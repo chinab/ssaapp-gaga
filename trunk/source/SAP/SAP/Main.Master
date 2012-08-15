@@ -8,8 +8,8 @@
     <script type="text/javascript" src="/js/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/splitter.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
-    <link href="skin/skin.css" rel="stylesheet" type="text/css" />
     <link href="skin/start/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="skin/skin.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form2" runat="server">
@@ -19,13 +19,18 @@
     </div>
     <div id="menu">
         <ul>
-            <li id="current"><a href="Default.aspx"><span>Home</span></a></li>
-            <li><a href="#"><span>Products</span></a></li>
-            <li><a href="#"><span>Services</span></a></li>
-            <li><a href="#"><span>Support</span></a></li>
-            <li><a href="#"><span>Order</span></a></li>
-            <li><a href="#"><span>News</span></a></li>
-            <li><a href="#"><span>About</span></a></li>
+            <li><a href="#"><span>File</span></a></li>
+            <li><a href="#"><span>Edit</span></a></li>
+            <li><a href="#"><span>View</span></a></li>
+            <li><a href="#"><span>Data</span></a></li>
+            <li><a href="#"><span>Goto</span></a></li>
+            <li><a href="#"><span>Tool</span></a></li>
+            <li><a href="#"><span>Help</span></a></li>
+        </ul>
+    </div>
+    <div id="menu-action">
+        <ul>
+            <li><a href="#"><img alt="" src="/skin/icon/system-search.png" /></a></li>
         </ul>
     </div>
     <div id="splitterContainer">
@@ -34,26 +39,134 @@
                 <div>
                     <h3>
                         <a href="#">Administration</a></h3>
-                    <div>
-                        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</div>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div>
                     <h3>
                         <a href="#">Finnacials</a></h3>
-                    <div>
-                        Phasellus mattis tincidunt nibh.</div>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div>
                     <h3>
                         <a href="#">Sales Opportunities-A/R</a></h3>
-                    <div>
-                        Nam dui erat, auctor a, dignissim quis.</div>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div>
                     <h3>
                         <a href="#">Purchasing-A/P</a></h3>
-                    <div>
-                        Nam dui erat, auctor a, dignissim quis.</div>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">Purchasing-A/P</a></h3>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">Purchasing-A/P</a></h3>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

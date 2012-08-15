@@ -63,6 +63,7 @@
   <ItemGroup>
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\main.js" />
+    <Content Include="skin\icon\system-search.png" />
     <Content Include="skin\img\paneh.gif" />
     <Content Include="skin\img\panehc.gif" />
     <Content Include="skin\img\panev.gif" />
@@ -91,7 +92,7 @@
     <Content Include="skin\start\images\ui-icons_fcd113_256x240.png" />
     <Content Include="skin\start\jquery-ui.css" />
     <Content Include="Web.config" />
-    <Content Include="Home.aspx" />
+    <Content Include="default.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="login.aspx.cs">
@@ -109,12 +110,12 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

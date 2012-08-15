@@ -5,8 +5,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    font-family:Arial;
-    font-size:12px;
+    font-family: Arial;
+    font-size: 12px;
 }
 #header
 {
@@ -107,7 +107,7 @@
     float: left;
     width: 100%;
     font-size: 93%;
-    border-bottom: 1px solid #2763A5;
+    border-bottom: 2px solid #2763A5;
     line-height: normal;
 }
 #menu ul
@@ -142,12 +142,9 @@
 #menu a span
 {
     float: none;
+    font-weight: bold;
 }
 /* End IE5-Mac hack */
-#tabs9 a:hover span
-{
-    color: #FFF;
-}
 #menu a:hover
 {
     background-position: 0% -42px;
@@ -164,4 +161,91 @@
 #menu #current a span
 {
     background-position: 100% -42px;
+}
+/*****/
+
+.menubutton
+{
+    width: 100%;
+    border-right: 1px solid #000;
+    padding: 0 0 1em 0;
+    margin-bottom: 1em;
+    font-family: Tahoma, Arial, sans-serif; /*'Trebuchet MS', 'Lucida Grande', Verdana, Arial, sans-serif;*/
+    font-size: 11px;
+    background-color: #90bade;
+    color: #333;
+}
+
+.menubutton ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.menubutton li
+{
+    border-bottom: 1px solid #90bade;
+    margin: 0;
+    list-style: none;
+    list-style-image: none;
+}
+
+.menubutton li a
+{
+    display: block;
+    padding: 5px 5px 5px 0.5em;
+    border-left: 10px solid #1958b7;
+    border-right: 10px solid #508fc4;
+    background-color: #2175bc;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+}
+
+html > body .menubutton li a
+{
+    width: auto;
+}
+
+.menubutton li a:hover
+{
+    border-left: 10px solid #1c64d1;
+    border-right: 10px solid #5ba3e0;
+    background-color: #2586d7;
+    color: #fff;
+}
+
+.menubutton li #active
+{
+    border-left: 10px solid #1c64d1;
+    border-right: 10px solid #5ba3e0;
+    background-color: #2586d7;
+    color: #fff;
+}
+div#leftPane .ui-accordion .ui-accordion-content
+{
+    padding:0;
+}
+.ui-widget-content {
+background: #90BADE;
+}
+/*****menu-action***/
+div#menu-action
+{
+    height:25px;
+}
+div#menu-action ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+div#menu-action li
+{
+    margin: 0;
+    list-style: none;
+    list-style-image: none;
 }

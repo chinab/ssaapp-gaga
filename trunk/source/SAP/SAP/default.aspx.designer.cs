@@ -10,6 +10,6 @@
 namespace SAP {
     
     
-    public partial class Home {
+    public partial class _default {
     }
 }

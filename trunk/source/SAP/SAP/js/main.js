@@ -8,7 +8,7 @@ $(document).ready(function () {
         B: $('#rightPane'),
         closeableto: 0
     });
-    $("#splitterContainer").height($(document).height());
+    $("#splitterContainer").height($('body').height() - 55);
 
     // Accordion
     $("#accordion").accordion({ header: "h3" });

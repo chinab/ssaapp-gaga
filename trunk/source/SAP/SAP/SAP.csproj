@@ -63,6 +63,8 @@
   <ItemGroup>
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\main.js" />
+    <Content Include="skin\icon\document-preview.png" />
+    <Content Include="skin\icon\document-print.png" />
     <Content Include="skin\icon\system-search.png" />
     <Content Include="skin\img\paneh.gif" />
     <Content Include="skin\img\panehc.gif" />

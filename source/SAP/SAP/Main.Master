@@ -13,10 +13,6 @@
 </head>
 <body>
     <form id="form2" runat="server">
-    <div>
-        <asp:LoginName ID="LoginName1" runat="server" />
-        <asp:LoginStatus ID="LoginStatus1" runat="server" />
-    </div>
     <div id="menu">
         <ul>
             <li><a href="#"><span>File</span></a></li>
@@ -28,10 +24,41 @@
             <li><a href="#"><span>Help</span></a></li>
         </ul>
     </div>
+    <div class="clear">
+    </div>
     <div id="menu-action">
         <ul>
-            <li><a href="#"><img alt="" src="/skin/icon/system-search.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/system-search.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/document-print.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/document-preview.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/system-search.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/document-print.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/document-preview.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/system-search.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/document-print.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/document-preview.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/system-search.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/document-print.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/document-preview.png" /></a></li>
         </ul>
+        <div id="login-logout">
+            <asp:LoginName ID="LoginName1" runat="server" />
+            <asp:LoginStatus ID="LoginStatus1" runat="server" />
+        </div>
+    </div>
+    <div class="clear">
     </div>
     <div id="splitterContainer">
         <div id="leftPane">
@@ -75,58 +102,6 @@
                         <a href="#">Sales Opportunities-A/R</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">Purchasing-A/P</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">Purchasing-A/P</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
                             <li><a href="#">Administration 1</a></li>
                             <li><a href="#">Administration 2</a></li>
                             <li><a href="#">Administration 3</a></li>

@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="SAP.Main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <script type="text/javascript" src="/js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/splitter.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <link href="skin/skin.css" rel="stylesheet" type="text/css" />
+    <link href="skin/start/jquery-ui.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form2" runat="server">
+    <div>
+        <asp:LoginName ID="LoginName1" runat="server" />
+        <asp:LoginStatus ID="LoginStatus1" runat="server" />
+    </div>
+    <div id="menu">
+        <ul>
+            <li id="current"><a href="Default.aspx"><span>Home</span></a></li>
+            <li><a href="#"><span>Products</span></a></li>
+            <li><a href="#"><span>Services</span></a></li>
+            <li><a href="#"><span>Support</span></a></li>
+            <li><a href="#"><span>Order</span></a></li>
+            <li><a href="#"><span>News</span></a></li>
+            <li><a href="#"><span>About</span></a></li>
+        </ul>
+    </div>
+    <div id="splitterContainer">
+        <div id="leftPane">
+            <div id="accordion">
+                <div>
+                    <h3>
+                        <a href="#">Administration</a></h3>
+                    <div>
+                        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">Finnacials</a></h3>
+                    <div>
+                        Phasellus mattis tincidunt nibh.</div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">Sales Opportunities-A/R</a></h3>
+                    <div>
+                        Nam dui erat, auctor a, dignissim quis.</div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">Purchasing-A/P</a></h3>
+                    <div>
+                        Nam dui erat, auctor a, dignissim quis.</div>
+                </div>
+            </div>
+        </div>
+        <div id="rightPane">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

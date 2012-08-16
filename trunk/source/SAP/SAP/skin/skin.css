@@ -10,12 +10,13 @@
 }
 img
 {
-    border:none;
+    border: none;
 }
 .clear
 {
     clear: both;
 }
+/*************************/
 #header
 {
     background: #c4dcfb;

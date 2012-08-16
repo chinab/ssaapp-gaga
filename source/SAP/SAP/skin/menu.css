@@ -22,7 +22,7 @@
 /* menu::base */
 div#menu {
     height:41px;
-    background:url(images/main-bg.png) repeat-x;
+    background:url(images/main-bg.png) repeat-x 0px 2px;
 }
 
 div#menu ul {
@@ -32,7 +32,6 @@ div#menu ul {
     float: left;
 }
 div#menu ul.menu {
-    padding-left: 30px;
 }
 
 div#menu li {
@@ -76,13 +75,13 @@ div#menu ul ul a.parent:hover span {
 /* menu::level1 */
 div#menu a {
     padding: 0 10px 0 10px;
-    line-height: 30px;
+    line-height: 35px;
     color: #e5e5e5;
 }
 div#menu span {
     margin-top: 5px;
 }/**@replace#1*/
-div#menu li { background: url(images/main-delimiter.png) 98% 4px no-repeat; }
+div#menu li { background: url(images/main-delimiter.png) 98% 6px no-repeat; }
 div#menu li.last { background: none; }
 
 /* menu::level2 */

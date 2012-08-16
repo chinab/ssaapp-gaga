@@ -61,7 +61,7 @@ img
     font-size: 0px;
     border-left: solid 1px #9cbdff;
     border-right: solid 1px #9cbdff;
-    background: #cbe1fb url(img/panev.gif) 0% 50%;
+    background: #cbe1fb url(images/panev.gif) 0% 50%;
 }
 .splitbarH
 {
@@ -71,7 +71,7 @@ img
     font-size: 0px;
     border-top: solid 1px #9cbdff;
     border-bottom: solid 1px #9cbdff;
-    background: #cbe1fb url(img/paneh.gif) 50% 0%;
+    background: #cbe1fb url(images/paneh.gif) 50% 0%;
 }
 .splitbuttonV
 {
@@ -81,12 +81,12 @@ img
     position: relative;
     height: 83px;
     width: 10px;
-    background: transparent url(img/panevc.gif) 10px 50%;
+    background: transparent url(images/panevc.gif) 10px 50%;
 }
 .splitbuttonV.invert
 {
     margin-left: 0px;
-    background: transparent url(img/panevc.gif) 0px 50%;
+    background: transparent url(images/panevc.gif) 0px 50%;
 }
 .splitbuttonH
 {
@@ -95,12 +95,12 @@ img
     position: relative;
     height: 10px !important;
     width: 83px;
-    background: transparent url(img/panehc.gif) 50% 0px;
+    background: transparent url(images/panehc.gif) 50% 0px;
 }
 .splitbuttonH.invert
 {
     margin-top: -4px;
-    background: transparent url(img/panehc.gif) 50% -10px;
+    background: transparent url(images/panehc.gif) 50% -10px;
 }
 .splitbarV.working, .splitbarH.working, .splitbuttonV.working, .splitbuttonH.working
 {
@@ -113,68 +113,6 @@ img
     width: 100%;
     overflow: hidden;
 }
-#menu
-{
-    float: left;
-    width: 100%;
-    font-size: 93%;
-    border-bottom: 2px solid #2763A5;
-    line-height: normal;
-}
-#menu ul
-{
-    margin: 0;
-    padding: 0 10px 0 0;
-    list-style: none;
-}
-#menu li
-{
-    display: inline;
-    margin: 0;
-    padding: 0;
-}
-#menu a
-{
-    float: left;
-    background: url("img/tableft10.gif") no-repeat left top;
-    margin: 0;
-    padding: 0 0 0 4px;
-    text-decoration: none;
-}
-#menu a span
-{
-    float: left;
-    display: block;
-    background: url("img/tabright10.gif") no-repeat right top;
-    padding: 5px 15px 4px 6px;
-    color: #FFF;
-}
-/* Commented Backslash Hack hides rule from IE5-Mac \*/
-#menu a span
-{
-    float: none;
-    font-weight: bold;
-}
-/* End IE5-Mac hack */
-#menu a:hover
-{
-    background-position: 0% -42px;
-}
-#menu a:hover span
-{
-    background-position: 100% -42px;
-}
-
-#menu #current a
-{
-    background-position: 0% -42px;
-}
-#menu #current a span
-{
-    background-position: 100% -42px;
-}
-/*****/
-
 .menubutton
 {
     width: 100%;

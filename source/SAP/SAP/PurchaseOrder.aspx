@@ -2,4 +2,340 @@
     CodeBehind="PurchaseOrder.aspx.cs" Inherits="SAP.PurchaseOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div id="title-form">
+        <h2>
+            Purchase Order</h2>
+    </div>
+    <div id="header-form">
+        <div class="left">
+            <table class="detail_table">
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Vendor</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Name</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Contact Person</span>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlContactPerson" runat="server">
+                            <asp:ListItem Text="Riahk"></asp:ListItem>
+                            <asp:ListItem Text="Nguyen"></asp:ListItem>
+                            <asp:ListItem Text="Sum"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Vendor Ref No.</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtRefNo" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <asp:DropDownList ID="ddlCurency" runat="server">
+                            <asp:ListItem Text="VND"></asp:ListItem>
+                            <asp:ListItem Text="AUD"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                        <span>AUD</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="right">
+            <table class="detail_table">
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>No</span>
+                        <asp:DropDownList ID="ddlNo" runat="server">
+                            <asp:ListItem Text="1"></asp:ListItem>
+                            <asp:ListItem Text="2"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                        <asp:Label ID="lblNoFrom" Text="227" runat="server" />
+                        <span>-</span>
+                        <asp:Label ID="lblNoTo" Text="0" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Status</span>
+                    </td>
+                    <td>
+                        <asp:Label ID="lblStatus" Text="" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Posting Date</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPostingDate" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Vendor Ref No.</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtDeliveryDate" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Document Date</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtDocumentDate" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div id="content-form">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Contents</a></li>
+                <li><a href="#tabs-2">Logistics</a></li>
+                <li><a href="#tabs-3">Accounting</a></li>
+                <li><a href="#tabs-4">Attachment</a></li>
+            </ul>
+            <div id="tabs-1">
+                <asp:ListView ID="lvContents" runat="server">
+                    <LayoutTemplate>
+                        <table class="data_table">
+                            <tr>
+                                <th>
+                                    <span>Item No.</span>
+                                </th>
+                                <th>
+                                    <span>Quantity</span>
+                                </th>
+                                <th>
+                                    <span>Unit Price</span>
+                                </th>
+                                <th>
+                                    <span>Discount %</span>
+                                </th>
+                                <th>
+                                    <span>Taxcode %</span>
+                                </th>
+                                <th>
+                                    <span>Total(LC)</span>
+                                </th>
+                                <th>
+                                    <span>Whse</span>
+                                </th>
+                                <th>
+                                    <span>Blanket Agreement</span>
+                                </th>
+                            </tr>
+                            <tr id="itemPlaceholder" runat="server">
+                            </tr>
+                        </table>
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td>
+                                <asp:Label runat="server" ID="Label1"><%#Eval("ID") %></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="Label2"><%#Eval("ID") %></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="Label3"><%#Eval("ID") %></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="Label4"><%#Eval("ID") %></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="Label5"><%#Eval("ID") %></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="Label6"><%#Eval("ID") %></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="Label7"><%#Eval("ID") %></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="Label8"><%#Eval("ID") %></asp:Label>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                    <EmptyDataTemplate>
+                        <table class="data_table">
+                            <tr>
+                                <th>
+                                    <span>Item No.</span>
+                                </th>
+                                <th>
+                                    <span>Quantity</span>
+                                </th>
+                                <th>
+                                    <span>Unit Price</span>
+                                </th>
+                                <th>
+                                    <span>Discount %</span>
+                                </th>
+                                <th>
+                                    <span>Taxcode %</span>
+                                </th>
+                                <th>
+                                    <span>Total(LC)</span>
+                                </th>
+                                <th>
+                                    <span>Whse</span>
+                                </th>
+                                <th>
+                                    <span>Blanket Agreement</span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td colspan="8">
+                                    <span>No Data</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </EmptyDataTemplate>
+                </asp:ListView>
+            </div>
+            <div id="tabs-2">
+                Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet
+                ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum
+                bibendum.</div>
+            <div id="tabs-3">
+                Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi
+                urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor
+                ullamcorper augue.</div>
+            <div id="tabs-4">
+                Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi
+                urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor
+                ullamcorper augue.</div>
+        </div>
+        <div class="left">
+            <table class="detail_table">
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Buyer</span>
+                    </td>
+                    <td class="detail_table_td_100">
+                        <asp:DropDownList ID="ddlBuyer" runat="server">
+                            <asp:ListItem Text="Riahk"></asp:ListItem>
+                            <asp:ListItem Text="Nguyen"></asp:ListItem>
+                            <asp:ListItem Text="Sum"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Owner</span>
+                    </td>
+                    <td class="detail_table_td_100">
+                        <asp:TextBox ID="txtOwner" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="right">
+            <table class="detail_table">
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Total before discount</span>
+                    </td>
+                    <td>
+                        <asp:Label ID="txtTotalDiscount" Text="AUD 250.00" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Discount </span><asp:TextBox ID="txtDiscountPercent" runat="server" Width="30px"></asp:TextBox><span>%</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtDiscount" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Freight</span>
+                    </td>
+                    <td>
+                        <asp:Label ID="lblFreight" Text="" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Rounding</span>
+                    </td>
+                    <td>
+                        <asp:Label ID="lblRounding" Text="" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Tax</span>
+                    </td>
+                    <td>
+                        <asp:Label ID="lblTax" Text="" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Total Payment Due</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtTotalPayment" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="left">
+            <table class="detail_table">
+                <tr>
+                    <td class="detail_table_td_100">
+                        <span>Remark</span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtRemark" runat="server" Height="100px" TextMode="MultiLine"></asp:TextBox>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div id="footer-form">
+        <div class="left">
+            <asp:Button ID="btnAdd" Text="Add" runat="server" />
+            <asp:Button ID="btnCancel" Text="Cancel" runat="server" />
+        </div>
+        <div class="right">
+            <asp:Button ID="btnCopyFrom" Text="Copy From" runat="server" />
+            <asp:Button ID="btnCopyTo" Text="Copy To" runat="server" />
+        </div>
+        <div class="clear">
+        </div>
+    </div>
 </asp:Content>

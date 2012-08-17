@@ -16,6 +16,14 @@ img
 {
     clear: both;
 }
+.left
+{
+    float: left;
+}
+.right
+{
+    float: right;
+}
 /*************************/
 #header
 {
@@ -210,3 +218,149 @@ div#login-logout
     padding: 3px;
     font-weight: bold;
 }
+/******form********/
+div#title-form h2
+{
+    height: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+/******end form********/
+
+/*data_table*/
+table.data_table
+{
+    padding: 5px;
+    margin-top: 5px;
+    border: solid 1px #99BBE8;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%; /*background:#d5e7f5 none;*/
+}
+table.data_table tr td
+{
+    overflow: hidden;
+}
+table.data_table th
+{
+    text-align: center;
+    vertical-align: middle;
+    height: 25px;
+    background: transparent url(images/data_table_header.png) repeat-x scroll 50% 50%;
+    color: #15428B;
+    border: 1px solid #99BBE8;
+    font-weight: bold;
+}
+table.data_table th a
+{
+    color: Olive;
+    text-decoration: none;
+}
+table.data_table tr.altrow
+{
+    background-color: #dfe8f6;
+}
+table.data_table tr:hover
+{
+    background-color: #e7efef;
+}
+table.data_table td
+{
+    border: 1px solid #99BBE8;
+    padding: 4px 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+table.data_table .border-right
+{
+    border-right: solid 1px #99BBE8;
+    width: 1px;
+    height: 100%;
+    padding: 0px;
+}
+table.data_table input
+{
+    width: 100%;
+}
+table.data_table .width50
+{
+    width: 50px;
+}
+table.data_table .width100
+{
+    width: 100px;
+}
+table.data_table .width150
+{
+    width: 150px;
+}
+table.data_table .width200
+{
+    width: 200px;
+}
+table.data_table .width250
+{
+    width: 250px;
+}
+/*data_table*/
+/*option_table*/
+table.detail_table
+{
+    width: 100%;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+}
+table.detail_table tr
+{
+}
+table.detail_table td
+{
+    padding: 0px 2px 0px 2px;
+    vertical-align: middle;
+    border-bottom: dotted 1px #808080;
+}
+table.detail_table table td
+{
+    border-bottom: none;
+}
+table.detail_table .detail_table_td_50
+{
+    width: 50px;
+}
+table.detail_table .detail_table_td_50 span
+{
+    font: bold 11px/18px "Segoe UI" ,Arial,sans-serif;
+    font-weight: bold;
+}
+table.detail_table .detail_table_td_100
+{
+    width: 100px;
+}
+table.detail_table .detail_table_td_100 span
+{
+    font: bold 11px/18px "Segoe UI" ,Arial,sans-serif;
+    font-weight: bold;
+}
+table.detail_table .detail_table_td_150
+{
+    width: 150px;
+}
+table.detail_table .detail_table_td_150 span
+{
+    font: bold 11px/18px "Segoe UI" ,Arial,sans-serif;
+    font-weight: bold;
+}
+table.detail_table .detail_table_td_200
+{
+    width: 200px;
+}
+table.detail_table .detail_table_td_200 span
+{
+    font: bold 11px/18px "Segoe UI" ,Arial,sans-serif;
+    font-weight: bold;
+}
+table.detail_table .detail_table_td_200
+{
+    width: 200px;
+}
+/**/

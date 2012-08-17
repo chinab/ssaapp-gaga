@@ -21,9 +21,9 @@ namespace SAP.xml
             get { return _Description; }
             set { _Description = value; }
         }
-        private String _Quantity;
+        private int _Quantity;
 
-        public String Quantity
+        public int Quantity
         {
             get { return _Quantity; }
             set { _Quantity = value; }
@@ -57,7 +57,7 @@ namespace SAP.xml
             set { _PriceAfVAT = value; }
         }
 
-        public OrderItem(String itemcode, String des, String quan, float discount,
+        public OrderItem(String itemcode, String des, int quan, float discount,
                             String whscode, String vat, double vatprice)
         {
             this._ItemCode = itemcode;

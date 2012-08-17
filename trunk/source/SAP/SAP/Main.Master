@@ -76,6 +76,32 @@
             <div id="accordion">
                 <div>
                     <h3>
+                        <a href="#">Purchasing-A/P</a></h3>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="PurchaseOrder.aspx">Purchase Order</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>
                         <a href="#">Finnacials</a></h3>
                     <div class="menubutton">
                         <ul>
@@ -93,32 +119,6 @@
                         <a href="#">Sales Opportunities-A/R</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">Purchasing-A/P</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
                             <li><a href="#">Administration 1</a></li>
                             <li><a href="#">Administration 2</a></li>
                             <li><a href="#">Administration 3</a></li>

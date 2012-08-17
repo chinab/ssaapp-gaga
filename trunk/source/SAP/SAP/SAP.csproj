@@ -103,6 +103,7 @@
     <Content Include="skin\start\jquery-ui.css" />
     <Content Include="Web.config" />
     <Content Include="default.aspx" />
+    <Content Include="PurchaseOrder.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="login.aspx.cs">
@@ -126,6 +127,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrder.aspx.cs">
+      <DependentUpon>PurchaseOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PurchaseOrder.aspx.designer.cs">
+      <DependentUpon>PurchaseOrder.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

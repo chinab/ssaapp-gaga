@@ -13,7 +13,7 @@ namespace SAP
         {
             if (User.Identity.IsAuthenticated == true)
             {
-                Response.Redirect("home.aspx");
+                Response.Redirect("PurchaseOrder.aspx");
             }
         }
     }

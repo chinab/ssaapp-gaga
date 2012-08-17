@@ -128,16 +128,16 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-	<Compile Include="xml\OrderItem.cs" />
-	<Compile Include="xml\PurchaseInfo.cs" />
-	<Compile Include="PurchaseOrder.aspx.cs">
+    <Compile Include="xml\OrderItem.cs" />
+    <Compile Include="PurchaseOrder.aspx.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PurchaseOrder.aspx.designer.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>
     </Compile>
-	</ItemGroup>
+    <Compile Include="xml\PurchaseInfo.cs" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>

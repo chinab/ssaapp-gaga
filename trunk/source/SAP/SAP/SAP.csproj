@@ -68,6 +68,7 @@
     <Content Include="skin\icon\document-preview.png" />
     <Content Include="skin\icon\document-print.png" />
     <Content Include="skin\icon\system-search.png" />
+    <Content Include="skin\images\data_table_header.png" />
     <Content Include="skin\images\item-pointer-mover.gif" />
     <Content Include="skin\images\item-pointer.gif" />
     <Content Include="skin\images\lava.gif" />

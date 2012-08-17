@@ -105,6 +105,7 @@
     <Content Include="Web.config" />
     <Content Include="default.aspx" />
     <Content Include="PurchaseOrder.aspx" />
+    <Content Include="TestXML.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="login.aspx.cs">
@@ -128,6 +129,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestXML.aspx.cs">
+      <DependentUpon>TestXML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestXML.aspx.designer.cs">
+      <DependentUpon>TestXML.aspx</DependentUpon>
     </Compile>
     <Compile Include="xml\OrderItem.cs" />
     <Compile Include="PurchaseOrder.aspx.cs">

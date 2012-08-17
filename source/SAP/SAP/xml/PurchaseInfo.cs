@@ -133,11 +133,31 @@ namespace SAP.xml
                                 writer.WriteStartElement(PurchaseInfo.DOCDATE_ELEMENT);
                                 {
                                     writer.WriteString(this._DocDate);
-                                    writer.WriteString(this._DocDueDate);
-                                    writer.WriteString(this._TaxDate);
-                                    writer.WriteString(this._CardCode);
-                                    writer.WriteString(this._CardName);
+                                }
+                                writer.WriteEndElement();
 
+                                writer.WriteStartElement(PurchaseInfo.DOCDUEDATE_ELEMENT);
+                                {
+                                    writer.WriteString(this._DocDueDate);
+
+                                }
+                                writer.WriteEndElement();
+
+                                writer.WriteStartElement(PurchaseInfo.TAXDATE_ELEMENT);
+                                {
+                                    writer.WriteString(this._TaxDate);
+                                }
+                                writer.WriteEndElement();
+
+                                writer.WriteStartElement(PurchaseInfo.CARDCODE_ELEMENT);
+                                {
+                                    writer.WriteString(this._CardCode);
+                                }
+                                writer.WriteEndElement();
+
+                                writer.WriteStartElement(PurchaseInfo.CARDNAME_ELEMENT);
+                                {
+                                    writer.WriteString(this._CardName);
                                 }
                                 writer.WriteEndElement();
                             }
@@ -173,7 +193,7 @@ namespace SAP.xml
 
                                             writer.WriteStartElement(PurchaseInfo.QUANTITY_ELEMENT); //write Quantity
                                             {
-                                                writer.WriteString(this._OrderItems[i].Quantity);
+                                                writer.WriteString(Convert.ToString(this._OrderItems[i].Quantity));
 
                                             }
                                             writer.WriteEndElement();
@@ -220,6 +240,8 @@ namespace SAP.xml
                 writer.WriteEndElement();
             }
             writer.WriteEndDocument();
+
+            writer.Flush();
 
             return XmlString.ToString();
         }

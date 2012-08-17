@@ -23,8 +23,43 @@ namespace SAP
                 dt.Columns.Add("Total");
                 dt.Columns.Add("Whse");
                 dt.Columns.Add("BlanketAgreement");
+                dt.Rows.Add("1", "1", "1", "1", "1", "1", "1", "1");
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
+            }
+        }
+
+        protected override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+
+            // get callback from popup
+            if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
+            {
+                switch (this.Request["__EVENTARGUMENT"].ToString())
+                {
+                    case "EditCallBack":
+                        string data = Session["data"] as string;
+                        if (!string.IsNullOrEmpty(data))
+                        {
+                            // update grid
+                            DataTable dt = new DataTable();
+                            dt.Columns.Add("No");
+                            dt.Columns.Add("Quantity");
+                            dt.Columns.Add("UnitPrice");
+                            dt.Columns.Add("Discount");
+                            dt.Columns.Add("Taxcode");
+                            dt.Columns.Add("Total");
+                            dt.Columns.Add("Whse");
+                            dt.Columns.Add("BlanketAgreement");
+                            dt.Rows.Add("1", "2", "2", "2", "2", "2", "2", "2");
+                            this.lvContents.DataSource = dt;
+                            this.lvContents.DataBind();
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

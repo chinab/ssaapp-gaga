@@ -10,25 +10,25 @@ namespace SAP.xml
 {
     public class PurchaseInfo
     {
-        private static const String ROOT_ELEMENT = "BOM";
-        private static const String BO_ELEMENT = "BO";
-        private static const String ADMINFO_ELEMENT = "AdmInfo";
-        private static const String OBJECT_ELEMENT = "Object";
-        private static const String OPOR_ELEMENT = "OPOR";
-        private static const String ROW_ELEMENT = "row";
-        private static const String DOCDATE_ELEMENT = "DocDate";
-        private static const String DOCDUEDATE_ELEMENT = "DocDueDate";
-        private static const String TAXDATE_ELEMENT = "TaxDate";
-        private static const String CARDCODE_ELEMENT = "CardCode";
-        private static const String CARDNAME_ELEMENT = "CardName";
-        private static const String POR_ELEMENT = "POR";
-        private static const String ITEMCODE_ELEMENT = "ItemCode";
-        private static const String DES_ELEMENT = "Dscription";
-        private static const String QUANTITY_ELEMENT = "Quantity";
-        private static const String DISPERCENT_ELEMENT = "DiscPrcnt";
-        private static const String WHSCODE_ELEMENT = "WhsCode";
-        private static const String VATGRP_ELEMENT = "VATGroup";
-        private static const String PRICEVAT_ELEMENT = "PriceAfVAT";
+        private const String ROOT_ELEMENT = "BOM";
+        private const String BO_ELEMENT = "BO";
+        private const String ADMINFO_ELEMENT = "AdmInfo";
+        private const String OBJECT_ELEMENT = "Object";
+        private const String OPOR_ELEMENT = "OPOR";
+        private const String ROW_ELEMENT = "row";
+        private const String DOCDATE_ELEMENT = "DocDate";
+        private const String DOCDUEDATE_ELEMENT = "DocDueDate";
+        private const String TAXDATE_ELEMENT = "TaxDate";
+        private const String CARDCODE_ELEMENT = "CardCode";
+        private const String CARDNAME_ELEMENT = "CardName";
+        private const String POR_ELEMENT = "POR";
+        private const String ITEMCODE_ELEMENT = "ItemCode";
+        private const String DES_ELEMENT = "Dscription";
+        private const String QUANTITY_ELEMENT = "Quantity";
+        private const String DISPERCENT_ELEMENT = "DiscPrcnt";
+        private const String WHSCODE_ELEMENT = "WhsCode";
+        private const String VATGRP_ELEMENT = "VATGroup";
+        private const String PRICEVAT_ELEMENT = "PriceAfVAT";
 
         private String _AdmInfo;
 

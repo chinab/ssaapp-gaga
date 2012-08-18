@@ -17,6 +17,7 @@
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManagerMain" runat="server">
     </asp:ScriptManager>
+    <input type="hidden" id="isMainPage" value="1" />
     <div id="menu">
         <ul class="menu">
             <li><a href="#" class="parent"><span>File</span></a>

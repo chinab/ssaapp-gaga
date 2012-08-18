@@ -1,37 +1,38 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PurchaseOrder_EditItem.aspx.cs"
-    Inherits="SAP.PurchaseOrder_EditItem" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PurchaseOrder_EditWareHouse.aspx.cs" Inherits="SAP.PurchaseOrder_EditWareHouse" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
     <script type="text/javascript" src="/js/jquery-1.4.3.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <link href="skin/skin.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManagerEditItem" runat="server" EnablePartialRendering="true">
+    <form id="form2" runat="server">
+    <asp:ScriptManager ID="ScriptManagerEditWareHouse" runat="server" EnablePartialRendering="true">
     </asp:ScriptManager>
-    <asp:UpdatePanel ID="editItemUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="True">       
+    <asp:UpdatePanel ID="editWareHouseUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="True">       
         <ContentTemplate>
             <asp:TextBox runat="server" ID="txtFilter"></asp:TextBox>
             <asp:Button runat="server" ID="btnFilter" Text="Filter" onclick="btnFilter_Click" />
             <br />
-			<asp:ListView ID="listItems" runat="server">
+			<asp:ListView ID="listWareHouses" runat="server">
 				<LayoutTemplate>
 					<table class="data_table">
 						<tr>
                             <th style="width:25px;">
 							</th>
 							<th>
-								<span>Item No.</span>
+								<span>#</span>
 							</th>
 							<th>
-								<span>Item Code</span>
+								<span>Warehouse Code</span>
 							</th>
 							<th>
-								<span>Item Description</span>
+								<span>Warehouse Name</span>
 							</th>	
 						</tr>
 						<tr id="itemPlaceholder" runat="server">
@@ -60,13 +61,13 @@
                             <th>
                             </th>
 							<th>
-								<span>Item No.</span>
+								<span>#</span>
 							</th>
 							<th>
-								<span>Item Code</span>
+								<span>Warehouse Code</span>
 							</th>
 							<th>
-								<span>Item Description</span>
+								<span>Warehouse Name</span>
 							</th>							
 						</tr>
 						<tr>
@@ -83,8 +84,8 @@
         </Triggers>
     </asp:UpdatePanel>
     <div id="action-form">
-        <asp:Button ID="btnAdd" Text="OK" runat="server" onclick="btnAdd_Click" />
-        <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditItemClick()" />
+        <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
+        <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditVendorClick()" />
     </div>
     </form>
 </body>

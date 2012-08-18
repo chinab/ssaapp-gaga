@@ -37,7 +37,7 @@ namespace SAP.WebServices
                     list.Add(item);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

@@ -37,7 +37,7 @@ namespace SAP.WebServices
                     list.Add(wareHouse);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

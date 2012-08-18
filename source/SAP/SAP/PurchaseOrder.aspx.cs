@@ -17,6 +17,7 @@ namespace SAP
             {
                 DataTable dt = new DataTable();
                 dt.Columns.Add("No");
+                dt.Columns.Add("Code");
                 dt.Columns.Add("Quantity");
                 dt.Columns.Add("UnitPrice");
                 dt.Columns.Add("Discount");
@@ -24,7 +25,8 @@ namespace SAP
                 dt.Columns.Add("Total");
                 dt.Columns.Add("Whse");
                 dt.Columns.Add("BlanketAgreement");
-                dt.Rows.Add("1", "1", "1", "1", "1", "1", "1", "1");
+                for (int i = 0; i < 5; i ++ )
+                    dt.Rows.Add(i, "", "", "", "", "", "", "", "");
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
             }
@@ -40,20 +42,15 @@ namespace SAP
                 switch (this.Request["__EVENTARGUMENT"].ToString())
                 {
                     case "EditItemCallBack":
-                        string data = Session["data"] as string;
-                        if (!string.IsNullOrEmpty(data))
+                        ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
+                        Int32 itemNo =  Int32.Parse(Session["chosenItemNo"] as String);
+                        if (chosenItem != null)
                         {
                             // update grid
-                            DataTable dt = new DataTable();
-                            dt.Columns.Add("No");
-                            dt.Columns.Add("Quantity");
-                            dt.Columns.Add("UnitPrice");
-                            dt.Columns.Add("Discount");
-                            dt.Columns.Add("Taxcode");
-                            dt.Columns.Add("Total");
-                            dt.Columns.Add("Whse");
-                            dt.Columns.Add("BlanketAgreement");
-                            dt.Rows.Add("1", "2", "2", "2", "2", "2", "2", "2");
+                            DataTable dt = (DataTable)this.lvContents.DataSource;
+                            DataRow dr = dt.Rows[itemNo];
+                            dr["Code"] = chosenItem.ItemCode;
+                            //dt.Rows.
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
                         }

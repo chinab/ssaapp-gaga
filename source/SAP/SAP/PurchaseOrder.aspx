@@ -132,6 +132,9 @@
                             <LayoutTemplate>
                                 <table class="data_table">
                                     <tr>
+                                        <th style="width:25px;">
+                                            <span>#</span>
+                                        </th>
                                         <th>
                                             <span>Item No.</span>
                                         </th>
@@ -156,8 +159,6 @@
                                         <th>
                                             <span>Blanket Agreement</span>
                                         </th>
-                                        <th>
-                                        </th>
                                     </tr>
                                     <tr id="itemPlaceholder" runat="server">
                                     </tr>
@@ -165,8 +166,14 @@
                             </LayoutTemplate>
                             <ItemTemplate>
                                 <tr>
+                                    <td >
+                                        <asp:Label runat="server" ID="Label9"><%#Eval("No")%></asp:Label>
+                                    </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label1"><%#Eval("No") %></asp:Label>
+                                        <asp:Label runat="server" ID="Label1"><%#Eval("Code") %></asp:Label>
+                                         <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openEditItem({0})", Eval("No"))%>' runat="server">
+                                            <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                        </asp:HyperLink>
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="Label2"><%#Eval("Quantity")%></asp:Label>
@@ -185,18 +192,21 @@
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="Label7"><%#Eval("Whse")%></asp:Label>
+                                        <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openEditWareHouse({0})", Eval("No"))%>' runat="server">
+                                            <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                        </asp:HyperLink>
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="Label8"><%#Eval("BlanketAgreement")%></asp:Label>
-                                    </td>
-                                    <td>
-                                        <a href="javascript:Main.openEditItem('<%#Eval("No") %>')">Edit</a>
                                     </td>
                                 </tr>
                             </ItemTemplate>
                             <EmptyDataTemplate>
                                 <table class="data_table">
                                     <tr>
+                                        <th>
+                                            <span>#</span>
+                                        </th>
                                         <th>
                                             <span>Item No.</span>
                                         </th>
@@ -232,17 +242,11 @@
                         </asp:ListView>
                     </div>
                     <div id="tabs-2">
-                        Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet
-                        ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum
-                        bibendum.</div>
+                        TBD.</div>
                     <div id="tabs-3">
-                        Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi
-                        urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor
-                        ullamcorper augue.</div>
+                        TBD.</div>
                     <div id="tabs-4">
-                        Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi
-                        urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor
-                        ullamcorper augue.</div>
+                        TBD.</div>
                 </div>
                 <div class="left">
                     <table class="detail_table">
@@ -264,6 +268,14 @@
                             </td>
                             <td class="detail_table_td_100">
                                 <asp:TextBox ID="txtOwner" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td class="detail_table_td_100">
+                                <span>Remark</span>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtRemark" runat="server" Height="100px" TextMode="MultiLine"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -324,16 +336,7 @@
                 <div class="clear">
                 </div>
                 <div class="left">
-                    <table class="detail_table">
-                        <tr>
-                            <td class="detail_table_td_100">
-                                <span>Remark</span>
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtRemark" runat="server" Height="100px" TextMode="MultiLine"></asp:TextBox>
-                            </td>
-                        </tr>
-                    </table>
+                    
                 </div>
                 <div class="clear">
                 </div>
@@ -358,6 +361,10 @@
             </div>
             <div id="dialogEditVendor">
                 <iframe id="iframeEditVendor" width="100%" height="100%" frameborder="0" marginwidth="0"
+                    marginheight="0"></iframe>
+            </div>
+            <div id="dialogEditWareHouse">
+                <iframe id="iframeEditWareHouse" width="100%" height="100%" frameborder="0" marginwidth="0"
                     marginheight="0"></iframe>
             </div>
         </ContentTemplate>

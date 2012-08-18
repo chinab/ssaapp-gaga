@@ -41,6 +41,10 @@ Main = {
                 autoOpen: false,
                 width: 600
             });
+            $('#dialogEditTaxCode').dialog({
+                autoOpen: false,
+                width: 600
+            });
         }
         $(".txtDate").datepicker();
     },
@@ -60,6 +64,10 @@ Main = {
             width: 600
         });
         $('#dialogEditWareHouse').dialog({
+            autoOpen: false,
+            width: 600
+        });
+        $('#dialogEditTaxCode').dialog({
             autoOpen: false,
             width: 600
         });
@@ -104,6 +112,20 @@ Main = {
     },
     cancelEditWareHouseClick: function () {
         window.parent.$('#dialogEditWareHouse').dialog('close');
+        //return false;
+    },
+    openEditTaxCode: function (param) {
+        $('#dialogEditTaxCode').dialog('open');
+        $('#dialogEditTaxCode > #iframeEditTaxCode').attr('src', 'PurchaseOrder_EditTaxCode.aspx?id=' + param);
+        //return false;
+    },
+    okEditTaxCodeClick: function () {
+        window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, 'EditTaxCodeCallBack');
+        window.parent.$('#dialogEditTaxCode').dialog('close');
+        //return false;
+    },
+    cancelEditTaxCodeClick: function () {
+        window.parent.$('#dialogEditTaxCode').dialog('close');
         //return false;
     }
 }

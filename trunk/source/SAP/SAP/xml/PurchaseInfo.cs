@@ -6,7 +6,7 @@ using System.Web;
 using System.Text;
 using System.Xml;
 
-namespace SAP.xml
+namespace SAP
 {
     public class PurchaseInfo
     {

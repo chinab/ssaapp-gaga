@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SAP.xml
+namespace SAP
 {
     public class OrderItem
     {

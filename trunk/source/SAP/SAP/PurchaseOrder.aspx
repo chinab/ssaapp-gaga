@@ -20,7 +20,8 @@
                             </td>
                             <td>
                                 <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
-                                <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openEditVendor()" runat="server">
+                                <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openEditVendor()"
+                                    runat="server">
                                     <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                 </asp:HyperLink>
                             </td>
@@ -95,7 +96,7 @@
                                 <span>Posting Date</span>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtPostingDate" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtPostingDate" runat="server" CssClass="txtDate"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -103,7 +104,7 @@
                                 <span>Vendor Ref No.</span>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtDeliveryDate" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtDeliveryDate" runat="server" CssClass="txtDate"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -111,7 +112,7 @@
                                 <span>Document Date</span>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtDocumentDate" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtDocumentDate" runat="server" CssClass="txtDate"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -132,7 +133,7 @@
                             <LayoutTemplate>
                                 <table class="data_table">
                                     <tr>
-                                        <th style="width:25px;">
+                                        <th style="width: 25px;">
                                             <span>#</span>
                                         </th>
                                         <th>
@@ -166,12 +167,13 @@
                             </LayoutTemplate>
                             <ItemTemplate>
                                 <tr>
-                                    <td >
+                                    <td>
                                         <asp:Label runat="server" ID="Label9"><%#Eval("No")%></asp:Label>
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="Label1"><%#Eval("Code") %></asp:Label>
-                                         <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openEditItem({0})", Eval("No"))%>' runat="server">
+                                        <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openEditItem({0})", Eval("No"))%>'
+                                            runat="server">
                                             <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                         </asp:HyperLink>
                                     </td>
@@ -192,7 +194,8 @@
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="Label7"><%#Eval("Whse")%></asp:Label>
-                                        <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openEditWareHouse({0})", Eval("No"))%>' runat="server">
+                                        <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openEditWareHouse({0})", Eval("No"))%>'
+                                            runat="server">
                                             <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                         </asp:HyperLink>
                                     </td>
@@ -270,7 +273,7 @@
                                 <asp:TextBox ID="txtOwner" runat="server"></asp:TextBox>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td class="detail_table_td_100">
                                 <span>Remark</span>
                             </td>
@@ -336,7 +339,6 @@
                 <div class="clear">
                 </div>
                 <div class="left">
-                    
                 </div>
                 <div class="clear">
                 </div>

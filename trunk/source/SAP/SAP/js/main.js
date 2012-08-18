@@ -42,7 +42,7 @@ Main = {
                 width: 600
             });
         }
-        $(".txtPostingDate").datepicker();
+        $(".txtDate").datepicker();
     },
     rebind_init: function () {
         // Accordion

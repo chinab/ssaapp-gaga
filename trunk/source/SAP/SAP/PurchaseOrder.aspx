@@ -8,8 +8,8 @@
     <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="title-form">
-                <h2>Purchase Order</h2>
-                <asp:Label ID="lblResults" runat="server" />
+                <h2>Purchase Order</h2>  
+                <asp:Label BackColor="Red" ID="lblResults" runat="server" />              
             </div>
             <div id="header-form">
                 <div class="left">
@@ -375,6 +375,9 @@
              <div id="dialogEditTaxCode">
                 <iframe id="iframeEditTaxCode" width="100%" height="100%" frameborder="0" marginwidth="0"
                     marginheight="0"></iframe>
+            </div>
+             <div id="dialogRequestTransaction">
+                    
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>

@@ -45,6 +45,10 @@ Main = {
                 autoOpen: false,
                 width: 600
             });
+            $('#dialogRequestTransaction').dialog({
+                autoOpen: false,
+                width: 600
+            });
         }
         $(".txtDate").datepicker();
     },
@@ -68,6 +72,10 @@ Main = {
             width: 600
         });
         $('#dialogEditTaxCode').dialog({
+            autoOpen: false,
+            width: 600
+        });
+        $('#dialogRequestTransaction').dialog({
             autoOpen: false,
             width: 600
         });
@@ -126,6 +134,10 @@ Main = {
     },
     cancelEditTaxCodeClick: function () {
         window.parent.$('#dialogEditTaxCode').dialog('close');
+        //return false;
+    },
+     openRequestTransaction: function () {
+      $('#dialogRequestTransaction').dialog('open');
         //return false;
     }
 }

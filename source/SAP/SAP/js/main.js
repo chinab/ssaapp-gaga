@@ -44,6 +44,15 @@ Main = {
 
         // Tabs
         $('#tabs').tabs();
+
+        $('#dialogEditItem').dialog({
+            autoOpen: false,
+            width: 600
+        });
+        $('#dialogEditVendor').dialog({
+            autoOpen: false,
+            width: 600
+        });
     },
     openEditItem: function (param) {
         $('#dialogEditItem').dialog('open');

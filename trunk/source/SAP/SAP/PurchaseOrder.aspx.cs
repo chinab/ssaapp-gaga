@@ -46,11 +46,7 @@ namespace SAP
                 {
                     case "EditItemCallBack":
                         ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
-<<<<<<< .mine
-                        Int32 itemNo = Int32.Parse(Session["chosenItemNo"] as String);
-=======
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
->>>>>>> .r27
                         if (chosenItem != null)
                         {
                             // update grid
@@ -160,7 +156,5 @@ namespace SAP
             }
             return table;
         }
-
->>>>>>> .r27
     }
 }

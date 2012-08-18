@@ -20,7 +20,7 @@ namespace SAP
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             Session["data"] = "NewData";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopup", "Main.okEditClick()", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopup", "Main.okEditItemClick()", true);
         }
     }
 }

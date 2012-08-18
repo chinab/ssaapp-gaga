@@ -248,7 +248,7 @@ table.data_table th
     height: 25px;
     background: transparent url(images/data_table_header.png) repeat-x scroll 50% 50%;
     color: #15428B;
-    border: 1px solid #99BBE8;
+    border: 1px solid #FFFFFF;
     font-weight: bold;
 }
 table.data_table th a
@@ -266,7 +266,7 @@ table.data_table tr:hover
 }
 table.data_table td
 {
-    border: 1px solid #99BBE8;
+    border: 1px solid #FFFFFF;
     padding: 4px 10px;
     text-align: center;
     vertical-align: middle;

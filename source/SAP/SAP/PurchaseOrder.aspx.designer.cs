@@ -13,13 +13,13 @@ namespace SAP {
     public partial class PurchaseOrder {
         
         /// <summary>
-        /// myUpdatePanel control.
+        /// purchaseOrderUpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel myUpdatePanel;
+        protected global::System.Web.UI.UpdatePanel purchaseOrderUpdatePanel;
         
         /// <summary>
         /// txtVendor control.
@@ -29,6 +29,24 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVendor;
+        
+        /// <summary>
+        /// linkVendorsLoad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink linkVendorsLoad;
+        
+        /// <summary>
+        /// imgVendorsLoad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgVendorsLoad;
         
         /// <summary>
         /// txtName control.

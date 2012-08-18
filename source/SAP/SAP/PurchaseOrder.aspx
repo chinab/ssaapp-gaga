@@ -3,9 +3,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type="text/javascript">
-        Main.myUpdatePanelId = '<%= myUpdatePanel.ClientID %>';
+        Main.myUpdatePanelId = '<%= purchaseOrderUpdatePanel.ClientID %>';
     </script>
-    <asp:UpdatePanel ID="myUpdatePanel" runat="server">
+    <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="title-form">
                 <h2>
@@ -20,6 +20,9 @@
                             </td>
                             <td>
                                 <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
+                                <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openEditVendor()" runat="server">
+                                    <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                </asp:HyperLink>
                             </td>
                         </tr>
                         <tr>
@@ -351,6 +354,10 @@
             </div>
             <div id="dialogEditItem">
                 <iframe id="iframeEditItem" width="100%" height="100%" frameborder="0" marginwidth="0"
+                    marginheight="0"></iframe>
+            </div>
+            <div id="dialogEditVendor">
+                <iframe id="iframeEditVendor" width="100%" height="100%" frameborder="0" marginwidth="0"
                     marginheight="0"></iframe>
             </div>
         </ContentTemplate>

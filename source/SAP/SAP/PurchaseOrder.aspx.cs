@@ -27,7 +27,7 @@ namespace SAP
                 dt.Columns.Add("Total");
                 dt.Columns.Add("Whse");
                 dt.Columns.Add("BlanketAgreement");
-                for (int i = 0; i < 5; i ++ )
+                for (int i = 0; i < 5; i++)
                     dt.Rows.Add(i, "", "", "", "", "", "", "", "");
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
@@ -46,7 +46,11 @@ namespace SAP
                 {
                     case "EditItemCallBack":
                         ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
+<<<<<<< .mine
+                        Int32 itemNo = Int32.Parse(Session["chosenItemNo"] as String);
+=======
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
+>>>>>>> .r27
                         if (chosenItem != null)
                         {
                             // update grid
@@ -85,6 +89,20 @@ namespace SAP
                 }
             }
         }
+        
+        public void _collectData()
+        {
+            try
+            {
+                PurchaseInfo objInfo = new PurchaseInfo("adminInfo", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
         protected DataTable getDataFromListView(ListView lv)
         {
@@ -121,5 +139,6 @@ namespace SAP
             return table;
         }
 
+>>>>>>> .r27
     }
 }

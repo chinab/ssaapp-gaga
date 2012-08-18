@@ -38,7 +38,7 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     public MasterData() {
-        this.Url = "http://demo1.w4vn.com/MasterData.asmx";
+        this.Url = "http://localhost:49881/MasterData.asmx";
     }
     
     /// <remarks/>

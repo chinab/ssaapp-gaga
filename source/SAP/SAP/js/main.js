@@ -12,7 +12,7 @@ $(document).ready(function () {
 Main = {
     myUpdatePanelId: '',
     init: function () {
-        if ($('#isMainPage').val()=='1') {
+        if ($('#isMainPage').val() == '1') {
             // layout
             $("#splitterContainer").splitter({
                 minAsize: 250,
@@ -23,22 +23,27 @@ Main = {
                 closeableto: 0
             });
             $("#splitterContainer").height($('body').height() - 75);
+            // Accordion
+            $("#accordion").accordion({ header: "h3" });
+
+            // Tabs
+            $('#tabs').tabs();
+
+            $('#dialogEditItem').dialog({
+                autoOpen: false,
+                width: 600
+            });
+            $('#dialogEditVendor').dialog({
+                autoOpen: false,
+                width: 600
+            });
+            $('#dialogEditWareHouse').dialog({
+                autoOpen: false,
+                width: 600
+            });
         }
-        
-        // Accordion
-        $("#accordion").accordion({ header: "h3" });
 
-        // Tabs
-        $('#tabs').tabs();
-
-        $('#dialogEditItem').dialog({
-            autoOpen: false,
-            width: 600
-        });
-        $('#dialogEditVendor').dialog({
-            autoOpen: false,
-            width: 600
-        });
+       
     },
     rebind_init: function () {
         // Accordion
@@ -72,7 +77,7 @@ Main = {
     },
     cancelEditItemClick: function () {
         window.parent.$('#dialogEditItem').dialog('close');
-       // return false;
+        // return false;
     },
     openEditVendor: function (param) {
         $('#dialogEditVendor').dialog('open');
@@ -80,9 +85,7 @@ Main = {
         //return false;
     },
     okEditVendorClick: function () {
-        alert(1);
         window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, 'EditVendorCallBack');
-        alert(2);
         window.parent.$('#dialogEditVendor').dialog('close');
         //return false;
     },
@@ -92,13 +95,11 @@ Main = {
     },
     openEditWareHouse: function (param) {
         $('#dialogEditWareHouse').dialog('open');
-        $('#dialogEditWareHouse > #iframeEditWareHouse').attr('src', 'PurchaseOrder_EditWareHouse.aspx');
+        $('#dialogEditWareHouse > #iframeEditWareHouse').attr('src', 'PurchaseOrder_EditWareHouse.aspx?id=' + param);
         //return false;
     },
     okEditWareHouseClick: function () {
-        alert(1);
         window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, 'EditWareHouseCallBack');
-        alert(2);
         window.parent.$('#dialogEditWareHouse').dialog('close');
         //return false;
     },

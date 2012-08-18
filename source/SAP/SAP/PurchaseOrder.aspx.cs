@@ -55,7 +55,7 @@ namespace SAP
                             dr["Quantity"] = 1;
                             dr["UnitPrice"] = "AUD 250.0";
                             dr["Discount"] = "0.00";
-                                                        
+
                             //dt.Rows.
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
@@ -99,7 +99,7 @@ namespace SAP
                             this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDeliveryDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
-                            
+
                         }
                         break;
                     default:
@@ -107,12 +107,27 @@ namespace SAP
                 }
             }
         }
-        
-        public void _collectData()
+
+        public String _collectData()
         {
             try
             {
                 PurchaseInfo objInfo = new PurchaseInfo("adminInfo", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text);
+                foreach (ListViewDataItem item in this.lvContents.Items)
+                {
+                    Label lblNo = item.FindControl("lblNo") as Label;
+                    Label lblCode = item.FindControl("lblCode") as Label;
+                    Label lblQuantity = item.FindControl("lblQuantity") as Label;
+                    Label lblPrice = item.FindControl("lblPrice") as Label;
+                    Label lblDiscount = item.FindControl("lblDiscount") as Label;
+                    Label lblTaxcode = item.FindControl("lblTaxcode") as Label;
+                    Label lblTotal = item.FindControl("lblTotal") as Label;
+                    Label lblWhse = item.FindControl("lblWhse") as Label;
+                    Label lblBlanketAgreement = item.FindControl("lblBlanketAgreement") as Label;
+                    OrderItem objOrder = new OrderItem(lblCode.Text, "", int.Parse(lblQuantity.Text), float.Parse(lblDiscount.Text), lblWhse.Text, "", double.Parse(lblTotal.Text));
+                    objInfo.AddOrderItem(objOrder);
+                }
+                return objInfo.ToXMLString();
             }
             catch (Exception)
             {

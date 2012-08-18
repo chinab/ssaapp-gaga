@@ -168,42 +168,42 @@
                             <ItemTemplate>
                                 <tr>
                                     <td>
-                                        <asp:Label runat="server" ID="Label9"><%#Eval("No")%></asp:Label>
+                                        <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label1"><%#Eval("Code") %></asp:Label>
+                                        <asp:Label runat="server" ID="lblCode"><%#Eval("Code") %></asp:Label>
                                         <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openEditItem({0})", Eval("No"))%>'
                                             runat="server">
                                             <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                         </asp:HyperLink>
                                     </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label2"><%#Eval("Quantity")%></asp:Label>
+                                        <asp:Label runat="server" ID="lblQuantity"><%#Eval("Quantity")%></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label3"><%#Eval("UnitPrice")%></asp:Label>
+                                        <asp:Label runat="server" ID="lblPrice"><%#Eval("UnitPrice")%></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label4"><%#Eval("Discount")%></asp:Label>
+                                        <asp:Label runat="server" ID="lblDiscount"><%#Eval("Discount")%></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label5"><%#Eval("Taxcode")%></asp:Label>
+                                        <asp:Label runat="server" ID="lblTaxcode"><%#Eval("Taxcode")%></asp:Label>
                                         <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openEditTaxCode({0})", Eval("No"))%>' runat="server">
                                             <asp:Image ID="imgTaxCodeLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                         </asp:HyperLink>
                                     </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label6"><%#Eval("Total")%></asp:Label>
+                                        <asp:Label runat="server" ID="lblTotal"><%#Eval("Total")%></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label7"><%#Eval("Whse")%></asp:Label>
+                                        <asp:Label runat="server" ID="lblWhse"><%#Eval("Whse")%></asp:Label>
                                         <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openEditWareHouse({0})", Eval("No"))%>'
                                             runat="server">
                                             <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                         </asp:HyperLink>
                                     </td>
                                     <td>
-                                        <asp:Label runat="server" ID="Label8"><%#Eval("BlanketAgreement")%></asp:Label>
+                                        <asp:Label runat="server" ID="lblBlanketAgreement"><%#Eval("BlanketAgreement")%></asp:Label>
                                     </td>
                                 </tr>
                             </ItemTemplate>

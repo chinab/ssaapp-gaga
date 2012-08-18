@@ -61,6 +61,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PurchaseOrder_EditTaxCode.aspx" />
     <Content Include="PurchaseOrder_EditVendor.aspx" />
     <Content Include="GetBusinessPartner.aspx" />
     <Content Include="js\jquery-ui.js" />
@@ -113,6 +114,13 @@
     <Content Include="TestXML.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PurchaseOrder_EditTaxCode.aspx.cs">
+      <DependentUpon>PurchaseOrder_EditTaxCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PurchaseOrder_EditTaxCode.aspx.designer.cs">
+      <DependentUpon>PurchaseOrder_EditTaxCode.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PurchaseOrder_EditVendor.aspx.cs">
       <DependentUpon>PurchaseOrder_EditVendor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

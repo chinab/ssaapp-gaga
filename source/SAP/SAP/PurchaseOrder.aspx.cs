@@ -56,7 +56,10 @@ namespace SAP
                             // update grid
                             DataRow dr = dt.Rows[itemNo];
                             dr["Code"] = chosenItem.ItemCode;
-
+                            dr["Quantity"] = 1;
+                            dr["UnitPrice"] = "AUD 250.0";
+                            dr["Discount"] = "0.00";
+                                                        
                             //dt.Rows.
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
@@ -76,12 +79,31 @@ namespace SAP
                             this.lvContents.DataBind();
                         }
                         break;
+                    case "EditTaxCodeCallBack":
+                        TaxGroup chosenTaxCode = Session["chosenTaxCode"] as TaxGroup;
+                        itemNo = Int32.Parse(Session["chosenItemNo"] as String);
+                        if (chosenTaxCode != null)
+                        {
+                            // update grid
+                            DataRow dr = dt.Rows[itemNo];
+                            dr["Taxcode"] = chosenTaxCode.Code;
+
+                            //dt.Rows.
+                            this.lvContents.DataSource = dt;
+                            this.lvContents.DataBind();
+                        }
+                        break;
                     case "EditVendorCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {
                             this.txtName.Text = chosenPartner.CardName;
                             this.txtVendor.Text = chosenPartner.CardCode;
+                            this.lblStatus.Text = "Open";
+                            this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
+                            this.txtDeliveryDate.Text = DateTime.Now.ToShortDateString();
+                            this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
+                            
                         }
                         break;
                     default:

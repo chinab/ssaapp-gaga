@@ -188,6 +188,9 @@
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="Label5"><%#Eval("Taxcode")%></asp:Label>
+                                        <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openEditTaxCode({0})", Eval("No"))%>' runat="server">
+                                            <asp:Image ID="imgTaxCodeLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                        </asp:HyperLink>
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="Label6"><%#Eval("Total")%></asp:Label>
@@ -367,6 +370,10 @@
             </div>
             <div id="dialogEditWareHouse">
                 <iframe id="iframeEditWareHouse" width="100%" height="100%" frameborder="0" marginwidth="0"
+                    marginheight="0"></iframe>
+            </div>
+             <div id="dialogEditTaxCode">
+                <iframe id="iframeEditTaxCode" width="100%" height="100%" frameborder="0" marginwidth="0"
                     marginheight="0"></iframe>
             </div>
         </ContentTemplate>

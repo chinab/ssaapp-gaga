@@ -1,6 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PurchaseOrder_EditWareHouse.aspx.cs" Inherits="SAP.PurchaseOrder_EditWareHouse" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PurchaseOrder_EditTaxCode.aspx.cs" Inherits="SAP.PurchaseOrder_EditTaxCode" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,27 +10,27 @@
 </head>
 <body>
     <form id="form2" runat="server">
-    <asp:ScriptManager ID="ScriptManagerEditWareHouse" runat="server" EnablePartialRendering="true">
+    <asp:ScriptManager ID="ScriptManagerEditVendor" runat="server">
     </asp:ScriptManager>
-    <asp:UpdatePanel ID="editWareHouseUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="True">       
+    <asp:UpdatePanel ID="editTaxCodeUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="True">       
         <ContentTemplate>
             <asp:TextBox runat="server" ID="txtFilter"></asp:TextBox>
             <asp:Button runat="server" ID="btnFilter" Text="Filter" onclick="btnFilter_Click" />
             <br />
-			<asp:ListView ID="listWareHouses" runat="server">
+			<asp:ListView ID="listTaxCodes" runat="server">
 				<LayoutTemplate>
 					<table class="data_table">
 						<tr>
                             <th style="width:25px;">
 							</th>
 							<th>
-								<span>#</span>
+								<span>Item No.</span>
 							</th>
 							<th>
-								<span>Warehouse Code</span>
+								<span>BP Code</span>
 							</th>
 							<th>
-								<span>Warehouse Name</span>
+								<span>BP Name</span>
 							</th>	
 						</tr>
 						<tr id="itemPlaceholder" runat="server">
@@ -61,13 +59,13 @@
                             <th>
                             </th>
 							<th>
-								<span>#</span>
+								<span>Item No.</span>
 							</th>
 							<th>
-								<span>Warehouse Code</span>
+								<span>BP Code</span>
 							</th>
 							<th>
-								<span>Warehouse Name</span>
+								<span>BP Name</span>
 							</th>							
 						</tr>
 						<tr>
@@ -78,15 +76,16 @@
 					</table>
 				</EmptyDataTemplate>
 			</asp:ListView>
+            <div id="action-form">
+                <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
+                <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditTaxCodeClick()" />
+            </div>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger  ControlID="btnFilter" />
         </Triggers>
     </asp:UpdatePanel>
-    <div id="action-form">
-        <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
-        <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditWareHouseClick()" />
-    </div>
+    
     </form>
 </body>
 </html>

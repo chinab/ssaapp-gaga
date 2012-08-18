@@ -67,6 +67,7 @@
     <Content Include="js\main.js" />
     <Content Include="js\menu.js" />
     <Content Include="PurchaseOrder_EditItem.aspx" />
+    <Content Include="PurchaseOrder_EditWarehouse.aspx" />
     <Content Include="readme.txt" />
     <Content Include="skin\AdminLogin.css" />
     <Content Include="skin\icon\document-preview.png" />
@@ -154,6 +155,13 @@
     </Compile>
     <Compile Include="PurchaseOrder_EditItem.aspx.designer.cs">
       <DependentUpon>PurchaseOrder_EditItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrder_EditWarehouse.aspx.cs">
+      <DependentUpon>PurchaseOrder_EditWarehouse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PurchaseOrder_EditWarehouse.aspx.designer.cs">
+      <DependentUpon>PurchaseOrder_EditWarehouse.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestXML.aspx.cs">
       <DependentUpon>TestXML.aspx</DependentUpon>

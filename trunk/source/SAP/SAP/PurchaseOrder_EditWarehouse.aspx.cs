@@ -9,22 +9,22 @@ using SAP.WebServices;
 
 namespace SAP
 {
-    public partial class PurchaseOrder_EditVendor : System.Web.UI.Page
+    public partial class PurchaseOrder_EditWareHouse : System.Web.UI.Page
     {
-        protected static DataSet businessPartners;
+        protected static DataSet warehousesItems;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                
+
                 MasterData masterDataWS = new MasterData();
-                businessPartners = masterDataWS.GetBusinessPartner();
-                //this.gridVendors.DataSource = warehousesItems.Tables[0];
-                //this.gridVendors.DataBind();
-               //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;
+                warehousesItems = masterDataWS.GetWarehouse();
+                //this.gridWareHouses.DataSource = warehousesItems.Tables[0];
+                //this.gridWareHouses.DataBind();
+                //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;
                 BindCategories("");
-                editVendorUpdatePanel.Update();
-                
+                editWareHouseUpdatePanel.Update();
+
             }
         }
 
@@ -33,14 +33,14 @@ namespace SAP
             string selectedValue = Request.Form["MyRadioButton"];
             if (!String.IsNullOrEmpty(selectedValue))
             {
-                List<BusinessPartner> list = BusinessPartner.extractFromDataSet(businessPartners.Tables[0]);
-                BusinessPartner chosenPartner = list[Int32.Parse(selectedValue)];
-                Session["chosenPartner"] = chosenPartner;
+                List<WareHouse> list = WareHouse.extractFromDataSet(warehousesItems.Tables[0]);
+                WareHouse chosenWareHouse = list[Int32.Parse(selectedValue)];
+                Session["chosenWareHouse"] = chosenWareHouse;
             }
             //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
             //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKVendorPopup", "Main.okEditVendorClick()", true);
-            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKWareHousePopup", "Main.okEditWareHouseClick()", true);
+
         }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
         {
@@ -54,15 +54,15 @@ namespace SAP
             try
             {
                 // Simple created a table to bind with Grid view and populated it with data.
-                DataTable gridTable = new DataTable("Vendors");
+                DataTable gridTable = new DataTable("WareHouses");
                 gridTable.Columns.Add("Selected");
                 gridTable.Columns.Add("No");
                 gridTable.Columns.Add("Code");
                 gridTable.Columns.Add("Name");
-                DataTable vendorsTable = businessPartners.Tables[0];
+                DataTable warehouseTable = warehousesItems.Tables[0];
                 DataRow dr;
                 int i = 0;
-                foreach (DataRow row in vendorsTable.Rows)
+                foreach (DataRow row in warehouseTable.Rows)
                 {
                     if (("" + row[0].ToString() + row[1].ToString()).Trim().IndexOf(CategoryFilter.Trim()) >= 0)
                     {
@@ -71,7 +71,7 @@ namespace SAP
                             dr["Selected"] = "checked";
                         else
                             dr["Selected"] = "";
-                        dr["No"] = i.ToString(); vendorsTable.Rows.IndexOf(row);
+                        dr["No"] = i.ToString(); warehouseTable.Rows.IndexOf(row);
                         dr["Code"] = row[0].ToString();
                         dr["Name"] = row[1].ToString();
                         i++;
@@ -79,9 +79,9 @@ namespace SAP
                     }
                 }
 
-                listVendors.DataSource = gridTable;
-                listVendors.DataBind();
-                editVendorUpdatePanel.Update();
+                listWareHouses.DataSource = gridTable;
+                listWareHouses.DataBind();
+                editWareHouseUpdatePanel.Update();
             }
             catch (Exception)
             {
@@ -97,6 +97,5 @@ namespace SAP
         {
             BindCategories(this.txtFilter.Text);
         }
-        
     }
 }

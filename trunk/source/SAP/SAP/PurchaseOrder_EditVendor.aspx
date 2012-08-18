@@ -11,7 +11,7 @@
 </head>
 <body>
     <form id="form2" runat="server">
-    <asp:ScriptManager ID="ScriptManagerEditVendor" runat="server" EnablePartialRendering="true">
+    <asp:ScriptManager ID="ScriptManagerEditVendor" runat="server">
     </asp:ScriptManager>
     <asp:UpdatePanel ID="editVendorUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="True">       
         <ContentTemplate>
@@ -77,15 +77,16 @@
 					</table>
 				</EmptyDataTemplate>
 			</asp:ListView>
+            <div id="action-form">
+                <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
+                <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditVendorClick()" />
+            </div>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger  ControlID="btnFilter" />
         </Triggers>
     </asp:UpdatePanel>
-    <div id="action-form">
-        <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
-        <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditVendorClick()" />
-    </div>
+    
     </form>
 </body>
 </html>

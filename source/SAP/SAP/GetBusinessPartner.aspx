@@ -25,10 +25,7 @@
     <form id="form1" runat="server">
     <asp:ScriptManager ID="script1" runat="server">
     </asp:ScriptManager>
-    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="lnkPopup" 
-        PopupControlID="panEdit" BackgroundCssClass="modalBackground" CancelControlID="btnCancel"
-        PopupDragHandleControlID="panEdit">
-    </ajaxToolkit:ModalPopupExtender>
+   
     <asp:Panel ID="panEdit" runat="server" Height="180px" Width="400px" CssClass="ModalWindow">
         <h1>
             Edit/h1>

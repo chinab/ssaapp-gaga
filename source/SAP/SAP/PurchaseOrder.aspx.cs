@@ -182,6 +182,7 @@ namespace SAP
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             String results = ts.CreateMarketingDocument(requestXML);
             lblResults.Text = results;
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopupTrans", "Main.openRequestTransaction();", true);
         }
     }
 }

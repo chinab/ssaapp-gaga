@@ -15,7 +15,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManagerMain" runat="server">
     </asp:ScriptManager>
     <div id="menu">
         <ul class="menu">

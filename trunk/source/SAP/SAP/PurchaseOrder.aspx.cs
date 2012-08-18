@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using SAP.WebServices;
 
 namespace SAP
 {
@@ -38,7 +39,7 @@ namespace SAP
             {
                 switch (this.Request["__EVENTARGUMENT"].ToString())
                 {
-                    case "EditCallBack":
+                    case "EditItemCallBack":
                         string data = Session["data"] as string;
                         if (!string.IsNullOrEmpty(data))
                         {
@@ -55,6 +56,14 @@ namespace SAP
                             dt.Rows.Add("1", "2", "2", "2", "2", "2", "2", "2");
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
+                        }
+                        break;
+                    case "EditVendorCallBack":
+                        BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
+                        if (chosenPartner != null)
+                        {
+                            this.txtName.Text = chosenPartner.CardName;
+                            this.txtVendor.Text = chosenPartner.CardCode;
                         }
                         break;
                     default:

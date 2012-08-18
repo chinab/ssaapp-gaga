@@ -16,7 +16,7 @@
     </div>
     <div id="action-form">
         <asp:Button ID="btnAdd" Text="OK" runat="server" onclick="btnAdd_Click" />
-        <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditClick()" />
+        <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditItemClick()" />
     </div>
     </form>
 </body>

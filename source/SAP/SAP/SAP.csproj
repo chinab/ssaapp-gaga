@@ -182,6 +182,7 @@
     <Compile Include="WebServices\ItemMaster.cs" />
     <Compile Include="WebServices\MasterData.cs" />
     <Compile Include="WebServices\TaxGroup.cs" />
+    <Compile Include="WebServices\Transaction.cs" />
     <Compile Include="WebServices\WareHouse.cs" />
     <Compile Include="xml\OrderItem.cs" />
     <Compile Include="PurchaseOrder.aspx.cs">

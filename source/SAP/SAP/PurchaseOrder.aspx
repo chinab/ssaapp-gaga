@@ -8,8 +8,8 @@
     <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="title-form">
-                <h2>
-                    Purchase Order</h2>
+                <h2>Purchase Order</h2>
+                <asp:Label ID="lblResults" runat="server" />
             </div>
             <div id="header-form">
                 <div class="left">
@@ -350,7 +350,7 @@
             </div>
             <div id="footer-form">
                 <div class="left">
-                    <asp:Button ID="btnAdd" Text="Add" runat="server" />
+                    <asp:Button ID="btnAdd" Text="Add" runat="server" onclick="btnAdd_Click" />
                     <asp:Button ID="btnCancel" Text="Cancel" runat="server" />
                 </div>
                 <div class="right">

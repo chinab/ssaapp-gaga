@@ -77,15 +77,16 @@
 					</table>
 				</EmptyDataTemplate>
 			</asp:ListView>
+            <div id="action-form">
+                <asp:Button ID="btnAdd" Text="OK" runat="server" onclick="btnAdd_Click" />
+                <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditItemClick()" />
+            </div>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger  ControlID="btnFilter" />
         </Triggers>
     </asp:UpdatePanel>
-    <div id="action-form">
-        <asp:Button ID="btnAdd" Text="OK" runat="server" onclick="btnAdd_Click" />
-        <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditItemClick()" />
-    </div>
+    
     </form>
 </body>
 </html>

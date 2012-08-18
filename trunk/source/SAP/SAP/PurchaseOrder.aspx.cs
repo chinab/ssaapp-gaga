@@ -6,16 +6,18 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using SAP.WebServices;
+using System.Collections;
 
 namespace SAP
 {
     public partial class PurchaseOrder : System.Web.UI.Page
     {
+        public static DataTable dt;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                DataTable dt = new DataTable();
+                dt = new DataTable();
                 dt.Columns.Add("No");
                 dt.Columns.Add("Code");
                 dt.Columns.Add("Quantity");
@@ -39,17 +41,32 @@ namespace SAP
             // get callback from popup
             if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
             {
+                Int32 itemNo = 0;
                 switch (this.Request["__EVENTARGUMENT"].ToString())
                 {
                     case "EditItemCallBack":
                         ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
-                        Int32 itemNo =  Int32.Parse(Session["chosenItemNo"] as String);
+                        itemNo = Int32.Parse(Session["chosenItemNo"] as String);
                         if (chosenItem != null)
                         {
                             // update grid
-                            DataTable dt = (DataTable)this.lvContents.DataSource;
                             DataRow dr = dt.Rows[itemNo];
                             dr["Code"] = chosenItem.ItemCode;
+
+                            //dt.Rows.
+                            this.lvContents.DataSource = dt;
+                            this.lvContents.DataBind();
+                        }
+                        break;
+                    case "EditWareHouseCallBack":
+                        WareHouse chosenWarehouse = Session["chosenWarehouse"] as WareHouse;
+                        itemNo = Int32.Parse(Session["chosenItemNo"] as String);
+                        if (chosenWarehouse != null)
+                        {
+                            // update grid
+                            DataRow dr = dt.Rows[itemNo];
+                            dr["Whse"] = chosenWarehouse.WhsName;
+
                             //dt.Rows.
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
@@ -68,5 +85,41 @@ namespace SAP
                 }
             }
         }
+
+        protected DataTable getDataFromListView(ListView lv)
+        {
+            DataTable table = new DataTable();
+            if (lv.Items.Count >= 1)
+            {
+                for (int i = 0; i < lv.Items[0].Controls.Count; i++)
+                {
+                    if (lv.Items[0].Controls[i].GetType() == typeof(Label))
+                    {
+                        table.Columns.Add("col" + i.ToString());
+                    }
+                }
+            }
+
+            for (int j = 0; j < lv.Items.Count; j++)
+            {
+                ArrayList valholder = new ArrayList();
+                for (int k = 0; k < lv.Items[0].Controls.Count; k++)
+                {
+                    if (lv.Items[0].Controls[k].GetType() == typeof(Label))
+                    {
+                        Label tep = lv.Items[0].Controls[k] as Label;
+                        valholder.Add(tep.Text);
+                    }
+                }
+                DataRow dr = table.NewRow();
+                for (int z = 0; z < valholder.Count; z++)
+                {
+                    dr[z] = valholder[z].ToString();
+                }
+                table.Rows.Add(dr);
+            }
+            return table;
+        }
+
     }
 }

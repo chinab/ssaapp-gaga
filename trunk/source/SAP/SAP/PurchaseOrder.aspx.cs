@@ -55,6 +55,7 @@ namespace SAP
                             dr["Quantity"] = 1;
                             dr["UnitPrice"] = "AUD 250.0";
                             dr["Discount"] = "0.00";
+                            dr["Total"] = "250.0";
 
                             //dt.Rows.
                             this.lvContents.DataSource = dt;
@@ -124,14 +125,17 @@ namespace SAP
                     Label lblTotal = item.FindControl("lblTotal") as Label;
                     Label lblWhse = item.FindControl("lblWhse") as Label;
                     Label lblBlanketAgreement = item.FindControl("lblBlanketAgreement") as Label;
-                    OrderItem objOrder = new OrderItem(lblCode.Text, "", int.Parse(lblQuantity.Text), float.Parse(lblDiscount.Text), lblWhse.Text, "", double.Parse(lblTotal.Text));
-                    objInfo.AddOrderItem(objOrder);
+                    if (!String.IsNullOrEmpty(lblCode.Text))
+                    {
+                        OrderItem objOrder = new OrderItem(lblCode.Text, "", int.Parse(lblQuantity.Text), float.Parse(lblDiscount.Text), lblWhse.Text, "", double.Parse(lblTotal.Text));
+                        objInfo.AddOrderItem(objOrder);
+                    }
+
                 }
                 return objInfo.ToXMLString();
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -170,6 +174,14 @@ namespace SAP
                 table.Rows.Add(dr);
             }
             return table;
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            String requestXML = _collectData();
+            SAP.WebServices.Transaction ts = new WebServices.Transaction();
+            String results = ts.CreateMarketingDocument(requestXML);
+            lblResults.Text = results;
         }
     }
 }

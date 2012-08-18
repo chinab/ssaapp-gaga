@@ -8,14 +8,14 @@ using System.Data;
 using SAP.WebServices;
 
 namespace SAP
-{
-    public partial class PurchaseOrder_EditTaxCode : System.Web.UI.Page
     {
-        protected static DataSet taxCodes;
-        protected void Page_Load(object sender, EventArgs e)
+        public partial class PurchaseOrder_EditTaxCode : System.Web.UI.Page
         {
-            if (!IsPostBack)
+            protected static DataSet taxCodes;
+            protected void Page_Load(object sender, EventArgs e)
             {
+                if (!IsPostBack)
+                {
 
                 MasterData masterDataWS = new MasterData();
                 taxCodes = masterDataWS.GetTaxGroup("1");

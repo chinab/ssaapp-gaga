@@ -182,16 +182,24 @@ namespace SAP
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             String results = ts.CreateMarketingDocument(requestXML);
-            if (results.IndexOf("Exception") >= 0)
+            if (results.IndexOf("Exception") >= 0 && !simulate.Equals("true"))
             {
-                Session["errorMessages"] = results;
+                Session["errorMessage"] = results;
                 Session["requestXML"] = requestXML;
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openErrorPage();", true);
             }
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openErrorPage();", true);
+            else 
+            {
+                Session["successMessage"] = results;
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openSuccessPage();", true);
+            }
+            
             //this.lblResults.Text = results;
+            
         }
     }
 }

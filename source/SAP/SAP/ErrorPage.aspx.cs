@@ -11,7 +11,12 @@ namespace SAP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
 
+                int a = 1;
+                a++;
+            }
         }
     }
 }

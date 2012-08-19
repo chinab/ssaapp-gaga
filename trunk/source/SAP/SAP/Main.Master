@@ -22,20 +22,25 @@
         <ul class="menu">
             <li><a href="#" class="parent"><span>File</span></a>
                 <ul>
-                    <li><a href="#"><span>Sub Item 1</span></a></li>
-                    <li><a href="#"><span>Sub Item 2</span></a></li>
-                    <li><a href="#"><span>Sub Item 3</span></a></li>
+                    <li><a href="#"><span>Open</span></a></li>
+                    <li><a href="#"><span>New</span></a></li>
+                    <li><a href="#"><span>Save</span></a></li>
                 </ul>
             </li>
             <li><a href="#" class="parent"><span>Edit</span></a>
                 <ul>
-                    <li><a href="#"><span>Sub Item 1</span></a></li>
-                    <li><a href="#"><span>Sub Item 2</span></a></li>
-                    <li><a href="#"><span>Sub Item 3</span></a></li>
+                    <li><a href="#"><span>Search</span></a></li>
+                    <li><a href="#"><span>Delete</span></a></li>
+                    <li><a href="#"><span>Goto</span></a></li>
                 </ul>
             </li>
-            <li><a href="#"><span>Tool</span></a></li>
-            <li class="last"><a href="#"><span>Help</span></a></li>
+            <li><a href="#"><span>View</span></a></li>
+            <li><a href="#"><span>Data</span></a></li>
+            <li><a href="#"><span>Goto</span></a></li>
+            <li><a href="#"><span>Modules</span></a></li>
+            <li><a href="#"><span>Tools</span></a></li>
+            <li><a href="#"><span>Window</span></a></li>
+            <li><a href="#" class="last"><span>Help</span></a></li>
         </ul>
     </div>
     <div class="clear">
@@ -43,29 +48,33 @@
     <div id="menu-action">
         <ul>
             <li><a href="#">
-                <img alt="" src="/skin/icon/system-search.png" /></a></li>
+                <img alt="" src="/skin/icon/Windows Explorer.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/document-print.png" /></a></li>
+                <img alt="" src="/skin/icon/Windows 2.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/document-preview.png" /></a></li>
+                <img alt="" src="/skin/icon/Time.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/system-search.png" /></a></li>
+                <img alt="" src="/skin/icon/Search.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/document-print.png" /></a></li>
+                <img alt="" src="/skin/icon/Photocamera.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/document-preview.png" /></a></li>
+                <img alt="" src="/skin/icon/Outlook Express.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/system-search.png" /></a></li>
+                <img alt="" src="/skin/icon/My Computer 2.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/document-print.png" /></a></li>
+                <img alt="" src="/skin/icon/Internet.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/document-preview.png" /></a></li>
+                <img alt="" src="/skin/icon/ICQ.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/system-search.png" /></a></li>
+                <img alt="" src="/skin/icon/IconX.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/document-print.png" /></a></li>
+                <img alt="" src="/skin/icon/Favorites.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/document-preview.png" /></a></li>
+                <img alt="" src="/skin/icon/E-mail 2.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/Date.png" /></a></li>
+            <li><a href="#">
+                <img alt="" src="/skin/icon/Bin - Full.png" /></a></li>
         </ul>
         <div id="login-logout">
             <asp:LoginName ID="LoginName1" runat="server" />
@@ -98,7 +107,7 @@
                             <li><a href="#">Purchase Quotation Generation Wizard</a></li>
                             <li><a href="#">Document Printing</a></li>
                             <li><a href="#">Purchase Reports</a></li>
-                         </ul>
+                        </ul>
                     </div>
                 </div>
                 <div>

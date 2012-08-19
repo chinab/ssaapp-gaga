@@ -61,6 +61,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ErrorPage.aspx" />
     <Content Include="PurchaseOrder_EditTaxCode.aspx" />
     <Content Include="PurchaseOrder_EditVendor.aspx" />
     <Content Include="GetBusinessPartner.aspx" />
@@ -108,12 +109,21 @@
     <Content Include="skin\start\images\ui-icons_f7a50d_256x240.png" />
     <Content Include="skin\start\images\ui-icons_fcd113_256x240.png" />
     <Content Include="skin\start\jquery-ui.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="default.aspx" />
     <Content Include="PurchaseOrder.aspx" />
     <Content Include="TestXML.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PurchaseOrder_EditTaxCode.aspx.cs">
       <DependentUpon>PurchaseOrder_EditTaxCode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

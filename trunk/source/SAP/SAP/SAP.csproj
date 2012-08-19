@@ -177,6 +177,7 @@
     <Content Include="default.aspx" />
     <Content Include="PurchaseOrder.aspx" />
     <Content Include="TestXML.aspx" />
+    <Content Include="Homepage.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorPage.aspx.cs">
@@ -249,6 +250,13 @@
     </Compile>
     <Compile Include="TestXML.aspx.designer.cs">
       <DependentUpon>TestXML.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Homepage.aspx.cs">
+      <DependentUpon>Homepage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Homepage.aspx.designer.cs">
+      <DependentUpon>Homepage.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebServices\BusinessPartner.cs" />
     <Compile Include="WebServices\ItemMaster.cs" />

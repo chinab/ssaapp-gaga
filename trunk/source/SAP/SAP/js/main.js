@@ -139,6 +139,6 @@ Main = {
     openErrorPage: function () {
         $('#dialogError').dialog('open');
         $('#dialogError > #iframeError').attr('src', 'ErrorPage.aspx');
-        //return false;
+        return false;
     }
 }

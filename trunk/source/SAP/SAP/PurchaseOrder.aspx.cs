@@ -96,11 +96,15 @@ namespace SAP
                         {
                             this.txtName.Text = chosenPartner.CardName;
                             this.txtVendor.Text = chosenPartner.CardCode;
-                            this.lblStatus.Text = "Open";
+                            this.txtStatus.Text = "Open";
+                            this.txtStatus.Enabled = false;
                             this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDeliveryDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
-
+                            this.txtNoFrom.Text = "227";
+                            this.txtNoFrom.Enabled = false;
+                            this.txtNoTo.Text = "0";
+                            this.txtNoTo.Enabled = false;
                         }
                         break;
                     default:
@@ -186,7 +190,8 @@ namespace SAP
                 Session["errorMessages"] = results;
                 Session["requestXML"] = requestXML;
             }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopupErrors", "Main.openErrorPage();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopupErrors", "Main.openErrorPage();", true);
+            this.lblResults.Text = results;
         }
     }
 }

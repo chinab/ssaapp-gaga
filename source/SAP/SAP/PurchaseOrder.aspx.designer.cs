@@ -103,31 +103,31 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.DropDownList ddlNo;
         
         /// <summary>
-        /// lblNoFrom control.
+        /// txtNoFrom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoFrom;
+        protected global::System.Web.UI.WebControls.TextBox txtNoFrom;
         
         /// <summary>
-        /// lblNoTo control.
+        /// txtNoTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoTo;
+        protected global::System.Web.UI.WebControls.TextBox txtNoTo;
         
         /// <summary>
-        /// lblStatus control.
+        /// txtStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatus;
+        protected global::System.Web.UI.WebControls.TextBox txtStatus;
         
         /// <summary>
         /// txtPostingDate control.

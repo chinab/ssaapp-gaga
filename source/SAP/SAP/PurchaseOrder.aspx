@@ -72,17 +72,33 @@
                     <div class="right">
                         <table class="detail_table">
                             <tr>
-                                <td class="detail_table_td_150">
-                                    <span>No</span>
-                                    <asp:DropDownList ID="ddlNo" runat="server">
-                                        <asp:ListItem Text="Primary"></asp:ListItem>
-                                        <asp:ListItem Text="Alternative"></asp:ListItem>
-                                    </asp:DropDownList>
+                                <td class="detail_table_td_150" style="padding:0 0 0 0;">
+                                    <table style="padding:0 0 0 0;">
+                                        <tr>
+                                            <td class="detail_table_td_100">
+                                               <span>No</span>
+                                            </td>
+                                            <td class="detail_table_td_50">
+                                                 <asp:DropDownList ID="ddlNo" runat="server">
+                                                    <asp:ListItem Text="Primary"></asp:ListItem>
+                                                    <asp:ListItem Text="Alternative"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>  
+                                    </table> 
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblNoFrom" Text="227" runat="server" />
-                                    <span>-</span>
-                                    <asp:Label ID="lblNoTo" Text="0" runat="server" />
+                                    <table style="padding:0 0 0 0;">
+                                        <tr>
+                                            <td style="width:50%" alig="left";>
+                                                <asp:TextBox Width="50px" ID="txtNoFrom" Text="" runat="server"></asp:TextBox>       
+                                                <span>-</span>
+                                            </td>
+                                            <td style="width:50%">
+                                                <asp:TextBox Width="60px"  ID="txtNoTo" Text="" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>  
+                                    </table> 
                                 </td>
                             </tr>
                             <tr>
@@ -90,7 +106,7 @@
                                     <span>Status</span>
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblStatus" Text="" runat="server" />
+                                    <asp:TextBox  Enabled="false" ID="txtStatus" Text="" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -300,8 +316,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
-                                    <table>
+                                <td class="detail_table_td_150" style="padding:0 0 0 0;">
+                                    <table style="padding:0 0 0 0;">
                                         <tr>
                                             <td class="detail_table_td_100">
                                                 <span>Discount </span>

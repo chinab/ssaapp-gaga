@@ -1,4 +1,4 @@
-function pageLoad(sender, args) {
+﻿function pageLoad(sender, args) {
     if (args.get_isPartialLoad()) {
         //rebind jquery after partial load
         Main.rebind_init();
@@ -49,36 +49,34 @@ Main = {
                 autoOpen: false,
                 width: 600
             });
+            $(".txtDate").datepicker();
         }
-        $(".txtDate").datepicker();
     },
     rebind_init: function () {
-        // Accordion
-        $("#accordion").accordion({ header: "h3" });
+        if ($('#isMainPage').val() == '1') {
+            // Accordion
+            $("#accordion").accordion({ header: "h3" });
 
-        // Tabs
-        $('#tabs').tabs();
+            // Tabs
+            $('#tabs').tabs();
 
-        $('#dialogEditItem').dialog({
-            autoOpen: false,
-            width: 600
-        });
-        $('#dialogEditVendor').dialog({
-            autoOpen: false,
-            width: 600
-        });
-        $('#dialogEditWareHouse').dialog({
-            autoOpen: false,
-            width: 600
-        });
-        $('#dialogEditTaxCode').dialog({
-            autoOpen: false,
-            width: 600
-        });
-        $('#dialogError').dialog({
-            autoOpen: false,
-            width: 600
-        });
+            $('#dialogEditItem').dialog({
+                autoOpen: false,
+                width: 600
+            });
+            $('#dialogEditVendor').dialog({
+                autoOpen: false,
+                width: 600
+            });
+            $('#dialogEditWareHouse').dialog({
+                autoOpen: false,
+                width: 600
+            });
+            $('#dialogEditTaxCode').dialog({
+                autoOpen: false,
+                width: 600
+            });
+        }
     },
     openEditItem: function (param) {
         $('#dialogEditItem').dialog('open');
@@ -137,8 +135,14 @@ Main = {
         //return false;
     },
     openErrorPage: function () {
+        $('#dialogError').dialog({
+            autoOpen: false,
+            width: 600
+        });
+        // do nó rebind sau khi nhấn nút, nên để khởi tạo sau khi open là sai
+
         $('#dialogError').dialog('open');
         $('#dialogError > #iframeError').attr('src', 'ErrorPage.aspx');
-        return false;
+        //return false;
     }
 }

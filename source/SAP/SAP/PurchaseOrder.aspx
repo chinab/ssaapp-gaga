@@ -7,11 +7,11 @@
     </script>
     <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server">
         <ContentTemplate>
-            <div id="contentData"  style="padding-left:15px;">
-                <div id="title-form" style="border-bottom:2px solid black;">
-                    <h2>PURCHASE ORDER</h2>
+            <div id="contentData" style="padding-left: 15px;">
+                <div id="title-form" style="border-bottom: 2px solid black;">
+                    <h2>
+                        PURCHASE ORDER</h2>
                     <asp:Label BackColor="Red" ID="lblResults" runat="server" />
-
                 </div>
                 <div id="header-form">
                     <div class="left">
@@ -20,7 +20,7 @@
                                 <td class="detail_table_td_100">
                                     <span>Vendor</span>
                                 </td>
-                                <td >
+                                <td>
                                     <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
                                     <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openEditVendor()"
                                         runat="server">
@@ -50,7 +50,7 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_100">
-                                    <span>Vendor Ref No.</span> 
+                                    <span>Vendor Ref No.</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtRefNo" runat="server"></asp:TextBox>
@@ -72,33 +72,33 @@
                     <div class="right">
                         <table class="detail_table">
                             <tr>
-                                <td class="detail_table_td_150" style="padding:0 0 0 0;">
-                                    <table style="padding:0 0 0 0;">
+                                <td class="detail_table_td_150" style="padding: 0 0 0 0;">
+                                    <table style="padding: 0 0 0 0;">
                                         <tr>
                                             <td class="detail_table_td_100">
-                                               <span>No</span>
+                                                <span>No</span>
                                             </td>
                                             <td class="detail_table_td_50">
-                                                 <asp:DropDownList ID="ddlNo" runat="server">
+                                                <asp:DropDownList ID="ddlNo" runat="server">
                                                     <asp:ListItem Text="Primary"></asp:ListItem>
                                                     <asp:ListItem Text="Alternative"></asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
-                                        </tr>  
-                                    </table> 
+                                        </tr>
+                                    </table>
                                 </td>
                                 <td>
-                                    <table style="padding:0 0 0 0;">
+                                    <table style="padding: 0 0 0 0;">
                                         <tr>
-                                            <td style="width:50%" alig="left";>
-                                                <asp:TextBox Width="50px" ID="txtNoFrom" Text="" runat="server"></asp:TextBox>       
+                                            <td style="width: 50%" align="left">
+                                                <asp:TextBox Width="50px" ID="txtNoFrom" Text="" runat="server"></asp:TextBox>
                                                 <span>-</span>
                                             </td>
-                                            <td style="width:50%">
-                                                <asp:TextBox Width="60px"  ID="txtNoTo" Text="" runat="server"></asp:TextBox>
+                                            <td style="width: 50%">
+                                                <asp:TextBox Width="60px" ID="txtNoTo" Text="" runat="server"></asp:TextBox>
                                             </td>
-                                        </tr>  
-                                    </table> 
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                             <tr>
@@ -106,7 +106,7 @@
                                     <span>Status</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox  Enabled="false" ID="txtStatus" Text="" runat="server"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtStatus" Text="" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -316,8 +316,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150" style="padding:0 0 0 0;">
-                                    <table style="padding:0 0 0 0;">
+                                <td class="detail_table_td_150" style="padding: 0 0 0 0;">
+                                    <table style="padding: 0 0 0 0;">
                                         <tr>
                                             <td class="detail_table_td_100">
                                                 <span>Discount </span>
@@ -325,8 +325,8 @@
                                             <td class="detail_table_td_50">
                                                 <asp:TextBox ID="txtDiscountPercent" runat="server" Width="30px"></asp:TextBox><span>%</span>
                                             </td>
-                                        </tr>  
-                                    </table> 
+                                        </tr>
+                                    </table>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtDiscount" runat="server"></asp:TextBox>

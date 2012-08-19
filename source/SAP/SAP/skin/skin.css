@@ -54,6 +54,7 @@ img
     height: 100%;
     background: #f4f4f4;
     overflow:scroll;
+    
 }
 #rightSplitterContainer
 {
@@ -213,6 +214,11 @@ div#menu-action li
     list-style-image: none;
     display: inline;
 }
+div#menu-action img
+{
+   width: 22px;
+   padding-left: 22px;
+}
 div#login-logout
 {
     float: right;
@@ -220,9 +226,13 @@ div#login-logout
     font-weight: bold;
 }
 /******form********/
+div#title-form
+{
+    padding-bottom:5px;
+}
 div#title-form h2
 {
-    height: 15px;
+    height: 10px;
     font-size: 14px;
     font-weight: bold;
 }
@@ -324,6 +334,7 @@ table.detail_table table td
 {
     border-bottom: none;
 }
+
 table.detail_table .detail_table_td_50
 {
     width: 50px;

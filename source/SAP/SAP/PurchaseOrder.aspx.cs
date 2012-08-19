@@ -181,8 +181,12 @@ namespace SAP
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             String results = ts.CreateMarketingDocument(requestXML);
-            lblResults.Text = results;
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopupTrans", "Main.openRequestTransaction();", true);
+            if(results.IndexOf("Exception") >= 0)
+            {
+                Session["errorMessages"] = results;
+                Session["requestXML"] = requestXML;
+            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopupErrors", "Main.openErrorPage();", true);
         }
     }
 }

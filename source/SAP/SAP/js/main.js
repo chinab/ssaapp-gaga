@@ -45,7 +45,7 @@ Main = {
                 autoOpen: false,
                 width: 600
             });
-            $('#dialogRequestTransaction').dialog({
+            $('#dialogError').dialog({
                 autoOpen: false,
                 width: 600
             });
@@ -75,7 +75,7 @@ Main = {
             autoOpen: false,
             width: 600
         });
-        $('#dialogRequestTransaction').dialog({
+        $('#dialogError').dialog({
             autoOpen: false,
             width: 600
         });
@@ -136,8 +136,9 @@ Main = {
         window.parent.$('#dialogEditTaxCode').dialog('close');
         //return false;
     },
-     openRequestTransaction: function () {
-      $('#dialogRequestTransaction').dialog('open');
+    openErrorPage: function () {
+        $('#dialogError').dialog('open');
+        $('#dialogError > #iframeError').attr('src', 'ErrorPage.aspx');
         //return false;
     }
 }

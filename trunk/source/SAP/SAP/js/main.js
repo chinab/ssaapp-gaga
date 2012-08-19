@@ -144,5 +144,17 @@ Main = {
         $('#dialogError').dialog('open');
         $('#dialogError > #iframeError').attr('src', 'ErrorPage.aspx');
         //return false;
+    },
+    openSuccessPage: function () {
+        $('#dialogError').dialog({
+            autoOpen: false,
+            width: 600
+        });
+        // do nó rebind sau khi nhấn nút, nên để khởi tạo sau khi open là sai      
+
+        $('#dialogError').dialog('open');
+        $('#dialogError > #iframeError').attr('src', 'ErrorPage.aspx');
+
+        //return false;
     }
 }

@@ -175,7 +175,7 @@
                                             <th>
                                                 <span>Whse</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Blanket Agreement</span>
                                             </th>
                                         </tr>
@@ -221,7 +221,7 @@
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblBlanketAgreement"><%#Eval("BlanketAgreement")%></asp:Label>
                                         </td>
                                     </tr>
@@ -253,7 +253,7 @@
                                             <th>
                                                 <span>Whse</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Blanket Agreement</span>
                                             </th>
                                         </tr>

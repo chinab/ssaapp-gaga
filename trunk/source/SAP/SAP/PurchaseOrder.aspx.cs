@@ -37,7 +37,10 @@ namespace SAP
         protected override void OnLoadComplete(EventArgs e)
         {
             base.OnLoadComplete(e);
-
+            if (!IsPostBack)
+            {
+                this._ddlCurency_SelectedIndexChanged(null, null);
+            }
             // get callback from popup
             if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
             {
@@ -202,9 +205,31 @@ namespace SAP
             //this.lblResults.Text = results;
         }
 
-
         protected void _ddlCurency_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Text");
+            this.ddlCurrencyDetail.DataValueField = "ID";
+            this.ddlCurrencyDetail.DataTextField = "Text";
+            switch (this.ddlCurency.SelectedValue)
+            {
+                case "1":
+                    dt.Rows.Add("1", "SGD");
+                    break;
+                case "2":
+                    dt.Rows.Add("1", "SGD");
+                    break;
+                case "3":
+                    // get data from ws
+                    dt.Rows.Add("1", "SGD");
+                    break;
+                default:
+                    dt.Rows.Add("1", "SGD");
+                    break;
+            }
+            this.ddlCurrencyDetail.DataSource = dt;
+            this.ddlCurrencyDetail.DataBind();
         }
         #endregion
     }

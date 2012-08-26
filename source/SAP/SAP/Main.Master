@@ -87,11 +87,11 @@
         <div id="leftPane">
             <div id="accordion">
                 <div>
-                   
                     <h3>
-                         <a href="#"> <img alt="" width="15px" src="/skin/icon/shopping.png" />&nbsp;Purchasing-A/P</a>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/shopping.png" />&nbsp;Purchasing-A/P</a>
                     </h3>
-                    <div class="menubutton" >
+                    <div class="menubutton">
                         <ul>
                             <li><a href="#">Purchase Quotation</a></li>
                             <li><a href="PurchaseOrder.aspx">Purchase Order</a></li>
@@ -112,7 +112,8 @@
                 </div>
                 <div>
                     <h3>
-                        <a href="#"><img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Business Partners</a></h3>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Business Partners</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Administration 1</a></li>
@@ -126,24 +127,8 @@
                 </div>
                 <div>
                     <h3>
-                        <a href="#"><img alt="" width="15px" src="/skin/icon/coins.png" />&nbsp;Banking</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#"><img alt="" width="15px" src="/skin/icon/inventory.png" />&nbsp;Inventory</a></h3>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/coins.png" />&nbsp;Banking</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Administration 1</a></li>
@@ -160,7 +145,8 @@
                 </div>
                 <div>
                     <h3>
-                        <a href="#"><img alt="" width="15px" src="/skin/icon/production.png" />&nbsp;Production</a></h3>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/inventory.png" />&nbsp;Inventory</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Administration 1</a></li>
@@ -177,7 +163,8 @@
                 </div>
                 <div>
                     <h3>
-                        <a href="#"><img alt="" width="15px" src="/skin/icon/mrp.png" />&nbspMRP</a></h3>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/production.png" />&nbsp;Production</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Administration 1</a></li>
@@ -194,7 +181,26 @@
                 </div>
                 <div>
                     <h3>
-                        <a href="#"><img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;Service</a></h3>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/mrp.png" />&nbspMRP</a></h3>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Administration 4</a></li>
+                            <li><a href="#">Administration 5</a></li>
+                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Administration 1</a></li>
+                            <li><a href="#">Administration 2</a></li>
+                            <li><a href="#">Administration 3</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;Service</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Administration 1</a></li>
@@ -215,6 +221,10 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+    </div>
+    <div id="dialogFrame">
+        <iframe id="iframeItem" width="100%" height="100%" frameborder="0" marginwidth="0"
+            marginheight="0"></iframe>
     </div>
     </form>
 </body>

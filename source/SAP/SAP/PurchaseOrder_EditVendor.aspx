@@ -79,7 +79,7 @@
 			</asp:ListView>
             <div id="action-form">
                 <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
-                <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelEditVendorClick()" />
+                <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelDialogClick()" />
             </div>
         </ContentTemplate>
         <Triggers>

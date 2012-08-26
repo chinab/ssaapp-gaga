@@ -22,7 +22,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
-                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openEditVendor()"
+                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('PurchaseOrder_EditVendor.aspx','');"
                                         runat="server">
                                         <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>
@@ -192,7 +192,7 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("Code") %></asp:Label>
-                                            <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openEditItem({0})", Eval("No"))%>'
+                                            <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"PurchaseOrder_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
@@ -208,7 +208,7 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblTaxcode"><%#Eval("Taxcode")%></asp:Label>
-                                            <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openEditTaxCode({0})", Eval("No"))%>'
+                                            <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"PurchaseOrder_EditTaxCode.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgTaxCodeLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
@@ -218,13 +218,13 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblWhse"><%#Eval("Whse")%></asp:Label>
-                                            <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openEditWareHouse({0})", Eval("No"))%>'
+                                            <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"PurchaseOrder_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
                                         <td style="display: none">
-                                            <asp:Label runat="server" ID="lblBlanketAgreement"><%#Eval("BlanketAgreement")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblBlanketAgreement" Text='<%# Eval("BlanketAgreement")%>'></asp:Label>
                                         </td>
                                     </tr>
                                 </ItemTemplate>
@@ -388,26 +388,6 @@
                     </div>
                     <div class="clear">
                     </div>
-                </div>
-                <div id="dialogEditItem">
-                    <iframe id="iframeEditItem" width="100%" height="100%" frameborder="0" marginwidth="0"
-                        marginheight="0"></iframe>
-                </div>
-                <div id="dialogEditVendor">
-                    <iframe id="iframeEditVendor" width="100%" height="100%" frameborder="0" marginwidth="0"
-                        marginheight="0"></iframe>
-                </div>
-                <div id="dialogEditWareHouse">
-                    <iframe id="iframeEditWareHouse" width="100%" height="100%" frameborder="0" marginwidth="0"
-                        marginheight="0"></iframe>
-                </div>
-                <div id="dialogEditTaxCode">
-                    <iframe id="iframeEditTaxCode" width="100%" height="100%" frameborder="0" marginwidth="0"
-                        marginheight="0"></iframe>
-                </div>
-                <div id="dialogError">
-                    <iframe id="iframeError" width="100%" height="100%" frameborder="0" marginwidth="0"
-                        marginheight="0"></iframe>
                 </div>
             </div>
         </ContentTemplate>

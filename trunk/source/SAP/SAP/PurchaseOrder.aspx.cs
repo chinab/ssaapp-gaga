@@ -194,12 +194,12 @@ namespace SAP
             {
                 Session["errorMessage"] = results;
                 Session["requestXML"] = requestXML;
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openErrorPage();", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openDialog('ErrorPage.aspx','');", true);
             }
             else
             {
                 Session["successMessage"] = results;
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openSuccessPage();", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openDialog('ErrorPage.aspx','');", true);
             }
 
             //this.lblResults.Text = results;

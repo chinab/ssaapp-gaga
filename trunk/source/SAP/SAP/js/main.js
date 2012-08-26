@@ -11,6 +11,8 @@ $(document).ready(function () {
 
 Main = {
     myUpdatePanelId: '',
+    widthDialog: 0,
+    heightDialog: 0,
     init: function () {
         if ($('#isMainPage').val() == '1') {
             // layout
@@ -29,26 +31,15 @@ Main = {
             // Tabs
             $('#tabs').tabs();
 
-            $('#dialogEditItem').dialog({
+            //initialize dialog
+            $('#dialogFrame').dialog({
                 autoOpen: false,
-                width: 600
+                modal: true,
+                width: this.widthDialog,
+                height: this.heightDialog
             });
-            $('#dialogEditVendor').dialog({
-                autoOpen: false,
-                width: 600
-            });
-            $('#dialogEditWareHouse').dialog({
-                autoOpen: false,
-                width: 600
-            });
-            $('#dialogEditTaxCode').dialog({
-                autoOpen: false,
-                width: 600
-            });
-            $('#dialogError').dialog({
-                autoOpen: false,
-                width: 600
-            });
+            //
+
             $(".txtDate").datepicker();
         }
     },
@@ -60,101 +51,36 @@ Main = {
             // Tabs
             $('#tabs').tabs();
 
-            $('#dialogEditItem').dialog({
+            //rebinf dialog
+            $('#dialogFrame').dialog({
                 autoOpen: false,
-                width: 600
+                modal: true,
+                width: this.widthDialog,
+                height: this.heightDialog
             });
-            $('#dialogEditVendor').dialog({
-                autoOpen: false,
-                width: 600
-            });
-            $('#dialogEditWareHouse').dialog({
-                autoOpen: false,
-                width: 600
-            });
-            $('#dialogEditTaxCode').dialog({
-                autoOpen: false,
-                width: 600
-            });
+            //
         }
     },
-    openEditItem: function (param) {
-        $('#dialogEditItem').dialog('open');
-        $('#dialogEditItem > #iframeEditItem').attr('src', 'PurchaseOrder_EditItem.aspx?id=' + param);
-        //return false;
-    },
-    okEditItemClick: function () {
-        window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, 'EditItemCallBack');
-        window.parent.$('#dialogEditItem').dialog('close');
-        //return false;
-    },
-    cancelEditItemClick: function () {
-        window.parent.$('#dialogEditItem').dialog('close');
-        // return false;
-    },
-    openEditVendor: function (param) {
-        $('#dialogEditVendor').dialog('open');
-        $('#dialogEditVendor > #iframeEditVendor').attr('src', 'PurchaseOrder_EditVendor.aspx');
-        //return false;
-    },
-    okEditVendorClick: function () {
-        window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, 'EditVendorCallBack');
-        window.parent.$('#dialogEditVendor').dialog('close');
-        //return false;
-    },
-    cancelEditVendorClick: function () {
-        window.parent.$('#dialogEditVendor').dialog('close');
-        //return false;
-    },
-    openEditWareHouse: function (param) {
-        $('#dialogEditWareHouse').dialog('open');
-        $('#dialogEditWareHouse > #iframeEditWareHouse').attr('src', 'PurchaseOrder_EditWareHouse.aspx?id=' + param);
-        //return false;
-    },
-    okEditWareHouseClick: function () {
-        window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, 'EditWareHouseCallBack');
-        window.parent.$('#dialogEditWareHouse').dialog('close');
-        //return false;
-    },
-    cancelEditWareHouseClick: function () {
-        window.parent.$('#dialogEditWareHouse').dialog('close');
-        //return false;
-    },
-    openEditTaxCode: function (param) {
-        $('#dialogEditTaxCode').dialog('open');
-        $('#dialogEditTaxCode > #iframeEditTaxCode').attr('src', 'PurchaseOrder_EditTaxCode.aspx?id=' + param);
-        //return false;
-    },
-    okEditTaxCodeClick: function () {
-        window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, 'EditTaxCodeCallBack');
-        window.parent.$('#dialogEditTaxCode').dialog('close');
-        //return false;
-    },
-    cancelEditTaxCodeClick: function () {
-        window.parent.$('#dialogEditTaxCode').dialog('close');
-        //return false;
-    },
-    openErrorPage: function () {
-        $('#dialogError').dialog({
+    openCustomDialog: function (url, _width, _height, param) {
+        $('#dialogFrame').dialog({
             autoOpen: false,
-            width: 600
+            modal: true,
+            width: _width,
+            height: _height
         });
-        // do nó rebind sau khi nhấn nút, nên để khởi tạo sau khi open là sai
-
-        $('#dialogError').dialog('open');
-        $('#dialogError > #iframeError').attr('src', 'ErrorPage.aspx');
-        //return false;
+        this.widthDialog = _width;
+        this.heightDialog = _height;
+        $('#dialogFrame').dialog('open');
+        $('#dialogFrame > #iframeItem').attr('src', url + (param == '' || param == undefined ? '' : ("?" + param)));
     },
-    openSuccessPage: function () {
-        $('#dialogError').dialog({
-            autoOpen: false,
-            width: 600
-        });
-        // do nó rebind sau khi nhấn nút, nên để khởi tạo sau khi open là sai      
-
-        $('#dialogError').dialog('open');
-        $('#dialogError > #iframeError').attr('src', 'ErrorPage.aspx');
-
-        //return false;
-    }
+    openDialog: function (url, param) {
+        this.openCustomDialog(url, 600, 300, param);
+    },
+    okDialogClick: function (action) {
+        window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, action);
+        window.parent.$('#dialogFrame').dialog('close');
+    },
+    cancelDialogClick: function () {
+        window.parent.$('#dialogFrame').dialog('close');
+    },
 }

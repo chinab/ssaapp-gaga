@@ -38,7 +38,7 @@ namespace SAP
                 Session["chosenTaxCode"] = chosenTaxCode;
                 Session["chosenItemNo"] = Request.QueryString["id"];
             }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKTaxCodePopup", "Main.okEditTaxCodeClick();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKTaxCodePopup", "Main.okDialogClick('EditTaxCodeCallBack');", true);
 
         }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)

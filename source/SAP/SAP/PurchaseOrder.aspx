@@ -58,9 +58,10 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_100">
-                                    <asp:DropDownList ID="ddlCurency" runat="server">
-                                        <asp:ListItem Text="VND"></asp:ListItem>
-                                        <asp:ListItem Text="AUD"></asp:ListItem>
+                                    <asp:DropDownList ID="ddlCurency" runat="server" OnSelectedIndexChanged="_ddlCurency_SelectedIndexChanged">
+                                        <asp:ListItem Text="Local Currency" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="System Currency" Value="2"></asp:ListItem>
+                                        <asp:ListItem Text="BP Currency" Value="3"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                                 <td>
@@ -175,7 +176,7 @@
                                             <th>
                                                 <span>Whse</span>
                                             </th>
-                                            <th style="display:none">
+                                            <th style="display: none">
                                                 <span>Blanket Agreement</span>
                                             </th>
                                         </tr>
@@ -221,7 +222,7 @@
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
-                                        <td style="display:none">
+                                        <td style="display: none">
                                             <asp:Label runat="server" ID="lblBlanketAgreement"><%#Eval("BlanketAgreement")%></asp:Label>
                                         </td>
                                     </tr>
@@ -253,7 +254,7 @@
                                             <th>
                                                 <span>Whse</span>
                                             </th>
-                                            <th style="display:none">
+                                            <th style="display: none">
                                                 <span>Blanket Agreement</span>
                                             </th>
                                         </tr>

@@ -58,14 +58,15 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_100">
-                                    <asp:DropDownList ID="ddlCurency" runat="server" OnSelectedIndexChanged="_ddlCurency_SelectedIndexChanged">
+                                    <asp:DropDownList ID="ddlCurency" runat="server" AutoPostBack="true" OnSelectedIndexChanged="_ddlCurency_SelectedIndexChanged">
                                         <asp:ListItem Text="Local Currency" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="System Currency" Value="2"></asp:ListItem>
                                         <asp:ListItem Text="BP Currency" Value="3"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                                 <td>
-                                    <span>AUD</span>
+                                    <asp:DropDownList ID="ddlCurrencyDetail" runat="server">
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                         </table>

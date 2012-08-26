@@ -180,6 +180,7 @@ namespace SAP
             return table;
         }
 
+        #region Event
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
@@ -192,14 +193,19 @@ namespace SAP
                 Session["requestXML"] = requestXML;
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openErrorPage();", true);
             }
-            else 
+            else
             {
                 Session["successMessage"] = results;
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openSuccessPage();", true);
             }
-            
+
             //this.lblResults.Text = results;
-            
         }
+
+
+        protected void _ddlCurency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+        #endregion
     }
 }

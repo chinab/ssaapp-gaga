@@ -177,7 +177,7 @@ namespace SAP
                                     {
                                         writer.WriteStartElement(PurchaseInfo.ROW_ELEMENT);
                                         {
-                                            writer.WriteStartElement(PurchaseInfo.ITEMCODE_ELEMENT); //write item code
+                                            writer.WriteStartElement(PurchaseInfo.ITEMCODE_ELEMENT); //write item _PrjCode
                                             {
                                                 writer.WriteString(this._OrderItems[i].ItemCode);
 

@@ -194,15 +194,15 @@ namespace SAP
             {
                 Session["errorMessage"] = results;
                 Session["requestXML"] = requestXML;
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openDialog('ErrorPage.aspx','');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('" + results + "','');", true);
             }
             else
             {
                 Session["successMessage"] = results;
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKPopupErrors", "Main.openDialog('ErrorPage.aspx','');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                   "Main.setMasterMessage('" + results + "','');", true);
             }
-
-            //this.lblResults.Text = results;
         }
 
         protected void _ddlCurency_SelectedIndexChanged(object sender, EventArgs e)

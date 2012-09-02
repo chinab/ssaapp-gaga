@@ -7,6 +7,7 @@
     overflow: hidden;
     font-family: Arial;
     font-size: 12px;
+    background-color: #EAF1F6;
 }
 img
 {
@@ -36,6 +37,7 @@ img
     width: 100%;
     margin: 0;
     padding: 0;
+    border-bottom: 1px solid #87A3C0;
 }
 #leftPane
 {
@@ -287,6 +289,20 @@ div#title-form h2
     height: 10px;
     font-size: 14px;
     font-weight: bold;
+}
+div#bottomMessage
+{
+    height: 20px;
+    padding: 5px;
+    background-color: #EAF1F6;
+}
+#bottomMessage span
+{
+    font-weight: bold;
+}
+#customeMessage
+{
+    color: red;
 }
 /******end form********/
 

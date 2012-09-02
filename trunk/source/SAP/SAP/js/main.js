@@ -24,9 +24,9 @@ Main = {
                 B: $('#rightPane'),
                 closeableto: 0
             });
-            $("#splitterContainer").height($('body').height() - 75);
+            $("#splitterContainer").height($('body').height() - 93);
             // Accordion
-            $("#accordion").accordion({autoHeight: false, header: "h3" });
+            $("#accordion").accordion({ autoHeight: false, header: "h3" });
 
             // Tabs
             $('#tabs').tabs();
@@ -83,4 +83,17 @@ Main = {
     cancelDialogClick: function () {
         window.parent.$('#dialogFrame').dialog('close');
     },
+    redirectWithTimeout: function (url, timeout) {
+        setTimeout('Main.redirectPage("' + url + '")', timeout);
+    },
+    updateMasterMessage: function () {
+        $('#customeMessage').text('');
+    },
+    clearMasterMessage: function () {
+        setTimeout('Main.updateMasterMessage()', 10000);
+    },
+    setMasterMessage: function (msg) {
+        $('#customeMessage').text(msg);
+        Main.clearMasterMessage();
+    }
 }

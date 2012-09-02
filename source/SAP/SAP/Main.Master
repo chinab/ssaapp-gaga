@@ -8,6 +8,7 @@
     <script type="text/javascript" src="/js/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/splitter.js"></script>
     <script type="text/javascript" src="/js/menu.js"></script>
+    <script type="text/javascript" src="/js/dialog.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <link href="skin/start/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="skin/skin.css" rel="stylesheet" type="text/css" />
@@ -274,11 +275,18 @@
         </div>
     </div>
     <div id="bottomMessage">
-        <span>Message : </span> <span id="customeMessage"></span>
+        <span>Message : </span><span id="customeMessage"></span>
     </div>
     <div id="dialogFrame">
         <iframe id="iframeItem" width="100%" height="100%" frameborder="0" marginwidth="0"
             marginheight="0"></iframe>
+    </div>
+    <div id="progressloader">
+        <div id="progressloader_dialog" class="progressloader_window">
+            <asp:Image ID="Image1" runat="server" Height="42" Width="42" ImageUrl="~/skin/images/ajax-loader.gif" />
+        </div>
+        <div id="progressloader_mask">
+        </div>
     </div>
     </form>
 </body>

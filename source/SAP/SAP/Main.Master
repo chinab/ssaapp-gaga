@@ -89,6 +89,76 @@
                 <div>
                     <h3>
                         <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Administration</a></h3>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Choose company</a></li>
+                            <li><a href="#">Exchange Rates and Indexes</a></li>
+                            <li><a href="#">System Initialization</a></li>
+                            <li><a href="#">Setup</a></li>
+                            <li><a href="#">Data Import/Export</a></li>
+                            <li><a href="#">Utilities</a></li>
+                            <li><a href="#">Approval Procedures</a></li>
+                            <li><a href="#">License</a></li>
+                            <li><a href="#">Add-Ons</a></li>
+                            <li><a href="#">Alerts Management</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Financials</a></h3>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Chart of Accounts</a></li>
+                            <li><a href="#">Edit Chart of Accounts</a></li>
+                            <li><a href="#">Account Code Generator</a></li>
+                            <li><a href="#">Journal Entry</a></li>
+                            <li><a href="#">Journal Vouchers</a></li>
+                            <li><a href="#">Posting Templates</a></li>
+                            <li><a href="#">Recurring Postings</a></li>
+                            <li><a href="#">Reverse Transactions</a></li>
+                            <li><a href="#">Exchange Rate Differences</a></li>
+                            <li><a href="#">Conversion Differences</a></li>
+                            <li><a href="#">1099 Editting</a></li>
+                            <li><a href="#">Financial Reports Templates</a></li>
+                            <li><a href="#">Document Printing</a></li>
+                            <li><a href="#">Internal Reconciliations</a></li>
+                            <li><a href="#">Budget Setup</a></li>
+                            <li><a href="#">Cost Accounting</a></li>
+                            <li><a href="#">Financial Reports</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/shopping.png" />&nbsp;Sales Opportunity</a>
+                    </h3>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="#">Sales Quotation</a></li>
+                            <li><a href="#">Sales Order</a></li>
+                            <li><a href="#">Delivery</a></li>
+                            <li><a href="#">Return</a></li>
+                            <li><a href="#">A/R Down Payment Invoice</a></li>
+                            <li><a href="#">A/R Invoice</a></li>
+                            <li><a href="#">A/R Invoice + Payment</a></li>
+                            <li><a href="#">A/R Credit Memo</a></li>
+                            <li><a href="#">A/R Reserve Invoice</a></li>
+                            <li><a href="#">Document Generetion Wizard</a></li>
+                            <li><a href="#">Recurring Transactions</a></li>
+                            <li><a href="#">Recurring Transaction Templates</a></li>
+                            <li><a href="#">Document Printing</a></li>
+                            <li><a href="#">Dunning Wizard</a></li>
+                            <li><a href="#">Sales Reports</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">
                             <img alt="" width="15px" src="/skin/icon/shopping.png" />&nbsp;Purchasing-A/P</a>
                     </h3>
                     <div class="menubutton">
@@ -116,12 +186,10 @@
                             <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Business Partners</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
+                            <li><a href="#">Bussiness Partner Master Data</a></li>
+                            <li><a href="#">Activity</a></li>
+                            <li><a href="#">Internal Reconciliations</a></li>
+                            <li><a href="#">Business Parter Reports</a></li>
                         </ul>
                     </div>
                 </div>
@@ -131,15 +199,14 @@
                             <img alt="" width="15px" src="/skin/icon/coins.png" />&nbsp;Banking</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Incomming Payments</a></li>
+                            <li><a href="#">Deposits</a></li>
+                            <li><a href="#">Outgoing Payments</a></li>
+                            <li><a href="#">Payment Wizard</a></li>
+                            <li><a href="#">Banking Statements and External Reconciliations</a></li>
+                            <li><a href="#">Check Number Confirmation</a></li>
+                            <li><a href="#">Document Printing</a></li>
+                            <li><a href="#">Banking Reports</a></li>
                         </ul>
                     </div>
                 </div>
@@ -149,15 +216,12 @@
                             <img alt="" width="15px" src="/skin/icon/inventory.png" />&nbsp;Inventory</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Item Master Data</a></li>
+                            <li><a href="#">Item Management</a></li>
+                            <li><a href="#">Inventory Transactions</a></li>
+                            <li><a href="#">Price Lists</a></li>
+                            <li><a href="#">Pick and Pack</a></li>
+                            <li><a href="#">Inventory Reports</a></li>
                         </ul>
                     </div>
                 </div>
@@ -167,33 +231,24 @@
                             <img alt="" width="15px" src="/skin/icon/production.png" />&nbsp;Production</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Bill of Materials</a></li>
+                            <li><a href="#">Production Order</a></li>
+                            <li><a href="#">Receipt From Production</a></li>
+                            <li><a href="#">Issue For Production</a></li>
+                            <li><a href="#">Update Parent Item Prices Globally</a></li>
+                            <li><a href="#">Production Reports</a></li>
                         </ul>
                     </div>
                 </div>
                 <div>
                     <h3>
                         <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/mrp.png" />&nbspMRP</a></h3>
+                            <img alt="" width="15px" src="/skin/icon/mrp.png" />&nbsp;MRP</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Forecasts</a></li>
+                            <li><a href="#">MRP Wizard</a></li>
+                            <li><a href="#">Order Recommendation</a></li>
                         </ul>
                     </div>
                 </div>
@@ -203,15 +258,11 @@
                             <img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;Service</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
-                            <li><a href="#">Administration 4</a></li>
-                            <li><a href="#">Administration 5</a></li>
-                            <li><a href="#">Administration 6</a></li>
-                            <li><a href="#">Administration 1</a></li>
-                            <li><a href="#">Administration 2</a></li>
-                            <li><a href="#">Administration 3</a></li>
+                            <li><a href="#">Service Call</a></li>
+                            <li><a href="#">Customer Equipment Card</a></li>
+                            <li><a href="#">Service Contract</a></li>
+                            <li><a href="#">Solutions Knowledge Base</a></li>
+                            <li><a href="#">Service Reports</a></li>
                         </ul>
                     </div>
                 </div>

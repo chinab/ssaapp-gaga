@@ -383,8 +383,6 @@
                         <asp:Button ID="btnCancel" Text="Cancel" runat="server" />
                     </div>
                     <div class="right">
-                        <asp:Button ID="btnCopyFrom" Text="Copy From" runat="server" />
-                        <asp:Button ID="btnCopyTo" Text="Copy To" runat="server" />
                     </div>
                     <div class="clear">
                     </div>

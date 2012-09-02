@@ -26,7 +26,7 @@ Main = {
             });
             $("#splitterContainer").height($('body').height() - 75);
             // Accordion
-            $("#accordion").accordion({ header: "h3" });
+            $("#accordion").accordion({autoHeight: false, header: "h3" });
 
             // Tabs
             $('#tabs').tabs();

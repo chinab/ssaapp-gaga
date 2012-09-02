@@ -104,6 +104,8 @@
     <Content Include="skin\images\banking.png" />
     <Content Include="skin\images\Bin - Full.png" />
     <Content Include="skin\images\bk_icontool.png" />
+    <Content Include="skin\images\bk_tab.png" />
+    <Content Include="skin\images\bk_tab_active.png" />
     <Content Include="skin\images\coins.png" />
     <Content Include="skin\images\data_table_header.png" />
     <Content Include="skin\images\Date.png" />

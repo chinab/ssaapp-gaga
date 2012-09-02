@@ -43,7 +43,7 @@ img
     width: 15%;
     height: 100%;
     border-top: solid 1px #9cbdff;
-    background: #90BADE;
+    background: #EAF1F6;
     overflow: auto;
 }
 #rightPane
@@ -52,9 +52,8 @@ img
     float: right;
     width: 85%;
     height: 100%;
-    background: #f4f4f4;
-    overflow:scroll;
-    
+    background: #EAF1F6;
+    overflow: scroll;
 }
 #rightSplitterContainer
 {
@@ -190,14 +189,14 @@ div#leftPane .ui-accordion .ui-accordion-content
 }
 .ui-widget-content
 {
-    background: #90BADE;
+    background: #eaf1f6;
 }
 /*****menu-action***/
 div#menu-action
 {
-    height: 22px;
+    height: 20px;
     padding: 5px;
-    background-color: #95C2F5;
+    background: url("images/bk_icontool.png") repeat-x;
 }
 div#menu-action ul
 {
@@ -216,8 +215,8 @@ div#menu-action li
 }
 div#menu-action img
 {
-   width: 22px;
-   padding-left: 22px;
+    width: 22px;
+    padding-left: 22px;
 }
 div#login-logout
 {
@@ -228,7 +227,7 @@ div#login-logout
 /******form********/
 div#title-form
 {
-    padding-bottom:5px;
+    padding-bottom: 5px;
 }
 div#title-form h2
 {
@@ -259,7 +258,7 @@ table.data_table th
     height: 25px;
     background: transparent url(images/data_table_header.png) repeat-x scroll 50% 50%;
     color: #15428B;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #C6C6BD;
     font-weight: bold;
 }
 table.data_table th a
@@ -277,7 +276,7 @@ table.data_table tr:hover
 }
 table.data_table td
 {
-    border: 1px solid #FFFFFF;
+    border: 1px solid #C6C6BD;
     padding: 4px 10px;
     text-align: center;
     vertical-align: middle;

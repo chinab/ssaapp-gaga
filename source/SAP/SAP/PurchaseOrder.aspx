@@ -42,9 +42,9 @@
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlContactPerson" Width="91%" runat="server">
-                                        <asp:ListItem Text="Riahk"></asp:ListItem>
-                                        <asp:ListItem Text="Nguyen"></asp:ListItem>
-                                        <asp:ListItem Text="Sum"></asp:ListItem>
+                                        <asp:ListItem Text="---"></asp:ListItem>
+                                        <asp:ListItem Text="Michael Morgan"></asp:ListItem>
+                                        <asp:ListItem Text="Sarina Hanschke"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -462,6 +462,7 @@
                             </div>
                         </div>
                     </div>
+                    <br />
                     <div class="left">
                         <table class="detail_table">
                             <tr>
@@ -470,9 +471,14 @@
                                 </td>
                                 <td class="detail_table_td_100">
                                     <asp:DropDownList ID="ddlBuyer" runat="server">
-                                        <asp:ListItem Text="Riahk"></asp:ListItem>
-                                        <asp:ListItem Text="Nguyen"></asp:ListItem>
-                                        <asp:ListItem Text="Sum"></asp:ListItem>
+                                        <asp:ListItem Text="-No Sales Employee-"></asp:ListItem>
+                                        <asp:ListItem Text="Bill Levine"></asp:ListItem>
+                                        <asp:ListItem Text="Brad Thompson"></asp:ListItem>
+                                        <asp:ListItem Text="James Chan"></asp:ListItem>
+                                        <asp:ListItem Text="Jim Boswik Chan"></asp:ListItem>
+                                        <asp:ListItem Text="Sales Manager"></asp:ListItem>
+                                        <asp:ListItem Text="Sophie Klogg"></asp:ListItem>
+                                        <asp:ListItem Text="Define New"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -526,7 +532,7 @@
                                     <span>Freight</span>
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblFreight" Text="" runat="server" />
+                                    <asp:TextBox ID="txtFreight" runat="server" ReadOnly="true"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -534,7 +540,7 @@
                                     <span>Rounding</span>
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblRounding" Text="" runat="server" />
+                                    <asp:TextBox ID="txtRounding" runat="server" ReadOnly="true"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -542,7 +548,7 @@
                                     <span>Tax</span>
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblTax" Text="" runat="server" />
+                                    <asp:TextBox ID="txtTax" runat="server" ReadOnly="true"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>

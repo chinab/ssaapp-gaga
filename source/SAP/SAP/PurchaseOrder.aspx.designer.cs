@@ -400,31 +400,31 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.TextBox txtDiscount;
         
         /// <summary>
-        /// lblFreight control.
+        /// txtFreight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFreight;
+        protected global::System.Web.UI.WebControls.TextBox txtFreight;
         
         /// <summary>
-        /// lblRounding control.
+        /// txtRounding control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRounding;
+        protected global::System.Web.UI.WebControls.TextBox txtRounding;
         
         /// <summary>
-        /// lblTax control.
+        /// txtTax control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTax;
+        protected global::System.Web.UI.WebControls.TextBox txtTax;
         
         /// <summary>
         /// txtTotalPayment control.

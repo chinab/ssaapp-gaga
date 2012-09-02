@@ -146,7 +146,6 @@
                             <li><a href="#tabs-1">Contents</a></li>
                             <li><a href="#tabs-2">Logistics</a></li>
                             <li><a href="#tabs-3">Accounting</a></li>
-                            <li><a href="#tabs-4">Attachment</a></li>
                         </ul>
                         <div id="tabs-1">
                             <asp:ListView ID="lvContents" runat="server">
@@ -269,11 +268,199 @@
                             </asp:ListView>
                         </div>
                         <div id="tabs-2">
-                            TBD.</div>
+                            <table class="detail_table">
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <span>Ship to</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtShipTo" runat="server" TextMode="MultiLine" Height="50px"></asp:TextBox>
+                                        <input type="button" name="btnBrowingShipTo" value="..." />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="cbxSplitPurchaseOrder" Text="Split Purchase Order" runat="server" /><br />
+                                        <asp:CheckBox ID="cbxApproved" Text="Approved" runat="server" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <span>Pay to</span>
+                                    </td>
+                                    <td colspan="2">
+                                        <asp:TextBox ID="txtPayTo" runat="server" TextMode="MultiLine" Height="50px"></asp:TextBox>
+                                        <input type="button" name="btnBrowingPayTo" value="..." />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <span>Shipping Type</span>
+                                    </td>
+                                    <td colspan="2">
+                                        <asp:DropDownList ID="ddlShippingType" runat="server">
+                                            <asp:ListItem Text=""></asp:ListItem>
+                                            <asp:ListItem Text="Fedex EM"></asp:ListItem>
+                                            <asp:ListItem Text="Fedex ON"></asp:ListItem>
+                                            <asp:ListItem Text="Motor Express"></asp:ListItem>
+                                            <asp:ListItem Text="UPS Ground"></asp:ListItem>
+                                            <asp:ListItem Text="UPS Red"></asp:ListItem>
+                                            <asp:ListItem Text="Define New"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="clear">
+                            </div>
+                        </div>
                         <div id="tabs-3">
-                            TBD.</div>
-                        <div id="tabs-4">
-                            TBD.</div>
+                            <table class="detail_table">
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <span>Journal Remark</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtJournalRemark" runat="server"></asp:TextBox>
+                                    </td>
+                                    <td class="detail_table_td_100">
+                                        <span>BP Project</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtBPProject" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td class="detail_table_td_100">
+                                        <span>Cancellation Date</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtCancellationDate" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td class="detail_table_td_100">
+                                        <span>Required Date</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtRequiredDate" runat="server" CssClass="txtDate"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td class="detail_table_td_100">
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <span>Payment Terms</span>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlPaymentTerm" runat="server">
+                                            <asp:ListItem Text="---"></asp:ListItem>
+                                            <asp:ListItem Text="Cash Basic"></asp:ListItem>
+                                            <asp:ListItem Text="2P10Net30"></asp:ListItem>
+                                            <asp:ListItem Text="Net30"></asp:ListItem>
+                                            <asp:ListItem Text="Defined View"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td class="detail_table_td_100">
+                                        <span>Indicator</span>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlIndicator" runat="server">
+                                            <asp:ListItem Text="---"></asp:ListItem>
+                                            <asp:ListItem Text="Define view"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <span>Payment Method</span>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlPaymentMethod" runat="server">
+                                            <asp:ListItem Text="---"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td class="detail_table_td_100">
+                                        <span>Federal Tax ID</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="ddlFederalTaxID" runat="server" ReadOnly="true"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <span>Central Bank Incl.</span>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="txtCentralBankIncl" runat="server">
+                                            <asp:ListItem Text="---"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td class="detail_table_td_100">
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td class="detail_table_td_100">
+                                        <span>Order Number</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtOrderNumber" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <br />
+                            <br />
+                            <table class="detail_table">
+                                <tr>
+                                    <td colspan="2" class="detail_table_td_100">
+                                        <span>Manually Recalculate Due Date:</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <asp:DropDownList ID="ddlRecalDueDate" runat="server">
+                                            <asp:ListItem Text="---"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtRecalDueDate1" runat="server"></asp:TextBox>
+                                        <span>Months + </span>
+                                        <asp:TextBox ID="txtRecalDueDate2" runat="server"></asp:TextBox>
+                                        <span>Days</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="detail_table_td_100">
+                                        <span>Cash Discount Date Offset:</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtCashDiscount" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="clear">
+                            </div>
+                        </div>
                     </div>
                     <div class="left">
                         <table class="detail_table">

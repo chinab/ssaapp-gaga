@@ -191,6 +191,59 @@ div#leftPane .ui-accordion .ui-accordion-content
 {
     background: #eaf1f6;
 }
+div#content-form .ui-widget-header
+{
+    border-bottom: 1px solid #4297D7;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+div#content-form .ui-state-default, div#content-form .ui-widget-content .ui-state-default, div#content-form .ui-widget-header .ui-state-default
+{
+    border: 1px solid #77D5F7;
+    background: url(images/bk_tab.png) repeat-x;
+    font-weight: normal;
+    color: white;
+}
+div#content-form .ui-state-active, div#content-form .ui-widget-content .ui-state-active, div#content-form .ui-widget-header .ui-state-active
+{
+    border: 1px solid #77D5F7;
+    background: url(images/bk_tab_active.png) repeat-x;
+    font-weight: normal;
+    color: white;
+}
+div#content-form .ui-tabs .ui-tabs-nav li
+{
+    margin: 0;
+    border: none;
+    border-right: 1px solid #87a3c0;
+}
+div#content-form .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl
+{
+    -moz-border-radius-topleft: 0;
+    -webkit-border-top-left-radius: 0;
+    -khtml-border-top-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+div#content-form .ui-tabs .ui-tabs-nav li a
+{
+    padding-left: 20px;
+    padding-bottom: 0px;
+}
+div#content-form .ui-tabs .ui-tabs-nav li.ui-tabs-selected
+{
+    padding-bottom: 0px;
+}
+div#content-form .ui-state-default a, div#content-form .ui-state-default a:link, div#content-form .ui-state-default a:visited
+{
+    color: black;
+}
 /*****menu-action***/
 div#menu-action
 {

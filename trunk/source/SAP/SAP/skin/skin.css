@@ -444,3 +444,40 @@ table.detail_table .detail_table_td_200
     width: 200px;
 }
 /**/
+/**********************/
+#progressloader_mask
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9000;
+    background: url("images/ui-bg_flat_0_aaaaaa_40x100.png") repeat scroll 50% 50% #AAAAAA;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    display: none;
+}
+#progressloader .progressloader_window
+{
+    position: absolute;
+    width: 440px;
+    height: 200px;
+    display: none;
+    z-index: 9999;
+    padding: 20px;
+}
+#progressloader #progressloader_dialog
+{
+    width: 24px;
+    height: 24px;
+}
+#progressloader .progressloader_window
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 200px;
+    display: none;
+    z-index: 9999;
+    padding: 20px;
+}

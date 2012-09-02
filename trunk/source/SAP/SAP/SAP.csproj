@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ErrorPage.aspx" />
+    <Content Include="js\dialog.js" />
     <Content Include="PurchaseOrder_EditTaxCode.aspx" />
     <Content Include="PurchaseOrder_EditVendor.aspx" />
     <Content Include="GetBusinessPartner.aspx" />
@@ -101,6 +102,7 @@
     <Content Include="skin\icon\Warning.png" />
     <Content Include="skin\icon\Windows 2.png" />
     <Content Include="skin\icon\Windows Explorer.png" />
+    <Content Include="skin\images\ajax-loader.gif" />
     <Content Include="skin\images\banking.png" />
     <Content Include="skin\images\Bin - Full.png" />
     <Content Include="skin\images\bk_icontool.png" />
@@ -148,6 +150,7 @@
     <Content Include="skin\images\system-search.png" />
     <Content Include="skin\images\Time.ico" />
     <Content Include="skin\images\Time.png" />
+    <Content Include="skin\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="skin\images\Warning.png" />
     <Content Include="skin\images\Windows 2.png" />
     <Content Include="skin\images\Windows Explorer.png" />

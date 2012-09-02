@@ -572,7 +572,7 @@
                 </div>
                 <div id="footer-form">
                     <div class="left">
-                        <asp:Button ID="btnAdd" Text="Add" runat="server" OnClick="btnAdd_Click" />
+                        <asp:Button ID="btnAdd" Text="Add" runat="server" OnClientClick="Dialog.showLoader();" OnClick="btnAdd_Click" />
                         <asp:Button ID="btnCancel" Text="Cancel" runat="server" />
                     </div>
                     <div class="right">

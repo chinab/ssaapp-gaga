@@ -203,6 +203,9 @@ namespace SAP
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                    "Main.setMasterMessage('" + results + "','');", true);
             }
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                              "Dialog.hideLoader();", true);
+
         }
 
         protected void _ddlCurency_SelectedIndexChanged(object sender, EventArgs e)

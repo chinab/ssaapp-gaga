@@ -22,7 +22,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
-                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('PurchaseOrder_EditVendor.aspx','');"
+                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('Popup_EditVendor.aspx','');"
                                         runat="server">
                                         <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>
@@ -156,6 +156,9 @@
                                                 <span>Item No.</span>
                                             </th>
                                             <th>
+                                                <span>Item Description</span>
+                                            </th>
+                                            <th>
                                                 <span>Quantity</span>
                                             </th>
                                             <th>
@@ -185,13 +188,16 @@
                                     <tr>
                                         <td>
                                             <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
-                                        </td>
+                                        </td>                                        
                                         <td>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("Code") %></asp:Label>
-                                            <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"PurchaseOrder_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="Label1"><%#Eval("Description")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblQuantity"><%#Eval("Quantity")%></asp:Label>
@@ -204,7 +210,7 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblTaxcode"><%#Eval("Taxcode")%></asp:Label>
-                                            <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"PurchaseOrder_EditTaxCode.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditTaxCode.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgTaxCodeLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
@@ -214,7 +220,7 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblWhse"><%#Eval("Whse")%></asp:Label>
-                                            <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"PurchaseOrder_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
@@ -232,6 +238,9 @@
                                             </th>
                                             <th>
                                                 <span>Item No.</span>
+                                            </th>
+                                             <th>
+                                                <span>Item Description</span>
                                             </th>
                                             <th>
                                                 <span>Quantity</span>
@@ -477,7 +486,7 @@
                                 </td>
                                 <td class="detail_table_td_100">
                                     <asp:TextBox ID="txtOwner" runat="server"></asp:TextBox>
-                                     <asp:HyperLink ID="linkOwner" NavigateUrl="javascript:Main.openDialog('PurchaseOrder_EditEmployee.aspx','');"
+                                     <asp:HyperLink ID="linkOwner" NavigateUrl="javascript:Main.openDialog('Popup_EditEmployee.aspx','');"
                                         runat="server">
                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>

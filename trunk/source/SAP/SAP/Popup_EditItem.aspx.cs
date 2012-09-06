@@ -4,26 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using SAP.WebServices;
+using System.Data;
 
 namespace SAP
+{
+    public partial class Popup_EditItem : System.Web.UI.Page
     {
-        public partial class PurchaseOrder_EditTaxCode : System.Web.UI.Page
+        protected static DataSet itemMasters;
+        protected void Page_Load(object sender, EventArgs e)
         {
-            protected static DataSet taxCodes;
-            protected void Page_Load(object sender, EventArgs e)
+            if (!IsPostBack)
             {
-                if (!IsPostBack)
-                {
 
                 MasterData masterDataWS = new MasterData();
-                taxCodes = masterDataWS.GetTaxGroup("1");
-                //this.gridTaxCodes.DataSource = warehousesItems.Tables[0];
-                //this.gridTaxCodes.DataBind();
+                itemMasters = masterDataWS.GetItemMasterData();
+                //this.gridVendors.DataSource = warehousesItems.Tables[0];
+                //this.gridVendors.DataBind();
                 //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;
                 BindCategories("");
-                editTaxCodeUpdatePanel.Update();
+                editItemUpdatePanel.Update();
 
             }
         }
@@ -33,12 +33,14 @@ namespace SAP
             string selectedValue = Request.Form["MyRadioButton"];
             if (!String.IsNullOrEmpty(selectedValue))
             {
-                List<TaxGroup> list = TaxGroup.extractFromDataSet(taxCodes.Tables[0]);
-                TaxGroup chosenTaxCode = list[Int32.Parse(selectedValue)];
-                Session["chosenTaxCode"] = chosenTaxCode;
+                List<ItemMaster> list = ItemMaster.extractFromDataSet(itemMasters.Tables[0]);
+                ItemMaster chosenItem = list[Int32.Parse(selectedValue)];
+                Session["chosenItem"] = chosenItem;
                 Session["chosenItemNo"] = Request.QueryString["id"];
             }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKTaxCodePopup", "Main.okDialogClick('EditTaxCodeCallBack');", true);
+            //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
+            //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopup", "Main.okDialogClick('EditItemCallBack');", true);
 
         }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
@@ -53,34 +55,30 @@ namespace SAP
             try
             {
                 // Simple created a table to bind with Grid view and populated it with data.
-                DataTable gridTable = new DataTable("TaxCodes");
+                DataTable gridTable = new DataTable("Items");
                 gridTable.Columns.Add("Selected");
                 gridTable.Columns.Add("No");
                 gridTable.Columns.Add("Code");
                 gridTable.Columns.Add("Name");
-                DataTable vendorsTable = taxCodes.Tables[0];
+                DataTable itemsTable = itemMasters.Tables[0];
                 DataRow dr;
                 int i = 0;
-                foreach (DataRow row in vendorsTable.Rows)
+                foreach (DataRow row in itemsTable.Rows)
                 {
                     if (("" + row[0].ToString() + row[1].ToString()).Trim().IndexOf(CategoryFilter.Trim()) >= 0)
                     {
                         dr = gridTable.NewRow();
-                        if (i == 0)
-                            dr["Selected"] = "checked";
-                        else
-                            dr["Selected"] = "";
-                        dr["No"] = i.ToString(); vendorsTable.Rows.IndexOf(row);
+                        dr["No"] = i.ToString(); itemsTable.Rows.IndexOf(row);
                         dr["Code"] = row[0].ToString();
                         dr["Name"] = row[1].ToString();
                         i++;
                         gridTable.Rows.Add(dr);
                     }
                 }
-
-                listTaxCodes.DataSource = gridTable;
-                listTaxCodes.DataBind();
-                editTaxCodeUpdatePanel.Update();
+                gridTable.Rows[gridTable.Rows.Count-1]["Selected"] = "checked";
+                listItems.DataSource = gridTable;
+                listItems.DataBind();
+                editItemUpdatePanel.Update();
             }
             catch (Exception)
             {

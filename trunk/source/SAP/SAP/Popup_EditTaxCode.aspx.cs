@@ -8,22 +8,22 @@ using System.Data;
 using SAP.WebServices;
 
 namespace SAP
-{
-    public partial class PurchaseOrder_EditWareHouse : System.Web.UI.Page
     {
-        protected static DataSet warehousesItems;
-        protected void Page_Load(object sender, EventArgs e)
+    public partial class Popup_EditTaxCode : System.Web.UI.Page
         {
-            if (!IsPostBack)
+            protected static DataSet taxCodes;
+            protected void Page_Load(object sender, EventArgs e)
             {
+                if (!IsPostBack)
+                {
 
                 MasterData masterDataWS = new MasterData();
-                warehousesItems = masterDataWS.GetWarehouse();
-                //this.gridWareHouses.DataSource = warehousesItems.Tables[0];
-                //this.gridWareHouses.DataBind();
+                taxCodes = masterDataWS.GetTaxGroup("I");
+                //this.gridTaxCodes.DataSource = warehousesItems.Tables[0];
+                //this.gridTaxCodes.DataBind();
                 //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;
                 BindCategories("");
-                editWareHouseUpdatePanel.Update();
+                editTaxCodeUpdatePanel.Update();
 
             }
         }
@@ -33,14 +33,12 @@ namespace SAP
             string selectedValue = Request.Form["MyRadioButton"];
             if (!String.IsNullOrEmpty(selectedValue))
             {
-                List<WareHouse> list = WareHouse.extractFromDataSet(warehousesItems.Tables[0]);
-                WareHouse chosenWareHouse = list[Int32.Parse(selectedValue)];
-                Session["chosenWareHouse"] = chosenWareHouse;
+                List<TaxGroup> list = TaxGroup.extractFromDataSet(taxCodes.Tables[0]);
+                TaxGroup chosenTaxCode = list[Int32.Parse(selectedValue)];
+                Session["chosenTaxCode"] = chosenTaxCode;
                 Session["chosenItemNo"] = Request.QueryString["id"];
             }
-            //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
-            //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKWareHousePopup", "Main.okDialogClick('EditWareHouseCallBack');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKTaxCodePopup", "Main.okDialogClick('EditTaxCodeCallBack');", true);
 
         }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
@@ -55,15 +53,15 @@ namespace SAP
             try
             {
                 // Simple created a table to bind with Grid view and populated it with data.
-                DataTable gridTable = new DataTable("WareHouses");
+                DataTable gridTable = new DataTable("TaxCodes");
                 gridTable.Columns.Add("Selected");
                 gridTable.Columns.Add("No");
                 gridTable.Columns.Add("Code");
                 gridTable.Columns.Add("Name");
-                DataTable warehouseTable = warehousesItems.Tables[0];
+                DataTable vendorsTable = taxCodes.Tables[0];
                 DataRow dr;
                 int i = 0;
-                foreach (DataRow row in warehouseTable.Rows)
+                foreach (DataRow row in vendorsTable.Rows)
                 {
                     if (("" + row[0].ToString() + row[1].ToString()).Trim().IndexOf(CategoryFilter.Trim()) >= 0)
                     {
@@ -72,7 +70,7 @@ namespace SAP
                             dr["Selected"] = "checked";
                         else
                             dr["Selected"] = "";
-                        dr["No"] = i.ToString(); warehouseTable.Rows.IndexOf(row);
+                        dr["No"] = i.ToString(); vendorsTable.Rows.IndexOf(row);
                         dr["Code"] = row[0].ToString();
                         dr["Name"] = row[1].ToString();
                         i++;
@@ -80,9 +78,9 @@ namespace SAP
                     }
                 }
 
-                listWareHouses.DataSource = gridTable;
-                listWareHouses.DataBind();
-                editWareHouseUpdatePanel.Update();
+                listTaxCodes.DataSource = gridTable;
+                listTaxCodes.DataBind();
+                editTaxCodeUpdatePanel.Update();
             }
             catch (Exception)
             {

@@ -9,7 +9,7 @@ using SAP.WebServices;
 
 namespace SAP
 {
-    public partial class PurchaseOrder_EditVendor : System.Web.UI.Page
+    public partial class Popup_EditVendor : System.Web.UI.Page
     {
         protected static DataSet businessPartners;
         protected void Page_Load(object sender, EventArgs e)

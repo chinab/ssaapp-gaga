@@ -39,7 +39,7 @@ namespace SAP
 
         private System.Threading.SendOrPostCallback GetTaxGroupOperationCompleted;
 
-        private System.Threading.SendOrPostCallback GetEmpolyeeMasterDataOperationCompleted;
+        private System.Threading.SendOrPostCallback GetEmployeeMasterDataOperationCompleted;
 
         private System.Threading.SendOrPostCallback GetSalesBuyerMasterDataOperationCompleted;
 
@@ -72,7 +72,7 @@ namespace SAP
         public event GetTaxGroupCompletedEventHandler GetTaxGroupCompleted;
 
         /// <remarks/>
-        public event GetEmpolyeeMasterDataCompletedEventHandler GetEmpolyeeMasterDataCompleted;
+        public event GetEmployeeMasterDataCompletedEventHandler GetEmployeeMasterDataCompleted;
 
         /// <remarks/>
         public event GetSalesBuyerMasterDataCompletedEventHandler GetSalesBuyerMasterDataCompleted;
@@ -274,48 +274,48 @@ namespace SAP
         }
 
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetEmpolyeeMasterData", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetEmpolyeeMasterData()
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetEmployeeMasterData", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetEmployeeMasterData()
         {
-            object[] results = this.Invoke("GetEmpolyeeMasterData", new object[0]);
+            object[] results = this.Invoke("GetEmployeeMasterData", new object[0]);
             return ((System.Data.DataSet)(results[0]));
         }
 
         /// <remarks/>
-        public System.IAsyncResult BeginGetEmpolyeeMasterData(System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginGetEmployeeMasterData(System.AsyncCallback callback, object asyncState)
         {
-            return this.BeginInvoke("GetEmpolyeeMasterData", new object[0], callback, asyncState);
+            return this.BeginInvoke("GetEmployeeMasterData", new object[0], callback, asyncState);
         }
 
         /// <remarks/>
-        public System.Data.DataSet EndGetEmpolyeeMasterData(System.IAsyncResult asyncResult)
+        public System.Data.DataSet EndGetEmployeeMasterData(System.IAsyncResult asyncResult)
         {
             object[] results = this.EndInvoke(asyncResult);
             return ((System.Data.DataSet)(results[0]));
         }
 
         /// <remarks/>
-        public void GetEmpolyeeMasterDataAsync()
+        public void GetEmployeeMasterDataAsync()
         {
-            this.GetEmpolyeeMasterDataAsync(null);
+            this.GetEmployeeMasterDataAsync(null);
         }
 
         /// <remarks/>
-        public void GetEmpolyeeMasterDataAsync(object userState)
+        public void GetEmployeeMasterDataAsync(object userState)
         {
-            if ((this.GetEmpolyeeMasterDataOperationCompleted == null))
+            if ((this.GetEmployeeMasterDataOperationCompleted == null))
             {
-                this.GetEmpolyeeMasterDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmpolyeeMasterDataOperationCompleted);
+                this.GetEmployeeMasterDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmployeeMasterDataOperationCompleted);
             }
-            this.InvokeAsync("GetEmpolyeeMasterData", new object[0], this.GetEmpolyeeMasterDataOperationCompleted, userState);
+            this.InvokeAsync("GetEmployeeMasterData", new object[0], this.GetEmployeeMasterDataOperationCompleted, userState);
         }
 
-        private void OnGetEmpolyeeMasterDataOperationCompleted(object arg)
+        private void OnGetEmployeeMasterDataOperationCompleted(object arg)
         {
-            if ((this.GetEmpolyeeMasterDataCompleted != null))
+            if ((this.GetEmployeeMasterDataCompleted != null))
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetEmpolyeeMasterDataCompleted(this, new GetEmpolyeeMasterDataCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetEmployeeMasterDataCompleted(this, new GetEmployeeMasterDataCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -635,18 +635,18 @@ namespace SAP
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    public delegate void GetEmpolyeeMasterDataCompletedEventHandler(object sender, GetEmpolyeeMasterDataCompletedEventArgs e);
+    public delegate void GetEmployeeMasterDataCompletedEventHandler(object sender, GetEmployeeMasterDataCompletedEventArgs e);
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetEmpolyeeMasterDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    public partial class GetEmployeeMasterDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
 
         private object[] results;
 
-        internal GetEmpolyeeMasterDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        internal GetEmployeeMasterDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;

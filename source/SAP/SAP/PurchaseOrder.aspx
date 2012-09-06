@@ -41,10 +41,7 @@
                                     <span>Contact Person</span>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlContactPerson" Width="91%" runat="server">
-                                        <asp:ListItem Text="---"></asp:ListItem>
-                                        <asp:ListItem Text="Michael Morgan"></asp:ListItem>
-                                        <asp:ListItem Text="Sarina Hanschke"></asp:ListItem>
+                                    <asp:DropDownList ID="ddlContactPerson" Width="88%" runat="server">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -471,14 +468,6 @@
                                 </td>
                                 <td class="detail_table_td_100">
                                     <asp:DropDownList ID="ddlBuyer" runat="server">
-                                        <asp:ListItem Text="-No Sales Employee-"></asp:ListItem>
-                                        <asp:ListItem Text="Bill Levine"></asp:ListItem>
-                                        <asp:ListItem Text="Brad Thompson"></asp:ListItem>
-                                        <asp:ListItem Text="James Chan"></asp:ListItem>
-                                        <asp:ListItem Text="Jim Boswik Chan"></asp:ListItem>
-                                        <asp:ListItem Text="Sales Manager"></asp:ListItem>
-                                        <asp:ListItem Text="Sophie Klogg"></asp:ListItem>
-                                        <asp:ListItem Text="Define New"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -488,6 +477,10 @@
                                 </td>
                                 <td class="detail_table_td_100">
                                     <asp:TextBox ID="txtOwner" runat="server"></asp:TextBox>
+                                     <asp:HyperLink ID="linkOwner" NavigateUrl="javascript:Main.openDialog('PurchaseOrder_EditEmployee.aspx','');"
+                                        runat="server">
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                    </asp:HyperLink>
                                 </td>
                             </tr>
                             <tr>
@@ -507,7 +500,7 @@
                                     <span>Total before discount</span>
                                 </td>
                                 <td>
-                                    <asp:Label ID="txtTotalDiscount" Text="AUD 250.00" runat="server" />
+                                    <asp:Label ID="txtTotalDiscount" Text="250.00" runat="server" />
                                 </td>
                             </tr>
                             <tr>

@@ -20,7 +20,7 @@ namespace SAP
             DataSet taxGroups = masterDataWS.GetTaxGroup("1");
             DataSet whareHouses = masterDataWS.GetWarehouse();
             //List<BusinessPartner> list = BusinessPartner.extractFromDataSet(warehousesItems.Tables[0]);
-            //List<ItemMaster> listItems = ItemMaster.extractFromDataSet(itemMasters.Tables[0]);
+            //List<ItemMaster> listItems = ItemMaster.extractFromDataSet(employeeSet.Tables[0]);
             List<WareHouse> whsItems = WareHouse.extractFromDataSet(whareHouses.Tables[0]);
             //String temp = "List count: " + whsItems.Count;
             //txtTest.Text = temp;

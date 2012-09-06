@@ -31,6 +31,29 @@ namespace SAP
                     dt.Rows.Add(i, "", "", "", "", "", "", "", "");
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
+
+                MasterData masterDataWS = new MasterData();
+                DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
+                ListItem item = new ListItem("-No Sales Employee-", "-1");
+                ddlBuyer.Items.Add(item);                
+                foreach (DataRow row in salesBuyers.Tables[0].Rows)
+                {
+                    item = new ListItem(row[1].ToString(),  row[0].ToString());
+                    ddlBuyer.Items.Add(item);
+                }
+
+                DataSet contactPersons = masterDataWS.GetContactPerson("");
+                item = new ListItem("-No Contact Person-", "-1");
+                ddlContactPerson.Items.Add(item);
+                foreach (DataRow row in contactPersons.Tables[0].Rows)
+                {                    
+                    String name = row[2].ToString() + " " + row[3].ToString() + " " + row[4].ToString();
+                    item = new ListItem(name, row[1].ToString());
+                    if ("Y".Equals(row[0].ToString()))
+                        item.Selected = true;
+                    ddlContactPerson.Items.Add(item);
+                }
+
             }
         }
 
@@ -56,7 +79,7 @@ namespace SAP
                             DataRow dr = dt.Rows[itemNo];
                             dr["Code"] = chosenItem.ItemCode;
                             dr["Quantity"] = 1;
-                            dr["UnitPrice"] = "AUD 250.0";
+                            dr["UnitPrice"] = "250.0";
                             dr["Discount"] = "0.00";
                             dr["Total"] = "250.0";
 
@@ -110,6 +133,15 @@ namespace SAP
                             this.txtNoTo.Enabled = false;
                         }
                         break;
+                    case "EditEmployeeCallBack":
+                        EmployeeMasterData employee = Session["chosenEmployee"] as EmployeeMasterData;
+                         if (employee != null)
+                        {
+                            this.txtOwner.Text = employee.FirstName + " " + employee.MidName + " " + employee.LastName; 
+                        }
+                        break;
+
+                        
                     default:
                         break;
                 }
@@ -217,22 +249,20 @@ namespace SAP
             this.ddlCurrencyDetail.DataTextField = "Text";
             switch (this.ddlCurency.SelectedValue)
             {
-                case "1":
-                    dt.Rows.Add("1", "SGD");
-                    break;
-                case "2":
-                    dt.Rows.Add("1", "SGD");
-                    break;
                 case "3":
                     // get data from ws
-                    dt.Rows.Add("1", "SGD");
+                    dt.Rows.Add("1", "$");
+                    if (dt.Rows.Count == 1)
+                        this.ddlCurrencyDetail.Enabled = false;
+                    this.ddlCurrencyDetail.DataSource = dt;
+                    this.ddlCurrencyDetail.DataBind();
+                    this.ddlCurrencyDetail.Visible = true;
                     break;
                 default:
-                    dt.Rows.Add("1", "SGD");
+                    this.ddlCurrencyDetail.Visible = false;
                     break;
             }
-            this.ddlCurrencyDetail.DataSource = dt;
-            this.ddlCurrencyDetail.DataBind();
+           
         }
         #endregion
     }

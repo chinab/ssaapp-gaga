@@ -55,7 +55,7 @@ div#menu a {
     line-height: 41px;
     text-decoration: none;
 }
-div#menu a:hover, div#menu a:hover span { color: #fff; }
+div#menu a:hover, div#menu a:hover span { text-decoration:underline;}
 div#menu li.current a {}
 
 div#menu span {
@@ -76,7 +76,7 @@ div#menu ul ul a.parent:hover span {
 div#menu a {
     padding: 0 10px 0 10px;
     line-height: 35px;
-    color: #e5e5e5;
+    color: #000000;
 }
 div#menu span {
     margin-top: 5px;
@@ -85,14 +85,14 @@ div#menu li { background: url(images/main-delimiter.png) 98% 6px no-repeat; }
 div#menu li.last { background: none; }
 
 /* menu::level2 */
-div#menu ul ul li { background: none; }
+div#menu ul ul li { background-color:#fef9e3; }
 div#menu ul ul {
     position: absolute;
     top: 38px;
     left: -999em;
     width: 163px;
     padding: 5px 0 0 0;
-    background: rgb(45,45,45);
+    background: #fef9e3;
     margin-top:1px;
 }
 div#menu ul ul a {
@@ -107,10 +107,10 @@ div#menu ul ul span {
     margin-top: 0;
     padding-right: 15px;
     _padding-right: 20px;
-    color: rgb(169,169,169);
+    color: #000000;
 }
 div#menu ul ul a:hover span {
-    color: #fff;
+    text-decoration:underline;
 }
 div#menu ul ul li.last { background: none; }
 div#menu ul ul li {

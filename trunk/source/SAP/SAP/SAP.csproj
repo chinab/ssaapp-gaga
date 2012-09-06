@@ -60,6 +60,7 @@
   <ItemGroup>
     <Content Include="ErrorPage.aspx" />
     <Content Include="js\dialog.js" />
+    <Content Include="PurchaseOrder_EditEmployee.aspx" />
     <Content Include="PurchaseOrder_EditTaxCode.aspx" />
     <Content Include="PurchaseOrder_EditVendor.aspx" />
     <Content Include="GetBusinessPartner.aspx" />
@@ -188,6 +189,13 @@
     </Compile>
     <Compile Include="ErrorPage.aspx.designer.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrder_EditEmployee.aspx.cs">
+      <DependentUpon>PurchaseOrder_EditEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PurchaseOrder_EditEmployee.aspx.designer.cs">
+      <DependentUpon>PurchaseOrder_EditEmployee.aspx</DependentUpon>
     </Compile>
     <Compile Include="PurchaseOrder_EditTaxCode.aspx.cs">
       <DependentUpon>PurchaseOrder_EditTaxCode.aspx</DependentUpon>

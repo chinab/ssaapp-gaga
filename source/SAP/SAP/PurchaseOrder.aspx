@@ -221,25 +221,25 @@
                                             </asp:HyperLink>
                                         </td>
                                          <td>
-                                            <asp:Label runat="server" ID="Label1"><%#Eval("Description")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblDescription"><%#Eval("Description")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblQuantity"><%#Eval("Quantity")%></asp:Label>
                                         </td>
                                          <td>
-                                            <asp:Label runat="server" ID="Label2"><%#Eval("OrgPrice")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblOrgPrice"><%#Eval("OrgPrice")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label runat="server" ID="Label3"><%#Eval("PromoDiscount")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblPromoDiscount"><%#Eval("PromoDiscount")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label runat="server" ID="lblPrice"><%#Eval("UnitPrice")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblUnitPrice"><%#Eval("UnitPrice")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblDiscount"><%#Eval("ContractDiscount")%></asp:Label>
                                         </td>
                                          <td>
-                                            <asp:Label runat="server" ID="Label4"><%#Eval("PriceAfterDiscout")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblPriceAfterDiscout"><%#Eval("PriceAfterDiscout")%></asp:Label>
                                         </td>
                                          <td>
                                             <asp:Label runat="server" ID="lblTotal"><%#Eval("Total")%></asp:Label>
@@ -259,13 +259,13 @@
                                             </asp:HyperLink>
                                         </td>
                                           <td>
-                                            <asp:Label runat="server" ID="Label5"><%#Eval("PromotionId")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblPromotionId"><%#Eval("PromotionId")%></asp:Label>
                                         </td>
                                           <td>
-                                            <asp:Label runat="server" ID="Label6"><%#Eval("PromotionLine")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblPromotionLine"><%#Eval("PromotionLine")%></asp:Label>
                                         </td>
                                           <td>
-                                            <asp:Label runat="server" ID="Label7"><%#Eval("Sole")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblSole"><%#Eval("Sole")%></asp:Label>
                                         </td>
                                     </tr>
                                 </ItemTemplate>

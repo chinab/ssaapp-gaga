@@ -58,6 +58,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Popup_Promo.aspx" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="js\dialog.js" />
     <Content Include="Popup_EditEmployee.aspx" />
@@ -144,6 +145,7 @@
     <Content Include="skin\images\partner.png" />
     <Content Include="skin\images\Photocamera.png" />
     <Content Include="skin\images\production.png" />
+    <Content Include="skin\images\promocode.png" />
     <Content Include="skin\images\Search.png" />
     <Content Include="skin\images\service.png" />
     <Content Include="skin\images\shopping.png" />
@@ -183,6 +185,13 @@
     <Content Include="Homepage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Popup_Promo.aspx.cs">
+      <DependentUpon>Popup_Promo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_Promo.aspx.designer.cs">
+      <DependentUpon>Popup_Promo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ErrorPage.aspx.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -271,6 +280,7 @@
     <Compile Include="WebServices\AccountMasterData.cs" />
     <Compile Include="WebServices\BusinessPartner.cs" />
     <Compile Include="WebServices\ContactPerson.cs" />
+    <Compile Include="WebServices\GetDefault.cs" />
     <Compile Include="WebServices\SalesBuyerMasterData.cs" />
     <Compile Include="WebServices\Project.cs" />
     <Compile Include="WebServices\EmployeeMasterData.cs" />

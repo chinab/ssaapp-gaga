@@ -11,19 +11,16 @@ namespace SAP
     {
     public partial class Popup_Promo : System.Web.UI.Page
         {
-            protected static DataSet taxCodes;
+            protected static DataSet promoCodes;
             protected void Page_Load(object sender, EventArgs e)
             {
                 if (!IsPostBack)
                 {
 
-                MasterData masterDataWS = new MasterData();
-                taxCodes = masterDataWS.GetTaxGroup("I");
-                //this.gridTaxCodes.DataSource = warehousesItems.Tables[0];
-                //this.gridTaxCodes.DataBind();
-                //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;
-                BindCategories("");
-                editTaxCodeUpdatePanel.Update();
+                    GetDefault getDefaultWS = new GetDefault();
+                    promoCodes = getDefaultWS.GetPromotion("", "", "", 0, new DateTime(), 0);
+                    BindCategories("");
+                    editPromoCodxeUpdatePanel.Update();
 
             }
         }
@@ -33,12 +30,12 @@ namespace SAP
             string selectedValue = Request.Form["MyRadioButton"];
             if (!String.IsNullOrEmpty(selectedValue))
             {
-                List<TaxGroup> list = TaxGroup.extractFromDataSet(taxCodes.Tables[0]);
-                TaxGroup chosenTaxCode = list[Int32.Parse(selectedValue)];
-                Session["chosenTaxCode"] = chosenTaxCode;
+                List<Promotion> list = Promotion.extractFromDataSet(promoCodes.Tables[0]);
+                Promotion chosenPrmo = list[Int32.Parse(selectedValue)];
+                Session["chosenPromo"] = chosenPrmo;
                 Session["chosenItemNo"] = Request.QueryString["id"];
             }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKTaxCodePopup", "Main.okDialogClick('EditTaxCodeCallBack');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPromoPopup", "Main.okDialogClick('EditPromoCallBack');", true);
 
         }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
@@ -56,9 +53,23 @@ namespace SAP
                 DataTable gridTable = new DataTable("TaxCodes");
                 gridTable.Columns.Add("Selected");
                 gridTable.Columns.Add("No");
-                gridTable.Columns.Add("Code");
-                gridTable.Columns.Add("Name");
-                DataTable vendorsTable = taxCodes.Tables[0];
+                gridTable.Columns.Add("ID");
+                gridTable.Columns.Add("ProCode");
+                gridTable.Columns.Add("ProName");
+                gridTable.Columns.Add("ProValue");
+                gridTable.Columns.Add("ProQty");
+                gridTable.Columns.Add("ProTrf");
+                gridTable.Columns.Add("ItemCode");
+                gridTable.Columns.Add("ItemName");
+                gridTable.Columns.Add("Condition");
+                gridTable.Columns.Add("IsReplace");
+                gridTable.Columns.Add("Sole");
+                gridTable.Columns.Add("ChkCond");
+                gridTable.Columns.Add("HeadDscAmt");
+                gridTable.Columns.Add("HeadDscPer");
+                gridTable.Columns.Add("WhsCode");
+
+                DataTable vendorsTable = promoCodes.Tables[0];
                 DataRow dr;
                 int i = 0;
                 foreach (DataRow row in vendorsTable.Rows)
@@ -70,17 +81,32 @@ namespace SAP
                             dr["Selected"] = "checked";
                         else
                             dr["Selected"] = "";
+
                         dr["No"] = i.ToString(); vendorsTable.Rows.IndexOf(row);
-                        dr["Code"] = row[0].ToString();
-                        dr["Name"] = row[1].ToString();
+                        dr["ID"] =row[0].ToString();
+                        dr["ProCode"] =row[1].ToString();
+                        dr["ProName"] =row[2].ToString();
+                        dr["ProValue"] =row[3].ToString();
+                        dr["ProQty"] =row[4].ToString();
+                        dr["ProTrf"] =row[5].ToString();
+                        dr["ItemCode"] =row[6].ToString();
+                        dr["ItemName"] =row[7].ToString();
+                        dr["Condition"] =row[8].ToString();
+                        dr["IsReplace"] =row[9].ToString();
+                        dr["Sole"] =row[10].ToString();
+                        dr["ChkCond"] =row[11].ToString();
+                        dr["HeadDscAmt"] =row[12].ToString();
+                        dr["HeadDscPer"] =row[13].ToString();
+                        dr["WhsCode"] =row[14].ToString();
+
                         i++;
                         gridTable.Rows.Add(dr);
                     }
                 }
 
-                listTaxCodes.DataSource = gridTable;
-                listTaxCodes.DataBind();
-                editTaxCodeUpdatePanel.Update();
+                listPromoCodes.DataSource = gridTable;
+                listPromoCodes.DataBind();
+                editPromoCodxeUpdatePanel.Update();
             }
             catch (Exception)
             {

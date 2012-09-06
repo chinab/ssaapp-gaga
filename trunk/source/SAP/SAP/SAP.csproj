@@ -277,18 +277,19 @@
     <Compile Include="Homepage.aspx.designer.cs">
       <DependentUpon>Homepage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebServices\AccountMasterData.cs" />
-    <Compile Include="WebServices\BusinessPartner.cs" />
-    <Compile Include="WebServices\ContactPerson.cs" />
+    <Compile Include="WebServices\Entity\AccountMasterData.cs" />
+    <Compile Include="WebServices\Entity\BusinessPartner.cs" />
+    <Compile Include="WebServices\Entity\ContactPerson.cs" />
+    <Compile Include="WebServices\Entity\Promotion.cs" />
     <Compile Include="WebServices\GetDefault.cs" />
-    <Compile Include="WebServices\SalesBuyerMasterData.cs" />
-    <Compile Include="WebServices\Project.cs" />
-    <Compile Include="WebServices\EmployeeMasterData.cs" />
-    <Compile Include="WebServices\ItemMaster.cs" />
+    <Compile Include="WebServices\Entity\SalesBuyerMasterData.cs" />
+    <Compile Include="WebServices\Entity\Project.cs" />
+    <Compile Include="WebServices\Entity\EmployeeMasterData.cs" />
+    <Compile Include="WebServices\Entity\ItemMaster.cs" />
     <Compile Include="WebServices\MasterData.cs" />
-    <Compile Include="WebServices\TaxGroup.cs" />
+    <Compile Include="WebServices\Entity\TaxGroup.cs" />
     <Compile Include="WebServices\Transaction.cs" />
-    <Compile Include="WebServices\WareHouse.cs" />
+    <Compile Include="WebServices\Entity\WareHouse.cs" />
     <Compile Include="xml\OrderItem.cs" />
     <Compile Include="PurchaseOrder.aspx.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>

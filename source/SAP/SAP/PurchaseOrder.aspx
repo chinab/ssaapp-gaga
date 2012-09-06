@@ -145,39 +145,57 @@
                             <li><a href="#tabs-3">Accounting</a></li>
                         </ul>
                         <div id="tabs-1">
-                            <asp:ListView ID="lvContents" runat="server">
+                            <asp:ListView ID="lvContents" runat="server" >
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
-                                            <th style="width: 25px;">
+                                            <th style="width:25px">
                                                 <span>#</span>
                                             </th>
-                                            <th>
+                                            <th  style="width:100px">
                                                 <span>Item No.</span>
                                             </th>
-                                            <th>
-                                                <span>Item Description</span>
+                                             <th style="width:50px">
+                                                <span>Promo Code</span>
+                                            </th>
+                                             <th>
+                                                <span>Description</span>
                                             </th>
                                             <th>
                                                 <span>Quantity</span>
                                             </th>
+                                             <th>
+                                                <span>Org Price</span>
+                                            </th>
+                                            <th>
+                                                <span>Discount By Promotion</span>
+                                            </th>  
                                             <th>
                                                 <span>Unit Price</span>
                                             </th>
                                             <th>
-                                                <span>Discount %</span>
+                                                <span>Discount By Contract</span>
+                                            </th>
+                                            <th>
+                                                <span>Price after Discount</span>
+                                            </th>                                            
+                                            <th>
+                                                <span>Total(LC)</span>
                                             </th>
                                             <th>
                                                 <span>Taxcode %</span>
                                             </th>
                                             <th>
-                                                <span>Total(LC)</span>
-                                            </th>
-                                            <th>
                                                 <span>Whse</span>
                                             </th>
-                                            <th style="display: none">
-                                                <span>Blanket Agreement</span>
+                                            <th>
+                                                <span>Promotion ID</span>
+                                            </th>
+                                            <th>
+                                                <span>Promotion Line</span>
+                                            </th>
+                                             <th>
+                                                <span>Sole</span>
                                             </th>
                                         </tr>
                                         <tr id="itemPlaceholder" runat="server">
@@ -196,17 +214,35 @@
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
+                                        <td>                                            
+                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
+                                            </asp:HyperLink>
+                                        </td>
                                          <td>
                                             <asp:Label runat="server" ID="Label1"><%#Eval("Description")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblQuantity"><%#Eval("Quantity")%></asp:Label>
                                         </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="Label2"><%#Eval("OrgPrice")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="Label3"><%#Eval("PromoDiscount")%></asp:Label>
+                                        </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblPrice"><%#Eval("UnitPrice")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label runat="server" ID="lblDiscount"><%#Eval("Discount")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblDiscount"><%#Eval("ContractDiscount")%></asp:Label>
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="Label4"><%#Eval("PriceAfterDiscout")%></asp:Label>
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="lblTotal"><%#Eval("Total")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblTaxcode"><%#Eval("Taxcode")%></asp:Label>
@@ -214,10 +250,7 @@
                                                 runat="server">
                                                 <asp:Image ID="imgTaxCodeLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
-                                        </td>
-                                        <td>
-                                            <asp:Label runat="server" ID="lblTotal"><%#Eval("Total")%></asp:Label>
-                                        </td>
+                                        </td>                                       
                                         <td>
                                             <asp:Label runat="server" ID="lblWhse"><%#Eval("Whse")%></asp:Label>
                                             <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
@@ -225,8 +258,14 @@
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
-                                        <td style="display: none">
-                                            <asp:Label runat="server" ID="lblBlanketAgreement" Text='<%# Eval("BlanketAgreement")%>'></asp:Label>
+                                          <td>
+                                            <asp:Label runat="server" ID="Label5"><%#Eval("PromotionId")%></asp:Label>
+                                        </td>
+                                          <td>
+                                            <asp:Label runat="server" ID="Label6"><%#Eval("PromotionLine")%></asp:Label>
+                                        </td>
+                                          <td>
+                                            <asp:Label runat="server" ID="Label7"><%#Eval("Sole")%></asp:Label>
                                         </td>
                                     </tr>
                                 </ItemTemplate>
@@ -239,29 +278,47 @@
                                             <th>
                                                 <span>Item No.</span>
                                             </th>
-                                             <th>
+                                            <th>
+                                                <span>Promo Code</span>
+                                            </th>
+                                            <th>
                                                 <span>Item Description</span>
                                             </th>
                                             <th>
                                                 <span>Quantity</span>
                                             </th>
+                                             <th>
+                                                <span>Org Price</span>
+                                            </th>
+                                            <th>
+                                                <span>Discount By Promotion</span>
+                                            </th>  
                                             <th>
                                                 <span>Unit Price</span>
                                             </th>
                                             <th>
-                                                <span>Discount %</span>
+                                                <span>Discount By Contract</span>
+                                            </th>
+                                            <th>
+                                                <span>Price after Discount</span>
+                                            </th>                                            
+                                            <th>
+                                                <span>Total(LC)</span>
                                             </th>
                                             <th>
                                                 <span>Taxcode %</span>
                                             </th>
                                             <th>
-                                                <span>Total(LC)</span>
-                                            </th>
-                                            <th>
                                                 <span>Whse</span>
                                             </th>
-                                            <th style="display: none">
-                                                <span>Blanket Agreement</span>
+                                            <th>
+                                                <span>Promotion ID</span>
+                                            </th>
+                                            <th>
+                                                <span>Promotion Line</span>
+                                            </th>
+                                             <th>
+                                                <span>Sole</span>
                                             </th>
                                         </tr>
                                         <tr>

@@ -22,16 +22,25 @@ namespace SAP
                 dt.Columns.Add("Code");
                 dt.Columns.Add("Description");
                 dt.Columns.Add("Quantity");
+                dt.Columns.Add("OrgPrice");
+                dt.Columns.Add("PromoDiscount");
                 dt.Columns.Add("UnitPrice");
-                dt.Columns.Add("Discount");
-                dt.Columns.Add("Taxcode");
+                dt.Columns.Add("ContractDiscount");
+                dt.Columns.Add("PriceAfterDiscout");
                 dt.Columns.Add("Total");
+                dt.Columns.Add("TaxCode");
+                dt.Columns.Add("TaxRate");                
                 dt.Columns.Add("Whse");
-                dt.Columns.Add("BlanketAgreement");
+                dt.Columns.Add("PromotionId");
+                dt.Columns.Add("PromotionLine");
+                dt.Columns.Add("Sole");
+                
                 for (int i = 0; i < 5; i++)
-                    dt.Rows.Add(i, "", "", "", "", "", "", "", "");
+                    dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
+               
 
                 MasterData masterDataWS = new MasterData();
                 DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
@@ -78,14 +87,15 @@ namespace SAP
                         {
                             // update grid
                             DataRow dr = dt.Rows[itemNo];
+                            setDefaultItemValue(dr);
+                            dr["No"] = itemNo;
                             dr["Code"] = chosenItem.ItemCode;
                             dr["Description"] = chosenItem.ItemName;
                             dr["Quantity"] = 1;
                             dr["UnitPrice"] = "250.0";
-                            dr["Discount"] = "0.00";
+                            dr["ContractDiscount"] = "0.00";
                             dr["Total"] = "250.0";
-
-                            //dt.Rows.
+                            //dt.Rows.                            
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
                         }
@@ -149,6 +159,26 @@ namespace SAP
                 }
             }
         }
+
+        protected void setDefaultItemValue(DataRow row){
+            row["No"]="";
+            row["Code"]="";
+            row["Description"]="";
+            row["Quantity"]="";
+            row["OrgPrice"]="";
+            row["PromoDiscount"]="";
+            row["UnitPrice"]="";
+            row["ContractDiscount"]="";
+            row["PriceAfterDiscout"]="";
+            row["Total"]="";
+            row["TaxCode"]="";
+            row["TaxRate"]="";                
+            row["Whse"]="";
+            row["PromotionId"]="";
+            row["PromotionLine"]="";
+            row["Sole"]="";
+        }
+        
 
         public String _collectData()
         {

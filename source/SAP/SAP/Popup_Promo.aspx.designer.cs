@@ -8,10 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace SAP {
-
-
-    public partial class Popup_Promo
-    {
+    
+    
+    public partial class Popup_Promo {
         
         /// <summary>
         /// Head1 control.
@@ -41,13 +40,13 @@ namespace SAP {
         protected global::System.Web.UI.ScriptManager ScriptManagerEditVendor;
         
         /// <summary>
-        /// editTaxCodeUpdatePanel control.
+        /// editPromoCodxeUpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel editTaxCodeUpdatePanel;
+        protected global::System.Web.UI.UpdatePanel editPromoCodxeUpdatePanel;
         
         /// <summary>
         /// txtFilter control.
@@ -68,13 +67,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.Button btnFilter;
         
         /// <summary>
-        /// listTaxCodes control.
+        /// listPromoCodes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView listTaxCodes;
+        protected global::System.Web.UI.WebControls.ListView listPromoCodes;
         
         /// <summary>
         /// btnAdd control.

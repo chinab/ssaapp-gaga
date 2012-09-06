@@ -10,7 +10,7 @@ using System.Data;
 
 namespace SAP
 {
-    public partial class PurchaseOrder_EditEmployee : System.Web.UI.Page
+    public partial class Popup_EditEmployee : System.Web.UI.Page
     {
         protected static DataSet employeeSet;
         protected void Page_Load(object sender, EventArgs e)

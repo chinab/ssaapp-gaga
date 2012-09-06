@@ -10,7 +10,7 @@
 namespace SAP {
     
     
-    public partial class PurchaseOrder_EditEmployee {
+    public partial class Popup_EditTaxCode {
         
         /// <summary>
         /// Head1 control.
@@ -22,31 +22,31 @@ namespace SAP {
         protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
         
         /// <summary>
-        /// form1 control.
+        /// form2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form2;
         
         /// <summary>
-        /// ScriptManagerEditItem control.
+        /// ScriptManagerEditVendor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManagerEditItem;
+        protected global::System.Web.UI.ScriptManager ScriptManagerEditVendor;
         
         /// <summary>
-        /// editEmployeeUpdatePanel control.
+        /// editTaxCodeUpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel editEmployeeUpdatePanel;
+        protected global::System.Web.UI.UpdatePanel editTaxCodeUpdatePanel;
         
         /// <summary>
         /// txtFilter control.
@@ -67,13 +67,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.Button btnFilter;
         
         /// <summary>
-        /// listItems control.
+        /// listTaxCodes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView listItems;
+        protected global::System.Web.UI.WebControls.ListView listTaxCodes;
         
         /// <summary>
         /// btnAdd control.

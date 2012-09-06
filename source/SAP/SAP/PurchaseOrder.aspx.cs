@@ -20,6 +20,7 @@ namespace SAP
                 dt = new DataTable();
                 dt.Columns.Add("No");
                 dt.Columns.Add("Code");
+                dt.Columns.Add("Description");
                 dt.Columns.Add("Quantity");
                 dt.Columns.Add("UnitPrice");
                 dt.Columns.Add("Discount");
@@ -42,7 +43,7 @@ namespace SAP
                     ddlBuyer.Items.Add(item);
                 }
 
-                DataSet contactPersons = masterDataWS.GetContactPerson("");
+                DataSet contactPersons = masterDataWS.GetContactPerson("I");
                 item = new ListItem("-No Contact Person-", "-1");
                 ddlContactPerson.Items.Add(item);
                 foreach (DataRow row in contactPersons.Tables[0].Rows)
@@ -78,6 +79,7 @@ namespace SAP
                             // update grid
                             DataRow dr = dt.Rows[itemNo];
                             dr["Code"] = chosenItem.ItemCode;
+                            dr["Description"] = chosenItem.ItemName;
                             dr["Quantity"] = 1;
                             dr["UnitPrice"] = "250.0";
                             dr["Discount"] = "0.00";

@@ -24,13 +24,16 @@
                             <th style="width:25px;">
 							</th>
 							<th>
-								<span>Item No.</span>
+								<span>No.</span>
 							</th>
 							<th>
-								<span>BP Code</span>
+								<span>Tax Code</span>
 							</th>
 							<th>
-								<span>BP Name</span>
+								<span>Tax Name</span>
+							</th>	
+                            <th>
+								<span>Tax Rate</span>
 							</th>	
 						</tr>
 						<tr id="itemPlaceholder" runat="server">
@@ -50,7 +53,10 @@
 						</td>
 						<td>
 							<asp:Label runat="server" ID="Label3"><%#Eval("Name")%></asp:Label>
-						</td>						
+						</td>		
+                        <td>
+							<asp:Label runat="server" ID="Label4"><%#Eval("Rate")%></asp:Label>
+						</td>					
 					</tr>
 				</ItemTemplate>
 				<EmptyDataTemplate>
@@ -59,14 +65,18 @@
                             <th>
                             </th>
 							<th>
-								<span>Item No.</span>
+								<span>No.</span>
 							</th>
 							<th>
-								<span>BP Code</span>
+								<span>Tax Code</span>
 							</th>
 							<th>
-								<span>BP Name</span>
-							</th>							
+								<span>Tax Name</span>
+							</th>	
+                            <th>
+								<span>Tax Rate</span>
+							</th>	
+                            						
 						</tr>
 						<tr>
 							<td colspan="8">

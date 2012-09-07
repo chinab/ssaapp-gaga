@@ -58,6 +58,7 @@ namespace SAP
                 gridTable.Columns.Add("No");
                 gridTable.Columns.Add("Code");
                 gridTable.Columns.Add("Name");
+                gridTable.Columns.Add("Rate");
                 DataTable vendorsTable = taxCodes.Tables[0];
                 DataRow dr;
                 int i = 0;
@@ -73,7 +74,11 @@ namespace SAP
                         dr["No"] = i.ToString(); vendorsTable.Rows.IndexOf(row);
                         dr["Code"] = row[0].ToString();
                         dr["Name"] = row[1].ToString();
-                        i++;
+                        if ("".Equals(row[2].ToString()))
+                            dr["Rate"] = row[1].ToString();
+                        else
+                             dr["Rate"] = row[2].ToString();
+                         i++;
                         gridTable.Rows.Add(dr);
                     }
                 }

@@ -24,6 +24,14 @@ namespace SAP.WebServices
             set { name = value; }
         }
 
+        private string _Rate;
+
+        public string Rate
+        {
+            get { return _Rate; }
+            set { _Rate = value; }
+        }
+
         public static List<TaxGroup> extractFromDataSet(DataTable table)
         {
             List<TaxGroup> list = new List<TaxGroup>();
@@ -34,6 +42,10 @@ namespace SAP.WebServices
                     TaxGroup tax = new TaxGroup();
                     tax.Code = row[0].ToString();
                     tax.Name = row[1].ToString();
+                    if ("".Equals(row[2].ToString()))
+                        tax.Rate = row[1].ToString();
+                    else
+                        tax.Rate = row[2].ToString();
                     list.Add(tax);
                 }
             }

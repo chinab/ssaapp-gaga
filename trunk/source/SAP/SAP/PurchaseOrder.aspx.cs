@@ -26,7 +26,7 @@ namespace SAP
                 dt.Columns.Add("PromoDiscount");
                 dt.Columns.Add("UnitPrice");
                 dt.Columns.Add("ContractDiscount");
-                dt.Columns.Add("PriceAfterDiscout");
+                dt.Columns.Add("PriceAfterDiscount");
                 dt.Columns.Add("Total");
                 dt.Columns.Add("TaxCode");
                 dt.Columns.Add("TaxRate");                
@@ -92,9 +92,9 @@ namespace SAP
                             dr["Code"] = chosenItem.ItemCode;
                             dr["Description"] = chosenItem.ItemName;
                             dr["Quantity"] = 1;
-                            dr["UnitPrice"] = "250.0";
-                            dr["ContractDiscount"] = "0.00";
-                            dr["Total"] = "250.0";
+                            dr["OrgPrice"] = "250";
+                            dr["ContractDiscount"] = "0";
+                            dr["Total"] = "250";
                             //dt.Rows.                            
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
@@ -122,6 +122,7 @@ namespace SAP
                             // update grid
                             DataRow dr = dt.Rows[itemNo];
                             dr["Taxcode"] = chosenTaxCode.Code;
+                            dr["TaxRate"] = chosenTaxCode.Rate;
 
                             //dt.Rows.
                             this.lvContents.DataSource = dt;
@@ -158,6 +159,7 @@ namespace SAP
                         break;
                 }
             }
+            updateTableTotalPrice(dt);
         }
 
         protected void setDefaultItemValue(DataRow row){
@@ -169,7 +171,7 @@ namespace SAP
             row["PromoDiscount"]="";
             row["UnitPrice"]="";
             row["ContractDiscount"]="";
-            row["PriceAfterDiscout"]="";
+            row["PriceAfterDiscount"]="";
             row["Total"]="";
             row["TaxCode"]="";
             row["TaxRate"]="";                
@@ -178,8 +180,7 @@ namespace SAP
             row["PromotionLine"]="";
             row["Sole"]="";
         }
-        
-
+ 
         public String _collectData()
         {
             try
@@ -295,6 +296,85 @@ namespace SAP
                     break;
             }
            
+        }        
+        #endregion
+        
+        #region priceCalculation
+        protected void updateTableTotalPrice(DataTable dtInput){
+            double orderTotalBeforeDiscount = 0.0;
+            double orderTotal = 0.0;
+            double taxTotal = 0.0;
+            for (int i = 0; i < dtInput.Rows.Count; i++) {
+                updateRowTotalPrice(dtInput, i);
+
+                double total = getDoubleFormDataRow(dtInput.Rows[i]["Total"]);
+                double taxRate =  getDoubleFormDataRow(dtInput.Rows[i]["TaxRate"]);
+                if (taxRate == 0)
+                    taxRate = 10;
+                double tax = total * taxRate / 100;
+
+                orderTotalBeforeDiscount += total;
+                taxTotal += tax;
+            }
+            this.txtTotalDiscount.Text = orderTotalBeforeDiscount.ToString();
+            this.txtTax.Text = taxTotal.ToString();
+            orderTotal = orderTotalBeforeDiscount + taxTotal;
+            this.txtTotalPayment.Text = orderTotal.ToString();
+        }
+
+        public void updateRowTotalPrice(DataTable dtInput, int rowNumber) {
+            int quantity = 0;
+            double orgPrice = 0.0;
+            double discountPromo = 0.0;
+            double unitPrice = 0.0;
+            double discountContract = 0.0;
+            double priceAfterDiscount = 0.0;
+            double total = 0;
+            //double totalBeforeDiscount = 0.0;
+
+            DataRow row = dtInput.Rows[rowNumber];
+            quantity = geIntFormDataRow(row["Quantity"]);
+            orgPrice = getDoubleFormDataRow(row["OrgPrice"]);
+            discountPromo = getDoubleFormDataRow(row["PromoDiscount"]);
+            unitPrice = getDoubleFormDataRow(row["UnitPrice"]);
+            discountContract = getDoubleFormDataRow(row["ContractDiscount"]);
+            priceAfterDiscount = getDoubleFormDataRow(row["PriceAfterDiscount"]);
+            total = getDoubleFormDataRow(row["Total"]);
+
+            unitPrice = orgPrice - discountPromo;
+            priceAfterDiscount = unitPrice * (100 - discountContract) / 100;
+            total = priceAfterDiscount * quantity;
+
+            row["UnitPrice"] = unitPrice;
+            row["UnitPrice"] = priceAfterDiscount;
+            row["Total"] = total;
+
+        }
+
+        public double getDoubleFormDataRow(Object input){
+            double result = 0.0;
+            try{
+                if (input != null )
+                    result= Double.Parse(input.ToString());
+            } catch (Exception ex){
+                result = 0.0;
+            }
+            return result;
+        }
+
+        public Int32 geIntFormDataRow(Object input)
+        {
+            Int32 result = 0;
+            try
+            {
+                if (input != null)
+                    result = Int32.Parse(input.ToString());
+            }
+            catch (Exception ex)
+            {
+                result = 0;
+            }
+            return result;
         }
         #endregion
     }

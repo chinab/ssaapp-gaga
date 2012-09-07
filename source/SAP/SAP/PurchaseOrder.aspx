@@ -185,6 +185,9 @@
                                             <th>
                                                 <span>Taxcode %</span>
                                             </th>
+                                            <th style="display:none">
+                                                <span>Tax Rate %</span>
+                                            </th>
                                             <th>
                                                 <span>Whse</span>
                                             </th>
@@ -239,7 +242,7 @@
                                             <asp:Label runat="server" ID="lblDiscount"><%#Eval("ContractDiscount")%></asp:Label>
                                         </td>
                                          <td>
-                                            <asp:Label runat="server" ID="lblPriceAfterDiscout"><%#Eval("PriceAfterDiscout")%></asp:Label>
+                                            <asp:Label runat="server" ID="lblPriceAfterDiscount"><%#Eval("PriceAfterDiscount")%></asp:Label>
                                         </td>
                                          <td>
                                             <asp:Label runat="server" ID="lblTotal"><%#Eval("Total")%></asp:Label>
@@ -258,7 +261,10 @@
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
-                                          <td>
+                                        <td style="display:none">
+                                            <asp:Label runat="server" ID="Label1"><%#Eval("TaxRate")%></asp:Label>
+                                        </td>
+                                        <td>
                                             <asp:Label runat="server" ID="lblPromotionId"><%#Eval("PromotionId")%></asp:Label>
                                         </td>
                                           <td>
@@ -307,6 +313,9 @@
                                             </th>
                                             <th>
                                                 <span>Taxcode %</span>
+                                            </th>
+                                             <th style="display:none">
+                                                <span>Tax Rate</span>
                                             </th>
                                             <th>
                                                 <span>Whse</span>
@@ -566,7 +575,7 @@
                                     <span>Total before discount</span>
                                 </td>
                                 <td>
-                                    <asp:Label ID="txtTotalDiscount" Text="250.00" runat="server" />
+                                     <asp:TextBox Enabled="false" ID="txtTotalDiscount" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -577,13 +586,13 @@
                                                 <span>Discount </span>
                                             </td>
                                             <td class="detail_table_td_50">
-                                                <asp:TextBox ID="txtDiscountPercent" runat="server" Width="30px"></asp:TextBox><span>%</span>
+                                                <asp:TextBox  Enabled="false" ID="txtDiscountPercent" runat="server" Width="30px"></asp:TextBox><span>%</span>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDiscount" runat="server"></asp:TextBox>
+                                    <asp:TextBox  Enabled="false" ID="txtDiscount" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -591,7 +600,7 @@
                                     <span>Freight</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtFreight" runat="server" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox  Enabled="false" ID="txtFreight" runat="server" ReadOnly="true"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -599,7 +608,7 @@
                                     <span>Rounding</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtRounding" runat="server" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtRounding" runat="server" ReadOnly="true"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -607,7 +616,7 @@
                                     <span>Tax</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtTax" runat="server" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTax" runat="server" ReadOnly="true"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -615,7 +624,7 @@
                                     <span>Total Payment Due</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtTotalPayment" runat="server"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTotalPayment" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>

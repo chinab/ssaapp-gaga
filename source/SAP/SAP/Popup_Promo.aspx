@@ -20,17 +20,20 @@
             <br />
             <asp:ListView ID="listPromoCodes" runat="server">
                 <LayoutTemplate>
-                    <table class="data_table">
+                    <table class="data_table" style="font-size:11px;">
                         <tr>
                             <th style="width: 25px;">
                             </th>
+                            <th>
+								<span>#</span>
+							</th>
                             <th>
                                 <span>ID<span>
                             </th>
                             <th>
                                 <span>ProCode<span>
                             </th>
-                            <th>
+                            <th  style="width:120px">
                                 <span>ProName<span>
                             </th>
                             <th>
@@ -135,12 +138,15 @@
                             <th>
                             </th>
                             <th>
+								<span>#</span>
+							</th>
+                            <th>
                                 <span>ID<span>
                             </th>
                             <th>
                                 <span>ProCode<span>
                             </th>
-                            <th>
+                            <th style="width:100px">
                                 <span>ProName<span>
                             </th>
                             <th>

@@ -74,7 +74,11 @@ Main = {
         $('#dialogFrame > #iframeItem').attr('src', url + (param == '' || param == undefined ? '' : ("?" + param)));
     },
     openDialog: function (url, param) {
-        this.openCustomDialog(url, 600, 300, param);
+        var n = url.indexOf("Promo");
+        if (n > 0)
+            this.openCustomDialog(url, 1200, 300, param);
+        else
+            this.openCustomDialog(url, 600, 300, param);
     },
     okDialogClick: function (action) {
         window.parent.__doPostBack(window.parent.Main.myUpdatePanelId, action);

@@ -58,6 +58,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ARInvoice.aspx" />
+    <Content Include="Popup_EditTaxCode_Out.aspx" />
+    <Content Include="Popup_EditCustomer.aspx" />
     <Content Include="Popup_Promo.aspx" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="js\dialog.js" />
@@ -185,6 +188,27 @@
     <Content Include="Homepage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ARInvoice.aspx.cs">
+      <DependentUpon>ARInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ARInvoice.aspx.designer.cs">
+      <DependentUpon>ARInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup_EditTaxCode_Out.aspx.cs">
+      <DependentUpon>Popup_EditTaxCode_Out.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditTaxCode_Out.aspx.designer.cs">
+      <DependentUpon>Popup_EditTaxCode_Out.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup_EditCustomer.aspx.cs">
+      <DependentUpon>Popup_EditCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditCustomer.aspx.designer.cs">
+      <DependentUpon>Popup_EditCustomer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Popup_Promo.aspx.cs">
       <DependentUpon>Popup_Promo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

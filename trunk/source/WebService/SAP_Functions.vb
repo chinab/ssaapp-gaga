@@ -126,42 +126,26 @@
 
         Return ds
     End Function
-    Public Function GetDefaultVendor(UserID As String) As String
+    Public Function GetDefaultBP(UserID As String, Cardtype As String) As DataSet
         Try
             Dim str As String
-            str = "Select 'V0000001' BP"
-            Dim dt As DataTable
+            If Cardtype = "C" Then
+                str = "Select top(1) DfltCard CardCode,'Default' CardName from OACP where isnull(DfltCard,'')<>''"
+            Else
+                str = "Select 'V0000001' CardCode, 'Default BP' CardName"
+            End If
+
+            Dim dt As DataSet
             Dim connect As New Connection()
             connect.setDB()
-            dt = connect.ObjectGetAll_Query_SAP(str).Tables(0)
+            dt = connect.ObjectGetAll_Query_SAP(str)
 
-            If dt.Rows.Count > 0 Then
-                Return dt.Rows(0).Item("BP").ToString
-            Else
-                Return ""
-            End If
+            Return dt
         Catch ex As Exception
-            Return ""
+            Return Nothing
         End Try
     End Function
-    Public Function GetDefaultCustomer(UserID As String) As String
-        Try
-            Dim str As String
-            str = "Select top(1) DfltCard BP from OACP where isnull(DfltCard,'')<>''"
-            Dim dt As DataTable
-            Dim connect As New Connection()
-            connect.setDB()
-            dt = connect.ObjectGetAll_Query_SAP(str).Tables(0)
-
-            If dt.Rows.Count > 0 Then
-                Return dt.Rows(0).Item("BP").ToString
-            Else
-                Return ""
-            End If
-        Catch ex As Exception
-            Return ""
-        End Try
-    End Function
+    
     Public Function GetDefaultWarehouse(UserID As String) As String
       Dim str As String = ""
         Try

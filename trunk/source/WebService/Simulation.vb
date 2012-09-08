@@ -67,13 +67,13 @@
         dr = dtJE.Tables(0).NewRow
         dr("Code") = "P1"
         dr("Name") = "VAT IN 10"
-        dr("Name") = "10"
+        dr("Rate") = 10
         dtJE.Tables(0).Rows.Add(dr)
 
         dr = dtJE.Tables(0).NewRow
         dr("Code") = "P2"
         dr("Name") = "VAT IN 5"
-        dr("Name") = "5"
+        dr("Rate") = 5
         dtJE.Tables(0).Rows.Add(dr)
 
         Return dtJE
@@ -157,7 +157,7 @@
         dr("IsDefault") = "Y"
         dr("Code") = "1"
         dr("FirstName") = "TRUONG"
-        dr("MidName") = "THAI"
+        'dr("MidName") = "THAI"
         dr("LastName") = "THUY"
         dtJE.Tables(0).Rows.Add(dr)
 
@@ -165,7 +165,7 @@
         dr("IsDefault") = "N"
         dr("Code") = "2"
         dr("FirstName") = "PHAM"
-        dr("MidName") = "THI"
+        'dr("MidName") = "THI"
         dr("LastName") = "LIEU"
         dtJE.Tables(0).Rows.Add(dr)
 

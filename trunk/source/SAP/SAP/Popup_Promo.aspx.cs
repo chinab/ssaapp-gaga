@@ -16,9 +16,14 @@ namespace SAP
             {
                 if (!IsPostBack)
                 {
-
+                    String userId = User.Identity.Name;
+                    String itemCode = Request.QueryString["itemCode"];
+                    String cardCode = Request.QueryString["cardCode"];
+                    double quantity = getDoubleFormDataRow(Request.QueryString["quantity"]);                    
+                    DateTime docDate = DateTime.Now;
+                    double amount = 0;
                     GetDefault getDefaultWS = new GetDefault();
-                    promoCodes = getDefaultWS.GetPromotion("", "", "", 0, new DateTime(), 0);
+                    promoCodes = getDefaultWS.GetPromotion(userId, itemCode, cardCode, quantity, docDate, amount);
                     BindCategories("");
                     editPromoCodxeUpdatePanel.Update();
 
@@ -121,6 +126,21 @@ namespace SAP
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             BindCategories(this.txtFilter.Text);
+        }
+
+        public double getDoubleFormDataRow(Object input)
+        {
+            double result = 0.0;
+            try
+            {
+                if (input != null)
+                    result = Double.Parse(input.ToString());
+            }
+            catch (Exception ex)
+            {
+                result = 0.0;
+            }
+            return result;
         }
     }
 }

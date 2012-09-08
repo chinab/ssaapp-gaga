@@ -218,7 +218,7 @@
                                             </asp:HyperLink>
                                         </td>
                                         <td>                                            
-                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0},{1},{2},{3})", "\"id=" + Eval("No").ToString()+"\"", "\"itemCode=" + Eval("Code").ToString()+"\"", "\"cardCode=" + Eval("Description").ToString()+"\"", "\"quantity=" + Eval("Quantity").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
                                             </asp:HyperLink>

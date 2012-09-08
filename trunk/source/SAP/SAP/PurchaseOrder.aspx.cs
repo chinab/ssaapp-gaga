@@ -153,7 +153,73 @@ namespace SAP
                             this.txtOwner.Text = employee.FirstName + " " + employee.MidName + " " + employee.LastName; 
                         }
                         break;
+                    case "EditPromoCallBack":
+                        Promotion promo = Session["chosenPromo"] as Promotion;
+                        itemNo = Int32.Parse(Session["chosenItemNo"] as String);
+                        if (promo != null)
+                        {
+                            // update grid
+                            DataRow dr = dt.Rows[itemNo];
+                            /*
+                            'Logic Apply Promotion:
+                            '1. Discount By Promotion = HeadDscAmt + HeadDscPer*UnitPrice/100 + ProValue
+                            '2. Unit Price = Unit Price - Discount By Promotion
+                            '3. So le = field Sole
+                            '4. ProCode = field ProCode
+                            '5. Neu ProQty>0: them 1 dong vao grid
+                            '    Item Code= Item Code cua dong apply
+                            '    Description = Description cua dong apply
+                            '    Quantity=ProQty
+                            '    Unit Price,Discount,Discount By Promotion  = 0
+                            '    Warehouse = WS GetPromotionWarehouse
+                            '    U_ProLine = Y
+                            '    ProCode = field ProCode
+                            '    So le = field Sole
+                             * 
+                            dt.Columns.Add("No");
+                            dt.Columns.Add("Code");
+                            dt.Columns.Add("Description");
+                            dt.Columns.Add("Quantity");
+                            dt.Columns.Add("OrgPrice");
+                            dt.Columns.Add("PromoDiscount");
+                            dt.Columns.Add("UnitPrice");
+                            dt.Columns.Add("ContractDiscount");
+                            dt.Columns.Add("PriceAfterDiscount");
+                            dt.Columns.Add("Total");
+                            dt.Columns.Add("TaxCode");
+                            dt.Columns.Add("TaxRate");
+                            dt.Columns.Add("Whse");
+                            dt.Columns.Add("PromotionId");
+                            dt.Columns.Add("PromotionLine");
+                            dt.Columns.Add("Sole");
+                            */
+                            double promoDiscount  =  getDoubleFromObject(promo.HeadDscAmt) +  getDoubleFromObject(promo.HeadDscPer) * getDoubleFromObject(dr["OrgPrice"]) / 100 +  getDoubleFromObject(promo.ProValue);
+                            double unitPrice = getDoubleFromObject(dr["UnitPrice"]);
+                            dr["PromoDiscount"] = promoDiscount;
+                            dr["UnitPrice"] = unitPrice;
+                            dr["PromotionId"] = promo.ProCode; 
+                            dr["Sole"] = promo.Sole;
 
+                            Int32 ProQty = geIntFromObject(promo.ProQty);
+                            if(ProQty >= 1){
+                                DataRow newRow = dt.NewRow();
+                                setDefaultItemValue(newRow);
+                                newRow["Code"] = promo.ItemCode;
+                                newRow["Description"] = promo.ItemName;
+                                newRow["Quantity"] = promo.ProQty;
+                                newRow["PromoDiscount"] = 0;
+                                newRow["UnitPrice"] = 0;
+                                newRow["ContractDiscount"] = 0;
+                                newRow["PromotionId"] = promo.ProCode; 
+                                newRow["Sole"] = promo.Sole;
+                                dt.Rows.InsertAt(newRow, itemNo);
+                            }     
+                            //dt.Rows.
+                            this.lvContents.DataSource = dt;
+                            this.lvContents.DataBind();
+                        }
+                        break;
+                        
                         
                     default:
                         break;
@@ -307,8 +373,8 @@ namespace SAP
             for (int i = 0; i < dtInput.Rows.Count; i++) {
                 updateRowTotalPrice(dtInput, i);
 
-                double total = getDoubleFormDataRow(dtInput.Rows[i]["Total"]);
-                double taxRate =  getDoubleFormDataRow(dtInput.Rows[i]["TaxRate"]);
+                double total = getDoubleFromObject(dtInput.Rows[i]["Total"]);
+                double taxRate =  getDoubleFromObject(dtInput.Rows[i]["TaxRate"]);
                 if (taxRate == 0)
                     taxRate = 10;
                 double tax = total * taxRate / 100;
@@ -333,13 +399,13 @@ namespace SAP
             //double totalBeforeDiscount = 0.0;
 
             DataRow row = dtInput.Rows[rowNumber];
-            quantity = geIntFormDataRow(row["Quantity"]);
-            orgPrice = getDoubleFormDataRow(row["OrgPrice"]);
-            discountPromo = getDoubleFormDataRow(row["PromoDiscount"]);
-            unitPrice = getDoubleFormDataRow(row["UnitPrice"]);
-            discountContract = getDoubleFormDataRow(row["ContractDiscount"]);
-            priceAfterDiscount = getDoubleFormDataRow(row["PriceAfterDiscount"]);
-            total = getDoubleFormDataRow(row["Total"]);
+            quantity = geIntFromObject(row["Quantity"]);
+            orgPrice = getDoubleFromObject(row["OrgPrice"]);
+            discountPromo = getDoubleFromObject(row["PromoDiscount"]);
+            unitPrice = getDoubleFromObject(row["UnitPrice"]);
+            discountContract = getDoubleFromObject(row["ContractDiscount"]);
+            priceAfterDiscount = getDoubleFromObject(row["PriceAfterDiscount"]);
+            total = getDoubleFromObject(row["Total"]);
 
             unitPrice = orgPrice - discountPromo;
             priceAfterDiscount = unitPrice * (100 - discountContract) / 100;
@@ -351,7 +417,7 @@ namespace SAP
 
         }
 
-        public double getDoubleFormDataRow(Object input){
+        public double getDoubleFromObject(Object input){
             double result = 0.0;
             try{
                 if (input != null )
@@ -362,7 +428,7 @@ namespace SAP
             return result;
         }
 
-        public Int32 geIntFormDataRow(Object input)
+        public Int32 geIntFromObject(Object input)
         {
             Int32 result = 0;
             try

@@ -26,22 +26,15 @@ Public Class GetDefault
             Return a.GetDefaultLineInfo(UserID, cardCode, itemCode, Quantity, refDate)
         End If
     End Function
+    
     <WebMethod()> _
-    Public Function GetDefaultVendor(UserID As String) As String
+    Public Function GetDefaultBP(UserID As String, CardType As String) As DataSet
         If PublicVariable.Simulate Then
-            Return "V00001"
+            Dim a As New Simulation
+            Return a.Simulate_GetDeafaultBP(UserID, CardType)
         Else
             Dim a As New SAP_Functions
-            Return a.GetDefaultVendor(UserID)
-        End If
-    End Function
-    <WebMethod()> _
-    Public Function GetDefaultCustomer(UserID As String) As String
-        If PublicVariable.Simulate Then
-            Return "O00003"
-        Else
-            Dim a As New SAP_Functions
-            Return a.GetDefaultVendor(UserID)
+            Return a.GetDefaultBP(UserID, CardType)
         End If
     End Function
 #Region "Apply Promotion"

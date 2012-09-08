@@ -289,4 +289,18 @@
 
         Return dtJE
     End Function
+    Public Function Simulate_GetDeafaultBP(UserID As String, CardType As String) As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("CardCode", GetType(String))
+        dtJE.Tables(0).Columns.Add("CardName", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("CardCode") = "V00001"
+        dr("CardName") = "Default BP"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
 End Class

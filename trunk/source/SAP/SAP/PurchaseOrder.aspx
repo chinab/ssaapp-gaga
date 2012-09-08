@@ -152,12 +152,12 @@
                                             <th style="width:25px">
                                                 <span>#</span>
                                             </th>
+                                             <th style="width:50px">
+                                                <span>Apply Promotion</span>
+                                            </th>
                                             <th  style="width:100px">
                                                 <span>Item No.</span>
-                                            </th>
-                                             <th style="width:50px">
-                                                <span>Promo Code</span>
-                                            </th>
+                                            </th>                                            
                                              <th>
                                                 <span>Description</span>
                                             </th>
@@ -211,20 +211,20 @@
                                     <tr>
                                         <td>
                                             <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
-                                        </td>                                        
+                                        </td>    
+                                        <td >                                            
+                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&amount=" + Eval("Total").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image Visible='<%#"N".Equals(Eval("PromoEnable")) ? false : true%>' ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
+                                            </asp:HyperLink>
+                                        </td>                                    
                                         <td>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("Code") %></asp:Label>
                                             <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
-                                        </td>
-                                        <td >                                            
-                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&amount=" + Eval("Total").ToString()+"\"")%>'
-                                                runat="server">
-                                                <asp:Image Visible='<%#"N".Equals(Eval("PromoEnable")) ? false : true%>' ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
-                                            </asp:HyperLink>
-                                        </td>
+                                        </td>                                        
                                          <td>
                                             <asp:Label runat="server" ID="lblDescription"><%#Eval("Description")%></asp:Label>
                                         </td>
@@ -281,20 +281,20 @@
                                     <tr>
                                         <td>
                                             <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
-                                        </td>                                        
+                                        </td>  
+                                         <td >                                            
+                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&amount=" + Eval("Total").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image Visible='<%#"N".Equals(Eval("PromoEnable")) ? false : true%>' ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
+                                            </asp:HyperLink>
+                                        </td>                                      
                                         <td>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("Code") %></asp:Label>
                                             <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
-                                        </td>
-                                        <td >                                            
-                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&amount=" + Eval("Total").ToString()+"\"")%>'
-                                                runat="server">
-                                                <asp:Image Visible='<%#"N".Equals(Eval("PromoEnable")) ? false : true%>' ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
-                                            </asp:HyperLink>
-                                        </td>
+                                        </td>                                       
                                          <td>
                                             <asp:Label runat="server" ID="lblDescription"><%#Eval("Description")%></asp:Label>
                                         </td>
@@ -354,11 +354,11 @@
                                                 <span>#</span>
                                             </th>
                                             <th>
-                                                <span>Item No.</span>
+                                                <span>Apply Promotion</span>
                                             </th>
                                             <th>
-                                                <span>Promo Code</span>
-                                            </th>
+                                                <span>Item No.</span>
+                                            </th>                                            
                                             <th>
                                                 <span>Item Description</span>
                                             </th>

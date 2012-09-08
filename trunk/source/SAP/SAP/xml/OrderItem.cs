@@ -28,9 +28,9 @@ namespace SAP
             get { return _Quantity; }
             set { _Quantity = value; }
         }
-        private float _DiscPrcnt;
+        private double _DiscPrcnt;
 
-        public float DiscPrcnt
+        public double DiscPrcnt
         {
             get { return _DiscPrcnt; }
             set { _DiscPrcnt = value; }
@@ -57,7 +57,7 @@ namespace SAP
             set { _PriceAfVAT = value; }
         }
 
-        public OrderItem(String itemcode, String des, int quan, float discount,
+        public OrderItem(String itemcode, String des, int quan, double discount,
                             String whscode, String vat, double vatprice)
         {
             this._ItemCode = itemcode;

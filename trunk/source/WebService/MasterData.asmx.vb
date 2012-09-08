@@ -18,8 +18,14 @@ Public Class MasterData
                 Dim a As New Simulation
                 dt = a.Simulate_OCRD(CardType)
             Else
+                Dim str As String
+                If CardType = "C" Then
+                    str = "Select CardCode,CardName from OCRD Where CardType='C' and GroupCode=102"
+                Else
+                    str = "Select CardCode,CardName from OCRD Where CardType='S'"
+                End If
                 connect.setDB()
-                dt = connect.ObjectGetAll_Query_SAP("Select CardCode,CardName from OCRD Where CardType='" + CardType + "'")
+                dt = connect.ObjectGetAll_Query_SAP(str)
             End If
 
             Return dt
@@ -100,7 +106,7 @@ Public Class MasterData
                 dt = a.Simulate_OSLP
             Else
                 connect.setDB()                
-                dt = connect.ObjectGetAll_Query_SAP("select SlpCode Code,SlpName Name from OSLP order by SlpName")
+                dt = connect.ObjectGetAll_Query_SAP("select SlpCode Code,SlpName Name from OSLP order by SlpCode")
             End If
             Return dt
         Catch ex As Exception

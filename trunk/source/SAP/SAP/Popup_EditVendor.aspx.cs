@@ -18,7 +18,7 @@ namespace SAP
             {
                 
                 MasterData masterDataWS = new MasterData();
-                businessPartners = masterDataWS.GetBusinessPartner();
+                businessPartners = masterDataWS.GetBusinessPartner("S");
                 //this.gridVendors.DataSource = warehousesItems.Tables[0];
                 //this.gridVendors.DataBind();
                //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;
@@ -27,7 +27,7 @@ namespace SAP
                 
             }
         }
-
+       
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             string selectedValue = Request.Form["MyRadioButton"];

@@ -19,9 +19,9 @@ namespace SAP
                     String userId = User.Identity.Name;
                     String itemCode = Request.QueryString["itemCode"];
                     String cardCode = Request.QueryString["cardCode"];
-                    double quantity = getDoubleFormDataRow(Request.QueryString["quantity"]);                    
+                    Int32 quantity = 7;// geIntFromObject(Request.QueryString["quantity"]);                    
                     DateTime docDate = DateTime.Now;
-                    double amount = 0;
+                    double amount = getDoubleFormDataRow(Request.QueryString["amount"]);               
                     GetDefault getDefaultWS = new GetDefault();
                     promoCodes = getDefaultWS.GetPromotion(userId, itemCode, cardCode, quantity, docDate, amount);
                     BindCategories("");
@@ -139,6 +139,20 @@ namespace SAP
             catch (Exception ex)
             {
                 result = 0.0;
+            }
+            return result;
+        }
+        public Int32 geIntFromObject(Object input)
+        {
+            Int32 result = 0;
+            try
+            {
+                if (input != null)
+                    result = Int32.Parse(input.ToString());
+            }
+            catch (Exception ex)
+            {
+                result = 0;
             }
             return result;
         }

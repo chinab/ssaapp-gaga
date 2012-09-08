@@ -130,9 +130,11 @@
         Try
             Dim str As String
             If Cardtype = "C" Then
-                str = "Select top(1) DfltCard CardCode,'Default' CardName from OACP where isnull(DfltCard,'')<>''"
+                str = "Select top(1) T1.CardCode,T1.CardName  from OACP T0 "
+                str = str + " join OCRD T1 on T0.DfltCard=T1.CardCode"
+                str = str + " where isnull(DfltCard,'')<>''"
             Else
-                str = "Select 'V0000001' CardCode, 'Default BP' CardName"
+                str = "Select 'V00001' CardCode, 'Default BP' CardName"
             End If
 
             Dim dt As DataSet

@@ -54,6 +54,36 @@ namespace SAP
                     ddlBuyer.Items.Add(item);
                 }
 
+                GetDefault getDefaultWS = new GetDefault();
+                DataSet defaultVendor = getDefaultWS.GetDefaultBP(User.Identity.Name, "S");
+
+
+                //extract to funtion later
+                if (defaultVendor != null)
+                {
+                    this.txtVendor.Text = defaultVendor.Tables[0].Rows[0]["CardCode"].ToString();
+                    this.txtName.Text = defaultVendor.Tables[0].Rows[0]["CardName"].ToString();                    
+                    this.txtStatus.Text = "Open";
+                    this.txtStatus.Enabled = false;
+                    this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
+                    this.txtDeliveryDate.Text = DateTime.Now.ToShortDateString();
+                    this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
+                    this.txtNoFrom.Text = "227";
+                    this.txtNoFrom.Enabled = false;
+                    this.txtNoTo.Text = "0";
+                    this.txtNoTo.Enabled = false;
+
+                    DataSet contactPersons = masterDataWS.GetContactPerson(defaultVendor.Tables[0].Rows[0]["CardCode"].ToString());
+                    item = new ListItem();
+                    foreach (DataRow row in contactPersons.Tables[0].Rows)
+                    {
+                        String name = row[1].ToString() + " " + row[2].ToString();
+                        item = new ListItem(name, row[1].ToString());
+                        if ("Y".Equals(row[0].ToString()))
+                            item.Selected = true;
+                        ddlContactPerson.Items.Add(item);
+                    }
+                }
 
             }
         }
@@ -228,6 +258,9 @@ namespace SAP
                                 newRow["ContractDiscount"] = 0;
                                 newRow["PromotionId"] = promo.ProCode; 
                                 newRow["Sole"] = promo.Sole;
+                                newRow["Whse"] = promo.WhsCode;
+                                newRow["PromotionLine"] = "Y";
+                                
 
                                 dt.Rows.InsertAt(newRow, itemNo + 1);
                                 dt.Rows.RemoveAt(dt.Rows.Count - 1); 
@@ -275,23 +308,22 @@ namespace SAP
             try
             {
                 PurchaseInfo objInfo = new PurchaseInfo("adminInfo", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text);
-                foreach (ListViewDataItem item in this.lvContents.Items)
-                {
-                    Label lblNo = item.FindControl("lblNo") as Label;
-                    Label lblCode = item.FindControl("lblCode") as Label;
-                    Label lblQuantity = item.FindControl("lblQuantity") as Label;
-                    Label lblPrice = item.FindControl("lblPrice") as Label;
-                    Label lblDiscount = item.FindControl("lblDiscount") as Label;
-                    Label lblTaxcode = item.FindControl("lblTaxcode") as Label;
-                    Label lblTotal = item.FindControl("lblTotal") as Label;
-                    Label lblWhse = item.FindControl("lblWhse") as Label;
-                    Label lblBlanketAgreement = item.FindControl("lblBlanketAgreement") as Label;
-                    if (!String.IsNullOrEmpty(lblCode.Text))
+
+                 for (int i = 0; i < dt.Rows.Count; i++) {
+
+                    DataRow row = dt.Rows[i];
+                    String itemcode = row["Code"].ToString();
+                    String des = row["Description"].ToString();
+                    String quan = row["Quantity"].ToString();
+                    String discount = row["ContractDiscount"].ToString();
+                    String whscode = row["Whse"].ToString();
+                    String vat = row["TaxCode"].ToString();
+                    String vatprice = row["Total"].ToString();
+                    if (!String.IsNullOrEmpty(itemcode))
                     {
-                        OrderItem objOrder = new OrderItem(lblCode.Text, "", int.Parse(lblQuantity.Text), float.Parse(lblDiscount.Text), lblWhse.Text, "", double.Parse(lblTotal.Text));
+                        OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode,vat,getDoubleFromObject(vatprice));
                         objInfo.AddOrderItem(objOrder);
                     }
-
                 }
                 return objInfo.ToXMLString();
             }

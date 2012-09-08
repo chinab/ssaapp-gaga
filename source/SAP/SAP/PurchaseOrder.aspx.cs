@@ -20,6 +20,7 @@ namespace SAP
                 dt = new DataTable();
                 dt.Columns.Add("No");
                 dt.Columns.Add("Code");
+                dt.Columns.Add("CardCode");
                 dt.Columns.Add("Description");
                 dt.Columns.Add("Quantity");
                 dt.Columns.Add("OrgPrice");
@@ -34,9 +35,11 @@ namespace SAP
                 dt.Columns.Add("PromotionId");
                 dt.Columns.Add("PromotionLine");
                 dt.Columns.Add("Sole");
+                dt.Columns.Add("PromoEnable");
+                
                 
                 for (int i = 0; i < 5; i++)
-                    dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                 
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
@@ -44,25 +47,13 @@ namespace SAP
 
                 MasterData masterDataWS = new MasterData();
                 DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
-                ListItem item = new ListItem("-No Sales Employee-", "-1");
-                ddlBuyer.Items.Add(item);                
+                ListItem item = new ListItem();           
                 foreach (DataRow row in salesBuyers.Tables[0].Rows)
                 {
-                    item = new ListItem(row[1].ToString(),  row[0].ToString());
+                    item = new ListItem(row[1].ToString(), row[0].ToString());
                     ddlBuyer.Items.Add(item);
                 }
 
-                DataSet contactPersons = masterDataWS.GetContactPerson("I");
-                item = new ListItem("-No Contact Person-", "-1");
-                ddlContactPerson.Items.Add(item);
-                foreach (DataRow row in contactPersons.Tables[0].Rows)
-                {                    
-                    String name = row[2].ToString() + " " + row[3].ToString() + " " + row[4].ToString();
-                    item = new ListItem(name, row[1].ToString());
-                    if ("Y".Equals(row[0].ToString()))
-                        item.Selected = true;
-                    ddlContactPerson.Items.Add(item);
-                }
 
             }
         }
@@ -91,11 +82,24 @@ namespace SAP
                             dr["No"] = itemNo;
                             dr["Code"] = chosenItem.ItemCode;
                             dr["Description"] = chosenItem.ItemName;
+                            dr["CardCode"] = this.txtVendor.Text;
                             dr["Quantity"] = 1;
-                            dr["OrgPrice"] = "250";
-                            dr["ContractDiscount"] = "0";
-                            dr["Total"] = "250";
-                            //dt.Rows.                            
+
+                            GetDefault defaultWS = new GetDefault();                            
+                            DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
+                            DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
+
+                            dr["UnitPrice"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
+                            dr["OrgPrice"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
+                            dr["ContractDiscount"] = defaultInfo.Tables[0].Rows[0]["Discount"];
+                            dr["PriceAfterDiscount"] = defaultInfo.Tables[0].Rows[0]["PriceAfDi"];
+                            dr["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
+                            dr["TaxRate"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
+                            dr["Whse"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
+
+
+                            //dt.Rows.      
+                            updateTableTotalPrice(dt);
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
                         }
@@ -144,6 +148,18 @@ namespace SAP
                             this.txtNoFrom.Enabled = false;
                             this.txtNoTo.Text = "0";
                             this.txtNoTo.Enabled = false;
+
+                            MasterData masterDataWS = new MasterData();
+                            DataSet contactPersons = masterDataWS.GetContactPerson(chosenPartner.CardCode);
+                            ListItem item = new ListItem();
+                            foreach (DataRow row in contactPersons.Tables[0].Rows)
+                            {
+                                String name = row[1].ToString() + " " + row[2].ToString();
+                                item = new ListItem(name, row[1].ToString());
+                                if ("Y".Equals(row[0].ToString()))
+                                    item.Selected = true;
+                                ddlContactPerson.Items.Add(item);
+                            }
                         }
                         break;
                     case "EditEmployeeCallBack":
@@ -212,11 +228,18 @@ namespace SAP
                                 newRow["ContractDiscount"] = 0;
                                 newRow["PromotionId"] = promo.ProCode; 
                                 newRow["Sole"] = promo.Sole;
-                                dt.Rows.InsertAt(newRow, itemNo);
-                            }     
+
+                                dt.Rows.InsertAt(newRow, itemNo + 1);
+                                dt.Rows.RemoveAt(dt.Rows.Count - 1); 
+                                dt.Rows[itemNo + 1]["PromoEnable"] = "N";                                
+                            }
+                            dt.Rows[itemNo]["PromoEnable"] = "N";
+                            dr["Sole"] = promo.Sole;                            
                             //dt.Rows.
+                            updateTableTotalPrice(dt);
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
+                            
                         }
                         break;
                         
@@ -225,7 +248,7 @@ namespace SAP
                         break;
                 }
             }
-            updateTableTotalPrice(dt);
+            
         }
 
         protected void setDefaultItemValue(DataRow row){
@@ -238,7 +261,7 @@ namespace SAP
             row["UnitPrice"]="";
             row["ContractDiscount"]="";
             row["PriceAfterDiscount"]="";
-            row["Total"]="";
+            row["Total"]="0.0";
             row["TaxCode"]="";
             row["TaxRate"]="";                
             row["Whse"]="";
@@ -371,16 +394,19 @@ namespace SAP
             double orderTotal = 0.0;
             double taxTotal = 0.0;
             for (int i = 0; i < dtInput.Rows.Count; i++) {
-                updateRowTotalPrice(dtInput, i);
+                if (!"".Equals(dtInput.Rows[i]["Code"]))
+                {
+                    updateRowTotalPrice(dtInput, i);
+                    double total = getDoubleFromObject(dtInput.Rows[i]["Total"]);
+                    double taxRate = getDoubleFromObject(dtInput.Rows[i]["TaxRate"]);
+                    if (taxRate == 0)
+                        taxRate = 10;
+                    double tax = total * taxRate / 100;
 
-                double total = getDoubleFromObject(dtInput.Rows[i]["Total"]);
-                double taxRate =  getDoubleFromObject(dtInput.Rows[i]["TaxRate"]);
-                if (taxRate == 0)
-                    taxRate = 10;
-                double tax = total * taxRate / 100;
-
-                orderTotalBeforeDiscount += total;
-                taxTotal += tax;
+                    orderTotalBeforeDiscount += total;
+                    taxTotal += tax;
+                }
+                dtInput.Rows[i]["No"] = i;
             }
             this.txtTotalDiscount.Text = orderTotalBeforeDiscount.ToString();
             this.txtTax.Text = taxTotal.ToString();
@@ -412,7 +438,7 @@ namespace SAP
             total = priceAfterDiscount * quantity;
 
             row["UnitPrice"] = unitPrice;
-            row["UnitPrice"] = priceAfterDiscount;
+            row["PriceAfterDiscount"] = priceAfterDiscount;
             row["Total"] = total;
 
         }

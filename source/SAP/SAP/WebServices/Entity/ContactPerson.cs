@@ -29,13 +29,7 @@ namespace SAP.WebServices
             get { return _FirstName; }
             set { _FirstName = value; }
         }
-        private string _MidName;
 
-        public string MidName
-        {
-            get { return _MidName; }
-            set { _MidName = value; }
-        }
         private string _LastName;
 
         public string LastName
@@ -54,11 +48,10 @@ namespace SAP.WebServices
                 foreach (DataRow row in table.Rows)
                 {
                     ContactPerson person = new ContactPerson();
-                    person.IsDefault = row[0].ToString();
+                    person.IsDefault = row[3].ToString();
                     person.Code = row[1].ToString();
                     person.FirstName = row[2].ToString();
-                    person.MidName = row[3].ToString();
-                    person.LastName = row[4].ToString();
+                    person.LastName = row[0].ToString();
                     list.Add(person);
                 }
             }

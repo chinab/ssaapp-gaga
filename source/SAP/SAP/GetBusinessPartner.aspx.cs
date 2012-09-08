@@ -15,7 +15,7 @@ namespace SAP
         {
             MasterData masterDataWS = new MasterData();            
             //masterDataWS.Url = 
-            DataSet businessPartners = masterDataWS.GetBusinessPartner();
+            DataSet businessPartners = masterDataWS.GetBusinessPartner("S");
             DataSet itemMasters = masterDataWS.GetItemMasterData();
             DataSet taxGroups = masterDataWS.GetTaxGroup("1");
             DataSet whareHouses = masterDataWS.GetWarehouse();

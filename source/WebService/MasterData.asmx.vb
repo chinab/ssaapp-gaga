@@ -142,7 +142,7 @@ Public Class MasterData
                 dt = a.Simulate_OCPR(CardCode)
             Else
                 connect.setDB()
-                dt = connect.ObjectGetAll_Query_SAP("select CntctCode Code,Name FirstName,'' LastName, 0 IsDefault from OCPR")
+                dt = connect.ObjectGetAll_Query_SAP("select CntctCode Code,Name FirstName,'' LastName, 0 IsDefault from OCPR where CardCode='" + CardCode + "'")
             End If
             Return dt
         Catch ex As Exception

@@ -106,7 +106,8 @@
         Dim NetPrice As Double = GetPriceAfterDiscount(cardCode, itemCode, amount, refDate)
         Dim Discount As Double = 0
         Dim WhsCode As String =  GetDefaultWarehouse(UserID)
-       
+        If WhsCode = "" Then WhsCode = "01"
+
         If GrossPrice = 0 Then
             Discount = 0
         Else

@@ -1,0 +1,15 @@
+C:\Working Folder\ABEO\SBOWEB\WebService\bin\SBOWebService.dll
+C:\Working Folder\ABEO\SBOWEB\WebService\bin\SBOWebService.pdb
+C:\Working Folder\ABEO\SBOWEB\WebService\bin\SBOWebService.xml
+C:\Working Folder\ABEO\SBOWEB\WebService\bin\Interop.SAPbobsCOM.dll
+C:\Working Folder\ABEO\SBOWEB\WebService\bin\Interop.Shell32.dll
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\ResolveAssemblyReference.cache
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\Interop.SAPbobsCOM.dll
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\Interop.Shell32.dll
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\SBOWebService.vbproj.ResolveComReference.cache
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\SBOWebService.Resources.resources
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\ResGen.read.1.tlog
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\ResGen.write.1.tlog
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\SBOWebService.dll
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\SBOWebService.xml
+C:\Working Folder\ABEO\SBOWEB\WebService\obj\Debug\SBOWebService.pdb

@@ -8,10 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace SAP {
-
-
-    public partial class ARInvoice
-    {
+    
+    
+    public partial class ARInvoice {
         
         /// <summary>
         /// purchaseOrderUpdatePanel control.
@@ -309,42 +308,6 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOrderNumber;
-        
-        /// <summary>
-        /// ddlRecalDueDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRecalDueDate;
-        
-        /// <summary>
-        /// txtRecalDueDate1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRecalDueDate1;
-        
-        /// <summary>
-        /// txtRecalDueDate2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRecalDueDate2;
-        
-        /// <summary>
-        /// txtCashDiscount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCashDiscount;
         
         /// <summary>
         /// ddlBuyer control.

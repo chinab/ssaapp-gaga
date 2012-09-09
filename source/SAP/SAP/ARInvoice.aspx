@@ -574,36 +574,6 @@
                             <br />
                             <br />
                             <br />
-                            <table class="detail_table">
-                                <tr>
-                                    <td colspan="2" class="detail_table_td_100">
-                                        <span>Manually Recalculate Due Date:</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <asp:DropDownList ID="ddlRecalDueDate" runat="server">
-                                            <asp:ListItem Text="---"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtRecalDueDate1" runat="server"></asp:TextBox>
-                                        <span>Months + </span>
-                                        <asp:TextBox ID="txtRecalDueDate2" runat="server"></asp:TextBox>
-                                        <span>Days</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Cash Discount Date Offset:</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtCashDiscount" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="clear">
-                            </div>
                         </div>
                     </div>
                     <br />

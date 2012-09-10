@@ -303,4 +303,144 @@
 
         Return dtJE
     End Function
+    Public Function Simulate_OIDC() As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("Code", GetType(String))
+        dtJE.Tables(0).Columns.Add("Name", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("Code") = "1"
+        dr("Name") = "Hoa don huy"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        dr = dtJE.Tables(0).NewRow
+        dr("Code") = "2"
+        dr("Name") = "Hoa don tra"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
+    Public Function Simulate_OCTG() As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("GroupNum", GetType(String))
+        dtJE.Tables(0).Columns.Add("PymntGroup", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("GroupNum") = "1"
+        dr("PymntGroup") = "30days"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        dr = dtJE.Tables(0).NewRow
+        dr("GroupNum") = "2"
+        dr("PymntGroup") = "60days"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
+    Public Function Simulate_OITB() As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("ItmsGrpCod", GetType(String))
+        dtJE.Tables(0).Columns.Add("ItmsGrpNam", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("ItmsGrpCod") = "100"
+        dr("ItmsGrpNam") = "Group 1"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        dr = dtJE.Tables(0).NewRow
+        dr("ItmsGrpCod") = "101"
+        dr("ItmsGrpNam") = "Group 2"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
+    Public Function Simulate_OPLN() As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("ListNum", GetType(String))
+        dtJE.Tables(0).Columns.Add("ListName", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("ListNum") = "1"
+        dr("ListName") = "Price List 1"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        dr = dtJE.Tables(0).NewRow
+        dr("ItmsGrpCod") = "2"
+        dr("ListNum") = "Price List 2"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
+    Public Function Simulate_OMRC() As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("FirmCode", GetType(String))
+        dtJE.Tables(0).Columns.Add("FirmName", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("FirmCode") = "1"
+        dr("FirmName") = "Nokia"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        dr = dtJE.Tables(0).NewRow
+        dr("FirmCode") = "2"
+        dr("FirmName") = "Samsung"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
+    Public Function Simulate_OOND() As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("IndCode", GetType(String))
+        dtJE.Tables(0).Columns.Add("IndName", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("IndCode") = "1"
+        dr("IndName") = "Retail"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        dr = dtJE.Tables(0).NewRow
+        dr("IndCode") = "2"
+        dr("IndName") = "Whole Sales"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
+    Public Function Simulate_OADM() As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("CompnyName", GetType(String))
+        dtJE.Tables(0).Columns.Add("DecSep", GetType(String))
+        dtJE.Tables(0).Columns.Add("ThousSep", GetType(String))
+        dtJE.Tables(0).Columns.Add("SumDec", GetType(Double))
+        dtJE.Tables(0).Columns.Add("PriceDec", GetType(Double))
+        dtJE.Tables(0).Columns.Add("QtyDec", GetType(Double))
+        dtJE.Tables(0).Columns.Add("PercentDec", GetType(Double))
+        dtJE.Tables(0).Columns.Add("RateDec", GetType(Double))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("CompnyName") = "DMS DEMO"
+        dr("DecSep") = "."
+        dr("ThousSep") = ","
+        dr("SumDec") = 0
+        dr("PriceDec") = 0
+        dr("QtyDec") = 0
+        dr("PercentDec") = 2
+        dr("RateDec") = 2
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
 End Class

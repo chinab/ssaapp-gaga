@@ -195,13 +195,147 @@ Public Class MasterData
                 Dim a As New Simulation
                 dt = a.Simulate_BPCurrency(CardCode)
             Else
+                Dim str As String
+                If CardCode = "" Then
+                    str = "select T0.CurrCode from OCRN T0 "
+                Else
+                    str = "select T1.CurrCode from ocrd T0 "
+                    str = str + " full join OCRN T1 oN T0.Currency=T1.CurrCode or T0.Currency='##'"
+                    str = str + " where T0.cardcode='" + CardCode + "'"
+                End If
                 connect.setDB()
-                Dim str As String = "select T1.CurrCode from ocrd T0 "
-                str = str + " full join OCRN T1 oN T0.Currency=T1.CurrCode or T0.Currency='##'"
-                str = str + " where T0.cardcode='" + CardCode + "'"
-                dt = connect.ObjectGetAll_Query_SAP(str)
+                dt = connect.ObjectGetAll_Query_SAP(Str)
             End If
 
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetIndicator() As DataSet
+        Try
+            Dim dt As New DataSet("OIDC")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OIDC
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("Select Code,Name from OIDC")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetPaymentTerm() As DataSet
+        Try
+            Dim dt As New DataSet("octg")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_octg
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select GroupNum,PymntGroup from octg order by GroupNum")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    '----------------------------------------------OTHER MASTER DATA---------------------------------
+    <WebMethod()> _
+    Public Function GetItemGroup() As DataSet
+        Try
+            Dim dt As New DataSet("OITB")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OITB
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("Select ItmsGrpCod,ItmsGrpNam from OITB")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetPriceList() As DataSet
+        Try
+            Dim dt As New DataSet("OPLN")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OPLN
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select ListNum,ListName from opln")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetManufacture() As DataSet
+        Try
+            Dim dt As New DataSet("OMRC")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OMRC
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select FirmCode,FirmName from OMRC")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetIndustry() As DataSet
+        Try
+            Dim dt As New DataSet("OOND")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OOND
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select IndCode,IndName from OOND")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetTerritory() As DataSet
+        Try
+            Dim dt As New DataSet("OTER")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OIDC
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select T0.territryID,T0.descript,T1.descript Parent from OTER T0 left join OTER T1 on T1.territryID=T0.parent")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetDisplaySetting() As DataSet
+        Try
+            Dim dt As New DataSet("OADM")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OADM
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select CompnyName,DecSep,ThousSep,SumDec,PriceDec,QtyDec,PercentDec,RateDec from OADM")
+            End If
             Return dt
         Catch ex As Exception
             Throw ex

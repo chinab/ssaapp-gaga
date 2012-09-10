@@ -42,6 +42,11 @@ Main = {
 
             $(".txtDate").datepicker();
         }
+        ////
+        if (window.parent != null || window.parent != undefined) {
+            window.parent.Main.resizeIframe($('body').height());
+        }
+
     },
     rebind_init: function () {
         if ($('#isMainPage').val() == '1') {
@@ -60,6 +65,13 @@ Main = {
             });
             //
         }
+        ////
+        if (window.parent != null || window.parent != undefined) {
+            window.parent.Main.resizeIframe($('body').height());
+        }
+    },
+    resizeIframe: function (newHeight) {
+        $('#dialogFrame > #iframeItem').height(parseInt(newHeight, 10) + 20);
     },
     openCustomDialog: function (url, _width, _height, param) {
         $('#dialogFrame').dialog({
@@ -71,6 +83,7 @@ Main = {
         this.widthDialog = _width;
         this.heightDialog = _height;
         $('#dialogFrame').dialog('open');
+        //$('#dialogFrame > #iframeItem').remove();
         $('#dialogFrame > #iframeItem').attr('src', url + (param == '' || param == undefined ? '' : ("?" + param)));
     },
     openDialog: function (url, param) {
@@ -100,7 +113,7 @@ Main = {
         $('#customeMessage').text(msg);
         Main.clearMasterMessage();
     },
-    integer_textbox_keypress: function(e) {
+    integer_textbox_keypress: function (e) {
         var keynum;
         if (window.event) // IE
         {

@@ -30,24 +30,24 @@ namespace SAP
                 dt.Columns.Add("PriceAfterDiscount");
                 dt.Columns.Add("Total");
                 dt.Columns.Add("TaxCode");
-                dt.Columns.Add("TaxRate");                
+                dt.Columns.Add("TaxRate");
                 dt.Columns.Add("Whse");
                 dt.Columns.Add("PromotionId");
                 dt.Columns.Add("PromotionLine");
                 dt.Columns.Add("Sole");
                 dt.Columns.Add("PromoEnable");
-                
-                
+
+
                 for (int i = 0; i < 5; i++)
                     dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                
+
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
-               
+
 
                 MasterData masterDataWS = new MasterData();
                 DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
-                ListItem item = new ListItem();           
+                ListItem item = new ListItem();
                 foreach (DataRow row in salesBuyers.Tables[0].Rows)
                 {
                     item = new ListItem(row[1].ToString(), row[0].ToString());
@@ -62,7 +62,7 @@ namespace SAP
                 if (defaultVendor != null)
                 {
                     this.txtVendor.Text = defaultVendor.Tables[0].Rows[0]["CardCode"].ToString();
-                    this.txtName.Text = defaultVendor.Tables[0].Rows[0]["CardName"].ToString();                    
+                    this.txtName.Text = defaultVendor.Tables[0].Rows[0]["CardName"].ToString();
                     this.txtStatus.Text = "Open";
                     this.txtStatus.Enabled = false;
                     this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
@@ -115,7 +115,7 @@ namespace SAP
                             dr["CardCode"] = this.txtVendor.Text;
                             dr["Quantity"] = 1;
 
-                            GetDefault defaultWS = new GetDefault();                            
+                            GetDefault defaultWS = new GetDefault();
                             DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
                             DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
 
@@ -194,9 +194,9 @@ namespace SAP
                         break;
                     case "EditEmployeeCallBack":
                         EmployeeMasterData employee = Session["chosenEmployee"] as EmployeeMasterData;
-                         if (employee != null)
+                        if (employee != null)
                         {
-                            this.txtOwner.Text = employee.FirstName + " " + employee.MidName + " " + employee.LastName; 
+                            this.txtOwner.Text = employee.FirstName + " " + employee.MidName + " " + employee.LastName;
                         }
                         break;
                     case "EditPromoCallBack":
@@ -239,15 +239,16 @@ namespace SAP
                             dt.Columns.Add("PromotionLine");
                             dt.Columns.Add("Sole");
                             */
-                            double promoDiscount  =  getDoubleFromObject(promo.HeadDscAmt) +  getDoubleFromObject(promo.HeadDscPer) * getDoubleFromObject(dr["OrgPrice"]) / 100 +  getDoubleFromObject(promo.ProValue);
+                            double promoDiscount = getDoubleFromObject(promo.HeadDscAmt) + getDoubleFromObject(promo.HeadDscPer) * getDoubleFromObject(dr["OrgPrice"]) / 100 + getDoubleFromObject(promo.ProValue);
                             double unitPrice = getDoubleFromObject(dr["UnitPrice"]);
                             dr["PromoDiscount"] = promoDiscount;
                             dr["UnitPrice"] = unitPrice;
-                            dr["PromotionId"] = promo.ProCode; 
+                            dr["PromotionId"] = promo.ProCode;
                             dr["Sole"] = promo.Sole;
 
                             Int32 ProQty = geIntFromObject(promo.ProQty);
-                            if(ProQty >= 1){
+                            if (ProQty >= 1)
+                            {
                                 DataRow newRow = dt.NewRow();
                                 setDefaultItemValue(newRow);
                                 newRow["Code"] = promo.ItemCode;
@@ -256,60 +257,62 @@ namespace SAP
                                 newRow["PromoDiscount"] = 0;
                                 newRow["UnitPrice"] = 0;
                                 newRow["ContractDiscount"] = 0;
-                                newRow["PromotionId"] = promo.ProCode; 
+                                newRow["PromotionId"] = promo.ProCode;
                                 newRow["Sole"] = promo.Sole;
                                 newRow["Whse"] = promo.WhsCode;
                                 newRow["PromotionLine"] = "Y";
-                                
+
 
                                 dt.Rows.InsertAt(newRow, itemNo + 1);
-                                dt.Rows.RemoveAt(dt.Rows.Count - 1); 
-                                dt.Rows[itemNo + 1]["PromoEnable"] = "N";                                
+                                dt.Rows.RemoveAt(dt.Rows.Count - 1);
+                                dt.Rows[itemNo + 1]["PromoEnable"] = "N";
                             }
                             dt.Rows[itemNo]["PromoEnable"] = "N";
-                            dr["Sole"] = promo.Sole;                            
+                            dr["Sole"] = promo.Sole;
                             //dt.Rows.
                             updateTableTotalPrice(dt);
                             this.lvContents.DataSource = dt;
                             this.lvContents.DataBind();
-                            
+
                         }
                         break;
-                        
-                        
+
+
                     default:
                         break;
                 }
             }
-            
+
         }
 
-        protected void setDefaultItemValue(DataRow row){
-            row["No"]="";
-            row["Code"]="";
-            row["Description"]="";
-            row["Quantity"]="";
-            row["OrgPrice"]="";
-            row["PromoDiscount"]="";
-            row["UnitPrice"]="";
-            row["ContractDiscount"]="";
-            row["PriceAfterDiscount"]="";
-            row["Total"]="0.0";
-            row["TaxCode"]="";
-            row["TaxRate"]="";                
-            row["Whse"]="";
-            row["PromotionId"]="";
-            row["PromotionLine"]="";
-            row["Sole"]="";
+        protected void setDefaultItemValue(DataRow row)
+        {
+            row["No"] = "";
+            row["Code"] = "";
+            row["Description"] = "";
+            row["Quantity"] = "";
+            row["OrgPrice"] = "";
+            row["PromoDiscount"] = "";
+            row["UnitPrice"] = "";
+            row["ContractDiscount"] = "";
+            row["PriceAfterDiscount"] = "";
+            row["Total"] = "0.0";
+            row["TaxCode"] = "";
+            row["TaxRate"] = "";
+            row["Whse"] = "";
+            row["PromotionId"] = "";
+            row["PromotionLine"] = "";
+            row["Sole"] = "";
         }
- 
+
         public String _collectData()
         {
             try
             {
                 PurchaseInfo objInfo = new PurchaseInfo("22", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
 
-                 for (int i = 0; i < dt.Rows.Count; i++) {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
 
                     DataRow row = dt.Rows[i];
                     String itemcode = row["Code"].ToString();
@@ -322,7 +325,11 @@ namespace SAP
                     String UnitPrice = row["UnitPrice"].ToString();
                     if (!String.IsNullOrEmpty(itemcode))
                     {
+<<<<<<< .mine
+                        OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(vatprice));
+=======
                         OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
+>>>>>>> .r89
                         objInfo.AddOrderItem(objOrder);
                     }
                 }
@@ -417,16 +424,36 @@ namespace SAP
                     this.ddlCurrencyDetail.Visible = false;
                     break;
             }
-           
-        }        
+
+        }
+
+        protected void btnQuantityUpdate_click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in this.lvContents.Items)
+            {
+                LinkButton btnQuantityUpdate = item.FindControl("btnQuantityUpdate") as LinkButton;
+                if (btnQuantityUpdate != null && btnQuantityUpdate == sender)
+                {
+                    TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
+                    Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
+                    // tinh toan gi do
+
+                    lblOrgPrice.Text = txtQuantity.Text + "123";
+                    //////
+                    break;
+                }
+            }
+        }
         #endregion
-        
+
         #region priceCalculation
-        protected void updateTableTotalPrice(DataTable dtInput){
+        protected void updateTableTotalPrice(DataTable dtInput)
+        {
             double orderTotalBeforeDiscount = 0.0;
             double orderTotal = 0.0;
             double taxTotal = 0.0;
-            for (int i = 0; i < dtInput.Rows.Count; i++) {
+            for (int i = 0; i < dtInput.Rows.Count; i++)
+            {
                 if (!"".Equals(dtInput.Rows[i]["Code"]))
                 {
                     updateRowTotalPrice(dtInput, i);
@@ -447,7 +474,8 @@ namespace SAP
             this.txtTotalPayment.Text = orderTotal.ToString();
         }
 
-        public void updateRowTotalPrice(DataTable dtInput, int rowNumber) {
+        public void updateRowTotalPrice(DataTable dtInput, int rowNumber)
+        {
             int quantity = 0;
             double orgPrice = 0.0;
             double discountPromo = 0.0;
@@ -476,12 +504,16 @@ namespace SAP
 
         }
 
-        public double getDoubleFromObject(Object input){
+        public double getDoubleFromObject(Object input)
+        {
             double result = 0.0;
-            try{
-                if (input != null )
-                    result= Double.Parse(input.ToString());
-            } catch (Exception ex){
+            try
+            {
+                if (input != null)
+                    result = Double.Parse(input.ToString());
+            }
+            catch (Exception ex)
+            {
                 result = 0.0;
             }
             return result;
@@ -502,7 +534,7 @@ namespace SAP
             return result;
         }
 
-        
+
         #endregion
     }
 }

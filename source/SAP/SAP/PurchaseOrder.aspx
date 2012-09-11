@@ -230,6 +230,7 @@
                                         </td>
                                         <td>
                                             <asp:TextBox ID="txtQuantity" runat="server" Text='<%#Eval("Quantity")%>' onkeypress="return Main.integer_textbox_keypress(event);" />
+                                            <asp:LinkButton ID="btnQuantityUpdate" Text="u" runat="server" OnClick='btnQuantityUpdate_click' />
                                         </td>
                                          <td>
                                             <asp:Label runat="server" ID="lblOrgPrice"><%#Eval("OrgPrice")%></asp:Label>

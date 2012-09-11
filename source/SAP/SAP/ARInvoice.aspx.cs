@@ -307,8 +307,8 @@ namespace SAP
         {
             try
             {
-                PurchaseInfo objInfo = new PurchaseInfo("adminInfo", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text);
-
+                PurchaseInfo objInfo = new PurchaseInfo("13", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text);
+                
                  for (int i = 0; i < dt.Rows.Count; i++) {
 
                     DataRow row = dt.Rows[i];
@@ -318,10 +318,11 @@ namespace SAP
                     String discount = row["ContractDiscount"].ToString();
                     String whscode = row["Whse"].ToString();
                     String vat = row["TaxCode"].ToString();
-                    String vatprice = row["Total"].ToString();
+                    //String vatprice = row["Total"].ToString();
+                    String UnitPrice = row["UnitPrice"].ToString();
                     if (!String.IsNullOrEmpty(itemcode))
                     {
-                        OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode,vat,getDoubleFromObject(vatprice));
+                        OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
                         objInfo.AddOrderItem(objOrder);
                     }
                 }

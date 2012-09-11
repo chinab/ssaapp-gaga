@@ -318,10 +318,11 @@ namespace SAP
                     String discount = row["ContractDiscount"].ToString();
                     String whscode = row["Whse"].ToString();
                     String vat = row["TaxCode"].ToString();
-                    String vatprice = row["Total"].ToString();
+                    //String vatprice = row["Total"].ToString();
+                    String UnitPrice = row["UnitPrice"].ToString();
                     if (!String.IsNullOrEmpty(itemcode))
                     {
-                        OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode,vat,getDoubleFromObject(vatprice));
+                        OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
                         objInfo.AddOrderItem(objOrder);
                     }
                 }

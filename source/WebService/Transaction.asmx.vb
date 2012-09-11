@@ -18,15 +18,15 @@ Public Class Transaction
     <WebMethod()> _
     Public Function CreateMarketingDocument(ByVal strXml As String) As String
         Try
-            Dim sStr As String = ""
+            Dim sStr As String = "Operation Completed Successfully!"
             If PublicVariable.Simulate Then
-                sStr = "Operation Successfull!"
+                Return sStr
             Else
                 Dim oSO As SAPbobsCOM.Documents
                 If Connection.bConnect = False Then
                     connect.setDB()
                     If Not connect.connectDB() Then
-                        Return -1
+                        Return "Connect to SAP failed!"
                     End If
                 End If
                 PublicVariable.oCompany.XMLAsString = True
@@ -34,12 +34,12 @@ Public Class Transaction
                 lErrCode = oSO.Add()
                 If lErrCode <> 0 Then
                     PublicVariable.oCompany.GetLastError(lErrCode, sErrMsg)
-                    Return sErrMsg
-                Else                    
-                    Dim a As New SAP_Functions
-                    Dim DocKey As String = a.GetLastKey(0, 13)                    
-                    a.Create_IncommingPayment(DocKey)
-                    Return sStr
+                    sStr = sErrMsg
+                    'Else                    
+                    'Dim a As New SAP_Functions
+                    'Dim DocKey As String = a.GetLastKey(0, 13)                    
+                    'a.Create_IncommingPayment(DocKey)
+                    'Return sStr
                 End If
             End If
             
@@ -86,5 +86,16 @@ Public Class Transaction
         Catch ex As Exception
             Return ex.ToString
         End Try
+    End Function
+    <WebMethod()> _
+    Public Function Insert_Promotion_Transfer(ItemCode As String, CardCode As String, Qty As Integer) As String
+        'Try
+        '    Dim sStr As String = "Insert Into Promotion_Transfer select '"+
+
+
+        '    Return sStr
+        'Catch ex As Exception
+        '    Return ex.ToString
+        'End Try
     End Function
 End Class

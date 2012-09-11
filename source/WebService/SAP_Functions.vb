@@ -107,7 +107,7 @@
         Dim Discount As Double = 0
         Dim WhsCode As String =  GetDefaultWarehouse(UserID)
         If WhsCode = "" Then WhsCode = "01"
-
+        Dim TaxCode As String = GetDefaultTaxCode(itemCode, cardCode)
         If GrossPrice = 0 Then
             Discount = 0
         Else
@@ -120,7 +120,7 @@
         dr("Discount") = Discount
         dr("PriceAfDi") = NetPrice
         dr("WhsCode") = WhsCode
-        dr("TaxCode") = "S10"
+        dr("TaxCode") = TaxCode
         dr("TaxRate") = 10
         ds.Tables(0).Rows.Add(dr)
 
@@ -158,6 +158,23 @@
             ors.DoQuery(str)
             If ors.RecordCount = 1 Then
                 Return ors.Fields.Item("WhsCode").Value.ToString
+            Else
+                Return ""
+            End If
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+    Public Function GetDefaultTaxCode(ItemCode As String, CardCode As String) As String
+        Dim str As String = ""
+        Try
+            str = "select case when (select CardType from ocrd where cardcode='" + CardCode + "')='C' then VatGourpSa else VatGroupPu end TaxCode from OITM where ItemCode='" + ItemCode + "'"
+
+            Dim ors As SAPbobsCOM.Recordset
+            ors = PublicVariable.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset)
+            ors.DoQuery(str)
+            If ors.RecordCount = 1 Then
+                Return ors.Fields.Item("TaxCode").Value.ToString
             Else
                 Return ""
             End If

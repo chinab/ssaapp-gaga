@@ -74,6 +74,7 @@ Public Class Transaction
                     End If
                 End If
                 PublicVariable.oCompany.XMLAsString = True
+                PublicVariable.oCompany.XmlExportType = SAPbobsCOM.BoXmlExportTypes.xet_ValidNodesOnly
                 oDocment = PublicVariable.oCompany.GetBusinessObject(DocType)
                 If oDocment.GetByKey(DocEntry) Then
                     oDocment.SaveXML(sStr)

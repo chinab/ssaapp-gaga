@@ -334,7 +334,7 @@ Public Class MasterData
                 dt = a.Simulate_OADM
             Else
                 connect.setDB()
-                dt = connect.ObjectGetAll_Query_SAP("select CompnyName,DecSep,ThousSep,SumDec,PriceDec,QtyDec,PercentDec,RateDec from OADM")
+                dt = connect.ObjectGetAll_Query_SAP("select CompnyName,DecSep,ThousSep,SumDec,PriceDec,QtyDec,PercentDec,RateDec,DateFormat,DateSep from OADM")
             End If
             Return dt
         Catch ex As Exception

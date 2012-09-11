@@ -432,12 +432,10 @@ namespace SAP
                 LinkButton btnQuantityUpdate = item.FindControl("btnQuantityUpdate") as LinkButton;
 
                 if (btnQuantityUpdate != null && btnQuantityUpdate == sender)
-                {
+                {                    
                     TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
                     Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
-                    Label lblNo = item.FindControl("lblNo") as Label;
-                    Int32 index = geIntFromObject(lblNo.Text);
-                    dt.Rows[index]["Quantity"] = geIntFromObject(txtQuantity.Text);
+                    dt.Rows[item.DataItemIndex]["Quantity"] = geIntFromObject(txtQuantity.Text);
                     updateTableTotalPrice(dt);
                     this.lvContents.DataSource = dt;
                     this.lvContents.DataBind();

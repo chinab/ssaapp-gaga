@@ -21,7 +21,7 @@ namespace SAP
         private const String TAXDATE_ELEMENT = "TaxDate";
         private const String CARDCODE_ELEMENT = "CardCode";
         private const String CARDNAME_ELEMENT = "CardName";
-        private const String POR_ELEMENT = "POR";
+        private const String POR1_ELEMENT = "POR1";
         private const String ITEMCODE_ELEMENT = "ItemCode";
         private const String DES_ELEMENT = "Dscription";
         private const String QUANTITY_ELEMENT = "Quantity";
@@ -79,9 +79,9 @@ namespace SAP
                                 String cardcode, String cardname)
         {
             this._AdmInfo = adminfo;
-            this._DocDate = docdate;
-            this._DocDueDate = docduedate;
-            this._TaxDate = taxdate;
+            this._DocDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(docdate));
+            this._DocDueDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(docduedate));// docduedate;
+            this._TaxDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(taxdate));// taxdate;
             this._CardCode = cardcode;
             this._CardName = cardname;
             _OrderItems = new List<OrderItem>();
@@ -173,7 +173,8 @@ namespace SAP
                             {
                                 for (int i = 0; i < _OrderItems.Count; i++)
                                 {
-                                    writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT + (i + 1));
+                                    //writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT + (i + 1));
+                                    writer.WriteStartElement(PurchaseInfo.POR1_ELEMENT);
                                     {
                                         writer.WriteStartElement(PurchaseInfo.ROW_ELEMENT);
                                         {

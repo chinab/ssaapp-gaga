@@ -307,7 +307,7 @@ namespace SAP
         {
             try
             {
-                PurchaseInfo objInfo = new PurchaseInfo("adminInfo", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text);
+                PurchaseInfo objInfo = new PurchaseInfo("22", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text);
 
                  for (int i = 0; i < dt.Rows.Count; i++) {
 

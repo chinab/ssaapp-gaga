@@ -228,8 +228,11 @@
                                          <td>
                                             <asp:Label runat="server" ID="lblDescription"><%#Eval("Description")%></asp:Label>
                                         </td>
-                                        <td>
+                                       <%-- <td>
                                             <asp:Label runat="server" ID="lblQuantity"><%#Eval("Quantity")%></asp:Label>
+                                        </td>--%>
+                                         <td>
+                                            <asp:TextBox ID="txtQuantity" runat="server" Text='<%#Eval("Quantity")%>'  onkeypress="return Main.integer_textbox_keypress(event);"  />
                                         </td>
                                          <td>
                                             <asp:Label runat="server" ID="lblOrgPrice"><%#Eval("OrgPrice")%></asp:Label>

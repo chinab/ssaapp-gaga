@@ -107,6 +107,7 @@
     <Content Include="skin\icon\Warning.png" />
     <Content Include="skin\icon\Windows 2.png" />
     <Content Include="skin\icon\Windows Explorer.png" />
+    <Content Include="skin\images\Abeo Logo.png" />
     <Content Include="skin\images\ajax-loader.gif" />
     <Content Include="skin\images\banking.png" />
     <Content Include="skin\images\Bin - Full.png" />

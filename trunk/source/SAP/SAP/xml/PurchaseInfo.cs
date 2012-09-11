@@ -30,7 +30,7 @@ namespace SAP
         private const String VATGRP_ELEMENT = "VATGroup";
         //private const String PRICEVAT_ELEMENT = "PriceAfVAT";
         private const String UNITPRICE_ELEMENT = "Price";
-
+        private const String USERID_ELEMENT = "U_UserID";
         private String _OPOR_ELEMENT;
 
         public String OPOR_ELEMENT
@@ -54,6 +54,14 @@ namespace SAP
             get { return _AdmInfo; }
             set { _AdmInfo = value; }
         }
+
+        private String _UserID;
+        public String UserID
+        {
+            get { return _UserID; }
+            set { _UserID = value; }
+        }
+
         private String _DocDate;
 
         public String DocDate
@@ -93,7 +101,7 @@ namespace SAP
         private List<OrderItem> _OrderItems;
 
         public PurchaseInfo(String adminfo, String docdate, String docduedate, String taxdate,
-                                String cardcode, String cardname)
+                                String cardcode, String cardname,String UserID)
         {
             this._AdmInfo = adminfo;
             switch(adminfo)
@@ -133,6 +141,7 @@ namespace SAP
             this._TaxDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(taxdate));// taxdate;
             this._CardCode = cardcode;
             this._CardName = cardname;
+            this._UserID = UserID;
             _OrderItems = new List<OrderItem>();
         }
 
@@ -208,6 +217,12 @@ namespace SAP
                                 writer.WriteStartElement(PurchaseInfo.CARDNAME_ELEMENT);
                                 {
                                     writer.WriteString(this._CardName);
+                                }
+                                writer.WriteEndElement();
+
+                                writer.WriteStartElement(PurchaseInfo.USERID_ELEMENT);
+                                {
+                                    writer.WriteString(this.UserID);
                                 }
                                 writer.WriteEndElement();
                             }

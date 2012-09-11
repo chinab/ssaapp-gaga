@@ -213,7 +213,7 @@
                                             <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
                                         </td>    
                                         <td >                                            
-                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&amount=" + Eval("Total").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&UnitPrice=" + Eval("UnitPrice").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image Visible='<%#"N".Equals(Eval("PromoEnable")) ? false : true%>' ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
                                             </asp:HyperLink>
@@ -286,7 +286,7 @@
                                             <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
                                         </td>  
                                          <td >                                            
-                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&amount=" + Eval("Total").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&UnitPrice=" + Eval("UnitPrice").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image Visible='<%#"N".Equals(Eval("PromoEnable")) ? false : true%>' ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
                                             </asp:HyperLink>

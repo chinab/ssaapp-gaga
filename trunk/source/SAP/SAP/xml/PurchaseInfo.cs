@@ -14,21 +14,38 @@ namespace SAP
         private const String BO_ELEMENT = "BO";
         private const String ADMINFO_ELEMENT = "AdmInfo";
         private const String OBJECT_ELEMENT = "Object";
-        private const String OPOR_ELEMENT = "OPOR";
+        //private const String OPOR_ELEMENT = "OPOR";
         private const String ROW_ELEMENT = "row";
         private const String DOCDATE_ELEMENT = "DocDate";
         private const String DOCDUEDATE_ELEMENT = "DocDueDate";
         private const String TAXDATE_ELEMENT = "TaxDate";
         private const String CARDCODE_ELEMENT = "CardCode";
         private const String CARDNAME_ELEMENT = "CardName";
-        private const String POR1_ELEMENT = "POR1";
+        //private const String POR1_ELEMENT = "POR1";
         private const String ITEMCODE_ELEMENT = "ItemCode";
         private const String DES_ELEMENT = "Dscription";
         private const String QUANTITY_ELEMENT = "Quantity";
         private const String DISPERCENT_ELEMENT = "DiscPrcnt";
         private const String WHSCODE_ELEMENT = "WhsCode";
         private const String VATGRP_ELEMENT = "VATGroup";
-        private const String PRICEVAT_ELEMENT = "PriceAfVAT";
+        //private const String PRICEVAT_ELEMENT = "PriceAfVAT";
+        private const String UNITPRICE_ELEMENT = "Price";
+
+        private String _OPOR_ELEMENT;
+
+        public String OPOR_ELEMENT
+        {
+            get { return _OPOR_ELEMENT; }
+            set { _OPOR_ELEMENT = value; }
+        }
+
+        private String _POR1_ELEMENT;
+
+        public String POR1_ELEMENT
+        {
+            get { return _POR1_ELEMENT; }
+            set { _POR1_ELEMENT = value; }
+        }
 
         private String _AdmInfo;
 
@@ -79,6 +96,38 @@ namespace SAP
                                 String cardcode, String cardname)
         {
             this._AdmInfo = adminfo;
+            switch(adminfo)
+            {
+                case "19": //AP Credit
+                    this.OPOR_ELEMENT = "ORPC";
+                    this.POR1_ELEMENT = "RPC1";
+                    break;
+                case "20": //GRPO
+                   this.OPOR_ELEMENT = "OPDN";
+                   this.POR1_ELEMENT = "PDN1";
+                   break;
+                case "21": //Goods Return
+                   this.OPOR_ELEMENT = "ORPD";
+                   this.POR1_ELEMENT = "RPD1";
+                   break;
+                case "22": //Purchase Order
+                   this.OPOR_ELEMENT = "OPOR";
+                   this.POR1_ELEMENT = "POR1";
+                   break;
+
+                case "13": //AR Invoice
+                   this.OPOR_ELEMENT = "OINV";
+                   this.POR1_ELEMENT = "INV1";
+                   break;
+                case "14": //AR Credit
+                   this.OPOR_ELEMENT = "ORIN";
+                   this.POR1_ELEMENT = "RIN1";
+                   break;
+                case "15": //Delivery
+                    this.OPOR_ELEMENT = "ODLN";
+                   this.POR1_ELEMENT = "DLN1";
+                   break;
+            }
             this._DocDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(docdate));
             this._DocDueDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(docduedate));// docduedate;
             this._TaxDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(taxdate));// taxdate;
@@ -126,7 +175,8 @@ namespace SAP
                         #endregion
 
                         #region write OPOR tag
-                        writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT); // write OPOR tag
+                       // writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT); // write OPOR tag
+                        writer.WriteStartElement(this.OPOR_ELEMENT); 
                         {
                             writer.WriteStartElement(PurchaseInfo.ROW_ELEMENT);
                             {
@@ -174,7 +224,8 @@ namespace SAP
                                 for (int i = 0; i < _OrderItems.Count; i++)
                                 {
                                     //writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT + (i + 1));
-                                    writer.WriteStartElement(PurchaseInfo.POR1_ELEMENT);
+                                    //writer.WriteStartElement(PurchaseInfo.POR1_ELEMENT);
+                                    writer.WriteStartElement(this.POR1_ELEMENT);
                                     {
                                         writer.WriteStartElement(PurchaseInfo.ROW_ELEMENT);
                                         {
@@ -220,9 +271,9 @@ namespace SAP
                                             }
                                             writer.WriteEndElement();
 
-                                            writer.WriteStartElement(PurchaseInfo.PRICEVAT_ELEMENT); //write VATGroup
+                                            writer.WriteStartElement(PurchaseInfo.UNITPRICE_ELEMENT); //Unit Price
                                             {
-                                                writer.WriteString(Convert.ToString(this._OrderItems[i].PriceAfVAT));
+                                                writer.WriteString(Convert.ToString(this._OrderItems[i].Price));
 
                                             }
                                             writer.WriteEndElement();

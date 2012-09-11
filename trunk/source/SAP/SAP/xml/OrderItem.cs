@@ -49,16 +49,16 @@ namespace SAP
             get { return _VATGroup; }
             set { _VATGroup = value; }
         }
-        private double _PriceAfVAT;
+        private double _Price;
 
-        public double PriceAfVAT
+        public double Price
         {
-            get { return _PriceAfVAT; }
-            set { _PriceAfVAT = value; }
+            get { return _Price; }
+            set { _Price = value; }
         }
 
         public OrderItem(String itemcode, String des, int quan, double discount,
-                            String whscode, String vat, double vatprice)
+                            String whscode, String vat, double UnitPrice)
         {
             this._ItemCode = itemcode;
             this._Description = des;
@@ -66,7 +66,7 @@ namespace SAP
             this._DiscPrcnt = discount;
             this._WhsCode = whscode;
             this._VATGroup = vat;
-            this._PriceAfVAT = vatprice;
+            this._Price = UnitPrice;
         }
 
         public OrderItem()

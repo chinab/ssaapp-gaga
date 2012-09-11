@@ -18,7 +18,7 @@ namespace SAP
                 {
 
                 MasterData masterDataWS = new MasterData();
-                taxCodes = masterDataWS.GetTaxGroup("I");
+                taxCodes = masterDataWS.GetTaxGroup("O");
                 //this.gridTaxCodes.DataSource = warehousesItems.Tables[0];
                 //this.gridTaxCodes.DataBind();
                 //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;

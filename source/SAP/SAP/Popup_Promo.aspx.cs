@@ -19,11 +19,11 @@ namespace SAP
                     String userId = User.Identity.Name;
                     String itemCode = Request.QueryString["itemCode"];
                     String cardCode = Request.QueryString["cardCode"];
-                    Int32 quantity =  geIntFromObject(Request.QueryString["Quantity"]);                    
+                    Int32 quantity = 12;//geIntFromObject(Request.QueryString["Quantity"]);                    
                     DateTime docDate = DateTime.Now;
-                    double amount = getDoubleFormDataRow(Request.QueryString["amount"]);               
+                    double UnitPrice = getDoubleFormDataRow(Request.QueryString["UnitPrice"]) ;               
                     GetDefault getDefaultWS = new GetDefault();
-                    promoCodes = getDefaultWS.GetPromotion(userId, itemCode, cardCode, quantity, docDate, amount);
+                    promoCodes = getDefaultWS.GetPromotion(userId, itemCode, cardCode, quantity, docDate, UnitPrice*quantity);
                     BindCategories("");
                     editPromoCodxeUpdatePanel.Update();
 

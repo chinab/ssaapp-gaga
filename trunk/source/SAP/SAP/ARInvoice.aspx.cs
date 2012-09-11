@@ -36,7 +36,7 @@ namespace SAP
                 dt.Columns.Add("PromotionLine");
                 dt.Columns.Add("Sole");
                 dt.Columns.Add("PromoEnable");
-                
+                dt.Columns.Add("QuantityEnable");
                 
                 for (int i = 0; i < 5; i++)
                     dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
@@ -265,8 +265,10 @@ namespace SAP
                                 dt.Rows.InsertAt(newRow, itemNo + 1);
                                 dt.Rows.RemoveAt(dt.Rows.Count - 1); 
                                 dt.Rows[itemNo + 1]["PromoEnable"] = "N";                                
+								dt.Rows[itemNo + 1]["QuantityEnable"] = "N";
                             }
                             dt.Rows[itemNo]["PromoEnable"] = "N";
+							dt.Rows[itemNo]["QuantityEnable"] = "N";
                             dr["Sole"] = promo.Sole;                            
                             //dt.Rows.
                             updateTableTotalPrice(dt);
@@ -417,8 +419,30 @@ namespace SAP
                     this.ddlCurrencyDetail.Visible = false;
                     break;
             }
-           
-        }        
+
+        }
+
+        protected void btnQuantityUpdate_click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in this.lvContents.Items)
+            {
+                LinkButton btnQuantityUpdate = item.FindControl("btnQuantityUpdate") as LinkButton;
+
+                if (btnQuantityUpdate != null && btnQuantityUpdate == sender)
+                {
+                    TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
+                    Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
+                    Label lblNo = item.FindControl("lblNo") as Label;
+                    Int32 index = geIntFromObject(lblNo.Text);
+                    dt.Rows[index]["Quantity"] = geIntFromObject(txtQuantity.Text);
+                    updateTableTotalPrice(dt);
+                    this.lvContents.DataSource = dt;
+                    this.lvContents.DataBind();
+  
+                    break;
+                }
+            }
+        }
         #endregion
         
         #region priceCalculation

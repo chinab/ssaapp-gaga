@@ -16,7 +16,7 @@ namespace SAP
 
         protected void btnGenXML_Click(object sender, EventArgs e)
         {
-            PurchaseInfo info = new PurchaseInfo("adm01", "12122012", "12122012", "12122012", "v0001", "sumpro");
+            PurchaseInfo info = new PurchaseInfo("adm01", "12122012", "12122012", "12122012", "v0001", "sumpro","");
             OrderItem item1 = new OrderItem("i001", "IPhone 5", 5, 100, "apple01", "va1", 15000);
             OrderItem item2 = new OrderItem("i002", "IPad 4", 5, 30, "apple01", "va1", 5000);
             info.AddOrderItem(item1);

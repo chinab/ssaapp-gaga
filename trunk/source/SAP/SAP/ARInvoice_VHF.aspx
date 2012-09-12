@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="AR Invoice" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
-    CodeBehind="ARInvoice.aspx.cs" Inherits="SAP.ARInvoice" %>
+    CodeBehind="ARInvoice_VHF.aspx.cs" Inherits="SAP.ARInvoice" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type="text/javascript">

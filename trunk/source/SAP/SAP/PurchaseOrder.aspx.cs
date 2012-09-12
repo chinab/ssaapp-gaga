@@ -41,6 +41,7 @@ namespace SAP
 
 
                 MasterData masterDataWS = new MasterData();
+                //-------------Load Sales/Buyer Employee----------------
                 DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
                 ListItem item = new ListItem();
                 foreach (DataRow row in salesBuyers.Tables[0].Rows)
@@ -48,7 +49,31 @@ namespace SAP
                     item = new ListItem(row[1].ToString(), row[0].ToString());
                     ddlBuyer.Items.Add(item);
                 }
-
+                //-------------Load Shipping Type----------------
+                DataSet ShippingType = masterDataWS.GetShippingType();
+                ListItem itemShipping = new ListItem();
+                foreach (DataRow row in ShippingType.Tables[0].Rows)
+                {
+                    itemShipping = new ListItem(row[1].ToString(), row[0].ToString());
+                    ddlShippingType.Items.Add(itemShipping);
+                }
+                //-------------Load Payment Tern----------------
+                DataSet PaymentTerm = masterDataWS.GetPaymentTerm();
+                ListItem itemPaymenTerm = new ListItem();
+                foreach (DataRow row in PaymentTerm.Tables[0].Rows)
+                {
+                    itemPaymenTerm = new ListItem(row[1].ToString(), row[0].ToString());
+                    ddlPaymentTerm.Items.Add(itemPaymenTerm);
+                }
+                //-------------Load Indicator----------------
+                DataSet Indicator = masterDataWS.GetIndicator();
+                ListItem itemIndicator = new ListItem();
+                foreach (DataRow row in Indicator.Tables[0].Rows)
+                {
+                    itemIndicator = new ListItem(row[1].ToString(), row[0].ToString());
+                    ddlIndicator.Items.Add(itemIndicator);
+                }
+                //-------------Load Default BP----------------
                 GetDefault getDefaultWS = new GetDefault();
                 DataSet defaultVendor = getDefaultWS.GetDefaultBP(User.Identity.Name, "S");
 
@@ -218,7 +243,7 @@ namespace SAP
         {
             try
             {
-                PurchaseInfo objInfo = new PurchaseInfo("22", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
+                DocumentXML objInfo = new DocumentXML("22", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -235,7 +260,7 @@ namespace SAP
                         String vat = row["TaxCode"].ToString();
                         String UnitPrice = row["UnitPrice"].ToString();
 
-                        OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
+                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
                         objInfo.AddOrderItem(objOrder);
                     }
                 }

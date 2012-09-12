@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SAP
 {
-    public class OrderItem
+    public class Document_LineXML
     {
         private String _ItemCode;
 
@@ -57,7 +57,7 @@ namespace SAP
             set { _Price = value; }
         }
 
-        public OrderItem(String itemcode, String des, int quan, double discount,
+        public Document_LineXML(String itemcode, String des, int quan, double discount,
                             String whscode, String vat, double UnitPrice)
         {
             this._ItemCode = itemcode;
@@ -69,7 +69,7 @@ namespace SAP
             this._Price = UnitPrice;
         }
 
-        public OrderItem()
+        public Document_LineXML()
         {
  
         }

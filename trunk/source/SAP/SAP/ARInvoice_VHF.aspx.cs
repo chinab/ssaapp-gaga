@@ -141,7 +141,7 @@ namespace SAP
                         {
                             // update grid
                             DataRow dr = dt.Rows[itemNo];
-                            dr["Whse"] = chosenWarehouse.WhsName;
+                            dr["Whse"] = chosenWarehouse.WhsCode;
 
                             //dt.Rows.
                             this.lvContents.DataSource = dt;
@@ -309,7 +309,7 @@ namespace SAP
         {
             try
             {
-                PurchaseInfo objInfo = new PurchaseInfo("13", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
+                DocumentXML objInfo = new DocumentXML("13", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
                 
                  for (int i = 0; i < dt.Rows.Count; i++) {
 
@@ -327,7 +327,7 @@ namespace SAP
                         //String vatprice = row["Total"].ToString();
                         String UnitPrice = row["UnitPrice"].ToString();
 
-                        OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
+                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
                         objInfo.AddOrderItem(objOrder);
                     }
                 }

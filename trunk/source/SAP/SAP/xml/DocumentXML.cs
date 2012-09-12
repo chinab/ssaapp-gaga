@@ -8,29 +8,44 @@ using System.Xml;
 
 namespace SAP
 {
-    public class PurchaseInfo
+    public class DocumentXML
     {
         private const String ROOT_ELEMENT = "BOM";
         private const String BO_ELEMENT = "BO";
         private const String ADMINFO_ELEMENT = "AdmInfo";
         private const String OBJECT_ELEMENT = "Object";
-        //private const String OPOR_ELEMENT = "OPOR";
         private const String ROW_ELEMENT = "row";
         private const String DOCDATE_ELEMENT = "DocDate";
         private const String DOCDUEDATE_ELEMENT = "DocDueDate";
         private const String TAXDATE_ELEMENT = "TaxDate";
         private const String CARDCODE_ELEMENT = "CardCode";
         private const String CARDNAME_ELEMENT = "CardName";
-        //private const String POR1_ELEMENT = "POR1";
+        private const String USERID_ELEMENT = "U_UserID";
+        private const String DOCTYPE_ELEMENT = "DocType";
+
+        private const String OWNERCODE_ELEMENT = "OwnerCode";
+        private const String BUYER_ELEMENT = "SlpCode";
+        private const String PROJECT_ELEMENT = "Project";
+        private const String SHIPPING_ELEMENT = "TrnspCode";
+        private const String INDICATOR_ELEMENT = "Indicator";
+        private const String PAYMENTTERM_ELEMENT = "GroupNum";
+
         private const String ITEMCODE_ELEMENT = "ItemCode";
         private const String DES_ELEMENT = "Dscription";
         private const String QUANTITY_ELEMENT = "Quantity";
         private const String DISPERCENT_ELEMENT = "DiscPrcnt";
         private const String WHSCODE_ELEMENT = "WhsCode";
         private const String VATGRP_ELEMENT = "VATGroup";
-        //private const String PRICEVAT_ELEMENT = "PriceAfVAT";
         private const String UNITPRICE_ELEMENT = "Price";
-        private const String USERID_ELEMENT = "U_UserID";
+
+        private const String CC_ELEMENT = "OcrCode";
+        private const String CC1_ELEMENT = "OcrCode1";
+        private const String CC2_ELEMENT = "OcrCode2";
+        private const String CC3_ELEMENT = "OcrCode3";
+        private const String CC4_ELEMENT = "OcrCode4";
+        private const String GLACCT_ELEMENT = "AcctCode";
+
+
         private String _OPOR_ELEMENT;
 
         public String OPOR_ELEMENT
@@ -98,9 +113,9 @@ namespace SAP
             set { _CardName = value; }
         }
 
-        private List<OrderItem> _OrderItems;
+        private List<Document_LineXML> _OrderItems;
 
-        public PurchaseInfo(String adminfo, String docdate, String docduedate, String taxdate,
+        public DocumentXML(String adminfo, String docdate, String docduedate, String taxdate,
                                 String cardcode, String cardname,String UserID)
         {
             this._AdmInfo = adminfo;
@@ -142,15 +157,15 @@ namespace SAP
             this._CardCode = cardcode;
             this._CardName = cardname;
             this._UserID = UserID;
-            _OrderItems = new List<OrderItem>();
+            _OrderItems = new List<Document_LineXML>();
         }
 
-        public PurchaseInfo()
+        public DocumentXML()
         {
-            _OrderItems = new List<OrderItem>();
+            _OrderItems = new List<Document_LineXML>();
         }
 
-        public void AddOrderItem(OrderItem item)
+        public void AddOrderItem(Document_LineXML item)
         {
             if (_OrderItems != null && item != null)
             {
@@ -165,14 +180,14 @@ namespace SAP
 
             writer.WriteStartDocument(); // write start doc
             {
-                writer.WriteStartElement(PurchaseInfo.ROOT_ELEMENT);
+                writer.WriteStartElement(DocumentXML.ROOT_ELEMENT);
                 {
-                    writer.WriteStartElement(PurchaseInfo.BO_ELEMENT);
+                    writer.WriteStartElement(DocumentXML.BO_ELEMENT);
                     {
                         #region write ADMINFO_ELEMENT
-                        writer.WriteStartElement(PurchaseInfo.ADMINFO_ELEMENT);
+                        writer.WriteStartElement(DocumentXML.ADMINFO_ELEMENT);
                         {
-                            writer.WriteStartElement(PurchaseInfo.OBJECT_ELEMENT); // write object tag
+                            writer.WriteStartElement(DocumentXML.OBJECT_ELEMENT); // write object tag
                             {
                                 writer.WriteString(this._AdmInfo);
                             }
@@ -187,40 +202,40 @@ namespace SAP
                        // writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT); // write OPOR tag
                         writer.WriteStartElement(this.OPOR_ELEMENT); 
                         {
-                            writer.WriteStartElement(PurchaseInfo.ROW_ELEMENT);
+                            writer.WriteStartElement(DocumentXML.ROW_ELEMENT);
                             {
-                                writer.WriteStartElement(PurchaseInfo.DOCDATE_ELEMENT);
+                                writer.WriteStartElement(DocumentXML.DOCDATE_ELEMENT);
                                 {
                                     writer.WriteString(this._DocDate);
                                 }
                                 writer.WriteEndElement();
 
-                                writer.WriteStartElement(PurchaseInfo.DOCDUEDATE_ELEMENT);
+                                writer.WriteStartElement(DocumentXML.DOCDUEDATE_ELEMENT);
                                 {
                                     writer.WriteString(this._DocDueDate);
 
                                 }
                                 writer.WriteEndElement();
 
-                                writer.WriteStartElement(PurchaseInfo.TAXDATE_ELEMENT);
+                                writer.WriteStartElement(DocumentXML.TAXDATE_ELEMENT);
                                 {
                                     writer.WriteString(this._TaxDate);
                                 }
                                 writer.WriteEndElement();
 
-                                writer.WriteStartElement(PurchaseInfo.CARDCODE_ELEMENT);
+                                writer.WriteStartElement(DocumentXML.CARDCODE_ELEMENT);
                                 {
                                     writer.WriteString(this._CardCode);
                                 }
                                 writer.WriteEndElement();
 
-                                writer.WriteStartElement(PurchaseInfo.CARDNAME_ELEMENT);
+                                writer.WriteStartElement(DocumentXML.CARDNAME_ELEMENT);
                                 {
                                     writer.WriteString(this._CardName);
                                 }
                                 writer.WriteEndElement();
 
-                                writer.WriteStartElement(PurchaseInfo.USERID_ELEMENT);
+                                writer.WriteStartElement(DocumentXML.USERID_ELEMENT);
                                 {
                                     writer.WriteString(this.UserID);
                                 }
@@ -242,52 +257,52 @@ namespace SAP
                                     {
                                         //writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT + (i + 1));
                                         //writer.WriteStartElement(PurchaseInfo.POR1_ELEMENT);
-                                    
-                                            writer.WriteStartElement(PurchaseInfo.ROW_ELEMENT);
+
+                                        writer.WriteStartElement(DocumentXML.ROW_ELEMENT);
                                             {
-                                                writer.WriteStartElement(PurchaseInfo.ITEMCODE_ELEMENT); //write item _PrjCode
+                                                writer.WriteStartElement(DocumentXML.ITEMCODE_ELEMENT); //write item _PrjCode
                                                 {
                                                     writer.WriteString(this._OrderItems[i].ItemCode);
 
                                                 }
                                                 writer.WriteEndElement();
 
-                                                writer.WriteStartElement(PurchaseInfo.DES_ELEMENT); //write Dscription
+                                                writer.WriteStartElement(DocumentXML.DES_ELEMENT); //write Dscription
                                                 {
                                                     writer.WriteString(this._OrderItems[i].Description);
 
                                                 }
                                                 writer.WriteEndElement();
 
-                                                writer.WriteStartElement(PurchaseInfo.QUANTITY_ELEMENT); //write Quantity
+                                                writer.WriteStartElement(DocumentXML.QUANTITY_ELEMENT); //write Quantity
                                                 {
                                                     writer.WriteString(Convert.ToString(this._OrderItems[i].Quantity));
 
                                                 }
                                                 writer.WriteEndElement();
 
-                                                writer.WriteStartElement(PurchaseInfo.DISPERCENT_ELEMENT); //write DiscPrcnt
+                                                writer.WriteStartElement(DocumentXML.DISPERCENT_ELEMENT); //write DiscPrcnt
                                                 {
                                                     writer.WriteString(Convert.ToString(this._OrderItems[i].DiscPrcnt));
 
                                                 }
                                                 writer.WriteEndElement();
 
-                                                writer.WriteStartElement(PurchaseInfo.WHSCODE_ELEMENT); //write WhsCode
+                                                writer.WriteStartElement(DocumentXML.WHSCODE_ELEMENT); //write WhsCode
                                                 {
                                                     writer.WriteString(this._OrderItems[i].WhsCode);
 
                                                 }
                                                 writer.WriteEndElement();
 
-                                                writer.WriteStartElement(PurchaseInfo.VATGRP_ELEMENT); //write VATGroup
+                                                writer.WriteStartElement(DocumentXML.VATGRP_ELEMENT); //write VATGroup
                                                 {
                                                     writer.WriteString(this._OrderItems[i].VATGroup);
 
                                                 }
                                                 writer.WriteEndElement();
 
-                                                writer.WriteStartElement(PurchaseInfo.UNITPRICE_ELEMENT); //Unit Price
+                                                writer.WriteStartElement(DocumentXML.UNITPRICE_ELEMENT); //Unit Price
                                                 {
                                                     writer.WriteString(Convert.ToString(this._OrderItems[i].Price));
 

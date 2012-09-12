@@ -379,12 +379,7 @@
                                     </td>
                                     <td colspan="2">
                                         <asp:DropDownList ID="ddlShippingType" runat="server">
-                                            <asp:ListItem Text=""></asp:ListItem>
-                                            <asp:ListItem Text="Fedex EM"></asp:ListItem>
-                                            <asp:ListItem Text="Fedex ON"></asp:ListItem>
-                                            <asp:ListItem Text="Motor Express"></asp:ListItem>
-                                            <asp:ListItem Text="UPS Ground"></asp:ListItem>
-                                            <asp:ListItem Text="UPS Red"></asp:ListItem>
+                                            <asp:ListItem Text=""></asp:ListItem>                                            
                                             <asp:ListItem Text="Define New"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
@@ -407,6 +402,11 @@
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtBPProject" runat="server"></asp:TextBox>
+                                        <asp:HyperLink ID="linkOwner0" runat="server" 
+                                            NavigateUrl="javascript:Main.openDialog('Popup_EditProject.aspx','');">
+                                        <asp:Image ID="Image3" runat="server" 
+                                            ImageUrl="~/skin/images/item-pointer.gif" />
+                                    </asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
@@ -448,12 +448,9 @@
                                         <span>Payment Terms</span>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="ddlPaymentTerm" runat="server">
-                                            <asp:ListItem Text="---"></asp:ListItem>
-                                            <asp:ListItem Text="Cash Basic"></asp:ListItem>
-                                            <asp:ListItem Text="2P10Net30"></asp:ListItem>
-                                            <asp:ListItem Text="Net30"></asp:ListItem>
-                                            <asp:ListItem Text="Defined View"></asp:ListItem>
+                                        <asp:DropDownList ID="ddlPaymentTerm" runat="server"> 
+                                            <asp:ListItem Text=""></asp:ListItem>                                           
+                                            <asp:ListItem Text="Defined New"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
                                     <td class="detail_table_td_100">
@@ -461,8 +458,8 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlIndicator" runat="server">
-                                            <asp:ListItem Text="---"></asp:ListItem>
-                                            <asp:ListItem Text="Define view"></asp:ListItem>
+                                            <asp:ListItem Text=""></asp:ListItem> 
+                                            <asp:ListItem Text="Define New"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
@@ -512,34 +509,6 @@
                             <br />
                             <br />
                             <br />
-                            <table class="detail_table">
-                                <tr>
-                                    <td colspan="2" class="detail_table_td_100">
-                                        <span>Manually Recalculate Due Date:</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <asp:DropDownList ID="ddlRecalDueDate" runat="server">
-                                            <asp:ListItem Text="---"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtRecalDueDate1" runat="server"></asp:TextBox>
-                                        <span>Months + </span>
-                                        <asp:TextBox ID="txtRecalDueDate2" runat="server"></asp:TextBox>
-                                        <span>Days</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Cash Discount Date Offset:</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtCashDiscount" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                            </table>
                             <div class="clear">
                             </div>
                         </div>

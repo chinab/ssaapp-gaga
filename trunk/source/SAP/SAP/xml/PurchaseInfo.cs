@@ -236,68 +236,69 @@ namespace SAP
                         {
                             if (_OrderItems != null)
                             {
-                                for (int i = 0; i < _OrderItems.Count; i++)
+                                writer.WriteStartElement(this.POR1_ELEMENT);
                                 {
-                                    //writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT + (i + 1));
-                                    //writer.WriteStartElement(PurchaseInfo.POR1_ELEMENT);
-                                    writer.WriteStartElement(this.POR1_ELEMENT);
+                                    for (int i = 0; i < _OrderItems.Count; i++)
                                     {
-                                        writer.WriteStartElement(PurchaseInfo.ROW_ELEMENT);
-                                        {
-                                            writer.WriteStartElement(PurchaseInfo.ITEMCODE_ELEMENT); //write item _PrjCode
+                                        //writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT + (i + 1));
+                                        //writer.WriteStartElement(PurchaseInfo.POR1_ELEMENT);
+                                    
+                                            writer.WriteStartElement(PurchaseInfo.ROW_ELEMENT);
                                             {
-                                                writer.WriteString(this._OrderItems[i].ItemCode);
+                                                writer.WriteStartElement(PurchaseInfo.ITEMCODE_ELEMENT); //write item _PrjCode
+                                                {
+                                                    writer.WriteString(this._OrderItems[i].ItemCode);
+
+                                                }
+                                                writer.WriteEndElement();
+
+                                                writer.WriteStartElement(PurchaseInfo.DES_ELEMENT); //write Dscription
+                                                {
+                                                    writer.WriteString(this._OrderItems[i].Description);
+
+                                                }
+                                                writer.WriteEndElement();
+
+                                                writer.WriteStartElement(PurchaseInfo.QUANTITY_ELEMENT); //write Quantity
+                                                {
+                                                    writer.WriteString(Convert.ToString(this._OrderItems[i].Quantity));
+
+                                                }
+                                                writer.WriteEndElement();
+
+                                                writer.WriteStartElement(PurchaseInfo.DISPERCENT_ELEMENT); //write DiscPrcnt
+                                                {
+                                                    writer.WriteString(Convert.ToString(this._OrderItems[i].DiscPrcnt));
+
+                                                }
+                                                writer.WriteEndElement();
+
+                                                writer.WriteStartElement(PurchaseInfo.WHSCODE_ELEMENT); //write WhsCode
+                                                {
+                                                    writer.WriteString(this._OrderItems[i].WhsCode);
+
+                                                }
+                                                writer.WriteEndElement();
+
+                                                writer.WriteStartElement(PurchaseInfo.VATGRP_ELEMENT); //write VATGroup
+                                                {
+                                                    writer.WriteString(this._OrderItems[i].VATGroup);
+
+                                                }
+                                                writer.WriteEndElement();
+
+                                                writer.WriteStartElement(PurchaseInfo.UNITPRICE_ELEMENT); //Unit Price
+                                                {
+                                                    writer.WriteString(Convert.ToString(this._OrderItems[i].Price));
+
+                                                }
+                                                writer.WriteEndElement();
 
                                             }
-                                            writer.WriteEndElement();
-
-                                            writer.WriteStartElement(PurchaseInfo.DES_ELEMENT); //write Dscription
-                                            {
-                                                writer.WriteString(this._OrderItems[i].Description);
-
-                                            }
-                                            writer.WriteEndElement();
-
-                                            writer.WriteStartElement(PurchaseInfo.QUANTITY_ELEMENT); //write Quantity
-                                            {
-                                                writer.WriteString(Convert.ToString(this._OrderItems[i].Quantity));
-
-                                            }
-                                            writer.WriteEndElement();
-
-                                            writer.WriteStartElement(PurchaseInfo.DISPERCENT_ELEMENT); //write DiscPrcnt
-                                            {
-                                                writer.WriteString(Convert.ToString(this._OrderItems[i].DiscPrcnt));
-
-                                            }
-                                            writer.WriteEndElement();
-
-                                            writer.WriteStartElement(PurchaseInfo.WHSCODE_ELEMENT); //write WhsCode
-                                            {
-                                                writer.WriteString(this._OrderItems[i].WhsCode);
-
-                                            }
-                                            writer.WriteEndElement();
-
-                                            writer.WriteStartElement(PurchaseInfo.VATGRP_ELEMENT); //write VATGroup
-                                            {
-                                                writer.WriteString(this._OrderItems[i].VATGroup);
-
-                                            }
-                                            writer.WriteEndElement();
-
-                                            writer.WriteStartElement(PurchaseInfo.UNITPRICE_ELEMENT); //Unit Price
-                                            {
-                                                writer.WriteString(Convert.ToString(this._OrderItems[i].Price));
-
-                                            }
-                                            writer.WriteEndElement();
-
-                                        }
-                                        writer.WriteEndElement();
-                                    }
-                                    writer.WriteEndElement();
+                                        writer.WriteEndElement();                                    
                                 }
+                                }
+                                writer.WriteEndElement();
                             }
                         }
                         #endregion

@@ -315,15 +315,18 @@ namespace SAP
 
                     DataRow row = dt.Rows[i];
                     String itemcode = row["Code"].ToString();
-                    String des = row["Description"].ToString();
-                    String quan = row["Quantity"].ToString();
-                    String discount = row["ContractDiscount"].ToString();
-                    String whscode = row["Whse"].ToString();
-                    String vat = row["TaxCode"].ToString();
-                    //String vatprice = row["Total"].ToString();
-                    String UnitPrice = row["UnitPrice"].ToString();
+
+                    
                     if (!String.IsNullOrEmpty(itemcode))
                     {
+                        String des = row["Description"].ToString();
+                        String quan = row["Quantity"].ToString();
+                        String discount = row["ContractDiscount"].ToString();
+                        String whscode = row["Whse"].ToString();
+                        String vat = row["TaxCode"].ToString();
+                        //String vatprice = row["Total"].ToString();
+                        String UnitPrice = row["UnitPrice"].ToString();
+
                         OrderItem objOrder = new OrderItem(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
                         objInfo.AddOrderItem(objOrder);
                     }

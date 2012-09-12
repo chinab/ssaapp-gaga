@@ -152,9 +152,7 @@
                                             <th style="width:25px">
                                                 <span>#</span>
                                             </th>
-                                             <th style="width:50px">
-                                                <span>Apply Promotion</span>
-                                            </th>
+                                             
                                             <th  style="width:100px">
                                                 <span>Item No.</span>
                                             </th>                                            
@@ -164,17 +162,12 @@
                                             <th>
                                                 <span>Quantity</span>
                                             </th>
-                                             <th>
-                                                <span>Org Price</span>
-                                            </th>
-                                            <th>
-                                                <span>Discount By Promotion</span>
-                                            </th>  
+                                             
                                             <th>
                                                 <span>Unit Price</span>
                                             </th>
                                             <th>
-                                                <span>Discount By Contract</span>
+                                                <span>Discount %</span>
                                             </th>
                                             <th>
                                                 <span>Price after Discount</span>
@@ -191,17 +184,7 @@
                                             <th>
                                                 <span>Whse</span>
                                             </th>
-                                            <th>
-                                                <span>Promotion ID</span>
-                                            </th>
-                                            <th>
-                                                <span>Promotion Line</span>
-                                            </th>
-                                             <th>
-                                                <span>Sole</span>                                                
-                                            </th>
-
-
+                                            
                                         </tr>
                                         <tr id="itemPlaceholder" runat="server">
                                         </tr>
@@ -212,12 +195,7 @@
                                         <td>
                                             <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
                                         </td>    
-                                        <td >                                            
-                                            <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_Promo.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&itemCode=" + Eval("Code").ToString()+"&cardCode=" + Eval("CardCode").ToString()+"&quantity=" + Eval("Quantity").ToString()+"&amount=" + Eval("Total").ToString()+"\"")%>'
-                                                runat="server">
-                                                <asp:Image Visible='<%#"N".Equals(Eval("PromoEnable")) ? false : true%>' ID="Image2" runat="server" ImageUrl="~/skin/images/promocode.png" Width="16px" />
-                                            </asp:HyperLink>
-                                        </td>                                    
+                                                                        
                                         <td>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("Code") %></asp:Label>
                                             <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
@@ -232,12 +210,7 @@
                                             <asp:TextBox  Enabled='<%#"N".Equals(Eval("QuantityEnable")) ? false : true%>' ID="txtQuantity" runat="server" Text='<%#Eval("Quantity")%>' onkeypress="return Main.integer_textbox_keypress(event);" />
                                             <asp:LinkButton Enabled='<%#"N".Equals(Eval("QuantityEnable")) ? false : true%>' ID="btnQuantityUpdate" Text="u" runat="server" OnClick='btnQuantityUpdate_click' />
                                         </td>
-                                         <td>
-                                            <asp:Label runat="server" ID="lblOrgPrice"><%#Eval("OrgPrice")%></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label runat="server" ID="lblPromoDiscount"><%#Eval("PromoDiscount")%></asp:Label>
-                                        </td>
+                                        
                                         <td>
                                             <asp:Label runat="server" ID="lblUnitPrice"><%#Eval("UnitPrice")%></asp:Label>
                                         </td>
@@ -267,15 +240,7 @@
                                         <td style="display:none">
                                             <asp:Label runat="server" ID="Label1"><%#Eval("TaxRate")%></asp:Label>
                                         </td>
-                                        <td>
-                                            <asp:Label runat="server" ID="lblPromotionId"><%#Eval("PromotionId")%></asp:Label>
-                                        </td>
-                                          <td>
-                                            <asp:Label runat="server" ID="lblPromotionLine"><%#Eval("PromotionLine")%></asp:Label>
-                                        </td>
-                                          <td>
-                                            <asp:Label runat="server" ID="lblSole"><%#Eval("Sole")%></asp:Label>  
-                                        </td>
+                                        
                                     </tr>
                                 </ItemTemplate>
                                 <EditItemTemplate>
@@ -302,12 +267,7 @@
                                         <td>
                                             <asp:TextBox runat="server" ID="lblQuantity" Text='<%# Bind("Quantity") %>'></asp:TextBox>                                            
                                         </td>
-                                         <td>
-                                            <asp:Label runat="server" ID="lblOrgPrice"><%#Eval("OrgPrice")%></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label runat="server" ID="lblPromoDiscount"><%#Eval("PromoDiscount")%></asp:Label>
-                                        </td>
+                                        
                                         <td>
                                             <asp:Label runat="server" ID="lblUnitPrice"><%#Eval("UnitPrice")%></asp:Label>
                                         </td>
@@ -337,15 +297,7 @@
                                         <td style="display:none">
                                             <asp:Label runat="server" ID="Label1"><%#Eval("TaxRate")%></asp:Label>
                                         </td>
-                                        <td>
-                                            <asp:Label runat="server" ID="lblPromotionId"><%#Eval("PromotionId")%></asp:Label>
-                                        </td>
-                                          <td>
-                                            <asp:Label runat="server" ID="lblPromotionLine"><%#Eval("PromotionLine")%></asp:Label>
-                                        </td>
-                                          <td>
-                                            <asp:Label runat="server" ID="lblSole"><%#Eval("Sole")%></asp:Label>                                          
-                                        </td>
+                                       
                                     </tr>
                                 </EditItemTemplate>
                                 <EmptyDataTemplate>
@@ -354,9 +306,7 @@
                                             <th>
                                                 <span>#</span>
                                             </th>
-                                            <th>
-                                                <span>Apply Promotion</span>
-                                            </th>
+                                           
                                             <th>
                                                 <span>Item No.</span>
                                             </th>                                            
@@ -366,17 +316,12 @@
                                             <th>
                                                 <span>Quantity</span>
                                             </th>
-                                             <th>
-                                                <span>Org Price</span>
-                                            </th>
-                                            <th>
-                                                <span>Discount By Promotion</span>
-                                            </th>  
+                                              
                                             <th>
                                                 <span>Unit Price</span>
                                             </th>
                                             <th>
-                                                <span>Discount By Contract</span>
+                                                <span>Discount %</span>
                                             </th>
                                             <th>
                                                 <span>Price after Discount</span>
@@ -393,15 +338,7 @@
                                             <th>
                                                 <span>Whse</span>
                                             </th>
-                                            <th>
-                                                <span>Promotion ID</span>
-                                            </th>
-                                            <th>
-                                                <span>Promotion Line</span>
-                                            </th>
-                                             <th>
-                                                <span>Sole</span>
-                                            </th>
+                                            
                                         </tr>
                                         <tr>
                                             <td colspan="8">

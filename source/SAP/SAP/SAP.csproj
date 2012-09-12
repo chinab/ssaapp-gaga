@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ARInvoice.aspx" />
+    <Content Include="Popup_EditProject.aspx" />
     <Content Include="Popup_EditTaxCode_Out.aspx" />
     <Content Include="Popup_EditCustomer.aspx" />
     <Content Include="Popup_Promo.aspx" />
@@ -195,6 +196,13 @@
     </Compile>
     <Compile Include="ARInvoice.aspx.designer.cs">
       <DependentUpon>ARInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup_EditProject.aspx.cs">
+      <DependentUpon>Popup_EditProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditProject.aspx.designer.cs">
+      <DependentUpon>Popup_EditProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="GeneralFunctions.cs" />
     <Compile Include="Popup_EditTaxCode_Out.aspx.cs">

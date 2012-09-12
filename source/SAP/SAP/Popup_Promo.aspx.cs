@@ -19,7 +19,7 @@ namespace SAP
                     String userId = User.Identity.Name;
                     String itemCode = Request.QueryString["itemCode"];
                     String cardCode = Request.QueryString["cardCode"];
-                    Int32 quantity = 12;//geIntFromObject(Request.QueryString["Quantity"]);                    
+                    Int32 quantity = geIntFromObject(Request.QueryString["quantity"]);                    
                     DateTime docDate = DateTime.Now;
                     double UnitPrice = getDoubleFormDataRow(Request.QueryString["UnitPrice"]) ;               
                     GetDefault getDefaultWS = new GetDefault();

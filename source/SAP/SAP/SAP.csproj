@@ -196,6 +196,7 @@
     <Compile Include="ARInvoice.aspx.designer.cs">
       <DependentUpon>ARInvoice.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GeneralFunctions.cs" />
     <Compile Include="Popup_EditTaxCode_Out.aspx.cs">
       <DependentUpon>Popup_EditTaxCode_Out.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

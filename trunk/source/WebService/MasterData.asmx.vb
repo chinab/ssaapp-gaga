@@ -341,4 +341,20 @@ Public Class MasterData
             Throw ex
         End Try
     End Function
+    <WebMethod()> _
+    Public Function GetCostCenter(DimCode) As DataSet
+        Try
+            Dim dt As New DataSet("OPRC")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OPRC
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select PrcCode,PrcName from OPRC where DimCode=" + CStr(DimCode))
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 End Class

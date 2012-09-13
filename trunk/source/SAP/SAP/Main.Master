@@ -170,7 +170,7 @@
                             <li><a href="#">Return</a></li>
                             <li><a href="#">A/R Down Payment Request</a></li>
                             <li><a href="#">A/R Down Payment Invoice</a></li>
-                            <li><a href="ARInvoice.aspx">A/R Invoice</a></li>
+                            <li><a href="ARInvoice_VHF.aspx">A/R Invoice</a></li>
                             <li><a href="#">A/R Invoice + Payment</a></li>
                             <li><a href="#">A/R Credit Memo</a></li>
                             <li><a href="#">A/P Reserver Invoice</a></li>

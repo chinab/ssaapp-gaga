@@ -119,8 +119,9 @@ namespace SAP
             if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
             {
                 Int32 itemNo = 0;
+                GeneralFunctions Newformat = new GeneralFunctions();
                 switch (this.Request["__EVENTARGUMENT"].ToString())
-                {
+                {                        
                     case "EditItemCallBack":
                         ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
@@ -139,9 +140,11 @@ namespace SAP
                             DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
                             DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
 
-                            dr["UnitPrice"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
-                            dr["ContractDiscount"] = defaultInfo.Tables[0].Rows[0]["Discount"];
-                            dr["PriceAfterDiscount"] = defaultInfo.Tables[0].Rows[0]["PriceAfDi"];
+                            
+                            
+                            dr["UnitPrice"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["UnitPrice"]);
+                            dr["ContractDiscount"] = String.Format("{0:n2}",defaultInfo.Tables[0].Rows[0]["Discount"]);
+                            dr["PriceAfterDiscount"] = String.Format("{0:n0}",defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);
                             dr["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
                             dr["TaxRate"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
                             dr["Whse"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
@@ -189,6 +192,8 @@ namespace SAP
                             this.txtVendor.Text = chosenPartner.CardCode;
                             this.txtStatus.Text = "Open";
                             this.txtStatus.Enabled = false;
+
+
                             this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDeliveryDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();

@@ -10,7 +10,7 @@
 namespace SAP {
     
     
-    public partial class Popup_EditTaxCode {
+    public partial class Popup_EditTaxCode_IN {
         
         /// <summary>
         /// Head1 control.

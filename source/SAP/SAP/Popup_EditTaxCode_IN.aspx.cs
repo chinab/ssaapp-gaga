@@ -9,7 +9,7 @@ using SAP.WebServices;
 
 namespace SAP
     {
-    public partial class Popup_EditTaxCode : System.Web.UI.Page
+    public partial class Popup_EditTaxCode_IN : System.Web.UI.Page
         {
             protected static DataSet taxCodes;
             protected void Page_Load(object sender, EventArgs e)

@@ -443,4 +443,23 @@
 
         Return dtJE
     End Function
+    Public Function Simulate_OPRC() As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("PrcCode", GetType(String))
+        dtJE.Tables(0).Columns.Add("PrcName", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("PrcCode") = "AA"
+        dr("PrcName") = "AA"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        dr = dtJE.Tables(0).NewRow
+        dr("PrcCode") = "BB"
+        dr("PrcName") = "BB"
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
 End Class

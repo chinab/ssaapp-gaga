@@ -60,13 +60,13 @@
   <ItemGroup>
     <Content Include="ARInvoice_VHF.aspx" />
     <Content Include="Popup_EditProject.aspx" />
-    <Content Include="Popup_EditTaxCode_Out.aspx" />
+    <Content Include="Popup_EditTaxCode_OUT.aspx" />
     <Content Include="Popup_EditCustomer.aspx" />
     <Content Include="Popup_Promo.aspx" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="js\dialog.js" />
     <Content Include="Popup_EditEmployee.aspx" />
-    <Content Include="Popup_EditTaxCode.aspx" />
+    <Content Include="Popup_EditTaxCode_IN.aspx" />
     <Content Include="Popup_EditVendor.aspx" />
     <Content Include="GetBusinessPartner.aspx" />
     <Content Include="js\jquery-ui.js" />
@@ -205,12 +205,12 @@
       <DependentUpon>Popup_EditProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="GeneralFunctions.cs" />
-    <Compile Include="Popup_EditTaxCode_Out.aspx.cs">
-      <DependentUpon>Popup_EditTaxCode_Out.aspx</DependentUpon>
+    <Compile Include="Popup_EditTaxCode_OUT.aspx.cs">
+      <DependentUpon>Popup_EditTaxCode_OUT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Popup_EditTaxCode_Out.aspx.designer.cs">
-      <DependentUpon>Popup_EditTaxCode_Out.aspx</DependentUpon>
+    <Compile Include="Popup_EditTaxCode_OUT.aspx.designer.cs">
+      <DependentUpon>Popup_EditTaxCode_OUT.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup_EditCustomer.aspx.cs">
       <DependentUpon>Popup_EditCustomer.aspx</DependentUpon>
@@ -240,12 +240,12 @@
     <Compile Include="Popup_EditEmployee.aspx.designer.cs">
       <DependentUpon>Popup_EditEmployee.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Popup_EditTaxCode.aspx.cs">
-      <DependentUpon>Popup_EditTaxCode.aspx</DependentUpon>
+    <Compile Include="Popup_EditTaxCode_IN.aspx.cs">
+      <DependentUpon>Popup_EditTaxCode_IN.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Popup_EditTaxCode.aspx.designer.cs">
-      <DependentUpon>Popup_EditTaxCode.aspx</DependentUpon>
+    <Compile Include="Popup_EditTaxCode_IN.aspx.designer.cs">
+      <DependentUpon>Popup_EditTaxCode_IN.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup_EditVendor.aspx.cs">
       <DependentUpon>Popup_EditVendor.aspx</DependentUpon>

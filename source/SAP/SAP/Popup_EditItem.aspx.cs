@@ -68,12 +68,13 @@ namespace SAP
                     if (("" + row[0].ToString() + row[1].ToString()).Trim().IndexOf(CategoryFilter.Trim()) >= 0)
                     {
                         dr = gridTable.NewRow();
-                        dr["No"] = i.ToString(); itemsTable.Rows.IndexOf(row);
+                        dr["No"] = i.ToString(); 
+                        itemsTable.Rows.IndexOf(row);
                         dr["Code"] = row[0].ToString();
-                        dr["Name"] = row[1].ToString();
-                        i++;
+                        dr["Name"] = row[1].ToString();                        
                         gridTable.Rows.Add(dr);
                     }
+                    i++;
                 }
                 gridTable.Rows[gridTable.Rows.Count-1]["Selected"] = "checked";
                 listItems.DataSource = gridTable;

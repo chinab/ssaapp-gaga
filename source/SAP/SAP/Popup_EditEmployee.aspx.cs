@@ -72,11 +72,10 @@ namespace SAP
                         dr["Code"] = row[0].ToString();
                         dr["First Name"] = row[1].ToString();
                         dr["Mid Name"] = row[2].ToString();
-                        dr["Last Name"] = row[3].ToString();
-
-                        i++;
+                        dr["Last Name"] = row[3].ToString();                       
                         gridTable.Rows.Add(dr);
                     }
+                    i++;
                 }
                 gridTable.Rows[gridTable.Rows.Count - 1]["Selected"] = "checked";
                 listItems.DataSource = gridTable;

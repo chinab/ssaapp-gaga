@@ -147,9 +147,9 @@
                         <div id="tabs-1" style="overflow:auto; height:300px;">
                             <asp:ListView ID="lvContents" runat="server">
                                 <LayoutTemplate>
-                                    <table class="data_table">                                        
+                                    <table class="data_table">                                                                         
                                         <tr> 
-                                            <th></th>
+                                            <th  id="thButtons" runat="server" style="width:70px"></th>
                                             <th style="width:25px">
                                                 <span>#</span>
                                             </th>                                            
@@ -198,18 +198,18 @@
                                             <th style="width:100px">
                                                 <span>Dimesion 4</span>
                                             </th>
+                                            
                                         </tr>
-                                        <tr id="itemPlaceholder" runat="server">
-                                        </tr>
+                                        <tr id="itemPlaceholder" runat="server"></tr>
                                     </table>
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:ImageButton ID="imgbEdit" runat="server" 
+                                            <asp:linkbutton ID="imgbEdit" runat="server" 
                                                CommandName="Edit" Text="Edit" 
                                                ImageUrl="~/skin/icon/edit_icon_mono.gif" />
-                                            <asp:ImageButton ID="imgbDelete" runat="server" 
+                                            <asp:linkbutton ID="imgbDelete" runat="server" 
                                                CommandName="Delete" Text="Delete" 
                                                ImageUrl="~/skin/icon/delete_icon_mono.gif" 
                                                OnClientClick="return confirm('Are you sure you want to delete this row?');" 
@@ -296,17 +296,19 @@
                                                 <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
+
+                                        
                                     </tr>
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:ImageButton ID="imgbUpdate" runat="server" 
+                                            <asp:linkbutton ID="imgbUpdate" runat="server" 
                                                 CommandName="Update" Text="Update" 
                                                 ImageUrl="~/skin/icon/save_icon_mono.gif" 
                                                 CausesValidation="true" 
                                                 ValidationGroup="vgrpSaveContact"/>
-                                            <asp:ImageButton ID="imgbCancel" runat="server" 
+                                            <asp:linkbutton ID="imgbCancel" runat="server" 
                                                 CommandName="Cancel" Text="Cancel" 
                                                 ImageUrl="~/skin/icon/undo_icon_mono.gif" 
                                                 CausesValidation="false"/>
@@ -397,6 +399,7 @@
                                                 <asp:Image ID="Image13" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
+                                        
                                     </tr>
                                 </EditItemTemplate>
                                 <EmptyDataTemplate>

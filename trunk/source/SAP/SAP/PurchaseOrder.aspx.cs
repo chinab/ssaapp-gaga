@@ -32,9 +32,13 @@ namespace SAP
                 dt.Columns.Add("Whse");
                 dt.Columns.Add("QuantityEnable");
 
-
-                for (int i = 0; i < 5; i++)
-                    dt.Rows.Add(i, "", "", "", "", "", "", "", "", "");
+                dt.Columns.Add("ProfitCode");
+                dt.Columns.Add("CC1");
+                dt.Columns.Add("CC2");
+                dt.Columns.Add("CC3");
+                dt.Columns.Add("CC4");
+                for (int i = 0; i < 10; i++)
+                    dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
@@ -139,9 +143,7 @@ namespace SAP
                             GetDefault defaultWS = new GetDefault();
                             DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
                             DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
-
-                            
-                            
+                           
                             dr["UnitPrice"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["UnitPrice"]);
                             dr["ContractDiscount"] = String.Format("{0:n2}",defaultInfo.Tables[0].Rows[0]["Discount"]);
                             dr["PriceAfterDiscount"] = String.Format("{0:n0}",defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);

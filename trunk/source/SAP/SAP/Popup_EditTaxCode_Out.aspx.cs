@@ -78,9 +78,10 @@ namespace SAP
                             dr["Rate"] = row[1].ToString();
                         else
                              dr["Rate"] = row[2].ToString();
-                         i++;
+                         
                         gridTable.Rows.Add(dr);
                     }
+                    i++;
                 }
 
                 listTaxCodes.DataSource = gridTable;

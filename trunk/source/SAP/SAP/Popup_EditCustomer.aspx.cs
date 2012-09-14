@@ -74,9 +74,10 @@ namespace SAP
                         dr["No"] = i.ToString(); vendorsTable.Rows.IndexOf(row);
                         dr["Code"] = row[0].ToString();
                         dr["Name"] = row[1].ToString();
-                        i++;
+                        
                         gridTable.Rows.Add(dr);
                     }
+                    i++;
                 }
 
                 listVendors.DataSource = gridTable;

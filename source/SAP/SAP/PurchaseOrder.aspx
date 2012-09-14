@@ -144,47 +144,60 @@
                             <li><a href="#tabs-2">Logistics</a></li>
                             <li><a href="#tabs-3">Accounting</a></li>
                         </ul>
-                        <div id="tabs-1">
+                        <div id="tabs-1" style="overflow:auto; height:300px;">
                             <asp:ListView ID="lvContents" runat="server">
                                 <LayoutTemplate>
-                                    <table class="data_table">
-                                        <tr>
+                                    <table class="data_table">                                        
+                                        <tr> 
+                                            <th></th>
                                             <th style="width:25px">
                                                 <span>#</span>
-                                            </th>
-                                             
+                                            </th>                                            
                                             <th  style="width:100px">
                                                 <span>Item No.</span>
                                             </th>                                            
-                                             <th>
+                                             <th  style="width:200px">
                                                 <span>Description</span>
                                             </th>
-                                            <th>
+                                            <th style="width:100px">
                                                 <span>Quantity</span>
                                             </th>
-                                             
-                                            <th>
+                                            <th style="width:100px">
                                                 <span>Unit Price</span>
                                             </th>
-                                            <th>
+                                            <th style="width:100px">
                                                 <span>Discount %</span>
                                             </th>
-                                            <th>
+                                            <th style="width:100px">
                                                 <span>Price after Discount</span>
                                             </th>                                            
-                                            <th>
+                                            <th style="width:100px">
                                                 <span>Total(LC)</span>
                                             </th>
-                                            <th>
+                                            <th style="width:100px">
                                                 <span>Taxcode %</span>
                                             </th>
                                             <th style="display:none">
                                                 <span>Tax Rate %</span>
                                             </th>
-                                            <th>
+                                            <th  style="width:100px">
                                                 <span>Whse</span>
                                             </th>
-                                            
+                                            <th style="width:100px">
+                                                <span>Profit center</span>
+                                            </th>
+                                            <th style="width:100px">
+                                                <span>Dimesion 1</span>
+                                            </th>
+                                            <th style="width:100px">
+                                                <span>Dimesion 2</span>
+                                            </th>
+                                            <th style="width:100px">
+                                                <span>Dimesion 3</span>
+                                            </th>
+                                            <th style="width:100px">
+                                                <span>Dimesion 4</span>
+                                            </th>
                                         </tr>
                                         <tr id="itemPlaceholder" runat="server">
                                         </tr>
@@ -193,9 +206,18 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td>
+                                            <asp:ImageButton ID="imgbEdit" runat="server" 
+                                               CommandName="Edit" Text="Edit" 
+                                               ImageUrl="~/skin/icon/edit_icon_mono.gif" />
+                                            <asp:ImageButton ID="imgbDelete" runat="server" 
+                                               CommandName="Delete" Text="Delete" 
+                                               ImageUrl="~/skin/icon/delete_icon_mono.gif" 
+                                               OnClientClick="return confirm('Are you sure you want to delete this row?');" 
+                                               ToolTip="Delete"/>
+                                        </td>  
+                                        <td>
                                             <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
                                         </td>    
-                                                                        
                                         <td>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("Code") %></asp:Label>
                                             <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
@@ -210,7 +232,6 @@
                                             <asp:TextBox  Enabled='<%#"N".Equals(Eval("QuantityEnable")) ? false : true%>' ID="txtQuantity" runat="server" Text='<%#Eval("Quantity")%>' onkeypress="return Main.integer_textbox_keypress(event);" />
                                             <asp:LinkButton Enabled='<%#"N".Equals(Eval("QuantityEnable")) ? false : true%>' ID="btnQuantityUpdate" Text="u" runat="server" OnClick='btnQuantityUpdate_click' />
                                         </td>
-                                        
                                         <td>
                                             <asp:Label runat="server" ID="lblUnitPrice"><%#Eval("UnitPrice")%></asp:Label>
                                         </td>
@@ -240,11 +261,56 @@
                                         <td style="display:none">
                                             <asp:Label runat="server" ID="Label1"><%#Eval("TaxRate")%></asp:Label>
                                         </td>
-                                        
+                                         <td>
+                                            <asp:Label runat="server" ID="Label2"><%#Eval("ProfitCode")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink2" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
+                                         <td >
+                                            <asp:Label runat="server" ID="Label3"><%#Eval("CC1")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink3" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
+                                         <td >
+                                            <asp:Label runat="server" ID="Label4"><%#Eval("CC2")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink4" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
+                                         <td >
+                                            <asp:Label runat="server" ID="Label5"><%#Eval("CC3")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink5" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="Label6"><%#Eval("CC4")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink6" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <tr>
+                                        <td>
+                                            <asp:ImageButton ID="imgbUpdate" runat="server" 
+                                                CommandName="Update" Text="Update" 
+                                                ImageUrl="~/skin/icon/save_icon_mono.gif" 
+                                                CausesValidation="true" 
+                                                ValidationGroup="vgrpSaveContact"/>
+                                            <asp:ImageButton ID="imgbCancel" runat="server" 
+                                                CommandName="Cancel" Text="Cancel" 
+                                                ImageUrl="~/skin/icon/undo_icon_mono.gif" 
+                                                CausesValidation="false"/>
+                                        </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblNo"><%#Eval("No")%></asp:Label>
                                         </td>  
@@ -267,7 +333,6 @@
                                         <td>
                                             <asp:TextBox runat="server" ID="lblQuantity" Text='<%# Bind("Quantity") %>'></asp:TextBox>                                            
                                         </td>
-                                        
                                         <td>
                                             <asp:Label runat="server" ID="lblUnitPrice"><%#Eval("UnitPrice")%></asp:Label>
                                         </td>
@@ -297,7 +362,41 @@
                                         <td style="display:none">
                                             <asp:Label runat="server" ID="Label1"><%#Eval("TaxRate")%></asp:Label>
                                         </td>
-                                       
+                                       <td>
+                                            <asp:Label runat="server" ID="Label2"><%#Eval("ProfitCode")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink7" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image9" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="Label3"><%#Eval("CC1")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink8" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image10" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="Label4"><%#Eval("CC2")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink9" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image11" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="Label5"><%#Eval("CC3")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink10" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image12" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="Label6"><%#Eval("CC4")%></asp:Label>
+                                            <asp:HyperLink ID="HyperLink11" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                                runat="server">
+                                                <asp:Image ID="Image13" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                            </asp:HyperLink>
+                                        </td>
                                     </tr>
                                 </EditItemTemplate>
                                 <EmptyDataTemplate>
@@ -306,7 +405,6 @@
                                             <th>
                                                 <span>#</span>
                                             </th>
-                                           
                                             <th>
                                                 <span>Item No.</span>
                                             </th>                                            
@@ -316,7 +414,6 @@
                                             <th>
                                                 <span>Quantity</span>
                                             </th>
-                                              
                                             <th>
                                                 <span>Unit Price</span>
                                             </th>
@@ -338,7 +435,21 @@
                                             <th>
                                                 <span>Whse</span>
                                             </th>
-                                            
+                                            <th>
+                                                <span>Profit center</span>
+                                            </th>
+                                            <th>
+                                                <span>Dimesion 1</span>
+                                            </th>
+                                            <th>
+                                                <span>Dimesion 2</span>
+                                            </th>
+                                            <th>
+                                                <span>Dimesion 3</span>
+                                            </th>
+                                            <th>
+                                                <span>Dimesion 4</span>
+                                            </th>
                                         </tr>
                                         <tr>
                                             <td colspan="8">

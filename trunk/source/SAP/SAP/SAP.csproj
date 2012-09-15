@@ -58,7 +58,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\CreateNewUser.aspx" />
     <Content Include="Admin\UserProfiles.aspx" />
     <Content Include="ARInvoice_VHF.aspx" />
     <Content Include="Popup_EditProject.aspx" />
@@ -192,13 +191,6 @@
     <Content Include="Homepage.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\CreateNewUser.aspx.cs">
-      <DependentUpon>CreateNewUser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\CreateNewUser.aspx.designer.cs">
-      <DependentUpon>CreateNewUser.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\ProfileCommon.cs" />
     <Compile Include="Admin\UserProfiles.aspx.cs">
       <DependentUpon>UserProfiles.aspx</DependentUpon>

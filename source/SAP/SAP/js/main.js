@@ -44,7 +44,9 @@ Main = {
         }
         ////
         if (window.parent != null || window.parent != undefined) {
-            window.parent.Main.resizeIframe($('body').height());
+            if ($('body').height()>0) {
+                window.parent.Main.resizeIframe($('body').height());
+            }
         }
 
     },
@@ -67,7 +69,9 @@ Main = {
         }
         ////
         if (window.parent != null || window.parent != undefined) {
-            window.parent.Main.resizeIframe($('body').height());
+            if ($('body').height() > 0) {
+                window.parent.Main.resizeIframe($('body').height());
+            }
         }
     },
     resizeIframe: function (newHeight) {
@@ -83,7 +87,7 @@ Main = {
         this.widthDialog = _width;
         this.heightDialog = _height;
         $('#dialogFrame').dialog('open');
-        //$('#dialogFrame > #iframeItem').remove();
+        $('#dialogFrame > #iframeItem').empty();
         $('#dialogFrame > #iframeItem').attr('src', url + (param == '' || param == undefined ? '' : ("?" + param)));
     },
     openDialog: function (url, param) {

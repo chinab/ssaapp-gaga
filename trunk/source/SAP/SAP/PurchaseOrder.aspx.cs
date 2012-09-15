@@ -234,7 +234,7 @@ namespace SAP
 
         protected void setDefaultItemValue(DataRow row)
         {
-            row["No"] = "";
+            row["No"] = dt.Rows.Count;
             row["Code"] = "";
             row["Description"] = "";
             row["Quantity"] = "";

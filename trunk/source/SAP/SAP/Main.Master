@@ -90,6 +90,18 @@
                 <div>
                     <h3>
                         <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;User Management</a></h3>
+                    <div class="menubutton">
+                        <ul>
+                            <li><a href="/Admin/UserProfiles.aspx">Your Profiles</a></li>
+                            <li><a href="/Admin/CreateNewUser.aspx">Create New User</a></li>
+             
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>
+                        <a href="#">
                             <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Administration</a></h3>
                     <div class="menubutton">
                         <ul>
@@ -165,12 +177,12 @@
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Sales Quotation</a></li>
-                            <li><a href="PurchaseOrder.aspx">Sales Order</a></li>
+                            <li><a href="/PurchaseOrder.aspx">Sales Order</a></li>
                             <li><a href="#">Deliver</a></li>
                             <li><a href="#">Return</a></li>
                             <li><a href="#">A/R Down Payment Request</a></li>
                             <li><a href="#">A/R Down Payment Invoice</a></li>
-                            <li><a href="ARInvoice_VHF.aspx">A/R Invoice</a></li>
+                            <li><a href="/ARInvoice_VHF.aspx">A/R Invoice</a></li>
                             <li><a href="#">A/R Invoice + Payment</a></li>
                             <li><a href="#">A/R Credit Memo</a></li>
                             <li><a href="#">A/P Reserver Invoice</a></li>
@@ -191,7 +203,7 @@
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Purchase Quotation</a></li>
-                            <li><a href="PurchaseOrder.aspx">Purchase Order</a></li>
+                            <li><a href="/PurchaseOrder.aspx">Purchase Order</a></li>
                             <li><a href="#">Goods Receipt PO</a></li>
                             <li><a href="#">Goods Return</a></li>
                             <li><a href="#">A/P Down Payment Request</a></li>

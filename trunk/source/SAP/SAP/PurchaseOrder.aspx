@@ -148,7 +148,7 @@
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" OnClick="_btnAddRecord_Click" />
                             <br />
                             <asp:ListView ID="lvContents" runat="server" OnItemInserted="lvContents_ItemInserted"
-                                OnItemInserting="lvContents_ItemInserting" OnItemCommand="lvContents_ItemCommand">
+                                OnItemInserting="lvContents_ItemInserting" OnItemCommand="lvContents_ItemCommand" OnItemEditing="lvContents_ItemEditing">
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
@@ -211,7 +211,7 @@
                                     <tr>
                                         <td>
                                             <asp:LinkButton ID="imgbEdit" runat="server" CommandName="Edit" Text="Edit" ImageUrl="~/skin/icon/edit_icon_mono.gif" />
-                                            <asp:LinkButton ID="imgbDelete" runat="server" CommandName="Delete" Text="Delete"
+                                            <asp:LinkButton ID="imgbDelete" runat="server" CommandName="DeleteItem" Text="Delete"
                                                 ImageUrl="~/skin/icon/delete_icon_mono.gif" OnClientClick="return confirm('Are you sure you want to delete this row?');"
                                                 ToolTip="Delete" />
                                         </td>
@@ -300,9 +300,9 @@
                                 <EditItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Update" Text="Update"
+                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="UpdateItem" Text="Update"
                                                 ImageUrl="~/skin/icon/save_icon_mono.gif" CausesValidation="true" ValidationGroup="vgrpSaveContact" />
-                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="Cancel" Text="Cancel"
+                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="CancelUpdate" Text="Cancel"
                                                 ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />
                                         </td>
                                         <td>

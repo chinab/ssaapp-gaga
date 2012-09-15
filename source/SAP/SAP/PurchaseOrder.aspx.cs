@@ -31,7 +31,8 @@ namespace SAP
                 dt.Columns.Add("TaxRate");
                 dt.Columns.Add("Whse");
                 dt.Columns.Add("QuantityEnable");
-
+                dt.Columns.Add("PromoEnable");
+                
                 dt.Columns.Add("ProfitCode");
                 dt.Columns.Add("CC1");
                 dt.Columns.Add("CC2");
@@ -390,6 +391,9 @@ namespace SAP
             this.lvContents.InsertItemPosition = InsertItemPosition.FirstItem;
             this.btnAddRecord.Enabled = false;
             this.lvContents.EditIndex = -1;
+
+            this.lvContents.DataSource = dt;
+            this.lvContents.DataBind();
         }
 
         protected void lvContents_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -400,10 +404,42 @@ namespace SAP
                     this._cancelAddNew();
                     this.lvContents.DataBind();
                     break;
+                case "CancelUpdate":
+                    this.lvContents.EditIndex = -1;
+                    this.lvContents.DataSource = dt;
+                    this.lvContents.DataBind();
+                    break;
+                case "UpdateItem":
+                    // update new data to dt
+                    // blah blah blah
+                    this.lvContents.EditIndex = -1;
+                    this.lvContents.DataSource = dt;
+                    this.lvContents.DataBind();
+                    break;
+                case "DeleteItem":
+                    // delete data and update dt
+                    // blah blah blah
+                    dt.Rows.RemoveAt(0);// code for dummy
+                    this.lvContents.EditIndex = -1;
+                    this.lvContents.DataSource = dt;
+                    this.lvContents.DataBind();
+                    break;
+                    
                 default:
                     break;
             }
         }
+
+        protected void lvContents_ItemEditing(object sender, ListViewEditEventArgs e)
+        {
+            this.lvContents.EditIndex = e.NewEditIndex;
+            this.lvContents.DataSource = dt;
+            this.lvContents.DataBind();
+        }
+
+        #region edit item
+
+        #endregion
 
         #region insert item
         protected void lvContents_ItemInserted(object sender, ListViewInsertedEventArgs e)
@@ -416,21 +452,26 @@ namespace SAP
             DataRow newRow = dt.NewRow();
             setDefaultItemValue(newRow);
             dt.Rows.Add(newRow);
+
+
             this.lvContents.DataSource = dt;
             this.lvContents.DataBind();
+            this._cancelAddNew();
         }
         #endregion
 
         protected void imgbCancel_CancelAddNew(object sender, EventArgs e)
         {
+            this.lvContents.DataSource = dt;
             this._cancelAddNew();
         }
 
         private void _cancelAddNew()
         {
             this.lvContents.InsertItemPosition = InsertItemPosition.None;
-            this.lvContents.EditIndex = -1;
             this.btnAddRecord.Enabled = true;
+
+            this.lvContents.DataBind();
         }
         #endregion
 

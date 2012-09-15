@@ -37,8 +37,8 @@ namespace SAP
                 dt.Columns.Add("CC2");
                 dt.Columns.Add("CC3");
                 dt.Columns.Add("CC4");
-                for (int i = 0; i < 10; i++)
-                    dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                //for (int i = 0; i < 10; i++)
+                //    dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 
                 this.lvContents.DataSource = dt;
                 this.lvContents.DataBind();
@@ -125,7 +125,7 @@ namespace SAP
                 Int32 itemNo = 0;
                 GeneralFunctions Newformat = new GeneralFunctions();
                 switch (this.Request["__EVENTARGUMENT"].ToString())
-                {                        
+                {
                     case "EditItemCallBack":
                         ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
@@ -143,10 +143,10 @@ namespace SAP
                             GetDefault defaultWS = new GetDefault();
                             DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
                             DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
-                           
+
                             dr["UnitPrice"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["UnitPrice"]);
-                            dr["ContractDiscount"] = String.Format("{0:n2}",defaultInfo.Tables[0].Rows[0]["Discount"]);
-                            dr["PriceAfterDiscount"] = String.Format("{0:n0}",defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);
+                            dr["ContractDiscount"] = String.Format("{0:n2}", defaultInfo.Tables[0].Rows[0]["Discount"]);
+                            dr["PriceAfterDiscount"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);
                             dr["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
                             dr["TaxRate"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
                             dr["Whse"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
@@ -223,8 +223,8 @@ namespace SAP
                         {
                             this.txtOwner.Text = employee.FirstName + " " + employee.MidName + " " + employee.LastName;
                         }
-                        break;              
-               default:
+                        break;
+                    default:
                         break;
                 }
             }
@@ -257,7 +257,7 @@ namespace SAP
 
                     DataRow row = dt.Rows[i];
                     String itemcode = row["Code"].ToString();
-                    
+
                     if (!String.IsNullOrEmpty(itemcode))
                     {
                         String des = row["Description"].ToString();
@@ -372,17 +372,61 @@ namespace SAP
                 LinkButton btnQuantityUpdate = item.FindControl("btnQuantityUpdate") as LinkButton;
 
                 if (btnQuantityUpdate != null && btnQuantityUpdate == sender)
-                {                    
+                {
                     TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
                     Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
                     dt.Rows[item.DataItemIndex]["Quantity"] = geIntFromObject(txtQuantity.Text);
                     updateTableTotalPrice(dt);
                     this.lvContents.DataSource = dt;
                     this.lvContents.DataBind();
-  
+
                     break;
                 }
             }
+        }
+
+        protected void _btnAddRecord_Click(object sender, EventArgs e)
+        {
+            this.lvContents.InsertItemPosition = InsertItemPosition.FirstItem;
+            this.btnAddRecord.Enabled = false;
+            this.lvContents.EditIndex = -1;
+        }
+
+        protected void lvContents_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "CancelAddNew":
+                    this._cancelAddNew();
+                    this.lvContents.DataBind();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #region insert item
+        protected void lvContents_ItemInserted(object sender, ListViewInsertedEventArgs e)
+        {
+            this._cancelAddNew();
+        }
+
+        protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
+        {
+            // do something here
+        }
+        #endregion
+
+        protected void imgbCancel_CancelAddNew(object sender, EventArgs e)
+        {
+            this._cancelAddNew();
+        }
+
+        private void _cancelAddNew()
+        {
+            this.lvContents.InsertItemPosition = InsertItemPosition.None;
+            this.lvContents.EditIndex = -1;
+            this.btnAddRecord.Enabled = true;
         }
         #endregion
 

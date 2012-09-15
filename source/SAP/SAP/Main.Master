@@ -79,6 +79,7 @@
         </ul>
         <div id="login-logout">
             <asp:LoginName ID="LoginName1" runat="server" />
+            <a href="/Admin/UserProfiles.aspx">User Management</a>            
             <asp:LoginStatus ID="LoginStatus1" runat="server" />
         </div>
     </div>
@@ -87,18 +88,6 @@
     <div id="splitterContainer">
         <div id="leftPane">
             <div id="accordion">
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;User Management</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="/Admin/UserProfiles.aspx">Your Profiles</a></li>
-                            <li><a href="/Admin/CreateNewUser.aspx">Create New User</a></li>
-             
-                        </ul>
-                    </div>
-                </div>
                 <div>
                     <h3>
                         <a href="#">

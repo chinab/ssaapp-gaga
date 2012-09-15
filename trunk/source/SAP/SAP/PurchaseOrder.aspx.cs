@@ -413,7 +413,11 @@ namespace SAP
 
         protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
         {
-            // do something here
+            DataRow newRow = dt.NewRow();
+            setDefaultItemValue(newRow);
+            dt.Rows.Add(newRow);
+            this.lvContents.DataSource = dt;
+            this.lvContents.DataBind();
         }
         #endregion
 

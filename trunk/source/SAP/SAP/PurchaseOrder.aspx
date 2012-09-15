@@ -148,7 +148,8 @@
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" OnClick="_btnAddRecord_Click" />
                             <br />
                             <asp:ListView ID="lvContents" runat="server" OnItemInserted="lvContents_ItemInserted"
-                                OnItemInserting="lvContents_ItemInserting" OnItemCommand="lvContents_ItemCommand" OnItemEditing="lvContents_ItemEditing">
+                                OnItemInserting="lvContents_ItemInserting" OnItemCommand="lvContents_ItemCommand"
+                                OnItemEditing="lvContents_ItemEditing">
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
@@ -810,6 +811,8 @@
                         <asp:Button ID="btnCancel" Text="Cancel" runat="server" />
                     </div>
                     <div class="right">
+                        <asp:Button ID="btnCopyFrom" Text="Copy From" runat="server" />
+                        <asp:Button ID="btnCopyTo" Text="Copy To" runat="server" />
                     </div>
                     <div class="clear">
                     </div>

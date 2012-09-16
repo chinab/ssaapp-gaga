@@ -18,6 +18,9 @@ Public Class Connection
             strConnect = "SAPConnect"
             sCon = System.Configuration.ConfigurationSettings.AppSettings.Get(strConnect)
             MyArr = sCon.Split(";")
+            If IsNothing(PublicVariable.oCompany) Then
+                PublicVariable.oCompany = New SAPbobsCOM.Company
+            End If
             PublicVariable.oCompany.CompanyDB = MyArr(0).ToString()
             PublicVariable.oCompany.UserName = MyArr(1).ToString()
             PublicVariable.oCompany.Password = MyArr(2).ToString()
@@ -34,7 +37,7 @@ Public Class Connection
             sCon = "server= " + MyArr(3).ToString() + ";database=" + MyArr(0).ToString() + " ;uid=" + MyArr(4).ToString() + "; pwd=" + MyArr(5).ToString() + ";"
             sConnSAP = New SqlConnection(sCon)
         Catch ex As Exception
-            Dim file As System.IO.StreamWriter = New System.IO.StreamWriter("C:\\Error\\Webservice_SalesCall\\SetDB.txt", True)
+            Dim file As System.IO.StreamWriter = New System.IO.StreamWriter("C:\\SetDB.txt", True)
             file.WriteLine(ex)
             file.Close()
         End Try
@@ -52,7 +55,7 @@ Public Class Connection
                 Return True
             End If
         Catch ex As Exception
-            Dim file As System.IO.StreamWriter = New System.IO.StreamWriter("C:\\Error\\Webservice_SalesCall\\connectDB.txt", True)
+            Dim file As System.IO.StreamWriter = New System.IO.StreamWriter("C:\\connectDB.txt", True)
             file.WriteLine(ex)
             file.Close()
             Throw ex
@@ -92,7 +95,7 @@ Public Class Connection
     Public Shared Sub WriteLog(ByVal Str As String)
         Dim oWrite As IO.StreamWriter
         Dim FilePath As String
-        FilePath = "C:\\SBOWS]\logfile.txt"
+        FilePath = "C:\\SBOWS.txt"
 
         If IO.File.Exists(FilePath) Then
             oWrite = IO.File.AppendText(FilePath)

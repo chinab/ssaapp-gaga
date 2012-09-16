@@ -68,4 +68,12 @@ Public Class GetDefault
             Return a.GetPromotion(UserID, ItemCode, CardCode, Quantity, DocDate, Amount)
         End If              
     End Function
+    <WebMethod()> _
+    Public Function GetCopyFromTo(Type As Integer, ObjType As String) As DataSet
+        Dim a As New SAP_Functions
+        'Type=1: Copy To
+        'Type=2: Copy From
+        'ObjType=22: Purchase Order
+        Return a.GetGopyFromTo(Type, ObjType)
+    End Function
 End Class

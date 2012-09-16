@@ -262,4 +262,69 @@
             Return Nothing
         End Try
     End Function
+    Public Function GetGopyFromTo(Type As Integer, ObjType As String) As DataSet
+        Dim ds = New DataSet
+        ds.Tables.Add()
+        ds.Tables(0).Columns.Add("Code", GetType(String))
+        ds.Tables(0).Columns.Add("Name", GetType(String))
+        Dim dr As DataRow
+
+        Select Case Type
+            Case 1 ' Copy To
+                Select Case ObjType
+                    Case "22"
+                        dr = ds.Tables(0).NewRow
+                        dr("Code") = "AA"
+                        dr("Name") = "GRPO"
+                        ds.Tables(0).Rows.Add(dr)
+
+                        dr = ds.Tables(0).NewRow
+                        dr("Code") = "AA"
+                        dr("Name") = "AP Invoice"
+                        ds.Tables(0).Rows.Add(dr)
+                End Select
+            Case 2 ' Copy From
+                Select Case ObjType
+                    Case "22"
+                        dr = ds.Tables(0).NewRow
+                        dr("Code") = "AA"
+                        dr("Name") = "Purchase Quotation"
+                        ds.Tables(0).Rows.Add(dr)
+                End Select
+        End Select
+        Return ds
+    End Function
+    Public Function GetMaxDocEntry(ObjType As String, UserID As String) As String
+        Dim dt As DataSet
+        Dim Str As String = ""
+        Dim connect As New Connection()
+        Select Case ObjType
+            Case "22"
+                dt = connect.ObjectGetAll_Query_SAP("select MAX(DocEntry) DocEntry from OPOR")
+
+        End Select
+        If IsNothing(dt) Then
+            Return ""
+        End If
+        If dt.Tables(0).Rows.Count > 0 Then
+            Return dt.Tables(0).Rows(0).Item("DocEntry")
+        Else
+            Return ""
+        End If
+
+    End Function
+    Public Function ReturnMessage(ErrCode As Integer, ErrMsg As String) As DataSet
+        Dim dtJE = New DataSet
+        dtJE.Tables.Add()
+        dtJE.Tables(0).Columns.Add("ErrCode", GetType(Integer))
+        dtJE.Tables(0).Columns.Add("ErrMsg", GetType(String))
+
+        Dim dr As DataRow
+        dr = dtJE.Tables(0).NewRow
+        dr("ErrCode") = ErrCode
+        dr("ErrMsg") = ErrMsg
+        dtJE.Tables(0).Rows.Add(dr)
+
+        Return dtJE
+    End Function
 End Class

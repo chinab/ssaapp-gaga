@@ -16,17 +16,20 @@ Public Class Transaction
     Dim connect As New Connection()
 
     <WebMethod()> _
-    Public Function CreateMarketingDocument(ByVal strXml As String) As String
+    Public Function CreateMarketingDocument(ByVal strXml As String) As DataSet
+        Dim b As New SAP_Functions
         Try
             Dim sStr As String = "Operation Completed Successfully!"
             If PublicVariable.Simulate Then
-                Return sStr
+                Dim a As New Simulation
+                Return a.Simulate_CreateTransaction()
             Else
+
                 Dim oSO As SAPbobsCOM.Documents
                 If Connection.bConnect = False Then
                     connect.setDB()
                     If Not connect.connectDB() Then
-                        Return "Connect to SAP failed!"
+                        Return b.ReturnMessage(-1, "Connect SAP failed")
                     End If
                 End If
                 PublicVariable.oCompany.XMLAsString = True
@@ -34,29 +37,28 @@ Public Class Transaction
                 lErrCode = oSO.Add()
                 If lErrCode <> 0 Then
                     PublicVariable.oCompany.GetLastError(lErrCode, sErrMsg)
-                    sStr = sErrMsg
-                    'Else                    
-                    'Dim a As New SAP_Functions
-                    'Dim DocKey As String = a.GetLastKey(0, 13)                    
-                    'a.Create_IncommingPayment(DocKey)
-                    'Return sStr
+                    Return b.ReturnMessage(lErrCode, sErrMsg)
+                Else
+                    Return b.ReturnMessage(lErrCode, "Operation Sucessful!")
                 End If
             End If
-            
-            Return sStr
+
         Catch ex As Exception
-            Return ex.ToString
+            Return b.ReturnMessage(-1, ex.ToString)
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetMarketingDocument(DocType As String, DocEntry As Integer) As String
+    Public Function GetMarketingDocument(DocType As String, DocEntry As Integer, UserID As String) As String
         'First: DocEntry=1
-        'Last: Set Docentry=-1
-
+        'Last: Set Docentry=0
+        'Next: current docentry+1, if current docentry is null, go last
+        'Prev: current docentry-1, if current docentry is null, go first
+        'DocType=22: Purchase Order
         Try
             Dim sStr As String = ""
             If PublicVariable.Simulate Then
-                sStr = "Operation Successfull!"
+                Dim a As New Simulation
+                Return a.Simulate_OPOR
             Else
                 Dim oDocment As SAPbobsCOM.Documents
                 If Connection.bConnect = False Then
@@ -65,13 +67,9 @@ Public Class Transaction
                         Return "Can't connect to SAP"
                     End If
                 End If
-                If DocEntry = -1 Then
-                    Dim dt As DataSet
-                    'hardcode opor
-                    dt = connect.ObjectGetAll_Query_SAP("select MAX(DocEntry) DocEntry from OPOR")
-                    If dt.Tables(0).Rows.Count > 0 Then
-                        DocEntry = dt.Tables(0).Rows(0).Item("DocEntry")
-                    End If
+                If DocEntry = 0 Then
+                    Dim b As New SAP_Functions
+                    DocEntry = b.GetMaxDocEntry(DocType, UserID)
                 End If
                 PublicVariable.oCompany.XMLAsString = True
                 PublicVariable.oCompany.XmlExportType = SAPbobsCOM.BoXmlExportTypes.xet_ValidNodesOnly

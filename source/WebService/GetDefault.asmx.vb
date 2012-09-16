@@ -76,4 +76,14 @@ Public Class GetDefault
         'ObjType=22: Purchase Order
         Return a.GetGopyFromTo(Type, ObjType)
     End Function
+    <WebMethod()> _
+    Public Function GetConnection() As Integer
+        Dim connect As New Connection()
+        connect.setDB()
+        If Not connect.connectDB() Then
+            Return -1
+        Else
+            Return 0
+        End If
+    End Function
 End Class

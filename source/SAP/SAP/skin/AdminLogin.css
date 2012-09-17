@@ -6,7 +6,7 @@
 div#login-form
 {
     margin: 100px auto;
-    width: 300px;
+    width: 354px;
 }
 .clear
 {
@@ -20,9 +20,9 @@ table
 #adminlogin
 {
     margin: 100px auto;
-    width: 358px;
+    width: 483px;
     height: 207px;
-    background: url("images/login_background.png") no-repeat;
+    background: url("images/SAP_Login.png") no-repeat;
     color: #666;
     padding: 90px 0 0;
 }
@@ -43,7 +43,7 @@ table
     font-weight: bold;
     padding: 5px;
     text-align: right;
-    width: 100px;
+    width: 240px;
 }
 .loginrow
 {

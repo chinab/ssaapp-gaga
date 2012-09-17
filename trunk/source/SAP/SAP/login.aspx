@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div id="login-form">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Login ID="Login1" runat="server" Width="357px">
             <LayoutTemplate>
                 <div id="adminlogin">
@@ -31,23 +32,18 @@
                         <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
                             ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                     </div>
-                    
-                    <div>
+                    <div style="font-family: Arial; font-size: x-small; color: #FF0000; padding-right: 5px;" 
+                        dir="rtl">
                         <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                     </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div">
-                    <td></td>
-                    <td>
-                    <th style="width=20px"></th>
-                        <asp:ImageButton ID="Button1" runat="server" AlternateText="button" 
-                            Height="16px" ImageUrl="~/skin/images/SAP_Button.png" CommandName="Login" />
-                        <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button" 
-                            Height="16px" ImageUrl="~/skin/images/SAP_Button.png" CommandName="Login"/>
-                            </td>
+                    <div style="height: 80px"></div>
+                    <div dir="rtl" style="padding-right: 10px">
+                     <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button" 
+                            CommandName="Login" Height="18px"  Width="89px"
+                            ImageUrl="~/skin/images/SAP_ChangeCompany.png" />
+                        &nbsp;<asp:ImageButton ID="Button1" runat="server" AlternateText="button" 
+                            CommandName="Login" Height="18px" Width="65px" ImageUrl="~/skin/images/SAP_OK.png" />
+                        &nbsp;
                      </div>
                 </div>
             </LayoutTemplate>

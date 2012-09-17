@@ -32,7 +32,8 @@
                         <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
                             ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                     </div>
-                    <div style="font-family: Arial; font-size: x-small; color: #FF0000; padding-right: 5px;" 
+
+                    <div style="font-family: Arial; font-size: x-small; color: #FF0000; padding-right: 10px;" 
                         dir="rtl">
                         <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                     </div>

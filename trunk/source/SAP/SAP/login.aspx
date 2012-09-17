@@ -9,14 +9,16 @@
 <body>
     <form id="form1" runat="server">
     <div id="login-form">
-        <asp:Login ID="Login1" runat="server">
+        <asp:Login ID="Login1" runat="server" Width="357px">
             <LayoutTemplate>
                 <div id="adminlogin">
+                <br />
                     <div class="loginrow">
                         <div class="label4login">
                             <span>Username</span>
                         </div>
-                        <asp:TextBox ID="UserName" runat="server" size="15"></asp:TextBox>
+                        <asp:TextBox ID="UserName" runat="server" size="15" BackColor="#FFFF99" 
+                            Width="170px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
                             ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                     </div>
@@ -24,23 +26,34 @@
                         <div class="label4login">
                             <span>Password</span>
                         </div>
-                        <asp:TextBox ID="Password" runat="server" TextMode="Password" size="15"></asp:TextBox>
+                        <asp:TextBox ID="Password" runat="server" TextMode="Password" size="15" 
+                            BackColor="#FFFF99" Width="169px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
                             ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                     </div>
-                    <div class="loginrow">
-                        <div id="login_button">
-                            <asp:LinkButton ID="btnLogin" runat="server" CommandName="Login" ValidationGroup="Login1">Login</asp:LinkButton>
-                        </div>
+                    
+                    <div>
+                        <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                     </div>
-                    <div class="clear">
-                    </div>
-                    <div class="loginrow">
-                        <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div">
+                    <td></td>
+                    <td>
+                    <th style="width=20px"></th>
+                        <asp:ImageButton ID="Button1" runat="server" AlternateText="button" 
+                            Height="16px" ImageUrl="~/skin/images/SAP_Button.png" CommandName="Login" />
+                        <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button" 
+                            Height="16px" ImageUrl="~/skin/images/SAP_Button.png" CommandName="Login"/>
+                            </td>
+                     </div>
                 </div>
             </LayoutTemplate>
         </asp:Login>
     </div>
     </form>
+    
 </body>
 </html>

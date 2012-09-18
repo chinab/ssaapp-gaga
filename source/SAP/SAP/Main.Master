@@ -97,7 +97,15 @@
                             <li><a href="#">Choose company</a></li>
                             <li><a href="#">Exchange Rates and Indexes</a></li>
                             <li><a href="#">System Initialization</a></li>
-                            <li><a href="#">Setup</a></li>
+                            
+                            <%--<h3> <a href="#">Setup</a></h3>
+                            <div class="menubutton">
+                                <ul>
+                                    <li><a href="#">General</a></li>
+                                    <li><a href="#">Financials</a></li>
+                                </ul>
+                            </div>--%>
+                            
                             <li><a href="#">Data Import/Export</a></li>
                             <li><a href="#">Utilities</a></li>
                             <li><a href="#">Approval Procedures</a></li>
@@ -214,7 +222,7 @@
                             <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Business Partners</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Bussiness Partner Master Data</a></li>
+                            <li><a href="/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
                             <li><a href="#">Activity</a></li>
                             <li><a href="#">Internal Reconciliations</a></li>
                             <li><a href="#">Business Parter Reports</a></li>

@@ -60,6 +60,8 @@
   <ItemGroup>
     <Content Include="Admin\UserProfiles.aspx" />
     <Content Include="ARInvoice_VHF.aspx" />
+    <Content Include="BusinessPartnerMaster.aspx" />
+    <Content Include="Popup_EditCostCenter.aspx" />
     <Content Include="Popup_EditProject.aspx" />
     <Content Include="Popup_EditTaxCode_OUT.aspx" />
     <Content Include="Popup_EditCustomer.aspx" />
@@ -76,6 +78,7 @@
     <Content Include="Popup_EditItem.aspx" />
     <Content Include="Popup_EditWarehouse.aspx" />
     <Content Include="readme.txt" />
+    <Content Include="SalesOpportunity.aspx" />
     <Content Include="skin\AdminLogin.css" />
     <Content Include="skin\icon\banking.png" />
     <Content Include="skin\icon\Bin - Full.png" />
@@ -206,6 +209,20 @@
     <Compile Include="ARInvoice_VHF.aspx.designer.cs">
       <DependentUpon>ARInvoice_VHF.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BusinessPartnerMaster.aspx.cs">
+      <DependentUpon>BusinessPartnerMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessPartnerMaster.aspx.designer.cs">
+      <DependentUpon>BusinessPartnerMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup_EditCostCenter.aspx.cs">
+      <DependentUpon>Popup_EditCostCenter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditCostCenter.aspx.designer.cs">
+      <DependentUpon>Popup_EditCostCenter.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Popup_EditProject.aspx.cs">
       <DependentUpon>Popup_EditProject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -305,6 +322,13 @@
     </Compile>
     <Compile Include="Popup_EditWarehouse.aspx.designer.cs">
       <DependentUpon>Popup_EditWarehouse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SalesOpportunity.aspx.cs">
+      <DependentUpon>SalesOpportunity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalesOpportunity.aspx.designer.cs">
+      <DependentUpon>SalesOpportunity.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestXML.aspx.cs">
       <DependentUpon>TestXML.aspx</DependentUpon>

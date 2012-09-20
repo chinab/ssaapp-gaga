@@ -21,8 +21,8 @@
                                     <span>Code</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
-                                    <asp:DropDownList ID="ddlBPType" runat="server" Width="114px">
+                                    <asp:TextBox ID="txtVendor" runat="server" Width="103px"></asp:TextBox>
+                                    <asp:DropDownList ID="ddlBPType" runat="server" Width="82px">
                                         <asp:ListItem Text="Customer" Value="C"></asp:ListItem>
                                         <asp:ListItem Text="Vendor" Value="S"></asp:ListItem>
                                         <asp:ListItem Text="Lead" Value="L"></asp:ListItem>
@@ -34,7 +34,7 @@
                                     <span>Name</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtName0" runat="server" Width="243px"></asp:TextBox>
+                                    <asp:TextBox ID="txtName0" runat="server" Width="189px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -42,7 +42,7 @@
                                     <span>Foreign Name</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtName" runat="server" Width="242px"></asp:TextBox>
+                                    <asp:TextBox ID="txtName" runat="server" Width="188px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -50,7 +50,7 @@
                                     <span>Group</span>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlContactPerson" runat="server" Width="250px" 
+                                    <asp:DropDownList ID="ddlContactPerson" runat="server" Width="193px" 
                                         onselectedindexchanged="ddlContactPerson_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
@@ -60,7 +60,7 @@
                                     <span>Federal Tax ID</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtRefNo" runat="server" Width="242px"></asp:TextBox>
+                                    <asp:TextBox ID="txtRefNo" runat="server" Width="187px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -68,7 +68,7 @@
                                     <span>Currency</span>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlCurrencyDetail" runat="server"  Width="253px">
+                                    <asp:DropDownList ID="ddlCurrencyDetail" runat="server"  Width="193px">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -89,7 +89,7 @@
                         </table>
                         <table class="detail_table">
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="width: 98px">
                                     <span>Account Balance</span>
                                 </td>
                                 <td>
@@ -97,7 +97,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="width: 98px">
                                     <span>Deliveries</span>
                                 </td>
                                 <td>
@@ -105,7 +105,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="width: 98px">
                                     <span>Orders</span>
                                 </td>
                                 <td>
@@ -113,7 +113,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="width: 98px">
                                     <span>Opportunities</span>
                                 </td>
                                 <td>
@@ -121,7 +121,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="width: 98px">
                                     &nbsp;</td>
                                 <td>
                                     &nbsp;</td>

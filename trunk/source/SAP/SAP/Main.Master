@@ -148,21 +148,8 @@
                     </h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Sales Quotation</a></li>
-                            <li><a href="#">Sales Order</a></li>
-                            <li><a href="#">Delivery</a></li>
-                            <li><a href="#">Return</a></li>
-                            <li><a href="#">A/R Down Payment Invoice</a></li>
-                            <li><a href="#">A/R Invoice</a></li>
-                            <li><a href="#">A/R Invoice + Payment</a></li>
-                            <li><a href="#">A/R Credit Memo</a></li>
-                            <li><a href="#">A/R Reserve Invoice</a></li>
-                            <li><a href="#">Document Generetion Wizard</a></li>
-                            <li><a href="#">Recurring Transactions</a></li>
-                            <li><a href="#">Recurring Transaction Templates</a></li>
-                            <li><a href="#">Document Printing</a></li>
-                            <li><a href="#">Dunning Wizard</a></li>
-                            <li><a href="#">Sales Reports</a></li>
+                            <li><a href="/SalesOpportunity.aspx">Sales Opportunity</a></li>
+                            <li><a href="#">Sales Opportunities Reports</a></li>                            
                         </ul>
                     </div>
                 </div>

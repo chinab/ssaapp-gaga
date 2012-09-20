@@ -20,16 +20,19 @@ img
 .left
 {
     float: left;
+    width:49%;
 }
 .right
 {
     float: right;
+    width:49%;
 }
 /*************************/
 #header
 {
     background: #c4dcfb;
     height: 5%;
+    
 }
 #splitterContainer
 {
@@ -314,8 +317,8 @@ table.data_table
     border: solid 1px #99BBE8;
     border-collapse: collapse;
     table-layout: fixed;
-    width: 100%;
-    margin-bottom: 1px;
+    width: 100%; /*background:#d5e7f5 none;*/
+   
 }
 table.data_table tr td
 {

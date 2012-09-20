@@ -36,7 +36,7 @@
                     <div style="font-family: Arial; font-size: x-small; color: #FF0000; padding-right: 10px;" 
                         dir="rtl">
                         <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
-                    </div>
+                        &nbsp;</div>
                     <div style="height: 80px"></div>
                     <div dir="rtl" style="padding-right: 10px">
                      <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button" 

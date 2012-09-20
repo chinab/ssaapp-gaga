@@ -41,7 +41,7 @@
                                     <span>Contact Person</span>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlContactPerson" Width="88%" runat="server">
+                                    <asp:DropDownList ID="ddlContactPerson" runat="server">
                                     </asp:DropDownList>
                                 </td>
                             </tr>

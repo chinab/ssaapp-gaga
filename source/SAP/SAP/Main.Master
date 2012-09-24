@@ -49,37 +49,31 @@
     <div id="menu-action">
         <ul>
             <li><a href="#">
-                <img alt="" src="/skin/icon/Windows Explorer.png" /></a></li>
+                <img alt="" src="/skin/icon/preview.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/Windows 2.png" /></a></li>
+                <img alt="" src="/skin/icon/print.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/Time.png" /></a></li>
+                <img alt="" src="/skin/icon/email.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/Search.png" /></a></li>
+                <img alt="" src="/skin/icon/excel.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/Photocamera.png" /></a></li>
+                <img alt="" src="/skin/icon/pdf.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/Outlook Express.png" /></a></li>
+                <img alt="" src="/skin/icon/word.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/My Computer 2.png" /></a></li>
+                <img alt="" src="/skin/icon/first.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/Internet.png" /></a></li>
+                <img alt="" src="/skin/icon/previous.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/ICQ.png" /></a></li>
+                <img alt="" src="/skin/icon/next.png" /></a></li>
             <li><a href="#">
-                <img alt="" src="/skin/icon/IconX.png" /></a></li>
-            <li><a href="#">
-                <img alt="" src="/skin/icon/Favorites.png" /></a></li>
-            <li><a href="#">
-                <img alt="" src="/skin/icon/E-mail 2.png" /></a></li>
-            <li><a href="#">
-                <img alt="" src="/skin/icon/Date.png" /></a></li>
-            <li><a href="#">
-                <img alt="" src="/skin/icon/Bin - Full.png" /></a></li>
+                <img alt="" src="/skin/icon/last.png" /></a></li>
         </ul>
         <div id="login-logout">
-            <asp:LoginName ID="LoginName1" runat="server" />
-            <a href="/Admin/UserProfiles.aspx">User Management</a>            
+            <%--<asp:LoginName ID="LoginName1" runat="server" />--%>
+            <a href="/Homepage.aspx">Home</a>
+            <%--<a href="/Admin/UserProfiles.aspx">User Management</a>--%>   
+                     
             <asp:LoginStatus ID="LoginStatus1" runat="server" />
         </div>
     </div>
@@ -91,7 +85,7 @@
                 <div>
                     <h3>
                         <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Administration</a></h3>
+                            <img alt="" width="15px" src="/skin/icon/administrator.png" />&nbsp;Administration</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Choose company</a></li>
@@ -118,7 +112,7 @@
                 <div>
                     <h3>
                         <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Financials</a></h3>
+                            <img alt="" width="15px" src="/skin/icon/financial.png" />&nbsp;Financials</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Chart of Accounts</a></li>
@@ -144,7 +138,7 @@
                 <div>
                     <h3>
                         <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/shopping.png" />&nbsp;Sales Opportunity</a>
+                            <img alt="" width="15px" src="/skin/icon/opportunity.png" />&nbsp;Sales Opportunity</a>
                     </h3>
                     <div class="menubutton">
                         <ul>
@@ -156,7 +150,7 @@
                 <div>
                     <h3>
                         <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/shopping.png" />&nbsp;Sales-A/R</a>
+                            <img alt="" width="15px" src="/skin/icon/sales.png" />&nbsp;Sales-A/R</a>
                     </h3>
                     <div class="menubutton">
                         <ul>
@@ -206,7 +200,7 @@
                 <div>
                     <h3>
                         <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Business Partners</a></h3>
+                            <img alt="" width="15px" src="/skin/icon/businesspartner.png" />&nbsp;Business Partners</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
@@ -219,7 +213,7 @@
                 <div>
                     <h3>
                         <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/coins.png" />&nbsp;Banking</a></h3>
+                            <img alt="" width="15px" src="/skin/icon/banking.png" />&nbsp;Banking</a></h3>
                     <div class="menubutton">
                         <ul>
                             <li><a href="#">Incomming Payments</a></li>

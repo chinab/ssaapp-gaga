@@ -61,6 +61,7 @@
     <Content Include="Admin\UserProfiles.aspx" />
     <Content Include="ARInvoice_VHF.aspx" />
     <Content Include="BusinessPartnerMaster.aspx" />
+    <Content Include="Popup_EditTerritory.aspx" />
     <Content Include="Popup_EditCostCenter.aspx" />
     <Content Include="Popup_EditProject.aspx" />
     <Content Include="Popup_EditTaxCode_OUT.aspx" />
@@ -216,6 +217,13 @@
     <Compile Include="BusinessPartnerMaster.aspx.designer.cs">
       <DependentUpon>BusinessPartnerMaster.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Popup_EditTerritory.aspx.cs">
+      <DependentUpon>Popup_EditTerritory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditTerritory.aspx.designer.cs">
+      <DependentUpon>Popup_EditTerritory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Popup_EditCostCenter.aspx.cs">
       <DependentUpon>Popup_EditCostCenter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -347,6 +355,7 @@
     <Compile Include="WebServices\Entity\AccountMasterData.cs" />
     <Compile Include="WebServices\Entity\BusinessPartner.cs" />
     <Compile Include="WebServices\Entity\ContactPerson.cs" />
+    <Compile Include="WebServices\Entity\Territory.cs" />
     <Compile Include="WebServices\Entity\Promotion.cs" />
     <Compile Include="WebServices\GetDefault.cs" />
     <Compile Include="WebServices\Entity\SalesBuyerMasterData.cs" />
@@ -357,6 +366,8 @@
     <Compile Include="WebServices\Entity\TaxGroup.cs" />
     <Compile Include="WebServices\Transaction.cs" />
     <Compile Include="WebServices\Entity\WareHouse.cs" />
+    <Compile Include="xml\Opportunity_StageXML.cs" />
+    <Compile Include="xml\OpportunityXML.cs" />
     <Compile Include="xml\Document_LineXML.cs" />
     <Compile Include="PurchaseOrder.aspx.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>

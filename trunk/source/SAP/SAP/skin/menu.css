@@ -22,7 +22,7 @@
 /* menu::base */
 div#menu {
     height:41px;
-    background:url(images/main-bg.png) repeat-x 0px 2px;
+    /*background:url(images/main-bg.png) repeat-x 0px 2px;*/
 }
 
 div#menu ul {
@@ -85,7 +85,7 @@ div#menu li { background: url(images/main-delimiter.png) 98% 6px no-repeat; }
 div#menu li.last { background: none; }
 
 /* menu::level2 */
-div#menu ul ul li { background-color:#fef9e3; }
+div#menu ul ul li { background-color:#EAF1F6; }
 div#menu ul ul {
     position: absolute;
     top: 38px;

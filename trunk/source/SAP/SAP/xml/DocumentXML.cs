@@ -150,6 +150,10 @@ namespace SAP
                     this.OPOR_ELEMENT = "ODLN";
                    this.POR1_ELEMENT = "DLN1";
                    break;
+                case "97": //sales opportunity
+                   this.OPOR_ELEMENT = "OOPR";
+                   this.POR1_ELEMENT = "OPR1";
+                   break;
             }
             this._DocDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(docdate));
             this._DocDueDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(docduedate));// docduedate;

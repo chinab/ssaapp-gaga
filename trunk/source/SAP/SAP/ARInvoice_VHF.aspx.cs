@@ -378,25 +378,25 @@ namespace SAP
         #region Event
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            String results = ts.CreateMarketingDocument(requestXML);
-            if (results.IndexOf("Exception") >= 0 && !simulate.Equals("true"))
+            DataSet ds = ts.CreateMarketingDocument(requestXML);
+            if (ds.Tables[0].Rows[0]["ErrCode"] != "0")
             {
-                Session["errorMessage"] = results;
+                Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + results + "','');", true);
+                    "Main.setMasterMessage('" + ds.Tables[0].Rows[0]["ErrMsg"] + "','');", true);
             }
             else
             {
-                Session["successMessage"] = results;
+                Session["successMessage"] = "Operation complete sucessful!";
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                   "Main.setMasterMessage('" + results + "','');", true);
+                   "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
             }
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                               "Dialog.hideLoader();", true);
+         
 
         }
 

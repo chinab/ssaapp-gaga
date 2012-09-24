@@ -20,7 +20,7 @@ Public Class MasterData
             Else
                 Dim str As String
                 If CardType = "C" Then
-                    str = "Select CardCode,CardName from OCRD Where CardType='C' and GroupCode=102"
+                    str = "Select CardCode,CardName from OCRD Where CardType='C'" ' and GroupCode=102"
                 Else
                     str = "Select CardCode,CardName from OCRD Where CardType='S'"
                 End If
@@ -342,7 +342,7 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetCostCenter(DimCode) As DataSet
+    Public Function GetCostCenter(DimCode As Integer) As DataSet
         Try
             Dim dt As New DataSet("OPRC")
             If PublicVariable.Simulate Then
@@ -351,6 +351,81 @@ Public Class MasterData
             Else
                 connect.setDB()
                 dt = connect.ObjectGetAll_Query_SAP("select PrcCode,PrcName from OPRC where DimCode=" + CStr(DimCode))
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetInformationSource() As DataSet
+        Try
+            Dim dt As New DataSet("OOSR")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select Num,Descript from OOSR")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetStage() As DataSet
+        Try
+            Dim dt As New DataSet("OOST")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select Num,Descript,CloPrcnt from OOST")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetPartners() As DataSet
+        Try
+            Dim dt As New DataSet("OPRT")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select PrtId,Name from OPRT")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetCompetitor() As DataSet
+        Try
+            Dim dt As New DataSet("OCMT")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select CompetId,Name from OCMT")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetLevelOfInterest() As DataSet
+        Try
+            Dim dt As New DataSet("OOIR")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB()
+                dt = connect.ObjectGetAll_Query_SAP("select Num,Descript from OOIR")
             End If
             Return dt
         Catch ex As Exception

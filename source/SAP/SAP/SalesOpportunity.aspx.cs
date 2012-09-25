@@ -35,7 +35,7 @@ namespace SAP
 
                 //for (int i = 0; i < 2; i++)
                 //    dtStage.Rows.Add(i, "20120924", "20120924", "0", "1", "10", "1000000", "0", "-1", "N", "0");
-
+                //this.lvStage.DataSourceID = "dtStage";
                 this.lvStage.DataSource = dtStage;
                 this.lvStage.DataBind();
 
@@ -72,12 +72,30 @@ namespace SAP
                 this.lvCompetitor.DataBind();
 
                 MasterData masterDataWS = new MasterData();
-                DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
+                DataSet ds = masterDataWS.GetSalesBuyerMasterData();
 
-                ddlBuyer.DataSource = salesBuyers.Tables[0];
+                ddlBuyer.DataSource = ds.Tables[0];
                 ddlBuyer.DataTextField = "Name";
                 ddlBuyer.DataValueField = "Code";
-                ddlBuyer.DataBind();               
+                ddlBuyer.DataBind();
+
+                ds = masterDataWS.GetLevelOfInterest();
+                ddlInterest.DataSource = ds.Tables[0];
+                ddlInterest.DataTextField = "Descript";
+                ddlInterest.DataValueField = "Num";
+                ddlInterest.DataBind();
+
+                ds = masterDataWS.GetIndustry();
+                ddlIndustry.DataSource = ds.Tables[0];
+                ddlIndustry.DataTextField = "IndName";
+                ddlIndustry.DataValueField = "IndCode";
+                ddlIndustry.DataBind();
+
+                ds = masterDataWS.GetInformationSource();
+                ddlSource.DataSource = ds.Tables[0];
+                ddlSource.DataTextField = "Descript";
+                ddlSource.DataValueField = "Num";
+                ddlSource.DataBind();
             }
         }
         protected override void OnLoadComplete(EventArgs e)
@@ -126,11 +144,19 @@ namespace SAP
                         }
                         break;
                     case "EditTerritoryCallBack":
-                        Territory Terr = Session["chosenTerritoryNo"] as Territory;
+                        Territory Terr = Session["chosenTerritory"] as Territory;
                         if (Terr != null)
                         {
-                            this.txtTerritory.Text = Terr.descript;
+                            this.txtTerritory.Text = Terr.descript.ToString();
                             this.txtterritryID.Text = Terr.territryID.ToString();
+                        }
+                        break;
+                    case "EditProjectCallBack":
+                        Project Proj = Session["chosenProject"] as Project;
+                        if (Proj != null)
+                        {
+                            this.txtBPProjectCode.Text = Proj.PrjCode.ToString();
+                            this.txtBPProjectName.Text = Proj.PrjName.ToString();
                         }
                         break;
                     default:
@@ -223,17 +249,17 @@ namespace SAP
                     this._StageCancelAddNew();
                     this.lvStage.DataBind();
                     break;
-                case "CancelUpdate":
+                case "Cancel":
                     this.lvStage.EditIndex = -1;
                     this.lvStage.DataSource = dtStage;
                     this.lvStage.DataBind();
                     break;
-                case "UpdateItem":
+                case "Update":
                     this.lvStage.EditIndex = -1;
                     this.lvStage.DataSource = dtStage;
                     this.lvStage.DataBind();
                     break;
-                case "DeleteItem":
+                case "Delete":
                     dtStage.Rows.RemoveAt(0);// code for dummy
                     this.lvStage.EditIndex = -1;
                     this.lvStage.DataSource = dtStage;
@@ -284,28 +310,46 @@ namespace SAP
 
         protected void lvStage_ItemCreated(object sender, ListViewItemEventArgs e)
         {
-            if (e.Item.ItemType == ListViewItemType.InsertItem)
-            {
-                DropDownList ddl = (DropDownList)e.Item.FindControl("ddlSalesEmployee"); if (ddl != null)
-                {
-                    MasterData masterDataWS = new MasterData();
-                    DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
-                    ddl.DataSource = salesBuyers.Tables[0];
-                    ddl.DataTextField = "Name";
-                    ddl.DataValueField = "Code";
-                    ddl.DataBind();
-                }
-                ddl = (DropDownList)e.Item.FindControl("ddlStage"); if (ddl != null)
-                {
-                    MasterData masterDataWS = new MasterData();
-                    DataSet salesBuyers = masterDataWS.GetStage();
-                    ddl.DataSource = salesBuyers.Tables[0];
-                    ddl.DataTextField = "Descript";
-                    ddl.DataValueField = "Num";
-                    ddl.DataBind();
-                }
-            }
+            //if (e.Item.ItemType == ListViewItemType.InsertItem)
+            //{
+            //    DropDownList ddl = (DropDownList)e.Item.FindControl("ddlSalesEmployee"); if (ddl != null)
+            //    {
+            //        MasterData masterDataWS = new MasterData();
+            //        DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
+            //        ddl.DataSource = salesBuyers.Tables[0];
+            //        ddl.DataTextField = "Name";
+            //        ddl.DataValueField = "Code";
+            //        ddl.DataBind();
+            //    }
+            //    ddl = (DropDownList)e.Item.FindControl("ddlStage"); if (ddl != null)
+            //    {
+            //        MasterData masterDataWS = new MasterData();
+            //        DataSet salesBuyers = masterDataWS.GetStage();
+            //        ddl.DataSource = salesBuyers.Tables[0];
+            //        ddl.DataTextField = "Descript";
+            //        ddl.DataValueField = "Num";
+            //        ddl.DataBind();
+            //    }
+            //}
+        }
+        
+
+        protected void lvStage_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+        {
+            
         }
         # endregion
+
+        protected void lvStage_ItemUpdated(object sender, ListViewUpdatedEventArgs e)
+        {
+            if (lvStage.EditIndex>=0)
+            {
+                //TextBox txt = new TextBox();
+                //txt = (TextBox)lvStage.Items[e.].FindControl("txtPercent");
+                //Label lbl = new Label();
+                //lbl = (Label)lvStage.Items[e.ItemIndex].FindControl("lblPercent");
+                //lbl.Text = txt.Text;
+            }
+        }
     }
 }

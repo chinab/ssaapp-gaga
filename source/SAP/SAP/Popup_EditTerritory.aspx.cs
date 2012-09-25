@@ -33,7 +33,7 @@ namespace SAP
                 List<Territory> list = Territory.extractFromDataSet(TerritoryItem.Tables[0]);
                 Territory chosenTerritory = list[Int32.Parse(selectedValue)];
                 Session["chosenTerritory"] = chosenTerritory;
-                Session["chosenTerritoryNo"] = Request.QueryString["id"];
+                //Session["chosenTerritoryNo"] = Request.QueryString["id"];
             }
             //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
             //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);

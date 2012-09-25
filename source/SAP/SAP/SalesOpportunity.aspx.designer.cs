@@ -8,9 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace SAP {
-    
-    
-    public partial class SalesOpportunity {
+
+
+    public partial class SalesOpportunity
+    {
         
         /// <summary>
         /// SalesOpportunityUpdatePanel control.
@@ -337,13 +338,22 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// txtBPProject0 control.
+        /// txtBPProjectName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBPProject0;
+        protected global::System.Web.UI.WebControls.TextBox txtBPProjectName;
+        
+        /// <summary>
+        /// txtBPProjectCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBPProjectCode;
         
         /// <summary>
         /// HyperLink2 control.

@@ -61,6 +61,9 @@
             <li><a href="#">
                 <img alt="" src="/skin/icon/word.png" /></a></li>
             <li><a href="#">
+                <img alt="" src="/skin/icon/addnew.png" /></a></li>
+            <li><a href="#">
+            <li><a href="#">
                 <img alt="" src="/skin/icon/first.png" /></a></li>
             <li><a href="#">
                 <img alt="" src="/skin/icon/previous.png" /></a></li>
@@ -275,7 +278,7 @@
                             <img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;Service</a></h3>
                     <div class="menubutton">
                         <ul>
-                            <li><a href="#">Service Call</a></li>
+                            <li><a href="/ServiceCall.aspx">Service Call</a></li>
                             <li><a href="#">Customer Equipment Card</a></li>
                             <li><a href="#">Service Contract</a></li>
                             <li><a href="#">Solutions Knowledge Base</a></li>

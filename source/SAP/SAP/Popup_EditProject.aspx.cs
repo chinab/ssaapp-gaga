@@ -33,14 +33,14 @@ namespace SAP
             string selectedValue = Request.Form["MyRadioButton"];
             if (!String.IsNullOrEmpty(selectedValue))
             {
-                List<WareHouse> list = WareHouse.extractFromDataSet(warehousesItems.Tables[0]);
-                WareHouse chosenWareHouse = list[Int32.Parse(selectedValue)];
-                Session["chosenWareHouse"] = chosenWareHouse;
-                Session["chosenItemNo"] = Request.QueryString["id"];
+                List<Project> list = Project.extractFromDataSet(warehousesItems.Tables[0]);
+                Project chosenProject = list[Int32.Parse(selectedValue)];
+                Session["chosenProject"] = chosenProject;
+                //Session["chosenItemNo"] = Request.QueryString["id"];
             }
             //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
             //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKWareHousePopup", "Main.okDialogClick('EditWareHouseCallBack');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKWareHousePopup", "Main.okDialogClick('EditProjectCallBack');", true);
 
         }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)

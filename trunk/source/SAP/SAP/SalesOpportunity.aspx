@@ -19,6 +19,7 @@
                                     <span>Business Partner Code (*)</span>
                                     <asp:HyperLink ID="lBP" NavigateUrl="~/BusinesspartnerMaster.aspx" runat="server">
                                         <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/link.png"/>
+                                    
                                     </asp:HyperLink>
                                 </td>
                                 <td>
@@ -26,6 +27,7 @@
                                     <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('Popup_EditCustomer.aspx','');"
                                         runat="server">
                                         <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                    
                                     </asp:HyperLink>
                                 </td>
                             </tr>
@@ -64,6 +66,7 @@
                                     <asp:HyperLink ID="HyperLink3" NavigateUrl="javascript:Main.openDialog('Popup_EditTerritory.aspx','');"
                                         runat="server">
                                         <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                    
                                     </asp:HyperLink>
                                 </td>
                             </tr>
@@ -86,6 +89,7 @@
                                     <asp:HyperLink ID="linkOwner" NavigateUrl="javascript:Main.openDialog('Popup_EditEmployee.aspx','');"
                                         runat="server">
                                         <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                    
                                     </asp:HyperLink>
                                 </td>
                             </tr>
@@ -245,16 +249,19 @@
                                         <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('Popup_EditVendor.aspx','');"
                                         runat="server">
                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                        
                                     </asp:HyperLink>
                                     </td>
                                     <td class="detail_table_td_100" style="width: 131px">
                                         <span>BP Project</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtBPProject0" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtBPProjectName" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtBPProjectCode" runat="server" Visible=false></asp:TextBox>
                                         <asp:HyperLink ID="HyperLink2" NavigateUrl="javascript:Main.openDialog('Popup_EditProject.aspx','');"
                                         runat="server">
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                        
                                     </asp:HyperLink>
                                     </td>
                                 </tr>
@@ -319,7 +326,9 @@
                             <asp:ListView ID="lvStage" runat="server"
                                 OnItemInserted="lvStage_ItemInserted"
                                 OnItemInserting="lvStage_ItemInserting" OnItemCommand="lvStage_ItemCommand"
-                                OnItemEditing="lvStage_ItemEditing" onitemcreated="lvStage_ItemCreated">
+                                OnItemEditing="lvStage_ItemEditing" onitemcreated="lvStage_ItemCreated" 
+                                onitemupdated="lvStage_ItemUpdated" onitemupdating="lvStage_ItemUpdating" ViewStateMode="Enabled"
+                                 >
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
@@ -367,12 +376,12 @@
                                     <tr>
                                          <td>
                                             <asp:LinkButton ID="imgbEdit" runat="server" CommandName="Edit" Text="Edit" ImageUrl="~/skin/icon/edit_icon_mono.gif" />
-                                            <asp:LinkButton ID="imgbDelete" runat="server" CommandName="DeleteItem" Text="Delete"
+                                            <asp:LinkButton ID="imgbDelete" runat="server" CommandName="Delete" Text="Delete"
                                                 ImageUrl="~/skin/icon/delete_icon_mono.gif" OnClientClick="return confirm('Are you sure you want to delete this row?');"
                                                 ToolTip="Delete" />
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNo" runat="server"><%#Eval("No")%></asp:Label>
+                                            <asp:Label ID="lblNo" runat="server"><%#Eval("No") %></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblStartDate" runat="server"><%#Eval("StartDate") %></asp:Label>
@@ -409,46 +418,46 @@
                                 <EditItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="UpdateItem" Text="Update"
+                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Update" Text="Update"
                                                 ImageUrl="~/skin/icon/save_icon_mono.gif" CausesValidation="true" ValidationGroup="vgrpSaveContact" />
-                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="CancelUpdate" Text="Cancel"
+                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="Cancel" Text="Cancel"
                                                 ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNo" runat="server"><%#Eval("No")%></asp:Label>
+                                             <asp:Label ID="lblNoEdit" runat="server" Text='<%# Bind("No") %>'/>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblStartDate" runat="server"><%#Eval("StartDate")%></asp:Label>
+                                            <asp:TextBox ID="txtStartDateEdit" runat="server" Text='<%# Bind("StartDate") %>'/>
                                         </td>
                                         <td>
-                                             <asp:TextBox ID="lblClosingDate" runat="server" Text='<%#Eval("ClosingDate")%>' />
+                                            <asp:TextBox ID="txtClosingDateEdit" runat="server" Text='<%# Bind("ClosingDate") %>'/>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="lblSalesEmployee" runat="server" Text='<%#Eval("SalesEmployee")%>' />
+                                            <asp:TextBox ID="txtSalesEmployeeEdit" runat="server" Text='<%# Bind("SalesEmployee") %>'/>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ddlStage" runat="server" Text='<%#Eval("Stage")%>' />
+                                             <asp:DropDownList ID="ddlStageEdit" runat="server" >
+                                              </asp:DropDownList>      
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="lblPercent" runat="server" Text='<%#Eval("Percent")%>' />
+                                            <asp:TextBox ID="txtPercentEdit" runat="server" Text='<%# Bind("Percent") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="lblPotentialAmt" runat="server" Text='<%#Eval("PotentialAmt")%>' />
+                                            <asp:TextBox ID="txtPotentialAmtEdit" runat="server" Text='<%# Bind("PotentialAmt") %>'/>
                                         </td>
                                         <td>
-                                             <asp:TextBox ID="lblWeightedAmt" runat="server" Text='<%#Eval("WeightedAmt")%>' />
+                                             <asp:TextBox ID="txtWeightedAmtEdit" runat="server" Text='<%#Bind("WeightedAmt")%>' />
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="lblDocType" runat="server" Text='<%#Eval("DocType")%>' />
-                                            
+                                            <asp:DropDownList ID="ddlDocTypeEdit" runat="server" />
                                         </td>
                                         <td>
-                                            <asp:CheckBox ID="lblShowBP" runat="server" Text='<%#Eval("ShowBP")%>' />
+                                            <asp:CheckBox ID="ckShowBPEdit" runat="server" Text='<%#Bind("ShowBP")%>' />
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblDocNo" runat="server"><%#Eval("DocNo")%></asp:Label>
+                                            <asp:Label ID="txtDocNoEdit" runat="server" Text='<%#Bind("ShowBP")%>' />
                                             <asp:HyperLink ID="HyperLink10" NavigateUrl='#' runat="server">
-                                                <asp:Image ID="Image12" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                           <asp:Image ID="Image12" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
                                     </tr>
@@ -456,52 +465,44 @@
                                 <InsertItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Insert" Text="Add" ImageUrl="~/skin/icon/save_icon_mono.gif"
-                                                CausesValidation="true" ValidationGroup="vgrpSaveContact" />
-                                            <asp:LinkButton ID="imgbCancel" runat="server" Text="Cancel" ImageUrl="~/skin/icon/undo_icon_mono.gif"
-                                                CommandName="CancelAddNew" />
+                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Insert" Text="Update"
+                                                ImageUrl="~/skin/icon/save_icon_mono.gif" CausesValidation="true" ValidationGroup="vgrpSaveContact" />
+                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="Cancel" Text="Cancel"
+                                                ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNo" runat="server"></asp:Label>
+                                             <asp:Label ID="lblNoInsert" runat="server" Text='<%# Bind("No") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="lblStartDate" runat="server" CssClass="txtDate"></asp:TextBox>
+                                            <asp:TextBox ID="txtStartDateInsert" runat="server" Text='<%# Bind("StartDate") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="lblClosingDate" runat="server" CssClass="txtDate"></asp:TextBox>
+                                            <asp:TextBox ID="txtClosingDateInsert" runat="server" Text='<%# Bind("ClosingDate") %>'/>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ddlSalesEmployee" runat="server">
-                                            </asp:DropDownList>
+                                            <asp:TextBox ID="txtSalesEmployeeInsert" runat="server" Text='<%# Bind("SalesEmployee") %>'/>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ddlStage" runat="server">
-                                            </asp:DropDownList>
-                                        </td>
-                                        
-                                        <td>
-                                            <asp:TextBox ID="lblPercent" runat="server"></asp:TextBox>
+                                             <asp:DropDownList ID="ddlStageInsert" runat="server" >
+                                              </asp:DropDownList>      
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="lblPotentialAmt" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="txtPercentInsert" runat="server" Text='<%# Bind("Percent") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="lblWeightedAmt" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="txtPotentialAmtInsert" runat="server" Text='<%# Bind("PotentialAmt") %>'/>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="lblDocType" runat="server">
-                                                <asp:ListItem Text="" Value="-1" />
-                                                <asp:ListItem Text="Sales Quotation" Value="23" />
-                                                <asp:ListItem Text="Sales Order" Value="17" />
-                                                <asp:ListItem Text="Delivery" Value="15" />
-                                                <asp:ListItem Text="AR Invoice" Value="13" />
-                                            </asp:DropDownList>
+                                             <asp:TextBox ID="txtWeightedAmtInsert" runat="server" Text='<%#Bind("WeightedAmt")%>' />
                                         </td>
                                         <td>
-                                            <asp:CheckBox ID="ckShowBP" runat="server"></asp:CheckBox>
+                                            <asp:DropDownList ID="ddlDocTypeInsert" runat="server" />
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblDocNo" runat="server"></asp:Label>
+                                            <asp:CheckBox ID="ckShowBPInsert" runat="server" Text='<%#Bind("ShowBP")%>' />
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="txtDocNoInsert" runat="server" Text='<%#Bind("ShowBP")%>' />
                                             <asp:HyperLink ID="HyperLink10" NavigateUrl='#' runat="server">
                                                 <asp:Image ID="Image12" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>

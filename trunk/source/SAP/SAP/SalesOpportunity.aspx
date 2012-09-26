@@ -327,7 +327,7 @@
                                 OnItemInserted="lvStage_ItemInserted"
                                 OnItemInserting="lvStage_ItemInserting" OnItemCommand="lvStage_ItemCommand"
                                 OnItemEditing="lvStage_ItemEditing" onitemcreated="lvStage_ItemCreated" onitemupdating="lvStage_ItemUpdating" 
-                                ViewStateMode="Enabled"
+                                ViewStateMode="Enabled" onitemdatabound="lvStage_ItemDataBound"
                                  >
                                 <LayoutTemplate>
                                     <table class="data_table">

@@ -83,8 +83,8 @@ namespace SAP
         public Opportunity_StageXML(String StartDate, String EndDate, int Stage, double Percent,int DocNo
                             ,String ShowBP, String DocType, double PotentialAmt,int SalesEmployee, Double WeightedAmt)
         {
-            this._StartDate = StartDate;
-            this._ClosingDate = ClosingDate;
+            this._StartDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(StartDate));
+            this._ClosingDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(EndDate)); 
             this._Stage = Stage;
             this._SalesEmployee = SalesEmployee;
             this._Percent = Percent;

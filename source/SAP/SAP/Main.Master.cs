@@ -13,5 +13,13 @@ namespace SAP
         {
 
         }
+
+        protected void btnAddNew_Click(object sender, ImageClickEventArgs e)
+        {
+            //this.ContentPlaceHolder1.FindControl(
+        }
+
+
+       
     }
 }

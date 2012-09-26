@@ -60,8 +60,13 @@
                 <img alt="" src="/skin/icon/pdf.png" /></a></li>
             <li><a href="#">
                 <img alt="" src="/skin/icon/word.png" /></a></li>
-            <li><a href="#">
-                <img alt="" src="/skin/icon/addnew.png" /></a></li>
+            <li>
+            <a hr<%--ef="#">
+                <img alt="" src--%>="/skin/icon/addnew.png" /></a>
+            <asp:ImageButton ID="btnAddNew" runat="server" AlternateText="button" 
+                            CommandName="Login" ImageUrl="~/skin/icon/addnew.png" 
+                    onclick="btnAddNew_Click" />
+                </li>
             <li><a href="#">
             <li><a href="#">
                 <img alt="" src="/skin/icon/first.png" /></a></li>

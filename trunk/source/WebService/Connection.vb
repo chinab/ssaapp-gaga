@@ -55,10 +55,10 @@ Public Class Connection
                 Return True
             End If
         Catch ex As Exception
-            Dim file As System.IO.StreamWriter = New System.IO.StreamWriter("C:\\connectDB.txt", True)
-            file.WriteLine(ex)
-            file.Close()
-            Throw ex
+            'Dim file As System.IO.StreamWriter = New System.IO.StreamWriter("C:\\connectDB.txt", True)
+            'file.WriteLine(ex)
+            'file.Close()
+            Return False
         End Try
     End Function
 #Region "ADO SAP"

@@ -32,10 +32,10 @@ namespace SAP
                 dtStage.Columns.Add("DocType");
                 dtStage.Columns.Add("ShowBP");
                 dtStage.Columns.Add("DocNo");
+                dtStage.Columns.Add("SalesEmployeeCode");
+                dtStage.Columns.Add("StageCode");
+                dtStage.Columns.Add("DocTypeCode");
 
-                //for (int i = 0; i < 2; i++)
-                //    dtStage.Rows.Add(i, "20120924", "20120924", "0", "1", "10", "1000000", "0", "-1", "N", "0");
-                //this.lvStage.DataSourceID = "dtStage";
                 this.lvStage.DataSource = dtStage;
                 this.lvStage.DataBind();
 
@@ -175,7 +175,7 @@ namespace SAP
                 for (int i = 0; i < dtStage.Rows.Count; i++)
                 {
                     DataRow row = dtStage.Rows[i];
-                    int stagecode = int.Parse(row["Stage"].ToString());
+                    int stagecode = int.Parse(row["StageCode"].ToString());
                     if (stagecode!=0)
                     {
                         String StartDate=row["StartDate"].ToString();
@@ -187,15 +187,20 @@ namespace SAP
                         }
                         int SalesEmployee=0;
 
-                        if (!String.IsNullOrEmpty(row["SalesEmployee"].ToString()))
+                        if (!String.IsNullOrEmpty(row["SalesEmployeeCode"].ToString()))
                         {
-                            SalesEmployee = int.Parse(row["SalesEmployee"].ToString());
+                            SalesEmployee = int.Parse(row["SalesEmployeeCode"].ToString());
                         }
                         Double Percent = Double.Parse(row["Percent"].ToString()); 
                         Double PotentialAmt = Double.Parse(row["PotentialAmt"].ToString());
                         Double WeightedAmt = Double.Parse(row["WeightedAmt"].ToString()); 
-                        String DocType = row["DocType"].ToString(); 
-                        int DocNo = int.Parse(row["DocNo"].ToString());
+                        String DocType = row["DocTypeCode"].ToString();
+                        int DocNo = -1;
+                        if (!String.IsNullOrEmpty(row["DocNo"].ToString()))
+                        {
+                            DocNo = int.Parse(row["DocNo"].ToString());
+                        }
+                        
                         String ShowBP=row["ShowBP"].ToString();
 
                         Opportunity_StageXML objOrder = new Opportunity_StageXML(StartDate,ClosingDate,stagecode,Percent,DocNo,ShowBP,DocType,PotentialAmt,SalesEmployee,WeightedAmt);
@@ -234,6 +239,7 @@ namespace SAP
                 Session["successMessage"] = "Operation complete sucessful!";
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                    "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
+                ClearScreen();
             }
             
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
@@ -263,12 +269,16 @@ namespace SAP
                         {
                             row["StartDate"] = ((TextBox)lvi.FindControl("txtStartDateEdit")).Text;
                             row["ClosingDate"] = ((TextBox)lvi.FindControl("txtClosingDateEdit")).Text;
-                            row["SalesEmployee"] = ((DropDownList)lvi.FindControl("ddlSalesEmployeeEdit")).Text;
-                            row["Stage"] = ((DropDownList)lvi.FindControl("ddlStageEdit")).Text;
+                            row["SalesEmployee"] = ((DropDownList)lvi.FindControl("ddlSalesEmployeeEdit")).SelectedItem.Text;
+                            row["Stage"] = ((DropDownList)lvi.FindControl("ddlStageEdit")).SelectedItem.Text;
                             row["Percent"] = ((TextBox)lvi.FindControl("txtPercentEdit")).Text;
                             row["PotentialAmt"] = ((TextBox)lvi.FindControl("txtPotentialAmtEdit")).Text;
                             row["WeightedAmt"] = ((TextBox)lvi.FindControl("txtWeightedAmtEdit")).Text;
-                            row["DocType"] = ((DropDownList)lvi.FindControl("ddlDocTypeEdit")).Text;
+                            row["DocType"] = ((DropDownList)lvi.FindControl("ddlDocTypeEdit")).SelectedItem.Text;
+
+                            row["SalesEmployeeCode"] = ((DropDownList)lvi.FindControl("ddlSalesEmployeeEdit")).SelectedValue;
+                            row["StageCode"] = ((DropDownList)lvi.FindControl("ddlStageEdit")).SelectedValue;
+                            row["DocTypeCode"] = ((DropDownList)lvi.FindControl("ddlDocTypeEdit")).SelectedValue;
                             break;
                         }
                     }
@@ -309,7 +319,8 @@ namespace SAP
 
         protected void lvStage_ItemInserting(object sender, ListViewInsertEventArgs e)
         {
-            string StartDate = "", ClosingDate = "", SalesEmployee = "", Stage = "", Percent="", PotentialAmt = "", WeightedAmt = "", DocType = "", ShowBP = "", DocNo="";
+            string StartDate = "", ClosingDate = "", SalesEmployee = "", Stage = "", Percent="", PotentialAmt = "", 
+                WeightedAmt = "", DocType = "", ShowBP = "", DocNo="",SalesEmployeeCode="",StageCode="",DocTypeCode="";
 
             TextBox txt = (e.Item.FindControl("txtStartDateInsert")) as TextBox;
             if (txt != null)
@@ -321,12 +332,16 @@ namespace SAP
 
             DropDownList ddl = (e.Item.FindControl("ddlSalesEmployeeInsert")) as DropDownList;
             if (ddl != null)
-                SalesEmployee = ddl.SelectedValue;
-
+            {
+                SalesEmployeeCode = ddl.SelectedValue;
+                SalesEmployee = ddl.SelectedItem.Text;
+            }
             ddl = (e.Item.FindControl("ddlStageInsert")) as DropDownList;
             if (ddl != null)
-                Stage = ddl.SelectedValue;
-
+            {
+                StageCode = ddl.SelectedValue;
+                Stage = ddl.SelectedItem.Text;
+            }
             txt = (e.Item.FindControl("txtPercentInsert")) as TextBox;
             if (txt != null)
                 Percent = txt.Text;
@@ -341,8 +356,10 @@ namespace SAP
 
             ddl = (e.Item.FindControl("ddlDocTypeInsert")) as DropDownList;
             if (ddl != null)
-                DocType = ddl.SelectedValue;
-
+            {
+                DocTypeCode = ddl.SelectedValue;
+                DocType = ddl.SelectedItem.Text;
+            }
             CheckBox ck = (e.Item.FindControl("ckShowBPInsert")) as CheckBox;
             if ((ddl != null))
                 ShowBP = "Y";
@@ -351,7 +368,8 @@ namespace SAP
             if (txt != null)
                 DocNo = txt.Text;
 
-            dtStage.Rows.Add(GetNo(), StartDate, ClosingDate, SalesEmployee, Stage, Percent, PotentialAmt, WeightedAmt, DocType, ShowBP, DocNo);
+            dtStage.Rows.Add(GetNo(), StartDate, ClosingDate, SalesEmployee, Stage, Percent, PotentialAmt, WeightedAmt, 
+                        DocType, ShowBP, DocNo, SalesEmployeeCode,StageCode,DocTypeCode);
             this.lvStage.DataSource = dtStage;
             this.lvStage.DataBind();
             this._StageCancelAddNew();
@@ -453,7 +471,7 @@ namespace SAP
             this.lvStage.DataSource = dtStage;
             this.lvStage.DataBind();
         }
-        # endregion
+       
 
         protected void lvStage_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
@@ -486,6 +504,22 @@ namespace SAP
                 }
             }
         }
+        # endregion
+        #region "Functions"
+        void ClearScreen()
+        {
+            txtCustomerCode.Text = "";
+            txtCustomerName.Text = "";
+            ddlContactPerson.DataSource = null;
+            txtOpportunityName.Text = "";
 
+            dtStage.Clear();
+            dtCompetitor.Clear();
+            dtPartner.Clear();
+
+            lvStage.DataSource = dtStage;
+            lvStage.DataBind();
+        }
+        # endregion 
     }
 }

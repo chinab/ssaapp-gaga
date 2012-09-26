@@ -101,14 +101,14 @@
                                 <td class="detail_table_td_150">
                                     <span>Opportunity Name</span></td>
                                 <td>
-                                    <asp:TextBox ID="txtStatus" Text="" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtOpportunityName" Text="" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="detail_table_td_150">
                                     <span>Opportunity No.</span></td>
                                 <td>
-                                    <asp:TextBox  Enabled="false" ID="txtPostingDate" runat="server" 
+                                    <asp:TextBox  Enabled="false" ID="txtOpportunityNo" runat="server" 
                                         BackColor="#D5DCE0"></asp:TextBox>
                                 </td>
                             </tr>
@@ -116,7 +116,7 @@
                                 <td class="detail_table_td_150">
                                     <span>Status</span></td>
                                 <td>
-                                    <asp:TextBox  Enabled="false" ID="txtDeliveryDate" runat="server"  BackColor="#D5DCE0"></asp:TextBox>
+                                    <asp:TextBox  Enabled="false" ID="txtStatus" runat="server"  BackColor="#D5DCE0"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -367,6 +367,15 @@
                                             <th>
                                                 <span>Doc. No.</span>
                                             </th>
+                                             <th style="display: none">
+                                                <span>Employee Code</span>
+                                            </th>
+                                            <th style="display: none">
+                                                <span>Stage Code</span>
+                                            </th>
+                                            <th style="display: none">
+                                                <span>DocType Code</span>
+                                            </th>
                                         </tr>
                                         <tr ID="itemPlaceholder" runat="server">
                                         </tr>
@@ -413,6 +422,15 @@
                                         <td>
                                             <asp:Label ID="lblDocNo" runat="server"><%#Eval("DocNo")%></asp:Label>
                                         </td>
+                                         <td style="display: none">
+                                            <asp:Label ID="lblEmployeeCode" runat="server"><%#Eval("DocTypeCode")%></asp:Label>
+                                        </td>
+                                        <td style="display: none">
+                                            <asp:Label ID="lblStageCode" runat="server"><%#Eval("StageCode")%></asp:Label>
+                                        </td>
+                                         <td style="display: none">
+                                            <asp:Label ID="lblDocTypeCode" runat="server"><%#Eval("DocTypeCode")%></asp:Label>
+                                        </td>                                         
                                     </tr>
                                 </ItemTemplate>
                                 <EditItemTemplate>
@@ -464,6 +482,15 @@
                                             <asp:HyperLink ID="HyperLink10" NavigateUrl='#' runat="server">
                                            <asp:Image ID="Image12" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
+                                        </td>
+                                        <td style="display: none">
+                                            <asp:Label runat="server" ID="lblSalesEmployeeCode"  Text='<%# Bind("SalesEmployeeCode") %>'></asp:Label>
+                                        </td>
+                                        <td style="display: none">
+                                            <asp:Label runat="server" ID="lblStageCode"  Text='<%# Bind("StageCode") %>'></asp:Label>
+                                        </td>
+                                        <td style="display: none">
+                                            <asp:Label runat="server" ID="lblDocTypeCode"  Text='<%# Bind("DocTypeCode") %>'></asp:Label>
                                         </td>
                                     </tr>
                                 </EditItemTemplate>
@@ -517,6 +544,15 @@
                                                 <asp:Image ID="Image12" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
+                                         <td style="display: none">
+                                            <asp:Label runat="server" ID="lblSalesEmployeeCode"  Text='<%# Bind("SalesEmployeeCode") %>'></asp:Label>
+                                        </td>
+                                        <td style="display: none">
+                                            <asp:Label runat="server" ID="lblStageCode"  Text='<%# Bind("StageCode") %>'></asp:Label>
+                                        </td>
+                                        <td style="display: none">
+                                            <asp:Label runat="server" ID="lblDocTypeCode"  Text='<%# Bind("DocTypeCode") %>'></asp:Label>
+                                        </td>
                                     </tr>
                                 </InsertItemTemplate>
                                 <EmptyDataTemplate>
@@ -555,6 +591,15 @@
                                             <th>
                                                 <span>Doc. No.</span>
                                             </th>
+                                             <th style="display: none">
+                                                <span>Employee Code</span>
+                                            </th>
+                                            <th style="display: none">
+                                                <span>Stage Code</span>
+                                            </th>
+                                            <th style="display: none">
+                                                <span>DocType Code</span>
+                                            </th>
                                         </tr>
                                         <tr>
                                             <td colspan="11">
@@ -569,7 +614,6 @@
                                     <asp:NumericPagerField ButtonType="Link" />
                                 </Fields>
                             </asp:DataPager>
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
                         </div>
                         <div id="tabs-4">
                             <asp:ListView ID="lvPartner" runat="server" >

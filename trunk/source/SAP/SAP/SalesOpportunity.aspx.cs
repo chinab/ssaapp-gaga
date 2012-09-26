@@ -279,6 +279,7 @@ namespace SAP
 
         protected void lvStage_ItemEditing(object sender, ListViewEditEventArgs e)
         {
+            
             this.lvStage.EditIndex = e.NewEditIndex;
             this.lvStage.DataSource = dtStage;
             this.lvStage.DataBind();
@@ -291,8 +292,49 @@ namespace SAP
 
         protected void lvStage_ItemInserting(object sender, ListViewInsertEventArgs e)
         {
-            DataRow newRow = dtStage.NewRow();
-            dtStage.Rows.Add(newRow);
+            string StartDate = "", ClosingDate = "", SalesEmployee = "", Stage = "", Percent="", PotentialAmt = "", WeightedAmt = "", DocType = "", ShowBP = "", DocNo="";
+
+            TextBox txt = (e.Item.FindControl("txtStartDateInsert")) as TextBox;
+            if (txt != null)
+                StartDate = txt.Text;
+            
+            txt = (e.Item.FindControl("txtClosingDateInsert")) as TextBox;
+            if (txt != null)
+                ClosingDate = txt.Text;
+
+            DropDownList ddl = (e.Item.FindControl("ddlSalesEmployeeInsert")) as DropDownList;
+            if (ddl != null)
+                SalesEmployee = ddl.SelectedValue;
+
+            ddl = (e.Item.FindControl("ddlStageInsert")) as DropDownList;
+            if (ddl != null)
+                Stage = ddl.SelectedValue;
+
+            txt = (e.Item.FindControl("txtPercentInsert")) as TextBox;
+            if (txt != null)
+                Percent = txt.Text;
+
+            txt = (e.Item.FindControl("txtPotentialAmtInsert")) as TextBox;
+            if (txt != null)
+                PotentialAmt = txt.Text;
+            
+            txt = (e.Item.FindControl("txtWeightedAmtInsert")) as TextBox;
+            if (txt != null)
+                WeightedAmt = txt.Text;
+
+            ddl = (e.Item.FindControl("ddlDocTypeInsert")) as DropDownList;
+            if (ddl != null)
+                DocType = ddl.SelectedValue;
+
+            CheckBox ck = (e.Item.FindControl("ckShowBPInsert")) as CheckBox;
+            if (ddl != null)
+                ShowBP = "Y";
+
+            txt = (e.Item.FindControl("txtDocNoInsert")) as TextBox;
+            if (txt != null)
+                DocNo = txt.Text;
+
+            dtStage.Rows.Add(1, StartDate, ClosingDate, SalesEmployee, Stage,Percent, PotentialAmt, WeightedAmt, DocType, ShowBP ,DocNo);
             this.lvStage.DataSource = dtStage;
             this.lvStage.DataBind();
             this._StageCancelAddNew();
@@ -306,50 +348,81 @@ namespace SAP
             this.lvStage.DataSource = dtStage;
             this.lvStage.DataBind();
         }
-       
-
+      
         protected void lvStage_ItemCreated(object sender, ListViewItemEventArgs e)
         {
-            //if (e.Item.ItemType == ListViewItemType.InsertItem)
-            //{
-            //    DropDownList ddl = (DropDownList)e.Item.FindControl("ddlSalesEmployee"); if (ddl != null)
-            //    {
-            //        MasterData masterDataWS = new MasterData();
-            //        DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
-            //        ddl.DataSource = salesBuyers.Tables[0];
-            //        ddl.DataTextField = "Name";
-            //        ddl.DataValueField = "Code";
-            //        ddl.DataBind();
-            //    }
-            //    ddl = (DropDownList)e.Item.FindControl("ddlStage"); if (ddl != null)
-            //    {
-            //        MasterData masterDataWS = new MasterData();
-            //        DataSet salesBuyers = masterDataWS.GetStage();
-            //        ddl.DataSource = salesBuyers.Tables[0];
-            //        ddl.DataTextField = "Descript";
-            //        ddl.DataValueField = "Num";
-            //        ddl.DataBind();
-            //    }
-            //}
-        }
-        
-
-        protected void lvStage_ItemUpdating(object sender, ListViewUpdateEventArgs e)
-        {
-            
-        }
-        # endregion
-
-        protected void lvStage_ItemUpdated(object sender, ListViewUpdatedEventArgs e)
-        {
-            if (lvStage.EditIndex>=0)
+            if (e.Item.ItemType == ListViewItemType.InsertItem)
             {
-                //TextBox txt = new TextBox();
-                //txt = (TextBox)lvStage.Items[e.].FindControl("txtPercent");
-                //Label lbl = new Label();
-                //lbl = (Label)lvStage.Items[e.ItemIndex].FindControl("lblPercent");
-                //lbl.Text = txt.Text;
+                DropDownList ddl = (DropDownList)e.Item.FindControl("ddlSalesEmployeeInsert"); if (ddl != null)
+                {
+                    MasterData masterDataWS = new MasterData();
+                    DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
+                    ddl.DataSource = salesBuyers.Tables[0];
+                    ddl.DataTextField = "Name";
+                    ddl.DataValueField = "Code";
+                    ddl.DataBind();
+                }
+                ddl = (DropDownList)e.Item.FindControl("ddlStageInsert"); if (ddl != null)
+                {
+                    MasterData masterDataWS = new MasterData();
+                    DataSet salesBuyers = masterDataWS.GetStage();
+                    ddl.DataSource = salesBuyers.Tables[0];
+                    ddl.DataTextField = "Descript";
+                    ddl.DataValueField = "Num";
+                    ddl.DataBind();
+                }
             }
         }
+        
+        protected void lvStage_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+        {
+            string StartDate = "", ClosingDate = "", SalesEmployee = "", Stage = "", Percent = "", PotentialAmt = "", WeightedAmt = "", DocType = "", ShowBP = "", DocNo = "";
+
+            TextBox txt = (lvStage.FindControl("txtStartDateEdit")) as TextBox;
+            if (txt != null)
+                StartDate = txt.Text;
+
+            txt = (lvStage.FindControl("txtClosingDateEdit")) as TextBox;
+            if (txt != null)
+                ClosingDate = txt.Text;
+
+            DropDownList ddl = (lvStage.FindControl("ddlSalesEmployeeEdit")) as DropDownList;
+            if (ddl != null)
+                SalesEmployee = ddl.SelectedValue;
+
+            ddl = (lvStage.FindControl("ddlStageEdit")) as DropDownList;
+            if (ddl != null)
+                Stage = ddl.SelectedValue;
+
+            txt = (lvStage.FindControl("txtPercentEdit")) as TextBox;
+            if (txt != null)
+                Percent = txt.Text;
+
+            txt = (lvStage.FindControl("txtPotentialAmtEdit")) as TextBox;
+            if (txt != null)
+                PotentialAmt = txt.Text;
+
+            txt = (lvStage.FindControl("txtWeightedAmtEdit")) as TextBox;
+            if (txt != null)
+                WeightedAmt = txt.Text;
+
+            ddl = (lvStage.FindControl("ddlDocTypeEdit")) as DropDownList;
+            if (ddl != null)
+                DocType = ddl.SelectedValue;
+
+            CheckBox ck = (lvStage.FindControl("ckShowBPEdit")) as CheckBox;
+            if (ddl != null)
+                ShowBP = "Y";
+
+            txt = (lvStage.FindControl("txtDocNoEdit")) as TextBox;
+            if (txt != null)
+                DocNo = txt.Text;
+
+            dtStage.Rows.Add(1, StartDate, ClosingDate, SalesEmployee, Stage, Percent, PotentialAmt, WeightedAmt, DocType, ShowBP, DocNo);
+            this.lvStage.EditIndex = -1;
+            this.lvStage.DataSource = dtStage;
+            this.lvStage.DataBind();
+        }
+        # endregion
     }
 }

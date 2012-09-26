@@ -326,8 +326,8 @@
                             <asp:ListView ID="lvStage" runat="server"
                                 OnItemInserted="lvStage_ItemInserted"
                                 OnItemInserting="lvStage_ItemInserting" OnItemCommand="lvStage_ItemCommand"
-                                OnItemEditing="lvStage_ItemEditing" onitemcreated="lvStage_ItemCreated" 
-                                onitemupdated="lvStage_ItemUpdated" onitemupdating="lvStage_ItemUpdating" ViewStateMode="Enabled"
+                                OnItemEditing="lvStage_ItemEditing" onitemcreated="lvStage_ItemCreated" onitemupdating="lvStage_ItemUpdating" 
+                                ViewStateMode="Enabled"
                                  >
                                 <LayoutTemplate>
                                     <table class="data_table">
@@ -433,7 +433,8 @@
                                             <asp:TextBox ID="txtClosingDateEdit" runat="server" Text='<%# Bind("ClosingDate") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtSalesEmployeeEdit" runat="server" Text='<%# Bind("SalesEmployee") %>'/>
+                                            <asp:DropDownList ID="ddlSalesEmployeeEdit" runat="server" >
+                                              </asp:DropDownList>
                                         </td>
                                         <td>
                                              <asp:DropDownList ID="ddlStageEdit" runat="server" >
@@ -449,7 +450,11 @@
                                              <asp:TextBox ID="txtWeightedAmtEdit" runat="server" Text='<%#Bind("WeightedAmt")%>' />
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ddlDocTypeEdit" runat="server" />
+                                            <asp:DropDownList ID="ddlDocTypeEdit" runat="server" >
+                                                <asp:ListItem Text="Sales Order" Value="17"></asp:ListItem>
+                                                <asp:ListItem Text="Delivery" Value="15"></asp:ListItem>
+                                                <asp:ListItem Text="AR Invoice" Value="13"></asp:ListItem>
+                                              </asp:DropDownList> 
                                         </td>
                                         <td>
                                             <asp:CheckBox ID="ckShowBPEdit" runat="server" Text='<%#Bind("ShowBP")%>' />
@@ -474,13 +479,14 @@
                                              <asp:Label ID="lblNoInsert" runat="server" Text='<%# Bind("No") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtStartDateInsert" runat="server" Text='<%# Bind("StartDate") %>'/>
+                                            <asp:TextBox ID="txtStartDateInsert" runat="server" Text='<%# Bind("StartDate") %>'  CssClass="txtDate"/>
                                         </td>
                                         <td>
                                             <asp:TextBox ID="txtClosingDateInsert" runat="server" Text='<%# Bind("ClosingDate") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtSalesEmployeeInsert" runat="server" Text='<%# Bind("SalesEmployee") %>'/>
+                                            <asp:DropDownList ID="ddlSalesEmployeeInsert" runat="server" >
+                                              </asp:DropDownList> 
                                         </td>
                                         <td>
                                              <asp:DropDownList ID="ddlStageInsert" runat="server" >
@@ -496,7 +502,11 @@
                                              <asp:TextBox ID="txtWeightedAmtInsert" runat="server" Text='<%#Bind("WeightedAmt")%>' />
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ddlDocTypeInsert" runat="server" />
+                                            <asp:DropDownList ID="ddlDocTypeInsert" runat="server">
+                                                <asp:ListItem Text="Sales Order" Value="17"></asp:ListItem>
+                                                <asp:ListItem Text="Delivery" Value="15"></asp:ListItem>
+                                                <asp:ListItem Text="AR Invoice" Value="13"></asp:ListItem>
+                                            </asp:DropDownList> 
                                         </td>
                                         <td>
                                             <asp:CheckBox ID="ckShowBPInsert" runat="server" Text='<%#Bind("ShowBP")%>' />
@@ -554,6 +564,12 @@
                                     </table>
                                 </EmptyDataTemplate>
                             </asp:ListView>
+                            <asp:DataPager ID="lvDataPager1" runat="server" PagedControlID="lvStage" PageSize="5">
+                                <Fields>
+                                    <asp:NumericPagerField ButtonType="Link" />
+                                </Fields>
+                            </asp:DataPager>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
                         </div>
                         <div id="tabs-4">
                             <asp:ListView ID="lvPartner" runat="server" >

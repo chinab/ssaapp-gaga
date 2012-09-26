@@ -86,4 +86,37 @@ Public Class GetDefault
             Return 0
         End If
     End Function
+
+    <WebMethod()> _
+    Public Function GetLoginInfo(UserID As String) As DataSet
+        If PublicVariable.Simulate Then
+            Dim a As New Simulation
+            Return a.Simulate_GetDeafaultBP(UserID, "")
+        Else
+            Dim a As New SAP_Functions
+            Return a.GetLoginInfo(UserID)
+        End If
+    End Function
+    <WebMethod()> _
+    Public Function GetOpenDocument(UserID As String, CardCode As String, DocType As String) As DataSet
+        If PublicVariable.Simulate Then
+            Dim a As New Simulation
+            Return a.Simulate_GetDeafaultBP(UserID, "")
+        Else
+            Dim dt As DataSet
+            Dim connect As New Connection()
+            connect.setDB()
+            Dim str As String
+            str = "select DocEntry,DocDate,DocDueDate,Comments,DocTotal from "
+            Select Case DocType
+                Case "17"
+                    str = str + "ORDR"
+                Case "15"
+                    str = str + "ODLN"
+            End Select
+            str = str + " where DocStatus='O' and CardCode='" + CardCode + "'"
+            dt = connect.ObjectGetAll_Query_SAP(str)
+            Return dt
+        End If
+    End Function
 End Class

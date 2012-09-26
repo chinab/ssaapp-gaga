@@ -199,7 +199,7 @@
             Return ""
         End Try
     End Function
-    Private Function ConvertRS2DT(ByVal RS As SAPbobsCOM.Recordset) As DataSet
+    Public Function ConvertRS2DT(ByVal RS As SAPbobsCOM.Recordset) As DataSet
         Dim dtTable As New DataSet
         dtTable.Tables.Add()
         Dim NewCol As DataColumn
@@ -326,5 +326,18 @@
         dtJE.Tables(0).Rows.Add(dr)
 
         Return dtJE
+    End Function
+    Public Function GetLoginInfo(UserID As String) As DataSet
+        Try
+            Dim str As String
+            str = "select CardCode,CardName,Phone1 from OCRD T0 where CardCode='" + UserID + "'"
+            Dim dt As DataSet
+            Dim connect As New Connection()
+            connect.setDB()
+            dt = connect.ObjectGetAll_Query_SAP(str)
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        End Try
     End Function
 End Class

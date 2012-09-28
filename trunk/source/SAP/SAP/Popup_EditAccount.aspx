@@ -29,10 +29,13 @@
 								<span>#</span>
 							</th>
 							<th>
-								<span>Project Code</span>
+								<span>Account Code</span>
 							</th>
 							<th>
-								<span>Project Name</span>
+								<span>Account Name</span>
+							</th>
+                            <th>
+								<span>Account Foreign Name</span>
 							</th>	
 						</tr>
 						<tr id="itemPlaceholder" runat="server">
@@ -48,10 +51,13 @@
 							<asp:Label runat="server" ID="Label1"><%#Eval("No") %></asp:Label>
 						</td>
 						<td>
-							<asp:Label runat="server" ID="Label2"><%#Eval("Code")%></asp:Label>
+							<asp:Label runat="server" ID="Label2"><%#Eval("AcctCode")%></asp:Label>
 						</td>
 						<td>
-							<asp:Label runat="server" ID="Label3"><%#Eval("Name")%></asp:Label>
+							<asp:Label runat="server" ID="Label3"><%#Eval("AcctName")%></asp:Label>
+						</td>	
+                        <td>
+							<asp:Label runat="server" ID="Label4"><%#Eval("FrgnName")%></asp:Label>
 						</td>						
 					</tr>
 				</ItemTemplate>
@@ -64,11 +70,14 @@
 								<span>#</span>
 							</th>
 							<th>
-								<span>Project Code</span>
+								<span>Account Code</span>
 							</th>
 							<th>
-								<span>Project Name</span>
-							</th>							
+								<span>Account Name</span>
+							</th>
+                            <th>
+								<span>Account Foreign Name</span>
+							</th>								
 						</tr>
 						<tr>
 							<td colspan="8">

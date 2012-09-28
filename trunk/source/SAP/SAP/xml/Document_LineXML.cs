@@ -56,9 +56,15 @@ namespace SAP
             get { return _Price; }
             set { _Price = value; }
         }
+        private String _AcctCode;
 
+        public String AcctCode
+        {
+            get { return _AcctCode; }
+            set { _AcctCode = value; }
+        }
         public Document_LineXML(String itemcode, String des, int quan, double discount,
-                            String whscode, String vat, double UnitPrice)
+                            String whscode, String vat, double UnitPrice,String AcctCode)
         {
             this._ItemCode = itemcode;
             this._Description = des;
@@ -67,6 +73,7 @@ namespace SAP
             this._WhsCode = whscode;
             this._VATGroup = vat;
             this._Price = UnitPrice;
+            this._AcctCode = AcctCode;
         }
 
         public Document_LineXML()

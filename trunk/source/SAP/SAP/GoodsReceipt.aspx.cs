@@ -76,12 +76,12 @@ namespace SAP
                         }
                         break;
                     case "EditAccountCallBack":
-                        WareHouse Account = Session["chosenWarehouse"] as WareHouse;
+                        AccountMasterData Account = Session["chosenAccount"] as AccountMasterData;
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
                         if (Account != null)
                         {
                             DataRow dr = dtItem.Rows[itemNo-1];
-                            dr["Account"] = Account.WhsCode;
+                            dr["Account"] = Account.AcctCode;
                             this.lvStage.DataSource = dtItem;
                             this.lvStage.DataBind();
                         }
@@ -98,7 +98,7 @@ namespace SAP
                        
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateOpportunity(requestXML);
+            DataSet ds = ts.CreateMarketingDocument(requestXML);
             if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
@@ -112,10 +112,12 @@ namespace SAP
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                    "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
                 ClearScreen();
+                
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                  "Dialog.hideLoader();", true);
             }
             
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
-                              "Dialog.hideLoader();", true);
+
         }
         #region "List View Stage"
         
@@ -214,15 +216,7 @@ namespace SAP
             }
             private int GetNo()
             {
-                //int iNo = 0;
                 return dtItem.Rows.Count+1;
-                //foreach (DataRow row in dtItem.Rows)
-                //{
-                //    int tempNo = int.Parse(row["No"].ToString());
-                //    if (tempNo > iNo)
-                //        iNo = tempNo;
-                //}
-                //return ++iNo;
             }
             void ClearScreen()
             {
@@ -238,42 +232,22 @@ namespace SAP
             {
                 try
                 {
-                    OpportunityXML objInfo = new OpportunityXML("97", "", "", this.txtJournalRemark.Text, User.Identity.Name
-                        , "");
+                    DocumentXML objInfo = new DocumentXML("59", this.txtPostingDate.Text, "", this.txtDocumentDate.Text,"", "", User.Identity.Name);
 
                     for (int i = 0; i < dtItem.Rows.Count; i++)
                     {
                         DataRow row = dtItem.Rows[i];
-                        int stagecode = int.Parse(row["StageCode"].ToString());
-                        if (stagecode != 0)
+                        String itemcode = row["ItemCode"].ToString();
+
+                        if (!String.IsNullOrEmpty(itemcode))
                         {
-                            String StartDate = row["StartDate"].ToString();
-                            String ClosingDate = null;
-
-                            if (!String.IsNullOrEmpty(row["ClosingDate"].ToString()))
-                            {
-                                ClosingDate = row["ClosingDate"].ToString();
-                            }
-                            int SalesEmployee = 0;
-
-                            if (!String.IsNullOrEmpty(row["SalesEmployeeCode"].ToString()))
-                            {
-                                SalesEmployee = int.Parse(row["SalesEmployeeCode"].ToString());
-                            }
-                            Double Percent = Double.Parse(row["Percent"].ToString());
-                            Double PotentialAmt = Double.Parse(row["PotentialAmt"].ToString());
-                            Double WeightedAmt = Double.Parse(row["WeightedAmt"].ToString());
-                            String DocType = row["DocTypeCode"].ToString();
-                            int DocNo = -1;
-                            if (!String.IsNullOrEmpty(row["DocNo"].ToString()))
-                            {
-                                DocNo = int.Parse(row["DocNo"].ToString());
-                            }
-
-                            String ShowBP = row["ShowBP"].ToString();
-
-                            Opportunity_StageXML objOrder = new Opportunity_StageXML(StartDate, ClosingDate, stagecode, Percent, DocNo, ShowBP, DocType, PotentialAmt, SalesEmployee, WeightedAmt);
-                            objInfo.AddStageLine(objOrder);
+                            String des = row["ItemName"].ToString();
+                            String quan = row["Quantity"].ToString();
+                            String whscode = row["Warehouse"].ToString();
+                            String UnitPrice = row["Price"].ToString();
+                            String AccountCode= row["Account"].ToString();
+                            Document_LineXML objOrder = new Document_LineXML(itemcode, des, int.Parse(quan.ToString()), 0, whscode, "", double.Parse(UnitPrice.ToString()),AccountCode);
+                            objInfo.AddOrderItem(objOrder);
                         }
                     }
                     return objInfo.ToXMLString();

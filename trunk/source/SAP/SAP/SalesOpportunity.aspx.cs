@@ -287,10 +287,11 @@ namespace SAP
                     this.lvStage.DataBind();
                     break;
                 case "Delete":
-                    dtStage.Rows.RemoveAt(0);// code for dummy
-                    this.lvStage.EditIndex = -1;
-                    this.lvStage.DataSource = dtStage;
-                    this.lvStage.DataBind();
+                    // delete data and update dt
+                    int i_idx = e.Item.DataItemIndex;
+                    dtStage.Rows.RemoveAt(i_idx);// code for dummy
+
+                    this._StageCancelAddNew();
                     break;
                 default:
                     break;
@@ -301,6 +302,8 @@ namespace SAP
         {
             this.lvStage.InsertItemPosition = InsertItemPosition.None;
             this.btnAddRecord.Enabled = true;
+            this.lvStage.EditIndex = -1;
+            this.lvStage.DataSource = dtStage;
             this.lvStage.DataBind();
         }
 
@@ -377,15 +380,7 @@ namespace SAP
 
         private int GetNo()
         {
-            int iNo = 0;
-
-            foreach (DataRow row in dtStage.Rows)
-            {
-                int tempNo = int.Parse(row["No"].ToString());
-                if (tempNo > iNo)
-                    iNo = tempNo;
-            }
-            return ++iNo;
+            return dtStage.Rows.Count + 1;
         }
 
         protected void _btnAddRecord_Click(object sender, EventArgs e)

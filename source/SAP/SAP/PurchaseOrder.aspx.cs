@@ -12,39 +12,37 @@ namespace SAP
 {
     public partial class PurchaseOrder : System.Web.UI.Page
     {
-        public static DataTable dt;
+        public static DataTable dtContents;
+        private static int idxItem = -1;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                dt = new DataTable();
-                dt.Columns.Add("No");
-                dt.Columns.Add("Code");
-                dt.Columns.Add("CardCode");
-                dt.Columns.Add("Description");
-                dt.Columns.Add("Quantity");
-                dt.Columns.Add("UnitPrice");
-                dt.Columns.Add("ContractDiscount");
-                dt.Columns.Add("PriceAfterDiscount");
-                dt.Columns.Add("Total");
-                dt.Columns.Add("TaxCode");
-                dt.Columns.Add("TaxRate");
-                dt.Columns.Add("Whse");
-                dt.Columns.Add("QuantityEnable");
-                dt.Columns.Add("PromoEnable");
-                
-                dt.Columns.Add("ProfitCode");
-                dt.Columns.Add("CC1");
-                dt.Columns.Add("CC2");
-                dt.Columns.Add("CC3");
-                dt.Columns.Add("CC4");
-                //for (int i = 0; i < 10; i++)
-                //    dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                dtContents = new DataTable();
+                dtContents.Columns.Add("No");
+                dtContents.Columns.Add("Code");
+                dtContents.Columns.Add("CardCode");
+                dtContents.Columns.Add("Description");
+                dtContents.Columns.Add("Quantity");
+                dtContents.Columns.Add("UnitPrice");
+                dtContents.Columns.Add("ContractDiscount");
+                dtContents.Columns.Add("PriceAfterDiscount");
+                dtContents.Columns.Add("Total");
+                dtContents.Columns.Add("TaxCode");
+                dtContents.Columns.Add("TaxRate");
+                dtContents.Columns.Add("Whse");
+                dtContents.Columns.Add("QuantityEnable");
+                dtContents.Columns.Add("PromoEnable");
 
-                this.lvContents.DataSource = dt;
+                dtContents.Columns.Add("ProfitCode");
+                dtContents.Columns.Add("CC1");
+                dtContents.Columns.Add("CC2");
+                dtContents.Columns.Add("CC3");
+                dtContents.Columns.Add("CC4");
+
+                this.lvContents.DataSource = dtContents;
                 this.lvContents.DataBind();
-
-
+                
                 MasterData masterDataWS = new MasterData();
                 //-------------Load Sales/Buyer Employee----------------
                 DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
@@ -109,7 +107,6 @@ namespace SAP
                         ddlContactPerson.Items.Add(item);
                     }
                 }
-
             }
         }
 
@@ -133,7 +130,7 @@ namespace SAP
                         if (chosenItem != null)
                         {
                             // update grid
-                            DataRow dr = dt.Rows[itemNo];
+                            DataRow dr = dtContents.Rows[itemNo];
                             setDefaultItemValue(dr);
                             dr["No"] = itemNo;
                             dr["Code"] = chosenItem.ItemCode;
@@ -153,8 +150,8 @@ namespace SAP
                             dr["Whse"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
 
                             //dt.Rows.      
-                            updateTableTotalPrice(dt);
-                            this.lvContents.DataSource = dt;
+                            updateTableTotalPrice(dtContents);
+                            this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         }
                         break;
@@ -164,11 +161,11 @@ namespace SAP
                         if (chosenWarehouse != null)
                         {
                             // update grid
-                            DataRow dr = dt.Rows[itemNo];
+                            DataRow dr = dtContents.Rows[itemNo];
                             dr["Whse"] = chosenWarehouse.WhsCode;
 
                             //dt.Rows.
-                            this.lvContents.DataSource = dt;
+                            this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         }
                         break;
@@ -178,12 +175,12 @@ namespace SAP
                         if (chosenTaxCode != null)
                         {
                             // update grid
-                            DataRow dr = dt.Rows[itemNo];
+                            DataRow dr = dtContents.Rows[itemNo];
                             dr["Taxcode"] = chosenTaxCode.Code;
                             dr["TaxRate"] = chosenTaxCode.Rate;
 
                             //dt.Rows.
-                            this.lvContents.DataSource = dt;
+                            this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         }
                         break;
@@ -234,7 +231,7 @@ namespace SAP
 
         protected void setDefaultItemValue(DataRow row)
         {
-            row["No"] = dt.Rows.Count;
+            row["No"] = dtContents.Rows.Count;
             row["Code"] = "";
             row["Description"] = "";
             row["Quantity"] = "";
@@ -253,10 +250,9 @@ namespace SAP
             {
                 DocumentXML objInfo = new DocumentXML("22", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
 
-                for (int i = 0; i < dt.Rows.Count; i++)
+                for (int i = 0; i < dtContents.Rows.Count; i++)
                 {
-
-                    DataRow row = dt.Rows[i];
+                    DataRow row = dtContents.Rows[i];
                     String itemcode = row["Code"].ToString();
 
                     if (!String.IsNullOrEmpty(itemcode))
@@ -362,7 +358,6 @@ namespace SAP
                     this.ddlCurrencyDetail.Visible = false;
                     break;
             }
-
         }
 
         protected void btnQuantityUpdate_click(object sender, EventArgs e)
@@ -375,9 +370,9 @@ namespace SAP
                 {
                     TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
                     Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
-                    dt.Rows[item.DataItemIndex]["Quantity"] = geIntFromObject(txtQuantity.Text);
-                    updateTableTotalPrice(dt);
-                    this.lvContents.DataSource = dt;
+                    dtContents.Rows[item.DataItemIndex]["Quantity"] = geIntFromObject(txtQuantity.Text);
+                    updateTableTotalPrice(dtContents);
+                    this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
 
                     break;
@@ -391,12 +386,14 @@ namespace SAP
             this.btnAddRecord.Enabled = false;
             this.lvContents.EditIndex = -1;
 
-            this.lvContents.DataSource = dt;
+            this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
+
         }
 
         protected void lvContents_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
+            ListViewItem lvi = e.Item;
             switch (e.CommandName)
             {
                 case "CancelAddNew":
@@ -405,22 +402,46 @@ namespace SAP
                     break;
                 case "CancelUpdate":
                     this.lvContents.EditIndex = -1;
-                    this.lvContents.DataSource = dt;
+                    this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
                     break;
                 case "UpdateItem":
                     // update new data to dt
-                    // blah blah blah
+                    Label lblNo = (Label)lvi.FindControl("lblNo");
+                    foreach(DataRow row in dtContents.Rows)
+                    {
+                        if (row["No"].ToString().Equals(lblNo.Text))
+                        {
+                            row["Code"] = ((Label)lvi.FindControl("lblCode")).Text;
+                            row["Description"] = ((Label)lvi.FindControl("lblDescription")).Text;
+                            row["Quantity"] = ((TextBox)lvi.FindControl("txtQuantity")).Text;
+                            row["UnitPrice"] = ((Label)lvi.FindControl("lblUnitPrice")).Text;
+                            row["ContractDiscount"] = ((Label)lvi.FindControl("lblDiscount")).Text;
+                            row["PriceAfterDiscount"] = ((Label)lvi.FindControl("lblPriceAfterDiscount")).Text;
+                            row["Total"] = ((Label)lvi.FindControl("lblTotal")).Text;
+                            row["TaxCode"] = ((Label)lvi.FindControl("lblTaxcode")).Text;
+                            row["Whse"] = ((Label)lvi.FindControl("lblWhse")).Text;
+                            row["TaxRate"] = ((Label)lvi.FindControl("lblTaxRate")).Text;
+                            row["ProfitCode"] = ((Label)lvi.FindControl("lblProfitCode")).Text;
+                            row["CC1"] = ((Label)lvi.FindControl("lblCC1")).Text;
+                            row["CC2"] = ((Label)lvi.FindControl("lblCC2")).Text;
+                            row["CC3"] = ((Label)lvi.FindControl("lblCC3")).Text;
+                            row["CC4"] = ((Label)lvi.FindControl("lblCC4")).Text;
+                            break;
+                        }
+                    }
+
                     this.lvContents.EditIndex = -1;
-                    this.lvContents.DataSource = dt;
+                    this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
                     break;
+
                 case "DeleteItem":
                     // delete data and update dt
-                    // blah blah blah
-                    dt.Rows.RemoveAt(0);// code for dummy
+                    int i_idx = e.Item.DataItemIndex;
+                    dtContents.Rows.RemoveAt(i_idx);// code for dummy
                     this.lvContents.EditIndex = -1;
-                    this.lvContents.DataSource = dt;
+                    this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
                     break;
                     
@@ -432,7 +453,7 @@ namespace SAP
         protected void lvContents_ItemEditing(object sender, ListViewEditEventArgs e)
         {
             this.lvContents.EditIndex = e.NewEditIndex;
-            this.lvContents.DataSource = dt;
+            this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
         }
 
@@ -446,22 +467,46 @@ namespace SAP
             this._cancelAddNew();
         }
 
+
         protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
         {
-            DataRow newRow = dt.NewRow();
-            setDefaultItemValue(newRow);
-            dt.Rows.Add(newRow);
+            ListViewItem lvi = e.Item;
+            //string lblNo = ((Label)lvi.FindControl("lblNo")).Text;
+            string lblCode = ((Label)lvi.FindControl("lblCode")).Text;
+            string lblDesc = ((Label)lvi.FindControl("lblDescription")).Text;
+            string txtQty = ((TextBox)lvi.FindControl("txtQuantity")).Text;
+            string lblUPrice = ((TextBox)lvi.FindControl("txtUnitPrice")).Text;
+            string lblDisc = ((TextBox)lvi.FindControl("txtDiscount")).Text;
+            string lblPriceAftDisc = ((TextBox)lvi.FindControl("txtPriceAfterDiscount")).Text;
+            string lblTotal = ((TextBox)lvi.FindControl("txtTotal")).Text;
+            string lblTaxcode = ((Label)lvi.FindControl("lblTaxcode")).Text;
+            string lblWhse = ((Label)lvi.FindControl("lblWhse")).Text;
+            string lblTaxRate = ((Label)lvi.FindControl("lblTaxRate")).Text;
+            string lblProfitCode = ((Label)lvi.FindControl("lblProfitCode")).Text;
+            string lblCC1 = ((Label)lvi.FindControl("lblCC1")).Text;
+            string lblCC2 = ((Label)lvi.FindControl("lblCC2")).Text;
+            string lblCC3 = ((Label)lvi.FindControl("lblCC3")).Text;
+            string lblCC4 = ((Label)lvi.FindControl("lblCC4")).Text;
 
+            int i_rc = dtContents.Rows.Count;
 
-            this.lvContents.DataSource = dt;
+            dtContents.Rows.Add(i_rc, lblCode, "", lblDesc, txtQty, lblUPrice, lblDisc, lblPriceAftDisc, lblTotal, lblTaxcode, lblTaxRate, lblWhse, "", "", lblProfitCode, lblCC1, lblCC2, lblCC3, lblCC4);
+            this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
             this._cancelAddNew();
+          
+            //DataRow newRow = dtContents.NewRow();
+            //setDefaultItemValue(newRow);
+            //dtContents.Rows.Add(newRow);
+            //this.lvContents.DataSource = dtContents;
+            //this.lvContents.DataBind();
+            //this._cancelAddNew();
         }
         #endregion
 
         protected void imgbCancel_CancelAddNew(object sender, EventArgs e)
         {
-            this.lvContents.DataSource = dt;
+            this.lvContents.DataSource = dtContents;
             this._cancelAddNew();
         }
 
@@ -560,5 +605,23 @@ namespace SAP
 
 
         #endregion
+
+        protected void lvContents_ItemCreated(object sender, ListViewItemEventArgs e)
+        {
+            //ListViewItem lvi = e.Item;
+            
+        }
+
+        protected void lvContents_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+        {
+            this.lvContents.EditIndex = -1;
+            this.lvContents.DataSource = dtContents;
+            this.lvContents.DataBind();
+        }
+
+        protected void lvContents_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+
+        }
     }
 }

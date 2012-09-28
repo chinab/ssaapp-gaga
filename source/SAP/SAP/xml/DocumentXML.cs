@@ -150,12 +150,27 @@ namespace SAP
                     this.OPOR_ELEMENT = "ODLN";
                    this.POR1_ELEMENT = "DLN1";
                    break;
+
+                case "59": //Goods Receipt
+                   this.OPOR_ELEMENT = "OIGN";
+                   this.POR1_ELEMENT = "IGN1";
+                   break;
+                case "60": //Goods Issue
+                   this.OPOR_ELEMENT = "OIGE";
+                   this.POR1_ELEMENT = "IGE1";
+                   break;
+
                 case "97": //sales opportunity
                    this.OPOR_ELEMENT = "OOPR";
                    this.POR1_ELEMENT = "OPR1";
                    break;
             }
             this._DocDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(docdate));
+            if (docduedate == "")
+                docduedate = docdate;
+            if (taxdate == "")
+                taxdate = docdate;
+
             this._DocDueDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(docduedate));// docduedate;
             this._TaxDate = String.Format("{0:yyyyMMdd}", DateTime.Parse(taxdate));// taxdate;
             this._CardCode = cardcode;
@@ -259,8 +274,6 @@ namespace SAP
                                 {
                                     for (int i = 0; i < _OrderItems.Count; i++)
                                     {
-                                        //writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT + (i + 1));
-                                        //writer.WriteStartElement(PurchaseInfo.POR1_ELEMENT);
 
                                         writer.WriteStartElement(DocumentXML.ROW_ELEMENT);
                                             {
@@ -313,6 +326,16 @@ namespace SAP
                                                 }
                                                 writer.WriteEndElement();
 
+                                                if (this._OrderItems[i].AcctCode != "")
+                                                {
+                                                    writer.WriteStartElement(DocumentXML.GLACCT_ELEMENT); //Unit Price
+                                                    {
+                                                        writer.WriteString(Convert.ToString(this._OrderItems[i].AcctCode));
+
+                                                    }
+                                                    writer.WriteEndElement();
+                                                }
+                                                
                                             }
                                         writer.WriteEndElement();                                    
                                 }

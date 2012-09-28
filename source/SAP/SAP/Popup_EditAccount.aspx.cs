@@ -16,15 +16,10 @@ namespace SAP
         {
             if (!IsPostBack)
             {
-
                 MasterData masterDataWS = new MasterData();
-                warehousesItems = masterDataWS.GetProject();
-                //this.gridWareHouses.DataSource = warehousesItems.Tables[0];
-                //this.gridWareHouses.DataBind();
-                //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;
+                warehousesItems = masterDataWS.GetAccountMasterData("");
                 BindCategories("");
                 editWareHouseUpdatePanel.Update();
-
             }
         }
 
@@ -33,15 +28,12 @@ namespace SAP
             string selectedValue = Request.Form["MyRadioButton"];
             if (!String.IsNullOrEmpty(selectedValue))
             {
-                List<Project> list = Project.extractFromDataSet(warehousesItems.Tables[0]);
-                Project chosenProject = list[Int32.Parse(selectedValue)];
-                Session["chosenProject"] = chosenProject;
-                //Session["chosenItemNo"] = Request.QueryString["id"];
+                List<AccountMasterData> list = AccountMasterData.extractFromDataSet(warehousesItems.Tables[0]);
+                AccountMasterData chosenAccount = list[Int32.Parse(selectedValue)];
+                Session["chosenAccount"] = chosenAccount;
+                Session["chosenItemNo"] = Request.QueryString["id"];
             }
-            //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
-            //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKWareHousePopup", "Main.okDialogClick('EditProjectCallBack');", true);
-
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKAccountPopup", "Main.okDialogClick('EditAccountCallBack');", true);
         }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
         {
@@ -55,11 +47,12 @@ namespace SAP
             try
             {
                 // Simple created a table to bind with Grid view and populated it with data.
-                DataTable gridTable = new DataTable("WareHouses");
+                DataTable gridTable = new DataTable("Account");
                 gridTable.Columns.Add("Selected");
                 gridTable.Columns.Add("No");
-                gridTable.Columns.Add("Code");
-                gridTable.Columns.Add("Name");
+                gridTable.Columns.Add("AcctCode");
+                gridTable.Columns.Add("AcctName");
+                gridTable.Columns.Add("FrgnName");
                 DataTable warehouseTable = warehousesItems.Tables[0];
                 DataRow dr;
                 int i = 0;
@@ -73,9 +66,9 @@ namespace SAP
                         else
                             dr["Selected"] = "";
                         dr["No"] = i.ToString(); warehouseTable.Rows.IndexOf(row);
-                        dr["Code"] = row[0].ToString();
-                        dr["Name"] = row[1].ToString();
-                        
+                        dr["AcctCode"] = row[0].ToString();
+                        dr["AcctName"] = row[1].ToString();
+                        dr["FrgnName"] = row[1].ToString();
                         gridTable.Rows.Add(dr);
                     }
                     i++;

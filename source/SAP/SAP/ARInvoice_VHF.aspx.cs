@@ -327,7 +327,7 @@ namespace SAP
                         //String vatprice = row["Total"].ToString();
                         String UnitPrice = row["UnitPrice"].ToString();
 
-                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice));
+                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice),"");
                         objInfo.AddOrderItem(objOrder);
                     }
                 }

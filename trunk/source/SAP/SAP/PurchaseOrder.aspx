@@ -325,13 +325,13 @@
                                         </td>
                                         <td>
                                             <asp:TextBox Enabled='<%#"N".Equals(Eval("QuantityEnable")) ? false : true%>' ID="txtQuantity"
-                                                runat="server" Text='<%#Eval("Quantity")%>' onkeypress="return Main.integer_textbox_keypress(event);" />
+                                                runat="server" Text='<%#Eval("Quantity")%>' ontextchanged="tb_TextChanged" onkeypress="return Main.integer_textbox_keypress(event);" />
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblUnitPrice" runat="server" Text='<%# Bind("UnitPrice")%>' />
+                                            <asp:TextBox ID="txtUnitPrice" runat="server" Text='<%# Bind("UnitPrice")%>' />
                                         </td>
                                         <td>
-                                            <asp:Label runat="server" ID="lblDiscount" Text='<%#Bind("ContractDiscount")%>' />
+                                            <asp:TextBox runat="server" ID="txtDiscount" Text='<%#Bind("ContractDiscount")%>' />
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblPriceAfterDiscount" Text='<%#Bind("PriceAfterDiscount")%>' />
@@ -406,8 +406,8 @@
                                         </td>
                                        
                                         <td>
-                                            <asp:Label runat="server" ID="lblCode"></asp:Label>
-                                            <asp:HyperLink ID="linkItems" NavigateUrl='#'
+                                            <asp:Label ID="lblCode" runat="server" Text='<%# Bind("Code") %>' />
+                                            <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + "0"+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>

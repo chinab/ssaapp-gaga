@@ -122,17 +122,19 @@ namespace SAP
             {
                 Int32 itemNo = 0;
                 GeneralFunctions Newformat = new GeneralFunctions();
+                
                 switch (this.Request["__EVENTARGUMENT"].ToString())
                 {
+                        
                     case "EditItemCallBack":
                         ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
                         if (chosenItem != null)
                         {
                             // update grid
-                            DataRow dr = dtContents.Rows[itemNo];
-                            setDefaultItemValue(dr);
-                            dr["No"] = itemNo;
+                            DataRow dr = dtContents.Rows[itemNo-1];
+                            //setDefaultItemValue(dr);
+                            //dr["No"] = itemNo;
                             dr["Code"] = chosenItem.ItemCode;
                             dr["Description"] = chosenItem.ItemName;
                             dr["CardCode"] = this.txtVendor.Text;
@@ -148,7 +150,6 @@ namespace SAP
                             dr["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
                             dr["TaxRate"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
                             dr["Whse"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
-
                             //dt.Rows.      
                             updateTableTotalPrice(dtContents);
                             this.lvContents.DataSource = dtContents;
@@ -231,7 +232,7 @@ namespace SAP
 
         protected void setDefaultItemValue(DataRow row)
         {
-            row["No"] = dtContents.Rows.Count;
+            //row["No"] = dtContents.Rows.Count;
             row["Code"] = "";
             row["Description"] = "";
             row["Quantity"] = "";
@@ -242,6 +243,15 @@ namespace SAP
             row["TaxCode"] = "";
             row["TaxRate"] = "";
             row["Whse"] = "";
+        }
+
+        private void ResetLineNo()
+        {
+            int i = 0;
+            foreach (DataRow row in dtContents.Rows)
+            {
+                row["No"] = ++i;
+            }
         }
 
         public String _collectData()
@@ -382,13 +392,22 @@ namespace SAP
 
         protected void _btnAddRecord_Click(object sender, EventArgs e)
         {
-            this.lvContents.InsertItemPosition = InsertItemPosition.FirstItem;
+            /*this.lvContents.InsertItemPosition = InsertItemPosition.FirstItem;
             this.btnAddRecord.Enabled = false;
             this.lvContents.EditIndex = -1;
-
             this.lvContents.DataSource = dtContents;
-            this.lvContents.DataBind();
+            this.lvContents.DataBind();*/
 
+            int iNo = GetNo();
+            dtContents.Rows.Add(iNo, "", this.txtVendor.Text, "", "1", "0", "0", "0", "0", "", "", "", "", "", "", "", "", "", "");
+            this.lvContents.DataSource = dtContents;
+            this.lvContents.EditIndex = iNo-1;
+            this.lvContents.DataBind();
+        }
+
+        private int GetNo()
+        {
+            return dtContents.Rows.Count + 1;
         }
 
         protected void lvContents_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -415,8 +434,8 @@ namespace SAP
                             row["Code"] = ((Label)lvi.FindControl("lblCode")).Text;
                             row["Description"] = ((Label)lvi.FindControl("lblDescription")).Text;
                             row["Quantity"] = ((TextBox)lvi.FindControl("txtQuantity")).Text;
-                            row["UnitPrice"] = ((Label)lvi.FindControl("lblUnitPrice")).Text;
-                            row["ContractDiscount"] = ((Label)lvi.FindControl("lblDiscount")).Text;
+                            row["UnitPrice"] = ((TextBox)lvi.FindControl("txtUnitPrice")).Text;
+                            row["ContractDiscount"] = ((TextBox)lvi.FindControl("txtDiscount")).Text;
                             row["PriceAfterDiscount"] = ((Label)lvi.FindControl("lblPriceAfterDiscount")).Text;
                             row["Total"] = ((Label)lvi.FindControl("lblTotal")).Text;
                             row["TaxCode"] = ((Label)lvi.FindControl("lblTaxcode")).Text;
@@ -430,7 +449,6 @@ namespace SAP
                             break;
                         }
                     }
-
                     this.lvContents.EditIndex = -1;
                     this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
@@ -441,6 +459,7 @@ namespace SAP
                     int i_idx = e.Item.DataItemIndex;
                     dtContents.Rows.RemoveAt(i_idx);// code for dummy
                     this.lvContents.EditIndex = -1;
+                    ResetLineNo();
                     this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
                     break;
@@ -470,7 +489,7 @@ namespace SAP
 
         protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
         {
-            ListViewItem lvi = e.Item;
+            /*ListViewItem lvi = e.Item;
             //string lblNo = ((Label)lvi.FindControl("lblNo")).Text;
             string lblCode = ((Label)lvi.FindControl("lblCode")).Text;
             string lblDesc = ((Label)lvi.FindControl("lblDescription")).Text;
@@ -490,10 +509,10 @@ namespace SAP
 
             int i_rc = dtContents.Rows.Count;
 
-            dtContents.Rows.Add(i_rc, lblCode, "", lblDesc, txtQty, lblUPrice, lblDisc, lblPriceAftDisc, lblTotal, lblTaxcode, lblTaxRate, lblWhse, "", "", lblProfitCode, lblCC1, lblCC2, lblCC3, lblCC4);
+            dtContents.Rows.Add(i_rc, lblCode, this.txtVendor.Text, lblDesc, txtQty, lblUPrice, lblDisc, lblPriceAftDisc, lblTotal, lblTaxcode, lblTaxRate, lblWhse, "", "", lblProfitCode, lblCC1, lblCC2, lblCC3, lblCC4);
             this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
-            this._cancelAddNew();
+            this._cancelAddNew();*/
           
             //DataRow newRow = dtContents.NewRow();
             //setDefaultItemValue(newRow);
@@ -503,6 +522,11 @@ namespace SAP
             //this._cancelAddNew();
         }
         #endregion
+
+        protected void tb_TextChanged(object sender, EventArgs e)
+        {
+            //string str = ((TextBox)sender).Text;
+        }
 
         protected void imgbCancel_CancelAddNew(object sender, EventArgs e)
         {
@@ -522,7 +546,7 @@ namespace SAP
         #region priceCalculation
         protected void updateTableTotalPrice(DataTable dtInput)
         {
-            double orderTotalBeforeDiscount = 0.0;
+            /*double orderTotalBeforeDiscount = 0.0;
             double orderTotal = 0.0;
             double taxTotal = 0.0;
             for (int i = 0; i < dtInput.Rows.Count; i++)
@@ -544,7 +568,7 @@ namespace SAP
             this.txtTotalDiscount.Text = orderTotalBeforeDiscount.ToString();
             this.txtTax.Text = taxTotal.ToString();
             orderTotal = orderTotalBeforeDiscount + taxTotal;
-            this.txtTotalPayment.Text = orderTotal.ToString();
+            this.txtTotalPayment.Text = orderTotal.ToString();*/
         }
 
         public void updateRowTotalPrice(DataTable dtInput, int rowNumber)

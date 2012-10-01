@@ -18,6 +18,7 @@
             <asp:TextBox runat="server" ID="txtFilter"></asp:TextBox>
             <asp:Button runat="server" ID="btnFilter" Text="Filter" OnClick="btnFilter_Click" />
             <br />
+            <div style="overflow:auto;height:200px;">
             <asp:ListView ID="listPromoCodes" runat="server">
                 <LayoutTemplate>
                     <table class="data_table" style="font-size:11px;">
@@ -194,6 +195,7 @@
                     </table>
                 </EmptyDataTemplate>
             </asp:ListView>
+            </div>
             <div id="action-form">
                 <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
                 <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelDialogClick()" />

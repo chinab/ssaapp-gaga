@@ -19,6 +19,7 @@
             <asp:TextBox runat="server" ID="txtFilter"></asp:TextBox>
             <asp:Button runat="server" ID="btnFilter" Text="Filter" onclick="btnFilter_Click" />
             <br />
+            <div style="overflow:auto;height:200px;">
 			<asp:ListView ID="listWareHouses" runat="server">
 				<LayoutTemplate>
 					<table class="data_table">
@@ -78,6 +79,7 @@
 					</table>
 				</EmptyDataTemplate>
 			</asp:ListView>
+            </div>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger  ControlID="btnFilter" />

@@ -235,4 +235,5 @@ Public Class Transaction
             Return Nothing
         End Try
     End Function
+    
 End Class

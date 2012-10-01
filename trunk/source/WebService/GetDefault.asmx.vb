@@ -119,4 +119,15 @@ Public Class GetDefault
             Return dt
         End If
     End Function
+
+    <WebMethod()> _
+    Public Function CreateUDF() As String
+        If PublicVariable.Simulate Then
+            Dim a As New Simulation
+            Return ""
+        Else
+            Dim a As New SAP_Functions
+            Return a.CreateUDF("ORDR", "UserID", "UserID", SAPbobsCOM.BoFieldTypes.db_Alpha, 30, "")
+        End If
+    End Function
 End Class

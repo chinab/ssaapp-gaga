@@ -270,10 +270,16 @@
                                     </table>
                                 </EmptyDataTemplate>
                             </asp:ListView>
-                            <asp:DataPager ID="lvDataPager1" runat="server" PagedControlID="lvStage" PageSize="5">
-                                <Fields>
-                                    <asp:NumericPagerField ButtonType="Link" />
-                                </Fields>
+                            <asp:DataPager ID="ProductListPagerCombo" runat="server" 
+                               PagedControlID="lvStage" PageSize="5" 
+                                onprerender="ProductListPagerCombo_PreRender">
+                               <Fields>
+                                  <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" 
+                                         ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                                  <asp:NumericPagerField />
+                                  <asp:NextPreviousPagerField LastPageText="&gt;&gt;" ShowLastPageButton="True" 
+                                         ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                               </Fields>
                             </asp:DataPager>
                         </div>                     
                     </div>

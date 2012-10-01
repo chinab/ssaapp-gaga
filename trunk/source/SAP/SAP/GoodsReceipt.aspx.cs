@@ -95,7 +95,8 @@ namespace SAP
         
         protected void btnAdd_Click(object sender, ImageClickEventArgs e)
         {
-                       
+            String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
+            
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             DataSet ds = ts.CreateMarketingDocument(requestXML);
@@ -112,11 +113,9 @@ namespace SAP
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                    "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
                 ClearScreen();
-                
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
-                  "Dialog.hideLoader();", true);
             }
-            
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                 "Dialog.hideLoader();", true);
 
         }
         #region "List View Stage"
@@ -259,5 +258,11 @@ namespace SAP
 
             }
         # endregion 
+
+            protected void ProductListPagerCombo_PreRender(object sender, EventArgs e)
+            {
+                lvStage.DataSource = dtItem;
+                lvStage.DataBind();
+            }
     }
 }

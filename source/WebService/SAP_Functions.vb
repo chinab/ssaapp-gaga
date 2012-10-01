@@ -340,4 +340,57 @@
             Return Nothing
         End Try
     End Function
+
+    Public Function CreateUDF(ByVal tableName As String, ByVal fieldName As String, _
+                              ByVal desc As String, ByVal fieldType As SAPbobsCOM.BoFieldTypes, ByVal Size As Integer, ByVal LinkTab As String) As String
+        Try
+            Dim connect As New Connection()
+            If Connection.bConnect = False Then
+                connect.setDB()
+                If Not connect.connectDB() Then
+                    Return "Connect SAP failed"
+                End If
+            End If
+
+            'Dim oUdtMD As SAPbobsCOM.UserTablesMD = Nothing
+            'oUdtMD = PublicVariable.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oUserTables)
+            'Dim tableExisted As Boolean = oUdtMD.GetByKey(tableName.Replace("@", ""))
+            'System.Runtime.InteropServices.Marshal.ReleaseComObject(oUdtMD)
+            'oUdtMD = Nothing
+            'If tableExisted = False Then
+            '    Return String.Format("UDT {0} doesn't exit", tableName)
+            '    ' Exit Sub
+            'End If
+            'If tableName.StartsWith("@") = False Then
+            '    tableName = "@" + tableName
+            'End If
+            Dim oUdfMD As SAPbobsCOM.UserFieldsMD
+            oUdfMD = PublicVariable.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oUserFields)
+
+
+            oUdfMD.TableName = tableName
+            oUdfMD.Name = fieldName
+            oUdfMD.Type = fieldType
+            oUdfMD.Description = desc
+            oUdfMD.EditSize = Size
+            'If LinkTab <> "" Then
+            '    oUdtMD = PublicVariable.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oUserTables)
+            '    tableExisted = oUdtMD.GetByKey(LinkTab.Replace("@", ""))
+            '    System.Runtime.InteropServices.Marshal.ReleaseComObject(oUdtMD)
+            '    oUdtMD = Nothing
+            '    If tableExisted = False Then
+            '        Return String.Format("UDT {0} doesn't exit", LinkTab)
+            '        Exit Function
+            '    End If
+            '    oUdfMD.LinkedTable = LinkTab
+            'End If
+            Dim lRetCode As Integer = oUdfMD.Add()
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(oUdfMD)
+            oUdfMD = Nothing
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+
+    End Function
+
 End Class

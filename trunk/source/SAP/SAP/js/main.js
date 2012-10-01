@@ -75,7 +75,7 @@ Main = {
         }
     },
     resizeIframe: function (newHeight) {
-        $('#dialogFrame > #iframeItem').height(parseInt(newHeight, 10) + 20);
+        //$('#dialogFrame > #iframeItem').height(parseInt(newHeight, 10) + 20);
     },
     openCustomDialog: function (url, _width, _height, param) {
         $('#dialogFrame').dialog({

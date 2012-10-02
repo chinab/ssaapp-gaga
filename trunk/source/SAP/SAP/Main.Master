@@ -10,16 +10,42 @@
     <script type="text/javascript" src="/js/menu.js"></script>
     <script type="text/javascript" src="/js/dialog.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/accordion.js"></script>
     <link href="skin/start/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="skin/skin.css" rel="stylesheet" type="text/css" />
     <link href="skin/menu.css" rel="stylesheet" type="text/css" />
+
+    
+<script type="text/javascript">
+    jQuery().ready(function () {
+        // applying the settings
+        jQuery('#theMenu').Accordion({
+            active: 'h3.selected',
+            header: 'h3.head',
+            alwaysOpen: false,
+            animated: true,
+            showSpeed: 400,
+            hideSpeed: 800
+        });
+        jQuery('#xtraMenu').Accordion({
+            active: 'h4.selected',
+            header: 'h4.head',
+            alwaysOpen: false,
+            animated: true,
+            showSpeed: 400,
+            hideSpeed: 800
+        });
+    });	
+</script>
+
 </head>
 <body>
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManagerMain" runat="server">
     </asp:ScriptManager>
     <input type="hidden" id="isMainPage" value="1" />
-    <div id="menu">
+    <div id="menu">       
         <ul class="menu">
             <li><a href="#" class="parent"><span>File</span></a>
                 <ul>
@@ -89,210 +115,197 @@
     </div>
     <div id="splitterContainer">
         <div id="leftPane">
-            <div id="accordion">
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/administrator.png" />&nbsp;Administration</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Choose company</a></li>
-                            <li><a href="#">Exchange Rates and Indexes</a></li>
-                            <li><a href="#">System Initialization</a></li>
-                            
-                            <%--<h3> <a href="#">Setup</a></h3>
-                            <div class="menubutton">
+        <ul id="theMenu">
+			<li>
+				<h3 class="head">
+                    <a href="#">
+                        <img alt="" width="15px" src="/skin/icon/partner.png" />&nbsp;Administration
+                    </a>
+                </h3>
+				<ul>
+                    <li><a href="#">Choose company</a></li>
+                    <li><a href="#">Exchange Rates and Indexes</a></li>                    
+                    <li>
+                          <ul id="xtraMenu">
+                        	<li>
+                                <h4 class="head"><a href="#">System Initialization</a></h4>
                                 <ul>
-                                    <li><a href="#">General</a></li>
-                                    <li><a href="#">Financials</a></li>
+                                    <li><a class="subitem" href="#">General</a></li>
+                                    <li><a class="subitem" href="#">Financials</a></li>
                                 </ul>
-                            </div>--%>
-                            
-                            <li><a href="#">Data Import/Export</a></li>
-                            <li><a href="#">Utilities</a></li>
-                            <li><a href="#">Approval Procedures</a></li>
-                            <li><a href="#">License</a></li>
-                            <li><a href="#">Add-Ons</a></li>
-                            <li><a href="#">Alerts Management</a></li>
+                            </li>
                         </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/financial.png" />&nbsp;Financials</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Chart of Accounts</a></li>
-                            <li><a href="#">Edit Chart of Accounts</a></li>
-                            <li><a href="#">Account Code Generator</a></li>
-                            <li><a href="#">Journal Entry</a></li>
-                            <li><a href="#">Journal Vouchers</a></li>
-                            <li><a href="#">Posting Templates</a></li>
-                            <li><a href="#">Recurring Postings</a></li>
-                            <li><a href="#">Reverse Transactions</a></li>
-                            <li><a href="#">Exchange Rate Differences</a></li>
-                            <li><a href="#">Conversion Differences</a></li>
-                            <li><a href="#">1099 Editting</a></li>
-                            <li><a href="#">Financial Reports Templates</a></li>
-                            <li><a href="#">Document Printing</a></li>
-                            <li><a href="#">Internal Reconciliations</a></li>
-                            <li><a href="#">Budget Setup</a></li>
-                            <li><a href="#">Cost Accounting</a></li>
-                            <li><a href="#">Financial Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/opportunity.png" />&nbsp;Sales Opportunity</a>
-                    </h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="/SalesOpportunity.aspx">Sales Opportunity</a></li>
-                            <li><a href="#">Sales Opportunities Reports</a></li>                            
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/sales.png" />&nbsp;Sales-A/R</a>
-                    </h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Sales Quotation</a></li>
-                            <li><a href="/PurchaseOrder.aspx">Sales Order</a></li>
-                            <li><a href="#">Deliver</a></li>
-                            <li><a href="#">Return</a></li>
-                            <li><a href="#">A/R Down Payment Request</a></li>
-                            <li><a href="#">A/R Down Payment Invoice</a></li>
-                            <li><a href="/ARInvoice_VHF.aspx">A/R Invoice</a></li>
-                            <li><a href="#">A/R Invoice + Payment</a></li>
-                            <li><a href="#">A/R Credit Memo</a></li>
-                            <li><a href="#">A/P Reserver Invoice</a></li>
-                            <li><a href="#">Document Generation Wizard</a></li>
-                            <li><a href="#">Recurring Transactions</a></li>
-                            <li><a href="#">Recurring Transactions Templates</a></li>
-                            <li><a href="#">Document Printing</a></li>
-                            <li><a href="#">Dunning Wizard</a></li>
-                            <li><a href="#">Sales Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/shopping.png" />&nbsp;Purchasing-A/P</a>
-                    </h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Purchase Quotation</a></li>
-                            <li><a href="/PurchaseOrder.aspx">Purchase Order</a></li>
-                            <li><a href="#">Goods Receipt PO</a></li>
-                            <li><a href="#">Goods Return</a></li>
-                            <li><a href="#">A/P Down Payment Request</a></li>
-                            <li><a href="#">A/P Down Payment Invoice</a></li>
-                            <li><a href="#">A/P invoice</a></li>
-                            <li><a href="#">A/P Credit Memo</a></li>
-                            <li><a href="#">A/P Reserver Invoice</a></li>
-                            <li><a href="#">Recurring Transactions</a></li>
-                            <li><a href="#">Landed Costs</a></li>
-                            <li><a href="#">Procurrement Confirmation Wizard</a></li>
-                            <li><a href="#">Document Printing</a></li>
-                            <li><a href="#">Purchase Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/businesspartner.png" />&nbsp;Business Partners</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
-                            <li><a href="#">Activity</a></li>
-                            <li><a href="#">Internal Reconciliations</a></li>
-                            <li><a href="#">Business Parter Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/banking.png" />&nbsp;Banking</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Incomming Payments</a></li>
-                            <li><a href="#">Deposits</a></li>
-                            <li><a href="#">Outgoing Payments</a></li>
-                            <li><a href="#">Payment Wizard</a></li>
-                            <li><a href="#">Banking Statements and External Reconciliations</a></li>
-                            <li><a href="#">Check Number Confirmation</a></li>
-                            <li><a href="#">Document Printing</a></li>
-                            <li><a href="#">Banking Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/inventory.png" />&nbsp;Inventory</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Item Master Data</a></li>
-                            <li><a href="#">Item Management</a></li>
-                            <li><a href="/GoodsReceipt.aspx">Inventory Transactions</a></li>
-                            <li><a href="#">Price Lists</a></li>
-                            <li><a href="#">Pick and Pack</a></li>
-                            <li><a href="#">Inventory Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/production.png" />&nbsp;Production</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Bill of Materials</a></li>
-                            <li><a href="#">Production Order</a></li>
-                            <li><a href="#">Receipt From Production</a></li>
-                            <li><a href="#">Issue For Production</a></li>
-                            <li><a href="#">Update Parent Item Prices Globally</a></li>
-                            <li><a href="#">Production Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/mrp.png" />&nbsp;MRP</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="#">Forecasts</a></li>
-                            <li><a href="#">MRP Wizard</a></li>
-                            <li><a href="#">Order Recommendation</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3>
-                        <a href="#">
-                            <img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;Service</a></h3>
-                    <div class="menubutton">
-                        <ul>
-                            <li><a href="/ServiceCall.aspx">Service Call</a></li>
-                            <li><a href="#">Customer Equipment Card</a></li>
-                            <li><a href="#">Service Contract</a></li>
-                            <li><a href="#">Solutions Knowledge Base</a></li>
-                            <li><a href="#">Service Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </li>                         
+                    <li><a href="#">Data Import/Export</a></li>
+                    <li><a href="#">Utilities</a></li>
+                    <li><a href="#">Approval Procedures</a></li>
+                    <li><a href="#">License</a></li>
+                    <li><a href="#">Add-Ons</a></li>
+                    <li><a href="#">Alerts Management</a></li>
+                </ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/financial.png" />&nbsp;Financials
+					</a>
+				</h3>
+				<ul>
+					<li><a href="#">Chart of Accounts</a></li>
+					<li><a href="#">Edit Chart of Accounts</a></li>
+					<li><a href="#">Account Code Generator</a></li>
+					<li><a href="#">Journal Entry</a></li>
+					<li><a href="#">Journal Vouchers</a></li>
+					<li><a href="#">Posting Templates</a></li>
+					<li><a href="#">Recurring Postings</a></li>
+					<li><a href="#">Reverse Transactions</a></li>
+					<li><a href="#">Exchange Rate Differences</a></li>
+					<li><a href="#">Conversion Differences</a></li>
+					<li><a href="#">1099 Editting</a></li>
+					<li><a href="#">Financial Reports Templates</a></li>
+					<li><a href="#">Document Printing</a></li>
+					<li><a href="#">Internal Reconciliations</a></li>
+					<li><a href="#">Budget Setup</a></li>
+					<li><a href="#">Cost Accounting</a></li>
+					<li><a href="#">Financial Reports</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+                            <img alt="" width="15px" src="/skin/icon/opportunity.png" />&nbsp;Sales Opportunity
+					</a>
+				</h3>
+				 <ul>
+					<li><a href="/SalesOpportunity.aspx">Sales Opportunity</a></li>
+					<li><a href="#">Sales Opportunities Reports</a></li>                            
+				</ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/sales.png" />&nbsp;Sales-A/R
+					</a>
+				</h3>
+				<ul>
+					<li><a href="#">Sales Quotation</a></li>
+					<li><a href="/PurchaseOrder.aspx">Sales Order</a></li>
+					<li><a href="#">Deliver</a></li>
+					<li><a href="#">Return</a></li>
+					<li><a href="#">A/R Down Payment Request</a></li>
+					<li><a href="#">A/R Down Payment Invoice</a></li>
+					<li><a href="/ARInvoice_VHF.aspx">A/R Invoice</a></li>
+					<li><a href="#">A/R Invoice + Payment</a></li>
+					<li><a href="#">A/R Credit Memo</a></li>
+					<li><a href="#">A/P Reserver Invoice</a></li>
+					<li><a href="#">Document Generation Wizard</a></li>
+					<li><a href="#">Recurring Transactions</a></li>
+					<li><a href="#">Recurring Transactions Templates</a></li>
+					<li><a href="#">Document Printing</a></li>
+					<li><a href="#">Dunning Wizard</a></li>
+					<li><a href="#">Sales Reports</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/shopping.png" />&nbsp;Purchasing-A/P
+					</a>
+				</h3>
+				<ul>
+					<li><a href="#">Purchase Quotation</a></li>
+					<li><a href="/PurchaseOrder.aspx">Purchase Order</a></li>
+					<li><a href="#">Goods Receipt PO</a></li>
+					<li><a href="#">Goods Return</a></li>
+					<li><a href="#">A/P Down Payment Request</a></li>
+					<li><a href="#">A/P Down Payment Invoice</a></li>
+					<li><a href="#">A/P invoice</a></li>
+					<li><a href="#">A/P Credit Memo</a></li>
+					<li><a href="#">A/P Reserver Invoice</a></li>
+					<li><a href="#">Recurring Transactions</a></li>
+					<li><a href="#">Landed Costs</a></li>
+					<li><a href="#">Procurrement Confirmation Wizard</a></li>
+					<li><a href="#">Document Printing</a></li>
+					<li><a href="#">Purchase Reports</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/businesspartner.png" />&nbsp;Business Partners
+					</a>
+				</h3>
+				<ul>
+					<li><a href="/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
+					<li><a href="#">Activity</a></li>
+					<li><a href="#">Internal Reconciliations</a></li>
+					<li><a href="#">Business Parter Reports</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/banking.png" />&nbsp;Banking
+					</a>
+				</h3>
+				<ul>
+					 <li><a href="#">Incomming Payments</a></li>
+					<li><a href="#">Deposits</a></li>
+					<li><a href="#">Outgoing Payments</a></li>
+					<li><a href="#">Payment Wizard</a></li>
+					<li><a href="#">Banking Statements and External Reconciliations</a></li>
+					<li><a href="#">Check Number Confirmation</a></li>
+					<li><a href="#">Document Printing</a></li>
+					<li><a href="#">Banking Reports</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/inventory.png" />&nbsp;Inventory
+					</a>
+				</h3>
+				<ul>
+					<li><a href="#">Item Master Data</a></li>
+					<li><a href="#">Item Management</a></li>
+					<li><a href="/GoodsReceipt.aspx">Inventory Transactions</a></li>
+					<li><a href="#">Price Lists</a></li>
+					<li><a href="#">Pick and Pack</a></li>
+					<li><a href="#">Inventory Reports</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/production.png" />&nbsp;Production
+					</a>
+				</h3>
+				<ul>
+					<li><a href="#">Bill of Materials</a></li>
+					<li><a href="#">Production Order</a></li>
+					<li><a href="#">Receipt From Production</a></li>
+					<li><a href="#">Issue For Production</a></li>
+					<li><a href="#">Update Parent Item Prices Globally</a></li>
+					<li><a href="#">Production Reports</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;MRP
+					</a>
+				</h3>
+				<ul>
+					<li><a href="/ServiceCall.aspx">Service Call</a></li>
+					<li><a href="#">Customer Equipment Card</a></li>
+					<li><a href="#">Service Contract</a></li>
+					<li><a href="#">Solutions Knowledge Base</a></li>
+					<li><a href="#">Service Reports</a></li>
+				</ul>
+			</li>
+		</ul>
+
+       </div>
         <div id="rightPane">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

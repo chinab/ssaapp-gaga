@@ -18,7 +18,7 @@
                         <table class="detail_table">
                             <tr>
                                 <td class="detail_table_td_100">
-                                    <span>Customer</span>
+                                    <span>Outlet</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_100">
-                                    <span>Name</span>
+                                    <span>Tên</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_100">
-                                    <span>Contact Person</span>
+                                    <span>Người liên hệ</span>
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlContactPerson" Width="88%" runat="server">
@@ -47,7 +47,7 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_100">
-                                    <span>Vendor Ref No.</span>
+                                    <span>Số đăng ký.</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtRefNo" runat="server"></asp:TextBox>
@@ -102,7 +102,7 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_150">
-                                    <span>Status</span>
+                                    <span>Tình trạng</span>
                                 </td>
                                 <td>
                                     <asp:TextBox Enabled="false" ID="txtStatus" Text="" runat="server"></asp:TextBox>
@@ -110,7 +110,7 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_150">
-                                    <span>Posting Date</span>
+                                    <span>Ngày ghi sổ</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtPostingDate" runat="server" CssClass="txtDate"></asp:TextBox>
@@ -118,7 +118,7 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_150">
-                                    <span>Customer Ref No.</span>
+                                    <span>Ngày thanh toán</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtDeliveryDate" runat="server" CssClass="txtDate"></asp:TextBox>
@@ -126,7 +126,7 @@
                             </tr>
                             <tr>
                                 <td class="detail_table_td_150">
-                                    <span>Document Date</span>
+                                    <span>Ngày hóa đơn</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtDocumentDate" runat="server" CssClass="txtDate"></asp:TextBox>
@@ -153,51 +153,51 @@
                                                 <span>#</span>
                                             </th>
                                              <th style="width:50px">
-                                                <span>Apply Promotion</span>
+                                                <span>Áp dụng KM</span>
                                             </th>
                                             <th  style="width:100px">
-                                                <span>Item No.</span>
+                                                <span>Mã hàng</span>
                                             </th>                                            
                                              <th>
-                                                <span>Description</span>
+                                                <span>Tên hàng</span>
                                             </th>
                                             <th>
-                                                <span>Quantity</span>
+                                                <span>Số lượng</span>
                                             </th>
                                              <th>
-                                                <span>Org Price</span>
+                                                <span>Đơn giá</span>
                                             </th>
                                             <th>
-                                                <span>Discount By Promotion</span>
+                                                <span>Chiết khấu</span>
                                             </th>  
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Unit Price</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Discount By Contract</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Price after Discount</span>
                                             </th>                                            
                                             <th>
-                                                <span>Total(LC)</span>
+                                                <span>Tổng tiền</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Taxcode %</span>
                                             </th>
                                             <th style="display:none">
                                                 <span>Tax Rate %</span>
                                             </th>
-                                            <th>
+                                            <th >
                                                 <span>Whse</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Promotion ID</span>
-                                            </th>
-                                            <th>
+                                            </th >
+                                            <th style="display:none">
                                                 <span>Promotion Line</span>
                                             </th>
-                                             <th>
+                                             <th style="display:none">
                                                 <span>Sole</span>                                                
                                             </th>
 
@@ -238,19 +238,19 @@
                                         <td>
                                             <asp:Label runat="server" ID="lblPromoDiscount"><%#Eval("PromoDiscount")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblUnitPrice"><%#Eval("UnitPrice")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblDiscount"><%#Eval("ContractDiscount")%></asp:Label>
                                         </td>
-                                         <td>
+                                         <td style="display:none">
                                             <asp:Label runat="server" ID="lblPriceAfterDiscount"><%#Eval("PriceAfterDiscount")%></asp:Label>
                                         </td>
                                          <td>
                                             <asp:Label runat="server" ID="lblTotal"><%#Eval("Total")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblTaxcode"><%#Eval("Taxcode")%></asp:Label>
                                             <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditTaxCode_OUT.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
@@ -267,13 +267,13 @@
                                         <td style="display:none">
                                             <asp:Label runat="server" ID="Label1"><%#Eval("TaxRate")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblPromotionId"><%#Eval("PromotionId")%></asp:Label>
                                         </td>
-                                          <td>
+                                          <td style="display:none">
                                             <asp:Label runat="server" ID="lblPromotionLine"><%#Eval("PromotionLine")%></asp:Label>
                                         </td>
-                                          <td>
+                                          <td style="display:none">
                                             <asp:Label runat="server" ID="lblSole"><%#Eval("Sole")%></asp:Label>  
                                         </td>
                                     </tr>
@@ -308,19 +308,19 @@
                                         <td>
                                             <asp:Label runat="server" ID="lblPromoDiscount"><%#Eval("PromoDiscount")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblUnitPrice"><%#Eval("UnitPrice")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblDiscount"><%#Eval("ContractDiscount")%></asp:Label>
                                         </td>
-                                         <td>
+                                         <td style="display:none">
                                             <asp:Label runat="server" ID="lblPriceAfterDiscount"><%#Eval("PriceAfterDiscount")%></asp:Label>
                                         </td>
                                          <td>
                                             <asp:Label runat="server" ID="lblTotal"><%#Eval("Total")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblTaxcode"><%#Eval("Taxcode")%></asp:Label>
                                             <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditTaxCode_Out.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
@@ -337,13 +337,13 @@
                                         <td style="display:none">
                                             <asp:Label runat="server" ID="Label1"><%#Eval("TaxRate")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <asp:Label runat="server" ID="lblPromotionId"><%#Eval("PromotionId")%></asp:Label>
-                                        </td>
-                                          <td>
+                                        </td >
+                                          <td style="display:none">
                                             <asp:Label runat="server" ID="lblPromotionLine"><%#Eval("PromotionLine")%></asp:Label>
                                         </td>
-                                          <td>
+                                          <td style="display:none">
                                             <asp:Label runat="server" ID="lblSole"><%#Eval("Sole")%></asp:Label>                                          
                                         </td>
                                     </tr>
@@ -351,56 +351,56 @@
                                 <EmptyDataTemplate>
                                     <table class="data_table">
                                         <tr>
-                                            <th>
+                                            <th style="width:25px">
                                                 <span>#</span>
                                             </th>
-                                            <th>
-                                                <span>Apply Promotion</span>
+                                             <th style="width:50px">
+                                                <span>Áp dụng KM</span>
                                             </th>
-                                            <th>
-                                                <span>Item No.</span>
+                                            <th  style="width:100px">
+                                                <span>Mã hàng</span>
                                             </th>                                            
-                                            <th>
-                                                <span>Item Description</span>
+                                             <th>
+                                                <span>Tên hàng</span>
                                             </th>
                                             <th>
-                                                <span>Quantity</span>
+                                                <span>Số lượng</span>
                                             </th>
                                              <th>
-                                                <span>Org Price</span>
+                                                <span>Đơn giá</span>
                                             </th>
                                             <th>
-                                                <span>Discount By Promotion</span>
+                                                <span>Chiết khấu</span>
                                             </th>  
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Unit Price</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Discount By Contract</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Price after Discount</span>
                                             </th>                                            
                                             <th>
-                                                <span>Total(LC)</span>
+                                                <span>Tổng tiền</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Taxcode %</span>
                                             </th>
-                                             <th style="display:none">
-                                                <span>Tax Rate</span>
+                                            <th style="display:none">
+                                                <span>Tax Rate %</span>
                                             </th>
-                                            <th>
+                                            <th >
                                                 <span>Whse</span>
                                             </th>
-                                            <th>
+                                            <th style="display:none">
                                                 <span>Promotion ID</span>
-                                            </th>
-                                            <th>
+                                            </th >
+                                            <th style="display:none">
                                                 <span>Promotion Line</span>
                                             </th>
-                                             <th>
-                                                <span>Sole</span>
+                                             <th style="display:none">
+                                                <span>Sole</span>                                                
                                             </th>
                                         </tr>
                                         <tr>

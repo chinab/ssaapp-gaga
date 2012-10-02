@@ -263,24 +263,6 @@
                                         <asp:TextBox ID="txtBPProject8" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Industry</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtJournalRemark9" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td class="detail_table_td_100" style="width: 131px">
-                                        <span>BP </span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtBPProject9" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        &nbsp;</td>
-                                </tr>
                             </table>
                         </div>
                         <div id="tabs-2">
@@ -466,27 +448,11 @@
                                     <asp:TextBox ID="txtBPProject15" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="detail_table_td_100">
-                                    &nbsp;</td>
-                            </tr>
                         </table>
                     </div>
                     </div>
                     
                     <br />
-                    <div class="left">
-                    </div>
-                    <div class="right">
-                    </div>
-                    <div class="clear">
-                    </div>
-                    <div class="left">
-                    </div>
-                    <div class="clear">
-                    </div>
-                </div>
-                <div class="clear">
                 </div>
                 <div id="footer-form">
                     <div class="left">

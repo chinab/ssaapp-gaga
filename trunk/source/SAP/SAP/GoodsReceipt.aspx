@@ -27,7 +27,7 @@
                                     <span>Document Date</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDocumentDate" runat="server"  class="txtDate"></asp:TextBox>
+                                    <asp:TextBox ID="txtDocumentDate" runat="server"  class="txtDate" ></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -43,7 +43,7 @@
                                     <span>Journal Remark</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtJournalRemark" runat="server" Width="496px"></asp:TextBox>
+                                    <asp:TextBox ID="txtJournalRemark" runat="server" Width="496px" ></asp:TextBox>
                                 </td>
                             </tr>
                             
@@ -120,7 +120,7 @@
                                             
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblItemName" runat="server"><%#Eval("ItemName")%></asp:Label>
+                                            <asp:Label ID="lblItemName" runat="server"><%#Eval("Dscription")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblQuantity" runat="server"><%#Eval("Quantity")%></asp:Label>
@@ -129,13 +129,13 @@
                                             <asp:Label ID="lblPrice" runat="server"><%#Eval("Price")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblTotal" runat="server"><%#Eval("Total")%></asp:Label>
+                                            <asp:Label ID="lblTotal" runat="server"><%#Eval("LineTotal")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblWarehouse" runat="server"><%#Eval("Warehouse")%></asp:Label>
+                                            <asp:Label ID="lblWarehouse" runat="server"><%#Eval("WhsCode")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblAccount" runat="server"><%#Eval("Account")%></asp:Label>
+                                            <asp:Label ID="lblAccount" runat="server"><%#Eval("AcctCode")%></asp:Label>
                                         </td>
                                                                             
                                     </tr>
@@ -159,7 +159,7 @@
                                             </asp:HyperLink>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblItemName" runat="server" Text='<%# Bind("ItemName") %>'/>
+                                            <asp:Label ID="lblItemName" runat="server" Text='<%# Bind("Dscription") %>'/>
                                         </td>
                                         <td>
                                             <asp:TextBox ID="txtQuantityEdit" runat="server" Text='<%# Bind("Quantity") %>'/>
@@ -168,17 +168,17 @@
                                             <asp:TextBox ID="txtPriceEdit" runat="server" Text='<%# Bind("Price") %>'/>     
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtTotalEdit" runat="server" Text='<%# Bind("Total") %>'/>
+                                            <asp:TextBox ID="txtTotalEdit" runat="server" Text='<%# Bind("LineTotal") %>'/>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblWarehouse" runat="server" Text='<%# Bind("Warehouse") %>'/>
+                                            <asp:Label ID="lblWarehouse" runat="server" Text='<%# Bind("WhsCode") %>'/>
                                             <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
                                         <td>
-                                             <asp:Label ID="lblAccount" runat="server" Text='<%#Bind("Account")%>' />
+                                             <asp:Label ID="lblAccount" runat="server" Text='<%#Bind("AcctCode")%>' />
                                              <asp:HyperLink ID="linkAccount" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditAccount.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
@@ -207,7 +207,7 @@
                                              
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblItemName" runat="server" Text='<%# Bind("ItemName") %>'/>
+                                            <asp:Label ID="lblItemName" runat="server" Text='<%# Bind("Dscription") %>'/>
                                         </td>
                                         <td>
                                             <asp:TextBox ID="txtQuantityInsert" runat="server" Text='<%# Bind("Quantity") %>'/>
@@ -216,7 +216,7 @@
                                             <asp:TextBox ID="txtPriceInsert" runat="server" Text='<%# Bind("Price") %>'/>     
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtTotalInsert" runat="server" Text='<%# Bind("Total") %>'/>
+                                            <asp:TextBox ID="txtTotalInsert" runat="server" Text='<%# Bind("LineTotal") %>'/>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblWarehouse"></asp:Label>

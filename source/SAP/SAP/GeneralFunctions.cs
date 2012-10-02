@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using SAP.WebServices;
 using System.Collections;
+using System.Globalization;
 
 namespace SAP
 {
@@ -20,36 +21,8 @@ namespace SAP
         //dr("QtyDec") = 0
         //dr("PercentDec") = 2
         //dr("RateDec") = 2
-        public String SAP_Date2String(DateTime date)
-        {
-            return "";
-        }
-        public DateTime SAP_String2Date(String date)
-        {
-            return DateTime.ParseExact(date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-        }
-        public String SAP_NumberFormatString(String Para)
-        {
-            String str;
-            str = "";
-            
-            return str;
-        }
-
-        void GetDisplaySetting()
-        {
-            MasterData MD = new MasterData();
-            DataSet ds = MD.GetDisplaySetting();
-            foreach (DataRow row in ds.Tables[0].Rows)
-            {
-                String name = row[0].ToString();
-                switch (name)
-                {
-                    case "":
-                        break;
-                }
-            }
-        }
+        //DateFormat
+        //DateSep
 
         public String GetHeaderTableTag(String ObjType)
         {
@@ -132,6 +105,58 @@ namespace SAP
                     break;
             }
             return str;
+        }
+        public string Puntos(string strValor, int intNumDecimales)
+        {
+            MasterData MD = new MasterData();
+            DataSet ds = MD.GetDisplaySetting();
+
+
+
+            CultureInfo cf = new CultureInfo("en-GB");
+            string strAux = null;
+            string strComas = string.Empty;
+            string strPuntos = null;
+
+            if (strValor.Length == 0) return "";
+            strValor = strValor.Replace(cf.NumberFormat.NumberGroupSeparator, "");
+            if (strValor.Contains(cf.NumberFormat.NumberDecimalSeparator))
+            {
+                strAux = strValor.Substring(0, strValor.LastIndexOf(cf.NumberFormat.NumberDecimalSeparator));
+                strComas = strValor.Substring(strValor.LastIndexOf(cf.NumberFormat.NumberDecimalSeparator) + 1);
+            }
+            else
+            {
+                strAux = strValor;
+            }
+
+            if (strAux.Substring(0, 1) == cf.NumberFormat.NegativeSign)
+            {
+                strAux = strAux.Substring(1);
+            }
+
+            strPuntos = strAux;
+            strAux = "";
+            while (strPuntos.Length > 3)
+            {
+                strAux = cf.NumberFormat.NumberGroupSeparator + strPuntos.Substring(strPuntos.Length - 3, 3) + strAux;
+                strPuntos = strPuntos.Substring(0, strPuntos.Length - 3);
+            }
+            if (intNumDecimales > 0)
+            {
+                if (strValor.Contains(cf.NumberFormat.PercentDecimalSeparator))
+                {
+                    strComas = cf.NumberFormat.PercentDecimalSeparator + strValor.Substring(strValor.LastIndexOf(cf.NumberFormat.PercentDecimalSeparator) + 1);
+                    if (strComas.Length > intNumDecimales)
+                    {
+                        strComas = strComas.Substring(0, intNumDecimales + 1);
+                    }
+
+                }
+            }
+            strAux = strPuntos + strAux + strComas;
+
+            return strAux;
         }
     }
 }

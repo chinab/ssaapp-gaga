@@ -7,13 +7,14 @@ using System.Web.UI.WebControls;
 using System.Data;
 using SAP.WebServices;
 using System.Collections;
+using System.Globalization;
 
 namespace SAP
 {
     public partial class PurchaseOrder : System.Web.UI.Page
     {
         public static DataTable dtContents;
-        private static int idxItem = -1;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -52,7 +53,7 @@ namespace SAP
                     item = new ListItem(row[1].ToString(), row[0].ToString());
                     ddlBuyer.Items.Add(item);
                 }
-                //-------------Load Shipping Type----------------
+                //-------------Load Shipping Type---------------------
                 DataSet ShippingType = masterDataWS.GetShippingType();
                 ListItem itemShipping = new ListItem();
                 foreach (DataRow row in ShippingType.Tables[0].Rows)
@@ -151,7 +152,7 @@ namespace SAP
                             dr["TaxRate"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
                             dr["Whse"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
                             //dt.Rows.      
-                            updateTableTotalPrice(dtContents);
+                            updateTableTotalPrice();
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         }
@@ -230,21 +231,6 @@ namespace SAP
 
         }
 
-        protected void setDefaultItemValue(DataRow row)
-        {
-            //row["No"] = dtContents.Rows.Count;
-            row["Code"] = "";
-            row["Description"] = "";
-            row["Quantity"] = "";
-            row["UnitPrice"] = "";
-            row["ContractDiscount"] = "";
-            row["PriceAfterDiscount"] = "";
-            row["Total"] = "0.0";
-            row["TaxCode"] = "";
-            row["TaxRate"] = "";
-            row["Whse"] = "";
-        }
-
         private void ResetLineNo()
         {
             int i = 0;
@@ -274,7 +260,8 @@ namespace SAP
                         String vat = row["TaxCode"].ToString();
                         String UnitPrice = row["UnitPrice"].ToString();
 
-                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice),"");
+
+                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice), "");
                         objInfo.AddOrderItem(objOrder);
                     }
                 }
@@ -381,7 +368,7 @@ namespace SAP
                     TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
                     Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
                     dtContents.Rows[item.DataItemIndex]["Quantity"] = geIntFromObject(txtQuantity.Text);
-                    updateTableTotalPrice(dtContents);
+                    updateTableTotalPrice();
                     this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
 
@@ -392,12 +379,6 @@ namespace SAP
 
         protected void _btnAddRecord_Click(object sender, EventArgs e)
         {
-            /*this.lvContents.InsertItemPosition = InsertItemPosition.FirstItem;
-            this.btnAddRecord.Enabled = false;
-            this.lvContents.EditIndex = -1;
-            this.lvContents.DataSource = dtContents;
-            this.lvContents.DataBind();*/
-
             int iNo = GetNo();
             dtContents.Rows.Add(iNo, "", this.txtVendor.Text, "", "1", "0", "0", "0", "0", "", "", "", "", "", "", "", "", "", "");
             this.lvContents.DataSource = dtContents;
@@ -431,13 +412,15 @@ namespace SAP
                     {
                         if (row["No"].ToString().Equals(lblNo.Text))
                         {
+                            //updateRowTotalPrice(row);
                             row["Code"] = ((Label)lvi.FindControl("lblCode")).Text;
                             row["Description"] = ((Label)lvi.FindControl("lblDescription")).Text;
                             row["Quantity"] = ((TextBox)lvi.FindControl("txtQuantity")).Text;
                             row["UnitPrice"] = ((TextBox)lvi.FindControl("txtUnitPrice")).Text;
                             row["ContractDiscount"] = ((TextBox)lvi.FindControl("txtDiscount")).Text;
-                            row["PriceAfterDiscount"] = ((Label)lvi.FindControl("lblPriceAfterDiscount")).Text;
-                            row["Total"] = ((Label)lvi.FindControl("lblTotal")).Text;
+                            updateRowTotalPrice(row);
+                            //row["PriceAfterDiscount"] = ((Label)lvi.FindControl("lblPriceAfterDiscount")).Text;
+                            //row["Total"] = ((Label)lvi.FindControl("lblTotal")).Text;
                             row["TaxCode"] = ((Label)lvi.FindControl("lblTaxcode")).Text;
                             row["Whse"] = ((Label)lvi.FindControl("lblWhse")).Text;
                             row["TaxRate"] = ((Label)lvi.FindControl("lblTaxRate")).Text;
@@ -446,6 +429,7 @@ namespace SAP
                             row["CC2"] = ((Label)lvi.FindControl("lblCC2")).Text;
                             row["CC3"] = ((Label)lvi.FindControl("lblCC3")).Text;
                             row["CC4"] = ((Label)lvi.FindControl("lblCC4")).Text;
+                            updateTableTotalPrice();
                             break;
                         }
                     }
@@ -457,7 +441,7 @@ namespace SAP
                 case "DeleteItem":
                     // delete data and update dt
                     int i_idx = e.Item.DataItemIndex;
-                    dtContents.Rows.RemoveAt(i_idx);// code for dummy
+                    dtContents.Rows.RemoveAt(i_idx);
                     this.lvContents.EditIndex = -1;
                     ResetLineNo();
                     this.lvContents.DataSource = dtContents;
@@ -471,7 +455,19 @@ namespace SAP
 
         protected void lvContents_ItemEditing(object sender, ListViewEditEventArgs e)
         {
+            
             this.lvContents.EditIndex = e.NewEditIndex;
+
+            string lsQty = dtContents.Rows[e.NewEditIndex]["Quantity"].ToString();
+            string lsUPr = dtContents.Rows[e.NewEditIndex]["UnitPrice"].ToString();
+            string lsPriAftDis = dtContents.Rows[e.NewEditIndex]["PriceAfterDiscount"].ToString();
+            string lsTotal = dtContents.Rows[e.NewEditIndex]["Total"].ToString();
+
+            dtContents.Rows[e.NewEditIndex]["Quantity"] = lsQty.Replace(",", "");
+            dtContents.Rows[e.NewEditIndex]["UnitPrice"] = lsUPr.Replace(",", "");
+            dtContents.Rows[e.NewEditIndex]["PriceAfterDiscount"] = lsPriAftDis.Replace(",", "");
+            dtContents.Rows[e.NewEditIndex]["Total"] = lsTotal.Replace(",", "");
+
             this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
         }
@@ -489,44 +485,9 @@ namespace SAP
 
         protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
         {
-            /*ListViewItem lvi = e.Item;
-            //string lblNo = ((Label)lvi.FindControl("lblNo")).Text;
-            string lblCode = ((Label)lvi.FindControl("lblCode")).Text;
-            string lblDesc = ((Label)lvi.FindControl("lblDescription")).Text;
-            string txtQty = ((TextBox)lvi.FindControl("txtQuantity")).Text;
-            string lblUPrice = ((TextBox)lvi.FindControl("txtUnitPrice")).Text;
-            string lblDisc = ((TextBox)lvi.FindControl("txtDiscount")).Text;
-            string lblPriceAftDisc = ((TextBox)lvi.FindControl("txtPriceAfterDiscount")).Text;
-            string lblTotal = ((TextBox)lvi.FindControl("txtTotal")).Text;
-            string lblTaxcode = ((Label)lvi.FindControl("lblTaxcode")).Text;
-            string lblWhse = ((Label)lvi.FindControl("lblWhse")).Text;
-            string lblTaxRate = ((Label)lvi.FindControl("lblTaxRate")).Text;
-            string lblProfitCode = ((Label)lvi.FindControl("lblProfitCode")).Text;
-            string lblCC1 = ((Label)lvi.FindControl("lblCC1")).Text;
-            string lblCC2 = ((Label)lvi.FindControl("lblCC2")).Text;
-            string lblCC3 = ((Label)lvi.FindControl("lblCC3")).Text;
-            string lblCC4 = ((Label)lvi.FindControl("lblCC4")).Text;
-
-            int i_rc = dtContents.Rows.Count;
-
-            dtContents.Rows.Add(i_rc, lblCode, this.txtVendor.Text, lblDesc, txtQty, lblUPrice, lblDisc, lblPriceAftDisc, lblTotal, lblTaxcode, lblTaxRate, lblWhse, "", "", lblProfitCode, lblCC1, lblCC2, lblCC3, lblCC4);
-            this.lvContents.DataSource = dtContents;
-            this.lvContents.DataBind();
-            this._cancelAddNew();*/
-          
-            //DataRow newRow = dtContents.NewRow();
-            //setDefaultItemValue(newRow);
-            //dtContents.Rows.Add(newRow);
-            //this.lvContents.DataSource = dtContents;
-            //this.lvContents.DataBind();
-            //this._cancelAddNew();
+            
         }
         #endregion
-
-        protected void tb_TextChanged(object sender, EventArgs e)
-        {
-            //string str = ((TextBox)sender).Text;
-        }
 
         protected void imgbCancel_CancelAddNew(object sender, EventArgs e)
         {
@@ -538,24 +499,23 @@ namespace SAP
         {
             this.lvContents.InsertItemPosition = InsertItemPosition.None;
             this.btnAddRecord.Enabled = true;
-
             this.lvContents.DataBind();
         }
         #endregion
 
         #region priceCalculation
-        protected void updateTableTotalPrice(DataTable dtInput)
+        protected void updateTableTotalPrice()
         {
-            /*double orderTotalBeforeDiscount = 0.0;
+            double orderTotalBeforeDiscount = 0.0;
             double orderTotal = 0.0;
             double taxTotal = 0.0;
-            for (int i = 0; i < dtInput.Rows.Count; i++)
+
+            foreach(DataRow row in dtContents.Rows)
             {
-                if (!"".Equals(dtInput.Rows[i]["Code"]))
+                //if (!"".Equals(row["Code"]))
                 {
-                    updateRowTotalPrice(dtInput, i);
-                    double total = getDoubleFromObject(dtInput.Rows[i]["Total"]);
-                    double taxRate = getDoubleFromObject(dtInput.Rows[i]["TaxRate"]);
+                    double total = getDoubleFromObject(row["Total"].ToString().Replace(",", ""));
+                    double taxRate = getDoubleFromObject(row["TaxRate"]);
                     if (taxRate == 0)
                         taxRate = 10;
                     double tax = total * taxRate / 100;
@@ -563,15 +523,14 @@ namespace SAP
                     orderTotalBeforeDiscount += total;
                     taxTotal += tax;
                 }
-                dtInput.Rows[i]["No"] = i;
             }
-            this.txtTotalDiscount.Text = orderTotalBeforeDiscount.ToString();
-            this.txtTax.Text = taxTotal.ToString();
+            this.txtTotalDiscount.Text = Puntos(orderTotalBeforeDiscount.ToString(), 2);
+            this.txtTax.Text = Puntos(taxTotal.ToString(), 2);
             orderTotal = orderTotalBeforeDiscount + taxTotal;
-            this.txtTotalPayment.Text = orderTotal.ToString();*/
+            this.txtTotalPayment.Text = Puntos(orderTotal.ToString(), 2);
         }
 
-        public void updateRowTotalPrice(DataTable dtInput, int rowNumber)
+        public void updateRowTotalPrice(DataRow row)
         {
             int quantity = 0;
             double unitPrice = 0.0;
@@ -579,22 +538,18 @@ namespace SAP
             double priceAfterDiscount = 0.0;
             double total = 0;
             //double totalBeforeDiscount = 0.0;
-
-            DataRow row = dtInput.Rows[rowNumber];
             quantity = geIntFromObject(row["Quantity"]);
             unitPrice = getDoubleFromObject(row["UnitPrice"]);
             discountContract = getDoubleFromObject(row["ContractDiscount"]);
-            priceAfterDiscount = getDoubleFromObject(row["PriceAfterDiscount"]);
+            //priceAfterDiscount = getDoubleFromObject(row["PriceAfterDiscount"]);
             total = getDoubleFromObject(row["Total"]);
-
-            //unitPrice = orgPrice - discountPromo;
+            
             priceAfterDiscount = unitPrice * (100 - discountContract) / 100;
             total = priceAfterDiscount * quantity;
-
-            row["UnitPrice"] = unitPrice;
-            row["PriceAfterDiscount"] = priceAfterDiscount;
-            row["Total"] = total;
-
+            row["UnitPrice"] = Puntos(unitPrice.ToString(), 2);
+            row["PriceAfterDiscount"] = Puntos(priceAfterDiscount.ToString(), 2);
+            row["Total"] = Puntos(total.ToString(), 2);
+            row["Quantity"] = Puntos(quantity.ToString(), 2);
         }
 
         public double getDoubleFromObject(Object input)
@@ -630,12 +585,6 @@ namespace SAP
 
         #endregion
 
-        protected void lvContents_ItemCreated(object sender, ListViewItemEventArgs e)
-        {
-            //ListViewItem lvi = e.Item;
-            
-        }
-
         protected void lvContents_ItemUpdating(object sender, ListViewUpdateEventArgs e)
         {
             this.lvContents.EditIndex = -1;
@@ -643,9 +592,70 @@ namespace SAP
             this.lvContents.DataBind();
         }
 
-        protected void lvContents_ItemDataBound(object sender, ListViewItemEventArgs e)
+        protected void lvContents_ItemCreated(object sender, ListViewItemEventArgs e)
         {
 
         }
+
+        protected void lvContents_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            
+
+        }
+
+       public string Puntos(string strValor, int intNumDecimales)
+       {
+           CultureInfo cf = new CultureInfo("en-GB");
+            string strAux = null;
+            string strComas = string.Empty;
+            string strPuntos = null;
+           
+            if (strValor.Length == 0) return "";
+            strValor = strValor.Replace(cf.NumberFormat.NumberGroupSeparator, "");
+            if (strValor.Contains(cf.NumberFormat.NumberDecimalSeparator))
+            {
+                strAux = strValor.Substring(0, strValor.LastIndexOf(cf.NumberFormat.NumberDecimalSeparator));
+                strComas = strValor.Substring(strValor.LastIndexOf(cf.NumberFormat.NumberDecimalSeparator) + 1);
+            }
+            else 
+            {
+                strAux = strValor;
+            }
+   
+            if (strAux.Substring(0, 1) == cf.NumberFormat.NegativeSign) 
+            {
+                strAux = strAux.Substring(1);
+            }
+   
+            strPuntos = strAux;
+            strAux = "";
+            while (strPuntos.Length > 3) 
+            {
+                strAux = cf.NumberFormat.NumberGroupSeparator + strPuntos.Substring(strPuntos.Length - 3, 3) + strAux;
+                strPuntos = strPuntos.Substring(0, strPuntos.Length - 3);
+            }
+            if (intNumDecimales > 0)
+            {
+                if (strValor.Contains(cf.NumberFormat.PercentDecimalSeparator)) 
+                {
+                    strComas = cf.NumberFormat.PercentDecimalSeparator + strValor.Substring(strValor.LastIndexOf(cf.NumberFormat.PercentDecimalSeparator) + 1);
+                    if (strComas.Length > intNumDecimales) 
+                    {
+                        strComas = strComas.Substring(0, intNumDecimales + 1);
+                    }
+           
+                }
+            }
+            strAux = strPuntos + strAux + strComas;
+    
+            return strAux;
+        }
+
+       protected void txtTotalDiscount_TextChanged(object sender, EventArgs e)
+       {
+           
+           
+       }
+
     }
 }

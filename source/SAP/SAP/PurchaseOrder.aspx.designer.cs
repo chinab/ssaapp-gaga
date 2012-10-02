@@ -184,6 +184,15 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.ListView lvContents;
         
         /// <summary>
+        /// lvDataPager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataPager lvDataPager1;
+        
+        /// <summary>
         /// txtShipTo control.
         /// </summary>
         /// <remarks>

@@ -144,7 +144,7 @@
                             <li><a href="#tabs-2">Logistics</a></li>
                             <li><a href="#tabs-3">Accounting</a></li>
                         </ul>
-                        <div id="tabs-1" style="overflow: auto; height: 300px;">
+                        <div id="tabs-1" style="overflow: auto; height: 250px;">
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" OnClick="_btnAddRecord_Click" />
                             <br />
                             <asp:ListView ID="lvContents" runat="server" OnItemInserted="lvContents_ItemInserted"
@@ -325,7 +325,7 @@
                                         </td>
                                         <td>
                                             <asp:TextBox Enabled='<%#"N".Equals(Eval("QuantityEnable")) ? false : true%>' ID="txtQuantity"
-                                                runat="server" Text='<%#Eval("Quantity")%>' ontextchanged="tb_TextChanged" onkeypress="return Main.integer_textbox_keypress(event);" />
+                                                runat="server" Text='<%#Eval("Quantity")%>'  onkeypress="return Main.integer_textbox_keypress(event);" />
                                         </td>
                                         <td>
                                             <asp:TextBox ID="txtUnitPrice" runat="server" Text='<%# Bind("UnitPrice")%>' />
@@ -537,6 +537,11 @@
                                     </table>
                                 </EmptyDataTemplate>
                             </asp:ListView>
+                            <asp:DataPager ID="lvDataPager1" runat="server" PagedControlID="lvContents" PageSize="5">
+                                <Fields>
+                                    <asp:NumericPagerField ButtonType="Link" />
+                                </Fields>
+                            </asp:DataPager>
                         </div>
                         <div id="tabs-2">
                             <table class="detail_table">
@@ -741,7 +746,8 @@
                                     <span>Total before discount</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtTotalDiscount" runat="server"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTotalDiscount" runat="server" 
+                                        ontextchanged="txtTotalDiscount_TextChanged"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>

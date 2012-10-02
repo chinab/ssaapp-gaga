@@ -5,16 +5,19 @@ using System.Linq;
 using System.Web;
 using System.Text;
 using System.Xml;
+using System.Data;
 
 namespace SAP
 {
     public class DocumentXML
     {
+        #region Will be deleted
         private const String ROOT_ELEMENT = "BOM";
         private const String BO_ELEMENT = "BO";
         private const String ADMINFO_ELEMENT = "AdmInfo";
         private const String OBJECT_ELEMENT = "Object";
         private const String ROW_ELEMENT = "row";
+
         private const String DOCDATE_ELEMENT = "DocDate";
         private const String DOCDUEDATE_ELEMENT = "DocDueDate";
         private const String TAXDATE_ELEMENT = "TaxDate";
@@ -45,7 +48,7 @@ namespace SAP
         private const String CC4_ELEMENT = "OcrCode4";
         private const String GLACCT_ELEMENT = "AcctCode";
 
-
+        
         private String _OPOR_ELEMENT;
 
         public String OPOR_ELEMENT
@@ -217,7 +220,7 @@ namespace SAP
                         writer.WriteEndElement();
                         #endregion
 
-                        #region write OPOR tag
+                        #region Header XML
                        // writer.WriteStartElement(PurchaseInfo.OPOR_ELEMENT); // write OPOR tag
                         writer.WriteStartElement(this.OPOR_ELEMENT); 
                         {
@@ -265,8 +268,7 @@ namespace SAP
                         writer.WriteEndElement();
                         #endregion
 
-                        //write POR items
-                        #region write POR items
+                        #region Lines XML
                         {
                             if (_OrderItems != null)
                             {
@@ -355,5 +357,92 @@ namespace SAP
 
             return XmlString.ToString();
         }
+        #endregion
+
+
+        public String ToXMLStringFromDS(String ObjType, DataTable ds, DataTable ds1)
+        {
+            GeneralFunctions gf = new GeneralFunctions();
+            StringBuilder XmlString = new StringBuilder();
+            XmlWriter writer = XmlWriter.Create(XmlString);
+            writer.WriteStartDocument();
+            {
+                writer.WriteStartElement("BOM");
+                {
+                    writer.WriteStartElement("BO");
+                    {
+                        #region write ADMINFO_ELEMENT
+                        writer.WriteStartElement("AdmInfo");
+                        {
+                            writer.WriteStartElement("Object");
+                            {
+                                writer.WriteString(ObjType);
+                            }
+                            writer.WriteEndElement();
+                        }
+                        writer.WriteEndElement();
+                        #endregion
+
+                        #region Header XML
+                        foreach (DataRow row in ds.Rows)
+                        {
+                            writer.WriteStartElement(gf.GetHeaderTableTag(ObjType));
+                            {
+                                writer.WriteStartElement("row");
+                                {
+                                    foreach (DataColumn column in ds.Columns)
+                                    {
+                                        if (column.ColumnName!="No")
+                                        {
+                                            writer.WriteStartElement(column.ColumnName); //Write Tag
+                                            {
+                                                writer.WriteString(row[column].ToString());
+                                            }
+                                            writer.WriteEndElement();
+                                        }
+                                    }
+                                }
+                                writer.WriteEndElement();
+                            }
+                            writer.WriteEndElement();
+                        }
+                        #endregion
+
+                       #region LineXML 1
+                       foreach (DataRow row in ds1.Rows)
+                        {
+                            writer.WriteStartElement(gf.GetLineTableTag(ObjType,1));
+                            {
+                                writer.WriteStartElement("row");
+                                {
+                                    foreach (DataColumn column in ds1.Columns)
+                                    {
+                                        if (column.ColumnName != "No")
+                                        {
+                                            writer.WriteStartElement(column.ColumnName); //Write Tag
+                                            {
+                                                writer.WriteString(row[column].ToString());
+                                            }
+                                            writer.WriteEndElement();
+                                        }
+                                    }
+                                }
+                                writer.WriteEndElement();
+                            }
+                            writer.WriteEndElement();
+                        }
+                        #endregion
+                    }
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+            }
+            writer.WriteEndDocument();
+
+            writer.Flush();
+
+            return XmlString.ToString();
+        }
+       
     }
 }

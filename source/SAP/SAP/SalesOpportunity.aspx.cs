@@ -12,6 +12,7 @@ namespace SAP
 {
     public partial class SalesOpportunity : System.Web.UI.Page
     {
+        public static DataTable dtHeader;
         public static DataTable dtStage;
         public static DataTable dtPartner;
         public static DataTable dtCompetitor;
@@ -20,21 +21,36 @@ namespace SAP
         {
             if (!IsPostBack)
             {
+                dtHeader = new DataTable();
+                dtHeader.Columns.Add("CardCode");
+                dtHeader.Columns.Add("SlpCode");
+                dtHeader.Columns.Add("OpenDate");
+                dtHeader.Columns.Add("Source");
+                dtHeader.Columns.Add("Territory");
+                dtHeader.Columns.Add("CardName");
+                dtHeader.Columns.Add("CprCode");
+                dtHeader.Columns.Add("OpenDate");
+                dtHeader.Columns.Add("MaxSumLoc");
+                dtHeader.Columns.Add("Name");
+                dtHeader.Rows.Add("", "", "", "","","", "", "", "","");
+
+
                 dtStage = new DataTable();
                 dtStage.Columns.Add("No");
-                dtStage.Columns.Add("StartDate");
-                dtStage.Columns.Add("ClosingDate");
-                dtStage.Columns.Add("SalesEmployee");
-                dtStage.Columns.Add("Stage");
-                dtStage.Columns.Add("Percent");
-                dtStage.Columns.Add("PotentialAmt");
-                dtStage.Columns.Add("WeightedAmt");
-                dtStage.Columns.Add("DocType");
-                dtStage.Columns.Add("ShowBP");
-                dtStage.Columns.Add("DocNo");
-                dtStage.Columns.Add("SalesEmployeeCode");
-                dtStage.Columns.Add("StageCode");
-                dtStage.Columns.Add("DocTypeCode");
+                dtStage.Columns.Add("OpenDate");
+                dtStage.Columns.Add("CloseDate");
+                dtStage.Columns.Add("ClosePrcnt");
+                dtStage.Columns.Add("MaxSumLoc");
+                dtStage.Columns.Add("WtSumLoc");
+                dtStage.Columns.Add("DocChkbox");
+                dtStage.Columns.Add("SlpCode");
+                dtStage.Columns.Add("Step_Id");
+                dtStage.Columns.Add("DocNumber");
+
+                dtStage.Columns.Add("DocType");//need to remove
+                dtStage.Columns.Add("Stage");//need to remove
+                dtStage.Columns.Add("SalesEmployee");//need to remove
+                dtStage.Columns.Add("Stage");//need to remove
 
                 this.lvStage.DataSource = dtStage;
                 this.lvStage.DataBind();
@@ -169,45 +185,68 @@ namespace SAP
         {
             try
             {
-                OpportunityXML objInfo = new OpportunityXML("97", this.txtStartDate.Text,txtPredDate.Text, this.txtCustomerCode.Text, User.Identity.Name
-                    ,txtPotentialAmt.Text);
+                //Update table header
+                    DataRow dr = dtHeader.Rows[0];
+                    dr["CardCode"] = txtCustomerCode.Text;
+                    dr["SlpCode"] = ddlBuyer.Text; 
+                    dr["OpenDate"] = txtStartDate.Text;
+                    dr["Source"] = "";
+                    dr["Territory"] = "";
+                    dr["CardName"] = ""; 
+                    dr["CprCode"] = "";
+                    dr["OpenDate"] = "";
+                    dr["MaxSumLoc"] = txtPotentialAmt.Text;
+                    dr["Name"] = ""; 
 
-                for (int i = 0; i < dtStage.Rows.Count; i++)
-                {
-                    DataRow row = dtStage.Rows[i];
-                    int stagecode = int.Parse(row["StageCode"].ToString());
-                    if (stagecode!=0)
+                    //Remove row with empty itemcode
+                    foreach (DataRow row in dtStage.Rows)
                     {
-                        String StartDate=row["StartDate"].ToString();
-                        String ClosingDate=null;
-
-                        if (!String.IsNullOrEmpty(row["ClosingDate"].ToString()))
+                        if (row["ItemCode"].ToString()=="")
                         {
-                            ClosingDate = row["ClosingDate"].ToString();
+                            row.Delete();
                         }
-                        int SalesEmployee=0;
-
-                        if (!String.IsNullOrEmpty(row["SalesEmployeeCode"].ToString()))
-                        {
-                            SalesEmployee = int.Parse(row["SalesEmployeeCode"].ToString());
-                        }
-                        Double Percent = Double.Parse(row["Percent"].ToString()); 
-                        Double PotentialAmt = Double.Parse(row["PotentialAmt"].ToString());
-                        Double WeightedAmt = Double.Parse(row["WeightedAmt"].ToString()); 
-                        String DocType = row["DocTypeCode"].ToString();
-                        int DocNo = -1;
-                        if (!String.IsNullOrEmpty(row["DocNo"].ToString()))
-                        {
-                            DocNo = int.Parse(row["DocNo"].ToString());
-                        }
-                        
-                        String ShowBP=row["ShowBP"].ToString();
-
-                        Opportunity_StageXML objOrder = new Opportunity_StageXML(StartDate,ClosingDate,stagecode,Percent,DocNo,ShowBP,DocType,PotentialAmt,SalesEmployee,WeightedAmt);
-                        objInfo.AddStageLine(objOrder);
                     }
-                }
-                return objInfo.ToXMLString();
+                    DocumentXML objInfo = new DocumentXML("", "", "", "","", "", "");
+                    return objInfo.ToXMLStringFromDS("97",dtHeader,dtStage);
+                //OpportunityXML objInfo = new OpportunityXML("97", this.txtStartDate.Text,txtPredDate.Text, this.txtCustomerCode.Text, User.Identity.Name
+                //    ,txtPotentialAmt.Text);
+
+                //for (int i = 0; i < dtStage.Rows.Count; i++)
+                //{
+                //    DataRow row = dtStage.Rows[i];
+                //    int stagecode = int.Parse(row["StageCode"].ToString());
+                //    if (stagecode!=0)
+                //    {
+                //        String StartDate=row["StartDate"].ToString();
+                //        String ClosingDate=null;
+
+                //        if (!String.IsNullOrEmpty(row["ClosingDate"].ToString()))
+                //        {
+                //            ClosingDate = row["ClosingDate"].ToString();
+                //        }
+                //        int SalesEmployee=0;
+
+                //        if (!String.IsNullOrEmpty(row["SalesEmployeeCode"].ToString()))
+                //        {
+                //            SalesEmployee = int.Parse(row["SalesEmployeeCode"].ToString());
+                //        }
+                //        Double Percent = Double.Parse(row["Percent"].ToString()); 
+                //        Double PotentialAmt = Double.Parse(row["PotentialAmt"].ToString());
+                //        Double WeightedAmt = Double.Parse(row["WeightedAmt"].ToString()); 
+                //        String DocType = row["DocTypeCode"].ToString();
+                //        int DocNo = -1;
+                //        if (!String.IsNullOrEmpty(row["DocNo"].ToString()))
+                //        {
+                //            DocNo = int.Parse(row["DocNo"].ToString());
+                //        }
+                        
+                //        String ShowBP=row["ShowBP"].ToString();
+
+                //        Opportunity_StageXML objOrder = new Opportunity_StageXML(StartDate,ClosingDate,stagecode,Percent,DocNo,ShowBP,DocType,PotentialAmt,SalesEmployee,WeightedAmt);
+                //        objInfo.AddStageLine(objOrder);
+                //    }
+                //}
+                //return objInfo.ToXMLString();
             }
             catch (Exception)
             {
@@ -267,18 +306,18 @@ namespace SAP
                     {
                         if (row["No"].ToString().Equals(lblNo.Text))
                         {
-                            row["StartDate"] = ((TextBox)lvi.FindControl("txtStartDateEdit")).Text;
-                            row["ClosingDate"] = ((TextBox)lvi.FindControl("txtClosingDateEdit")).Text;
+                            row["OpenDate"] = ((TextBox)lvi.FindControl("txtStartDateEdit")).Text;
+                            row["CloseDate"] = ((TextBox)lvi.FindControl("txtClosingDateEdit")).Text;
                             row["SalesEmployee"] = ((DropDownList)lvi.FindControl("ddlSalesEmployeeEdit")).SelectedItem.Text;
                             row["Stage"] = ((DropDownList)lvi.FindControl("ddlStageEdit")).SelectedItem.Text;
-                            row["Percent"] = ((TextBox)lvi.FindControl("txtPercentEdit")).Text;
-                            row["PotentialAmt"] = ((TextBox)lvi.FindControl("txtPotentialAmtEdit")).Text;
-                            row["WeightedAmt"] = ((TextBox)lvi.FindControl("txtWeightedAmtEdit")).Text;
+                            row["ClosePrcnt"] = ((TextBox)lvi.FindControl("txtPercentEdit")).Text;
+                            row["MaxSumLoc"] = ((TextBox)lvi.FindControl("txtPotentialAmtEdit")).Text;
+                            row["WtSumLoc"] = ((TextBox)lvi.FindControl("txtWeightedAmtEdit")).Text;
                             row["DocType"] = ((DropDownList)lvi.FindControl("ddlDocTypeEdit")).SelectedItem.Text;
 
-                            row["SalesEmployeeCode"] = ((DropDownList)lvi.FindControl("ddlSalesEmployeeEdit")).SelectedValue;
-                            row["StageCode"] = ((DropDownList)lvi.FindControl("ddlStageEdit")).SelectedValue;
-                            row["DocTypeCode"] = ((DropDownList)lvi.FindControl("ddlDocTypeEdit")).SelectedValue;
+                            row["SlpCode"] = ((DropDownList)lvi.FindControl("ddlSalesEmployeeEdit")).SelectedValue;
+                            row["Step_Id"] = ((DropDownList)lvi.FindControl("ddlStageEdit")).SelectedValue;
+                            row["ObjType"] = ((DropDownList)lvi.FindControl("ddlDocTypeEdit")).SelectedValue;
                             break;
                         }
                     }
@@ -419,47 +458,7 @@ namespace SAP
         
         protected void lvStage_ItemUpdating(object sender, ListViewUpdateEventArgs e)
         {
-            /*string StartDate = "", ClosingDate = "", SalesEmployee = "", Stage = "", Percent = "", PotentialAmt = "", WeightedAmt = "", DocType = "", ShowBP = "", DocNo = "";
-            
-            TextBox txt = (lvStage.FindControl("txtStartDateEdit")) as TextBox;
-            if (txt != null)
-                StartDate = txt.Text;
-
-            txt = (lvStage.FindControl("txtClosingDateEdit")) as TextBox;
-            if (txt != null)
-                ClosingDate = txt.Text;
-
-            DropDownList ddl = (lvStage.FindControl("ddlSalesEmployeeEdit")) as DropDownList;
-            if (ddl != null)
-                SalesEmployee = ddl.SelectedValue;
-
-            ddl = (lvStage.FindControl("ddlStageEdit")) as DropDownList;
-            if (ddl != null)
-                Stage = ddl.SelectedValue;
-
-            txt = (lvStage.FindControl("txtPercentEdit")) as TextBox;
-            if (txt != null)
-                Percent = txt.Text;
-
-            txt = (lvStage.FindControl("txtPotentialAmtEdit")) as TextBox;
-            if (txt != null)
-                PotentialAmt = txt.Text;
-
-            txt = (lvStage.FindControl("txtWeightedAmtEdit")) as TextBox;
-            if (txt != null)
-                WeightedAmt = txt.Text;
-
-            ddl = (lvStage.FindControl("ddlDocTypeEdit")) as DropDownList;
-            if (ddl != null)
-                DocType = ddl.SelectedValue;
-
-            CheckBox ck = (lvStage.FindControl("ckShowBPEdit")) as CheckBox;
-            if (ddl != null)
-                ShowBP = "Y";
-
-            txt = (lvStage.FindControl("txtDocNoEdit")) as TextBox;
-            if (txt != null)
-                DocNo = txt.Text;*/
+           
 
             //dtStage.Rows.Add(1, StartDate, ClosingDate, SalesEmployee, Stage, Percent, PotentialAmt, WeightedAmt, DocType, ShowBP, DocNo);
             this.lvStage.EditIndex = -1;

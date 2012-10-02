@@ -13,7 +13,7 @@ namespace SAP
     public partial class GoodsReceipt : System.Web.UI.Page
     {
         public static DataTable dtItem;
-
+        public static DataTable dtHeader;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,12 +21,19 @@ namespace SAP
                 dtItem = new DataTable();
                 dtItem.Columns.Add("No");
                 dtItem.Columns.Add("ItemCode");
-                dtItem.Columns.Add("ItemName");
+                dtItem.Columns.Add("Dscription");
                 dtItem.Columns.Add("Quantity");
                 dtItem.Columns.Add("Price");
-                dtItem.Columns.Add("Total");
-                dtItem.Columns.Add("Warehouse");
-                dtItem.Columns.Add("Account");
+                dtItem.Columns.Add("LineTotal");
+                dtItem.Columns.Add("WhsCode");
+                dtItem.Columns.Add("AcctCode");
+
+                dtHeader = new DataTable();
+                dtHeader.Columns.Add("DocDate");
+                dtHeader.Columns.Add("DocDueDate");
+                dtHeader.Columns.Add("Comments");
+                dtHeader.Columns.Add("JrnlMemo");
+                dtHeader.Rows.Add("20121001", "20121001","From SAP WEB","Goods Receipts JE Remark");
 
                 this.lvStage.DataSource = dtItem;
                 this.lvStage.DataBind();
@@ -50,18 +57,15 @@ namespace SAP
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
                         if (chosenItem != null)
                         {
-                            //dtItem.Rows.Add(GetNo(), "", "", 1, "0", "0", "", "");
-                            // update grid
                             DataRow dr = dtItem.Rows[itemNo-1];
                             dr["No"] = itemNo;
                             dr["ItemCode"] = chosenItem.ItemCode;
-                            dr["ItemName"] = chosenItem.ItemName;
+                            dr["Dscription"] = chosenItem.ItemName;
                             dr["Quantity"] = 1;
                             dr["Price"] = "0";
-                            dr["Total"] = "0";
+                            dr["LineTotal"] = "0";
                             this.lvStage.DataSource = dtItem;
                             this.lvStage.DataBind();
-                            //this._StageCancelAddNew();
                         }
                         break;
                     case "EditWareHouseCallBack":
@@ -70,7 +74,7 @@ namespace SAP
                         if (chosenWarehouse != null)
                         {
                             DataRow dr = dtItem.Rows[itemNo-1];
-                            dr["Warehouse"] = chosenWarehouse.WhsCode;
+                            dr["WhsCode"] = chosenWarehouse.WhsCode;
                             this.lvStage.DataSource = dtItem;
                             this.lvStage.DataBind();
                         }
@@ -81,7 +85,7 @@ namespace SAP
                         if (Account != null)
                         {
                             DataRow dr = dtItem.Rows[itemNo-1];
-                            dr["Account"] = Account.AcctCode;
+                            dr["AcctCode"] = Account.AcctCode;
                             this.lvStage.DataSource = dtItem;
                             this.lvStage.DataBind();
                         }
@@ -142,12 +146,12 @@ namespace SAP
                             if (row["No"].ToString().Equals(lblNo.Text))
                             {
                                 row["ItemCode"] = ((Label)lvi.FindControl("lblItemCode")).Text;
-                                row["ItemName"] = ((Label)lvi.FindControl("lblItemName")).Text;
+                                row["Dscription"] = ((Label)lvi.FindControl("lblItemName")).Text;
                                 row["Quantity"] = ((TextBox)lvi.FindControl("txtQuantityEdit")).Text;
                                 row["Price"] = ((TextBox)lvi.FindControl("txtPriceEdit")).Text;
-                                row["Total"] = ((TextBox)lvi.FindControl("txtTotalEdit")).Text;
-                                row["Warehouse"] = ((Label)lvi.FindControl("lblWarehouse")).Text;
-                                row["Account"] = ((Label)lvi.FindControl("lblAccount")).Text;
+                                row["LineTotal"] = ((TextBox)lvi.FindControl("txtTotalEdit")).Text;
+                                row["WhsCode"] = ((Label)lvi.FindControl("lblWarehouse")).Text;
+                                row["AcctCode"] = ((Label)lvi.FindControl("lblAccount")).Text;
                                 break;
                             }
                         }
@@ -231,31 +235,27 @@ namespace SAP
             {
                 try
                 {
-                    DocumentXML objInfo = new DocumentXML("59", this.txtPostingDate.Text, "", this.txtDocumentDate.Text,"", "", User.Identity.Name);
-
-                    for (int i = 0; i < dtItem.Rows.Count; i++)
+                    //Update table header
+                    DataRow dr = dtHeader.Rows[0];
+                    dr["DocDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
+                    dr["DocDueDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDocumentDate.Text)); 
+                    dr["Comments"] = txtRemarks.Text;
+                    dr["JrnlMemo"] = txtJournalRemark.Text;
+                    //Remove row with empty itemcode
+                    foreach (DataRow row in dtItem.Rows)
                     {
-                        DataRow row = dtItem.Rows[i];
-                        String itemcode = row["ItemCode"].ToString();
-
-                        if (!String.IsNullOrEmpty(itemcode))
+                        if (row["ItemCode"].ToString()=="")
                         {
-                            String des = row["ItemName"].ToString();
-                            String quan = row["Quantity"].ToString();
-                            String whscode = row["Warehouse"].ToString();
-                            String UnitPrice = row["Price"].ToString();
-                            String AccountCode= row["Account"].ToString();
-                            Document_LineXML objOrder = new Document_LineXML(itemcode, des, int.Parse(quan.ToString()), 0, whscode, "", double.Parse(UnitPrice.ToString()),AccountCode);
-                            objInfo.AddOrderItem(objOrder);
+                            row.Delete();
                         }
                     }
-                    return objInfo.ToXMLString();
+                    DocumentXML objInfo = new DocumentXML("59", this.txtPostingDate.Text, "", this.txtDocumentDate.Text,"", "", User.Identity.Name);
+                    return objInfo.ToXMLStringFromDS("59",dtHeader,dtItem);
                 }
                 catch (Exception)
                 {
                     throw;
                 }
-
             }
         # endregion 
 

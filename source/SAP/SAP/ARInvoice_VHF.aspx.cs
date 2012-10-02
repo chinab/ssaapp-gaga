@@ -38,7 +38,7 @@ namespace SAP
                 dt.Columns.Add("PromoEnable");
                 dt.Columns.Add("QuantityEnable");
                 
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 3; i++)
                     dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                 
                 this.lvContents.DataSource = dt;

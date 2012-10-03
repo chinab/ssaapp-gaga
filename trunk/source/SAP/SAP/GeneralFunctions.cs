@@ -24,6 +24,48 @@ namespace SAP
         //DateFormat
         //DateSep
 
+        private static MasterData MD = new MasterData();
+        private static DataSet ds = MD.GetDisplaySetting();
+        //private string decsep, thoussep;
+        //private int sumdec, pricedec, qtydec, percentdec, ratedec;
+
+        #region Properties
+        public string DecSep
+        {
+            get { return (ds.Tables[0].Rows[0]["DecSep"] == null ? "." : ds.Tables[0].Rows[0]["DecSep"].ToString()); }
+        }
+
+        public string ThousSep
+        {
+            get { return (ds.Tables[0].Rows[0]["ThousSep"] == null ? "," : ds.Tables[0].Rows[0]["ThousSep"].ToString()); }
+        }
+
+        public int SumDec
+        {
+            get { return (ds.Tables[0].Rows[0]["SumDec"] == null ? 0 : int.Parse(ds.Tables[0].Rows[0]["SumDec"].ToString())); }
+        }
+
+        public int QtyDec
+        {
+            get { return (ds.Tables[0].Rows[0]["QtyDec"] == null ? 0 : int.Parse(ds.Tables[0].Rows[0]["QtyDec"].ToString())); }
+        }
+
+        public int PriceDec
+        {
+            get { return (ds.Tables[0].Rows[0]["PriceDec"] == null ? 0 : int.Parse(ds.Tables[0].Rows[0]["PriceDec"].ToString())); }
+        }
+
+        public int PercentDec
+        {
+            get { return (ds.Tables[0].Rows[0]["PercentDec"] == null ? 2 : int.Parse(ds.Tables[0].Rows[0]["PercentDec"].ToString())); }
+        }
+
+        public int RateDec
+        {
+            get { return (ds.Tables[0].Rows[0]["RateDec"] == null ? 2 : int.Parse(ds.Tables[0].Rows[0]["RateDec"].ToString())); }
+        }
+        #endregion
+
         public String GetHeaderTableTag(String ObjType)
         {
             String str = "";
@@ -65,6 +107,7 @@ namespace SAP
             }
             return str;
         }
+
         public String GetLineTableTag(String ObjType, int num)
         {
             String str = "";
@@ -106,31 +149,111 @@ namespace SAP
             }
             return str;
         }
-        public string Puntos(string strValor, int intNumDecimales)
+
+        #region Transfer from Obj to Double
+        public Double Object2Double(Object Obj)
         {
-            MasterData MD = new MasterData();
-            DataSet ds = MD.GetDisplaySetting();
+            double result = 0.0;
+            try
+            {
+                if (Obj != null)
+                    result = Double.Parse(Obj.ToString());
+            }
+            catch (Exception ex)
+            {
+                result = 0.0;
+            }
+            return result;        
+        }
+        #endregion
 
+        #region Transfer from Obj & Display Setting Name
+        public Double Object2Double(Object Obj, string attName)
+        {
+            double result=0.0;
+            try
+            {
+                if (Obj != null)
+                {
+                    result = Double.Parse(Obj.ToString());
+                    return result = Math.Round(result, GetNumDecimals(attName));
+                }
+            }
+            catch (Exception ex)
+            {
+                result = 0.0;
+            }
+            return 0.0;
+        }
+        #endregion
 
+        #region Transfer from Obj & Display Setting Name
+        public Decimal Object2Decimal(Object Obj, string attName)
+        {
+            Decimal result;
+            try
+            {
+                if (Obj != null)
+                {
+                    result = (decimal)Obj;
+                    return result = Math.Round(result, GetNumDecimals(attName));
+                }
+            }
+            catch (Exception ex)
+            {
+                result = 0;
+            }
+            return 0;
+        }
+        #endregion
 
-            CultureInfo cf = new CultureInfo("en-GB");
+        #region Get Number Decimal of Display Setting Name
+        public int GetNumDecimals(string attName)
+        {
+            switch (attName)
+            {
+                case "SumDec":
+                    return SumDec;
+                case "PriceDec":
+                    return PriceDec;
+                case "QtyDec":
+                    return QtyDec;
+                case "PercentDec":
+                    return PercentDec;
+                case "RateDec":
+                    return RateDec;
+                default: return 0;
+            }
+        }
+        #endregion
+
+        #region FormatNumeric
+        public string FormatNumeric(string strValor, string asNumDecimales)
+        {
+            int intNumDecimales = GetNumDecimals(asNumDecimales);
+
+            string NumberGroupSeparator = this.ThousSep, NegativeSign = "-";
+            string PercentDecimalSeparator = this.DecSep, NumberDecimalSeparator = this.DecSep;
+
+            strValor = (Math.Round(Double.Parse(strValor), intNumDecimales)).ToString();
+
             string strAux = null;
             string strComas = string.Empty;
             string strPuntos = null;
 
             if (strValor.Length == 0) return "";
-            strValor = strValor.Replace(cf.NumberFormat.NumberGroupSeparator, "");
-            if (strValor.Contains(cf.NumberFormat.NumberDecimalSeparator))
+            strValor = strValor.Replace(NumberGroupSeparator, NumberDecimalSeparator);
+            if (strValor.Contains(NumberDecimalSeparator))
             {
-                strAux = strValor.Substring(0, strValor.LastIndexOf(cf.NumberFormat.NumberDecimalSeparator));
-                strComas = strValor.Substring(strValor.LastIndexOf(cf.NumberFormat.NumberDecimalSeparator) + 1);
+                strAux = strValor.Substring(0, strValor.LastIndexOf(NumberDecimalSeparator));
+                strComas = strValor.Substring(strValor.LastIndexOf(NumberDecimalSeparator) + 1);
             }
             else
             {
                 strAux = strValor;
             }
 
-            if (strAux.Substring(0, 1) == cf.NumberFormat.NegativeSign)
+            if (strAux.Substring(0, 1) == NegativeSign)
             {
                 strAux = strAux.Substring(1);
             }
@@ -139,14 +262,14 @@ namespace SAP
             strAux = "";
             while (strPuntos.Length > 3)
             {
-                strAux = cf.NumberFormat.NumberGroupSeparator + strPuntos.Substring(strPuntos.Length - 3, 3) + strAux;
+                strAux = NumberGroupSeparator + strPuntos.Substring(strPuntos.Length - 3, 3) + strAux;
                 strPuntos = strPuntos.Substring(0, strPuntos.Length - 3);
             }
             if (intNumDecimales > 0)
             {
-                if (strValor.Contains(cf.NumberFormat.PercentDecimalSeparator))
+                if (strValor.Contains(PercentDecimalSeparator))
                 {
-                    strComas = cf.NumberFormat.PercentDecimalSeparator + strValor.Substring(strValor.LastIndexOf(cf.NumberFormat.PercentDecimalSeparator) + 1);
+                    strComas = PercentDecimalSeparator + strValor.Substring(strValor.LastIndexOf(PercentDecimalSeparator) + 1);
                     if (strComas.Length > intNumDecimales)
                     {
                         strComas = strComas.Substring(0, intNumDecimales + 1);
@@ -158,5 +281,6 @@ namespace SAP
 
             return strAux;
         }
+        #endregion
     }
 }

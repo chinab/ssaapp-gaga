@@ -61,6 +61,9 @@
     <Content Include="Admin\UserProfiles.aspx" />
     <Content Include="ARInvoice_VHF.aspx" />
     <Content Include="BusinessPartnerMaster.aspx" />
+    <Content Include="Popup_EditAccount.aspx" />
+    <Content Include="GoodsReceipt.aspx" />
+    <Content Include="ServiceCall.aspx" />
     <Content Include="Popup_EditTerritory.aspx" />
     <Content Include="Popup_EditCostCenter.aspx" />
     <Content Include="Popup_EditProject.aspx" />
@@ -78,7 +81,6 @@
     <Content Include="js\menu.js" />
     <Content Include="Popup_EditItem.aspx" />
     <Content Include="Popup_EditWarehouse.aspx" />
-    <Content Include="readme.txt" />
     <Content Include="SalesOpportunity.aspx" />
     <Content Include="skin\AdminLogin.css" />
     <Content Include="skin\icon\banking.png" />
@@ -216,6 +218,27 @@
     </Compile>
     <Compile Include="BusinessPartnerMaster.aspx.designer.cs">
       <DependentUpon>BusinessPartnerMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup_EditAccount.aspx.cs">
+      <DependentUpon>Popup_EditAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditAccount.aspx.designer.cs">
+      <DependentUpon>Popup_EditAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GoodsReceipt.aspx.cs">
+      <DependentUpon>GoodsReceipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GoodsReceipt.aspx.designer.cs">
+      <DependentUpon>GoodsReceipt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceCall.aspx.cs">
+      <DependentUpon>ServiceCall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ServiceCall.aspx.designer.cs">
+      <DependentUpon>ServiceCall.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup_EditTerritory.aspx.cs">
       <DependentUpon>Popup_EditTerritory.aspx</DependentUpon>

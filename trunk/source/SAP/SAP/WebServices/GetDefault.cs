@@ -40,6 +40,12 @@ namespace SAP
 
         private System.Threading.SendOrPostCallback GetConnectionOperationCompleted;
 
+        private System.Threading.SendOrPostCallback GetLoginInfoOperationCompleted;
+
+        private System.Threading.SendOrPostCallback GetOpenDocumentOperationCompleted;
+
+        private System.Threading.SendOrPostCallback CreateUDFOperationCompleted;
+
         /// <remarks/>
         public GetDefault()
         {
@@ -64,6 +70,15 @@ namespace SAP
 
         /// <remarks/>
         public event GetConnectionCompletedEventHandler GetConnectionCompleted;
+
+        /// <remarks/>
+        public event GetLoginInfoCompletedEventHandler GetLoginInfoCompleted;
+
+        /// <remarks/>
+        public event GetOpenDocumentCompletedEventHandler GetOpenDocumentCompleted;
+
+        /// <remarks/>
+        public event CreateUDFCompletedEventHandler CreateUDFCompleted;
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetDefaultLineInfo", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -341,6 +356,156 @@ namespace SAP
         }
 
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetLoginInfo", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetLoginInfo(string UserID)
+        {
+            object[] results = this.Invoke("GetLoginInfo", new object[] {
+                    UserID});
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetLoginInfo(string UserID, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetLoginInfo", new object[] {
+                    UserID}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet EndGetLoginInfo(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetLoginInfoAsync(string UserID)
+        {
+            this.GetLoginInfoAsync(UserID, null);
+        }
+
+        /// <remarks/>
+        public void GetLoginInfoAsync(string UserID, object userState)
+        {
+            if ((this.GetLoginInfoOperationCompleted == null))
+            {
+                this.GetLoginInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetLoginInfoOperationCompleted);
+            }
+            this.InvokeAsync("GetLoginInfo", new object[] {
+                    UserID}, this.GetLoginInfoOperationCompleted, userState);
+        }
+
+        private void OnGetLoginInfoOperationCompleted(object arg)
+        {
+            if ((this.GetLoginInfoCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetLoginInfoCompleted(this, new GetLoginInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetOpenDocument", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetOpenDocument(string UserID, string CardCode, string DocType)
+        {
+            object[] results = this.Invoke("GetOpenDocument", new object[] {
+                    UserID,
+                    CardCode,
+                    DocType});
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetOpenDocument(string UserID, string CardCode, string DocType, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetOpenDocument", new object[] {
+                    UserID,
+                    CardCode,
+                    DocType}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet EndGetOpenDocument(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetOpenDocumentAsync(string UserID, string CardCode, string DocType)
+        {
+            this.GetOpenDocumentAsync(UserID, CardCode, DocType, null);
+        }
+
+        /// <remarks/>
+        public void GetOpenDocumentAsync(string UserID, string CardCode, string DocType, object userState)
+        {
+            if ((this.GetOpenDocumentOperationCompleted == null))
+            {
+                this.GetOpenDocumentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetOpenDocumentOperationCompleted);
+            }
+            this.InvokeAsync("GetOpenDocument", new object[] {
+                    UserID,
+                    CardCode,
+                    DocType}, this.GetOpenDocumentOperationCompleted, userState);
+        }
+
+        private void OnGetOpenDocumentOperationCompleted(object arg)
+        {
+            if ((this.GetOpenDocumentCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetOpenDocumentCompleted(this, new GetOpenDocumentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateUDF", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string CreateUDF()
+        {
+            object[] results = this.Invoke("CreateUDF", new object[0]);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginCreateUDF(System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("CreateUDF", new object[0], callback, asyncState);
+        }
+
+        /// <remarks/>
+        public string EndCreateUDF(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public void CreateUDFAsync()
+        {
+            this.CreateUDFAsync(null);
+        }
+
+        /// <remarks/>
+        public void CreateUDFAsync(object userState)
+        {
+            if ((this.CreateUDFOperationCompleted == null))
+            {
+                this.CreateUDFOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateUDFOperationCompleted);
+            }
+            this.InvokeAsync("CreateUDF", new object[0], this.CreateUDFOperationCompleted, userState);
+        }
+
+        private void OnCreateUDFOperationCompleted(object arg)
+        {
+            if ((this.CreateUDFCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateUDFCompleted(this, new CreateUDFCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
         public new void CancelAsync(object userState)
         {
             base.CancelAsync(userState);
@@ -493,6 +658,96 @@ namespace SAP
             {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    public delegate void GetLoginInfoCompletedEventHandler(object sender, GetLoginInfoCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetLoginInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetLoginInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    public delegate void GetOpenDocumentCompletedEventHandler(object sender, GetOpenDocumentCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetOpenDocumentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetOpenDocumentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    public delegate void CreateUDFCompletedEventHandler(object sender, CreateUDFCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateUDFCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal CreateUDFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public string Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }

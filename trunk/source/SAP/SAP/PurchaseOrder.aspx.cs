@@ -247,21 +247,24 @@ namespace SAP
             {
                 DocumentXML objInfo = new DocumentXML("22", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
 
-                for (int i = 0; i < dtContents.Rows.Count; i++)
+                foreach (DataRow row in dtContents.Rows)
                 {
-                    DataRow row = dtContents.Rows[i];
+                   
                     String itemcode = row["Code"].ToString();
 
                     if (!String.IsNullOrEmpty(itemcode))
                     {
                         String des = row["Description"].ToString();
-                        String quan = row["Quantity"].ToString();
-                        String discount = row["ContractDiscount"].ToString();
+                        //String quan = row["Quantity"].ToString();
+                        //String discount = row["ContractDiscount"].ToString();
                         String whscode = row["Whse"].ToString();
                         String vat = row["TaxCode"].ToString();
-                        String UnitPrice = row["UnitPrice"].ToString();
+                        //String UnitPrice = row["UnitPrice"].ToString();
 
-                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice), "");
+                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, GF.Object2Double((object)GF.ResetFormatNumeric(row["Quantity"].ToString())),
+                                                                                        GF.Object2Double((object)GF.ResetFormatNumeric(row["ContractDiscount"].ToString())), 
+                                                                                        whscode, vat,
+                                                                                        GF.Object2Double((object)GF.ResetFormatNumeric(row["UnitPrice"].ToString())), "");
                         objInfo.AddOrderItem(objOrder);
                     }
                 }
@@ -271,7 +274,6 @@ namespace SAP
             {
                 throw;
             }
-
         }
 
         protected DataTable getDataFromListView(ListView lv)
@@ -510,8 +512,8 @@ namespace SAP
             {
                 if (!"".Equals(row["Code"]))
                 {
-                    double total = getDoubleFromObject(row["Total"].ToString().Replace(",", ""));
-                    double taxRate = getDoubleFromObject(row["TaxRate"]);
+                    double total = GF.Object2Double(row["Total"].ToString(), "SumDec");
+                    double taxRate = GF.Object2Double(row["TaxRate"], "RateDec");
                     if (taxRate == 0) taxRate = 10;
                     double tax = total * taxRate / 100;
 
@@ -539,14 +541,18 @@ namespace SAP
             priceAfterDiscount = GF.Object2Double((Object)(unitPrice * (100 - discountContract) / 100), "PriceDec");
             total = GF.Object2Double((Object)(priceAfterDiscount * quantity), "SumDec");
             row["UnitPrice"] = GF.FormatNumeric(unitPrice.ToString(), "PriceDec");
+            row["ContractDiscount"] = GF.FormatNumeric(discountContract.ToString(), "PercentDec");
             row["PriceAfterDiscount"] = GF.FormatNumeric(priceAfterDiscount.ToString(), "PriceDec");
             row["Total"] = GF.FormatNumeric(total.ToString(), "SumDec");
             row["Quantity"] = GF.FormatNumeric(quantity.ToString(), "QtyDec");
+
         }
 
         public double getDoubleFromObject(Object input)
         {
             CultureInfo cf = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            cf.NumberFormat.NumberGroupSeparator = ",";
+            cf.NumberFormat.NumberDecimalSeparator = ".";
 
             double result = 0.0;
             try

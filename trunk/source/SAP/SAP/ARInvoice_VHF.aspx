@@ -468,7 +468,7 @@
                                     <span>Tổng tiền trước thuế</span>
                                 </td>
                                 <td>
-                                     <asp:TextBox Enabled="false" ID="txtTotalDiscount" runat="server"></asp:TextBox>
+                                     <asp:TextBox Enabled="false" ID="txtTotalDiscount" runat="server" Style="text-align: right">0</asp:TextBox>
                                 </td>
                             </tr>
                            
@@ -478,7 +478,7 @@
                                     <span>Thuế</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtTax" runat="server" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTax" runat="server" ReadOnly="true" Style="text-align: right">0</asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -486,7 +486,7 @@
                                     <span>Tổng thanh toán</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtTotalPayment" runat="server"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTotalPayment" runat="server" Style="text-align: right">0</asp:TextBox>
                                 </td>
                             </tr>
                         </table>

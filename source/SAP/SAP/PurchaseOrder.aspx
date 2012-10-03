@@ -758,13 +758,16 @@
                                                 <span>Discount </span>
                                             </td>
                                             <td class="detail_table_td_50">
-                                                <asp:TextBox Enabled="false" ID="txtDiscountPercent" runat="server" Width="30px"></asp:TextBox><span>%</span>
+                                                <asp:TextBox Enabled="true" ID="txtDiscountPercent" runat="server" Width="30px" 
+                                                    onkeypress="return Main.integer_textbox_keypress(event);" 
+                                                    onKeyUp="CalculateDisAmount(this);" 
+                                                    ontextchanged="txtDiscountPercent_TextChanged"></asp:TextBox><span>%</span>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtDiscount" runat="server"></asp:TextBox>
+                                    <asp:TextBox Enabled="true" ID="txtDiscount" runat="server" onkeypress="return Main.integer_textbox_keypress(event);"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>

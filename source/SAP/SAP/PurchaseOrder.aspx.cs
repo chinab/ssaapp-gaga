@@ -15,6 +15,8 @@ namespace SAP
     {
         public static DataTable dtContents;
 
+        public GeneralFunctions GF = new GeneralFunctions();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -195,7 +197,6 @@ namespace SAP
                             this.txtStatus.Text = "Open";
                             this.txtStatus.Enabled = false;
 
-
                             this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDeliveryDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
@@ -259,7 +260,6 @@ namespace SAP
                         String whscode = row["Whse"].ToString();
                         String vat = row["TaxCode"].ToString();
                         String UnitPrice = row["UnitPrice"].ToString();
-
 
                         Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice), "");
                         objInfo.AddOrderItem(objOrder);
@@ -412,15 +412,12 @@ namespace SAP
                     {
                         if (row["No"].ToString().Equals(lblNo.Text))
                         {
-                            //updateRowTotalPrice(row);
                             row["Code"] = ((Label)lvi.FindControl("lblCode")).Text;
                             row["Description"] = ((Label)lvi.FindControl("lblDescription")).Text;
                             row["Quantity"] = ((TextBox)lvi.FindControl("txtQuantity")).Text;
                             row["UnitPrice"] = ((TextBox)lvi.FindControl("txtUnitPrice")).Text;
                             row["ContractDiscount"] = ((TextBox)lvi.FindControl("txtDiscount")).Text;
                             updateRowTotalPrice(row);
-                            //row["PriceAfterDiscount"] = ((Label)lvi.FindControl("lblPriceAfterDiscount")).Text;
-                            //row["Total"] = ((Label)lvi.FindControl("lblTotal")).Text;
                             row["TaxCode"] = ((Label)lvi.FindControl("lblTaxcode")).Text;
                             row["Whse"] = ((Label)lvi.FindControl("lblWhse")).Text;
                             row["TaxRate"] = ((Label)lvi.FindControl("lblTaxRate")).Text;
@@ -455,7 +452,6 @@ namespace SAP
 
         protected void lvContents_ItemEditing(object sender, ListViewEditEventArgs e)
         {
-            
             this.lvContents.EditIndex = e.NewEditIndex;
 
             string lsQty = dtContents.Rows[e.NewEditIndex]["Quantity"].ToString();
@@ -512,53 +508,51 @@ namespace SAP
 
             foreach(DataRow row in dtContents.Rows)
             {
-                //if (!"".Equals(row["Code"]))
+                if (!"".Equals(row["Code"]))
                 {
                     double total = getDoubleFromObject(row["Total"].ToString().Replace(",", ""));
                     double taxRate = getDoubleFromObject(row["TaxRate"]);
-                    if (taxRate == 0)
-                        taxRate = 10;
+                    if (taxRate == 0) taxRate = 10;
                     double tax = total * taxRate / 100;
 
                     orderTotalBeforeDiscount += total;
                     taxTotal += tax;
                 }
             }
-            this.txtTotalDiscount.Text = Puntos(orderTotalBeforeDiscount.ToString(), 2);
-            this.txtTax.Text = Puntos(taxTotal.ToString(), 2);
+            this.txtTotalDiscount.Text = GF.FormatNumeric(orderTotalBeforeDiscount.ToString(), "SumDec");
+            this.txtTax.Text = GF.FormatNumeric(taxTotal.ToString(), "SumDec");
             orderTotal = orderTotalBeforeDiscount + taxTotal;
-            this.txtTotalPayment.Text = Puntos(orderTotal.ToString(), 2);
+            this.txtTotalPayment.Text = GF.FormatNumeric(orderTotal.ToString(), "SumDec");
         }
 
         public void updateRowTotalPrice(DataRow row)
         {
-            int quantity = 0;
+            double quantity = 0;
             double unitPrice = 0.0;
-            double discountContract = 0.0;
+            double discountContract = 0;
             double priceAfterDiscount = 0.0;
             double total = 0;
-            //double totalBeforeDiscount = 0.0;
-            quantity = geIntFromObject(row["Quantity"]);
-            unitPrice = getDoubleFromObject(row["UnitPrice"]);
-            discountContract = getDoubleFromObject(row["ContractDiscount"]);
-            //priceAfterDiscount = getDoubleFromObject(row["PriceAfterDiscount"]);
-            total = getDoubleFromObject(row["Total"]);
-            
-            priceAfterDiscount = unitPrice * (100 - discountContract) / 100;
-            total = priceAfterDiscount * quantity;
-            row["UnitPrice"] = Puntos(unitPrice.ToString(), 2);
-            row["PriceAfterDiscount"] = Puntos(priceAfterDiscount.ToString(), 2);
-            row["Total"] = Puntos(total.ToString(), 2);
-            row["Quantity"] = Puntos(quantity.ToString(), 2);
+            quantity = GF.Object2Double(row["Quantity"], "QtyDec");
+            unitPrice = GF.Object2Double(row["UnitPrice"], "PriceDec");
+            discountContract = GF.Object2Double(row["ContractDiscount"], "PercentDec");
+
+            priceAfterDiscount = GF.Object2Double((Object)(unitPrice * (100 - discountContract) / 100), "PriceDec");
+            total = GF.Object2Double((Object)(priceAfterDiscount * quantity), "SumDec");
+            row["UnitPrice"] = GF.FormatNumeric(unitPrice.ToString(), "PriceDec");
+            row["PriceAfterDiscount"] = GF.FormatNumeric(priceAfterDiscount.ToString(), "PriceDec");
+            row["Total"] = GF.FormatNumeric(total.ToString(), "SumDec");
+            row["Quantity"] = GF.FormatNumeric(quantity.ToString(), "QtyDec");
         }
 
         public double getDoubleFromObject(Object input)
         {
+            CultureInfo cf = System.Threading.Thread.CurrentThread.CurrentUICulture;
+
             double result = 0.0;
             try
             {
                 if (input != null)
-                    result = Double.Parse(input.ToString());
+                    result = Double.Parse(input.ToString(), cf);
             }
             catch (Exception ex)
             {
@@ -600,12 +594,13 @@ namespace SAP
         protected void lvContents_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             
-
         }
 
-       public string Puntos(string strValor, int intNumDecimales)
-       {
-           CultureInfo cf = new CultureInfo("en-GB");
+        #region Display Separate Thousand Symbol 
+        private string Puntos(string strValor, int intNumDecimales)
+        {
+            CultureInfo cf = System.Threading.Thread.CurrentThread.CurrentUICulture;
+           //CultureInfo cf = new CultureInfo("en-GB");
             string strAux = null;
             string strComas = string.Empty;
             string strPuntos = null;
@@ -643,19 +638,29 @@ namespace SAP
                     {
                         strComas = strComas.Substring(0, intNumDecimales + 1);
                     }
-           
                 }
             }
             strAux = strPuntos + strAux + strComas;
     
             return strAux;
         }
+        #endregion
 
-       protected void txtTotalDiscount_TextChanged(object sender, EventArgs e)
+        protected void txtTotalDiscount_TextChanged(object sender, EventArgs e)
        {
            
            
        }
+
+        protected void CalculateDisAmount()
+        {
+            txtDiscount.Text = txtDiscountPercent.Text;
+        }
+
+        protected void txtDiscountPercent_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
 
     }
 }

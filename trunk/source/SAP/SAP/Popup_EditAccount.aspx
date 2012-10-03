@@ -19,13 +19,14 @@
             <asp:TextBox runat="server" ID="txtFilter"></asp:TextBox>
             <asp:Button runat="server" ID="btnFilter" Text="Filter" onclick="btnFilter_Click" />
             <br />
+            <div style="overflow:auto;height:200px;">
 			<asp:ListView ID="listWareHouses" runat="server">
 				<LayoutTemplate>
 					<table class="data_table">
 						<tr>
                             <th style="width:25px;">
 							</th>
-							<th>
+							<th style="display:none">
 								<span>#</span>
 							</th>
 							<th>
@@ -47,7 +48,7 @@
                         <td style="margin:0 0 0 0;padding:0 0 0 0;">
                             <input  type="radio" name="MyRadioButton" value="<%#Eval("No") %>" checked="<%#Eval("Selected") %>"/>
                         </td>
-						<td>
+						<t style="display:none"d>
 							<asp:Label runat="server" ID="Label1"><%#Eval("No") %></asp:Label>
 						</td>
 						<td>
@@ -66,7 +67,7 @@
 						<tr>
                             <th>
                             </th>
-							<th>
+							<th style="display:none">
 								<span>#</span>
 							</th>
 							<th>
@@ -92,6 +93,7 @@
             <asp:PostBackTrigger  ControlID="btnFilter" />
         </Triggers>
     </asp:UpdatePanel>
+    </div>
     <div id="action-form">
         <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
         <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelDialogClick()" />

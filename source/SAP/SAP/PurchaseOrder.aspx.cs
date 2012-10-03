@@ -14,37 +14,49 @@ namespace SAP
     public partial class PurchaseOrder : System.Web.UI.Page
     {
         public static DataTable dtContents;
+        public static DataTable dtHeader;
         public GeneralFunctions GF = new GeneralFunctions();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                dtHeader = new DataTable();
+                dtHeader.Columns.Add("CardCode");
+                dtHeader.Columns.Add("CardName");
+                dtHeader.Columns.Add("TaxDate");
+                dtHeader.Columns.Add("DocDate");
+                dtHeader.Columns.Add("DocDueDate");
+                dtHeader.Columns.Add("Comments");
+                dtHeader.Columns.Add("JrnlMemo");
+                dtHeader.Rows.Add("", "", "", "", "", "From SAP WEB", "Goods Receipts JE Remark");
+
+
                 dtContents = new DataTable();
                 dtContents.Columns.Add("No");
-                dtContents.Columns.Add("Code");
-                dtContents.Columns.Add("CardCode");
-                dtContents.Columns.Add("Description");
+                dtContents.Columns.Add("ItemCode");
+                //dtContents.Columns.Add("CardCode");//no need
+                dtContents.Columns.Add("Dscription");
                 dtContents.Columns.Add("Quantity");
-                dtContents.Columns.Add("UnitPrice");
-                dtContents.Columns.Add("ContractDiscount");
-                dtContents.Columns.Add("PriceAfterDiscount");
-                dtContents.Columns.Add("Total");
+                dtContents.Columns.Add("PriceBefDi");
+                dtContents.Columns.Add("DiscPrcnt"); 
+                dtContents.Columns.Add("Price");
+                dtContents.Columns.Add("LineTotal");
                 dtContents.Columns.Add("TaxCode");
-                dtContents.Columns.Add("TaxRate");
-                dtContents.Columns.Add("Whse");
-                dtContents.Columns.Add("QuantityEnable");
-                dtContents.Columns.Add("PromoEnable");
-
-                dtContents.Columns.Add("ProfitCode");
-                dtContents.Columns.Add("CC1");
-                dtContents.Columns.Add("CC2");
-                dtContents.Columns.Add("CC3");
-                dtContents.Columns.Add("CC4");
+                dtContents.Columns.Add("VatPrcnt");
+                dtContents.Columns.Add("WhsCode");
+                //dtContents.Columns.Add("QuantityEnable");//no need
+                //dtContents.Columns.Add("PromoEnable");//no need
+                dtContents.Columns.Add("OcrCode");
+                dtContents.Columns.Add("OcrCode2");
+                dtContents.Columns.Add("OcrCode3");
+                dtContents.Columns.Add("OcrCode4");
+                dtContents.Columns.Add("OcrCode5");
 
                 this.lvContents.DataSource = dtContents;
                 this.lvContents.DataBind();
                 
+
                 MasterData masterDataWS = new MasterData();
                 //-------------Load Sales/Buyer Employee----------------
                 DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
@@ -91,7 +103,7 @@ namespace SAP
                     this.txtStatus.Text = "Open";
                     this.txtStatus.Enabled = false;
                     this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
-                    this.txtDeliveryDate.Text = DateTime.Now.ToShortDateString();
+                    this.txtDueDate.Text = DateTime.Now.ToShortDateString();
                     this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
                     this.txtNoFrom.Text = "227";
                     this.txtNoFrom.Enabled = false;
@@ -137,21 +149,21 @@ namespace SAP
                             DataRow dr = dtContents.Rows[itemNo-1];
                             //setDefaultItemValue(dr);
                             //dr["No"] = itemNo;
-                            dr["Code"] = chosenItem.ItemCode;
-                            dr["Description"] = chosenItem.ItemName;
-                            dr["CardCode"] = this.txtVendor.Text;
+                            dr["ItemCode"] = chosenItem.ItemCode;
+                            dr["Dscription"] = chosenItem.ItemName;
+                           // dr["CardCode"] = this.txtVendor.Text;
                             dr["Quantity"] = 1;
 
                             GetDefault defaultWS = new GetDefault();
                             DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
                             DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
 
-                            dr["UnitPrice"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["UnitPrice"]);
-                            dr["ContractDiscount"] = String.Format("{0:n2}", defaultInfo.Tables[0].Rows[0]["Discount"]);
-                            dr["PriceAfterDiscount"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);
+                            dr["PriceBefDi"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["UnitPrice"]);
+                            dr["DiscPrcnt"] = String.Format("{0:n2}", defaultInfo.Tables[0].Rows[0]["Discount"]);
+                            dr["Price"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);
                             dr["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
-                            dr["TaxRate"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
-                            dr["Whse"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
+                            dr["VatPrcnt"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
+                            dr["WhsCode"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
                             //dt.Rows.      
                             updateTableTotalPrice();
                             this.lvContents.DataSource = dtContents;
@@ -164,7 +176,7 @@ namespace SAP
                         if (chosenWarehouse != null)
                         {   // update grid
                             DataRow dr = dtContents.Rows[itemNo];
-                            dr["Whse"] = chosenWarehouse.WhsCode;
+                            dr["WhsCode"] = chosenWarehouse.WhsCode;
                             //dt.Rows.
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
@@ -177,8 +189,8 @@ namespace SAP
                         {
                             // update grid
                             DataRow dr = dtContents.Rows[itemNo];
-                            dr["Taxcode"] = chosenTaxCode.Code;
-                            dr["TaxRate"] = chosenTaxCode.Rate;
+                            dr["TaxCode"] = chosenTaxCode.Code;
+                            dr["VatPrcnt"] = chosenTaxCode.Rate;
 
                             //dt.Rows.
                             this.lvContents.DataSource = dtContents;
@@ -195,7 +207,7 @@ namespace SAP
                             this.txtStatus.Enabled = false;
 
                             this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
-                            this.txtDeliveryDate.Text = DateTime.Now.ToShortDateString();
+                            this.txtDueDate.Text = DateTime.Now.ToShortDateString();
                             this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
                             this.txtNoFrom.Text = "227";
                             this.txtNoFrom.Enabled = false;
@@ -242,30 +254,38 @@ namespace SAP
         {
             try
             {
-                DocumentXML objInfo = new DocumentXML("22", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
+                //Update table header
+                DataRow dr = dtHeader.Rows[0];
+                dr["DocDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
+                dr["DocDueDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDueDate.Text));
+                dr["TaxDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDocumentDate.Text));
+                dr["Comments"] = txtRemarks.Text;
+                dr["JrnlMemo"] = txtJournalRemark.Text;
+                dr["CardCode"] = txtVendor.Text;
+                dr["CardName"] = txtName.Text;
+                DocumentXML objInfo = new DocumentXML("22", this.txtPostingDate.Text, this.txtDueDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
+                String RemoveColumn = "No";
+                return objInfo.ToXMLStringFromDS("22", dtHeader, dtContents, RemoveColumn);
 
-                foreach (DataRow row in dtContents.Rows)
-                {
+                //foreach (DataRow row in dtContents.Rows)
+                //{
                    
-                    String itemcode = row["Code"].ToString();
+                //    String itemcode = row["Code"].ToString();
 
-                    if (!String.IsNullOrEmpty(itemcode))
-                    {
-                        String des = row["Description"].ToString();
-                        //String quan = row["Quantity"].ToString();
-                        //String discount = row["ContractDiscount"].ToString();
-                        String whscode = row["Whse"].ToString();
-                        String vat = row["TaxCode"].ToString();
-                        //String UnitPrice = row["UnitPrice"].ToString();
+                //    if (!String.IsNullOrEmpty(itemcode))
+                //    {
+                //        String des = row["Description"].ToString();
+                //        String whscode = row["Whse"].ToString();
+                //        String vat = row["TaxCode"].ToString();
 
-                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, GF.Object2Double((object)GF.ResetFormatNumeric(row["Quantity"].ToString())),
-                                                                                        GF.Object2Double((object)GF.ResetFormatNumeric(row["ContractDiscount"].ToString())), 
-                                                                                        whscode, vat,
-                                                                                        GF.Object2Double((object)GF.ResetFormatNumeric(row["UnitPrice"].ToString())), "");
-                        objInfo.AddOrderItem(objOrder);
-                    }
-                }
-                return objInfo.ToXMLString();
+                //        Document_LineXML objOrder = new Document_LineXML(itemcode, des, GF.Object2Double((object)GF.ResetFormatNumeric(row["Quantity"].ToString())),
+                //                                                                        GF.Object2Double((object)GF.ResetFormatNumeric(row["ContractDiscount"].ToString())), 
+                //                                                                        whscode, vat,
+                //                                                                        GF.Object2Double((object)GF.ResetFormatNumeric(row["UnitPrice"].ToString())), "");
+                //        objInfo.AddOrderItem(objOrder);
+                //    }
+                //}
+                //return objInfo.ToXMLString();
             }
             catch (Exception)
             {
@@ -315,7 +335,7 @@ namespace SAP
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             DataSet ds = ts.CreateMarketingDocument(requestXML);
-            if (ds.Tables[0].Rows[0]["ErrCode"] != "0")
+            if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
@@ -379,7 +399,7 @@ namespace SAP
         protected void _btnAddRecord_Click(object sender, EventArgs e)
         {
             int iNo = GetNo();
-            dtContents.Rows.Add(iNo, "", this.txtVendor.Text, "", "1", "0", "0", "0", "0", "", "", "", "", "", "", "", "", "", "");
+            dtContents.Rows.Add(iNo, "", "", "", "1", "0", "0", "0", "0", "", "", "", "", "", "", "");
             this.lvContents.DataSource = dtContents;
             this.lvContents.EditIndex = iNo-1;
             this.lvContents.DataBind();
@@ -411,20 +431,20 @@ namespace SAP
                     {
                         if (row["No"].ToString().Equals(lblNo.Text))
                         {
-                            row["Code"] = ((Label)lvi.FindControl("lblCode")).Text;
-                            row["Description"] = ((Label)lvi.FindControl("lblDescription")).Text;
+                            row["ItemCode"] = ((Label)lvi.FindControl("lblCode")).Text;
+                            row["Dscription"] = ((Label)lvi.FindControl("lblDescription")).Text;
                             row["Quantity"] = ((TextBox)lvi.FindControl("txtQuantity")).Text;
-                            row["UnitPrice"] = ((TextBox)lvi.FindControl("txtUnitPrice")).Text;
-                            row["ContractDiscount"] = ((TextBox)lvi.FindControl("txtDiscount")).Text;
+                            row["PriceBefDi"] = ((TextBox)lvi.FindControl("txtUnitPrice")).Text;
+                            row["DiscPrcnt"] = ((TextBox)lvi.FindControl("txtDiscount")).Text;
                             updateRowTotalPrice(row);
                             row["TaxCode"] = ((Label)lvi.FindControl("lblTaxcode")).Text;
-                            row["Whse"] = ((Label)lvi.FindControl("lblWhse")).Text;
-                            row["TaxRate"] = ((Label)lvi.FindControl("lblTaxRate")).Text;
-                            row["ProfitCode"] = ((Label)lvi.FindControl("lblProfitCode")).Text;
-                            row["CC1"] = ((Label)lvi.FindControl("lblCC1")).Text;
-                            row["CC2"] = ((Label)lvi.FindControl("lblCC2")).Text;
-                            row["CC3"] = ((Label)lvi.FindControl("lblCC3")).Text;
-                            row["CC4"] = ((Label)lvi.FindControl("lblCC4")).Text;
+                            row["WhsCode"] = ((Label)lvi.FindControl("lblWhse")).Text;
+                            row["VatPrcnt"] = ((Label)lvi.FindControl("lblTaxRate")).Text;
+                            row["OcrCode"] = ((Label)lvi.FindControl("lblProfitCode")).Text;
+                            row["OcrCode2"] = ((Label)lvi.FindControl("lblCC1")).Text;
+                            row["OcrCode3"] = ((Label)lvi.FindControl("lblCC2")).Text;
+                            row["OcrCode4"] = ((Label)lvi.FindControl("lblCC3")).Text;
+                            row["OcrCode5"] = ((Label)lvi.FindControl("lblCC4")).Text;
                             updateTableTotalPrice();
                             break;
                         }
@@ -454,14 +474,14 @@ namespace SAP
             this.lvContents.EditIndex = e.NewEditIndex;
 
             string lsQty = dtContents.Rows[e.NewEditIndex]["Quantity"].ToString();
-            string lsUPr = dtContents.Rows[e.NewEditIndex]["UnitPrice"].ToString();
-            string lsPriAftDis = dtContents.Rows[e.NewEditIndex]["PriceAfterDiscount"].ToString();
-            string lsTotal = dtContents.Rows[e.NewEditIndex]["Total"].ToString();
+            string lsUPr = dtContents.Rows[e.NewEditIndex]["PriceBefDi"].ToString();
+            string lsPriAftDis = dtContents.Rows[e.NewEditIndex]["Price"].ToString();
+            string lsTotal = dtContents.Rows[e.NewEditIndex]["LineTotal"].ToString();
 
             dtContents.Rows[e.NewEditIndex]["Quantity"] = lsQty.Replace(",", "");
-            dtContents.Rows[e.NewEditIndex]["UnitPrice"] = lsUPr.Replace(",", "");
-            dtContents.Rows[e.NewEditIndex]["PriceAfterDiscount"] = lsPriAftDis.Replace(",", "");
-            dtContents.Rows[e.NewEditIndex]["Total"] = lsTotal.Replace(",", "");
+            dtContents.Rows[e.NewEditIndex]["PriceBefDi"] = lsUPr.Replace(",", "");
+            dtContents.Rows[e.NewEditIndex]["Price"] = lsPriAftDis.Replace(",", "");
+            dtContents.Rows[e.NewEditIndex]["LineTotal"] = lsTotal.Replace(",", "");
 
             this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
@@ -507,10 +527,10 @@ namespace SAP
 
             foreach(DataRow row in dtContents.Rows)
             {
-                if (!"".Equals(row["Code"]))
+                if (!"".Equals(row["ItemCode"]))
                 {
-                    double total = GF.Object2Double((object)GF.ResetFormatNumeric(row["Total"].ToString()), "SumDec");
-                    double taxRate = GF.Object2Double(row["TaxRate"], "RateDec");
+                    double total = GF.Object2Double((object)GF.ResetFormatNumeric(row["LineTotal"].ToString()), "SumDec");
+                    double taxRate = GF.Object2Double(row["VatPrcnt"], "RateDec");
                     if (taxRate == 0) taxRate = 10;
                     double tax = total * taxRate / 100;
 
@@ -532,15 +552,15 @@ namespace SAP
             double priceAfterDiscount = 0.0;
             double total = 0;
             quantity = GF.Object2Double(row["Quantity"], "QtyDec");
-            unitPrice = GF.Object2Double(row["UnitPrice"], "PriceDec");
-            discountContract = GF.Object2Double(row["ContractDiscount"], "PercentDec");
+            unitPrice = GF.Object2Double(row["PriceBefDi"], "PriceDec");
+            discountContract = GF.Object2Double(row["DiscPrcnt"], "PercentDec");
 
             priceAfterDiscount = GF.Object2Double((Object)(unitPrice * (100 - discountContract) / 100), "PriceDec");
             total = GF.Object2Double((Object)(priceAfterDiscount * quantity), "SumDec");
-            row["UnitPrice"] = GF.FormatNumeric(unitPrice.ToString(), "PriceDec");
-            row["ContractDiscount"] = GF.FormatNumeric(discountContract.ToString(), "PercentDec");
-            row["PriceAfterDiscount"] = GF.FormatNumeric(priceAfterDiscount.ToString(), "PriceDec");
-            row["Total"] = GF.FormatNumeric(total.ToString(), "SumDec");
+            row["PriceBefDi"] = GF.FormatNumeric(unitPrice.ToString(), "PriceDec");
+            row["DiscPrcnt"] = GF.FormatNumeric(discountContract.ToString(), "PercentDec");
+            row["Price"] = GF.FormatNumeric(priceAfterDiscount.ToString(), "PriceDec");
+            row["LineTotal"] = GF.FormatNumeric(total.ToString(), "SumDec");
             row["Quantity"] = GF.FormatNumeric(quantity.ToString(), "QtyDec");
 
         }
@@ -599,55 +619,13 @@ namespace SAP
             
         }
 
-        #region Display Separate Thousand Symbol 
-        /*private string Puntos(string strValor, int intNumDecimales)
+        protected void ProductListPagerCombo_PreRender(object sender, EventArgs e)
         {
-            CultureInfo cf = System.Threading.Thread.CurrentThread.CurrentUICulture;
-           //CultureInfo cf = new CultureInfo("en-GB");
-            string strAux = null;
-            string strComas = string.Empty;
-            string strPuntos = null;
-           
-            if (strValor.Length == 0) return "";
-            strValor = strValor.Replace(cf.NumberFormat.NumberGroupSeparator, "");
-            if (strValor.Contains(cf.NumberFormat.NumberDecimalSeparator))
-            {
-                strAux = strValor.Substring(0, strValor.LastIndexOf(cf.NumberFormat.NumberDecimalSeparator));
-                strComas = strValor.Substring(strValor.LastIndexOf(cf.NumberFormat.NumberDecimalSeparator) + 1);
-            }
-            else 
-            {
-                strAux = strValor;
-            }
-   
-            if (strAux.Substring(0, 1) == cf.NumberFormat.NegativeSign) 
-            {
-                strAux = strAux.Substring(1);
-            }
-   
-            strPuntos = strAux;
-            strAux = "";
-            while (strPuntos.Length > 3) 
-            {
-                strAux = cf.NumberFormat.NumberGroupSeparator + strPuntos.Substring(strPuntos.Length - 3, 3) + strAux;
-                strPuntos = strPuntos.Substring(0, strPuntos.Length - 3);
-            }
-            if (intNumDecimales > 0)
-            {
-                if (strValor.Contains(cf.NumberFormat.PercentDecimalSeparator)) 
-                {
-                    strComas = cf.NumberFormat.PercentDecimalSeparator + strValor.Substring(strValor.LastIndexOf(cf.NumberFormat.PercentDecimalSeparator) + 1);
-                    if (strComas.Length > intNumDecimales) 
-                    {
-                        strComas = strComas.Substring(0, intNumDecimales + 1);
-                    }
-                }
-            }
-            strAux = strPuntos + strAux + strComas;
-    
-            return strAux;
-        }*/
-        #endregion
+            lvContents.DataSource = dtContents;
+            lvContents.DataBind();
+        }
+
+     
 
     }
 }

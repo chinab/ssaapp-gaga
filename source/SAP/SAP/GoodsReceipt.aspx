@@ -288,7 +288,7 @@
                 </div>
                 <div id="footer-form">
                     <div class="left">
-                        <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button" 
+                        <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button"  OnClientClick="Dialog.showLoader();"
                             CommandName="Login" Height="19px" Width="65px" 
                             ImageUrl="~/skin/images/SAP_Add.png" onclick="btnAdd_Click" />
                     </div>

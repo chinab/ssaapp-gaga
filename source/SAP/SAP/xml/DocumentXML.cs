@@ -383,7 +383,7 @@ namespace SAP
                 {
                     if (column.ColumnName == arr.GetValue(i).ToString())
                     {
-                        ds.Columns.RemoveAt(j);
+                        ds1.Columns.RemoveAt(j);
                         break;
                     }
                     j = j + 1;
@@ -421,14 +421,14 @@ namespace SAP
                                 {
                                     foreach (DataColumn column in ds.Columns)
                                     {
-                                        if (column.ColumnName!="No")
-                                        {
+                                        //if (column.ColumnName!="No")
+                                        //{
                                             writer.WriteStartElement(column.ColumnName); //Write Tag
                                             {
                                                 writer.WriteString(row[column].ToString());
                                             }
                                             writer.WriteEndElement();
-                                        }
+                                        //}
                                     }
                                 }
                                 writer.WriteEndElement();

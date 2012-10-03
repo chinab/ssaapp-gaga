@@ -26,6 +26,7 @@ namespace SAP
 
         private static MasterData MD = new MasterData();
         private static DataSet ds = MD.GetDisplaySetting();
+        private CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentCulture;
         //private string decsep, thoussep;
         //private int sumdec, pricedec, qtydec, percentdec, ratedec;
 
@@ -157,7 +158,11 @@ namespace SAP
             try
             {
                 if (Obj != null)
-                    result = Double.Parse(Obj.ToString());
+                {
+                    if (Obj.ToString().IndexOf(ci.NumberFormat.NumberGroupSeparator) > 0)
+                        Obj = Obj.ToString().Replace(ci.NumberFormat.NumberGroupSeparator, ci.NumberFormat.NumberDecimalSeparator);
+                    result = Double.Parse(Obj.ToString(), ci);
+                }
             }
             catch (Exception ex)
             {
@@ -175,8 +180,9 @@ namespace SAP
             {
                 if (Obj != null)
                 {
-                    result = Double.Parse(Obj.ToString());
-                    return result = Math.Round(result, GetNumDecimals(attName));
+                    if (Obj.ToString().IndexOf(ci.NumberFormat.NumberGroupSeparator) > 0)
+                        Obj = Obj.ToString().Replace(ci.NumberFormat.NumberGroupSeparator, ci.NumberFormat.NumberDecimalSeparator);
+                    return result = Math.Round(Double.Parse(Obj.ToString(), ci), GetNumDecimals(attName));
                 }
             }
             catch (Exception ex)
@@ -184,26 +190,6 @@ namespace SAP
                 result = 0.0;
             }
             return 0.0;
-        }
-        #endregion
-
-        #region Transfer from Obj & Display Setting Name
-        public Decimal Object2Decimal(Object Obj, string attName)
-        {
-            Decimal result;
-            try
-            {
-                if (Obj != null)
-                {
-                    result = (decimal)Obj;
-                    return result = Math.Round(result, GetNumDecimals(attName));
-                }
-            }
-            catch (Exception ex)
-            {
-                result = 0;
-            }
-            return 0;
         }
         #endregion
 
@@ -282,5 +268,10 @@ namespace SAP
             return strAux;
         }
         #endregion
+
+        public string ResetFormatNumeric(string strValor)
+        {
+            return strValor.Replace(ThousSep, "");
+        }
     }
 }

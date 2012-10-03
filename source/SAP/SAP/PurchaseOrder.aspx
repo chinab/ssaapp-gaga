@@ -144,7 +144,7 @@
                             <li><a href="#tabs-2">Logistics</a></li>
                             <li><a href="#tabs-3">Accounting</a></li>
                         </ul>
-                        <div id="tabs-1" style="overflow: auto; height: 250px;">
+                        <div id="tabs-1" style="overflow: auto; height: 240px; margin-top: 0px;">
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" OnClick="_btnAddRecord_Click" />
                             <br />
                             <asp:ListView ID="lvContents" runat="server" OnItemInserted="lvContents_ItemInserted"
@@ -734,7 +734,8 @@
                                     <span>Remark</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtRemark" runat="server" Height="85px" TextMode="MultiLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtRemark" runat="server" Height="40px" TextMode="MultiLine" 
+                                        Width="420px"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
@@ -746,44 +747,7 @@
                                     <span>Total before discount</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtTotalDiscount" runat="server" 
-                                        ontextchanged="txtTotalDiscount_TextChanged"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="detail_table_td_150" style="padding: 0 0 0 0;">
-                                    <table style="padding: 0 0 0 0;">
-                                        <tr>
-                                            <td class="detail_table_td_100">
-                                                <span>Discount </span>
-                                            </td>
-                                            <td class="detail_table_td_50">
-                                                <asp:TextBox Enabled="true" ID="txtDiscountPercent" runat="server" Width="30px" 
-                                                    onkeypress="return Main.integer_textbox_keypress(event);" 
-                                                    onKeyUp="CalculateDisAmount(this);" 
-                                                    ontextchanged="txtDiscountPercent_TextChanged"></asp:TextBox><span>%</span>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td>
-                                    <asp:TextBox Enabled="true" ID="txtDiscount" runat="server" onkeypress="return Main.integer_textbox_keypress(event);"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="detail_table_td_150">
-                                    <span>Freight</span>
-                                </td>
-                                <td>
-                                    <asp:TextBox Enabled="false" ID="txtFreight" runat="server" ReadOnly="true"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="detail_table_td_150">
-                                    <span>Rounding</span>
-                                </td>
-                                <td>
-                                    <asp:TextBox Enabled="false" ID="txtRounding" runat="server" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTotalDiscount" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>

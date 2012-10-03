@@ -14,7 +14,6 @@ namespace SAP
     public partial class PurchaseOrder : System.Web.UI.Page
     {
         public static DataTable dtContents;
-
         public GeneralFunctions GF = new GeneralFunctions();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -163,11 +162,9 @@ namespace SAP
                         WareHouse chosenWarehouse = Session["chosenWarehouse"] as WareHouse;
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
                         if (chosenWarehouse != null)
-                        {
-                            // update grid
+                        {   // update grid
                             DataRow dr = dtContents.Rows[itemNo];
                             dr["Whse"] = chosenWarehouse.WhsCode;
-
                             //dt.Rows.
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
@@ -512,7 +509,7 @@ namespace SAP
             {
                 if (!"".Equals(row["Code"]))
                 {
-                    double total = GF.Object2Double(row["Total"].ToString(), "SumDec");
+                    double total = GF.Object2Double((object)GF.ResetFormatNumeric(row["Total"].ToString()), "SumDec");
                     double taxRate = GF.Object2Double(row["TaxRate"], "RateDec");
                     if (taxRate == 0) taxRate = 10;
                     double tax = total * taxRate / 100;
@@ -603,7 +600,7 @@ namespace SAP
         }
 
         #region Display Separate Thousand Symbol 
-        private string Puntos(string strValor, int intNumDecimales)
+        /*private string Puntos(string strValor, int intNumDecimales)
         {
             CultureInfo cf = System.Threading.Thread.CurrentThread.CurrentUICulture;
            //CultureInfo cf = new CultureInfo("en-GB");
@@ -649,24 +646,8 @@ namespace SAP
             strAux = strPuntos + strAux + strComas;
     
             return strAux;
-        }
+        }*/
         #endregion
-
-        protected void txtTotalDiscount_TextChanged(object sender, EventArgs e)
-       {
-           
-           
-       }
-
-        protected void CalculateDisAmount()
-        {
-            txtDiscount.Text = txtDiscountPercent.Text;
-        }
-
-        protected void txtDiscountPercent_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
 
     }
 }

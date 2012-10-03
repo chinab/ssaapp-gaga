@@ -21,9 +21,9 @@ namespace SAP
             get { return _Description; }
             set { _Description = value; }
         }
-        private int _Quantity;
+        private double _Quantity;
 
-        public int Quantity
+        public double Quantity
         {
             get { return _Quantity; }
             set { _Quantity = value; }
@@ -63,7 +63,7 @@ namespace SAP
             get { return _AcctCode; }
             set { _AcctCode = value; }
         }
-        public Document_LineXML(String itemcode, String des, int quan, double discount,
+        public Document_LineXML(String itemcode, String des, double quan, double discount,
                             String whscode, String vat, double UnitPrice,String AcctCode)
         {
             this._ItemCode = itemcode;

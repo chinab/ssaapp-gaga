@@ -224,10 +224,12 @@ namespace SAP
                                 newRow["Quantity"] = promo.ProQty;
                                 newRow["PromoDiscount"] = 0;
                                 newRow["UnitPrice"] = 0;
+                                newRow["OrgPrice"] = 0;
                                 newRow["ContractDiscount"] = 0;
                                 newRow["PromotionId"] = promo.ProCode; 
                                 newRow["Sole"] = promo.Sole;
                                 newRow["Whse"] = "02";
+                                newRow["TaxCode"] = "S2";
                                 newRow["PromotionLine"] = "Y";
                                 
 
@@ -453,7 +455,7 @@ namespace SAP
             double discountContract = 0.0;
             double priceAfterDiscount = 0.0;
             double total = 0;
-            //double totalBeforeDiscount = 0.0;
+            double totalDiscount = 0;
 
             DataRow row = dtInput.Rows[rowNumber];
             quantity = geIntFromObject(row["Quantity"]);
@@ -465,14 +467,16 @@ namespace SAP
             priceAfterDiscount = getDoubleFromObject(row["PriceAfterDiscount"]);
             total = getDoubleFromObject(row["Total"]);
 
-            unitPrice = orgPrice - discountPromo;
+            unitPrice = orgPrice - discountPromo/quantity;
             priceAfterDiscount = unitPrice * (100 - discountContract) / 100;
             total = priceAfterDiscount * quantity;
+            totalDiscount = orgPrice * quantity * discountContract / 100 + discountPromo;
 
             row["UnitPrice"] = unitPrice;
             row["PriceAfterDiscount"] = priceAfterDiscount;
-            row["TotalDiscount"] = orgPrice * quantity - total;
-            row["Total"] = total;
+            row["TotalDiscount"] = totalDiscount;
+
+            row["Total"] = orgPrice * quantity - totalDiscount;// total;
 
         }
 

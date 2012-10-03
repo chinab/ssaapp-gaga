@@ -241,16 +241,10 @@ namespace SAP
                     dr["DocDueDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDocumentDate.Text)); 
                     dr["Comments"] = txtRemarks.Text;
                     dr["JrnlMemo"] = txtJournalRemark.Text;
-                    //Remove row with empty itemcode
-                    foreach (DataRow row in dtItem.Rows)
-                    {
-                        if (row["ItemCode"].ToString()=="")
-                        {
-                            row.Delete();
-                        }
-                    }
+                   
                     DocumentXML objInfo = new DocumentXML("59", this.txtPostingDate.Text, "", this.txtDocumentDate.Text,"", "", User.Identity.Name);
-                    return objInfo.ToXMLStringFromDS("59",dtHeader,dtItem);
+                    String RemoveColumn = "No";
+                    return objInfo.ToXMLStringFromDS("59", dtHeader, dtItem, RemoveColumn);
                 }
                 catch (Exception)
                 {

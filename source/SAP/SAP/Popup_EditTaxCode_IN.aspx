@@ -24,7 +24,7 @@
 						<tr>
                             <th style="width:25px;">
 							</th>
-							<th>
+							<th style="display:none">
 								<span>No.</span>
 							</th>
 							<th>
@@ -46,7 +46,7 @@
                         <td style="margin:0 0 0 0;padding:0 0 0 0;">
                             <input  type="radio" name="MyRadioButton" value="<%#Eval("No") %>" checked="<%#Eval("Selected") %>"/>
                         </td>
-						<td>
+						<td style="display:none">
 							<asp:Label runat="server" ID="Label1"><%#Eval("No") %></asp:Label>
 						</td>
 						<td>
@@ -65,7 +65,7 @@
 						<tr>
                             <th>
                             </th>
-							<th>
+							<th style="display:none">
 								<span>No.</span>
 							</th>
 							<th>

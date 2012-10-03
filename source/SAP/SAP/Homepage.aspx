@@ -9,13 +9,12 @@
         <span> </span>
     </td>     
  </div>
- <div id="Search" class="right">
-    <asp:TextBox ID="txtSearch" runat="server" Width=70%></asp:TextBox>
- </div>
-<div style="position: relative;">
-<div style="position: fixed;right:0; bottom:50;">
-<asp:Image ID = "ABEOLOGO" ImageUrl="~/skin/images/Abeo Logo.png" runat="server" />
-</div>
-</div>
+<table style="width:100%; height: 90%;">
+ <tr>
+    <td style="width: 100%;" align="right" valign="bottom">
+        <asp:Image ID = "Image1" ImageUrl="~/skin/images/Abeo Logo.png" runat="server" />
+    </td>
+ </tr>    
+</table>
 
 </asp:Content>

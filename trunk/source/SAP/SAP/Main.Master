@@ -45,10 +45,10 @@
     <asp:ScriptManager ID="ScriptManagerMain" runat="server">
     </asp:ScriptManager>
     <input type="hidden" id="isMainPage" value="1" />
-    <div id="menu">       
+<%--    <div id="menu">       
         <ul class="menu">
             <li><a href="#" class="parent"><span>File</span></a>
-                <ul>
+               <ul>
                     <li><a href="#"><span>Open</span></a></li>
                     <li><a href="#"><span>New</span></a></li>
                     <li><a href="#"><span>Save</span></a></li>
@@ -69,7 +69,7 @@
             <li><a href="#"><span>Window</span></a></li>
             <li><a href="#" class="last"><span>Help</span></a></li>
         </ul>
-    </div>
+    </div>--%>
     <div class="clear">
     </div>
     <div id="menu-action">

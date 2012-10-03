@@ -57,7 +57,7 @@ namespace SAP
                 gridTable.Columns.Add("No");
                 gridTable.Columns.Add("Code");
                 gridTable.Columns.Add("Name");
-                DataTable warehouseTable = warehousesItems.Tables[0];
+                DataTable warehouseTable = dsOpenItem.Tables[0];
                 DataRow dr;
                 int i = 0;
                 foreach (DataRow row in warehouseTable.Rows)

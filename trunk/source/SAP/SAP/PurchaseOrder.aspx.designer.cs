@@ -148,13 +148,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.TextBox txtPostingDate;
         
         /// <summary>
-        /// txtDeliveryDate control.
+        /// txtDueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDeliveryDate;
+        protected global::System.Web.UI.WebControls.TextBox txtDueDate;
         
         /// <summary>
         /// txtDocumentDate control.
@@ -184,13 +184,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.ListView lvContents;
         
         /// <summary>
-        /// lvDataPager1 control.
+        /// ProductListPagerCombo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataPager lvDataPager1;
+        protected global::System.Web.UI.WebControls.DataPager ProductListPagerCombo;
         
         /// <summary>
         /// txtShipTo control.
@@ -382,13 +382,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// txtRemark control.
+        /// txtRemarks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRemark;
+        protected global::System.Web.UI.WebControls.TextBox txtRemarks;
         
         /// <summary>
         /// txtTotalDiscount control.
@@ -427,21 +427,21 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
         
         /// <summary>
-        /// btnCopyFrom control.
+        /// btnAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCopyFrom;
+        protected global::System.Web.UI.WebControls.ImageButton btnAdd;
         
         /// <summary>
-        /// btnCopyTo control.
+        /// ImageButton2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCopyTo;
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
     }
 }

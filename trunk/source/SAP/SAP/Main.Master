@@ -268,7 +268,19 @@
 				<ul>
 					<li><a href="#">Item Master Data</a></li>
 					<li><a href="#">Item Management</a></li>
-					<li><a href="/GoodsReceipt.aspx">Inventory Transactions</a></li>
+                    <li>
+                          <ul id="Ul2">
+                        	<li>
+                                <h4 class="head"><a href="#">Inventory Transactions</a></h4>
+                                <ul>
+                                    <li><a class="subitem" href="/GoodsReceipt.aspx">Goods Receipt</a></li>
+                                    <li><a class="subitem" href="/GoodsIssue.aspx">Goods Issue</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>  
+
+					
 					<li><a href="#">Price Lists</a></li>
 					<li><a href="#">Pick and Pack</a></li>
 					<li><a href="#">Inventory Reports</a></li>

@@ -393,10 +393,10 @@
                                             <asp:Label ID="lblNo" runat="server"><%#Eval("No") %></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblStartDate" runat="server"><%#Eval("StartDate") %></asp:Label>
+                                            <asp:Label ID="lblStartDate" runat="server"><%#Eval("OpenDate") %></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblClosingDate" runat="server"><%#Eval("ClosingDate")%></asp:Label>
+                                            <asp:Label ID="lblClosingDate" runat="server"><%#Eval("CloseDate")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblSalesEmployee" runat="server"><%#Eval("SalesEmployee")%></asp:Label>
@@ -405,31 +405,31 @@
                                             <asp:Label ID="lblStage" runat="server"><%#Eval("Stage")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblPercent" runat="server"><%#Eval("Percent")%></asp:Label>
+                                            <asp:Label ID="lblPercent" runat="server"><%#Eval("ClosePrcnt")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblPotentialAmt" runat="server"><%#Eval("PotentialAmt")%></asp:Label>
+                                            <asp:Label ID="lblPotentialAmt" runat="server"><%#Eval("MaxSumLoc")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblWeightedAmt" runat="server"><%#Eval("WeightedAmt")%></asp:Label>
+                                            <asp:Label ID="lblWeightedAmt" runat="server"><%#Eval("WtSumLoc")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblDocType" runat="server"><%#Eval("DocType")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblShowBP" runat="server"><%#Eval("ShowBP")%></asp:Label>
+                                            <asp:Label ID="lblShowBP" runat="server"><%#Eval("DocChkbox")%></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblDocNo" runat="server"><%#Eval("DocNo")%></asp:Label>
+                                            <asp:Label ID="lblDocNo" runat="server"><%#Eval("DocNumber")%></asp:Label>
                                         </td>
                                          <td style="display: none">
-                                            <asp:Label ID="lblEmployeeCode" runat="server"><%#Eval("DocTypeCode")%></asp:Label>
+                                            <asp:Label ID="lblEmployeeCode" runat="server"><%#Eval("SlpCode")%></asp:Label>
                                         </td>
                                         <td style="display: none">
-                                            <asp:Label ID="lblStageCode" runat="server"><%#Eval("StageCode")%></asp:Label>
+                                            <asp:Label ID="lblStageCode" runat="server"><%#Eval("Step_ID")%></asp:Label>
                                         </td>
                                          <td style="display: none">
-                                            <asp:Label ID="lblDocTypeCode" runat="server"><%#Eval("DocTypeCode")%></asp:Label>
+                                            <asp:Label ID="lblDocTypeCode" runat="server"><%#Eval("ObjType")%></asp:Label>
                                         </td>                                         
                                     </tr>
                                 </ItemTemplate>
@@ -445,10 +445,10 @@
                                              <asp:Label ID="lblNoEdit" runat="server" Text='<%# Bind("No") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtStartDateEdit" runat="server" Text='<%# Bind("StartDate") %>'/>
+                                            <asp:TextBox ID="txtStartDateEdit" runat="server" Text='<%# Bind("OpenDate") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtClosingDateEdit" runat="server" Text='<%# Bind("ClosingDate") %>'/>
+                                            <asp:TextBox ID="txtClosingDateEdit" runat="server" Text='<%# Bind("ClosegDate") %>'/>
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ddlSalesEmployeeEdit" runat="server" >
@@ -459,13 +459,13 @@
                                               </asp:DropDownList>      
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtPercentEdit" runat="server" Text='<%# Bind("Percent") %>'/>
+                                            <asp:TextBox ID="txtPercentEdit" runat="server" Text='<%# Bind("ClosePrcnt") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtPotentialAmtEdit" runat="server" Text='<%# Bind("PotentialAmt") %>'/>
+                                            <asp:TextBox ID="txtPotentialAmtEdit" runat="server" Text='<%# Bind("MaxSumLoc") %>'/>
                                         </td>
                                         <td>
-                                             <asp:TextBox ID="txtWeightedAmtEdit" runat="server" Text='<%#Bind("WeightedAmt")%>' />
+                                             <asp:TextBox ID="txtWeightedAmtEdit" runat="server" Text='<%#Bind("WtSumLoc")%>' />
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ddlDocTypeEdit" runat="server" >
@@ -475,22 +475,22 @@
                                               </asp:DropDownList> 
                                         </td>
                                         <td>
-                                            <asp:CheckBox ID="ckShowBPEdit" runat="server" Text='<%#Bind("ShowBP")%>' />
+                                            <asp:CheckBox ID="ckShowBPEdit" runat="server" Text='<%#Bind("DocChkbox")%>' />
                                         </td>
                                         <td>
-                                            <asp:Label ID="txtDocNoEdit" runat="server" Text='<%#Bind("ShowBP")%>' />
+                                            <asp:Label ID="txtDocNoEdit" runat="server" Text='<%#Bind("DocNumber")%>' />
                                             <asp:HyperLink ID="HyperLink10" NavigateUrl='#' runat="server">
                                            <asp:Image ID="Image12" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
                                         <td style="display: none">
-                                            <asp:Label runat="server" ID="lblSalesEmployeeCode"  Text='<%# Bind("SalesEmployeeCode") %>'></asp:Label>
+                                            <asp:Label runat="server" ID="lblSalesEmployeeCode"  Text='<%# Bind("SlpCode") %>'></asp:Label>
                                         </td>
                                         <td style="display: none">
-                                            <asp:Label runat="server" ID="lblStageCode"  Text='<%# Bind("StageCode") %>'></asp:Label>
+                                            <asp:Label runat="server" ID="lblStageCode"  Text='<%# Bind("Step_Id") %>'></asp:Label>
                                         </td>
                                         <td style="display: none">
-                                            <asp:Label runat="server" ID="lblDocTypeCode"  Text='<%# Bind("DocTypeCode") %>'></asp:Label>
+                                            <asp:Label runat="server" ID="lblDocTypeCode"  Text='<%# Bind("ObjType") %>'></asp:Label>
                                         </td>
                                     </tr>
                                 </EditItemTemplate>
@@ -506,10 +506,10 @@
                                              <asp:Label ID="lblNoInsert" runat="server" Text='<%# Bind("No") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtStartDateInsert" runat="server" Text='<%# Bind("StartDate") %>'  CssClass="txtDate"/>
+                                            <asp:TextBox ID="txtStartDateInsert" runat="server" Text='<%# Bind("OpenDate") %>'  CssClass="txtDate"/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtClosingDateInsert" runat="server" Text='<%# Bind("ClosingDate") %>'/>
+                                            <asp:TextBox ID="txtClosingDateInsert" runat="server" Text='<%# Bind("CloseDate") %>'/>
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ddlSalesEmployeeInsert" runat="server" >
@@ -520,13 +520,13 @@
                                               </asp:DropDownList>      
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtPercentInsert" runat="server" Text='<%# Bind("Percent") %>'/>
+                                            <asp:TextBox ID="txtPercentInsert" runat="server" Text='<%# Bind("ClosePrcnt") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtPotentialAmtInsert" runat="server" Text='<%# Bind("PotentialAmt") %>'/>
+                                            <asp:TextBox ID="txtPotentialAmtInsert" runat="server" Text='<%# Bind("MaxSumLoc") %>'/>
                                         </td>
                                         <td>
-                                             <asp:TextBox ID="txtWeightedAmtInsert" runat="server" Text='<%#Bind("WeightedAmt")%>' />
+                                             <asp:TextBox ID="txtWeightedAmtInsert" runat="server" Text='<%#Bind("WtSumLoc")%>' />
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ddlDocTypeInsert" runat="server">
@@ -536,22 +536,22 @@
                                             </asp:DropDownList> 
                                         </td>
                                         <td>
-                                            <asp:CheckBox ID="ckShowBPInsert" runat="server" Text='<%#Bind("ShowBP")%>' />
+                                            <asp:CheckBox ID="ckShowBPInsert" runat="server" Text='<%#Bind("DocChkbox")%>' />
                                         </td>
                                         <td>
-                                            <asp:Label ID="txtDocNoInsert" runat="server" Text='<%#Bind("ShowBP")%>' />
+                                            <asp:Label ID="txtDocNoInsert" runat="server" Text='<%#Bind("DocNumber")%>' />
                                             <asp:HyperLink ID="HyperLink10" NavigateUrl='#' runat="server">
                                                 <asp:Image ID="Image12" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
                                          <td style="display: none">
-                                            <asp:Label runat="server" ID="lblSalesEmployeeCode"  Text='<%# Bind("SalesEmployeeCode") %>'></asp:Label>
+                                            <asp:Label runat="server" ID="lblSalesEmployeeCode"  Text='<%# Bind("SlpCode") %>'></asp:Label>
                                         </td>
                                         <td style="display: none">
-                                            <asp:Label runat="server" ID="lblStageCode"  Text='<%# Bind("StageCode") %>'></asp:Label>
+                                            <asp:Label runat="server" ID="lblStageCode"  Text='<%# Bind("Step_Id") %>'></asp:Label>
                                         </td>
                                         <td style="display: none">
-                                            <asp:Label runat="server" ID="lblDocTypeCode"  Text='<%# Bind("DocTypeCode") %>'></asp:Label>
+                                            <asp:Label runat="server" ID="lblDocTypeCode"  Text='<%# Bind("ObjType") %>'></asp:Label>
                                         </td>
                                     </tr>
                                 </InsertItemTemplate>

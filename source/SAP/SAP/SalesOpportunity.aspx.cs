@@ -29,10 +29,9 @@ namespace SAP
                 dtHeader.Columns.Add("Territory");
                 dtHeader.Columns.Add("CardName");
                 dtHeader.Columns.Add("CprCode");
-                dtHeader.Columns.Add("OpenDate");
                 dtHeader.Columns.Add("MaxSumLoc");
                 dtHeader.Columns.Add("Name");
-                dtHeader.Rows.Add("", "", "", "","","", "", "", "","");
+                dtHeader.Rows.Add("", "", "", "","","", "", "", "");
 
 
                 dtStage = new DataTable();
@@ -46,12 +45,12 @@ namespace SAP
                 dtStage.Columns.Add("SlpCode");
                 dtStage.Columns.Add("Step_Id");
                 dtStage.Columns.Add("DocNumber");
+                dtStage.Columns.Add("ObjType");
 
                 dtStage.Columns.Add("DocType");//need to remove
                 dtStage.Columns.Add("Stage");//need to remove
                 dtStage.Columns.Add("SalesEmployee");//need to remove
-                dtStage.Columns.Add("Stage");//need to remove
-
+                
                 this.lvStage.DataSource = dtStage;
                 this.lvStage.DataBind();
 
@@ -181,79 +180,7 @@ namespace SAP
             }
 
         }
-        public String _collectData()
-        {
-            try
-            {
-                //Update table header
-                    DataRow dr = dtHeader.Rows[0];
-                    dr["CardCode"] = txtCustomerCode.Text;
-                    dr["SlpCode"] = ddlBuyer.Text; 
-                    dr["OpenDate"] = txtStartDate.Text;
-                    dr["Source"] = "";
-                    dr["Territory"] = "";
-                    dr["CardName"] = ""; 
-                    dr["CprCode"] = "";
-                    dr["OpenDate"] = "";
-                    dr["MaxSumLoc"] = txtPotentialAmt.Text;
-                    dr["Name"] = ""; 
-
-                    //Remove row with empty itemcode
-                    foreach (DataRow row in dtStage.Rows)
-                    {
-                        if (row["ItemCode"].ToString()=="")
-                        {
-                            row.Delete();
-                        }
-                    }
-                    DocumentXML objInfo = new DocumentXML();
-                    return objInfo.ToXMLStringFromDS("97",dtHeader,dtStage,"");
-                //OpportunityXML objInfo = new OpportunityXML("97", this.txtStartDate.Text,txtPredDate.Text, this.txtCustomerCode.Text, User.Identity.Name
-                //    ,txtPotentialAmt.Text);
-
-                //for (int i = 0; i < dtStage.Rows.Count; i++)
-                //{
-                //    DataRow row = dtStage.Rows[i];
-                //    int stagecode = int.Parse(row["StageCode"].ToString());
-                //    if (stagecode!=0)
-                //    {
-                //        String StartDate=row["StartDate"].ToString();
-                //        String ClosingDate=null;
-
-                //        if (!String.IsNullOrEmpty(row["ClosingDate"].ToString()))
-                //        {
-                //            ClosingDate = row["ClosingDate"].ToString();
-                //        }
-                //        int SalesEmployee=0;
-
-                //        if (!String.IsNullOrEmpty(row["SalesEmployeeCode"].ToString()))
-                //        {
-                //            SalesEmployee = int.Parse(row["SalesEmployeeCode"].ToString());
-                //        }
-                //        Double Percent = Double.Parse(row["Percent"].ToString()); 
-                //        Double PotentialAmt = Double.Parse(row["PotentialAmt"].ToString());
-                //        Double WeightedAmt = Double.Parse(row["WeightedAmt"].ToString()); 
-                //        String DocType = row["DocTypeCode"].ToString();
-                //        int DocNo = -1;
-                //        if (!String.IsNullOrEmpty(row["DocNo"].ToString()))
-                //        {
-                //            DocNo = int.Parse(row["DocNo"].ToString());
-                //        }
-                        
-                //        String ShowBP=row["ShowBP"].ToString();
-
-                //        Opportunity_StageXML objOrder = new Opportunity_StageXML(StartDate,ClosingDate,stagecode,Percent,DocNo,ShowBP,DocType,PotentialAmt,SalesEmployee,WeightedAmt);
-                //        objInfo.AddStageLine(objOrder);
-                //    }
-                //}
-                //return objInfo.ToXMLString();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-        }
+      
         protected void btnAdd_Click(object sender, ImageClickEventArgs e)
         {
             if (txtCustomerCode.Text=="")
@@ -417,11 +344,6 @@ namespace SAP
             this._StageCancelAddNew();
         }
 
-        private int GetNo()
-        {
-            return dtStage.Rows.Count + 1;
-        }
-
         protected void _btnAddRecord_Click(object sender, EventArgs e)
         {
             this.lvStage.InsertItemPosition = InsertItemPosition.FirstItem;
@@ -466,7 +388,6 @@ namespace SAP
             this.lvStage.DataBind();
         }
        
-
         protected void lvStage_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             if (lvStage.EditIndex >= 0)
@@ -513,6 +434,46 @@ namespace SAP
 
             lvStage.DataSource = dtStage;
             lvStage.DataBind();
+        }
+        public String _collectData()
+        {
+            try
+            {
+                //Update table header
+                DataRow dr = dtHeader.Rows[0];
+                dr["CardCode"] = txtCustomerCode.Text;
+                dr["SlpCode"] = ddlBuyer.Text;
+                dr["OpenDate"] = txtStartDate.Text;
+                dr["Source"] = "";
+                dr["Territory"] = "";
+                dr["CardName"] = "";
+                dr["CprCode"] = "";
+                dr["OpenDate"] = "";
+                dr["MaxSumLoc"] = txtPotentialAmt.Text;
+                dr["Name"] = "";
+
+                //Remove row with empty itemcode
+                foreach (DataRow row in dtStage.Rows)
+                {
+                    if (row["ItemCode"].ToString() == "")
+                    {
+                        row.Delete();
+                    }
+                }
+                DocumentXML objInfo = new DocumentXML();
+                String RemoveColumn = "No;DocType;Stage;SalesEmployee";
+                return objInfo.ToXMLStringFromDS("97", dtHeader, dtStage, RemoveColumn);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        private int GetNo()
+        {
+            return dtStage.Rows.Count + 1;
         }
         # endregion 
     }

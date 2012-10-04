@@ -242,7 +242,7 @@ namespace SAP
                     dr["Comments"] = txtRemarks.Text;
                     dr["JrnlMemo"] = txtJournalRemark.Text;
                    
-                    DocumentXML objInfo = new DocumentXML("59", this.txtPostingDate.Text, "", this.txtDocumentDate.Text,"", "", User.Identity.Name);
+                    DocumentXML objInfo = new DocumentXML();
                     String RemoveColumn = "No";
                     return objInfo.ToXMLStringFromDS("59", dtHeader, dtItem, RemoveColumn);
                 }

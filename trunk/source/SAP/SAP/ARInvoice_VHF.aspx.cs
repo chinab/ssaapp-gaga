@@ -280,7 +280,7 @@ namespace SAP
         {
             try
             {
-                DocumentXML objInfo = new DocumentXML("13", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
+                DocumentXML_VHF objInfo = new DocumentXML_VHF("13", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
                 
                  for (int i = 0; i < dt.Rows.Count; i++) {
 

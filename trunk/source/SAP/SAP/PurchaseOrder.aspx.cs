@@ -263,7 +263,7 @@ namespace SAP
                 dr["JrnlMemo"] = txtJournalRemark.Text;
                 dr["CardCode"] = txtVendor.Text;
                 dr["CardName"] = txtName.Text;
-                DocumentXML objInfo = new DocumentXML("22", this.txtPostingDate.Text, this.txtDueDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
+                DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "No";
                 return objInfo.ToXMLStringFromDS("22", dtHeader, dtContents, RemoveColumn);
 

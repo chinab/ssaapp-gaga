@@ -206,7 +206,7 @@ namespace SAP
                             row.Delete();
                         }
                     }
-                    DocumentXML objInfo = new DocumentXML("", "", "", "","", "", "");
+                    DocumentXML objInfo = new DocumentXML();
                     return objInfo.ToXMLStringFromDS("97",dtHeader,dtStage,"");
                 //OpportunityXML objInfo = new OpportunityXML("97", this.txtStartDate.Text,txtPredDate.Text, this.txtCustomerCode.Text, User.Identity.Name
                 //    ,txtPotentialAmt.Text);

@@ -75,37 +75,7 @@ namespace SAP
                                 {
                                     foreach (DataColumn column in ds.Columns)
                                     {
-                                        //Can kiem tra column name ko nam trong array
-                                        if (Array.BinarySearch(arr,column.ColumnName)>0)
-                                        {
-                                            if (column.ColumnName != "No")//phan lon cac table deu co column No nay
-                                            {
-                                                writer.WriteStartElement(column.ColumnName); //Write Tag
-                                                {
-                                                    writer.WriteString(row[column].ToString());
-                                                }
-                                                writer.WriteEndElement();
-                                            }
-                                        }
-                                        
-                                    }
-                                }
-                                writer.WriteEndElement();
-                            }
-                            writer.WriteEndElement();
-                        }
-                        #endregion
-
-                       #region LineXML 1
-                       foreach (DataRow row in ds1.Rows)
-                        {
-                            writer.WriteStartElement(gf.GetLineTableTag(ObjType,1));
-                            {
-                                writer.WriteStartElement("row");
-                                {
-                                    foreach (DataColumn column in ds1.Columns)
-                                    {
-                                        if (column.ColumnName != "No")
+                                        if (column.ColumnName != "No")//phan lon cac table deu co column No nay
                                         {
                                             writer.WriteStartElement(column.ColumnName); //Write Tag
                                             {
@@ -119,6 +89,34 @@ namespace SAP
                             }
                             writer.WriteEndElement();
                         }
+                        #endregion
+
+                       #region LineXML 1
+                        writer.WriteStartElement(gf.GetLineTableTag(ObjType, 1));
+                        {
+                           foreach (DataRow row in ds1.Rows)
+                            {
+                                writer.WriteStartElement("row");
+                                {
+                                    foreach (DataColumn column in ds1.Columns)
+                                    {
+                                        if (Array.IndexOf(arr, column.ColumnName) < 0)
+                                        {
+                                            if (column.ColumnName != "No")
+                                            {
+                                                writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                {
+                                                    writer.WriteString(row[column].ToString());
+                                                }
+                                                writer.WriteEndElement();
+                                            }
+                                        }
+                                    }
+                                }
+                                writer.WriteEndElement();
+                            }
+                        }
+                        writer.WriteEndElement();
                         #endregion
                     }
                     writer.WriteEndElement();

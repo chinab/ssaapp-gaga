@@ -13,33 +13,44 @@ namespace SAP
     public partial class ARInvoice : System.Web.UI.Page
     {
         public static DataTable dt;
+        public static DataTable dtHeader;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                dtHeader = new DataTable();
+                dtHeader.Columns.Add("CardCode");
+                dtHeader.Columns.Add("CardName");
+                dtHeader.Columns.Add("TaxDate");
+                dtHeader.Columns.Add("DocDate");
+                dtHeader.Columns.Add("DocDueDate");
+                dtHeader.Columns.Add("Comments");
+                dtHeader.Columns.Add("JrnlMemo");
+                dtHeader.Rows.Add("", "", "", "", "", "From SAP WEB", "Goods Receipts JE Remark");
+
                 dt = new DataTable();
                 dt.Columns.Add("No");
-                dt.Columns.Add("Code");
-                dt.Columns.Add("CardCode");
-                dt.Columns.Add("Description");
+                dt.Columns.Add("ItemCode");
+                dt.Columns.Add("CardCode");//will be deleted
+                dt.Columns.Add("Dscription");
                 dt.Columns.Add("Quantity");
-                dt.Columns.Add("OrgPrice");
-                dt.Columns.Add("PromoDiscount");
-                dt.Columns.Add("UnitPrice");
-                dt.Columns.Add("ContractDiscount");
-                dt.Columns.Add("PriceAfterDiscount");
-                dt.Columns.Add("TotalDiscount");
-                dt.Columns.Add("Total");
+                dt.Columns.Add("U_OrgPrice");
+                dt.Columns.Add("U_Pro_ByPro");
+                dt.Columns.Add("PriceBefDi");
+                dt.Columns.Add("DiscPrcnt");
+                dt.Columns.Add("Price");
+                dt.Columns.Add("TotalDiscount");//will be deleted
+                dt.Columns.Add("LineTotal");
                 dt.Columns.Add("TaxCode");
-                dt.Columns.Add("TaxRate");                
-                dt.Columns.Add("Whse");
-                dt.Columns.Add("PromotionId");
-                dt.Columns.Add("PromotionLine");
-                dt.Columns.Add("Sole");
-                dt.Columns.Add("PromoEnable");
-                dt.Columns.Add("QuantityEnable");
+                dt.Columns.Add("VatPrcnt");                
+                dt.Columns.Add("WhsCode");
+                dt.Columns.Add("U_ProID");
+                dt.Columns.Add("U_ProLine");
+                dt.Columns.Add("U_Pro_SoLe");
+                dt.Columns.Add("PromoEnable"); //will be deleted
+                dt.Columns.Add("QuantityEnable");//will be deleted
                 
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                     dt.Rows.Add(i, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","");
                 
                 this.lvContents.DataSource = dt;
@@ -111,8 +122,8 @@ namespace SAP
                             DataRow dr = dt.Rows[itemNo];
                             setDefaultItemValue(dr);
                             dr["No"] = itemNo;
-                            dr["Code"] = chosenItem.ItemCode;
-                            dr["Description"] = chosenItem.ItemName;
+                            dr["ItemCode"] = chosenItem.ItemCode;
+                            dr["Dscription"] = chosenItem.ItemName;
                             dr["CardCode"] = this.txtVendor.Text;
                             dr["Quantity"] = 1;
 
@@ -120,13 +131,13 @@ namespace SAP
                             DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
                             DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
 
-                            dr["UnitPrice"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
-                            dr["OrgPrice"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
-                            dr["ContractDiscount"] = defaultInfo.Tables[0].Rows[0]["Discount"];
-                            dr["PriceAfterDiscount"] = defaultInfo.Tables[0].Rows[0]["PriceAfDi"];
+                            dr["PriceBefDi"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
+                            dr["U_OrgPrice"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
+                            dr["DiscPrcnt"] = defaultInfo.Tables[0].Rows[0]["Discount"];
+                            dr["Price"] = defaultInfo.Tables[0].Rows[0]["PriceAfDi"];
                             dr["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
-                            dr["TaxRate"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
-                            dr["Whse"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
+                            dr["VatPrcnt"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
+                            dr["WhsCode"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
 
 
                             //dt.Rows.      
@@ -142,7 +153,7 @@ namespace SAP
                         {
                             // update grid
                             DataRow dr = dt.Rows[itemNo];
-                            dr["Whse"] = chosenWarehouse.WhsCode;
+                            dr["WhsCode"] = chosenWarehouse.WhsCode;
 
                             //dt.Rows.
                             this.lvContents.DataSource = dt;
@@ -157,7 +168,7 @@ namespace SAP
                             // update grid
                             DataRow dr = dt.Rows[itemNo];
                             dr["Taxcode"] = chosenTaxCode.Code;
-                            dr["TaxRate"] = chosenTaxCode.Rate;
+                            dr["VatPrcnt"] = chosenTaxCode.Rate;
 
                             //dt.Rows.
                             this.lvContents.DataSource = dt;
@@ -208,29 +219,29 @@ namespace SAP
                             // update grid
                             DataRow dr = dt.Rows[itemNo];
                             
-                            double promoDiscount  =  getDoubleFromObject(promo.HeadDscAmt) +  getDoubleFromObject(promo.HeadDscPer) * getDoubleFromObject(dr["OrgPrice"]) / 100 +  getDoubleFromObject(promo.ProValue);
-                            double unitPrice = getDoubleFromObject(dr["UnitPrice"]);
-                            dr["PromoDiscount"] = promoDiscount;
-                            dr["UnitPrice"] = unitPrice;
-                            dr["PromotionId"] = promo.ProCode; 
-                            dr["Sole"] = promo.Sole;
+                            double promoDiscount  =  getDoubleFromObject(promo.HeadDscAmt) +  getDoubleFromObject(promo.HeadDscPer) * getDoubleFromObject(dr["U_OrgPrice"]) / 100 +  getDoubleFromObject(promo.ProValue);
+                            double unitPrice = getDoubleFromObject(dr["PriceBefDi"]);
+                            dr["U_Pro_ByPro"] = promoDiscount;
+                            dr["PriceBefDi"] = unitPrice;
+                            dr["U_ProId"] = promo.ProCode; 
+                            dr["U_Pro_Sole"] = promo.Sole;
 
                             Int32 ProQty = geIntFromObject(promo.ProQty);
                             if(ProQty >= 1){
                                 DataRow newRow = dt.NewRow();
                                 setDefaultItemValue(newRow);
-                                newRow["Code"] = promo.ItemCode;
-                                newRow["Description"] = promo.ItemName;
+                                newRow["ItemCode"] = promo.ItemCode;
+                                newRow["Dscription"] = promo.ItemName;
                                 newRow["Quantity"] = promo.ProQty;
-                                newRow["PromoDiscount"] = 0;
-                                newRow["UnitPrice"] = 0;
-                                newRow["OrgPrice"] = 0;
-                                newRow["ContractDiscount"] = 0;
-                                newRow["PromotionId"] = promo.ProCode; 
-                                newRow["Sole"] = promo.Sole;
-                                newRow["Whse"] = "02";
+                                newRow["U_Pro_ByPro"] = 0;
+                                newRow["PriceBefDi"] = 0;
+                                newRow["U_OrgPrice"] = 0;
+                                newRow["DiscPrcnt"] = 0;
+                                newRow["U_ProID"] = promo.ProCode;
+                                newRow["U_Pro_SoLe"] = promo.Sole;
+                                newRow["WhsCode"] = "02";
                                 newRow["TaxCode"] = "S2";
-                                newRow["PromotionLine"] = "Y";
+                                newRow["U_ProLine"] = "Y";
                                 
 
                                 dt.Rows.InsertAt(newRow, itemNo + 1);
@@ -240,7 +251,7 @@ namespace SAP
                             }
                             dt.Rows[itemNo]["PromoEnable"] = "N";
 							dt.Rows[itemNo]["QuantityEnable"] = "N";
-                            dr["Sole"] = promo.Sole;                            
+                            dr["U_Pro_Sole"] = promo.Sole;                            
                             //dt.Rows.
                             updateTableTotalPrice(dt);
                             this.lvContents.DataSource = dt;
@@ -259,50 +270,39 @@ namespace SAP
 
         protected void setDefaultItemValue(DataRow row){
             row["No"]="";
-            row["Code"]="";
-            row["Description"]="";
+            row["ItemCode"]="";
+            row["Dscription"]="";
             row["Quantity"]="";
-            row["OrgPrice"]="";
-            row["PromoDiscount"]="";
-            row["UnitPrice"]="";
-            row["ContractDiscount"]="";
-            row["PriceAfterDiscount"]="";
-            row["Total"]="0.0";
+            row["U_OrgPrice"]="";
+            row["U_Pro_ByPro"] = "";
+            row["PriceBefDi"] = "";
+            row["DiscPrcnt"] = "";
+            row["Price"]="";
+            row["LineTotal"]="0.0";
             row["TaxCode"]="";
-            row["TaxRate"]="";                
-            row["Whse"]="";
-            row["PromotionId"]="";
-            row["PromotionLine"]="";
-            row["Sole"]="";
+            row["VatPrcnt"] = "";                
+            row["WhsCode"]="";
+            row["U_ProID"] = "";
+            row["U_ProLine"] = "";
+            row["U_Pro_Sole"] = "";
         }
  
         public String _collectData()
         {
             try
             {
-                DocumentXML_VHF objInfo = new DocumentXML_VHF("13", this.txtPostingDate.Text, this.txtDeliveryDate.Text, this.txtDocumentDate.Text, this.txtVendor.Text, txtName.Text, User.Identity.Name);
-                
-                 for (int i = 0; i < dt.Rows.Count; i++) {
-
-                    DataRow row = dt.Rows[i];
-                    String itemcode = row["Code"].ToString();
-
-                    
-                    if (!String.IsNullOrEmpty(itemcode))
-                    {
-                        String des = row["Description"].ToString();
-                        String quan = row["Quantity"].ToString();
-                        String discount = row["ContractDiscount"].ToString();
-                        String whscode = row["Whse"].ToString();
-                        String vat = row["TaxCode"].ToString();
-                        //String vatprice = row["Total"].ToString();
-                        String UnitPrice = row["UnitPrice"].ToString();
-
-                        Document_LineXML objOrder = new Document_LineXML(itemcode, des, geIntFromObject(quan), getDoubleFromObject(discount), whscode, vat, getDoubleFromObject(UnitPrice),"");
-                        objInfo.AddOrderItem(objOrder);
-                    }
-                }
-                return objInfo.ToXMLString();
+                //Update table header
+                DataRow dr = dtHeader.Rows[0];
+                dr["DocDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
+                dr["DocDueDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDeliveryDate.Text));
+                dr["TaxDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDocumentDate.Text));
+                dr["Comments"] = txtRemark.Text;
+                dr["JrnlMemo"] = "";
+                dr["CardCode"] = txtVendor.Text;
+                dr["CardName"] = txtName.Text;
+                DocumentXML objInfo = new DocumentXML();
+                String RemoveColumn = "No;CardCode;PromoEnable;QuantityEnable;TotalDiscount";
+                return objInfo.ToXMLStringFromDS("13", dtHeader, dt, RemoveColumn);
             }
             catch (Exception)
             {
@@ -352,7 +352,7 @@ namespace SAP
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             DataSet ds = ts.CreateMarketingDocument(requestXML);
-            if (ds.Tables[0].Rows[0]["ErrCode"] != "0")
+            if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
@@ -427,11 +427,11 @@ namespace SAP
             double orderTotal = 0.0;
             double taxTotal = 0.0;
             for (int i = 0; i < dtInput.Rows.Count; i++) {
-                if (!"".Equals(dtInput.Rows[i]["Code"]))
+                if (!"".Equals(dtInput.Rows[i]["ItemCode"]))
                 {
                     updateRowTotalPrice(dtInput, i);
-                    double total = getDoubleFromObject(dtInput.Rows[i]["Total"]);
-                    double taxRate = getDoubleFromObject(dtInput.Rows[i]["TaxRate"]);
+                    double total = getDoubleFromObject(dtInput.Rows[i]["LineTotal"]);
+                    double taxRate = getDoubleFromObject(dtInput.Rows[i]["VatPrcnt"]);
                     if (taxRate == 0)
                         taxRate = 10;
                     double tax = total * taxRate / 100;
@@ -459,24 +459,24 @@ namespace SAP
 
             DataRow row = dtInput.Rows[rowNumber];
             quantity = geIntFromObject(row["Quantity"]);
-            orgPrice = getDoubleFromObject(row["OrgPrice"]);
+            orgPrice = getDoubleFromObject(row["U_OrgPrice"]);
 
-            discountPromo = getDoubleFromObject(row["PromoDiscount"]);
-            unitPrice = getDoubleFromObject(row["UnitPrice"]);
-            discountContract = getDoubleFromObject(row["ContractDiscount"]);
-            priceAfterDiscount = getDoubleFromObject(row["PriceAfterDiscount"]);
-            total = getDoubleFromObject(row["Total"]);
+            discountPromo = getDoubleFromObject(row["U_Pro_ByPro"]);
+            unitPrice = getDoubleFromObject(row["PriceBefDi"]);
+            discountContract = getDoubleFromObject(row["DiscPrcnt"]);
+            priceAfterDiscount = getDoubleFromObject(row["Price"]);
+            total = getDoubleFromObject(row["LineTotal"]);
 
             unitPrice = orgPrice - discountPromo/quantity;
             priceAfterDiscount = unitPrice * (100 - discountContract) / 100;
             total = priceAfterDiscount * quantity;
             totalDiscount = orgPrice * quantity * discountContract / 100 + discountPromo;
 
-            row["UnitPrice"] = unitPrice;
-            row["PriceAfterDiscount"] = priceAfterDiscount;
+            row["PriceBefDi"] = unitPrice;
+            row["Price"] = priceAfterDiscount;
             row["TotalDiscount"] = totalDiscount;
 
-            row["Total"] = orgPrice * quantity - totalDiscount;// total;
+            row["LineTotal"] = orgPrice * quantity - totalDiscount;// total;
 
         }
 

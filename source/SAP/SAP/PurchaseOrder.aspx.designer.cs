@@ -418,13 +418,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.TextBox txtTotalPayment;
         
         /// <summary>
-        /// ImageButton1 control.
+        /// btnAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.ImageButton btnAdd;
         
         /// <summary>
         /// btnCopyFrom control.
@@ -436,12 +436,12 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.ImageButton btnCopyFrom;
         
         /// <summary>
-        /// ImageButton2 control.
+        /// btnCopyTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
+        protected global::System.Web.UI.WebControls.ImageButton btnCopyTo;
     }
 }

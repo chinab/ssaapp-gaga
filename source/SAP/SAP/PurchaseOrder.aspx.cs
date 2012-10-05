@@ -123,9 +123,10 @@ namespace SAP
                             DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
                             DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
 
-                            dtContents.Rows[itemNo - 1]["PriceBefDi"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["UnitPrice"]);
-                            dtContents.Rows[itemNo - 1]["DiscPrcnt"] = String.Format("{0:n2}", defaultInfo.Tables[0].Rows[0]["Discount"]);
-                            dtContents.Rows[itemNo - 1]["Price"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);
+                            dtContents.Rows[itemNo - 1]["PriceBefDi"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
+                            dtContents.Rows[itemNo - 1]["DiscPrcnt"] = defaultInfo.Tables[0].Rows[0]["Discount"];
+                            dtContents.Rows[itemNo - 1]["Price"] = defaultInfo.Tables[0].Rows[0]["PriceAfDi"];
+
                             dtContents.Rows[itemNo - 1]["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
                             dtContents.Rows[itemNo - 1]["VatPrcnt"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
                             dtContents.Rows[itemNo - 1]["WhsCode"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];

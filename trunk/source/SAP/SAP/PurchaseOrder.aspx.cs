@@ -45,8 +45,6 @@ namespace SAP
                 dtContents.Columns.Add("TaxCode");
                 dtContents.Columns.Add("VatPrcnt");
                 dtContents.Columns.Add("WhsCode");
-                //dtContents.Columns.Add("QuantityEnable");//no need
-                //dtContents.Columns.Add("PromoEnable");//no need
                 dtContents.Columns.Add("OcrCode");
                 dtContents.Columns.Add("OcrCode2");
                 dtContents.Columns.Add("OcrCode3");
@@ -93,7 +91,6 @@ namespace SAP
                 //-------------Load Default BP----------------
                 GetDefault getDefaultWS = new GetDefault();
                 DataSet defaultVendor = getDefaultWS.GetDefaultBP(User.Identity.Name, "S");
-
 
                 //extract to funtion later
                 if (defaultVendor != null)
@@ -146,26 +143,23 @@ namespace SAP
                         if (chosenItem != null)
                         {
                             // update grid
-                            DataRow dr = dtContents.Rows[itemNo-1];
-                            //setDefaultItemValue(dr);
-                            //dr["No"] = itemNo;
-                            dr["ItemCode"] = chosenItem.ItemCode;
-                            dr["Dscription"] = chosenItem.ItemName;
-                           // dr["CardCode"] = this.txtVendor.Text;
-                            dr["Quantity"] = 1;
+                            dtContents.Rows[itemNo - 1]["ItemCode"] = chosenItem.ItemCode;
+                            dtContents.Rows[itemNo - 1]["Dscription"] = chosenItem.ItemName;
+                            dtContents.Rows[itemNo - 1]["Quantity"] = 1;
 
                             GetDefault defaultWS = new GetDefault();
                             DateTime postingDate = DateTime.Parse(this.txtPostingDate.Text);
                             DataSet defaultInfo = defaultWS.GetDefaultLineInfo(User.Identity.Name, this.txtVendor.Text, chosenItem.ItemCode, 1, postingDate);
 
-                            dr["PriceBefDi"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["UnitPrice"]);
-                            dr["DiscPrcnt"] = String.Format("{0:n2}", defaultInfo.Tables[0].Rows[0]["Discount"]);
-                            dr["Price"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);
-                            dr["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
-                            dr["VatPrcnt"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
-                            dr["WhsCode"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
+                            dtContents.Rows[itemNo - 1]["PriceBefDi"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["UnitPrice"]);
+                            dtContents.Rows[itemNo - 1]["DiscPrcnt"] = String.Format("{0:n2}", defaultInfo.Tables[0].Rows[0]["Discount"]);
+                            dtContents.Rows[itemNo - 1]["Price"] = String.Format("{0:n0}", defaultInfo.Tables[0].Rows[0]["PriceAfDi"]);
+                            dtContents.Rows[itemNo - 1]["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
+                            dtContents.Rows[itemNo - 1]["VatPrcnt"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
+                            dtContents.Rows[itemNo - 1]["WhsCode"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
                             //dt.Rows.      
                             updateTableTotalPrice();
+                            dtContents.AcceptChanges();
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         }
@@ -266,26 +260,6 @@ namespace SAP
                 DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "No";
                 return objInfo.ToXMLStringFromDS("22", dtHeader, dtContents, RemoveColumn);
-
-                //foreach (DataRow row in dtContents.Rows)
-                //{
-                   
-                //    String itemcode = row["Code"].ToString();
-
-                //    if (!String.IsNullOrEmpty(itemcode))
-                //    {
-                //        String des = row["Description"].ToString();
-                //        String whscode = row["Whse"].ToString();
-                //        String vat = row["TaxCode"].ToString();
-
-                //        Document_LineXML objOrder = new Document_LineXML(itemcode, des, GF.Object2Double((object)GF.ResetFormatNumeric(row["Quantity"].ToString())),
-                //                                                                        GF.Object2Double((object)GF.ResetFormatNumeric(row["ContractDiscount"].ToString())), 
-                //                                                                        whscode, vat,
-                //                                                                        GF.Object2Double((object)GF.ResetFormatNumeric(row["UnitPrice"].ToString())), "");
-                //        objInfo.AddOrderItem(objOrder);
-                //    }
-                //}
-                //return objInfo.ToXMLString();
             }
             catch (Exception)
             {
@@ -293,40 +267,40 @@ namespace SAP
             }
         }
 
-        protected DataTable getDataFromListView(ListView lv)
-        {
-            DataTable table = new DataTable();
-            if (lv.Items.Count >= 1)
-            {
-                for (int i = 0; i < lv.Items[0].Controls.Count; i++)
-                {
-                    if (lv.Items[0].Controls[i].GetType() == typeof(Label))
-                    {
-                        table.Columns.Add("col" + i.ToString());
-                    }
-                }
-            }
+        //protected DataTable getDataFromListView(ListView lv)
+        //{
+        //    DataTable table = new DataTable();
+        //    if (lv.Items.Count >= 1)
+        //    {
+        //        for (int i = 0; i < lv.Items[0].Controls.Count; i++)
+        //        {
+        //            if (lv.Items[0].Controls[i].GetType() == typeof(Label))
+        //            {
+        //                table.Columns.Add("col" + i.ToString());
+        //            }
+        //        }
+        //    }
 
-            for (int j = 0; j < lv.Items.Count; j++)
-            {
-                ArrayList valholder = new ArrayList();
-                for (int k = 0; k < lv.Items[0].Controls.Count; k++)
-                {
-                    if (lv.Items[0].Controls[k].GetType() == typeof(Label))
-                    {
-                        Label tep = lv.Items[0].Controls[k] as Label;
-                        valholder.Add(tep.Text);
-                    }
-                }
-                DataRow dr = table.NewRow();
-                for (int z = 0; z < valholder.Count; z++)
-                {
-                    dr[z] = valholder[z].ToString();
-                }
-                table.Rows.Add(dr);
-            }
-            return table;
-        }
+        //    for (int j = 0; j < lv.Items.Count; j++)
+        //    {
+        //        ArrayList valholder = new ArrayList();
+        //        for (int k = 0; k < lv.Items[0].Controls.Count; k++)
+        //        {
+        //            if (lv.Items[0].Controls[k].GetType() == typeof(Label))
+        //            {
+        //                Label tep = lv.Items[0].Controls[k] as Label;
+        //                valholder.Add(tep.Text);
+        //            }
+        //        }
+        //        DataRow dr = table.NewRow();
+        //        for (int z = 0; z < valholder.Count; z++)
+        //        {
+        //            dr[z] = valholder[z].ToString();
+        //        }
+        //        table.Rows.Add(dr);
+        //    }
+        //    return table;
+        //}
 
         #region Event
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -350,6 +324,7 @@ namespace SAP
             }
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                               "Dialog.hideLoader();", true);
+            SetControlsStatus("Save");
         }
 
         protected void _ddlCurency_SelectedIndexChanged(object sender, EventArgs e)
@@ -376,33 +351,37 @@ namespace SAP
             }
         }
 
-        protected void btnQuantityUpdate_click(object sender, EventArgs e)
-        {
-            foreach (ListViewItem item in this.lvContents.Items)
-            {
-                LinkButton btnQuantityUpdate = item.FindControl("btnQuantityUpdate") as LinkButton;
+        //protected void btnQuantityUpdate_click(object sender, EventArgs e)
+        //{
+        //    foreach (ListViewItem item in this.lvContents.Items)
+        //    {
+        //        LinkButton btnQuantityUpdate = item.FindControl("btnQuantityUpdate") as LinkButton;
 
-                if (btnQuantityUpdate != null && btnQuantityUpdate == sender)
-                {
-                    TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
-                    Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
-                    dtContents.Rows[item.DataItemIndex]["Quantity"] = geIntFromObject(txtQuantity.Text);
-                    updateTableTotalPrice();
-                    this.lvContents.DataSource = dtContents;
-                    this.lvContents.DataBind();
+        //        if (btnQuantityUpdate != null && btnQuantityUpdate == sender)
+        //        {
+        //            TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
+        //            Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
+        //            dtContents.Rows[item.DataItemIndex]["Quantity"] = geIntFromObject(txtQuantity.Text);
+        //            updateTableTotalPrice();
+        //            this.lvContents.DataSource = dtContents;
+        //            this.lvContents.DataBind();
 
-                    break;
-                }
-            }
-        }
+        //            break;
+        //        }
+        //    }
+        //}
 
         protected void _btnAddRecord_Click(object sender, EventArgs e)
         {
             int iNo = GetNo();
-            dtContents.Rows.Add(iNo, "", "", "", "1", "0", "0", "0", "0", "", "", "", "", "", "", "");
+            dtContents.Rows.Add(iNo, "", "", "1", "0", "0", "0", "0", "0", "", "", "", "", "", "", "");
             this.lvContents.DataSource = dtContents;
-            this.lvContents.EditIndex = iNo-1;
+
+            int lastpage = this.ProductListPagerCombo.TotalRowCount / this.ProductListPagerCombo.PageSize;
+            this.ProductListPagerCombo.SetPageProperties(lastpage * this.ProductListPagerCombo.PageSize, this.ProductListPagerCombo.MaximumRows, false);
+            this.lvContents.EditIndex = iNo - 1;
             this.lvContents.DataBind();
+            SetControlsStatus("Add");
         }
 
         private int GetNo()
@@ -410,6 +389,7 @@ namespace SAP
             return dtContents.Rows.Count + 1;
         }
 
+        #region item command
         protected void lvContents_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             ListViewItem lvi = e.Item;
@@ -424,12 +404,14 @@ namespace SAP
                     this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
                     break;
-                case "UpdateItem":
+                case "Update":
                     // update new data to dt
+                    if (string.IsNullOrEmpty(((Label)lvi.FindControl("lblCode")).Text)) return;
+                   
                     Label lblNo = (Label)lvi.FindControl("lblNo");
                     foreach(DataRow row in dtContents.Rows)
                     {
-                        if (row["No"].ToString().Equals(lblNo.Text))
+                        if (row["No"].ToString().Equals(lblNo.Text)) // update currentrow into data table
                         {
                             row["ItemCode"] = ((Label)lvi.FindControl("lblCode")).Text;
                             row["Dscription"] = ((Label)lvi.FindControl("lblDescription")).Text;
@@ -452,6 +434,7 @@ namespace SAP
                     this.lvContents.EditIndex = -1;
                     this.lvContents.DataSource = dtContents;
                     this.lvContents.DataBind();
+                    SetControlsStatus("Update");
                     break;
 
                 case "DeleteItem":
@@ -464,43 +447,37 @@ namespace SAP
                     this.lvContents.DataBind();
                     break;
                     
-                default:
-                    break;
+                default: break;
             }
         }
+        #endregion
 
+        #region edit item
         protected void lvContents_ItemEditing(object sender, ListViewEditEventArgs e)
         {
             this.lvContents.EditIndex = e.NewEditIndex;
 
-            string lsQty = dtContents.Rows[e.NewEditIndex]["Quantity"].ToString();
-            string lsUPr = dtContents.Rows[e.NewEditIndex]["PriceBefDi"].ToString();
-            string lsPriAftDis = dtContents.Rows[e.NewEditIndex]["Price"].ToString();
-            string lsTotal = dtContents.Rows[e.NewEditIndex]["LineTotal"].ToString();
+            // Reset FormatNumeric 
+            string lsQty = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["Quantity"].ToString());
+            string lsUPr = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["PriceBefDi"].ToString());
+            string lsPriAftDis = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["Price"].ToString());
+            string lsTotal = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["LineTotal"].ToString());
 
-            dtContents.Rows[e.NewEditIndex]["Quantity"] = lsQty.Replace(",", "");
-            dtContents.Rows[e.NewEditIndex]["PriceBefDi"] = lsUPr.Replace(",", "");
-            dtContents.Rows[e.NewEditIndex]["Price"] = lsPriAftDis.Replace(",", "");
-            dtContents.Rows[e.NewEditIndex]["LineTotal"] = lsTotal.Replace(",", "");
+            dtContents.Rows[e.NewEditIndex]["Quantity"] = lsQty;
+            dtContents.Rows[e.NewEditIndex]["PriceBefDi"] = lsUPr;
+            dtContents.Rows[e.NewEditIndex]["Price"] = lsPriAftDis;
+            dtContents.Rows[e.NewEditIndex]["LineTotal"] = lsTotal;
 
             this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
+            SetControlsStatus("Edit");
         }
-
-        #region edit item
-
         #endregion
 
         #region insert item
         protected void lvContents_ItemInserted(object sender, ListViewInsertedEventArgs e)
         {
             this._cancelAddNew();
-        }
-
-
-        protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
-        {
-            
         }
         #endregion
 
@@ -546,11 +523,8 @@ namespace SAP
 
         public void updateRowTotalPrice(DataRow row)
         {
-            double quantity = 0;
-            double unitPrice = 0.0;
-            double discountContract = 0;
-            double priceAfterDiscount = 0.0;
-            double total = 0;
+            double quantity = 0, unitPrice = 0.0, discountContract = 0, priceAfterDiscount = 0.0, total = 0;
+
             quantity = GF.Object2Double(row["Quantity"], "QtyDec");
             unitPrice = GF.Object2Double(row["PriceBefDi"], "PriceDec");
             discountContract = GF.Object2Double(row["DiscPrcnt"], "PercentDec");
@@ -562,61 +536,21 @@ namespace SAP
             row["Price"] = GF.FormatNumeric(priceAfterDiscount.ToString(), "PriceDec");
             row["LineTotal"] = GF.FormatNumeric(total.ToString(), "SumDec");
             row["Quantity"] = GF.FormatNumeric(quantity.ToString(), "QtyDec");
-
         }
-
-        public double getDoubleFromObject(Object input)
-        {
-            CultureInfo cf = System.Threading.Thread.CurrentThread.CurrentUICulture;
-            cf.NumberFormat.NumberGroupSeparator = ",";
-            cf.NumberFormat.NumberDecimalSeparator = ".";
-
-            double result = 0.0;
-            try
-            {
-                if (input != null)
-                    result = Double.Parse(input.ToString(), cf);
-            }
-            catch (Exception ex)
-            {
-                result = 0.0;
-            }
-            return result;
-        }
-
-        public Int32 geIntFromObject(Object input)
-        {
-            Int32 result = 0;
-            try
-            {
-                if (input != null)
-                    result = Int32.Parse(input.ToString());
-            }
-            catch (Exception ex)
-            {
-                result = 0;
-            }
-            return result;
-        }
-
 
         #endregion
 
         protected void lvContents_ItemUpdating(object sender, ListViewUpdateEventArgs e)
         {
+            Label lblCode = (Label)lvContents.Items[e.ItemIndex].FindControl("lblCode");
+            if (lblCode == null || string.IsNullOrEmpty(lblCode.Text))
+            {
+                e.Cancel = true;
+                return;
+            }
             this.lvContents.EditIndex = -1;
             this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
-        }
-
-        protected void lvContents_ItemCreated(object sender, ListViewItemEventArgs e)
-        {
-
-        }
-
-        protected void lvContents_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
-            
         }
 
         protected void ProductListPagerCombo_PreRender(object sender, EventArgs e)
@@ -625,7 +559,34 @@ namespace SAP
             lvContents.DataBind();
         }
 
-     
+        private void SetControlsStatus(string asStatus)
+        {
+            switch (asStatus)
+            { 
+                case "Add":
+                    btnAdd.Enabled = btnAddRecord.Enabled = false;
+                    ImageButton1.Enabled = false;
+                    ImageButton2.Enabled = false;
+                    break;
+                case "Edit":
+                    btnAdd.Enabled = btnAddRecord.Enabled = false;
+                    ImageButton1.Enabled = ImageButton2.Enabled = false;
+                    break;
+                case "Update":
+                    btnAdd.Enabled = btnAddRecord.Enabled = true;
+                    ImageButton1.Enabled = ImageButton2.Enabled = true;
+                    break;
+                case "Save":
+                    btnAdd.Enabled = btnAddRecord.Enabled = true;
+                    ImageButton1.Enabled = ImageButton2.Enabled = true;
+                    break;            
+            }
+        }
+
+        protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
+        {
+
+        }
 
     }
 }

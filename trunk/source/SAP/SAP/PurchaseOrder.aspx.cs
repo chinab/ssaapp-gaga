@@ -19,7 +19,7 @@ namespace SAP
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            GF = new GeneralFunctions(User.Identity.Name);
+            
             if (!IsPostBack)
             {
                 dtHeader = new DataTable();
@@ -56,6 +56,7 @@ namespace SAP
 
                 MasterData masterDataWS = new MasterData();
                 //-------------Load Sales/Buyer Employee----------------
+                GF = new GeneralFunctions(User.Identity.Name);
                 DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData(User.Identity.Name);
                 ListItem item = new ListItem();
                 foreach (DataRow row in salesBuyers.Tables[0].Rows)
@@ -103,17 +104,15 @@ namespace SAP
             if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
             {
                 Int32 itemNo = 0;
-                GeneralFunctions Newformat = new GeneralFunctions();
-                
+                if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
+
                 switch (this.Request["__EVENTARGUMENT"].ToString())
                 {
-                        
                     case "EditItemCallBack":
                         ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
                         if (chosenItem != null)
-                        {
-                            // update grid
+                        {   // update grid
                             dtContents.Rows[itemNo - 1]["ItemCode"] = chosenItem.ItemCode;
                             dtContents.Rows[itemNo - 1]["Dscription"] = chosenItem.ItemName;
                             dtContents.Rows[itemNo - 1]["Quantity"] = 1;
@@ -124,7 +123,7 @@ namespace SAP
 
                             dtContents.Rows[itemNo - 1]["PriceBefDi"] = defaultInfo.Tables[0].Rows[0]["UnitPrice"];
                             dtContents.Rows[itemNo - 1]["DiscPrcnt"] = defaultInfo.Tables[0].Rows[0]["Discount"];
-                            dtContents.Rows[itemNo - 1]["Price"] = defaultInfo.Tables[0].Rows[0]["PriceAfDi"];
+                            dtContents.Rows[itemNo - 1]["PriceBefDi"] = defaultInfo.Tables[0].Rows[0]["PriceAfDi"];
 
                             dtContents.Rows[itemNo - 1]["TaxCode"] = defaultInfo.Tables[0].Rows[0]["TaxCode"];
                             dtContents.Rows[itemNo - 1]["VatPrcnt"] = defaultInfo.Tables[0].Rows[0]["TaxRate"];
@@ -141,24 +140,30 @@ namespace SAP
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
                         if (chosenWarehouse != null)
                         {   // update grid
-                            DataRow dr = dtContents.Rows[itemNo];
-                            dr["WhsCode"] = chosenWarehouse.WhsCode;
+                            dtContents.Rows[itemNo - 1]["WhsCode"] = chosenWarehouse.WhsCode;
+
+                            dtContents.Rows[itemNo - 1]["Quantity"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtQuantity")).Text;
+                            dtContents.Rows[itemNo - 1]["PriceBefDi"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtUnitPrice")).Text;
+                            dtContents.Rows[itemNo - 1]["DiscPrcnt"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtDiscount")).Text;
                             //dt.Rows.
+                            dtContents.AcceptChanges();
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
-                        }
-                        break;
+                        } break;
                     case "EditTaxCodeCallBack":
                         TaxGroup chosenTaxCode = Session["chosenTaxCode"] as TaxGroup;
                         itemNo = Int32.Parse(Session["chosenItemNo"] as String);
                         if (chosenTaxCode != null)
                         {
                             // update grid
-                            DataRow dr = dtContents.Rows[itemNo];
-                            dr["TaxCode"] = chosenTaxCode.Code;
-                            dr["VatPrcnt"] = chosenTaxCode.Rate;
+                            dtContents.Rows[itemNo - 1]["TaxCode"] = chosenTaxCode.Code;
+                            dtContents.Rows[itemNo - 1]["VatPrcnt"] = chosenTaxCode.Rate;
 
+                            dtContents.Rows[itemNo - 1]["Quantity"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtQuantity")).Text;
+                            dtContents.Rows[itemNo - 1]["PriceBefDi"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtUnitPrice")).Text;
+                            dtContents.Rows[itemNo - 1]["DiscPrcnt"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtDiscount")).Text;
                             //dt.Rows.
+                            dtContents.AcceptChanges();
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         }
@@ -212,6 +217,7 @@ namespace SAP
         {
             return dtContents.Rows.Count + 1;
         }
+
         protected void ClearScreen()
         {
             //-------------Load Default BP----------------
@@ -244,16 +250,13 @@ namespace SAP
                     ddlContactPerson.Items.Add(item);
                 }
             }
-
             dtContents.Clear();
         }
         private void ResetLineNo()
         {
             int i = 0;
             foreach (DataRow row in dtContents.Rows)
-            {
                 row["No"] = ++i;
-            }
         }
         private void SetControlsStatus(string asStatus)
         {
@@ -283,6 +286,7 @@ namespace SAP
         {
             try
             {
+                if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
                 //Update table header
                 DataRow dr = dtHeader.Rows[0];
                 dr["DocDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
@@ -294,7 +298,7 @@ namespace SAP
                 dr["CardName"] = txtName.Text;
                 DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "No";
-                Array arrContentsCols = new string[] { "Quantity", "PriceBefDi", "DiscPrcnt", "Price", "LineTotal"}; // Columns need reset format numeric
+                Array arrContentsCols = new string[] { "Quantity", "PriceBefDi", "Price", "DiscPrcnt", "LineTotal" }; // Columns need to reset format numeric
                 return objInfo.ToXMLStringFromDS("22", dtHeader, GF.ResetFormatNumeric(dtContents, arrContentsCols), RemoveColumn);
             }
             catch (Exception)
@@ -305,7 +309,6 @@ namespace SAP
         #endregion
 
         #region Event
-       
         protected void _ddlCurency_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
@@ -411,15 +414,17 @@ namespace SAP
         {
             this.lvContents.EditIndex = e.NewEditIndex;
 
+            if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
             // Reset FormatNumeric 
-            string lsQty = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["Quantity"].ToString());
-            string lsUPr = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["PriceBefDi"].ToString());
-            string lsPriAftDis = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["Price"].ToString());
-            string lsTotal = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["LineTotal"].ToString());
+            string lsQty = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["Quantity"].ToString());       // Quantity
+            string lsUPrBeDi = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["PriceBefDi"].ToString()); // Unitprice
+            string lsPrice = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["Price"].ToString());        // PriceAfterDiscount
+            string lsDisPrcnt = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["DiscPrcnt"].ToString()); // DiscPrcnt
+            string lsTotal = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["LineTotal"].ToString());    // Total
 
             dtContents.Rows[e.NewEditIndex]["Quantity"] = lsQty;
-            dtContents.Rows[e.NewEditIndex]["PriceBefDi"] = lsUPr;
-            dtContents.Rows[e.NewEditIndex]["Price"] = lsPriAftDis;
+            dtContents.Rows[e.NewEditIndex]["PriceBefDi"] = lsUPrBeDi;
+            dtContents.Rows[e.NewEditIndex]["Price"] = lsPrice;
             dtContents.Rows[e.NewEditIndex]["LineTotal"] = lsTotal;
 
             this.lvContents.DataSource = dtContents;
@@ -464,11 +469,6 @@ namespace SAP
         {
             lvContents.DataSource = dtContents;
             lvContents.DataBind();
-        }
-
-        protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
-        {
-
         }
 
         protected void btnAdd_Click(object sender, ImageClickEventArgs e)
@@ -526,8 +526,8 @@ namespace SAP
 
         public void updateRowTotalPrice(DataRow row)
         {
+            if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
             double quantity = 0, unitPrice = 0.0, discountContract = 0, priceAfterDiscount = 0.0, total = 0;
-
             quantity = GF.Object2Double(row["Quantity"], "QtyDec");
             unitPrice = GF.Object2Double(row["PriceBefDi"], "PriceDec");
             discountContract = GF.Object2Double(row["DiscPrcnt"], "PercentDec");

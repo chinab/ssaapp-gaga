@@ -144,15 +144,14 @@
                             <li><a href="#tabs-2">Logistics</a></li>
                             <li><a href="#tabs-3">Accounting</a></li>
                         </ul>
-                        <div id="tabs-1" style="overflow: auto; height: 240px; margin-top: 0px;">
+                        <div id="tabs-1" style="overflow: auto; height: 220px; margin-top: 0px;">
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" OnClick="_btnAddRecord_Click" />
                             <br />
-                            <asp:ListView ID="lvContents" runat="server" OnItemInserted="lvContents_ItemInserted"
-                                OnItemInserting="lvContents_ItemInserting" OnItemCommand="lvContents_ItemCommand"
-                                OnItemEditing="lvContents_ItemEditing" 
-                                onitemcreated="lvContents_ItemCreated" 
-                                onitemdatabound="lvContents_ItemDataBound" 
-                                onitemupdating="lvContents_ItemUpdating" ViewStateMode="Enabled">
+                            <asp:ListView ID="lvContents" runat="server" 
+                                OnItemInserted="lvContents_ItemInserted"
+                                OnItemInserting="lvContents_ItemInserting" OnItemCommand="lvContents_ItemCommand" 
+                                onitemupdating="lvContents_ItemUpdating" ViewStateMode="Enabled" 
+                                onitemediting="lvContents_ItemEditing">
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
@@ -304,7 +303,7 @@
                                 <EditItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="UpdateItem" Text="Update"
+                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Update" Text="Update"
                                                 ImageUrl="~/skin/icon/save_icon_mono.gif" CausesValidation="true" ValidationGroup="vgrpSaveContact" />
                                             <asp:LinkButton ID="imgbCancel" runat="server" CommandName="CancelUpdate" Text="Cancel"
                                                 ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />

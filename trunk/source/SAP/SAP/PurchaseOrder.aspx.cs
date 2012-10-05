@@ -88,36 +88,8 @@ namespace SAP
                     itemIndicator = new ListItem(row[1].ToString(), row[0].ToString());
                     ddlIndicator.Items.Add(itemIndicator);
                 }
-                //-------------Load Default BP----------------
-                GetDefault getDefaultWS = new GetDefault();
-                DataSet defaultVendor = getDefaultWS.GetDefaultBP(User.Identity.Name, "S");
 
-                //extract to funtion later
-                if (defaultVendor != null)
-                {
-                    this.txtVendor.Text = defaultVendor.Tables[0].Rows[0]["CardCode"].ToString();
-                    this.txtName.Text = defaultVendor.Tables[0].Rows[0]["CardName"].ToString();
-                    this.txtStatus.Text = "Open";
-                    this.txtStatus.Enabled = false;
-                    this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
-                    this.txtDueDate.Text = DateTime.Now.ToShortDateString();
-                    this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
-                    this.txtNoFrom.Text = "227";
-                    this.txtNoFrom.Enabled = false;
-                    this.txtNoTo.Text = "0";
-                    this.txtNoTo.Enabled = false;
-
-                    DataSet contactPersons = masterDataWS.GetContactPerson(defaultVendor.Tables[0].Rows[0]["CardCode"].ToString());
-                    item = new ListItem();
-                    foreach (DataRow row in contactPersons.Tables[0].Rows)
-                    {
-                        String name = row[1].ToString() + " " + row[2].ToString();
-                        item = new ListItem(name, row[1].ToString());
-                        if ("Y".Equals(row[0].ToString()))
-                            item.Selected = true;
-                        ddlContactPerson.Items.Add(item);
-                    }
-                }
+                ClearScreen();
             }
         }
 
@@ -235,9 +207,46 @@ namespace SAP
 
         }
 
-        
-
         #region Functions
+        private int GetNo()
+        {
+            return dtContents.Rows.Count + 1;
+        }
+        protected void ClearScreen()
+        {
+            //-------------Load Default BP----------------
+            GetDefault getDefaultWS = new GetDefault();
+            DataSet defaultVendor = getDefaultWS.GetDefaultBP(User.Identity.Name, "S");
+
+            //extract to funtion later
+            if (defaultVendor != null)
+            {
+                this.txtVendor.Text = defaultVendor.Tables[0].Rows[0]["CardCode"].ToString();
+                this.txtName.Text = defaultVendor.Tables[0].Rows[0]["CardName"].ToString();
+                this.txtStatus.Text = "Open";
+                this.txtStatus.Enabled = false;
+                this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
+                this.txtDueDate.Text = DateTime.Now.ToShortDateString();
+                this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
+                this.txtNoFrom.Text = "227";
+                this.txtNoFrom.Enabled = false;
+                this.txtNoTo.Text = "0";
+                this.txtNoTo.Enabled = false;
+                MasterData masterDataWS = new MasterData();
+                DataSet contactPersons = masterDataWS.GetContactPerson(defaultVendor.Tables[0].Rows[0]["CardCode"].ToString());
+                ListItem item = new ListItem();
+                foreach (DataRow row in contactPersons.Tables[0].Rows)
+                {
+                    String name = row[1].ToString() + " " + row[2].ToString();
+                    item = new ListItem(name, row[1].ToString());
+                    if ("Y".Equals(row[0].ToString()))
+                        item.Selected = true;
+                    ddlContactPerson.Items.Add(item);
+                }
+            }
+
+            dtContents.Clear();
+        }
         private void ResetLineNo()
         {
             int i = 0;
@@ -294,30 +303,7 @@ namespace SAP
         #endregion
 
         #region Event
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
-            String requestXML = _collectData();
-            SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateMarketingDocument(requestXML);
-            if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
-            {
-                Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
-                Session["requestXML"] = requestXML;
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + ds.Tables[0].Rows[0]["ErrMsg"] + "','');", true);
-            }
-            else
-            {
-                Session["successMessage"] = "Operation complete sucessful!";
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                   "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
-            }
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
-                              "Dialog.hideLoader();", true);
-            SetControlsStatus("Save");
-        }
-
+       
         protected void _ddlCurency_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
@@ -342,26 +328,7 @@ namespace SAP
             }
         }
 
-        //protected void btnQuantityUpdate_click(object sender, EventArgs e)
-        //{
-        //    foreach (ListViewItem item in this.lvContents.Items)
-        //    {
-        //        LinkButton btnQuantityUpdate = item.FindControl("btnQuantityUpdate") as LinkButton;
-
-        //        if (btnQuantityUpdate != null && btnQuantityUpdate == sender)
-        //        {
-        //            TextBox txtQuantity = item.FindControl("txtQuantity") as TextBox;
-        //            Label lblOrgPrice = item.FindControl("lblOrgPrice") as Label;
-        //            dtContents.Rows[item.DataItemIndex]["Quantity"] = geIntFromObject(txtQuantity.Text);
-        //            updateTableTotalPrice();
-        //            this.lvContents.DataSource = dtContents;
-        //            this.lvContents.DataBind();
-
-        //            break;
-        //        }
-        //    }
-        //}
-
+     
         protected void _btnAddRecord_Click(object sender, EventArgs e)
         {
             int iNo = GetNo();
@@ -375,10 +342,7 @@ namespace SAP
             SetControlsStatus("Add");
         }
 
-        private int GetNo()
-        {
-            return dtContents.Rows.Count + 1;
-        }
+       
 
         #region item command
         protected void lvContents_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -484,6 +448,55 @@ namespace SAP
             this.btnAddRecord.Enabled = true;
             this.lvContents.DataBind();
         }
+        protected void lvContents_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+        {
+            Label lblCode = (Label)lvContents.Items[e.ItemIndex].FindControl("lblCode");
+            if (lblCode == null || string.IsNullOrEmpty(lblCode.Text))
+            {
+                e.Cancel = true;
+                return;
+            }
+            this.lvContents.EditIndex = -1;
+            this.lvContents.DataSource = dtContents;
+            this.lvContents.DataBind();
+        }
+
+        protected void ProductListPagerCombo_PreRender(object sender, EventArgs e)
+        {
+            lvContents.DataSource = dtContents;
+            lvContents.DataBind();
+        }
+
+        protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
+        {
+
+        }
+
+        protected void btnAdd_Click(object sender, ImageClickEventArgs e)
+        {
+            String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
+            String requestXML = _collectData();
+            SAP.WebServices.Transaction ts = new WebServices.Transaction();
+            DataSet ds = ts.CreateMarketingDocument(requestXML);
+            if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
+            {
+                Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
+                Session["requestXML"] = requestXML;
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('" + ds.Tables[0].Rows[0]["ErrMsg"] + "','');", true);
+            }
+            else
+            {
+                Session["successMessage"] = "Operation complete sucessful!";
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                   "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
+
+                ClearScreen();
+            }
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                              "Dialog.hideLoader();", true);
+            SetControlsStatus("Save");
+        }
         #endregion
 
         #region priceCalculation
@@ -531,31 +544,7 @@ namespace SAP
 
         #endregion
 
-        protected void lvContents_ItemUpdating(object sender, ListViewUpdateEventArgs e)
-        {
-            Label lblCode = (Label)lvContents.Items[e.ItemIndex].FindControl("lblCode");
-            if (lblCode == null || string.IsNullOrEmpty(lblCode.Text))
-            {
-                e.Cancel = true;
-                return;
-            }
-            this.lvContents.EditIndex = -1;
-            this.lvContents.DataSource = dtContents;
-            this.lvContents.DataBind();
-        }
-
-        protected void ProductListPagerCombo_PreRender(object sender, EventArgs e)
-        {
-            lvContents.DataSource = dtContents;
-            lvContents.DataBind();
-        }
-
-      
-
-        protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
-        {
-
-        }
+       
 
     }
 }

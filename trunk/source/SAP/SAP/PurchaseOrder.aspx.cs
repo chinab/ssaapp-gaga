@@ -57,7 +57,7 @@ namespace SAP
 
                 MasterData masterDataWS = new MasterData();
                 //-------------Load Sales/Buyer Employee----------------
-                DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
+                DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData(User.Identity.Name);
                 ListItem item = new ListItem();
                 foreach (DataRow row in salesBuyers.Tables[0].Rows)
                 {
@@ -65,7 +65,7 @@ namespace SAP
                     ddlBuyer.Items.Add(item);
                 }
                 //-------------Load Shipping Type---------------------
-                DataSet ShippingType = masterDataWS.GetShippingType();
+                DataSet ShippingType = masterDataWS.GetShippingType(User.Identity.Name);
                 ListItem itemShipping = new ListItem();
                 foreach (DataRow row in ShippingType.Tables[0].Rows)
                 {
@@ -73,7 +73,7 @@ namespace SAP
                     ddlShippingType.Items.Add(itemShipping);
                 }
                 //-------------Load Payment Tern----------------
-                DataSet PaymentTerm = masterDataWS.GetPaymentTerm();
+                DataSet PaymentTerm = masterDataWS.GetPaymentTerm(User.Identity.Name);
                 ListItem itemPaymenTerm = new ListItem();
                 foreach (DataRow row in PaymentTerm.Tables[0].Rows)
                 {
@@ -81,7 +81,7 @@ namespace SAP
                     ddlPaymentTerm.Items.Add(itemPaymenTerm);
                 }
                 //-------------Load Indicator----------------
-                DataSet Indicator = masterDataWS.GetIndicator();
+                DataSet Indicator = masterDataWS.GetIndicator(User.Identity.Name);
                 ListItem itemIndicator = new ListItem();
                 foreach (DataRow row in Indicator.Tables[0].Rows)
                 {
@@ -182,7 +182,7 @@ namespace SAP
                             this.txtNoTo.Enabled = false;
 
                             MasterData masterDataWS = new MasterData();
-                            DataSet contactPersons = masterDataWS.GetContactPerson(chosenPartner.CardCode);
+                            DataSet contactPersons = masterDataWS.GetContactPerson(chosenPartner.CardCode, User.Identity.Name);
                             ListItem item = new ListItem();
                             foreach (DataRow row in contactPersons.Tables[0].Rows)
                             {
@@ -234,7 +234,7 @@ namespace SAP
                 this.txtNoTo.Text = "0";
                 this.txtNoTo.Enabled = false;
                 MasterData masterDataWS = new MasterData();
-                DataSet contactPersons = masterDataWS.GetContactPerson(defaultVendor.Tables[0].Rows[0]["CardCode"].ToString());
+                DataSet contactPersons = masterDataWS.GetContactPerson(defaultVendor.Tables[0].Rows[0]["CardCode"].ToString(), User.Identity.Name);
                 ListItem item = new ListItem();
                 foreach (DataRow row in contactPersons.Tables[0].Rows)
                 {
@@ -478,7 +478,7 @@ namespace SAP
             String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateMarketingDocument(requestXML);
+            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name);
             if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];

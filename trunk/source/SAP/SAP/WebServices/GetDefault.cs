@@ -311,16 +311,18 @@ namespace SAP
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetConnection", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int GetConnection()
+        public int GetConnection(string UserID)
         {
-            object[] results = this.Invoke("GetConnection", new object[0]);
+            object[] results = this.Invoke("GetConnection", new object[] {
+                    UserID});
             return ((int)(results[0]));
         }
 
         /// <remarks/>
-        public System.IAsyncResult BeginGetConnection(System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginGetConnection(string UserID, System.AsyncCallback callback, object asyncState)
         {
-            return this.BeginInvoke("GetConnection", new object[0], callback, asyncState);
+            return this.BeginInvoke("GetConnection", new object[] {
+                    UserID}, callback, asyncState);
         }
 
         /// <remarks/>
@@ -331,19 +333,20 @@ namespace SAP
         }
 
         /// <remarks/>
-        public void GetConnectionAsync()
+        public void GetConnectionAsync(string UserID)
         {
-            this.GetConnectionAsync(null);
+            this.GetConnectionAsync(UserID, null);
         }
 
         /// <remarks/>
-        public void GetConnectionAsync(object userState)
+        public void GetConnectionAsync(string UserID, object userState)
         {
             if ((this.GetConnectionOperationCompleted == null))
             {
                 this.GetConnectionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetConnectionOperationCompleted);
             }
-            this.InvokeAsync("GetConnection", new object[0], this.GetConnectionOperationCompleted, userState);
+            this.InvokeAsync("GetConnection", new object[] {
+                    UserID}, this.GetConnectionOperationCompleted, userState);
         }
 
         private void OnGetConnectionOperationCompleted(object arg)
@@ -461,16 +464,18 @@ namespace SAP
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateUDF", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string CreateUDF()
+        public string CreateUDF(string UserID)
         {
-            object[] results = this.Invoke("CreateUDF", new object[0]);
+            object[] results = this.Invoke("CreateUDF", new object[] {
+                    UserID});
             return ((string)(results[0]));
         }
 
         /// <remarks/>
-        public System.IAsyncResult BeginCreateUDF(System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginCreateUDF(string UserID, System.AsyncCallback callback, object asyncState)
         {
-            return this.BeginInvoke("CreateUDF", new object[0], callback, asyncState);
+            return this.BeginInvoke("CreateUDF", new object[] {
+                    UserID}, callback, asyncState);
         }
 
         /// <remarks/>
@@ -481,19 +486,20 @@ namespace SAP
         }
 
         /// <remarks/>
-        public void CreateUDFAsync()
+        public void CreateUDFAsync(string UserID)
         {
-            this.CreateUDFAsync(null);
+            this.CreateUDFAsync(UserID, null);
         }
 
         /// <remarks/>
-        public void CreateUDFAsync(object userState)
+        public void CreateUDFAsync(string UserID, object userState)
         {
             if ((this.CreateUDFOperationCompleted == null))
             {
                 this.CreateUDFOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateUDFOperationCompleted);
             }
-            this.InvokeAsync("CreateUDF", new object[0], this.CreateUDFOperationCompleted, userState);
+            this.InvokeAsync("CreateUDF", new object[] {
+                    UserID}, this.CreateUDFOperationCompleted, userState);
         }
 
         private void OnCreateUDFOperationCompleted(object arg)

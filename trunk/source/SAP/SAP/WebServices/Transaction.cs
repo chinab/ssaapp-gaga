@@ -40,6 +40,8 @@ namespace SAP.WebServices
 
         private System.Threading.SendOrPostCallback CreateOpportunityOperationCompleted;
 
+        private System.Threading.SendOrPostCallback GetMarketingDocument_ReturnDSOperationCompleted;
+
         /// <remarks/>
         public Transaction()
         {
@@ -49,7 +51,6 @@ namespace SAP.WebServices
             else
                 this.Url = urlSetting;
         }
-
         /// <remarks/>
         public event CreateMarketingDocumentCompletedEventHandler CreateMarketingDocumentCompleted;
 
@@ -66,19 +67,24 @@ namespace SAP.WebServices
         public event CreateOpportunityCompletedEventHandler CreateOpportunityCompleted;
 
         /// <remarks/>
+        public event GetMarketingDocument_ReturnDSCompletedEventHandler GetMarketingDocument_ReturnDSCompleted;
+
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateMarketingDocument", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet CreateMarketingDocument(string strXml)
+        public System.Data.DataSet CreateMarketingDocument(string strXml, string UserID)
         {
             object[] results = this.Invoke("CreateMarketingDocument", new object[] {
-                    strXml});
+                    strXml,
+                    UserID});
             return ((System.Data.DataSet)(results[0]));
         }
 
         /// <remarks/>
-        public System.IAsyncResult BeginCreateMarketingDocument(string strXml, System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginCreateMarketingDocument(string strXml, string UserID, System.AsyncCallback callback, object asyncState)
         {
             return this.BeginInvoke("CreateMarketingDocument", new object[] {
-                    strXml}, callback, asyncState);
+                    strXml,
+                    UserID}, callback, asyncState);
         }
 
         /// <remarks/>
@@ -89,20 +95,21 @@ namespace SAP.WebServices
         }
 
         /// <remarks/>
-        public void CreateMarketingDocumentAsync(string strXml)
+        public void CreateMarketingDocumentAsync(string strXml, string UserID)
         {
-            this.CreateMarketingDocumentAsync(strXml, null);
+            this.CreateMarketingDocumentAsync(strXml, UserID, null);
         }
 
         /// <remarks/>
-        public void CreateMarketingDocumentAsync(string strXml, object userState)
+        public void CreateMarketingDocumentAsync(string strXml, string UserID, object userState)
         {
             if ((this.CreateMarketingDocumentOperationCompleted == null))
             {
                 this.CreateMarketingDocumentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateMarketingDocumentOperationCompleted);
             }
             this.InvokeAsync("CreateMarketingDocument", new object[] {
-                    strXml}, this.CreateMarketingDocumentOperationCompleted, userState);
+                    strXml,
+                    UserID}, this.CreateMarketingDocumentOperationCompleted, userState);
         }
 
         private void OnCreateMarketingDocumentOperationCompleted(object arg)
@@ -278,18 +285,20 @@ namespace SAP.WebServices
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateOpportunity", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet CreateOpportunity(string strXml)
+        public System.Data.DataSet CreateOpportunity(string strXml, string UserID)
         {
             object[] results = this.Invoke("CreateOpportunity", new object[] {
-                    strXml});
+                    strXml,
+                    UserID});
             return ((System.Data.DataSet)(results[0]));
         }
 
         /// <remarks/>
-        public System.IAsyncResult BeginCreateOpportunity(string strXml, System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginCreateOpportunity(string strXml, string UserID, System.AsyncCallback callback, object asyncState)
         {
             return this.BeginInvoke("CreateOpportunity", new object[] {
-                    strXml}, callback, asyncState);
+                    strXml,
+                    UserID}, callback, asyncState);
         }
 
         /// <remarks/>
@@ -300,20 +309,21 @@ namespace SAP.WebServices
         }
 
         /// <remarks/>
-        public void CreateOpportunityAsync(string strXml)
+        public void CreateOpportunityAsync(string strXml, string UserID)
         {
-            this.CreateOpportunityAsync(strXml, null);
+            this.CreateOpportunityAsync(strXml, UserID, null);
         }
 
         /// <remarks/>
-        public void CreateOpportunityAsync(string strXml, object userState)
+        public void CreateOpportunityAsync(string strXml, string UserID, object userState)
         {
             if ((this.CreateOpportunityOperationCompleted == null))
             {
                 this.CreateOpportunityOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateOpportunityOperationCompleted);
             }
             this.InvokeAsync("CreateOpportunity", new object[] {
-                    strXml}, this.CreateOpportunityOperationCompleted, userState);
+                    strXml,
+                    UserID}, this.CreateOpportunityOperationCompleted, userState);
         }
 
         private void OnCreateOpportunityOperationCompleted(object arg)
@@ -322,6 +332,61 @@ namespace SAP.WebServices
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CreateOpportunityCompleted(this, new CreateOpportunityCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMarketingDocument_ReturnDS", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetMarketingDocument_ReturnDS(string DocType, int DocEntry, string UserID)
+        {
+            object[] results = this.Invoke("GetMarketingDocument_ReturnDS", new object[] {
+                    DocType,
+                    DocEntry,
+                    UserID});
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetMarketingDocument_ReturnDS(string DocType, int DocEntry, string UserID, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetMarketingDocument_ReturnDS", new object[] {
+                    DocType,
+                    DocEntry,
+                    UserID}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet EndGetMarketingDocument_ReturnDS(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetMarketingDocument_ReturnDSAsync(string DocType, int DocEntry, string UserID)
+        {
+            this.GetMarketingDocument_ReturnDSAsync(DocType, DocEntry, UserID, null);
+        }
+
+        /// <remarks/>
+        public void GetMarketingDocument_ReturnDSAsync(string DocType, int DocEntry, string UserID, object userState)
+        {
+            if ((this.GetMarketingDocument_ReturnDSOperationCompleted == null))
+            {
+                this.GetMarketingDocument_ReturnDSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMarketingDocument_ReturnDSOperationCompleted);
+            }
+            this.InvokeAsync("GetMarketingDocument_ReturnDS", new object[] {
+                    DocType,
+                    DocEntry,
+                    UserID}, this.GetMarketingDocument_ReturnDSOperationCompleted, userState);
+        }
+
+        private void OnGetMarketingDocument_ReturnDSOperationCompleted(object arg)
+        {
+            if ((this.GetMarketingDocument_ReturnDSCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetMarketingDocument_ReturnDSCompleted(this, new GetMarketingDocument_ReturnDSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -466,6 +531,36 @@ namespace SAP.WebServices
         private object[] results;
 
         internal CreateOpportunityCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    public delegate void GetMarketingDocument_ReturnDSCompletedEventHandler(object sender, GetMarketingDocument_ReturnDSCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetMarketingDocument_ReturnDSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetMarketingDocument_ReturnDSCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;

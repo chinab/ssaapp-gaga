@@ -18,7 +18,7 @@ namespace SAP
             {
                 String Dimension = Request.QueryString["Dimension"];
                 MasterData masterDataWS = new MasterData();
-                warehousesItems = masterDataWS.GetProject();
+                warehousesItems = masterDataWS.GetProject(User.Identity.Name);
                 BindCategories("");
                 editWareHouseUpdatePanel.Update();
 

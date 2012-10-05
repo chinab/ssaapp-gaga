@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace SAP
 {
-    public partial class GoodsReceipt : System.Web.UI.Page
+    public partial class GoodsIssue : System.Web.UI.Page
     {
         public static DataTable dtItem;
         public static DataTable dtHeader;

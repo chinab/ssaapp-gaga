@@ -323,13 +323,13 @@
                                             <asp:Label ID="lblDescription" runat="server" Text='<%# Bind("Dscription")%>' />
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtQuantity"  runat="server" Text='<%#Eval("Quantity")%>' />
+                                            <asp:TextBox ID="txtQuantity" Style="text-align: right" runat="server" Text='<%#Eval("Quantity")%>' />
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtUnitPrice" runat="server" Text='<%# Bind("PriceBefDi")%>' />
+                                            <asp:TextBox ID="txtUnitPrice" Style="text-align: right" runat="server" Text='<%# Bind("PriceBefDi")%>' />
                                         </td>
                                         <td>
-                                            <asp:TextBox runat="server" ID="txtDiscount" Text='<%#Bind("DiscPrcnt")%>' />
+                                            <asp:TextBox runat="server" ID="txtDiscount" Style="text-align: right" Text='<%#Bind("DiscPrcnt")%>' />
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblPriceAfterDiscount" Text='<%#Bind("Price")%>' />
@@ -752,7 +752,7 @@
                                     <span>Total before discount</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtTotalDiscount" runat="server"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTotalDiscount" Style="text-align: right" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -760,7 +760,7 @@
                                     <span>Tax</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtTax" runat="server" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTax" Style="text-align: right" runat="server" ReadOnly="true"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -768,7 +768,7 @@
                                     <span>Total Payment Due</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtTotalPayment" runat="server"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTotalPayment" Style="text-align: right" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>

@@ -18,7 +18,7 @@ namespace SAP
             {
 
                 MasterData masterDataWS = new MasterData();
-                TerritoryItem = masterDataWS.GetTerritory();
+                TerritoryItem = masterDataWS.GetTerritory(User.Identity.Name);
                 BindCategories("");
                 editWareHouseUpdatePanel.Update();
 

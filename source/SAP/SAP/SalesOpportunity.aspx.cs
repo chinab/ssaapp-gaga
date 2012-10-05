@@ -87,26 +87,26 @@ namespace SAP
                 this.lvCompetitor.DataBind();
 
                 MasterData masterDataWS = new MasterData();
-                DataSet ds = masterDataWS.GetSalesBuyerMasterData();
+                DataSet ds = masterDataWS.GetSalesBuyerMasterData(User.Identity.Name);
 
                 ddlBuyer.DataSource = ds.Tables[0];
                 ddlBuyer.DataTextField = "Name";
                 ddlBuyer.DataValueField = "Code";
                 ddlBuyer.DataBind();
 
-                ds = masterDataWS.GetLevelOfInterest();
+                ds = masterDataWS.GetLevelOfInterest(User.Identity.Name);
                 ddlInterest.DataSource = ds.Tables[0];
                 ddlInterest.DataTextField = "Descript";
                 ddlInterest.DataValueField = "Num";
                 ddlInterest.DataBind();
 
-                ds = masterDataWS.GetIndustry();
+                ds = masterDataWS.GetIndustry(User.Identity.Name);
                 ddlIndustry.DataSource = ds.Tables[0];
                 ddlIndustry.DataTextField = "IndName";
                 ddlIndustry.DataValueField = "IndCode";
                 ddlIndustry.DataBind();
 
-                ds = masterDataWS.GetInformationSource();
+                ds = masterDataWS.GetInformationSource(User.Identity.Name);
                 ddlSource.DataSource = ds.Tables[0];
                 ddlSource.DataTextField = "Descript";
                 ddlSource.DataValueField = "Num";
@@ -138,7 +138,7 @@ namespace SAP
                             this.txtStartDate.Text = DateTime.Now.ToShortDateString();
                             this.txtPredDate.Text = DateTime.Now.ToShortDateString();
                             MasterData masterDataWS = new MasterData();
-                            DataSet contactPersons = masterDataWS.GetContactPerson(chosenPartner.CardCode);
+                            DataSet contactPersons = masterDataWS.GetContactPerson(chosenPartner.CardCode, User.Identity.Name);
                             ListItem item = new ListItem();
                             foreach (DataRow row in contactPersons.Tables[0].Rows)
                             {
@@ -192,7 +192,7 @@ namespace SAP
             
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateOpportunity(requestXML);
+            DataSet ds = ts.CreateOpportunity(requestXML, User.Identity.Name);
             if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
@@ -360,7 +360,7 @@ namespace SAP
                 DropDownList ddl = (DropDownList)e.Item.FindControl("ddlSalesEmployeeInsert"); if (ddl != null)
                 {
                     MasterData masterDataWS = new MasterData();
-                    DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
+                    DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData(User.Identity.Name);
                     ddl.DataSource = salesBuyers.Tables[0];
                     ddl.DataTextField = "Name";
                     ddl.DataValueField = "Code";
@@ -369,7 +369,7 @@ namespace SAP
                 ddl = (DropDownList)e.Item.FindControl("ddlStageInsert"); if (ddl != null)
                 {
                     MasterData masterDataWS = new MasterData();
-                    DataSet salesBuyers = masterDataWS.GetStage();
+                    DataSet salesBuyers = masterDataWS.GetStage(User.Identity.Name);
                     ddl.DataSource = salesBuyers.Tables[0];
                     ddl.DataTextField = "Descript";
                     ddl.DataValueField = "Num";
@@ -400,7 +400,7 @@ namespace SAP
                     DropDownList ddl = (DropDownList)e.Item.FindControl("ddlSalesEmployeeEdit"); if (ddl != null)
                     {
                         MasterData masterDataWS = new MasterData();
-                        DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData();
+                        DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData(User.Identity.Name);
                         ddl.DataSource = salesBuyers.Tables[0];
                         ddl.DataTextField = "Name";
                         ddl.DataValueField = "Code";
@@ -409,7 +409,7 @@ namespace SAP
                     ddl = (DropDownList)e.Item.FindControl("ddlStageEdit"); if (ddl != null)
                     {
                         MasterData masterDataWS = new MasterData();
-                        DataSet salesBuyers = masterDataWS.GetStage();
+                        DataSet salesBuyers = masterDataWS.GetStage(User.Identity.Name);
                         ddl.DataSource = salesBuyers.Tables[0];
                         ddl.DataTextField = "Descript";
                         ddl.DataValueField = "Num";

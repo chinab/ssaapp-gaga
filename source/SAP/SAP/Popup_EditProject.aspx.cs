@@ -18,7 +18,7 @@ namespace SAP
             {
 
                 MasterData masterDataWS = new MasterData();
-                warehousesItems = masterDataWS.GetProject();
+                warehousesItems = masterDataWS.GetProject(User.Identity.Name);
                 //this.gridWareHouses.DataSource = warehousesItems.Tables[0];
                 //this.gridWareHouses.DataBind();
                 //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;

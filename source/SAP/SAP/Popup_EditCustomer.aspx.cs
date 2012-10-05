@@ -18,7 +18,7 @@ namespace SAP
             {
                 
                 MasterData masterDataWS = new MasterData();
-                businessPartners = masterDataWS.GetBusinessPartner("C");
+                businessPartners = masterDataWS.GetBusinessPartner("C", User.Identity.Name);
                 //this.gridVendors.DataSource = warehousesItems.Tables[0];
                 //this.gridVendors.DataBind();
                //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;

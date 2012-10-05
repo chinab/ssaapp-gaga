@@ -166,18 +166,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetBusinessPartner", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetBusinessPartner(string CardType)
+    public System.Data.DataSet GetBusinessPartner(string CardType, string UserID)
     {
         object[] results = this.Invoke("GetBusinessPartner", new object[] {
-                    CardType});
+                    CardType,
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetBusinessPartner(string CardType, System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetBusinessPartner(string CardType, string UserID, System.AsyncCallback callback, object asyncState)
     {
         return this.BeginInvoke("GetBusinessPartner", new object[] {
-                    CardType}, callback, asyncState);
+                    CardType,
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -188,20 +190,21 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetBusinessPartnerAsync(string CardType)
+    public void GetBusinessPartnerAsync(string CardType, string UserID)
     {
-        this.GetBusinessPartnerAsync(CardType, null);
+        this.GetBusinessPartnerAsync(CardType, UserID, null);
     }
 
     /// <remarks/>
-    public void GetBusinessPartnerAsync(string CardType, object userState)
+    public void GetBusinessPartnerAsync(string CardType, string UserID, object userState)
     {
         if ((this.GetBusinessPartnerOperationCompleted == null))
         {
             this.GetBusinessPartnerOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBusinessPartnerOperationCompleted);
         }
         this.InvokeAsync("GetBusinessPartner", new object[] {
-                    CardType}, this.GetBusinessPartnerOperationCompleted, userState);
+                    CardType,
+                    UserID}, this.GetBusinessPartnerOperationCompleted, userState);
     }
 
     private void OnGetBusinessPartnerOperationCompleted(object arg)
@@ -215,16 +218,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetItemMasterData", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetItemMasterData()
+    public System.Data.DataSet GetItemMasterData(string UserID)
     {
-        object[] results = this.Invoke("GetItemMasterData", new object[0]);
+        object[] results = this.Invoke("GetItemMasterData", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetItemMasterData(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetItemMasterData(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetItemMasterData", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetItemMasterData", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -235,19 +240,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetItemMasterDataAsync()
+    public void GetItemMasterDataAsync(string UserID)
     {
-        this.GetItemMasterDataAsync(null);
+        this.GetItemMasterDataAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetItemMasterDataAsync(object userState)
+    public void GetItemMasterDataAsync(string UserID, object userState)
     {
         if ((this.GetItemMasterDataOperationCompleted == null))
         {
             this.GetItemMasterDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetItemMasterDataOperationCompleted);
         }
-        this.InvokeAsync("GetItemMasterData", new object[0], this.GetItemMasterDataOperationCompleted, userState);
+        this.InvokeAsync("GetItemMasterData", new object[] {
+                    UserID}, this.GetItemMasterDataOperationCompleted, userState);
     }
 
     private void OnGetItemMasterDataOperationCompleted(object arg)
@@ -261,16 +267,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetWarehouse", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetWarehouse()
+    public System.Data.DataSet GetWarehouse(string UserID)
     {
-        object[] results = this.Invoke("GetWarehouse", new object[0]);
+        object[] results = this.Invoke("GetWarehouse", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetWarehouse(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetWarehouse(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetWarehouse", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetWarehouse", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -281,19 +289,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetWarehouseAsync()
+    public void GetWarehouseAsync(string UserID)
     {
-        this.GetWarehouseAsync(null);
+        this.GetWarehouseAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetWarehouseAsync(object userState)
+    public void GetWarehouseAsync(string UserID, object userState)
     {
         if ((this.GetWarehouseOperationCompleted == null))
         {
             this.GetWarehouseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetWarehouseOperationCompleted);
         }
-        this.InvokeAsync("GetWarehouse", new object[0], this.GetWarehouseOperationCompleted, userState);
+        this.InvokeAsync("GetWarehouse", new object[] {
+                    UserID}, this.GetWarehouseOperationCompleted, userState);
     }
 
     private void OnGetWarehouseOperationCompleted(object arg)
@@ -307,18 +316,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetTaxGroup", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetTaxGroup(string Category)
+    public System.Data.DataSet GetTaxGroup(string Category, string UserID)
     {
         object[] results = this.Invoke("GetTaxGroup", new object[] {
-                    Category});
+                    Category,
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetTaxGroup(string Category, System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetTaxGroup(string Category, string UserID, System.AsyncCallback callback, object asyncState)
     {
         return this.BeginInvoke("GetTaxGroup", new object[] {
-                    Category}, callback, asyncState);
+                    Category,
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -329,20 +340,21 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetTaxGroupAsync(string Category)
+    public void GetTaxGroupAsync(string Category, string UserID)
     {
-        this.GetTaxGroupAsync(Category, null);
+        this.GetTaxGroupAsync(Category, UserID, null);
     }
 
     /// <remarks/>
-    public void GetTaxGroupAsync(string Category, object userState)
+    public void GetTaxGroupAsync(string Category, string UserID, object userState)
     {
         if ((this.GetTaxGroupOperationCompleted == null))
         {
             this.GetTaxGroupOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTaxGroupOperationCompleted);
         }
         this.InvokeAsync("GetTaxGroup", new object[] {
-                    Category}, this.GetTaxGroupOperationCompleted, userState);
+                    Category,
+                    UserID}, this.GetTaxGroupOperationCompleted, userState);
     }
 
     private void OnGetTaxGroupOperationCompleted(object arg)
@@ -356,16 +368,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetEmployeeMasterData", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetEmployeeMasterData()
+    public System.Data.DataSet GetEmployeeMasterData(string UserID)
     {
-        object[] results = this.Invoke("GetEmployeeMasterData", new object[0]);
+        object[] results = this.Invoke("GetEmployeeMasterData", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetEmployeeMasterData(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetEmployeeMasterData(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetEmployeeMasterData", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetEmployeeMasterData", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -376,19 +390,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetEmployeeMasterDataAsync()
+    public void GetEmployeeMasterDataAsync(string UserID)
     {
-        this.GetEmployeeMasterDataAsync(null);
+        this.GetEmployeeMasterDataAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetEmployeeMasterDataAsync(object userState)
+    public void GetEmployeeMasterDataAsync(string UserID, object userState)
     {
         if ((this.GetEmployeeMasterDataOperationCompleted == null))
         {
             this.GetEmployeeMasterDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmployeeMasterDataOperationCompleted);
         }
-        this.InvokeAsync("GetEmployeeMasterData", new object[0], this.GetEmployeeMasterDataOperationCompleted, userState);
+        this.InvokeAsync("GetEmployeeMasterData", new object[] {
+                    UserID}, this.GetEmployeeMasterDataOperationCompleted, userState);
     }
 
     private void OnGetEmployeeMasterDataOperationCompleted(object arg)
@@ -402,16 +417,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetSalesBuyerMasterData", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetSalesBuyerMasterData()
+    public System.Data.DataSet GetSalesBuyerMasterData(string UserID)
     {
-        object[] results = this.Invoke("GetSalesBuyerMasterData", new object[0]);
+        object[] results = this.Invoke("GetSalesBuyerMasterData", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetSalesBuyerMasterData(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetSalesBuyerMasterData(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetSalesBuyerMasterData", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetSalesBuyerMasterData", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -422,19 +439,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetSalesBuyerMasterDataAsync()
+    public void GetSalesBuyerMasterDataAsync(string UserID)
     {
-        this.GetSalesBuyerMasterDataAsync(null);
+        this.GetSalesBuyerMasterDataAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetSalesBuyerMasterDataAsync(object userState)
+    public void GetSalesBuyerMasterDataAsync(string UserID, object userState)
     {
         if ((this.GetSalesBuyerMasterDataOperationCompleted == null))
         {
             this.GetSalesBuyerMasterDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSalesBuyerMasterDataOperationCompleted);
         }
-        this.InvokeAsync("GetSalesBuyerMasterData", new object[0], this.GetSalesBuyerMasterDataOperationCompleted, userState);
+        this.InvokeAsync("GetSalesBuyerMasterData", new object[] {
+                    UserID}, this.GetSalesBuyerMasterDataOperationCompleted, userState);
     }
 
     private void OnGetSalesBuyerMasterDataOperationCompleted(object arg)
@@ -448,18 +466,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetAccountMasterData", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetAccountMasterData(string Filter)
+    public System.Data.DataSet GetAccountMasterData(string Filter, string UserID)
     {
         object[] results = this.Invoke("GetAccountMasterData", new object[] {
-                    Filter});
+                    Filter,
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetAccountMasterData(string Filter, System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetAccountMasterData(string Filter, string UserID, System.AsyncCallback callback, object asyncState)
     {
         return this.BeginInvoke("GetAccountMasterData", new object[] {
-                    Filter}, callback, asyncState);
+                    Filter,
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -470,20 +490,21 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetAccountMasterDataAsync(string Filter)
+    public void GetAccountMasterDataAsync(string Filter, string UserID)
     {
-        this.GetAccountMasterDataAsync(Filter, null);
+        this.GetAccountMasterDataAsync(Filter, UserID, null);
     }
 
     /// <remarks/>
-    public void GetAccountMasterDataAsync(string Filter, object userState)
+    public void GetAccountMasterDataAsync(string Filter, string UserID, object userState)
     {
         if ((this.GetAccountMasterDataOperationCompleted == null))
         {
             this.GetAccountMasterDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAccountMasterDataOperationCompleted);
         }
         this.InvokeAsync("GetAccountMasterData", new object[] {
-                    Filter}, this.GetAccountMasterDataOperationCompleted, userState);
+                    Filter,
+                    UserID}, this.GetAccountMasterDataOperationCompleted, userState);
     }
 
     private void OnGetAccountMasterDataOperationCompleted(object arg)
@@ -497,18 +518,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetContactPerson", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetContactPerson(string CardCode)
+    public System.Data.DataSet GetContactPerson(string CardCode, string UserID)
     {
         object[] results = this.Invoke("GetContactPerson", new object[] {
-                    CardCode});
+                    CardCode,
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetContactPerson(string CardCode, System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetContactPerson(string CardCode, string UserID, System.AsyncCallback callback, object asyncState)
     {
         return this.BeginInvoke("GetContactPerson", new object[] {
-                    CardCode}, callback, asyncState);
+                    CardCode,
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -519,20 +542,21 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetContactPersonAsync(string CardCode)
+    public void GetContactPersonAsync(string CardCode, string UserID)
     {
-        this.GetContactPersonAsync(CardCode, null);
+        this.GetContactPersonAsync(CardCode, UserID, null);
     }
 
     /// <remarks/>
-    public void GetContactPersonAsync(string CardCode, object userState)
+    public void GetContactPersonAsync(string CardCode, string UserID, object userState)
     {
         if ((this.GetContactPersonOperationCompleted == null))
         {
             this.GetContactPersonOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetContactPersonOperationCompleted);
         }
         this.InvokeAsync("GetContactPerson", new object[] {
-                    CardCode}, this.GetContactPersonOperationCompleted, userState);
+                    CardCode,
+                    UserID}, this.GetContactPersonOperationCompleted, userState);
     }
 
     private void OnGetContactPersonOperationCompleted(object arg)
@@ -546,16 +570,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetProject", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetProject()
+    public System.Data.DataSet GetProject(string UserID)
     {
-        object[] results = this.Invoke("GetProject", new object[0]);
+        object[] results = this.Invoke("GetProject", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetProject(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetProject(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetProject", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetProject", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -566,19 +592,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetProjectAsync()
+    public void GetProjectAsync(string UserID)
     {
-        this.GetProjectAsync(null);
+        this.GetProjectAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetProjectAsync(object userState)
+    public void GetProjectAsync(string UserID, object userState)
     {
         if ((this.GetProjectOperationCompleted == null))
         {
             this.GetProjectOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetProjectOperationCompleted);
         }
-        this.InvokeAsync("GetProject", new object[0], this.GetProjectOperationCompleted, userState);
+        this.InvokeAsync("GetProject", new object[] {
+                    UserID}, this.GetProjectOperationCompleted, userState);
     }
 
     private void OnGetProjectOperationCompleted(object arg)
@@ -592,16 +619,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetShippingType", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetShippingType()
+    public System.Data.DataSet GetShippingType(string UserID)
     {
-        object[] results = this.Invoke("GetShippingType", new object[0]);
+        object[] results = this.Invoke("GetShippingType", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetShippingType(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetShippingType(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetShippingType", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetShippingType", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -612,19 +641,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetShippingTypeAsync()
+    public void GetShippingTypeAsync(string UserID)
     {
-        this.GetShippingTypeAsync(null);
+        this.GetShippingTypeAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetShippingTypeAsync(object userState)
+    public void GetShippingTypeAsync(string UserID, object userState)
     {
         if ((this.GetShippingTypeOperationCompleted == null))
         {
             this.GetShippingTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetShippingTypeOperationCompleted);
         }
-        this.InvokeAsync("GetShippingType", new object[0], this.GetShippingTypeOperationCompleted, userState);
+        this.InvokeAsync("GetShippingType", new object[] {
+                    UserID}, this.GetShippingTypeOperationCompleted, userState);
     }
 
     private void OnGetShippingTypeOperationCompleted(object arg)
@@ -638,18 +668,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetBPCurrency", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetBPCurrency(string CardCode)
+    public System.Data.DataSet GetBPCurrency(string CardCode, string UserID)
     {
         object[] results = this.Invoke("GetBPCurrency", new object[] {
-                    CardCode});
+                    CardCode,
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetBPCurrency(string CardCode, System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetBPCurrency(string CardCode, string UserID, System.AsyncCallback callback, object asyncState)
     {
         return this.BeginInvoke("GetBPCurrency", new object[] {
-                    CardCode}, callback, asyncState);
+                    CardCode,
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -660,20 +692,21 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetBPCurrencyAsync(string CardCode)
+    public void GetBPCurrencyAsync(string CardCode, string UserID)
     {
-        this.GetBPCurrencyAsync(CardCode, null);
+        this.GetBPCurrencyAsync(CardCode, UserID, null);
     }
 
     /// <remarks/>
-    public void GetBPCurrencyAsync(string CardCode, object userState)
+    public void GetBPCurrencyAsync(string CardCode, string UserID, object userState)
     {
         if ((this.GetBPCurrencyOperationCompleted == null))
         {
             this.GetBPCurrencyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBPCurrencyOperationCompleted);
         }
         this.InvokeAsync("GetBPCurrency", new object[] {
-                    CardCode}, this.GetBPCurrencyOperationCompleted, userState);
+                    CardCode,
+                    UserID}, this.GetBPCurrencyOperationCompleted, userState);
     }
 
     private void OnGetBPCurrencyOperationCompleted(object arg)
@@ -687,16 +720,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetIndicator", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetIndicator()
+    public System.Data.DataSet GetIndicator(string UserID)
     {
-        object[] results = this.Invoke("GetIndicator", new object[0]);
+        object[] results = this.Invoke("GetIndicator", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetIndicator(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetIndicator(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetIndicator", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetIndicator", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -707,19 +742,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetIndicatorAsync()
+    public void GetIndicatorAsync(string UserID)
     {
-        this.GetIndicatorAsync(null);
+        this.GetIndicatorAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetIndicatorAsync(object userState)
+    public void GetIndicatorAsync(string UserID, object userState)
     {
         if ((this.GetIndicatorOperationCompleted == null))
         {
             this.GetIndicatorOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetIndicatorOperationCompleted);
         }
-        this.InvokeAsync("GetIndicator", new object[0], this.GetIndicatorOperationCompleted, userState);
+        this.InvokeAsync("GetIndicator", new object[] {
+                    UserID}, this.GetIndicatorOperationCompleted, userState);
     }
 
     private void OnGetIndicatorOperationCompleted(object arg)
@@ -733,16 +769,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetPaymentTerm", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetPaymentTerm()
+    public System.Data.DataSet GetPaymentTerm(string UserID)
     {
-        object[] results = this.Invoke("GetPaymentTerm", new object[0]);
+        object[] results = this.Invoke("GetPaymentTerm", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetPaymentTerm(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetPaymentTerm(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetPaymentTerm", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetPaymentTerm", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -753,19 +791,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetPaymentTermAsync()
+    public void GetPaymentTermAsync(string UserID)
     {
-        this.GetPaymentTermAsync(null);
+        this.GetPaymentTermAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetPaymentTermAsync(object userState)
+    public void GetPaymentTermAsync(string UserID, object userState)
     {
         if ((this.GetPaymentTermOperationCompleted == null))
         {
             this.GetPaymentTermOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetPaymentTermOperationCompleted);
         }
-        this.InvokeAsync("GetPaymentTerm", new object[0], this.GetPaymentTermOperationCompleted, userState);
+        this.InvokeAsync("GetPaymentTerm", new object[] {
+                    UserID}, this.GetPaymentTermOperationCompleted, userState);
     }
 
     private void OnGetPaymentTermOperationCompleted(object arg)
@@ -779,16 +818,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetItemGroup", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetItemGroup()
+    public System.Data.DataSet GetItemGroup(string UserID)
     {
-        object[] results = this.Invoke("GetItemGroup", new object[0]);
+        object[] results = this.Invoke("GetItemGroup", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetItemGroup(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetItemGroup(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetItemGroup", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetItemGroup", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -799,19 +840,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetItemGroupAsync()
+    public void GetItemGroupAsync(string UserID)
     {
-        this.GetItemGroupAsync(null);
+        this.GetItemGroupAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetItemGroupAsync(object userState)
+    public void GetItemGroupAsync(string UserID, object userState)
     {
         if ((this.GetItemGroupOperationCompleted == null))
         {
             this.GetItemGroupOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetItemGroupOperationCompleted);
         }
-        this.InvokeAsync("GetItemGroup", new object[0], this.GetItemGroupOperationCompleted, userState);
+        this.InvokeAsync("GetItemGroup", new object[] {
+                    UserID}, this.GetItemGroupOperationCompleted, userState);
     }
 
     private void OnGetItemGroupOperationCompleted(object arg)
@@ -825,16 +867,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetPriceList", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetPriceList()
+    public System.Data.DataSet GetPriceList(string UserID)
     {
-        object[] results = this.Invoke("GetPriceList", new object[0]);
+        object[] results = this.Invoke("GetPriceList", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetPriceList(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetPriceList(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetPriceList", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetPriceList", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -845,19 +889,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetPriceListAsync()
+    public void GetPriceListAsync(string UserID)
     {
-        this.GetPriceListAsync(null);
+        this.GetPriceListAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetPriceListAsync(object userState)
+    public void GetPriceListAsync(string UserID, object userState)
     {
         if ((this.GetPriceListOperationCompleted == null))
         {
             this.GetPriceListOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetPriceListOperationCompleted);
         }
-        this.InvokeAsync("GetPriceList", new object[0], this.GetPriceListOperationCompleted, userState);
+        this.InvokeAsync("GetPriceList", new object[] {
+                    UserID}, this.GetPriceListOperationCompleted, userState);
     }
 
     private void OnGetPriceListOperationCompleted(object arg)
@@ -871,16 +916,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetManufacture", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetManufacture()
+    public System.Data.DataSet GetManufacture(string UserID)
     {
-        object[] results = this.Invoke("GetManufacture", new object[0]);
+        object[] results = this.Invoke("GetManufacture", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetManufacture(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetManufacture(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetManufacture", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetManufacture", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -891,19 +938,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetManufactureAsync()
+    public void GetManufactureAsync(string UserID)
     {
-        this.GetManufactureAsync(null);
+        this.GetManufactureAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetManufactureAsync(object userState)
+    public void GetManufactureAsync(string UserID, object userState)
     {
         if ((this.GetManufactureOperationCompleted == null))
         {
             this.GetManufactureOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetManufactureOperationCompleted);
         }
-        this.InvokeAsync("GetManufacture", new object[0], this.GetManufactureOperationCompleted, userState);
+        this.InvokeAsync("GetManufacture", new object[] {
+                    UserID}, this.GetManufactureOperationCompleted, userState);
     }
 
     private void OnGetManufactureOperationCompleted(object arg)
@@ -917,16 +965,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetIndustry", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetIndustry()
+    public System.Data.DataSet GetIndustry(string UserID)
     {
-        object[] results = this.Invoke("GetIndustry", new object[0]);
+        object[] results = this.Invoke("GetIndustry", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetIndustry(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetIndustry(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetIndustry", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetIndustry", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -937,19 +987,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetIndustryAsync()
+    public void GetIndustryAsync(string UserID)
     {
-        this.GetIndustryAsync(null);
+        this.GetIndustryAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetIndustryAsync(object userState)
+    public void GetIndustryAsync(string UserID, object userState)
     {
         if ((this.GetIndustryOperationCompleted == null))
         {
             this.GetIndustryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetIndustryOperationCompleted);
         }
-        this.InvokeAsync("GetIndustry", new object[0], this.GetIndustryOperationCompleted, userState);
+        this.InvokeAsync("GetIndustry", new object[] {
+                    UserID}, this.GetIndustryOperationCompleted, userState);
     }
 
     private void OnGetIndustryOperationCompleted(object arg)
@@ -963,16 +1014,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetTerritory", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetTerritory()
+    public System.Data.DataSet GetTerritory(string UserID)
     {
-        object[] results = this.Invoke("GetTerritory", new object[0]);
+        object[] results = this.Invoke("GetTerritory", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetTerritory(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetTerritory(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetTerritory", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetTerritory", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -983,19 +1036,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetTerritoryAsync()
+    public void GetTerritoryAsync(string UserID)
     {
-        this.GetTerritoryAsync(null);
+        this.GetTerritoryAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetTerritoryAsync(object userState)
+    public void GetTerritoryAsync(string UserID, object userState)
     {
         if ((this.GetTerritoryOperationCompleted == null))
         {
             this.GetTerritoryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTerritoryOperationCompleted);
         }
-        this.InvokeAsync("GetTerritory", new object[0], this.GetTerritoryOperationCompleted, userState);
+        this.InvokeAsync("GetTerritory", new object[] {
+                    UserID}, this.GetTerritoryOperationCompleted, userState);
     }
 
     private void OnGetTerritoryOperationCompleted(object arg)
@@ -1009,16 +1063,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetDisplaySetting", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetDisplaySetting()
+    public System.Data.DataSet GetDisplaySetting(string UserID)
     {
-        object[] results = this.Invoke("GetDisplaySetting", new object[0]);
+        object[] results = this.Invoke("GetDisplaySetting", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetDisplaySetting(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetDisplaySetting(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetDisplaySetting", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetDisplaySetting", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -1029,19 +1085,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetDisplaySettingAsync()
+    public void GetDisplaySettingAsync(string UserID)
     {
-        this.GetDisplaySettingAsync(null);
+        this.GetDisplaySettingAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetDisplaySettingAsync(object userState)
+    public void GetDisplaySettingAsync(string UserID, object userState)
     {
         if ((this.GetDisplaySettingOperationCompleted == null))
         {
             this.GetDisplaySettingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDisplaySettingOperationCompleted);
         }
-        this.InvokeAsync("GetDisplaySetting", new object[0], this.GetDisplaySettingOperationCompleted, userState);
+        this.InvokeAsync("GetDisplaySetting", new object[] {
+                    UserID}, this.GetDisplaySettingOperationCompleted, userState);
     }
 
     private void OnGetDisplaySettingOperationCompleted(object arg)
@@ -1055,18 +1112,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetCostCenter", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetCostCenter(int DimCode)
+    public System.Data.DataSet GetCostCenter(int DimCode, string UserID)
     {
         object[] results = this.Invoke("GetCostCenter", new object[] {
-                    DimCode});
+                    DimCode,
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetCostCenter(int DimCode, System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetCostCenter(int DimCode, string UserID, System.AsyncCallback callback, object asyncState)
     {
         return this.BeginInvoke("GetCostCenter", new object[] {
-                    DimCode}, callback, asyncState);
+                    DimCode,
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -1077,20 +1136,21 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetCostCenterAsync(int DimCode)
+    public void GetCostCenterAsync(int DimCode, string UserID)
     {
-        this.GetCostCenterAsync(DimCode, null);
+        this.GetCostCenterAsync(DimCode, UserID, null);
     }
 
     /// <remarks/>
-    public void GetCostCenterAsync(int DimCode, object userState)
+    public void GetCostCenterAsync(int DimCode, string UserID, object userState)
     {
         if ((this.GetCostCenterOperationCompleted == null))
         {
             this.GetCostCenterOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCostCenterOperationCompleted);
         }
         this.InvokeAsync("GetCostCenter", new object[] {
-                    DimCode}, this.GetCostCenterOperationCompleted, userState);
+                    DimCode,
+                    UserID}, this.GetCostCenterOperationCompleted, userState);
     }
 
     private void OnGetCostCenterOperationCompleted(object arg)
@@ -1104,16 +1164,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetInformationSource", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetInformationSource()
+    public System.Data.DataSet GetInformationSource(string UserID)
     {
-        object[] results = this.Invoke("GetInformationSource", new object[0]);
+        object[] results = this.Invoke("GetInformationSource", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetInformationSource(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetInformationSource(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetInformationSource", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetInformationSource", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -1124,19 +1186,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetInformationSourceAsync()
+    public void GetInformationSourceAsync(string UserID)
     {
-        this.GetInformationSourceAsync(null);
+        this.GetInformationSourceAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetInformationSourceAsync(object userState)
+    public void GetInformationSourceAsync(string UserID, object userState)
     {
         if ((this.GetInformationSourceOperationCompleted == null))
         {
             this.GetInformationSourceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetInformationSourceOperationCompleted);
         }
-        this.InvokeAsync("GetInformationSource", new object[0], this.GetInformationSourceOperationCompleted, userState);
+        this.InvokeAsync("GetInformationSource", new object[] {
+                    UserID}, this.GetInformationSourceOperationCompleted, userState);
     }
 
     private void OnGetInformationSourceOperationCompleted(object arg)
@@ -1150,16 +1213,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetStage", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetStage()
+    public System.Data.DataSet GetStage(string UserID)
     {
-        object[] results = this.Invoke("GetStage", new object[0]);
+        object[] results = this.Invoke("GetStage", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetStage(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetStage(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetStage", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetStage", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -1170,19 +1235,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetStageAsync()
+    public void GetStageAsync(string UserID)
     {
-        this.GetStageAsync(null);
+        this.GetStageAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetStageAsync(object userState)
+    public void GetStageAsync(string UserID, object userState)
     {
         if ((this.GetStageOperationCompleted == null))
         {
             this.GetStageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStageOperationCompleted);
         }
-        this.InvokeAsync("GetStage", new object[0], this.GetStageOperationCompleted, userState);
+        this.InvokeAsync("GetStage", new object[] {
+                    UserID}, this.GetStageOperationCompleted, userState);
     }
 
     private void OnGetStageOperationCompleted(object arg)
@@ -1196,16 +1262,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetPartners", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetPartners()
+    public System.Data.DataSet GetPartners(string UserID)
     {
-        object[] results = this.Invoke("GetPartners", new object[0]);
+        object[] results = this.Invoke("GetPartners", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetPartners(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetPartners(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetPartners", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetPartners", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -1216,19 +1284,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetPartnersAsync()
+    public void GetPartnersAsync(string UserID)
     {
-        this.GetPartnersAsync(null);
+        this.GetPartnersAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetPartnersAsync(object userState)
+    public void GetPartnersAsync(string UserID, object userState)
     {
         if ((this.GetPartnersOperationCompleted == null))
         {
             this.GetPartnersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetPartnersOperationCompleted);
         }
-        this.InvokeAsync("GetPartners", new object[0], this.GetPartnersOperationCompleted, userState);
+        this.InvokeAsync("GetPartners", new object[] {
+                    UserID}, this.GetPartnersOperationCompleted, userState);
     }
 
     private void OnGetPartnersOperationCompleted(object arg)
@@ -1242,16 +1311,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetCompetitor", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetCompetitor()
+    public System.Data.DataSet GetCompetitor(string UserID)
     {
-        object[] results = this.Invoke("GetCompetitor", new object[0]);
+        object[] results = this.Invoke("GetCompetitor", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetCompetitor(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetCompetitor(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetCompetitor", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetCompetitor", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -1262,19 +1333,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetCompetitorAsync()
+    public void GetCompetitorAsync(string UserID)
     {
-        this.GetCompetitorAsync(null);
+        this.GetCompetitorAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetCompetitorAsync(object userState)
+    public void GetCompetitorAsync(string UserID, object userState)
     {
         if ((this.GetCompetitorOperationCompleted == null))
         {
             this.GetCompetitorOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCompetitorOperationCompleted);
         }
-        this.InvokeAsync("GetCompetitor", new object[0], this.GetCompetitorOperationCompleted, userState);
+        this.InvokeAsync("GetCompetitor", new object[] {
+                    UserID}, this.GetCompetitorOperationCompleted, userState);
     }
 
     private void OnGetCompetitorOperationCompleted(object arg)
@@ -1288,16 +1360,18 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetLevelOfInterest", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetLevelOfInterest()
+    public System.Data.DataSet GetLevelOfInterest(string UserID)
     {
-        object[] results = this.Invoke("GetLevelOfInterest", new object[0]);
+        object[] results = this.Invoke("GetLevelOfInterest", new object[] {
+                    UserID});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetLevelOfInterest(System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetLevelOfInterest(string UserID, System.AsyncCallback callback, object asyncState)
     {
-        return this.BeginInvoke("GetLevelOfInterest", new object[0], callback, asyncState);
+        return this.BeginInvoke("GetLevelOfInterest", new object[] {
+                    UserID}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -1308,19 +1382,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetLevelOfInterestAsync()
+    public void GetLevelOfInterestAsync(string UserID)
     {
-        this.GetLevelOfInterestAsync(null);
+        this.GetLevelOfInterestAsync(UserID, null);
     }
 
     /// <remarks/>
-    public void GetLevelOfInterestAsync(object userState)
+    public void GetLevelOfInterestAsync(string UserID, object userState)
     {
         if ((this.GetLevelOfInterestOperationCompleted == null))
         {
             this.GetLevelOfInterestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetLevelOfInterestOperationCompleted);
         }
-        this.InvokeAsync("GetLevelOfInterest", new object[0], this.GetLevelOfInterestOperationCompleted, userState);
+        this.InvokeAsync("GetLevelOfInterest", new object[] {
+                    UserID}, this.GetLevelOfInterestOperationCompleted, userState);
     }
 
     private void OnGetLevelOfInterestOperationCompleted(object arg)

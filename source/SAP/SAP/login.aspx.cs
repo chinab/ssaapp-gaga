@@ -14,7 +14,7 @@ namespace SAP
             if (User.Identity.IsAuthenticated == true)
             {
                 GetDefault df = new GetDefault();
-                if (df.GetConnection()==0)
+                if (df.GetConnection(User.Identity.Name) == 0)
                      Response.Redirect("Homepage.aspx");
             }
         }

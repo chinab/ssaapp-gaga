@@ -18,7 +18,7 @@ namespace SAP
             if (!IsPostBack)
             {
                 MasterData masterDataWS = new MasterData();
-                employeeSet = masterDataWS.GetEmployeeMasterData();
+                employeeSet = masterDataWS.GetEmployeeMasterData(User.Identity.Name);
                 //this.gridVendors.DataSource = warehousesItems.Tables[0];
                 //this.gridVendors.DataBind();
                 //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;

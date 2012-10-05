@@ -15,10 +15,10 @@ namespace SAP
         {
             MasterData masterDataWS = new MasterData();            
             //masterDataWS.Url = 
-            DataSet businessPartners = masterDataWS.GetBusinessPartner("S");
-            DataSet itemMasters = masterDataWS.GetItemMasterData();
-            DataSet taxGroups = masterDataWS.GetTaxGroup("1");
-            DataSet whareHouses = masterDataWS.GetWarehouse();
+            DataSet businessPartners = masterDataWS.GetBusinessPartner("S", User.Identity.Name);
+            DataSet itemMasters = masterDataWS.GetItemMasterData(User.Identity.Name);
+            DataSet taxGroups = masterDataWS.GetTaxGroup("1", User.Identity.Name);
+            DataSet whareHouses = masterDataWS.GetWarehouse(User.Identity.Name);
             //List<BusinessPartner> list = BusinessPartner.extractFromDataSet(warehousesItems.Tables[0]);
             //List<ItemMaster> listItems = ItemMaster.extractFromDataSet(employeeSet.Tables[0]);
             List<WareHouse> whsItems = WareHouse.extractFromDataSet(whareHouses.Tables[0]);

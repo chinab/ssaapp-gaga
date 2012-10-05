@@ -17,7 +17,7 @@ namespace SAP
             if (!IsPostBack)
             {
                 MasterData masterDataWS = new MasterData();
-                warehousesItems = masterDataWS.GetAccountMasterData("");
+                warehousesItems = masterDataWS.GetAccountMasterData("", User.Identity.Name);
                 BindCategories("");
                 editWareHouseUpdatePanel.Update();
             }

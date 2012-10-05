@@ -25,7 +25,7 @@ namespace SAP
         //DateSep
 
         private static MasterData MD = new MasterData();
-        private static DataSet ds = MD.GetDisplaySetting();
+        private static DataSet ds = MD.GetDisplaySetting(User.Identity.Name);
         private CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentCulture;
         //private string decsep, thoussep;
         //private int sumdec, pricedec, qtydec, percentdec, ratedec;

@@ -24,11 +24,20 @@ namespace SAP
         //DateFormat
         //DateSep
 
-        private static MasterData MD = new MasterData();
-        private static DataSet ds = MD.GetDisplaySetting(User.Identity.Name);
+        private static MasterData MD;
+        private static DataSet ds;
         private CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentCulture;
-        //private string decsep, thoussep;
-        //private int sumdec, pricedec, qtydec, percentdec, ratedec;
+        
+        public GeneralFunctions()
+        {
+
+        }
+
+        public GeneralFunctions(string asUserName)
+        {
+            MD = new MasterData();
+            ds = MD.GetDisplaySetting(asUserName);
+        }
 
         #region Properties
         public string DecSep

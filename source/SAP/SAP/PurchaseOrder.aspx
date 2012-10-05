@@ -148,8 +148,7 @@
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" OnClick="_btnAddRecord_Click" />
                             <br />
                             <asp:ListView ID="lvContents" runat="server" 
-                                OnItemInserted="lvContents_ItemInserted"
-                                OnItemInserting="lvContents_ItemInserting" OnItemCommand="lvContents_ItemCommand" 
+                                OnItemInserted="lvContents_ItemInserted" OnItemCommand="lvContents_ItemCommand" 
                                 onitemupdating="lvContents_ItemUpdating" ViewStateMode="Enabled" 
                                 onitemediting="lvContents_ItemEditing">
                                 <LayoutTemplate>

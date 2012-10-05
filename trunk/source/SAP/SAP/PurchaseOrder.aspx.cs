@@ -15,10 +15,11 @@ namespace SAP
     {
         public static DataTable dtContents;
         public static DataTable dtHeader;
-        public GeneralFunctions GF = new GeneralFunctions();
+        private GeneralFunctions GF;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            GF = new GeneralFunctions(User.Identity.Name);
             if (!IsPostBack)
             {
                 dtHeader = new DataTable();
@@ -31,11 +32,9 @@ namespace SAP
                 dtHeader.Columns.Add("JrnlMemo");
                 dtHeader.Rows.Add("", "", "", "", "", "From SAP WEB", "Goods Receipts JE Remark");
 
-
                 dtContents = new DataTable();
                 dtContents.Columns.Add("No");
                 dtContents.Columns.Add("ItemCode");
-                //dtContents.Columns.Add("CardCode");//no need
                 dtContents.Columns.Add("Dscription");
                 dtContents.Columns.Add("Quantity");
                 dtContents.Columns.Add("PriceBefDi");
@@ -279,6 +278,7 @@ namespace SAP
                     break;
             }
         }
+
         public String _collectData()
         {
             try
@@ -294,7 +294,8 @@ namespace SAP
                 dr["CardName"] = txtName.Text;
                 DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "No";
-                return objInfo.ToXMLStringFromDS("22", dtHeader, dtContents, RemoveColumn);
+                Array arrContentsCols = new string[] { "Quantity", "PriceBefDi", "DiscPrcnt", "Price", "LineTotal"}; // Columns need reset format numeric
+                return objInfo.ToXMLStringFromDS("22", dtHeader, GF.ResetFormatNumeric(dtContents, arrContentsCols), RemoveColumn);
             }
             catch (Exception)
             {
@@ -329,7 +330,6 @@ namespace SAP
             }
         }
 
-     
         protected void _btnAddRecord_Click(object sender, EventArgs e)
         {
             int iNo = GetNo();
@@ -342,8 +342,6 @@ namespace SAP
             this.lvContents.DataBind();
             SetControlsStatus("Add");
         }
-
-       
 
         #region item command
         protected void lvContents_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -542,10 +540,6 @@ namespace SAP
             row["LineTotal"] = GF.FormatNumeric(total.ToString(), "SumDec");
             row["Quantity"] = GF.FormatNumeric(quantity.ToString(), "QtyDec");
         }
-
         #endregion
-
-       
-
     }
 }

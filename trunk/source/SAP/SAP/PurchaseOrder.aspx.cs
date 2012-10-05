@@ -565,20 +565,20 @@ namespace SAP
             { 
                 case "Add":
                     btnAdd.Enabled = btnAddRecord.Enabled = false;
-                    ImageButton1.Enabled = false;
-                    ImageButton2.Enabled = false;
+                    btnCopyFrom.Enabled = false;
+                    btnCopyTo.Enabled = false;
                     break;
                 case "Edit":
                     btnAdd.Enabled = btnAddRecord.Enabled = false;
-                    ImageButton1.Enabled = ImageButton2.Enabled = false;
+                    btnCopyFrom.Enabled = btnCopyTo.Enabled = false;
                     break;
                 case "Update":
                     btnAdd.Enabled = btnAddRecord.Enabled = true;
-                    ImageButton1.Enabled = ImageButton2.Enabled = true;
+                    btnCopyFrom.Enabled = btnCopyTo.Enabled = true;
                     break;
                 case "Save":
                     btnAdd.Enabled = btnAddRecord.Enabled = true;
-                    ImageButton1.Enabled = ImageButton2.Enabled = true;
+                    btnCopyFrom.Enabled = btnCopyTo.Enabled = true;
                     break;            
             }
         }

@@ -784,15 +784,15 @@
                 </div>
                 <div id="footer-form">
                     <div class="left">
-                            <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button" OnClientClick="Dialog.showLoader();"
+                            <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button" OnClientClick="Dialog.showLoader();"
                             CommandName="Login" Height="19px" Width="65px" 
                             ImageUrl="~/skin/images/SAP_Add.png" onclick="btnAdd_Click" />
                     </div>
                     <div class="right">
-                        <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button" 
+                        <asp:ImageButton ID="btnCopyFrom" runat="server" AlternateText="button" 
                             CommandName="Login" Height="19px" Width="109px" 
                             ImageUrl="~/skin/images/CopyFrom.png"/>
-                        <asp:ImageButton ID="ImageButton2" runat="server" AlternateText="button" 
+                        <asp:ImageButton ID="btnCopyTo" runat="server" AlternateText="button" 
                             CommandName="Login" Height="19px" Width="109px" 
                             ImageUrl="~/skin/images/CopyTo.png" />
                     </div>

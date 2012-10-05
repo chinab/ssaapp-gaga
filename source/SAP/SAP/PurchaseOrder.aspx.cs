@@ -235,6 +235,9 @@ namespace SAP
 
         }
 
+        
+
+        #region Functions
         private void ResetLineNo()
         {
             int i = 0;
@@ -243,7 +246,29 @@ namespace SAP
                 row["No"] = ++i;
             }
         }
-
+        private void SetControlsStatus(string asStatus)
+        {
+            switch (asStatus)
+            {
+                case "Add":
+                    btnAdd.Enabled = btnAddRecord.Enabled = false;
+                    btnCopyFrom.Enabled = false;
+                    btnCopyTo.Enabled = false;
+                    break;
+                case "Edit":
+                    btnAdd.Enabled = btnAddRecord.Enabled = false;
+                    btnCopyFrom.Enabled = btnCopyTo.Enabled = false;
+                    break;
+                case "Update":
+                    btnAdd.Enabled = btnAddRecord.Enabled = true;
+                    btnCopyFrom.Enabled = btnCopyTo.Enabled = true;
+                    break;
+                case "Save":
+                    btnAdd.Enabled = btnAddRecord.Enabled = true;
+                    btnCopyFrom.Enabled = btnCopyTo.Enabled = true;
+                    break;
+            }
+        }
         public String _collectData()
         {
             try
@@ -266,41 +291,7 @@ namespace SAP
                 throw;
             }
         }
-
-        //protected DataTable getDataFromListView(ListView lv)
-        //{
-        //    DataTable table = new DataTable();
-        //    if (lv.Items.Count >= 1)
-        //    {
-        //        for (int i = 0; i < lv.Items[0].Controls.Count; i++)
-        //        {
-        //            if (lv.Items[0].Controls[i].GetType() == typeof(Label))
-        //            {
-        //                table.Columns.Add("col" + i.ToString());
-        //            }
-        //        }
-        //    }
-
-        //    for (int j = 0; j < lv.Items.Count; j++)
-        //    {
-        //        ArrayList valholder = new ArrayList();
-        //        for (int k = 0; k < lv.Items[0].Controls.Count; k++)
-        //        {
-        //            if (lv.Items[0].Controls[k].GetType() == typeof(Label))
-        //            {
-        //                Label tep = lv.Items[0].Controls[k] as Label;
-        //                valholder.Add(tep.Text);
-        //            }
-        //        }
-        //        DataRow dr = table.NewRow();
-        //        for (int z = 0; z < valholder.Count; z++)
-        //        {
-        //            dr[z] = valholder[z].ToString();
-        //        }
-        //        table.Rows.Add(dr);
-        //    }
-        //    return table;
-        //}
+        #endregion
 
         #region Event
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -559,29 +550,7 @@ namespace SAP
             lvContents.DataBind();
         }
 
-        private void SetControlsStatus(string asStatus)
-        {
-            switch (asStatus)
-            { 
-                case "Add":
-                    btnAdd.Enabled = btnAddRecord.Enabled = false;
-                    btnCopyFrom.Enabled = false;
-                    btnCopyTo.Enabled = false;
-                    break;
-                case "Edit":
-                    btnAdd.Enabled = btnAddRecord.Enabled = false;
-                    btnCopyFrom.Enabled = btnCopyTo.Enabled = false;
-                    break;
-                case "Update":
-                    btnAdd.Enabled = btnAddRecord.Enabled = true;
-                    btnCopyFrom.Enabled = btnCopyTo.Enabled = true;
-                    break;
-                case "Save":
-                    btnAdd.Enabled = btnAddRecord.Enabled = true;
-                    btnCopyFrom.Enabled = btnCopyTo.Enabled = true;
-                    break;            
-            }
-        }
+      
 
         protected void lvContents_ItemInserting(object sender, ListViewInsertEventArgs e)
         {

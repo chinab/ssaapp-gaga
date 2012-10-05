@@ -278,9 +278,23 @@ namespace SAP
         }
         #endregion
 
+        #region Reset format numeric functions
         public string ResetFormatNumeric(string strValor)
         {
             return strValor.Replace(ThousSep, "");
         }
+
+        public DataTable ResetFormatNumeric(DataTable dt, Array arr)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach(string ls in arr)
+                {
+                    row[ls] = ResetFormatNumeric(row[ls].ToString());
+                }
+            }
+            return dt;
+        }
+        #endregion
     }
 }

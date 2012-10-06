@@ -1,5 +1,5 @@
 ﻿Public Class SAP_Functions
-    Public Function Create_IncommingPayment(ARDocEntry As Integer) As String
+    Public Function Create_IncommingPayment(ARDocEntry As Integer, UserID As String) As String
         Dim str As String = ""
         Dim RetVal As Long
         Dim lErrCode As Integer
@@ -11,7 +11,7 @@
         oInvoice = PublicVariable.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oInvoices)
 
         oPayment.CardCode = oInvoice.CardCode
-        oPayment.CashAccount = GetCashAccount()
+        oPayment.CashAccount = GetCashAccount(UserID)
         oPayment.DocDate = oInvoice.DocDate
         oPayment.TaxDate = oInvoice.DocDate
 
@@ -24,14 +24,14 @@
             str = sErrMsg
         End If
         Return str
-    End Function   
+    End Function
     Public Function GetLastKey(UserID As String, ObjType As String) As String
         Try
             Dim str As String
             str = "Select top(1) LinkAct_3 ObjKey from OACP where isnull(LinkAct_3,'')<>''"
             Dim dt As DataTable
             Dim connect As New Connection()
-            connect.setDB()
+            connect.setDB(UserID)
             dt = connect.ObjectGetAll_Query_SAP(str).Tables(0)
 
             If dt.Rows.Count > 0 Then
@@ -43,13 +43,13 @@
             Return ""
         End Try
     End Function
-    Private Function GetCashAccount() As String
+    Private Function GetCashAccount(UserID As String) As String
         Try
             Dim str As String
             str = "Select top(1) LinkAct_3 CashAccount from OACP where isnull(LinkAct_3,'')<>''"
             Dim dt As DataTable
             Dim connect As New Connection()
-            connect.setDB()
+            connect.setDB(UserID)
             dt = connect.ObjectGetAll_Query_SAP(str).Tables(0)
 
             If dt.Rows.Count > 0 Then
@@ -61,10 +61,10 @@
             Return ""
         End Try
     End Function
-    Public Function GetPriceAfterDiscount(ByVal cardCode As String, ByVal itemCode As String, ByVal amount As Single, ByVal refDate As Date) As Double
+    Public Function GetPriceAfterDiscount(ByVal cardCode As String, ByVal itemCode As String, ByVal amount As Single, ByVal refDate As Date, UserID As String) As Double
         Dim connect As New Connection()
         If Connection.bConnect = False Then
-            connect.setDB()
+            connect.setDB(UserID)
             If Not connect.connectDB() Then
                 Return Nothing
             End If
@@ -76,9 +76,9 @@
         rs = vObj.GetItemPrice(cardCode, itemCode, amount, refDate)
         Return rs.Fields.Item("Price").Value
     End Function
-    Public Function GetGrossPrice(ByVal cardCode As String, ByVal itemCode As String) As Double
+    Public Function GetGrossPrice(ByVal cardCode As String, ByVal itemCode As String, UserID As String) As Double
         Dim connect As New Connection()
-        connect.setDB()
+        connect.setDB(UserID)
         Dim dt As DataTable
         Dim str As String = ""
         str = " select isnull(t0.Price,0) GrossPrice from ITM1 T0 "
@@ -102,8 +102,8 @@
         ds.Tables(0).Columns.Add("TaxCode", GetType(String))
         ds.Tables(0).Columns.Add("TaxRate", GetType(Double))
 
-        Dim GrossPrice As Double = GetGrossPrice(cardCode, itemCode)
-        Dim NetPrice As Double = GetPriceAfterDiscount(cardCode, itemCode, amount, refDate)
+        Dim GrossPrice As Double = GetGrossPrice(cardCode, itemCode, UserID)
+        Dim NetPrice As Double = GetPriceAfterDiscount(cardCode, itemCode, amount, refDate, UserID)
         Dim Discount As Double = 0
         Dim WhsCode As String =  GetDefaultWarehouse(UserID)
         If WhsCode = "" Then WhsCode = "01"
@@ -139,7 +139,7 @@
 
             Dim dt As DataSet
             Dim connect As New Connection()
-            connect.setDB()
+            connect.setDB(UserID)
             dt = connect.ObjectGetAll_Query_SAP(str)
 
             Return dt
@@ -255,7 +255,7 @@
             str = "exec sp_Promotion_Get '" & ItemCode & "'," & CStr(Quantity) & ",'" & CStr(DocDate) & "'," & CStr(Amount) & ",'" & CardCode & "'"
             Dim dt As DataSet
             Dim connect As New Connection()
-            connect.setDB()
+            connect.setDB(UserID)
             dt = connect.ObjectGetAll_Query_SAP(str)
             Return dt
         Catch ex As Exception
@@ -333,7 +333,7 @@
             str = "select CardCode,CardName,Phone1 from OCRD T0 where CardCode='" + UserID + "'"
             Dim dt As DataSet
             Dim connect As New Connection()
-            connect.setDB()
+            connect.setDB(UserID)
             dt = connect.ObjectGetAll_Query_SAP(str)
             Return dt
         Catch ex As Exception
@@ -342,11 +342,11 @@
     End Function
 
     Public Function CreateUDF(ByVal tableName As String, ByVal fieldName As String, _
-                              ByVal desc As String, ByVal fieldType As SAPbobsCOM.BoFieldTypes, ByVal Size As Integer, ByVal LinkTab As String) As String
+                              ByVal desc As String, ByVal fieldType As SAPbobsCOM.BoFieldTypes, ByVal Size As Integer, ByVal LinkTab As String, UserID As String) As String
         Try
             Dim connect As New Connection()
             If Connection.bConnect = False Then
-                connect.setDB()
+                connect.setDB(UserID)
                 If Not connect.connectDB() Then
                     Return "Connect SAP failed"
                 End If

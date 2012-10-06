@@ -16,7 +16,7 @@ Public Class Transaction
     Dim connect As New Connection()
 
     <WebMethod()> _
-    Public Function CreateMarketingDocument(ByVal strXml As String) As DataSet
+    Public Function CreateMarketingDocument(ByVal strXml As String, UserID As String) As DataSet
         Dim b As New SAP_Functions
         Try
             Dim sStr As String = "Operation Completed Successfully!"
@@ -27,7 +27,7 @@ Public Class Transaction
 
                 Dim oSO As SAPbobsCOM.Documents
                 If Connection.bConnect = False Then
-                    connect.setDB()
+                    connect.setDB(UserID)
                     If Not connect.connectDB() Then
                         Return b.ReturnMessage(-1, "Connect SAP failed")
                     End If
@@ -62,7 +62,7 @@ Public Class Transaction
             Else
                 Dim oDocment As SAPbobsCOM.Documents
                 If Connection.bConnect = False Then
-                    connect.setDB()
+                    connect.setDB(UserID)
                     If Not connect.connectDB() Then
                         Return "Can't connect to SAP"
                     End If
@@ -102,7 +102,7 @@ Public Class Transaction
             Else
                 Dim oDocment As SAPbobsCOM.SalesOpportunities
                 If Connection.bConnect = False Then
-                    connect.setDB()
+                    connect.setDB(UserID)
                     If Not connect.connectDB() Then
                         Return "Can't connect to SAP"
                     End If
@@ -137,7 +137,7 @@ Public Class Transaction
         'End Try
     End Function
     <WebMethod()> _
-    Public Function CreateOpportunity(ByVal strXml As String) As DataSet
+    Public Function CreateOpportunity(ByVal strXml As String, UserID As String) As DataSet
         Dim b As New SAP_Functions
         Try
             Dim sStr As String = "Operation Completed Successfully!"
@@ -148,7 +148,7 @@ Public Class Transaction
 
                 Dim oSO As SAPbobsCOM.SalesOpportunities
                 If Connection.bConnect = False Then
-                    connect.setDB()
+                    connect.setDB(UserID)
                     If Not connect.connectDB() Then
                         Return b.ReturnMessage(-1, "Connect SAP failed")
                     End If
@@ -179,7 +179,7 @@ Public Class Transaction
 
                 If DocEntry = 0 Then
                     Dim b As New SAP_Functions
-                    connect.setDB()
+                    connect.setDB(UserID)
                     DocEntry = b.GetMaxDocEntry(DocType, UserID)
                 End If
                 Dim HeaderTableName As String = ""
@@ -217,12 +217,12 @@ Public Class Transaction
                 End Select
                 Dim ds As New DataSet("Document")
                 Dim dt1 As New DataTable
-                connect.setDB()
+                connect.setDB(UserID)
                 dt1 = connect.ObjectGetAll_Query_SAP("Select * from " + HeaderTableName + " where DocEntry=" + CStr(DocEntry)).Tables(0)
                 dt1.TableName = HeaderTableName
 
                 Dim dt2 As New DataTable
-                connect.setDB()
+                connect.setDB(UserID)
                 dt2 = connect.ObjectGetAll_Query_SAP("Select * from " + LineTableName1 + " where DocEntry=" + CStr(DocEntry)).Tables(0)
                 dt2.TableName = LineTableName1
 

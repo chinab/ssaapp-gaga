@@ -77,9 +77,9 @@ Public Class GetDefault
         Return a.GetGopyFromTo(Type, ObjType)
     End Function
     <WebMethod()> _
-    Public Function GetConnection() As Integer
+    Public Function GetConnection(UserID As String) As Integer
         Dim connect As New Connection()
-        connect.setDB()
+        connect.setDB(UserID)
         If Not connect.connectDB() Then
             Return -1
         Else
@@ -105,14 +105,34 @@ Public Class GetDefault
         Else
             Dim dt As DataSet
             Dim connect As New Connection()
-            connect.setDB()
+            connect.setDB(UserID)
             Dim str As String
             str = "select DocEntry,DocDate,DocDueDate,Comments,DocTotal from "
             Select Case DocType
-                Case "17"
-                    str = str + "ORDR"
+                Case "19"
+                    str = str + "ORPC"
+                Case "20"
+                    str = str + "OPDN"
+                Case "21"
+                    str = str + "ORPD"
+                Case "22"
+                    str = str + "OPOR"
+
+                Case "13"
+                    str = str + "OINV"
+                Case "14"
+                    str = str + "ORIN"
                 Case "15"
                     str = str + "ODLN"
+
+                Case "59"
+                    str = str + "OIGN"
+                Case "60"
+                    str = str + "OIGE"
+
+                Case "97"
+                    str = str + "OOPR"
+
             End Select
             str = str + " where DocStatus='O' and CardCode='" + CardCode + "'"
             dt = connect.ObjectGetAll_Query_SAP(str)
@@ -121,13 +141,13 @@ Public Class GetDefault
     End Function
 
     <WebMethod()> _
-    Public Function CreateUDF() As String
+    Public Function CreateUDF(UserID As String) As String
         If PublicVariable.Simulate Then
             Dim a As New Simulation
             Return ""
         Else
             Dim a As New SAP_Functions
-            Return a.CreateUDF("ORDR", "UserID", "UserID", SAPbobsCOM.BoFieldTypes.db_Alpha, 30, "")
+            Return a.CreateUDF("ORDR", "UserID", "UserID", SAPbobsCOM.BoFieldTypes.db_Alpha, 30, "", UserID)
         End If
     End Function
 End Class

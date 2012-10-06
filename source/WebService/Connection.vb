@@ -8,16 +8,29 @@ Public Class Connection
     Public Shared sConnSAP As SqlConnection
     Public Shared bConnect As Boolean
 
-    Public Sub setDB()
+    Public Sub setDB(UserID As String)
         Try
             Dim strConnect As String = ""
             Dim sCon As String = ""
             Dim SQLType As String = ""
             Dim MyArr As Array
             Dim sErrMsg As String = ""
-            strConnect = "SAPConnect"
+            strConnect = "DBConnect"
             sCon = System.Configuration.ConfigurationSettings.AppSettings.Get(strConnect)
             MyArr = sCon.Split(";")
+            sCon = "server= " + MyArr(1).ToString() + ";database=" + MyArr(0).ToString() + " ;uid=" + MyArr(2).ToString() + "; pwd=" + MyArr(3).ToString() + ";"
+            sConnSAP = New SqlConnection(sCon)
+            'Get connection from database
+            Dim ds As New DataSet
+            ds = RunQuery("Select top(1) * from Users_Default where DefaultCode='SAPConnection' and UserId='" + UserID + "'")
+            If ds.Tables(0).Rows.Count > 0 Then
+                sCon = ds.Tables(0).Rows(0).Item("DefaultValue").ToString
+            Else
+                Return
+            End If
+            MyArr = sCon.Split(";")
+            sCon = "server= " + MyArr(3).ToString() + ";database=" + MyArr(0).ToString() + " ;uid=" + MyArr(4).ToString() + "; pwd=" + MyArr(5).ToString() + ";"
+            sConnSAP = New SqlConnection(sCon)
             If IsNothing(PublicVariable.oCompany) Then
                 PublicVariable.oCompany = New SAPbobsCOM.Company
             End If
@@ -34,8 +47,7 @@ Public Class Connection
             Else
                 PublicVariable.oCompany.DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2005
             End If
-            sCon = "server= " + MyArr(3).ToString() + ";database=" + MyArr(0).ToString() + " ;uid=" + MyArr(4).ToString() + "; pwd=" + MyArr(5).ToString() + ";"
-            sConnSAP = New SqlConnection(sCon)
+
         Catch ex As Exception
             Dim file As System.IO.StreamWriter = New System.IO.StreamWriter("C:\\SetDB.txt", True)
             file.WriteLine(ex)
@@ -90,6 +102,28 @@ Public Class Connection
             WriteLog(ex.ToString)
             Return Nothing
         End Try
+    End Function
+    Private Function RunQuery(ByVal Query As String) As DataSet
+
+        Dim ds As New DataSet
+        Using myConn = sConnSAP
+            Try
+                Dim myCommand As SqlCommand = New SqlCommand(Query, myConn)
+                myCommand.CommandType = CommandType.Text
+                Using da As New SqlDataAdapter()
+                    ds.Clear()
+                    da.SelectCommand = myCommand
+                    da.Fill(ds)
+                    Return ds
+                End Using
+            Catch ex As Exception
+                Throw ex
+            Finally
+                If Not (myConn Is Nothing) Then
+                    myConn.Close()
+                End If
+            End Try
+        End Using
     End Function
 #End Region
     Public Shared Sub WriteLog(ByVal Str As String)

@@ -11,7 +11,7 @@ Public Class MasterData
     Inherits System.Web.Services.WebService
     Dim connect As New Connection()
     <WebMethod()> _
-    Public Function GetBusinessPartner(CardType As String) As DataSet
+    Public Function GetBusinessPartner(CardType As String, UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OCRD")
             If PublicVariable.Simulate Then
@@ -24,7 +24,7 @@ Public Class MasterData
                 Else
                     str = "Select CardCode,CardName from OCRD Where CardType='S'"
                 End If
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP(str)
             End If
 
@@ -34,15 +34,15 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetItemMasterData() As DataSet
+    Public Function GetItemMasterData(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OITM")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OITM
             Else
-                connect.setDB()                
-                dt = connect.ObjectGetAll_Query_SAP("Select ItemCode,ItemName from OITM")
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP("Select ItemCode,ItemName from OITM order by ItemCode")
             End If
             Return dt
         Catch ex As Exception
@@ -50,31 +50,15 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetWarehouse() As DataSet
+    Public Function GetWarehouse(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OWHS")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OWHS
-            Else                
-                connect.setDB()
-                dt = connect.ObjectGetAll_Query_SAP("Select WhsCode,WhsName from OWHS")
-            End If          
-            Return dt
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-    <WebMethod()> _
-    Public Function GetTaxGroup(ByVal Category As String) As DataSet
-        Try
-            Dim dt As New DataSet("OVTG")
-            If PublicVariable.Simulate Then
-                Dim a As New Simulation
-                dt = a.Simulate_OTVG
-            Else                
-                connect.setDB()
-                dt = connect.ObjectGetAll_Query_SAP("Select Code,Name,rate from OVTG where Category='" + Category + "'")
+            Else
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP("Select WhsCode,WhsName from OWHS order by WhsCode")
             End If
             Return dt
         Catch ex As Exception
@@ -82,14 +66,30 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetEmployeeMasterData() As DataSet
+    Public Function GetTaxGroup(ByVal Category As String, UserID As String) As DataSet
+        Try
+            Dim dt As New DataSet("OVTG")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OTVG
+            Else
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP("Select Code,Name,rate from OVTG where Category='" + Category + "' order by Code")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetEmployeeMasterData(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OHEM")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OHEM
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("Select empID Code,LastName,firstName,MiddleName from ohem")
             End If
             Return dt
@@ -98,14 +98,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetSalesBuyerMasterData() As DataSet
+    Public Function GetSalesBuyerMasterData(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OSLP")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OSLP
             Else
-                connect.setDB()                
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select SlpCode Code,SlpName Name from OSLP order by SlpCode")
             End If
             Return dt
@@ -114,7 +114,7 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetAccountMasterData(Filter As String) As DataSet
+    Public Function GetAccountMasterData(Filter As String, UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OACT")
             If PublicVariable.Simulate Then
@@ -131,7 +131,7 @@ Public Class MasterData
                     Case "AP"
                         str = str + " and LocManTran='Y' and GroupMask=2"
                 End Select
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP(str)
             End If
             Return dt
@@ -140,14 +140,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetContactPerson(ByVal CardCode As String) As DataSet
+    Public Function GetContactPerson(ByVal CardCode As String, UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OCPR")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OCPR(CardCode)
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select CntctCode Code,Name FirstName,'' LastName, 0 IsDefault from OCPR where CardCode='" + CardCode + "'")
             End If
             Return dt
@@ -156,14 +156,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetProject() As DataSet
+    Public Function GetProject(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OPRJ")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OPRJ
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select PrjCode,PrjName from OPRJ ")
             End If
             Return dt
@@ -172,14 +172,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetShippingType() As DataSet
+    Public Function GetShippingType(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OSHP")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OSHP
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select TrnspCode,TrnspName from OSHP")
             End If
             Return dt
@@ -188,7 +188,7 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetBPCurrency(CardCode As String) As DataSet
+    Public Function GetBPCurrency(CardCode As String, UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OCRD")
             If PublicVariable.Simulate Then
@@ -203,8 +203,8 @@ Public Class MasterData
                     str = str + " full join OCRN T1 oN T0.Currency=T1.CurrCode or T0.Currency='##'"
                     str = str + " where T0.cardcode='" + CardCode + "'"
                 End If
-                connect.setDB()
-                dt = connect.ObjectGetAll_Query_SAP(Str)
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP(str)
             End If
 
             Return dt
@@ -213,14 +213,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetIndicator() As DataSet
+    Public Function GetIndicator(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OIDC")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OIDC
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("Select Code,Name from OIDC")
             End If
             Return dt
@@ -229,14 +229,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetPaymentTerm() As DataSet
+    Public Function GetPaymentTerm(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("octg")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
-                dt = a.Simulate_octg
+                dt = a.Simulate_OCTG
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select GroupNum,PymntGroup from octg order by GroupNum")
             End If
             Return dt
@@ -246,14 +246,14 @@ Public Class MasterData
     End Function
     '----------------------------------------------OTHER MASTER DATA---------------------------------
     <WebMethod()> _
-    Public Function GetItemGroup() As DataSet
+    Public Function GetItemGroup(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OITB")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OITB
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("Select ItmsGrpCod,ItmsGrpNam from OITB")
             End If
             Return dt
@@ -262,14 +262,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetPriceList() As DataSet
+    Public Function GetPriceList(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OPLN")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OPLN
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select ListNum,ListName from opln")
             End If
             Return dt
@@ -278,14 +278,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetManufacture() As DataSet
+    Public Function GetManufacture(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OMRC")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OMRC
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select FirmCode,FirmName from OMRC")
             End If
             Return dt
@@ -294,14 +294,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetIndustry() As DataSet
+    Public Function GetIndustry(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OOND")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OOND
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select IndCode,IndName from OOND")
             End If
             Return dt
@@ -310,14 +310,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetTerritory() As DataSet
+    Public Function GetTerritory(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OTER")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OIDC
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select T0.territryID,T0.descript,T1.descript Parent from OTER T0 left join OTER T1 on T1.territryID=T0.parent")
             End If
             Return dt
@@ -326,14 +326,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetDisplaySetting() As DataSet
+    Public Function GetDisplaySetting(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OADM")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OADM
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select CompnyName,DecSep,ThousSep,SumDec,PriceDec,QtyDec,PercentDec,RateDec,DateFormat,DateSep from OADM")
             End If
             Return dt
@@ -342,14 +342,14 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetCostCenter(DimCode As Integer) As DataSet
+    Public Function GetCostCenter(DimCode As Integer, UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OPRC")
             If PublicVariable.Simulate Then
                 Dim a As New Simulation
                 dt = a.Simulate_OPRC
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select PrcCode,PrcName from OPRC where DimCode=" + CStr(DimCode))
             End If
             Return dt
@@ -358,13 +358,13 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetInformationSource() As DataSet
+    Public Function GetInformationSource(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OOSR")
             If PublicVariable.Simulate Then
 
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select Num,Descript from OOSR")
             End If
             Return dt
@@ -373,13 +373,13 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetStage() As DataSet
+    Public Function GetStage(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OOST")
             If PublicVariable.Simulate Then
 
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select Num,Descript,CloPrcnt from OOST")
             End If
             Return dt
@@ -388,13 +388,13 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetPartners() As DataSet
+    Public Function GetPartners(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OPRT")
             If PublicVariable.Simulate Then
 
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select PrtId,Name from OPRT")
             End If
             Return dt
@@ -403,13 +403,13 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetCompetitor() As DataSet
+    Public Function GetCompetitor(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OCMT")
             If PublicVariable.Simulate Then
 
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select CompetId,Name from OCMT")
             End If
             Return dt
@@ -418,13 +418,13 @@ Public Class MasterData
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetLevelOfInterest() As DataSet
+    Public Function GetLevelOfInterest(UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OOIR")
             If PublicVariable.Simulate Then
 
             Else
-                connect.setDB()
+                connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select Num,Descript from OOIR")
             End If
             Return dt

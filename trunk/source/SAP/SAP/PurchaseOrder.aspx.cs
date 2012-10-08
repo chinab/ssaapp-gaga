@@ -130,7 +130,7 @@ namespace SAP
                             dtContents.Rows[itemNo - 1]["WhsCode"] = defaultInfo.Tables[0].Rows[0]["WhsCode"];
                             //dt.Rows.      
                             updateTableTotalPrice();
-                            dtContents.AcceptChanges();
+                            //dtContents.AcceptChanges();
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         }
@@ -146,7 +146,7 @@ namespace SAP
                             dtContents.Rows[itemNo - 1]["PriceBefDi"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtUnitPrice")).Text;
                             dtContents.Rows[itemNo - 1]["DiscPrcnt"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtDiscount")).Text;
                             //dt.Rows.
-                            dtContents.AcceptChanges();
+                            //dtContents.AcceptChanges();
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         } break;
@@ -163,7 +163,7 @@ namespace SAP
                             dtContents.Rows[itemNo - 1]["PriceBefDi"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtUnitPrice")).Text;
                             dtContents.Rows[itemNo - 1]["DiscPrcnt"] = ((TextBox)lvContents.Items[itemNo - 1].FindControl("txtDiscount")).Text;
                             //dt.Rows.
-                            dtContents.AcceptChanges();
+                            //dtContents.AcceptChanges();
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
                         }

@@ -107,7 +107,17 @@
         Dim Discount As Double = 0
         Dim WhsCode As String =  GetDefaultWarehouse(UserID)
         If WhsCode = "" Then WhsCode = "01"
-        Dim TaxCode As String = GetDefaultTaxCode(itemCode, cardCode)
+        Dim TaxCode As String = ""
+        Dim TaxRate As Double = 0
+        Dim dstax As DataSet = GetDefaultTaxCode(itemCode, cardCode)
+        If Not IsNothing(dstax) Then
+            If dstax.Tables.Count > 0 Then
+                If dstax.Tables(0).Rows.Count > 0 Then
+                    TaxCode = dstax.Tables(0).Rows(0).Item("Code").ToString
+                    TaxRate = dstax.Tables(0).Rows(0).Item("Rate").ToString
+                End If
+            End If
+        End If
         If GrossPrice = 0 Then
             Discount = 0
         Else
@@ -121,7 +131,7 @@
         dr("PriceAfDi") = NetPrice
         dr("WhsCode") = WhsCode
         dr("TaxCode") = TaxCode
-        dr("TaxRate") = 10
+        dr("TaxRate") = TaxRate
         ds.Tables(0).Rows.Add(dr)
 
         Return ds
@@ -165,21 +175,19 @@
             Return ""
         End Try
     End Function
-    Public Function GetDefaultTaxCode(ItemCode As String, CardCode As String) As String
+    Public Function GetDefaultTaxCode(ItemCode As String, CardCode As String) As DataSet
         Dim str As String = ""
         Try
-            str = "select case when (select CardType from ocrd where cardcode='" + CardCode + "')='C' then VatGourpSa else VatGroupPu end TaxCode from OITM where ItemCode='" + ItemCode + "'"
+            str = "select Code,Name,Rate from ovtg where Code=("
+            str = str + " select case when (select CardType from ocrd where cardcode='" + CardCode + "')='C' then VatGourpSa else VatGroupPu end TaxCode from OITM where ItemCode='" + ItemCode + "'"
+            str = str + " )"
 
             Dim ors As SAPbobsCOM.Recordset
             ors = PublicVariable.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset)
             ors.DoQuery(str)
-            If ors.RecordCount = 1 Then
-                Return ors.Fields.Item("TaxCode").Value.ToString
-            Else
-                Return ""
-            End If
+            Return ConvertRS2DT(ors)
         Catch ex As Exception
-            Return ""
+            Return Nothing
         End Try
     End Function
     Public Function GetPromotionWarehouse(UserID As String) As String
@@ -226,7 +234,7 @@
                 NewCol = New DataColumn(RS.Fields.Item(ColCount).Name, System.Type.GetType(dataType))
                 dtTable.Tables(0).Columns.Add(NewCol)
             Next
-
+            RS.MoveFirst()
             Do Until RS.EoF
 
                 NewRow = dtTable.Tables(0).NewRow

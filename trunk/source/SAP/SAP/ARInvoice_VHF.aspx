@@ -498,8 +498,11 @@
                 </div>
                 <div id="footer-form">
                     <div class="left">
-                        <asp:Button ID="btnAdd" Text="Add" runat="server" OnClientClick="Dialog.showLoader();" OnClick="btnAdd_Click" />
-                        <asp:Button ID="btnCancel" Text="Cancel" runat="server" />
+                        <%--<asp:Button ID="btnAdd" Text="Add" runat="server" OnClientClick="Dialog.showLoader();" OnClick="btnAdd_Click" />--%>
+                         <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button"  OnClientClick="Dialog.showLoader();"
+                            CommandName="Login" Height="19px" Width="65px" 
+                            ImageUrl="~/skin/images/SAP_Add.png" onclick="btnAdd_Click" />
+                        
                     </div>
                     <div class="right">
                     </div>

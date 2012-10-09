@@ -30,7 +30,8 @@ namespace SAP
                 dtHeader.Columns.Add("DocDueDate");
                 dtHeader.Columns.Add("Comments");
                 dtHeader.Columns.Add("JrnlMemo");
-                dtHeader.Rows.Add("", "", "", "", "", "From SAP WEB", "Goods Receipts JE Remark");
+                dtHeader.Columns.Add("U_UserID");
+                dtHeader.Rows.Add("", "", "", "", "", "From SAP WEB", "Goods Receipts JE Remark", User.Identity.Name);
 
                 dtContents = new DataTable();
                 dtContents.Columns.Add("No");

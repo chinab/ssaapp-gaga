@@ -114,6 +114,9 @@ namespace SAP
                 case "97": //sales opportunity
                     str = "OOPR";
                     break;
+                case "30": //Journal Entry
+                    str = "OJDT";
+                    break;
             }
             return str;
         }
@@ -155,6 +158,9 @@ namespace SAP
 
                 case "97": //sales opportunity
                     str = "OPR1";
+                    break;
+                case "30": //Journal Entry
+                    str = "JDT1";
                     break;
             }
             return str;

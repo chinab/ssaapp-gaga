@@ -154,7 +154,7 @@
 					<li><a href="#">Chart of Accounts</a></li>
 					<li><a href="#">Edit Chart of Accounts</a></li>
 					<li><a href="#">Account Code Generator</a></li>
-					<li><a href="#">Journal Entry</a></li>
+					<li><a href="/JournalEntry.aspx">Journal Entry</a></li>
 					<li><a href="#">Journal Vouchers</a></li>
 					<li><a href="#">Posting Templates</a></li>
 					<li><a href="#">Recurring Postings</a></li>

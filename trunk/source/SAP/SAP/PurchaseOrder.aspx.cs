@@ -476,7 +476,7 @@ namespace SAP
             String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name);
+            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name,"22");
             if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];

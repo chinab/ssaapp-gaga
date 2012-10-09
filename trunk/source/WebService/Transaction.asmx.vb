@@ -16,7 +16,7 @@ Public Class Transaction
     Dim connect As New Connection()
 
     <WebMethod()> _
-    Public Function CreateMarketingDocument(ByVal strXml As String, UserID As String) As DataSet
+    Public Function CreateMarketingDocument(ByVal strXml As String, UserID As String, DocType As String) As DataSet
         Dim b As New SAP_Functions
         Try
             Dim sStr As String = "Operation Completed Successfully!"
@@ -25,7 +25,16 @@ Public Class Transaction
                 Return a.Simulate_CreateTransaction()
             Else
 
-                Dim oSO As SAPbobsCOM.Documents
+                Dim oDocment
+                Select Case DocType
+                    Case 30
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.JournalEntries)
+                    Case 97
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.SalesOpportunities)
+                    Case Else
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.Documents)
+                End Select
+
                 If Connection.bConnect = False Then
                     connect.setDB(UserID)
                     If Not connect.connectDB() Then
@@ -33,8 +42,8 @@ Public Class Transaction
                     End If
                 End If
                 PublicVariable.oCompany.XMLAsString = True
-                oSO = PublicVariable.oCompany.GetBusinessObjectFromXML(strXml, 0)
-                lErrCode = oSO.Add()
+                oDocment = PublicVariable.oCompany.GetBusinessObjectFromXML(strXml, 0)
+                lErrCode = oDocment.Add()
                 If lErrCode <> 0 Then
                     PublicVariable.oCompany.GetLastError(lErrCode, sErrMsg)
                     Return b.ReturnMessage(lErrCode, sErrMsg)
@@ -60,7 +69,16 @@ Public Class Transaction
                 Dim a As New Simulation
                 Return a.Simulate_OPOR
             Else
-                Dim oDocment As SAPbobsCOM.Documents
+                Dim oDocment
+                Select Case DocType
+                    Case 30
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.JournalEntries)
+                    Case 97
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.SalesOpportunities)
+                    Case Else
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.Documents)
+                End Select
+
                 If Connection.bConnect = False Then
                     connect.setDB(UserID)
                     If Not connect.connectDB() Then
@@ -88,44 +106,6 @@ Public Class Transaction
         End Try
     End Function
     <WebMethod()> _
-    Public Function GetSalesOpportunity(OpprId As Integer, UserID As String) As String
-        'First: DocEntry=1
-        'Last: Set Docentry=0
-        'Next: current docentry+1, if current docentry is null, go last
-        'Prev: current docentry-1, if current docentry is null, go first
-        'DocType=22: Purchase Order
-        Try
-            Dim sStr As String = ""
-            If PublicVariable.Simulate Then
-                Dim a As New Simulation
-                Return a.Simulate_OPOR
-            Else
-                Dim oDocment As SAPbobsCOM.SalesOpportunities
-                If Connection.bConnect = False Then
-                    connect.setDB(UserID)
-                    If Not connect.connectDB() Then
-                        Return "Can't connect to SAP"
-                    End If
-                End If
-                If OpprId = 0 Then
-                    Dim b As New SAP_Functions
-                    ' OpprId = b.GetMaxDocEntry(DocType, UserID)
-                End If
-                PublicVariable.oCompany.XMLAsString = True
-                PublicVariable.oCompany.XmlExportType = SAPbobsCOM.BoXmlExportTypes.xet_ValidNodesOnly
-                oDocment = PublicVariable.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oSalesOpportunities)
-                If oDocment.GetByKey(OpprId) Then
-                    oDocment.SaveXML(sStr)
-                    Return sStr
-                Else
-                    Return ""
-                End If
-            End If
-        Catch ex As Exception
-            Return ex.ToString
-        End Try
-    End Function
-    <WebMethod()> _
     Public Function Insert_Promotion_Transfer(ItemCode As String, CardCode As String, Qty As Integer) As String
         'Try
         '    Dim sStr As String = "Insert Into Promotion_Transfer select '"+
@@ -135,38 +115,6 @@ Public Class Transaction
         'Catch ex As Exception
         '    Return ex.ToString
         'End Try
-    End Function
-    <WebMethod()> _
-    Public Function CreateOpportunity(ByVal strXml As String, UserID As String) As DataSet
-        Dim b As New SAP_Functions
-        Try
-            Dim sStr As String = "Operation Completed Successfully!"
-            If PublicVariable.Simulate Then
-                Dim a As New Simulation
-                Return a.Simulate_CreateTransaction()
-            Else
-
-                Dim oSO As SAPbobsCOM.SalesOpportunities
-                If Connection.bConnect = False Then
-                    connect.setDB(UserID)
-                    If Not connect.connectDB() Then
-                        Return b.ReturnMessage(-1, "Connect SAP failed")
-                    End If
-                End If
-                PublicVariable.oCompany.XMLAsString = True
-                oSO = PublicVariable.oCompany.GetBusinessObjectFromXML(strXml, 0)
-                lErrCode = oSO.Add()
-                If lErrCode <> 0 Then
-                    PublicVariable.oCompany.GetLastError(lErrCode, sErrMsg)
-                    Return b.ReturnMessage(lErrCode, sErrMsg)
-                Else
-                    Return b.ReturnMessage(lErrCode, "Operation Sucessful!")
-                End If
-            End If
-
-        Catch ex As Exception
-            Return b.ReturnMessage(-1, ex.ToString)
-        End Try
     End Function
     <WebMethod()> _
     Public Function GetMarketingDocument_ReturnDS(DocType As String, DocEntry As Integer, UserID As String) As DataSet

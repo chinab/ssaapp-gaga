@@ -28,7 +28,7 @@
             showSpeed: 400,
             hideSpeed: 800
         });
-        jQuery('#xtraMenu').Accordion({
+        jQuery('.xtraMenuClass').Accordion({
             active: 'h4.selected',
             header: 'h4.head',
             alwaysOpen: false,
@@ -36,6 +36,7 @@
             showSpeed: 400,
             hideSpeed: 800
         });
+        
     });	
 </script>
 
@@ -126,7 +127,7 @@
                     <li><a href="#">Choose company</a></li>
                     <li><a href="#">Exchange Rates and Indexes</a></li>                    
                     <li>
-                          <ul id="xtraMenu">
+                          <ul id="xtraMenu" class="xtraMenuClass">
                         	<li>
                                 <h4 class="head"><a href="#">System Initialization</a></h4>
                                 <ul>
@@ -269,7 +270,7 @@
 					<li><a href="#">Item Master Data</a></li>
 					<li><a href="#">Item Management</a></li>
                     <li>
-                          <ul id="Ul2">
+                          <ul id="xtraMenu2"  class="xtraMenuClass">
                         	<li>
                                 <h4 class="head"><a href="#">Inventory Transactions</a></h4>
                                 <ul>

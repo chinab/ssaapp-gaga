@@ -222,10 +222,10 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("ItemCode") %></asp:Label>
-                                            <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                           <%-- <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
+                                            </asp:HyperLink>--%>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblDescription"><%#Eval("Dscription")%></asp:Label>
@@ -247,55 +247,55 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblTaxcode"><%#Eval("Taxcode")%></asp:Label>
-                                            <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditTaxCode_IN.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <%--<asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditTaxCode_IN.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgTaxCodeLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
+                                            </asp:HyperLink>--%>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblWhse"><%#Eval("WhsCode")%></asp:Label>
-                                            <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <%--<asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
+                                            </asp:HyperLink>--%>
                                         </td>
                                         <td style="display: none">
                                             <asp:Label runat="server" ID="Label1"><%#Eval("VatPrcnt")%></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="Label2"><%#Eval("OcrCode")%></asp:Label>
-                                            <asp:HyperLink ID="HyperLink2" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <%--<asp:HyperLink ID="HyperLink2" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
+                                            </asp:HyperLink>--%>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="Label3"><%#Eval("OcrCode2")%></asp:Label>
-                                            <asp:HyperLink ID="HyperLink3" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <%--<asp:HyperLink ID="HyperLink3" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
+                                            </asp:HyperLink>--%>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="Label4"><%#Eval("OcrCode3")%></asp:Label>
-                                            <asp:HyperLink ID="HyperLink4" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <%--<asp:HyperLink ID="HyperLink4" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
+                                            </asp:HyperLink>--%>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="Label5"><%#Eval("OcrCode4")%></asp:Label>
-                                            <asp:HyperLink ID="HyperLink5" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <%--<asp:HyperLink ID="HyperLink5" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
+                                            </asp:HyperLink>--%>
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="Label6"><%#Eval("OcrCode5")%></asp:Label>
-                                            <asp:HyperLink ID="HyperLink6" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <%--<asp:HyperLink ID="HyperLink6" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditCostCenter.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
+                                            </asp:HyperLink>--%>
                                         </td>
                                     </tr>
                                 </ItemTemplate>

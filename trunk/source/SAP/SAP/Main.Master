@@ -139,10 +139,6 @@
                     </li>                         
                     <li><a href="#">Data Import/Export</a></li>
                     <li><a href="#">Utilities</a></li>
-                    <li><a href="#">Approval Procedures</a></li>
-                    <li><a href="#">License</a></li>
-                    <li><a href="#">Add-Ons</a></li>
-                    <li><a href="#">Alerts Management</a></li>
                 </ul>
 			</li>
 			<li>
@@ -154,21 +150,8 @@
 				<ul>
 					<li><a href="#">Chart of Accounts</a></li>
 					<li><a href="#">Edit Chart of Accounts</a></li>
-					<li><a href="#">Account Code Generator</a></li>
 					<li><a href="/JournalEntry.aspx">Journal Entry</a></li>
 					<li><a href="#">Journal Vouchers</a></li>
-					<li><a href="#">Posting Templates</a></li>
-					<li><a href="#">Recurring Postings</a></li>
-					<li><a href="#">Reverse Transactions</a></li>
-					<li><a href="#">Exchange Rate Differences</a></li>
-					<li><a href="#">Conversion Differences</a></li>
-					<li><a href="#">1099 Editting</a></li>
-					<li><a href="#">Financial Reports Templates</a></li>
-					<li><a href="#">Document Printing</a></li>
-					<li><a href="#">Internal Reconciliations</a></li>
-					<li><a href="#">Budget Setup</a></li>
-					<li><a href="#">Cost Accounting</a></li>
-					<li><a href="#">Financial Reports</a></li>
 				</ul>
 			</li>
 			<li>
@@ -179,7 +162,6 @@
 				</h3>
 				 <ul>
 					<li><a href="/SalesOpportunity.aspx">Sales Opportunity</a></li>
-					<li><a href="#">Sales Opportunities Reports</a></li>                            
 				</ul>
 			</li>
 			<li>
@@ -193,18 +175,8 @@
 					<li><a href="/PurchaseOrder.aspx">Sales Order</a></li>
 					<li><a href="#">Deliver</a></li>
 					<li><a href="#">Return</a></li>
-					<li><a href="#">A/R Down Payment Request</a></li>
-					<li><a href="#">A/R Down Payment Invoice</a></li>
 					<li><a href="/ARInvoice_VHF.aspx">A/R Invoice</a></li>
-					<li><a href="#">A/R Invoice + Payment</a></li>
 					<li><a href="#">A/R Credit Memo</a></li>
-					<li><a href="#">A/P Reserver Invoice</a></li>
-					<li><a href="#">Document Generation Wizard</a></li>
-					<li><a href="#">Recurring Transactions</a></li>
-					<li><a href="#">Recurring Transactions Templates</a></li>
-					<li><a href="#">Document Printing</a></li>
-					<li><a href="#">Dunning Wizard</a></li>
-					<li><a href="#">Sales Reports</a></li>
 				</ul>
 			</li>
 			<li>
@@ -218,16 +190,9 @@
 					<li><a href="/PurchaseOrder.aspx">Purchase Order</a></li>
 					<li><a href="#">Goods Receipt PO</a></li>
 					<li><a href="#">Goods Return</a></li>
-					<li><a href="#">A/P Down Payment Request</a></li>
-					<li><a href="#">A/P Down Payment Invoice</a></li>
 					<li><a href="#">A/P invoice</a></li>
 					<li><a href="#">A/P Credit Memo</a></li>
-					<li><a href="#">A/P Reserver Invoice</a></li>
-					<li><a href="#">Recurring Transactions</a></li>
 					<li><a href="#">Landed Costs</a></li>
-					<li><a href="#">Procurrement Confirmation Wizard</a></li>
-					<li><a href="#">Document Printing</a></li>
-					<li><a href="#">Purchase Reports</a></li>
 				</ul>
 			</li>
 			<li>
@@ -239,8 +204,6 @@
 				<ul>
 					<li><a href="/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
 					<li><a href="#">Activity</a></li>
-					<li><a href="#">Internal Reconciliations</a></li>
-					<li><a href="#">Business Parter Reports</a></li>
 				</ul>
 			</li>
 			<li>
@@ -251,13 +214,7 @@
 				</h3>
 				<ul>
 					 <li><a href="#">Incomming Payments</a></li>
-					<li><a href="#">Deposits</a></li>
 					<li><a href="#">Outgoing Payments</a></li>
-					<li><a href="#">Payment Wizard</a></li>
-					<li><a href="#">Banking Statements and External Reconciliations</a></li>
-					<li><a href="#">Check Number Confirmation</a></li>
-					<li><a href="#">Document Printing</a></li>
-					<li><a href="#">Banking Reports</a></li>
 				</ul>
 			</li>
 			<li>
@@ -274,17 +231,15 @@
                         	<li>
                                 <h4 class="head"><a href="#">Inventory Transactions</a></h4>
                                 <ul>
+                                     <li><a class="subitem" href="#">Inventory Transfer</a></li>
                                     <li><a class="subitem" href="/GoodsReceipt.aspx">Goods Receipt</a></li>
                                     <li><a class="subitem" href="/GoodsIssue.aspx">Goods Issue</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>  
-
-					
 					<li><a href="#">Price Lists</a></li>
 					<li><a href="#">Pick and Pack</a></li>
-					<li><a href="#">Inventory Reports</a></li>
 				</ul>
 			</li>
 			<li>
@@ -298,14 +253,23 @@
 					<li><a href="#">Production Order</a></li>
 					<li><a href="#">Receipt From Production</a></li>
 					<li><a href="#">Issue For Production</a></li>
-					<li><a href="#">Update Parent Item Prices Globally</a></li>
-					<li><a href="#">Production Reports</a></li>
+				</ul>
+			</li>
+            <li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;MRP
+					</a>
+				</h3>
+				<ul>
+					<li><a href="#">Forecast</a></li>
+					<li><a href="#">MRP Wizard</a></li>
 				</ul>
 			</li>
 			<li>
 				<h3 class="head">
                     <a href="#">
-						<img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;MRP
+						<img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;Service
 					</a>
 				</h3>
 				<ul>
@@ -313,7 +277,6 @@
 					<li><a href="#">Customer Equipment Card</a></li>
 					<li><a href="#">Service Contract</a></li>
 					<li><a href="#">Solutions Knowledge Base</a></li>
-					<li><a href="#">Service Reports</a></li>
 				</ul>
 			</li>
 		</ul>

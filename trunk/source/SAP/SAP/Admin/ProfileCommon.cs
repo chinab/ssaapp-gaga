@@ -8,40 +8,78 @@ namespace SAP.Admin
 {
     public class ProfileCommon
     {
-        public String Country
+        public String Email
         {
             get
             {
-                return (String)HttpContext.Current.Profile.GetPropertyValue("Teachers");
+                return (String)HttpContext.Current.Profile.GetPropertyValue("Email");
             }
             set
             {
-                HttpContext.Current.Profile.SetPropertyValue("Teachers", value);
+                HttpContext.Current.Profile.SetPropertyValue("Email", value);
             }
         }
 
-        public String Gender
+        public String Phone
         {
             get
             {
-                return (String)HttpContext.Current.Profile.GetPropertyValue("Gender");
+                return (String)HttpContext.Current.Profile.GetPropertyValue("Phone");
             }
             set
             {
-                HttpContext.Current.Profile.SetPropertyValue("Gender", value);
+                HttpContext.Current.Profile.SetPropertyValue("Phone", value);
             }
         }
 
-        public Int32 Age
+        public String Ref1
         {
             get
             {
-                return (Int32)HttpContext.Current.Profile.GetPropertyValue("Age");
+                return (String)HttpContext.Current.Profile.GetPropertyValue("Ref1");
             }
             set
             {
-                HttpContext.Current.Profile.SetPropertyValue("Age", value);
+                HttpContext.Current.Profile.SetPropertyValue("Ref1", value);
             }
         }
+
+        public String Ref2
+        {
+            get
+            {
+                return (String)HttpContext.Current.Profile.GetPropertyValue("Ref2");
+            }
+            set
+            {
+                HttpContext.Current.Profile.SetPropertyValue("Ref2", value);
+            }
+        }
+
+        public String Ref3
+        {
+            get
+            {
+                return (String)HttpContext.Current.Profile.GetPropertyValue("Ref3");
+            }
+            set
+            {
+                HttpContext.Current.Profile.SetPropertyValue("Ref3", value);
+            }
+        }
+
+        public String Ref4
+        {
+            get
+            {
+                return (String)HttpContext.Current.Profile.GetPropertyValue("Ref4");
+            }
+            set
+            {
+                HttpContext.Current.Profile.SetPropertyValue("Ref4", value);
+            }
+        }
+
+       
     }
 }

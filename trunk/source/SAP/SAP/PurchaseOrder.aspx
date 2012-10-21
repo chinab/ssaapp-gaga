@@ -8,6 +8,45 @@
     <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
+                <div id="menu-action" style="margin-left: -15px;">
+                    <ul>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/preview.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/print.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/excel.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/pdf.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/word.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/addnew.png" /></a>
+                            <%--          <asp:ImageButton ID="btnAddNew" runat="server" AlternateText="button" 
+                            CommandName="Login" ImageUrl="~/skin/icon/addnew.png" 
+                    onclick="btnAddNew_Click" />--%>
+                        </li>
+                        <li><a href="#">
+                            <li><a href="#">
+                                <img alt="" src="/skin/icon/first.png" /></a></li>
+                            <li><a href="#">
+                                <img alt="" src="/skin/icon/previous.png" /></a></li>
+                            <li><a href="#">
+                                <img alt="" src="/skin/icon/next.png" /></a></li>
+                            <li><a href="#">
+                                <img alt="" src="/skin/icon/last.png" /></a></li>
+                    </ul>
+                    <div id="login-logout">
+                        <%--<asp:LoginName ID="LoginName1" runat="server" />--%>
+                        <a href="/Homepage.aspx">Home</a>
+                        <%--<a href="/Admin/UserProfiles.aspx">User Management</a>--%>
+                        <asp:LoginStatus ID="LoginStatus1" runat="server" />
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
                 <div id="title-form" style="border-bottom: 2px solid black;">
                     <h2>
                         PURCHASE ORDER</h2>
@@ -147,10 +186,9 @@
                         <div id="tabs-1" style="overflow: auto; height: 220px; margin-top: 0px;">
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" OnClick="_btnAddRecord_Click" />
                             <br />
-                            <asp:ListView ID="lvContents" runat="server" 
-                                OnItemInserted="lvContents_ItemInserted" OnItemCommand="lvContents_ItemCommand" 
-                                onitemupdating="lvContents_ItemUpdating" ViewStateMode="Enabled" 
-                                onitemediting="lvContents_ItemEditing">
+                            <asp:ListView ID="lvContents" runat="server" OnItemInserted="lvContents_ItemInserted"
+                                OnItemCommand="lvContents_ItemCommand" OnItemUpdating="lvContents_ItemUpdating"
+                                ViewStateMode="Enabled" OnItemEditing="lvContents_ItemEditing">
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
@@ -222,7 +260,7 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("ItemCode") %></asp:Label>
-                                           <%-- <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <%-- <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>--%>
@@ -308,9 +346,8 @@
                                                 ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNo" runat="server" Text='<%# Bind("No") %>'/>
+                                            <asp:Label ID="lblNo" runat="server" Text='<%# Bind("No") %>' />
                                         </td>
-                                       
                                         <td>
                                             <asp:Label ID="lblCode" runat="server" Text='<%# Bind("ItemCode") %>' />
                                             <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
@@ -400,8 +437,7 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblNo"></asp:Label>
-                                        </td>                                     
-                                       
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblCode" runat="server" Text='<%# Bind("ItemCode") %>' />
                                             <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + "0"+"\"")%>'
@@ -534,17 +570,15 @@
                                     </table>
                                 </EmptyDataTemplate>
                             </asp:ListView>
-                            
-                            <asp:DataPager ID="ProductListPagerCombo" runat="server" 
-                               PagedControlID="lvContents" PageSize="5" 
-                                onprerender="ProductListPagerCombo_PreRender">
-                               <Fields>
-                                  <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" 
-                                         ShowNextPageButton="False" ShowPreviousPageButton="False" />
-                                  <asp:NumericPagerField />
-                                  <asp:NextPreviousPagerField LastPageText="&gt;&gt;" ShowLastPageButton="True" 
-                                         ShowNextPageButton="False" ShowPreviousPageButton="False" />
-                               </Fields>
+                            <asp:DataPager ID="ProductListPagerCombo" runat="server" PagedControlID="lvContents"
+                                PageSize="5" OnPreRender="ProductListPagerCombo_PreRender">
+                                <Fields>
+                                    <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" ShowNextPageButton="False"
+                                        ShowPreviousPageButton="False" />
+                                    <asp:NumericPagerField />
+                                    <asp:NextPreviousPagerField LastPageText="&gt;&gt;" ShowLastPageButton="True" ShowNextPageButton="False"
+                                        ShowPreviousPageButton="False" />
+                                </Fields>
                             </asp:DataPager>
                         </div>
                         <div id="tabs-2">
@@ -738,8 +772,7 @@
                                     <span>Remark</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtRemarks" runat="server" Height="40px" TextMode="MultiLine" 
-                                        Width="420px"></asp:TextBox>
+                                    <asp:TextBox ID="txtRemarks" runat="server" Height="40px" TextMode="MultiLine" Width="420px"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
@@ -759,7 +792,8 @@
                                     <span>Tax</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox Enabled="false" ID="txtTax" Style="text-align: right" runat="server" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox Enabled="false" ID="txtTax" Style="text-align: right" runat="server"
+                                        ReadOnly="true"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -783,17 +817,15 @@
                 </div>
                 <div id="footer-form">
                     <div class="left">
-                            <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button" OnClientClick="Dialog.showLoader();"
-                            CommandName="Login" Height="19px" Width="65px" 
-                            ImageUrl="~/skin/images/SAP_Add.png" onclick="btnAdd_Click" />
+                        <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button" OnClientClick="Dialog.showLoader();"
+                            CommandName="Login" Height="19px" Width="65px" ImageUrl="~/skin/images/SAP_Add.png"
+                            OnClick="btnAdd_Click" />
                     </div>
                     <div class="right">
-                        <asp:ImageButton ID="btnCopyFrom" runat="server" AlternateText="button" 
-                            CommandName="Login" Height="19px" Width="109px" 
-                            ImageUrl="~/skin/images/CopyFrom.png"/>
-                        <asp:ImageButton ID="btnCopyTo" runat="server" AlternateText="button" 
-                            CommandName="Login" Height="19px" Width="109px" 
-                            ImageUrl="~/skin/images/CopyTo.png" />
+                        <asp:ImageButton ID="btnCopyFrom" runat="server" AlternateText="button" CommandName="Login"
+                            Height="19px" Width="109px" ImageUrl="~/skin/images/CopyFrom.png" />
+                        <asp:ImageButton ID="btnCopyTo" runat="server" AlternateText="button" CommandName="Login"
+                            Height="19px" Width="109px" ImageUrl="~/skin/images/CopyTo.png" />
                     </div>
                     <div class="clear">
                     </div>

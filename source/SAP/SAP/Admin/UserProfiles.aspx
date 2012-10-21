@@ -2,268 +2,273 @@
     Inherits="SAP.Admin.UserProfiles" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Your Profiles</a></li>
-            <li><a href="#tabs-2">Change Passwords</a></li>
-            <li><a href="#tabs-3">Create New User</a></li>
-        </ul>
-        <div id="tabs-1" style="overflow: auto; height: 300px;">
-            <table width="370px" cellspacing="0" cellpadding="1" border="0" style="background-color: Transparent;
-                border-color: #CCCC99; border-width: 1px; border-style: Solid; border-collapse: collapse;">
+    <style type="text/css">
+        .user-profile-header 
+        {
+            font-weight: normal;
+            line-height: 24px;
+            font-size: 2.24em;
+            color: #DD4B39;
+            font: arial, helvetica, sans-serif;
+            margin: 0 0 .92em;
+            border-bottom: 1px solid #B6B0CC;
+        }
+        #user-profile
+        {
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            width: 930px;
+            margin: 10px 0px 0px 50px;
+            padding-top: 23px;
+            padding-bottom: 100px;
+            border-bottom: 1px solid #B6B0CC;
+            height:170px;
+        }    
+        
+        #user-profile-left
+        {
+            width: 460px;
+            float:left;
+        }   
+        #user-profile-right
+        {
+            width: 460px;
+            float:right;
+        }   
+        #user-profiles-roles
+        {            
+            width:100%;
+            padding-top:230px;
+            padding-bottom:10px;
+            border-bottom: 1px solid #B6B0CC;
+        }  
+         #user-profiles-default
+        {            
+            width:100%;
+            padding-top:230px;
+            padding-bottom:10px;
+            border-bottom: 1px solid #B6B0CC;
+        }  
+        #user-profiles-submit
+        {            
+            width:100%;
+            padding-top:10px;
+        }  
+        .user-attribute 
+        {
+            line-height: 40px;
+        }
+        
+        .user-attribute td:first-child {
+            width: 25%;
+        }
+        
+        .user-profile input {
+            display: inline-block;
+            height: 29px;
+            margin: 0;
+            padding: 0 8px;
+            background: white;
+            border: 1px solid #D9D9D9;
+            border-top: 1px solid silver;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-border-radius: 1px;
+            -moz-border-radius: 1px;
+            border-radius: 1px;
+        }
+        
+        .g-button-submit {
+            border: 1px solid #3079ED;
+            color: white;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+            background-color: #4D90FE;
+            background-image: -webkit-gradient(linear,left top,left bottom,from(#4D90FE),to(#4787ED));
+            background-image: -webkit-linear-gradient(top,#4D90FE,#4787ED);
+            background-image: -moz-linear-gradient(top,#4D90FE,#4787ED);
+            background-image: -ms-linear-gradient(top,#4D90FE,#4787ED);
+            background-image: -o-linear-gradient(top,#4D90FE,#4787ED);
+            background-image: linear-gradient(top,#4D90FE,#4787ED);
+        }
+       .g-button {
+            margin: 1.5em 0;
+            min-width: 75px;
+        }
+        
+        button.g-button, input[type="submit"].g-button {
+            height: 29px;
+            line-height: 29px;
+            vertical-align: bottom;
+            margin: 0;
+        }
+        
+    </style>
+    <div id="user-profile">
+        <h1 class="user-profile-header">Management Your User Profile</h1>
+        <div id = "user-profile-left">     
+            <table>
                 <tbody>
-                    <tr>
+                    <tr class="user-attribute">
                         <td>
-                            <table width="370px" cellpadding="0" border="0" style="font-family: Verdana; font-size: 10pt;">
-                                <tbody>
-                                    <tr>
-                                        <td align="center" style="color: White; background-color: #6B696B; font-weight: bold;"
-                                            colspan="2">
-                                            User Profiles
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right">
-                                            <asp:Label runat="server" ID="lblCountry">Country:</asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtCountry" name="Country"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right">
-                                            <asp:Label ID="lblGender" runat="server">Gender:</asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:TextBox  Width="300px"  runat="server" type="text" ID="txtGender" name="Gender"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right">
-                                            <asp:Label ID="lblAge" runat="server">Age:</asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:TextBox  Width="300px"  runat="server" type="text" ID="txtAge" name="Age"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right">
-                                            <asp:Label ID="lblRole" runat="server" for="lblRole">Roles:</asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:ListBox  Width="300px"  ID="RoleList" runat="server" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <asp:Label runat="server" ID="lblUserId">User Id:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtUserId"></asp:TextBox>
                         </td>
                     </tr>
-                    <tr>
-                        <td align="right">
-                            <asp:Button ID="btnSave" Text="Save" runat="server" OnClientClick="Dialog.showLoader();" OnClick="btnSave_Click" />
-                            <asp:Button ID="btnClear" Text="Clear" runat="server" 
-                                onclick="btnClear_Click" />
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label ID="lblUserName" runat="server">User Name:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtUserName" ></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label ID="lblEmail" runat="server">Email:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtEmail" ></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label ID="lblPassword" runat="server">Password:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtPassword" TextMode="Password"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label ID="lblPasswordConfirmation" runat="server">Confirm Password:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtPasswordConfirmation" TextMode="Password"></asp:TextBox>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div id="tabs-2">
-            <asp:ChangePassword ID="ChangePassword1" runat="server" BackColor="Transparent" BorderColor="#CCCC99"
-                BorderStyle="Solid" BorderWidth="1px" CancelDestinationPageUrl="~/login.aspx"
-                Font-Names="Verdana" Font-Size="10pt" SuccessPageUrl="~/Homepage.aspx">
-                <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />
-            </asp:ChangePassword>
+        <div id = "user-profile-right">     
+            <table>
+                <tbody>
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label runat="server" ID="lblPhone">Phone No:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtPhone" ></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label ID="lblRef1" runat="server">Ref 1:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtRef1" ></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label ID="lblRef2" runat="server">Ref 2:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtRef2" ></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label ID="lblRef3" runat="server">Ref 3:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtRef3" ></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr class="user-attribute">
+                        <td>
+                            <asp:Label ID="lblRef4" runat="server">Ref 4:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox Width="300px" runat="server" type="text" ID="txtRef4" ></asp:TextBox>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div  id="tabs-3">
-            <asp:createuserwizard id="CreateUserWizard1" runat="server" continuedestinationpageurl="~/default.aspx"
-            disablecreateduser="false" font-names="Verdana" backcolor="Transparent" font-size="10pt"
-            borderwidth="1px" bordercolor="#CCCC99" borderstyle="Solid" completesuccesstext="The account has been successfully created."
-            unknownerrormessage="The account was not created. Please try again." oncreateduser="CreateUserWizard1_CreatedUser"> 
-            
-            <WizardSteps>
-            
-                <asp:CreateUserWizardStep ID="CreateUserWizardStep1" runat="server" Title="Step 1: Basic User Information">
-                    <ContentTemplate>
-                    
-                        <table style="font-size: 10pt; font-family: Verdana" border="0" width="400">
-                            <tr>
-                                <td style="font-weight: bold; color: white; background-color: #6b696b" align="center" colspan="2">
-                                    Create Your UserID
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">UserID:</asp:Label></td>
-                                <td>
-                                    <asp:TextBox ID="UserName" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ToolTip="User Name is required."
-                                        ErrorMessage="User Name is required." ValidationGroup="CreateUserWizard1" ControlToValidate="UserName">
-                                        *</asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label></td>
-                                <td>
-                                    <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ToolTip="Password is required."
-                                        ErrorMessage="Password is required." ValidationGroup="CreateUserWizard1" ControlToValidate="Password">
-                                        *</asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    <asp:Label ID="ConfirmPasswordLabel" runat="server" AssociatedControlID="ConfirmPassword">Re-Type Password:</asp:Label>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="ConfirmPassword" runat="server" TextMode="Password"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="ConfirmPasswordRequired" runat="server" ToolTip="Confirm Password is required."
-                                        ErrorMessage="Confirm Password is required." ValidationGroup="CreateUserWizard1"
-                                        ControlToValidate="ConfirmPassword">
-                                        *</asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email">Email:</asp:Label>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="Email" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ToolTip="Email is required."
-                                        ErrorMessage="Email is required." ValidationGroup="CreateUserWizard1" ControlToValidate="Email">
-                                        *</asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                        </table>
-                            
-                        <br />    
-                        <br />
-                            
-                        <table style="font-size: 10pt; font-family: Verdana" border="0" width="400">
-                            <tr>
-                                <td style="font-weight: bold; color: white; background-color: #6b696b" align="center" colspan="2">
-                                    If You Forget Your Password
-                                </td>
-                            </tr>
-    
-                            <tr>
-                                <td align="right">
-                                    Security Question:
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="Question" runat="server" Width="200">
-                                        <asp:ListItem Text="[Select a Question]" />
-                                        <asp:ListItem Text="Favorite Pet" />
-                                        <asp:ListItem Text="Mother's Maiden Name"  />
-                                        <asp:ListItem Text="Who was your childhood hero?"  />
-                                        <asp:ListItem Text="Your favorite pasttime?"  />
-                                    </asp:DropDownList>
-                                
-                                    <asp:RequiredFieldValidator ID="QuestionRequired" runat="server" InitialValue="[Select a Question]" ControlToValidate="Question"
-                                        ErrorMessage="Select a Security Question" ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right" width="170">
-                                    Your Answer:
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="Answer" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="AnswerRequired" runat="server" ControlToValidate="Answer"
-                                        ErrorMessage="RequiredFieldValidator" ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                        
-                        </table>
-                            
-                        <br />     
-                        <br />
-                            
-                        <table style="font-size: 10pt; font-family: Verdana" border="0" width="400">
-                            <tr>
-                                <td style="font-weight: bold; color: white; background-color: #6b696b" align="center" colspan="2">
-                                    Help Us Customize Your Experience
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td align="right" width="170">
-                                    Country:</td>
-                                <td>
-                                    <asp:DropDownList ID="Country" runat="server">
-                                        <asp:ListItem Text="[Select a Country]" />
-                                        <asp:ListItem Text="Albania" />
-                                        <asp:ListItem Text="Austria"  />
-                                        <asp:ListItem Text="Austrailia"  />
-                                        <asp:ListItem Text="VietNam"  />
-                                        <asp:ListItem Text="Other" />
-                                    </asp:DropDownList>
-                                    
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" InitialValue="[Select a Country]" ControlToValidate="Country"
-                                        ErrorMessage="Select a Country" ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    Gender:</td>
-                                <td>
-                                    <asp:DropDownList ID="Gender" runat="server">
-                                        <asp:ListItem Text="[Select Gender]" />
-                                        <asp:ListItem Text="Male" />
-                                        <asp:ListItem Text="Female"  />
-                                    </asp:DropDownList>
-                                    
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" InitialValue="[Select Gender]" ControlToValidate="Gender"
-                                        ErrorMessage="Select Gender" ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    Age:
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="Age" runat="server"></asp:TextBox>
-                                    
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Age"
-                                        ErrorMessage="Enter Age" ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
-                                        
-                                    <asp:RangeValidator ID="RangeValidator1" Type="Integer" ControlToValidate="Age" MinimumValue="1" MaximumValue="120" runat="server" ValidationGroup="CreateUserWizard1" ErrorMessage="Not a valid number">*</asp:RangeValidator>
-                                </td>
-                            </tr>
-
-                             <tr>
-                                <td align="right">
-                                    Roles:
-                                </td>
-                                 <td>
-                                      <asp:ListBox  Width="300px"  ID="RoleListAll" runat="server" />
-                                 </td>
-                            </tr>
-                            <tr>
-                                <td align="center" colspan="2">
-                                    <asp:CompareValidator ID="PasswordCompare" runat="server" ErrorMessage="The Password and Confirmation Password must match."
-                                        ValidationGroup="CreateUserWizard1" ControlToValidate="ConfirmPassword" ControlToCompare="Password"
-                                        Display="Dynamic">
-                                    </asp:CompareValidator>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td style="color: red" align="center" colspan="2">
-                                    <asp:Literal ID="ErrorMessage" runat="server" EnableViewState="False"></asp:Literal>
-                                </td>
-                            </tr>                           
-                        </table>
-                    </ContentTemplate>
-                </asp:CreateUserWizardStep>
-                <asp:CompleteWizardStep ID="CompleteWizardStep1" runat="server">
-                </asp:CompleteWizardStep>
-            </WizardSteps>
-                
-            <TitleTextStyle Font-Bold="True" BackColor="#6B696B" ForeColor="White"></TitleTextStyle>
+        <div id="user-profiles-roles">
+            <asp:ListView ID="listUserRoles" runat="server">
+                <LayoutTemplate>
+                    <table class="data_table">
+                        <tr>
+                            <th style="width: 100px">
+                                <span>Role No.</span>
+                            </th>
+                            <th style="width: 100px">
+                                <span>Role Name</span>
+                            </th>
+                            <th style="width: 200px">
+                                <span>Role Description</span>
+                            </th>                            
+                        </tr>
+                        <tr id="itemPlaceholder" runat="server">
+                        </tr>
+                    </table>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <asp:Label runat="server" ID="lblNo" Text='<%#Eval("No")%>'></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="LabelRoleName" Text='<%#Eval("RoleName")%>'></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="LabelRoleDescription" Text='<%#Eval("RoleDescription")%>'></asp:Label>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:ListView>
+        </div>
+         <div id="user-profile-default">
+            <asp:ListView ID="listUserDefault" runat="server">
+                <LayoutTemplate>
+                    <table class="data_table">
+                        <tr>
+                            <th style="width: 100px">
+                                <span>Default Code</span>
+                            </th>
+                            <th style="width: 100px">
+                                <span>Default Value</span>
+                            </th>
+                            <th style="width: 200px">
+                                <span>Default By Query</span>
+                            </th>                            
+                        </tr>
+                        <tr id="itemPlaceholder" runat="server">
+                        </tr>
+                    </table>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <asp:Label runat="server" ID="lblNo" Text='<%#Eval("DefaultCode")%>'></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="LabelRoleName" Text='<%#Eval("DefaultValue")%>'></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="LabelRoleDescription" Text='<%#Eval("DefaultByQuery")%>'></asp:Label>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:ListView>
+        </div>
         
-        </asp:createuserwizard>
+        <div id="user-profiles-submit">
+            <asp:Button ID="btnSaveProfiles" OnClick="btnSave_Click" runat="server" Text="Save" AlternateText="Save" CssClass="g-button g-button-submit"/>            
         </div>
     </div>
 </asp:Content>

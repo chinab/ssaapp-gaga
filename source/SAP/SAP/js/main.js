@@ -65,6 +65,7 @@ Main = {
                 width: this.widthDialog,
                 height: this.heightDialog
             });
+            $(".txtDate").datepicker();
             //
         }
         ////

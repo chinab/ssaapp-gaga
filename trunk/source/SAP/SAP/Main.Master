@@ -77,6 +77,12 @@
         <div id="leftPane">
         <div>
             <asp:Image Width="100px" ID = "Image2" ImageUrl="~/skin/images/Abeo Logo.png" runat="server" />
+            <div id="login-logout" style="margin-top: 40px;">
+                <%--<asp:LoginName ID="LoginName1" runat="server" />--%>
+                <a href="/Homepage.aspx">Home</a>
+                <%--<a href="/Admin/UserProfiles.aspx">User Management</a>--%>
+                <asp:LoginStatus ID="LoginStatus1" runat="server" />
+            </div>
         </div>
         <ul id="theMenu">
 			<li>
@@ -92,7 +98,7 @@
                                 <h4 class="head"><a href="#">User Management</a></h4>
                                 <ul>
                                     <li><a class="subitem" href="/Admin/UserProfiles.aspx">User Profiles</a></li>
-                                    <li><a class="subitem" href="/Admin/UserProfiles.aspx">User Profiles</a></li>
+                                    <li><a class="subitem" href="/Admin/UserManagement.aspx">User Management</a></li>
                                 </ul>
                             </li>
                         </ul>

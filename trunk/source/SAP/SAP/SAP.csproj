@@ -58,7 +58,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\UserManagement.aspx" />
     <Content Include="Admin\UserProfiles.aspx" />
+    <Content Include="Admin\user_style.css" />
     <Content Include="ARInvoice_VHF.aspx" />
     <Content Include="BusinessPartnerMaster.aspx" />
     <Content Include="js\jquery.colour.js" />
@@ -204,6 +206,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\ProfileCommon.cs" />
+    <Compile Include="Admin\UserManagement.aspx.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserManagement.aspx.designer.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\UserProfiles.aspx.cs">
       <DependentUpon>UserProfiles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

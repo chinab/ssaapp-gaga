@@ -2,108 +2,7 @@
     Inherits="SAP.Admin.UserProfiles" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <style type="text/css">
-        .user-profile-header 
-        {
-            font-weight: normal;
-            line-height: 24px;
-            font-size: 2.24em;
-            color: #DD4B39;
-            font: arial, helvetica, sans-serif;
-            margin: 0 0 .92em;
-            border-bottom: 1px solid #B6B0CC;
-        }
-        #user-profile
-        {
-            padding-bottom: 1em;
-            margin-bottom: 1em;
-            width: 930px;
-            margin: 10px 0px 0px 50px;
-            padding-top: 23px;
-            padding-bottom: 100px;
-            border-bottom: 1px solid #B6B0CC;
-            height:170px;
-        }    
-        
-        #user-profile-left
-        {
-            width: 460px;
-            float:left;
-        }   
-        #user-profile-right
-        {
-            width: 460px;
-            float:right;
-        }   
-        #user-profiles-roles
-        {            
-            width:100%;
-            padding-top:230px;
-            padding-bottom:10px;
-            border-bottom: 1px solid #B6B0CC;
-        }  
-         #user-profiles-default
-        {            
-            width:100%;
-            padding-top:230px;
-            padding-bottom:10px;
-            border-bottom: 1px solid #B6B0CC;
-        }  
-        #user-profiles-submit
-        {            
-            width:100%;
-            padding-top:10px;
-        }  
-        .user-attribute 
-        {
-            line-height: 40px;
-        }
-        
-        .user-attribute td:first-child {
-            width: 25%;
-        }
-        
-        .user-profile input {
-            display: inline-block;
-            height: 29px;
-            margin: 0;
-            padding: 0 8px;
-            background: white;
-            border: 1px solid #D9D9D9;
-            border-top: 1px solid silver;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            -webkit-border-radius: 1px;
-            -moz-border-radius: 1px;
-            border-radius: 1px;
-        }
-        
-        .g-button-submit {
-            border: 1px solid #3079ED;
-            color: white;
-            text-shadow: 0 1px rgba(0, 0, 0, 0.1);
-            background-color: #4D90FE;
-            background-image: -webkit-gradient(linear,left top,left bottom,from(#4D90FE),to(#4787ED));
-            background-image: -webkit-linear-gradient(top,#4D90FE,#4787ED);
-            background-image: -moz-linear-gradient(top,#4D90FE,#4787ED);
-            background-image: -ms-linear-gradient(top,#4D90FE,#4787ED);
-            background-image: -o-linear-gradient(top,#4D90FE,#4787ED);
-            background-image: linear-gradient(top,#4D90FE,#4787ED);
-        }
-       .g-button {
-            margin: 1.5em 0;
-            min-width: 75px;
-        }
-        
-        button.g-button, input[type="submit"].g-button {
-            height: 29px;
-            line-height: 29px;
-            vertical-align: bottom;
-            margin: 0;
-        }
-        
-    </style>
+    <link href="../Admin/user_style.css" rel="stylesheet" type="text/css" />
     <div id="user-profile">
         <h1 class="user-profile-header">Management Your User Profile</h1>
         <div id = "user-profile-left">     
@@ -220,7 +119,7 @@
                 <ItemTemplate>
                     <tr>
                         <td>
-                            <asp:Label runat="server" ID="lblNo" Text='<%#Eval("No")%>'></asp:Label>
+                            <asp:CheckBox runat="server" ID="chkRoleSelected"></asp:CheckBox>
                         </td>
                         <td>
                             <asp:Label runat="server" ID="LabelRoleName" Text='<%#Eval("RoleName")%>'></asp:Label>
@@ -266,9 +165,10 @@
                 </ItemTemplate>
             </asp:ListView>
         </div>
-        
+
         <div id="user-profiles-submit">
             <asp:Button ID="btnSaveProfiles" OnClick="btnSave_Click" runat="server" Text="Save" AlternateText="Save" CssClass="g-button g-button-submit"/>            
+            <asp:Button ID="btnAddProfiles" OnClick="btnAdd_Click" runat="server" Text="Add" AlternateText="Add" CssClass="g-button g-button-submit"/>            
         </div>
     </div>
 </asp:Content>

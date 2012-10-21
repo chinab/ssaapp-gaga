@@ -37,13 +37,7 @@
                                 <img alt="" src="/skin/icon/next.png" /></a></li>
                             <li><a href="#">
                                 <img alt="" src="/skin/icon/last.png" /></a></li>
-                    </ul>
-                    <div id="login-logout">
-                        <%--<asp:LoginName ID="LoginName1" runat="server" />--%>
-                        <a href="/Homepage.aspx">Home</a>
-                        <%--<a href="/Admin/UserProfiles.aspx">User Management</a>--%>
-                        <asp:LoginStatus ID="LoginStatus1" runat="server" />
-                    </div>
+                    </ul>                    
                 </div>
                 <div class="clear">
                 </div>

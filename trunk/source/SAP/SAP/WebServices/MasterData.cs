@@ -79,6 +79,12 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     private System.Threading.SendOrPostCallback GetLevelOfInterestOperationCompleted;
 
+    private System.Threading.SendOrPostCallback GetActivityTypeOperationCompleted;
+
+    private System.Threading.SendOrPostCallback GetActivitySubjectOperationCompleted;
+
+    private System.Threading.SendOrPostCallback GetSAPUserOperationCompleted;
+
     /// <remarks/>
     public MasterData()
     {
@@ -163,6 +169,15 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     public event GetLevelOfInterestCompletedEventHandler GetLevelOfInterestCompleted;
+
+    /// <remarks/>
+    public event GetActivityTypeCompletedEventHandler GetActivityTypeCompleted;
+
+    /// <remarks/>
+    public event GetActivitySubjectCompletedEventHandler GetActivitySubjectCompleted;
+
+    /// <remarks/>
+    public event GetSAPUserCompletedEventHandler GetSAPUserCompleted;
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetBusinessPartner", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -1408,6 +1423,153 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetActivityType", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetActivityType(string UserID)
+    {
+        object[] results = this.Invoke("GetActivityType", new object[] {
+                    UserID});
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public System.IAsyncResult BeginGetActivityType(string UserID, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginInvoke("GetActivityType", new object[] {
+                    UserID}, callback, asyncState);
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet EndGetActivityType(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public void GetActivityTypeAsync(string UserID)
+    {
+        this.GetActivityTypeAsync(UserID, null);
+    }
+
+    /// <remarks/>
+    public void GetActivityTypeAsync(string UserID, object userState)
+    {
+        if ((this.GetActivityTypeOperationCompleted == null))
+        {
+            this.GetActivityTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetActivityTypeOperationCompleted);
+        }
+        this.InvokeAsync("GetActivityType", new object[] {
+                    UserID}, this.GetActivityTypeOperationCompleted, userState);
+    }
+
+    private void OnGetActivityTypeOperationCompleted(object arg)
+    {
+        if ((this.GetActivityTypeCompleted != null))
+        {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetActivityTypeCompleted(this, new GetActivityTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetActivitySubject", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetActivitySubject(string UserID)
+    {
+        object[] results = this.Invoke("GetActivitySubject", new object[] {
+                    UserID});
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public System.IAsyncResult BeginGetActivitySubject(string UserID, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginInvoke("GetActivitySubject", new object[] {
+                    UserID}, callback, asyncState);
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet EndGetActivitySubject(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public void GetActivitySubjectAsync(string UserID)
+    {
+        this.GetActivitySubjectAsync(UserID, null);
+    }
+
+    /// <remarks/>
+    public void GetActivitySubjectAsync(string UserID, object userState)
+    {
+        if ((this.GetActivitySubjectOperationCompleted == null))
+        {
+            this.GetActivitySubjectOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetActivitySubjectOperationCompleted);
+        }
+        this.InvokeAsync("GetActivitySubject", new object[] {
+                    UserID}, this.GetActivitySubjectOperationCompleted, userState);
+    }
+
+    private void OnGetActivitySubjectOperationCompleted(object arg)
+    {
+        if ((this.GetActivitySubjectCompleted != null))
+        {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetActivitySubjectCompleted(this, new GetActivitySubjectCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetSAPUser", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetSAPUser(string UserID)
+    {
+        object[] results = this.Invoke("GetSAPUser", new object[] {
+                    UserID});
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public System.IAsyncResult BeginGetSAPUser(string UserID, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginInvoke("GetSAPUser", new object[] {
+                    UserID}, callback, asyncState);
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet EndGetSAPUser(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public void GetSAPUserAsync(string UserID)
+    {
+        this.GetSAPUserAsync(UserID, null);
+    }
+
+    /// <remarks/>
+    public void GetSAPUserAsync(string UserID, object userState)
+    {
+        if ((this.GetSAPUserOperationCompleted == null))
+        {
+            this.GetSAPUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSAPUserOperationCompleted);
+        }
+        this.InvokeAsync("GetSAPUser", new object[] {
+                    UserID}, this.GetSAPUserOperationCompleted, userState);
+    }
+
+    private void OnGetSAPUserOperationCompleted(object arg)
+    {
+        if ((this.GetSAPUserCompleted != null))
+        {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetSAPUserCompleted(this, new GetSAPUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+
+    /// <remarks/>
     public new void CancelAsync(object userState)
     {
         base.CancelAsync(userState);
@@ -2148,6 +2310,96 @@ public partial class GetLevelOfInterestCompletedEventArgs : System.ComponentMode
     private object[] results;
 
     internal GetLevelOfInterestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetActivityTypeCompletedEventHandler(object sender, GetActivityTypeCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetActivityTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal GetActivityTypeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetActivitySubjectCompletedEventHandler(object sender, GetActivitySubjectCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetActivitySubjectCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal GetActivitySubjectCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetSAPUserCompletedEventHandler(object sender, GetSAPUserCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetSAPUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal GetSAPUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
         base(exception, cancelled, userState)
     {
         this.results = results;

@@ -400,7 +400,7 @@ table.detail_table td
 {
     padding: 0px 2px 0px 2px;
     vertical-align: middle;
-    border-bottom: dotted 1px #808080;
+    /*border-bottom: dotted 1px #808080;*/
 }
 table.detail_table table td
 {

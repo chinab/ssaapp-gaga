@@ -11,12 +11,16 @@ namespace SAP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (User.Identity.IsAuthenticated == true)
+            if (!IsPostBack)
             {
-                GetDefault df = new GetDefault();
-                if (df.GetConnection(User.Identity.Name) == 0)
-                     Response.Redirect("Homepage.aspx");
+                if (User.Identity.IsAuthenticated == true)
+                {
+                    GetDefault df = new GetDefault();
+                    if (df.GetConnection(User.Identity.Name) == 0)
+                        Response.Redirect("Homepage.aspx");
+                }
             }
+            
         }
 
       

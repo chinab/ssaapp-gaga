@@ -1,4 +1,4 @@
-﻿<%@ Page Title="AR Invoice" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Service Call" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
     CodeBehind="ServiceCall.aspx.cs" Inherits="SAP.ServiceCall" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -17,18 +17,25 @@
                         <table class="detail_table">
                             <tr>
                                 <td class="detail_table_td_100">
-                                    <span>Customer Code</span>
+                                    <span>Customer Code (*)</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtVendor" runat="server" Width="186px" Enabled="false" BackColor="#D5DCE0"></asp:TextBox>
+                                    <asp:TextBox ID="txtBP" runat="server" Width="186px" Enabled="false" 
+                                        BackColor="#D5DCE0"></asp:TextBox>
+                                     <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('Popup_EditCustomer.aspx','');"
+                                        runat="server">
+                                        <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                    </asp:HyperLink>
                                 </td>
+                               
                             </tr>
                             <tr>
                                 <td class="detail_table_td_100">
                                     <span>Customer Name</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtName0" runat="server" Width="189px" Enabled="false" BackColor="#D5DCE0"></asp:TextBox>
+                                    <asp:TextBox ID="txtBPName" runat="server" Width="189px" Enabled="false" 
+                                        BackColor="#D5DCE0"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -36,7 +43,8 @@
                                     <span>Contact Person</span>
                                 </td>
                                 <td>
-                                     <asp:TextBox ID="TextBox1" runat="server" Width="189px" Enabled="false" BackColor="#D5DCE0"></asp:TextBox>
+                                    <asp:DropDownList ID="ddlContactPerson" runat="server">
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -87,6 +95,37 @@
                     </div>
                 </div>
                 <div class="clear">
+                    <table class="detail_table">
+                        <tr>
+                            <td class="detail_table_td_150" style="width: 98px">
+                                <span>Item No.</span>
+                            </td>
+                            <td>
+
+
+                                 <asp:TextBox ID="txtItemNo" runat="server" Width="186px" Enabled="false" 
+                                    BackColor="#D5DCE0"></asp:TextBox>
+                                  <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('Popup_EditItem.aspx','');" 
+                                    runat="server">
+                                <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                </asp:HyperLink>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="detail_table_td_150" style="width: 98px">
+                                <span>Item Name</span>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtItemName" runat="server" Width="295px"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="detail_table_td_150" style="width: 98px">
+                                &nbsp;</td>
+                            <td>
+                                &nbsp;</td>
+                        </tr>
+                    </table>
                 </div>
                 <div id="content-form">
                     <div id="tabs">
@@ -97,10 +136,10 @@
                             <table class="detail_table">
                                 <tr>
                                     <td class="detail_table_td_100">
-                                        <span>Subject</span>
+                                        <span>Subject (*)</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtJournalRemark0" runat="server" Width="655px"></asp:TextBox>
+                                        <asp:TextBox ID="txtSubject" runat="server" Width="655px"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -108,7 +147,7 @@
                                         <span>Remarks</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtJournalRemark1" runat="server" Height="80px" 
+                                        <asp:TextBox ID="txtRemark" runat="server" Height="80px" 
                                             TextMode="MultiLine" Width="652px"></asp:TextBox>
                                     </td>
                                 </tr>
@@ -123,7 +162,7 @@
                 <div id="footer-form">
                     <div class="left">
                         <asp:ImageButton ID="imgAdd" runat="server" AlternateText="button" 
-                            CommandName="Login" Height="19px" Width="65px" 
+                             Height="19px" Width="65px" 
                             ImageUrl="~/skin/images/SAP_Add.png" onclick="imgAdd_Click" />
                     
                     </div>

@@ -14,6 +14,7 @@ namespace SAP
     {
         public static DataTable dtItem;
         public static DataTable dtHeader;
+        private string DocType = "59";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -104,7 +105,7 @@ namespace SAP
             
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name,"59");
+            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType);
             if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
@@ -245,7 +246,7 @@ namespace SAP
                    
                     DocumentXML objInfo = new DocumentXML();
                     String RemoveColumn = "No";
-                    return objInfo.ToXMLStringFromDS("59", dtHeader, dtItem, RemoveColumn);
+                    return objInfo.ToXMLStringFromDS(DocType, dtHeader, dtItem, RemoveColumn);
                 }
                 catch (Exception)
                 {

@@ -114,7 +114,7 @@ namespace SAP.Admin
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             String message = "";
-            if (!String.IsNullOrEmpty(txtUserId.Text) && !String.IsNullOrEmpty(txtUserName.Text) && !String.IsNullOrEmpty(txtPassword.Text) && !String.IsNullOrEmpty(txtEmail.Text))
+            if (!String.IsNullOrEmpty(txtUserId.Text)  && !String.IsNullOrEmpty(txtPassword.Text) && !String.IsNullOrEmpty(txtEmail.Text))
             {
                 if (txtPassword.Text.Equals(txtPasswordConfirmation.Text))
                 {

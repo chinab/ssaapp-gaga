@@ -10,39 +10,67 @@ using System.Collections;
 
 namespace SAP
 {
-    public partial class ServiceCall : System.Web.UI.Page
+    public partial class Activity : System.Web.UI.Page
     {
         public static DataTable dtContents;
         public static DataTable dtHeader;
         private GeneralFunctions GF;
-        private string DocType = "191";
+        private string DocType = "33";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 dtHeader = new DataTable();
-                dtHeader.Columns.Add("customer");
-                dtHeader.Columns.Add("custmrName");
-                dtHeader.Columns.Add("itemCode");
-                dtHeader.Columns.Add("itemName");
-                dtHeader.Columns.Add("subject");
-                dtHeader.Columns.Add("descrption");
-                dtHeader.Columns.Add("U_UserID");
+                dtHeader.Columns.Add("Action");
+                dtHeader.Columns.Add("CntctType");
+                dtHeader.Columns.Add("CntctSbjct");
+                dtHeader.Columns.Add("CardCode");
+                dtHeader.Columns.Add("Notes");
+                dtHeader.Columns.Add("Details");
 
-                dtHeader.Rows.Add("", "", "", "", "","", User.Identity.Name);
+                dtHeader.Columns.Add("Recontact");
+                dtHeader.Columns.Add("BeginTime");
+                dtHeader.Columns.Add("endDate");
+                dtHeader.Columns.Add("ENDTime");
+
+                dtHeader.Columns.Add("U_UserID");
+                dtHeader.Rows.Add("", "", "", "", "","","20121022","830","20121022","930", User.Identity.Name);
+
+                MasterData masterDataWS = new MasterData();
+                DataSet dsMaster = masterDataWS.GetActivityType(User.Identity.Name);
+                ListItem item = new ListItem();
+
+                foreach (DataRow row in dsMaster.Tables[0].Rows)
+                {
+                    item = new ListItem(row[1].ToString(), row[0].ToString());
+                    ddlType.Items.Add(item);
+                }
+
+                
+                dsMaster = masterDataWS.GetActivitySubject(User.Identity.Name);
+                foreach (DataRow row in dsMaster.Tables[0].Rows)
+                {
+                    item = new ListItem(row[1].ToString(), row[0].ToString());
+                    ddlSubject.Items.Add(item);
+                }
 
                 LoadDefault();
+
             }
             
         }
 
         void LoadDefault()
         {
-            txtBP.Text = "C00001";
-            txtBPName.Text = "DNTN SXTM Trường Hải";
-            txtItemNo.Text = "ABD-22002395";
-            txtItemName.Text = "Acrobe 9 IE Win DVD Set";
+            txtBP.Text = "ABEO";
+            txtBPName.Text = "ABEO";
+            ddlActivity.SelectedValue = "T";
+            ddlType.Items.FindByText("TIMESHEET").Selected = true;
+            txtDate.Text= DateTime.Now.ToShortDateString();
+            txtFromTime.Text = "830";
+            txtToTime.Text = "1730";
+            txtSubject.Text = "TIMESHEET | " + User.Identity.Name + " | " + String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text)) + " | " + txtBP.Text  ;
         }
 
         protected override void OnLoadComplete(EventArgs e)
@@ -55,17 +83,7 @@ namespace SAP
                 if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
 
                 switch (this.Request["__EVENTARGUMENT"].ToString())
-                {
-                    case "EditItemCallBack":
-                        ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
-                       // itemNo = Int32.Parse(Session["chosenItemNo"] as String);
-                        if (chosenItem != null)
-                        {   // update grid
-                            txtItemNo.Text = chosenItem.ItemCode;
-                            txtItemName.Text = chosenItem.ItemName;
-                        }
-                        break;
-                   
+                {                    
                     case "EditVendorCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
@@ -106,13 +124,20 @@ namespace SAP
             {
                 if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
                 //Update table header
+                txtSubject.Text = "TIMESHEET | " + User.Identity.Name + " | " + String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text)) + " | " + txtBP.Text;
+
                 DataRow dr = dtHeader.Rows[0];
-                dr["customer"] = txtBP.Text;
-                dr["custmrName"] = txtBPName.Text;
-                dr["itemCode"] =  txtItemNo.Text;
-                dr["itemName"] =  txtItemName.Text;
-                dr["subject"] = txtSubject.Text;
-                dr["descrption"] = txtRemark.Text;
+                dr["Action"] = ddlActivity.SelectedValue.ToString();
+                dr["CntctType"] = ddlType.SelectedValue.ToString();
+                dr["CntctSbjct"] = ddlSubject.SelectedValue.ToString();
+                dr["CardCode"] = txtBP.Text;
+                dr["Notes"] = txtRemark.Text;
+                dr["Details"] = txtSubject.Text;
+
+                dr["Recontact"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text));
+                dr["BeginTime"] = txtFromTime.Text;
+                dr["endDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text));
+                dr["ENDTime"] = txtToTime.Text;
 
                 DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "No";
@@ -148,5 +173,6 @@ namespace SAP
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                               "Dialog.hideLoader();", true);
         }
+
     }
 }

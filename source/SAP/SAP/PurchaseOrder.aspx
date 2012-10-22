@@ -50,7 +50,7 @@
                     <div class="left">
                         <table class="detail_table">
                             <tr>
-                                <td class="detail_table_td_100">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Vendor</span>
                                 </td>
                                 <td>
@@ -62,7 +62,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_100">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Name</span>
                                 </td>
                                 <td>
@@ -70,7 +70,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_100">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Contact Person</span>
                                 </td>
                                 <td>
@@ -79,7 +79,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_100">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Vendor Ref No.</span>
                                 </td>
                                 <td>
@@ -107,7 +107,7 @@
                                 <td class="detail_table_td_150" style="padding: 0 0 0 0;">
                                     <table style="padding: 0 0 0 0;">
                                         <tr>
-                                            <td class="detail_table_td_100">
+                                            <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                                 <span>No</span>
                                             </td>
                                             <td class="detail_table_td_50">
@@ -134,7 +134,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                     <span>Status</span>
                                 </td>
                                 <td>
@@ -142,7 +142,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                     <span>Posting Date</span>
                                 </td>
                                 <td>
@@ -150,7 +150,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                     <span>Due Date</span>
                                 </td>
                                 <td>
@@ -158,7 +158,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                     <span>Document Date</span>
                                 </td>
                                 <td>
@@ -600,7 +600,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Shipping Type</span>
                                     </td>
                                     <td colspan="2">
@@ -617,13 +617,13 @@
                         <div id="tabs-3">
                             <table class="detail_table">
                                 <tr>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Journal Remark</span>
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtJournalRemark" runat="server"></asp:TextBox>
                                     </td>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>BP Project</span>
                                     </td>
                                     <td>
@@ -638,7 +638,7 @@
                                     </td>
                                     <td>
                                     </td>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Cancellation Date</span>
                                     </td>
                                     <td>
@@ -650,7 +650,7 @@
                                     </td>
                                     <td>
                                     </td>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Required Date</span>
                                     </td>
                                     <td>
@@ -668,7 +668,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Payment Terms</span>
                                     </td>
                                     <td>
@@ -677,7 +677,7 @@
                                             <asp:ListItem Text="Defined New"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Indicator</span>
                                     </td>
                                     <td>
@@ -688,7 +688,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Payment Method</span>
                                     </td>
                                     <td>
@@ -696,7 +696,7 @@
                                             <asp:ListItem Text="---"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Federal Tax ID</span>
                                     </td>
                                     <td>
@@ -704,7 +704,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Central Bank Incl.</span>
                                     </td>
                                     <td>
@@ -722,7 +722,7 @@
                                     </td>
                                     <td>
                                     </td>
-                                    <td class="detail_table_td_100">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Order Number</span>
                                     </td>
                                     <td>
@@ -741,7 +741,7 @@
                     <div class="left">
                         <table class="detail_table">
                             <tr>
-                                <td class="detail_table_td_100">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Buyer</span>
                                 </td>
                                 <td class="detail_table_td_100">
@@ -750,7 +750,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_100">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Owner</span>
                                 </td>
                                 <td class="detail_table_td_100">
@@ -762,7 +762,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_100">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Remark</span>
                                 </td>
                                 <td>
@@ -774,7 +774,7 @@
                     <div class="right">
                         <table class="detail_table">
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                     <span>Total before discount</span>
                                 </td>
                                 <td>
@@ -782,7 +782,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                     <span>Tax</span>
                                 </td>
                                 <td>
@@ -791,7 +791,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_150">
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                     <span>Total Payment Due</span>
                                 </td>
                                 <td>

@@ -92,32 +92,35 @@ namespace SAP
                         #endregion
 
                        #region LineXML 1
-                        writer.WriteStartElement(gf.GetLineTableTag(ObjType, 1));
+                        if (ds1 != null)
                         {
-                           foreach (DataRow row in ds1.Rows)
+                            writer.WriteStartElement(gf.GetLineTableTag(ObjType, 1));
                             {
-                                writer.WriteStartElement("row");
+                                foreach (DataRow row in ds1.Rows)
                                 {
-                                    foreach (DataColumn column in ds1.Columns)
+                                    writer.WriteStartElement("row");
                                     {
-                                        if (Array.IndexOf(arr, column.ColumnName) < 0)
+                                        foreach (DataColumn column in ds1.Columns)
                                         {
-                                            if (column.ColumnName != "No")
+                                            if (Array.IndexOf(arr, column.ColumnName) < 0)
                                             {
-                                                writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                if (column.ColumnName != "No")
                                                 {
-                                                    writer.WriteString(row[column].ToString());
+                                                    writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                    {
+                                                        writer.WriteString(row[column].ToString());
+                                                    }
+                                                    writer.WriteEndElement();
                                                 }
-                                                writer.WriteEndElement();
                                             }
                                         }
                                     }
+                                    writer.WriteEndElement();
                                 }
-                                writer.WriteEndElement();
                             }
+                            writer.WriteEndElement();
                         }
-                        writer.WriteEndElement();
-                        #endregion
+                       #endregion
                     }
                     writer.WriteEndElement();
                 }

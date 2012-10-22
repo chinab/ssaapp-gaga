@@ -16,7 +16,7 @@ namespace SAP
         public static DataTable dtContents;
         public static DataTable dtHeader;
         private GeneralFunctions GF;
-
+        private string DocType = "22";
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -300,7 +300,7 @@ namespace SAP
                 DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "No";
                 Array arrContentsCols = new string[] { "Quantity", "PriceBefDi", "Price", "DiscPrcnt", "LineTotal" }; // Columns need to reset format numeric
-                return objInfo.ToXMLStringFromDS("22", dtHeader, GF.ResetFormatNumeric(dtContents, arrContentsCols), RemoveColumn);
+                return objInfo.ToXMLStringFromDS(DocType, dtHeader, GF.ResetFormatNumeric(dtContents, arrContentsCols), RemoveColumn);
             }
             catch (Exception)
             {
@@ -477,7 +477,7 @@ namespace SAP
             String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name,"22");
+            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType);
             if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];

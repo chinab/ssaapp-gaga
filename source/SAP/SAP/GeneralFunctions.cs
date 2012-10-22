@@ -117,6 +117,12 @@ namespace SAP
                 case "30": //Journal Entry
                     str = "OJDT";
                     break;
+                case "191": //Service call
+                    str = "OSCL";
+                    break;
+                case "33": //Activity
+                    str = "OCLG";
+                    break;
             }
             return str;
         }
@@ -161,6 +167,12 @@ namespace SAP
                     break;
                 case "30": //Journal Entry
                     str = "JDT1";
+                    break;
+                case "191": //Service call
+                    str = "OSCL";
+                    break;
+                case "33": //Activity
+                    str = "OCLG";
                     break;
             }
             return str;

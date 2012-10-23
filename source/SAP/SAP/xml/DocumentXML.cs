@@ -75,14 +75,18 @@ namespace SAP
                                 {
                                     foreach (DataColumn column in ds.Columns)
                                     {
-                                        if (column.ColumnName != "No")//phan lon cac table deu co column No nay
+                                        if (Array.IndexOf(arr, column.ColumnName) < 0)
                                         {
-                                            writer.WriteStartElement(column.ColumnName); //Write Tag
+                                            if (column.ColumnName != "No")//phan lon cac table deu co column No nay
                                             {
-                                                writer.WriteString(row[column].ToString());
+                                                writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                {
+                                                    writer.WriteString(row[column].ToString());
+                                                }
+                                                writer.WriteEndElement();
                                             }
-                                            writer.WriteEndElement();
                                         }
+                                        
                                     }
                                 }
                                 writer.WriteEndElement();

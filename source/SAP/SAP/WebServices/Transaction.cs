@@ -34,8 +34,6 @@ namespace SAP.WebServices
 
         private System.Threading.SendOrPostCallback GetMarketingDocumentOperationCompleted;
 
-        private System.Threading.SendOrPostCallback Insert_Promotion_TransferOperationCompleted;
-
         private System.Threading.SendOrPostCallback GetMarketingDocument_ReturnDSOperationCompleted;
 
         /// <remarks/>
@@ -55,29 +53,30 @@ namespace SAP.WebServices
         public event GetMarketingDocumentCompletedEventHandler GetMarketingDocumentCompleted;
 
         /// <remarks/>
-        public event Insert_Promotion_TransferCompletedEventHandler Insert_Promotion_TransferCompleted;
-
-        /// <remarks/>
         public event GetMarketingDocument_ReturnDSCompletedEventHandler GetMarketingDocument_ReturnDSCompleted;
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateMarketingDocument", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet CreateMarketingDocument(string strXml, string UserID, string DocType)
+        public System.Data.DataSet CreateMarketingDocument(string strXml, string UserID, string DocType, string Key, bool IsUpdate)
         {
             object[] results = this.Invoke("CreateMarketingDocument", new object[] {
                     strXml,
                     UserID,
-                    DocType});
+                    DocType,
+                    Key,
+                    IsUpdate});
             return ((System.Data.DataSet)(results[0]));
         }
 
         /// <remarks/>
-        public System.IAsyncResult BeginCreateMarketingDocument(string strXml, string UserID, string DocType, System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginCreateMarketingDocument(string strXml, string UserID, string DocType, string Key, bool IsUpdate, System.AsyncCallback callback, object asyncState)
         {
             return this.BeginInvoke("CreateMarketingDocument", new object[] {
                     strXml,
                     UserID,
-                    DocType}, callback, asyncState);
+                    DocType,
+                    Key,
+                    IsUpdate}, callback, asyncState);
         }
 
         /// <remarks/>
@@ -88,13 +87,13 @@ namespace SAP.WebServices
         }
 
         /// <remarks/>
-        public void CreateMarketingDocumentAsync(string strXml, string UserID, string DocType)
+        public void CreateMarketingDocumentAsync(string strXml, string UserID, string DocType, string Key, bool IsUpdate)
         {
-            this.CreateMarketingDocumentAsync(strXml, UserID, DocType, null);
+            this.CreateMarketingDocumentAsync(strXml, UserID, DocType, Key, IsUpdate, null);
         }
 
         /// <remarks/>
-        public void CreateMarketingDocumentAsync(string strXml, string UserID, string DocType, object userState)
+        public void CreateMarketingDocumentAsync(string strXml, string UserID, string DocType, string Key, bool IsUpdate, object userState)
         {
             if ((this.CreateMarketingDocumentOperationCompleted == null))
             {
@@ -103,7 +102,9 @@ namespace SAP.WebServices
             this.InvokeAsync("CreateMarketingDocument", new object[] {
                     strXml,
                     UserID,
-                    DocType}, this.CreateMarketingDocumentOperationCompleted, userState);
+                    DocType,
+                    Key,
+                    IsUpdate}, this.CreateMarketingDocumentOperationCompleted, userState);
         }
 
         private void OnCreateMarketingDocumentOperationCompleted(object arg)
@@ -167,61 +168,6 @@ namespace SAP.WebServices
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetMarketingDocumentCompleted(this, new GetMarketingDocumentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Insert_Promotion_Transfer", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string Insert_Promotion_Transfer(string ItemCode, string CardCode, int Qty)
-        {
-            object[] results = this.Invoke("Insert_Promotion_Transfer", new object[] {
-                    ItemCode,
-                    CardCode,
-                    Qty});
-            return ((string)(results[0]));
-        }
-
-        /// <remarks/>
-        public System.IAsyncResult BeginInsert_Promotion_Transfer(string ItemCode, string CardCode, int Qty, System.AsyncCallback callback, object asyncState)
-        {
-            return this.BeginInvoke("Insert_Promotion_Transfer", new object[] {
-                    ItemCode,
-                    CardCode,
-                    Qty}, callback, asyncState);
-        }
-
-        /// <remarks/>
-        public string EndInsert_Promotion_Transfer(System.IAsyncResult asyncResult)
-        {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((string)(results[0]));
-        }
-
-        /// <remarks/>
-        public void Insert_Promotion_TransferAsync(string ItemCode, string CardCode, int Qty)
-        {
-            this.Insert_Promotion_TransferAsync(ItemCode, CardCode, Qty, null);
-        }
-
-        /// <remarks/>
-        public void Insert_Promotion_TransferAsync(string ItemCode, string CardCode, int Qty, object userState)
-        {
-            if ((this.Insert_Promotion_TransferOperationCompleted == null))
-            {
-                this.Insert_Promotion_TransferOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsert_Promotion_TransferOperationCompleted);
-            }
-            this.InvokeAsync("Insert_Promotion_Transfer", new object[] {
-                    ItemCode,
-                    CardCode,
-                    Qty}, this.Insert_Promotion_TransferOperationCompleted, userState);
-        }
-
-        private void OnInsert_Promotion_TransferOperationCompleted(object arg)
-        {
-            if ((this.Insert_Promotion_TransferCompleted != null))
-            {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.Insert_Promotion_TransferCompleted(this, new Insert_Promotion_TransferCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -331,36 +277,6 @@ namespace SAP.WebServices
         private object[] results;
 
         internal GetMarketingDocumentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
-            base(exception, cancelled, userState)
-        {
-            this.results = results;
-        }
-
-        /// <remarks/>
-        public string Result
-        {
-            get
-            {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    public delegate void Insert_Promotion_TransferCompletedEventHandler(object sender, Insert_Promotion_TransferCompletedEventArgs e);
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class Insert_Promotion_TransferCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
-    {
-
-        private object[] results;
-
-        internal Insert_Promotion_TransferCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;

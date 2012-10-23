@@ -54,7 +54,7 @@
                         <div id="tabs-1">
                             
                             
-                            <asp:ListView ID="lvStage" runat="server" onitemcommand="lvStage_ItemCommand">
+                            <asp:ListView ID="lvStage" runat="server" onitemcommand="lvStage_ItemCommand" >
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
@@ -80,7 +80,7 @@
                                 <ItemTemplate>
                                     <tr>
                                          <td>
-                                            <asp:LinkButton ID="imgbEdit" runat="server" CommandName="View" Text="View" />
+                                            <asp:LinkButton ID="imgbEdit" runat="server" CommandName="View" Text="View" CommandArgument='<%#Eval("ClgCode")%>' />
                                         </td>
                                         <td>
                                             <asp:Label ID="ClgCode" runat="server"><%#Eval("ClgCode")%></asp:Label>
@@ -117,7 +117,7 @@
                                             </th>
                                         </tr>
                                         <tr>
-                                            <td colspan="8">
+                                            <td colspan="4">
                                                 <span>No Data</span>
                                             </td>
                                         </tr>

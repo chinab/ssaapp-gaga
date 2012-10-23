@@ -51,6 +51,10 @@ namespace SAP
                 dtContents.Columns.Add("OcrCode4");
                 dtContents.Columns.Add("OcrCode5");
 
+                CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentCulture;
+                //ci.DateTimeFormat.ShortDatePattern = "yyyy/MM/dd";
+                txtPostingDate.Text.ToString(ci);
+
                 this.lvContents.DataSource = dtContents;
                 this.lvContents.DataBind();
                 
@@ -88,7 +92,7 @@ namespace SAP
                 {
                     itemIndicator = new ListItem(row[1].ToString(), row[0].ToString());
                     ddlIndicator.Items.Add(itemIndicator);
-                }
+                } 
 
                 ClearScreen();
             }
@@ -290,9 +294,14 @@ namespace SAP
                 if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
                 //Update table header
                 DataRow dr = dtHeader.Rows[0];
-                dr["DocDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
-                dr["DocDueDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDueDate.Text));
-                dr["TaxDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDocumentDate.Text));
+
+                CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
+                //string ls = Convert.ToDateTime(txtDueDate.Text,ivC).ToString("dd/MM/yyyy");
+
+                dr["DocDate"] = Convert.ToDateTime(txtDueDate.Text, ivC).ToString("yyyyMMdd");//String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
+                dr["DocDueDate"] = Convert.ToDateTime(txtDueDate.Text, ivC).ToString("yyyyMMdd");//String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDueDate.Text));
+                dr["TaxDate"] = Convert.ToDateTime(txtDocumentDate.Text, ivC).ToString("yyyyMMdd");//String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDocumentDate.Text));
+
                 dr["Comments"] = txtRemarks.Text;
                 dr["JrnlMemo"] = txtJournalRemark.Text;
                 dr["CardCode"] = txtVendor.Text;

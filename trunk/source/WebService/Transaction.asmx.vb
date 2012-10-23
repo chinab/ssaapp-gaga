@@ -14,9 +14,8 @@ Public Class Transaction
     Dim lErrCode As Integer
     Dim sErrMsg As String
     Dim connect As New Connection()
-
     <WebMethod()> _
-    Public Function CreateMarketingDocument(ByVal strXml As String, UserID As String, DocType As String) As DataSet
+    Public Function CreateMarketingDocument(ByVal strXml As String, UserID As String, DocType As String, Key As String, IsUpdate As Boolean) As DataSet
         Dim b As New SAP_Functions
         Try
             Dim sStr As String = "Operation Completed Successfully!"
@@ -27,10 +26,14 @@ Public Class Transaction
 
                 Dim oDocment
                 Select Case DocType
-                    Case 30
+                    Case "30"
                         oDocment = DirectCast(oDocment, SAPbobsCOM.JournalEntries)
-                    Case 97
+                    Case "97"
                         oDocment = DirectCast(oDocment, SAPbobsCOM.SalesOpportunities)
+                    Case "191"
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.ServiceCalls)
+                    Case "33"
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.Contacts)
                     Case Else
                         oDocment = DirectCast(oDocment, SAPbobsCOM.Documents)
                 End Select
@@ -43,7 +46,16 @@ Public Class Transaction
                 End If
                 PublicVariable.oCompany.XMLAsString = True
                 oDocment = PublicVariable.oCompany.GetBusinessObjectFromXML(strXml, 0)
-                lErrCode = oDocment.Add()
+                If IsUpdate Then
+                    If oDocment.GetByKey(Key) Then
+                        lErrCode = oDocment.Update()
+                    Else
+                        Return b.ReturnMessage(-1, "Record not found!")
+                    End If
+                Else
+                    lErrCode = oDocment.Add()
+                End If
+
                 If lErrCode <> 0 Then
                     PublicVariable.oCompany.GetLastError(lErrCode, sErrMsg)
                     Return b.ReturnMessage(lErrCode, sErrMsg)
@@ -58,11 +70,6 @@ Public Class Transaction
     End Function
     <WebMethod()> _
     Public Function GetMarketingDocument(DocType As String, DocEntry As Integer, UserID As String) As String
-        'First: DocEntry=1
-        'Last: Set Docentry=0
-        'Next: current docentry+1, if current docentry is null, go last
-        'Prev: current docentry-1, if current docentry is null, go first
-        'DocType=22: Purchase Order
         Try
             Dim sStr As String = ""
             If PublicVariable.Simulate Then
@@ -71,13 +78,19 @@ Public Class Transaction
             Else
                 Dim oDocment
                 Select Case DocType
-                    Case 30
+                    Case "30"
                         oDocment = DirectCast(oDocment, SAPbobsCOM.JournalEntries)
-                    Case 97
+                    Case "97"
                         oDocment = DirectCast(oDocment, SAPbobsCOM.SalesOpportunities)
+                    Case "191"
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.ServiceCalls)
+                    Case "33"
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.Contacts)
                     Case Else
                         oDocment = DirectCast(oDocment, SAPbobsCOM.Documents)
                 End Select
+                '-----------------TEST--------------------
+                'oDocment = DirectCast(oDocment, SAPbobsCOM.Contacts)
 
                 If Connection.bConnect = False Then
                     connect.setDB(UserID)
@@ -85,36 +98,22 @@ Public Class Transaction
                         Return "Can't connect to SAP"
                     End If
                 End If
-                If DocEntry = 0 Then
-                    Dim b As New SAP_Functions
-                    DocEntry = b.GetMaxDocEntry(DocType, UserID)
-                End If
                 PublicVariable.oCompany.XMLAsString = True
                 PublicVariable.oCompany.XmlExportType = SAPbobsCOM.BoXmlExportTypes.xet_ValidNodesOnly
-                oDocment = PublicVariable.oCompany.GetBusinessObject(DocType)
-                If oDocment.GetByKey(DocEntry) Then
-                    'oDocment.Browser.Recordset
 
+                oDocment = PublicVariable.oCompany.GetBusinessObject(DocType)
+                '-----------------TEST--------------------
+                'oDocment = PublicVariable.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oContacts)
+                If oDocment.GetByKey(DocEntry) Then
                     oDocment.SaveXML(sStr)
                     Return sStr
                 Else
-                    Return ""
+                    Return "Error: docentry not found"
                 End If
             End If
         Catch ex As Exception
             Return ex.ToString
         End Try
-    End Function
-    <WebMethod()> _
-    Public Function Insert_Promotion_Transfer(ItemCode As String, CardCode As String, Qty As Integer) As String
-        'Try
-        '    Dim sStr As String = "Insert Into Promotion_Transfer select '"+
-
-
-        '    Return sStr
-        'Catch ex As Exception
-        '    Return ex.ToString
-        'End Try
     End Function
     <WebMethod()> _
     Public Function GetMarketingDocument_ReturnDS(DocType As String, DocEntry As Integer, UserID As String) As DataSet
@@ -132,7 +131,7 @@ Public Class Transaction
                 End If
                 Dim HeaderTableName As String = ""
                 Dim LineTableName1 As String = ""
-
+                Dim KeyName As String = "DocEntry"
                 Select Case DocType
                     Case "22"
                         HeaderTableName = "OPOR"
@@ -161,22 +160,26 @@ Public Class Transaction
                     Case "97" 'Sales opportunity
                         HeaderTableName = "OOPR"
                         LineTableName1 = "OPR1"
-
+                    Case "33" 'Sales opportunity
+                        HeaderTableName = "OCLG"
+                        LineTableName1 = "OCLG"
+                        KeyName = "ClgCode"
                 End Select
                 Dim ds As New DataSet("Document")
                 Dim dt1 As New DataTable
                 connect.setDB(UserID)
-                dt1 = connect.ObjectGetAll_Query_SAP("Select * from " + HeaderTableName + " where DocEntry=" + CStr(DocEntry)).Tables(0)
+                dt1 = connect.ObjectGetAll_Query_SAP("Select * from " + HeaderTableName + " where " + KeyName + "=" + CStr(DocEntry)).Tables(0)
                 dt1.TableName = HeaderTableName
-
-                Dim dt2 As New DataTable
-                connect.setDB(UserID)
-                dt2 = connect.ObjectGetAll_Query_SAP("Select * from " + LineTableName1 + " where DocEntry=" + CStr(DocEntry)).Tables(0)
-                dt2.TableName = LineTableName1
-
                 ds.Tables.Add(dt1.Copy)
-                ds.Tables.Add(dt2.Copy)
 
+                If HeaderTableName <> LineTableName1 Then
+                    Dim dt2 As New DataTable
+                    connect.setDB(UserID)
+                    dt2 = connect.ObjectGetAll_Query_SAP("Select * from " + LineTableName1 + " where DocEntry=" + CStr(DocEntry)).Tables(0)
+                    dt2.TableName = LineTableName1
+                    ds.Tables.Add(dt2.Copy)
+                End If
+               
                 Return ds
             End If
         Catch ex As Exception

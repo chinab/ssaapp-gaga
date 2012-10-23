@@ -58,14 +58,19 @@ Public Class Connection
         Try
             Dim sErrMsg As String = ""
             Dim connectOk As Integer = 0
-            If PublicVariable.oCompany.Connect() <> 0 Then
-                PublicVariable.oCompany.GetLastError(connectOk, sErrMsg)
-                bConnect = False
-                Return False
-            Else                
-                bConnect = True
+            If PublicVariable.oCompany.Connected = False Then
+                If PublicVariable.oCompany.Connect() <> 0 Then
+                    PublicVariable.oCompany.GetLastError(connectOk, sErrMsg)
+                    bConnect = False
+                    Return False
+                Else
+                    bConnect = True
+                    Return True
+                End If
+            Else
                 Return True
             End If
+            
         Catch ex As Exception
             'Dim file As System.IO.StreamWriter = New System.IO.StreamWriter("C:\\connectDB.txt", True)
             'file.WriteLine(ex)

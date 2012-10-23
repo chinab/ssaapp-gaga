@@ -432,4 +432,51 @@ Public Class MasterData
             Throw ex
         End Try
     End Function
+
+    <WebMethod()> _
+    Public Function GetActivityType(UserID As String) As DataSet
+        Try
+            Dim dt As New DataSet("OCLT")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP("select code,name from OCLT")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetActivitySubject(UserID As String, Type As Integer) As DataSet
+        Try
+            Dim dt As New DataSet("OCLS")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP("select code,name from OCLS where type=" + CStr(Type))
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    <WebMethod()> _
+    Public Function GetSAPUser(UserID As String) As DataSet
+        Try
+            Dim dt As New DataSet("OUSR")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP("select UserID,User_Code from OUSR")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 End Class

@@ -86,6 +86,16 @@ Public Class GetDefault
             Return 0
         End If
     End Function
+    <WebMethod()> _
+    Public Function LogOut(UserID As String) As Integer
+        Try
+            Dim connect As New Connection()
+            Connection.bConnect = False
+            PublicVariable.oCompany.Disconnect()
+        Catch ex As Exception
+
+        End Try
+    End Function
 
     <WebMethod()> _
     Public Function GetLoginInfo(UserID As String) As DataSet

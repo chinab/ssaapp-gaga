@@ -16,18 +16,16 @@ namespace SAP
         public static DataTable dtHeader;
         private GeneralFunctions GF;
         private string DocType = "33";
-        private String clgCode="";
-        void LoadData(int clgcode)
+        void LoadData()
         {
-            txtNo.Text = clgcode.ToString();
            ddlActivity.SelectedValue= dtHeader.Rows[0]["Action"].ToString();
            ddlType.SelectedValue= dtHeader.Rows[0]["CntctType"].ToString();
            txtSubject.Text= dtHeader.Rows[0]["CntctSbjct"].ToString();
            txtBP.Text= dtHeader.Rows[0]["CardCode"].ToString();
            txtBPName.Text = "";
            txtRemark.Text = dtHeader.Rows[0]["Notes"].ToString();
-           txtSubject.Text = dtHeader.Rows[0]["Details"].ToString(); 
-           txtDate.Text= dtHeader.Rows[0]["Recontact"].ToString();
+           txtSubject.Text = dtHeader.Rows[0]["Details"].ToString();
+           txtDate.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Parse(dtHeader.Rows[0]["Recontact"].ToString()));  
            txtFromTime.Text= dtHeader.Rows[0]["BeginTime"].ToString();
            txtToTime.Text= dtHeader.Rows[0]["ENDTime"].ToString();
            if (dtHeader.Rows[0]["Closed"].ToString() == "Y")
@@ -69,12 +67,12 @@ namespace SAP
                 ddlType.DataBind();
 
 
-                clgCode = Request.QueryString["clgCode"];
-                if (!String.IsNullOrEmpty(clgCode))
+                txtNo.Text = Request.QueryString["clgCode"];
+                if (!String.IsNullOrEmpty(txtNo.Text))
                 {
                     Transaction trx = new Transaction();
-                    dtHeader=trx.GetMarketingDocument_ReturnDS("33",Int32.Parse(clgCode),User.Identity.Name).Tables[0];
-                    LoadData(Int32.Parse(clgCode));
+                    dtHeader = trx.GetMarketingDocument_ReturnDS("33", Int32.Parse(txtNo.Text), User.Identity.Name).Tables[0];
+                    LoadData();
                 }
                 else
                 {
@@ -147,11 +145,11 @@ namespace SAP
         {
             txtSubject.Text = "";
             txtRemark.Text = "";
-            txtNo.Text = "";
-            clgCode = "";
+            txtNo.Text = "";         
             dtHeader.Clear();
             imgAdd.Visible = true;
             LoadDefault();
+            dtHeader.Rows.Add("", "", "", "", "", "", "", "20121022", "830", "20121022", "930", "N", User.Identity.Name);
         }
         public String _collectData()
         {
@@ -179,10 +177,10 @@ namespace SAP
                 DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "";
 
-                if (!String.IsNullOrEmpty(clgCode))
+                if (!String.IsNullOrEmpty(txtNo.Text))
                 {
                     RemoveColumn = "";
-                    dr["ClgCode"] = clgCode;
+                    dr["ClgCode"] = txtNo.Text;
                 }
                 else
                     RemoveColumn = "ClgCode";
@@ -206,7 +204,12 @@ namespace SAP
             }
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType);
+            DataSet ds = new DataSet();
+            if (!String.IsNullOrEmpty(txtNo.Text))
+                ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, txtNo.Text, true);
+            else
+                ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, "", false);
+
             if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];

@@ -40,6 +40,10 @@ namespace SAP
         }
 
         #region Properties
+        public string DateFormatString
+        {
+            get { return "MM/dd/yyyy"; }
+        }
         public string DecSep
         {
             get { return (ds.Tables[0].Rows[0]["DecSep"] == null ? "." : ds.Tables[0].Rows[0]["DecSep"].ToString()); }

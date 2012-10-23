@@ -45,7 +45,8 @@ namespace SAP
         {
             if (e.CommandName == "View")
             {
-                Response.Redirect("/TimeSheet/ABEO_TIMESHEET.aspx?clgCode=1");//+ ((Label)lvStage.FindControl("ClgCode")).Text);
+                LinkButton lb = (LinkButton)e.CommandSource;
+                Response.Redirect("/TimeSheet/ABEO_TIMESHEET.aspx?clgCode=" + lb.CommandArgument);
             }
         }
     }

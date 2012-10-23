@@ -10,46 +10,84 @@ using System.Collections;
 
 namespace SAP
 {
-    public partial class Activity : System.Web.UI.Page
+    public partial class ABEO_TIMESHEET : System.Web.UI.Page
     {
         public static DataTable dtContents;
         public static DataTable dtHeader;
         private GeneralFunctions GF;
         private string DocType = "33";
-
+        private String clgCode="";
+        void LoadData(int clgcode)
+        {
+            txtNo.Text = clgcode.ToString();
+           ddlActivity.SelectedValue= dtHeader.Rows[0]["Action"].ToString();
+           ddlType.SelectedValue= dtHeader.Rows[0]["CntctType"].ToString();
+           txtSubject.Text= dtHeader.Rows[0]["CntctSbjct"].ToString();
+           txtBP.Text= dtHeader.Rows[0]["CardCode"].ToString();
+           txtBPName.Text = "";
+           txtRemark.Text = dtHeader.Rows[0]["Notes"].ToString();
+           txtSubject.Text = dtHeader.Rows[0]["Details"].ToString(); 
+           txtDate.Text= dtHeader.Rows[0]["Recontact"].ToString();
+           txtFromTime.Text= dtHeader.Rows[0]["BeginTime"].ToString();
+           txtToTime.Text= dtHeader.Rows[0]["ENDTime"].ToString();
+           if (dtHeader.Rows[0]["Closed"].ToString() == "Y")
+           {
+               cbClosed.Checked = true;
+               imgAdd.Visible = false;
+           }
+           else
+               cbClosed.Checked = false;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                //-------------create table------------------
                 dtHeader = new DataTable();
+                dtHeader.Columns.Add("ClgCode");
                 dtHeader.Columns.Add("Action");
                 dtHeader.Columns.Add("CntctType");
                 dtHeader.Columns.Add("CntctSbjct");
                 dtHeader.Columns.Add("CardCode");
                 dtHeader.Columns.Add("Notes");
                 dtHeader.Columns.Add("Details");
-
                 dtHeader.Columns.Add("Recontact");
                 dtHeader.Columns.Add("BeginTime");
                 dtHeader.Columns.Add("endDate");
                 dtHeader.Columns.Add("ENDTime");
-
+                dtHeader.Columns.Add("Closed");
                 dtHeader.Columns.Add("U_UserID");
-                dtHeader.Rows.Add("", "", "", "", "","","20121022","830","20121022","930", User.Identity.Name);
 
+                
+                //------------------load activity--------------------
                 MasterData masterDataWS = new MasterData();
                 DataSet dsMaster = masterDataWS.GetActivityType(User.Identity.Name);
-                ListItem item = new ListItem();
 
-                foreach (DataRow row in dsMaster.Tables[0].Rows)
+                ddlType.DataSource = dsMaster.Tables[0];
+                ddlType.DataTextField = "name";
+                ddlType.DataValueField = "code";
+                ddlType.DataBind();
+
+
+                clgCode = Request.QueryString["clgCode"];
+                if (!String.IsNullOrEmpty(clgCode))
                 {
-                    item = new ListItem(row[1].ToString(), row[0].ToString());
-                    ddlType.Items.Add(item);
+                    Transaction trx = new Transaction();
+                    dtHeader=trx.GetMarketingDocument_ReturnDS("33",Int32.Parse(clgCode),User.Identity.Name).Tables[0];
+                    LoadData(Int32.Parse(clgCode));
                 }
-                            
+                else
+                {
+                    LoadDefault();
+                    dtHeader.Rows.Add("","", "", "", "", "", "", "20121022", "830", "20121022", "930", "N", User.Identity.Name);
+                }
 
-                LoadDefault();
-
+                dsMaster = masterDataWS.GetActivitySubject(User.Identity.Name, Int32.Parse(ddlType.SelectedValue.ToString()));
+                ddlSubject.DataSource = dsMaster.Tables[0];
+                ddlSubject.DataTextField = "name";
+                ddlSubject.DataValueField = "code";
+                ddlSubject.DataBind();
+                
             }
             
         }
@@ -107,9 +145,13 @@ namespace SAP
 
         void ClearScreen()
         {
-            LoadDefault();
             txtSubject.Text = "";
             txtRemark.Text = "";
+            txtNo.Text = "";
+            clgCode = "";
+            dtHeader.Clear();
+            imgAdd.Visible = true;
+            LoadDefault();
         }
         public String _collectData()
         {
@@ -132,8 +174,19 @@ namespace SAP
                 dr["endDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text));
                 dr["ENDTime"] = txtToTime.Text;
 
+                if (cbClosed.Checked == true)
+                { dr["Closed"] = "Y"; }
                 DocumentXML objInfo = new DocumentXML();
-                String RemoveColumn = "No";
+                String RemoveColumn = "";
+
+                if (!String.IsNullOrEmpty(clgCode))
+                {
+                    RemoveColumn = "";
+                    dr["ClgCode"] = clgCode;
+                }
+                else
+                    RemoveColumn = "ClgCode";
+
                 return objInfo.ToXMLStringFromDS(DocType, dtHeader, dtContents, RemoveColumn);
             }
             catch (Exception)
@@ -144,7 +197,13 @@ namespace SAP
 
         protected void imgAdd_Click(object sender, ImageClickEventArgs e)
         {
-            String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
+            if (txtRemark.Text == "") 
+            {
+                Session["errorMessage"] = "Detail information can't be blank";
+                Session["requestXML"] = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('Detail information can not be blank','');", true);
+            }
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType);
@@ -171,12 +230,17 @@ namespace SAP
         {
             MasterData masterDataWS = new MasterData();
             ListItem item = new ListItem();
-            DataSet dsMaster = masterDataWS.GetActivitySubject(User.Identity.Name, Int32.Parse(ddlType.SelectedValue.ToString()));
+            DataSet dsMaster  = masterDataWS.GetActivitySubject(User.Identity.Name,Int32.Parse(ddlType.SelectedValue.ToString()));
             foreach (DataRow row in dsMaster.Tables[0].Rows)
             {
                 item = new ListItem(row[1].ToString(), row[0].ToString());
                 ddlSubject.Items.Add(item);
             }
+        }
+
+        protected void btnAddNew_Click(object sender, ImageClickEventArgs e)
+        {
+            ClearScreen();
         }
 
     }

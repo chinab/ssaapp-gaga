@@ -1473,18 +1473,20 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
 
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetActivitySubject", RequestNamespace = "http://electra-ai.com/", ResponseNamespace = "http://electra-ai.com/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public System.Data.DataSet GetActivitySubject(string UserID)
+    public System.Data.DataSet GetActivitySubject(string UserID, int Type)
     {
         object[] results = this.Invoke("GetActivitySubject", new object[] {
-                    UserID});
+                    UserID,
+                    Type});
         return ((System.Data.DataSet)(results[0]));
     }
 
     /// <remarks/>
-    public System.IAsyncResult BeginGetActivitySubject(string UserID, System.AsyncCallback callback, object asyncState)
+    public System.IAsyncResult BeginGetActivitySubject(string UserID, int Type, System.AsyncCallback callback, object asyncState)
     {
         return this.BeginInvoke("GetActivitySubject", new object[] {
-                    UserID}, callback, asyncState);
+                    UserID,
+                    Type}, callback, asyncState);
     }
 
     /// <remarks/>
@@ -1495,20 +1497,21 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
 
     /// <remarks/>
-    public void GetActivitySubjectAsync(string UserID)
+    public void GetActivitySubjectAsync(string UserID, int Type)
     {
-        this.GetActivitySubjectAsync(UserID, null);
+        this.GetActivitySubjectAsync(UserID, Type, null);
     }
 
     /// <remarks/>
-    public void GetActivitySubjectAsync(string UserID, object userState)
+    public void GetActivitySubjectAsync(string UserID, int Type, object userState)
     {
         if ((this.GetActivitySubjectOperationCompleted == null))
         {
             this.GetActivitySubjectOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetActivitySubjectOperationCompleted);
         }
         this.InvokeAsync("GetActivitySubject", new object[] {
-                    UserID}, this.GetActivitySubjectOperationCompleted, userState);
+                    UserID,
+                    Type}, this.GetActivitySubjectOperationCompleted, userState);
     }
 
     private void OnGetActivitySubjectOperationCompleted(object arg)

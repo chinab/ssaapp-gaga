@@ -40,6 +40,8 @@ namespace SAP
 
         private System.Threading.SendOrPostCallback GetConnectionOperationCompleted;
 
+        private System.Threading.SendOrPostCallback LogOutOperationCompleted;
+
         private System.Threading.SendOrPostCallback GetLoginInfoOperationCompleted;
 
         private System.Threading.SendOrPostCallback GetOpenDocumentOperationCompleted;
@@ -70,6 +72,9 @@ namespace SAP
 
         /// <remarks/>
         public event GetConnectionCompletedEventHandler GetConnectionCompleted;
+
+        /// <remarks/>
+        public event LogOutCompletedEventHandler LogOutCompleted;
 
         /// <remarks/>
         public event GetLoginInfoCompletedEventHandler GetLoginInfoCompleted;
@@ -355,6 +360,55 @@ namespace SAP
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetConnectionCompleted(this, new GetConnectionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LogOut", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int LogOut(string UserID)
+        {
+            object[] results = this.Invoke("LogOut", new object[] {
+                    UserID});
+            return ((int)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginLogOut(string UserID, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("LogOut", new object[] {
+                    UserID}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public int EndLogOut(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((int)(results[0]));
+        }
+
+        /// <remarks/>
+        public void LogOutAsync(string UserID)
+        {
+            this.LogOutAsync(UserID, null);
+        }
+
+        /// <remarks/>
+        public void LogOutAsync(string UserID, object userState)
+        {
+            if ((this.LogOutOperationCompleted == null))
+            {
+                this.LogOutOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLogOutOperationCompleted);
+            }
+            this.InvokeAsync("LogOut", new object[] {
+                    UserID}, this.LogOutOperationCompleted, userState);
+        }
+
+        private void OnLogOutOperationCompleted(object arg)
+        {
+            if ((this.LogOutCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LogOutCompleted(this, new LogOutCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -652,6 +706,36 @@ namespace SAP
         private object[] results;
 
         internal GetConnectionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public int Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    public delegate void LogOutCompletedEventHandler(object sender, LogOutCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LogOutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal LogOutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;

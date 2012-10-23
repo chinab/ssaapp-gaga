@@ -81,7 +81,7 @@
                 <%--<asp:LoginName ID="LoginName1" runat="server" />--%>
                 <a href="/Homepage.aspx">Home</a>
                 <%--<a href="/Admin/UserProfiles.aspx">User Management</a>--%>
-                <asp:LoginStatus ID="LoginStatus1" runat="server" />
+                <asp:LoginStatus ID="LoginStatus1" runat="server" OnLoggedOut="LoginStatus1_LoggedOut"/>
             </div>
         </div>
         <ul id="theMenu">
@@ -256,6 +256,19 @@
 					<li><a href="#">Customer Equipment Card</a></li>
 					<li><a href="#">Service Contract</a></li>
 					<li><a href="#">Solutions Knowledge Base</a></li>
+				</ul>
+			</li>
+
+            <li>
+				<h3 class="head">
+                    <a href="#">
+						<img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;TimeSheet
+					</a>
+				</h3>
+				<ul>
+					<li><a href="/TimeSheet/ABEO_TIMESHEET.aspx">TimeSheet</a></li>
+					<li><a href="/TimeSheet/MyOpenTimeSheet.aspx">My Open TimeSheet</a></li>
+					<li><a href="#">TimeSheet Reports</a></li>					
 				</ul>
 			</li>
 		</ul>

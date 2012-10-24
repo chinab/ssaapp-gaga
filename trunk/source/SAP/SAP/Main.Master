@@ -268,7 +268,7 @@
 				<ul>
 					<li><a href="/TimeSheet/ABEO_TIMESHEET.aspx">TimeSheet</a></li>
 					<li><a href="/TimeSheet/MyOpenTimeSheet.aspx">My Open TimeSheet</a></li>
-					<li><a href="#">TimeSheet Reports</a></li>					
+					<li><a href="/TimeSheet/AllTimeSheet.aspx">TimeSheet Reports</a></li>					
 				</ul>
 			</li>
 		</ul>

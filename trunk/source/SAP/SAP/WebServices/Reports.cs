@@ -30,8 +30,11 @@ public partial class Reports : System.Web.Services.Protocols.SoapHttpClientProto
     
     private System.Threading.SendOrPostCallback TimeSheet_OpenListOperationCompleted;
     
+    private System.Threading.SendOrPostCallback TimeSheet_AllOperationCompleted;
+    
     /// <remarks/>
-    public Reports() {
+    public Reports()
+    {
         String urlSetting = System.Configuration.ConfigurationManager.AppSettings["ReportsWSURL"];
         if (String.IsNullOrEmpty(urlSetting))
             this.Url = "http://demo1.w4vn.com/GetDefault.asmx";
@@ -41,6 +44,9 @@ public partial class Reports : System.Web.Services.Protocols.SoapHttpClientProto
     
     /// <remarks/>
     public event TimeSheet_OpenListCompletedEventHandler TimeSheet_OpenListCompleted;
+    
+    /// <remarks/>
+    public event TimeSheet_AllCompletedEventHandler TimeSheet_AllCompleted;
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/TimeSheet_OpenList", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -90,6 +96,53 @@ public partial class Reports : System.Web.Services.Protocols.SoapHttpClientProto
     }
     
     /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/TimeSheet_All", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet TimeSheet_All(string UserID, System.DateTime FromDate, System.DateTime ToDate) {
+        object[] results = this.Invoke("TimeSheet_All", new object[] {
+                    UserID,
+                    FromDate,
+                    ToDate});
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public System.IAsyncResult BeginTimeSheet_All(string UserID, System.DateTime FromDate, System.DateTime ToDate, System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("TimeSheet_All", new object[] {
+                    UserID,
+                    FromDate,
+                    ToDate}, callback, asyncState);
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet EndTimeSheet_All(System.IAsyncResult asyncResult) {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public void TimeSheet_AllAsync(string UserID, System.DateTime FromDate, System.DateTime ToDate) {
+        this.TimeSheet_AllAsync(UserID, FromDate, ToDate, null);
+    }
+    
+    /// <remarks/>
+    public void TimeSheet_AllAsync(string UserID, System.DateTime FromDate, System.DateTime ToDate, object userState) {
+        if ((this.TimeSheet_AllOperationCompleted == null)) {
+            this.TimeSheet_AllOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTimeSheet_AllOperationCompleted);
+        }
+        this.InvokeAsync("TimeSheet_All", new object[] {
+                    UserID,
+                    FromDate,
+                    ToDate}, this.TimeSheet_AllOperationCompleted, userState);
+    }
+    
+    private void OnTimeSheet_AllOperationCompleted(object arg) {
+        if ((this.TimeSheet_AllCompleted != null)) {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.TimeSheet_AllCompleted(this, new TimeSheet_AllCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+    
+    /// <remarks/>
     public new void CancelAsync(object userState) {
         base.CancelAsync(userState);
     }
@@ -108,6 +161,32 @@ public partial class TimeSheet_OpenListCompletedEventArgs : System.ComponentMode
     private object[] results;
     
     internal TimeSheet_OpenListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState) {
+        this.results = results;
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet Result {
+        get {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void TimeSheet_AllCompletedEventHandler(object sender, TimeSheet_AllCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class TimeSheet_AllCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    
+    private object[] results;
+    
+    internal TimeSheet_AllCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
             base(exception, cancelled, userState) {
         this.results = results;
     }

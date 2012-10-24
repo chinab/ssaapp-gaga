@@ -181,6 +181,43 @@ namespace SAP
             }
             return str;
         }
+        public string BuildKeepColumnStr(DataTable dt)
+        {
+            string str = "";
+            foreach (DataColumn column in dt.Columns)
+            {
+                str = str + column.ColumnName + ";";
+            }
+            return str;
+        }
+        public DataTable ConvertDate_RemoveCols(DataTable dt, string KeepColumns)
+        {
+            DataTable dt1 = dt;
+            Array arr = KeepColumns.Split(';');
+            foreach (var column in dt1.Columns.Cast<DataColumn>().ToArray())
+            {
+                if (Array.IndexOf(arr, column.ColumnName) < 0)
+                {//-------neu ko nam trong danh sach column giu lai, thi delete-----------------
+                    dt1.Columns.Remove(column);
+                }
+                else
+                {
+                    if (column.DataType == typeof(DateTime))
+                    {
+                        //--------------neu kieu du lieu la ngay, thi convert qua string------------
+                        foreach (DataRow row in dt1.Rows)
+                        {
+                            DateTime d = DateTime.Parse(row[column].ToString());
+                            dt1.Columns.Remove(column.ColumnName);
+                            dt1.Columns.Add(column.ColumnName, typeof(string));
+                            row[column.ColumnName] = String.Format("{0:yyyyMMdd}", d);
+                        }
+                    }
+                }
+            }
+
+            return dt1;
+        }
 
         #region Transfer from Obj to Double
         public Double Object2Double(Object Obj)

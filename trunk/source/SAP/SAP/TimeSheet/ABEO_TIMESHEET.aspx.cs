@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using SAP.WebServices;
 using System.Collections;
+using System.Globalization;
 
 namespace SAP
 {
@@ -14,8 +15,9 @@ namespace SAP
     {
         public static DataTable dtContents;
         public static DataTable dtHeader;
-        private GeneralFunctions GF;
+        private GeneralFunctions GF=new GeneralFunctions();
         private string DocType = "33";
+        private string KeepColums = "";
         void LoadData()
         {
            ddlActivity.SelectedValue= dtHeader.Rows[0]["Action"].ToString();
@@ -25,7 +27,9 @@ namespace SAP
            txtBPName.Text = "";
            txtRemark.Text = dtHeader.Rows[0]["Notes"].ToString();
            txtSubject.Text = dtHeader.Rows[0]["Details"].ToString();
-           txtDate.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Parse(dtHeader.Rows[0]["Recontact"].ToString()));  
+           DateTime d=DateTime.ParseExact(dtHeader.Rows[0]["Recontact"].ToString(), "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+           txtDate.Text = String.Format("{0:MM/dd/yyyy}", d);
+           
            txtFromTime.Text= dtHeader.Rows[0]["BeginTime"].ToString();
            txtToTime.Text= dtHeader.Rows[0]["ENDTime"].ToString();
            if (dtHeader.Rows[0]["Closed"].ToString() == "Y")
@@ -40,23 +44,8 @@ namespace SAP
         {
             if (!IsPostBack)
             {
-                //-------------create table------------------
-                dtHeader = new DataTable();
-                dtHeader.Columns.Add("ClgCode");
-                dtHeader.Columns.Add("Action");
-                dtHeader.Columns.Add("CntctType");
-                dtHeader.Columns.Add("CntctSbjct");
-                dtHeader.Columns.Add("CardCode");
-                dtHeader.Columns.Add("Notes");
-                dtHeader.Columns.Add("Details");
-                dtHeader.Columns.Add("Recontact");
-                dtHeader.Columns.Add("BeginTime");
-                dtHeader.Columns.Add("endDate");
-                dtHeader.Columns.Add("ENDTime");
-                dtHeader.Columns.Add("Closed");
-                dtHeader.Columns.Add("U_UserID");
+                ClearScreen();
 
-                
                 //------------------load activity--------------------
                 MasterData masterDataWS = new MasterData();
                 DataSet dsMaster = masterDataWS.GetActivityType(User.Identity.Name);
@@ -66,18 +55,18 @@ namespace SAP
                 ddlType.DataValueField = "code";
                 ddlType.DataBind();
 
-
                 txtNo.Text = Request.QueryString["clgCode"];
                 if (!String.IsNullOrEmpty(txtNo.Text))
                 {
                     Transaction trx = new Transaction();
                     dtHeader = trx.GetMarketingDocument_ReturnDS("33", Int32.Parse(txtNo.Text), User.Identity.Name).Tables[0];
+                    dtHeader = GF.ConvertDate_RemoveCols(dtHeader, KeepColums);
                     LoadData();
                 }
                 else
                 {
                     LoadDefault();
-                    dtHeader.Rows.Add("","", "", "", "", "", "", "20121022", "830", "20121022", "930", "N", User.Identity.Name);
+                    //dtHeader.Rows.Add("","", "", "", "", "", "", "20121022", "830", "20121022", "930", "N", User.Identity.Name);
                 }
 
                 dsMaster = masterDataWS.GetActivitySubject(User.Identity.Name, Int32.Parse(ddlType.SelectedValue.ToString()));
@@ -143,12 +132,30 @@ namespace SAP
 
         void ClearScreen()
         {
+            //-------------create table------------------
+
+            dtHeader = new DataTable();
+            dtHeader.Columns.Add("ClgCode");
+            dtHeader.Columns.Add("Action");
+            dtHeader.Columns.Add("CntctType");
+            dtHeader.Columns.Add("CntctSbjct");
+            dtHeader.Columns.Add("CardCode");
+            dtHeader.Columns.Add("Notes");
+            dtHeader.Columns.Add("Details");
+            dtHeader.Columns.Add("Recontact");
+            dtHeader.Columns.Add("BeginTime");
+            dtHeader.Columns.Add("endDate");
+            dtHeader.Columns.Add("ENDTime");
+            dtHeader.Columns.Add("Closed");
+            dtHeader.Columns.Add("U_UserID");
+
+            KeepColums = GF.BuildKeepColumnStr(dtHeader);
+
             txtSubject.Text = "";
             txtRemark.Text = "";
             txtNo.Text = "";         
-            dtHeader.Clear();
             imgAdd.Visible = true;
-            LoadDefault();
+
             dtHeader.Rows.Add("", "", "", "", "", "", "", "20121022", "830", "20121022", "930", "N", User.Identity.Name);
         }
         public String _collectData()
@@ -177,13 +184,7 @@ namespace SAP
                 DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "";
 
-                if (!String.IsNullOrEmpty(txtNo.Text))
-                {
-                    RemoveColumn = "";
-                    dr["ClgCode"] = txtNo.Text;
-                }
-                else
-                    RemoveColumn = "ClgCode";
+                RemoveColumn = "ClgCode";
 
                 return objInfo.ToXMLStringFromDS(DocType, dtHeader, dtContents, RemoveColumn);
             }
@@ -246,5 +247,6 @@ namespace SAP
             ClearScreen();
         }
 
+       
     }
 }

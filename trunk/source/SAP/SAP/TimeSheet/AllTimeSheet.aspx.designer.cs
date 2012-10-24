@@ -10,7 +10,7 @@
 namespace SAP {
     
     
-    public partial class MyOpenTimeSheet {
+    public partial class AllTimeSheet {
         
         /// <summary>
         /// SalesOpportunityUpdatePanel control.
@@ -38,6 +38,15 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtToDate;
+        
+        /// <summary>
+        /// ckViewAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ckViewAll;
         
         /// <summary>
         /// btnView control.

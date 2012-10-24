@@ -7,10 +7,10 @@ using System.Web.UI.WebControls;
 using System.Data;
 using SAP.WebServices;
 using System.Collections;
-
+using System.Globalization;
 namespace SAP
 {
-    public partial class MyOpenTimeSheet : System.Web.UI.Page
+    public partial class AllTimeSheet : System.Web.UI.Page
     {
         DataSet ds = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
@@ -26,7 +26,8 @@ namespace SAP
         void Binding()
         {
             Reports rpt = new Reports();
-            ds = rpt.TimeSheet_OpenList(User.Identity.Name, DateTime.Parse(txtFromDate.Text).Date, DateTime.Parse(txtToDate.Text).Date);
+            CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
+            ds = rpt.TimeSheet_All(User.Identity.Name, Convert.ToDateTime(txtFromDate.Text, ivC), Convert.ToDateTime(txtToDate.Text, ivC));
 
             DataView dv = new DataView(ds.Tables[0]);
             DataView dv1 = new DataView(ds.Tables[0]);

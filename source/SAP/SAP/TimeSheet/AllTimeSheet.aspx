@@ -1,5 +1,5 @@
-﻿<%@ Page Title="My Open TimeSheet" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
-    CodeBehind="MyOpenTimeSheet.aspx.cs" Inherits="SAP.MyOpenTimeSheet" %>
+﻿<%@ Page Title="All TimeSheet" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
+    CodeBehind="AllTimeSheet.aspx.cs" Inherits="SAP.AllTimeSheet" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type="text/javascript">
@@ -9,7 +9,7 @@
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
                 <div id="title-form" style="border-bottom: 2px solid black;">
-                    <h2>My Open TimeSheet</h2>
+                    <h2>All TimeSheet</h2>
                 </div>
                 <div id="header-form">
                     <div style="width: 706px">
@@ -33,7 +33,8 @@
                             
                             <tr>
                                 <td class="detail_table_td_100" style="width: 195px">
-                                    &nbsp;</td>
+                                    <asp:CheckBox ID="ckViewAll" runat="server" Text="View All" />
+                                </td>
                                 <td>
                                     <asp:Button ID="btnView" runat="server" 
                                         Text="View" onclick="btnView_Click" Width="65px" />
@@ -71,6 +72,9 @@
                                             <th >
                                                 <span>Recontact</span>
                                             </th>
+                                            <th >
+                                                <span>User</span>
+                                            </th>
                                         </tr>
                                         <tr ID="itemPlaceholder" runat="server">
                                         </tr>
@@ -94,7 +98,9 @@
                                         <td>
                                             <asp:Label ID="Recontact" runat="server"><%#Eval("Recontact")%></asp:Label>
                                         </td>
-                                                                  
+                                         <td>
+                                            <asp:Label ID="U_UserID" runat="server"><%#Eval("U_UserID")%></asp:Label>
+                                        </td>                         
                                     </tr>
                                 </ItemTemplate>
                                 <EmptyDataTemplate>
@@ -112,9 +118,12 @@
                                             <th >
                                                 <span>Recontact</span>
                                             </th>
+                                            <th >
+                                                <span>User</span>
+                                            </th>
                                         </tr>
                                         <tr>
-                                            <td colspan="4">
+                                            <td colspan="5">
                                                 <span>No Data</span>
                                             </td>
                                         </tr>
@@ -152,6 +161,9 @@
                                             <th >
                                                 <span>Recontact</span>
                                             </th>
+                                            <th >
+                                                <span>User</span>
+                                            </th>
                                         </tr>
                                         <tr ID="itemPlaceholder" runat="server">
                                         </tr>
@@ -175,7 +187,9 @@
                                         <td>
                                             <asp:Label ID="Recontact" runat="server"><%#Eval("Recontact")%></asp:Label>
                                         </td>
-                                                                  
+                                         <td>
+                                            <asp:Label ID="U_UserID" runat="server"><%#Eval("U_UserID")%></asp:Label>
+                                        </td>                     
                                     </tr>
                                 </ItemTemplate>
                                 <EmptyDataTemplate>
@@ -193,9 +207,12 @@
                                             <th >
                                                 <span>Recontact</span>
                                             </th>
+                                            <th >
+                                                <span>User</span>
+                                            </th>
                                         </tr>
                                         <tr>
-                                            <td colspan="4">
+                                            <td colspan="5">
                                                 <span>No Data</span>
                                             </td>
                                         </tr>

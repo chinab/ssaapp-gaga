@@ -7,12 +7,14 @@ using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Web.Profile;
 using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace SAP.Admin
 {
     public partial class UserProfiles : System.Web.UI.Page
     {
-        public static DataTable dtUserProfile;
+        public static DataTable dtUserRoles;
         public static DataTable dtUserDefault;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -27,6 +29,7 @@ namespace SAP.Admin
                     loadProfile(name);
                     this.btnSaveProfiles.Visible = true;
                     this.btnAddProfiles.Visible = false;
+                    this.txtUserId.ReadOnly = true;
                 }
                 else if (String.IsNullOrEmpty(action))
                 {
@@ -69,12 +72,7 @@ namespace SAP.Admin
             
 
             dtUserDefault = new DataTable();
-            dtUserDefault.Columns.Add("DefaultCode");
-            dtUserDefault.Columns.Add("DefaultValue");
-            dtUserDefault.Columns.Add("DefaultByQuery");
-            dtUserDefault.Rows.Add("1", "Admin", "Administrators");
-            dtUserDefault.Rows.Add("2", "Admin", "Administrators");
-            dtUserDefault.Rows.Add("3", "Admin", "Administrators");
+            dtUserDefault = getUserDefaultValue(userName);
             listUserDefault.DataSource = dtUserDefault;
             listUserDefault.DataBind();
 
@@ -82,12 +80,12 @@ namespace SAP.Admin
 
             //RoleList.DataSource = Roles.GetRolesForUser(User.Identity.Name);
             //RoleList.DataBind();
-            dtUserProfile = new DataTable();
-            dtUserProfile.Columns.Add("Select");
-            dtUserProfile.Columns.Add("RoleName");
-            dtUserProfile.Columns.Add("RoleDescription");
+            dtUserRoles = new DataTable();
+            dtUserRoles.Columns.Add("Select");
+            dtUserRoles.Columns.Add("RoleName");
+            dtUserRoles.Columns.Add("RoleDescription");
             String[] roles = Roles.GetAllRoles();
-            String[] rolesByUser = Roles.GetRolesForUser(User.Identity.Name);
+            String[] rolesByUser = Roles.GetRolesForUser(userName);
 
             foreach (String role in roles)
             {
@@ -98,15 +96,15 @@ namespace SAP.Admin
                     if (role == userRole)
                         roleSelect = true;
                 }
-                dtUserProfile.Rows.Add(roleSelect, role, roleDescription);
+                dtUserRoles.Rows.Add(roleSelect, role, roleDescription);
             }
 
-            listUserRoles.DataSource = dtUserProfile;
+            listUserRoles.DataSource = dtUserRoles;
             listUserRoles.DataBind();
             for (int i = 0; i < listUserRoles.Items.Count; i++)
             {
                 CheckBox chk = listUserRoles.Items[i].FindControl("chkRoleSelected") as CheckBox;
-                chk.Checked = Boolean.Parse(dtUserProfile.Rows[i]["Select"].ToString());
+                chk.Checked = Boolean.Parse(dtUserRoles.Rows[i]["Select"].ToString());
             }
 
         }
@@ -156,20 +154,42 @@ namespace SAP.Admin
             {
                 if (txtPassword.Text.Equals(txtPasswordConfirmation.Text))
                 {
-                    MembershipUser user = Membership.GetUser(this.txtUserId.Text);
-                    if(!"NoChange".Equals(txtPassword.Text))
-                        user.ChangePassword(user.ResetPassword(), txtPassword.Text);
-                    //user.ChangePassword(
-                    var profile = HttpContext.Current.Profile;
-                    profile.SetPropertyValue("Email", txtEmail.Text);
-                    profile.SetPropertyValue("Phone", txtPhone.Text);
-                    profile.SetPropertyValue("Ref1", txtRef1.Text);
-                    profile.SetPropertyValue("Ref2", txtRef2.Text);
-                    profile.SetPropertyValue("Ref3", txtRef3.Text);
-                    profile.SetPropertyValue("Ref4", txtRef4.Text);
-                    profile.Save();
-                    Membership.UpdateUser(user);
-                    message = "Your information has been updated !!!";
+                    try
+                    {
+                        MembershipUser user = Membership.GetUser(this.txtUserId.Text);
+                        if (!"NoChange".Equals(txtPassword.Text))
+                            user.ChangePassword(user.ResetPassword(), txtPassword.Text);
+                        //user.ChangePassword(
+                        var profile = HttpContext.Current.Profile;
+                        profile.SetPropertyValue("Email", txtEmail.Text);
+                        profile.SetPropertyValue("Phone", txtPhone.Text);
+                        profile.SetPropertyValue("Ref1", txtRef1.Text);
+                        profile.SetPropertyValue("Ref2", txtRef2.Text);
+                        profile.SetPropertyValue("Ref3", txtRef3.Text);
+                        profile.SetPropertyValue("Ref4", txtRef4.Text);
+                        profile.Save();
+                        Membership.UpdateUser(user);
+
+                        for (int i = 0; i < listUserRoles.Items.Count; i++)
+                        {
+                            CheckBox chk = listUserRoles.Items[i].FindControl("chkRoleSelected") as CheckBox;
+                            Label lbl = listUserRoles.Items[i].FindControl("LabelRoleName") as Label;
+                            if (chk.Checked == true)
+                            {
+                                String roleName = lbl.Text;
+                                if (!Roles.IsUserInRole(this.txtUserId.Text, roleName))
+                                    Roles.AddUserToRole(this.txtUserId.Text, roleName);
+
+                            }
+
+                        }
+
+                        message = "Your information has been updated !!!";
+                    }
+                    catch (ArgumentException) 
+                    {
+                        message = "Your password is invalid !!!";
+                    }
                 }
                 else
                 {
@@ -183,6 +203,18 @@ namespace SAP.Admin
             }
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors", "Main.setMasterMessage('" + message + "','');", true);
 
+        }
+        protected DataTable getUserDefaultValue(String UserName) 
+        {
+            DataTable results = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ToString()))
+            {
+                SqlCommand command = new SqlCommand("select * from Users_Default where UserId= '" + UserName + "'", conn);  
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                conn.Open();
+                adapter.Fill(results);
+            }
+            return results;
         }
     }
 }

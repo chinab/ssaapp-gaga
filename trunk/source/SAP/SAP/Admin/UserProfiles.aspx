@@ -159,7 +159,7 @@
                             <asp:Label runat="server" ID="LabelRoleName" Text='<%#Eval("DefaultValue")%>'></asp:Label>
                         </td>
                         <td>
-                            <asp:Label runat="server" ID="LabelRoleDescription" Text='<%#Eval("DefaultByQuery")%>'></asp:Label>
+                            <asp:Label runat="server" ID="LabelRoleDescription" Text='<%#Eval("DefaultType")%>'></asp:Label>
                         </td>
                     </tr>
                 </ItemTemplate>

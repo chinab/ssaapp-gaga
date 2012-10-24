@@ -48,6 +48,7 @@ Public Class Transaction
                 oDocment = PublicVariable.oCompany.GetBusinessObjectFromXML(strXml, 0)
                 If IsUpdate Then
                     If oDocment.GetByKey(Key) Then
+                        oDocment.Browser.ReadXML(strXml, 0)
                         lErrCode = oDocment.Update()
                     Else
                         Return b.ReturnMessage(-1, "Record not found!")

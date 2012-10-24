@@ -15,11 +15,23 @@ Public Class Reports
         Try
             Dim connect As New Connection()
             connect.setDB(UserID)
-            Dim str As String = "select * from OCLG where U_UserID ='" + UserID + "' and CntctDate between '" + FromDate.ToString + "' and '" + ToDate.ToString + "'"
-            Return connect.ObjectGetAll_Query_SAP(Str)
+            Dim str As String
+            str = "select * from OCLG where U_UserID ='" + UserID + "' and CntctDate between '" + FromDate.ToString + "' and '" + ToDate.ToString + "'"
+            Return connect.ObjectGetAll_Query_SAP(str)
         Catch ex As Exception
             Return Nothing
         End Try
     End Function
-
+    <WebMethod()> _
+    Public Function TimeSheet_All(UserID As String, FromDate As Date, ToDate As Date) As DataSet
+        Try
+            Dim connect As New Connection()
+            connect.setDB(UserID)
+            Dim str As String
+            str = "select * from OCLG where CntctDate between '" + FromDate.ToString + "' and '" + ToDate.ToString + "'"
+            Return connect.ObjectGetAll_Query_SAP(str)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
 End Class

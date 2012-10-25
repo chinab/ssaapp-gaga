@@ -34,6 +34,10 @@ Public Class Transaction
                         oDocment = DirectCast(oDocment, SAPbobsCOM.ServiceCalls)
                     Case "33"
                         oDocment = DirectCast(oDocment, SAPbobsCOM.Contacts)
+                    Case "221"
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.Attachments2)
+                    Case "2"
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.BusinessPartners)
                     Case Else
                         oDocment = DirectCast(oDocment, SAPbobsCOM.Documents)
                 End Select
@@ -87,8 +91,13 @@ Public Class Transaction
                         oDocment = DirectCast(oDocment, SAPbobsCOM.ServiceCalls)
                     Case "33"
                         oDocment = DirectCast(oDocment, SAPbobsCOM.Contacts)
+                    Case "221"
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.Attachments2)
+                    Case "2"
+                        oDocment = DirectCast(oDocment, SAPbobsCOM.BusinessPartners)
                     Case Else
                         oDocment = DirectCast(oDocment, SAPbobsCOM.Documents)
+
                 End Select
                 '-----------------TEST--------------------
                 'oDocment = DirectCast(oDocment, SAPbobsCOM.Contacts)
@@ -125,11 +134,7 @@ Public Class Transaction
             Else
                 Dim connect As New Connection()
 
-                If DocEntry = 0 Then
-                    Dim b As New SAP_Functions
-                    connect.setDB(UserID)
-                    DocEntry = b.GetMaxDocEntry(DocType, UserID)
-                End If
+                
                 Dim HeaderTableName As String = ""
                 Dim LineTableName1 As String = ""
                 Dim KeyName As String = "DocEntry"
@@ -161,11 +166,21 @@ Public Class Transaction
                     Case "97" 'Sales opportunity
                         HeaderTableName = "OOPR"
                         LineTableName1 = "OPR1"
-                    Case "33" 'Sales opportunity
+                    Case "33" 'Activity
                         HeaderTableName = "OCLG"
                         LineTableName1 = "OCLG"
                         KeyName = "ClgCode"
+                    Case "221" 'Attachment
+                        HeaderTableName = "OATC"
+                        LineTableName1 = "ATC1"
+                        KeyName = "AbsEntry"
                 End Select
+                If DocEntry = 0 Then
+                    Dim b As New SAP_Functions
+                    connect.setDB(UserID)
+                    DocEntry = b.GetMaxDocEntry(DocType, UserID, HeaderTableName, KeyName)
+                End If
+
                 Dim ds As New DataSet("Document")
                 Dim dt1 As New DataTable
                 connect.setDB(UserID)
@@ -187,5 +202,66 @@ Public Class Transaction
             Return Nothing
         End Try
     End Function
-    
+    <WebMethod()> _
+    Public Function GetLastKey(DocType As String, UserID As String) As String
+        Try
+            Dim sStr As String = ""
+            If PublicVariable.Simulate Then
+                Return ""
+            Else
+                Dim connect As New Connection()
+
+                Dim HeaderTableName As String = ""
+                Dim LineTableName1 As String = ""
+                Dim KeyName As String = "DocEntry"
+                Select Case DocType
+                    Case "22"
+                        HeaderTableName = "OPOR"
+                        LineTableName1 = "POR1"
+                    Case "19"
+                        HeaderTableName = "ORPC"
+                        LineTableName1 = "RPC1"
+                    Case "20"
+                        HeaderTableName = "OPDN"
+                        LineTableName1 = "PDN1"
+                    Case "21"
+                        HeaderTableName = "ORPD"
+                        LineTableName1 = "RPD1"
+                    Case "22"
+                        HeaderTableName = "OPOR"
+                        LineTableName1 = "POR1"
+                    Case "13"
+                        HeaderTableName = "OINV"
+                        LineTableName1 = "INV1"
+                    Case "14"
+                        HeaderTableName = "ORIN"
+                        LineTableName1 = "RIN1"
+                    Case "15"
+                        HeaderTableName = "ODLN"
+                        LineTableName1 = "DLN1"
+                    Case "97" 'Sales opportunity
+                        HeaderTableName = "OOPR"
+                        LineTableName1 = "OPR1"
+                    Case "33" 'Activity
+                        HeaderTableName = "OCLG"
+                        LineTableName1 = "OCLG"
+                        KeyName = "ClgCode"
+                    Case "221" 'Attachment
+                        HeaderTableName = "OATC"
+                        LineTableName1 = "ATC1"
+                        KeyName = "AbsEntry"
+                    Case "2" 'BP
+                        HeaderTableName = "OCRD"
+                        LineTableName1 = "OCRD"
+                        KeyName = "CardCode"
+                End Select
+                Dim b As New SAP_Functions
+                connect.setDB(UserID)
+                Return b.GetMaxDocEntry(DocType, UserID, HeaderTableName, KeyName)
+
+            End If
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
 End Class

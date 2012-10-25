@@ -302,20 +302,18 @@
         End Select
         Return ds
     End Function
-    Public Function GetMaxDocEntry(ObjType As String, UserID As String) As String
+    Public Function GetMaxDocEntry(ObjType As String, UserID As String, TableName As String, KeyName As String) As String
         Dim dt As DataSet
         Dim Str As String = ""
         Dim connect As New Connection()
-        Select Case ObjType
-            Case "22"
-                dt = connect.ObjectGetAll_Query_SAP("select MAX(DocEntry) DocEntry from OPOR")
 
-        End Select
+        dt = connect.ObjectGetAll_Query_SAP("select MAX(" + KeyName + ") DocKey from " + TableName)
+
         If IsNothing(dt) Then
             Return ""
         End If
         If dt.Tables(0).Rows.Count > 0 Then
-            Return dt.Tables(0).Rows(0).Item("DocEntry")
+            Return dt.Tables(0).Rows(0).Item("DocKey")
         Else
             Return ""
         End If

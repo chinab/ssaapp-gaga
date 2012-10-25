@@ -11,6 +11,25 @@ Public Class MasterData
     Inherits System.Web.Services.WebService
     Dim connect As New Connection()
     <WebMethod()> _
+    Public Function GetBPGroup(CardType As String, UserID As String) As DataSet
+        Try
+            Dim dt As New DataSet("OCRG")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OCRD(CardType)
+            Else
+                Dim str As String
+                    str = "select GroupCode,GroupName from OCRG where GroupType='" + CardType + "'"
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP(str)
+            End If
+
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
     Public Function GetBusinessPartner(CardType As String, UserID As String) As DataSet
         Try
             Dim dt As New DataSet("OCRD")
@@ -197,9 +216,9 @@ Public Class MasterData
             Else
                 Dim str As String
                 If CardCode = "" Then
-                    str = "select T0.CurrCode from OCRN T0 "
+                    str = "select T0.CurrCode,T0.CurrName from OCRN T0 "
                 Else
-                    str = "select T1.CurrCode from ocrd T0 "
+                    str = "select T1.CurrCode,T1.CurrName from ocrd T0 "
                     str = str + " full join OCRN T1 oN T0.Currency=T1.CurrCode or T0.Currency='##'"
                     str = str + " where T0.cardcode='" + CardCode + "'"
                 End If
@@ -335,6 +354,22 @@ Public Class MasterData
             Else
                 connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select CompnyName,DecSep,ThousSep,SumDec,PriceDec,QtyDec,PercentDec,RateDec,DateFormat,DateSep from OADM")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetCompanySetting(UserID As String) As DataSet
+        Try
+            Dim dt As New DataSet("OADP")
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                dt = a.Simulate_OADM
+            Else
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP("select (select AttachPath from OADP) AttachPath")
             End If
             Return dt
         Catch ex As Exception

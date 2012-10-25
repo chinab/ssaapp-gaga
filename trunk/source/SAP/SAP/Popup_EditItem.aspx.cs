@@ -41,7 +41,7 @@ namespace SAP
             //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
             //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopup", "Main.okDialogClick('EditItemCallBack');", true);
-
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "ShowLoading","Dialog.showLoader();", true);
         }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
         {

@@ -53,7 +53,7 @@
                             <li><a href="#tabs-1">Open List</a></li>
                             <li><a href="#tabs-2">All</a></li>
                         </ul>
-                        <div id="tabs-1" style="overflow: auto; height: 220px; margin-top: 0px;">                                                        
+                        <div id="tabs-1" style="overflow: auto; height: 400px; margin-top: 0px;">                                                        
                             <asp:ListView ID="lvStage" runat="server" onitemcommand="lvStage_ItemCommand" >
                                 <LayoutTemplate>
                                     <table class="data_table">
@@ -142,7 +142,7 @@
                                </Fields>
                             </asp:DataPager>
                         </div>  
-                        <div id="tabs-2" style="overflow: auto; height: 220px; margin-top: 0px;">                                                        
+                        <div id="tabs-2" style="overflow: auto; height: 400px; margin-top: 0px;">                                                        
                             <asp:ListView ID="lvAll" runat="server" onitemcommand="lvAll_ItemCommand" >
                                 <LayoutTemplate>
                                     <table class="data_table">

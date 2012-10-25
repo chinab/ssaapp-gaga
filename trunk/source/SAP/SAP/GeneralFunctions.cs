@@ -127,6 +127,12 @@ namespace SAP
                 case "33": //Activity
                     str = "OCLG";
                     break;
+                case "221": //Activity
+                    str = "OATC";
+                    break;
+                case "2": //BP
+                    str = "OCRD";
+                    break;
             }
             return str;
         }
@@ -178,6 +184,9 @@ namespace SAP
                 case "33": //Activity
                     str = "OCLG";
                     break;
+                case "221": //Activity
+                    str = "ATC1";
+                    break;
             }
             return str;
         }
@@ -194,6 +203,7 @@ namespace SAP
         {
             DataTable dt1 = dt;
             Array arr = KeepColumns.Split(';');
+            CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
             foreach (var column in dt1.Columns.Cast<DataColumn>().ToArray())
             {
                 if (Array.IndexOf(arr, column.ColumnName) < 0)
@@ -207,7 +217,7 @@ namespace SAP
                         //--------------neu kieu du lieu la ngay, thi convert qua string------------
                         foreach (DataRow row in dt1.Rows)
                         {
-                            DateTime d = DateTime.Parse(row[column].ToString());
+                            DateTime d = Convert.ToDateTime(row[column].ToString(), ivC);
                             dt1.Columns.Remove(column.ColumnName);
                             dt1.Columns.Add(column.ColumnName, typeof(string));
                             row[column.ColumnName] = String.Format("{0:yyyyMMdd}", d);

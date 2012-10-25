@@ -37,7 +37,7 @@
                                     <span>Type</span>
                                 </td>
                                 <td>
-                                     <asp:DropDownList ID="ddlType" runat="server" Width="200px" 
+                                     <asp:DropDownList ID="ddlType" runat="server" Width="200px" AutoPostBack="true"
                                          onselectedindexchanged="ddlType_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
@@ -47,7 +47,8 @@
                                     <span>Subject</span>
                                 </td>
                                 <td>
-                                     <asp:DropDownList ID="ddlSubject" runat="server" Width="200px">
+                                     <asp:DropDownList ID="ddlSubject" runat="server" Width="200px"  
+                                         AutoPostBack="true" onselectedindexchanged="ddlSubject_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
                             </tr>

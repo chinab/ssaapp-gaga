@@ -7,13 +7,14 @@
     </script>
     <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server">
         <ContentTemplate>
+        
             <div id="contentData" style="padding-left: 15px;">
              <div id="menu-action" style="margin-left: -15px;">
                     <ul>
                         <li>
                             <asp:ImageButton ID="ImageButton2" runat="server" AlternateText="button" 
                                     CommandName="Login" ImageUrl="~/skin/icon/preview.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                                    onclick="btnAddNew_Click" Height="22px" Width="22px" />
                         </li>
                         <li>
                             <asp:ImageButton ID="ImageButton3" runat="server" AlternateText="button" 
@@ -202,6 +203,7 @@
                     <div id="tabs">
                         <ul>
                             <li><a href="#tabs-1">General</a></li>
+                            <li><a href="#tabs-2">Attachments</a></li>
                         </ul>
                         <div id="tabs-1">
                             <table class="detail_table">
@@ -230,6 +232,82 @@
                                 </tr>
                             </table>
                         </div>
+                        <div id="tabs-2">
+                            <asp:FileUpload ID="FileUpload1" runat="server" />
+                            <asp:Button ID="SubmitButton" runat="server" Text="Submit File" OnClick="SubmitButton_Click" />
+                            
+                            <br />
+                           <asp:ListView ID="lvAttachments" runat="server" 
+                                onitemcommand="lvAttachments_ItemCommand" >
+                                <LayoutTemplate>
+                                    <table class="data_table">
+                                        <tr>
+                                        <th id="thButtons" runat="server" style="width: 70px">
+                                            </th>
+                                            <th style="width: 25px">
+                                                <span>#</span>
+                                            </th>
+                                            <th >
+                                                <span>Path</span>
+                                            </th>
+                                            <th >
+                                                <span>File Name</span>
+                                            </th>
+                                            <th >
+                                                <span>Attachment Date</span>
+                                            </th>
+                                            
+                                        </tr>
+                                        <tr ID="itemPlaceholder" runat="server">
+                                        </tr>
+                                    </table>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                    <td>
+                                            <asp:LinkButton ID="imgbDelete" runat="server" CommandName="DeleteItem" Text="Delete"
+                                                ImageUrl="~/skin/icon/delete_icon_mono.gif" OnClientClick="return confirm('Are you sure you want to delete this row?');"
+                                                ToolTip="Delete" />
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="No" runat="server"><%#Eval("No")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="trgtPath" runat="server"><%#Eval("trgtPath")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="FileName" runat="server"><%#Eval("FileName")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Date" runat="server"><%#Eval("Date")%></asp:Label>
+                                        </td>                         
+                                    </tr>
+                                </ItemTemplate>
+                                <EmptyDataTemplate>
+                                    <table class="data_table">
+                                        <tr>
+                                            <th style="width: 25px">
+                                                <span>#</span>
+                                            </th>
+                                            <th >
+                                                <span>Path</span>
+                                            </th>
+                                            <th >
+                                                <span>File Name</span>
+                                            </th>
+                                            <th >
+                                                <span>Attachment Date</span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <span>No Data</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </EmptyDataTemplate>
+                            </asp:ListView>
+                        </div>
                     </div>
                     
                     <br />
@@ -240,7 +318,7 @@
                     <div class="left">
                         <asp:ImageButton ID="imgAdd" runat="server" AlternateText="button" 
                              Height="19px" Width="65px" 
-                            ImageUrl="~/skin/images/SAP_Add.png" onclick="imgAdd_Click" />
+                            ImageUrl="~/skin/images/SAP_Add.png" onclick="imgAdd_Click" OnClientClick="Dialog.showLoader();"/>
                     
                     </div>
                     <div class="clear">
@@ -248,5 +326,8 @@
                 </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="SubmitButton"  runat="server" />
+        </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

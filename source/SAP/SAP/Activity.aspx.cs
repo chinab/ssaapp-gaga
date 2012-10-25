@@ -41,12 +41,16 @@ namespace SAP
                 DataSet dsMaster = masterDataWS.GetActivityType(User.Identity.Name);
                 ListItem item = new ListItem();
 
-                foreach (DataRow row in dsMaster.Tables[0].Rows)
-                {
-                    item = new ListItem(row[1].ToString(), row[0].ToString());
-                    ddlType.Items.Add(item);
-                }
-                            
+                ddlType.DataSource = dsMaster.Tables[0];
+                ddlType.DataTextField = "name";
+                ddlType.DataValueField = "code";
+                ddlType.DataBind();
+
+                dsMaster = masterDataWS.GetActivitySubject(User.Identity.Name, Int32.Parse(ddlType.SelectedValue.ToString()));
+                ddlSubject.DataSource = dsMaster.Tables[0];
+                ddlSubject.DataTextField = "name";
+                ddlSubject.DataValueField = "code";
+                ddlSubject.DataBind();
 
                 LoadDefault();
 
@@ -56,14 +60,14 @@ namespace SAP
 
         void LoadDefault()
         {
-            txtBP.Text = "ABEO";
-            txtBPName.Text = "ABEO";
-            ddlActivity.SelectedValue = "T";
-            ddlType.Items.FindByText("TIMESHEET").Selected = true;
+            //txtBP.Text = "ABEO";
+            //txtBPName.Text = "ABEO";
+            //ddlActivity.SelectedValue = "T";
+           // ddlType.Items.FindByText("TIMESHEET").Selected = true;
             txtDate.Text= DateTime.Now.ToShortDateString();
-            txtFromTime.Text = "830";
-            txtToTime.Text = "1730";
-            txtSubject.Text = "TIMESHEET | " + User.Identity.Name + " | " + String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text)) + " | " + txtBP.Text  ;
+            txtFromTime.Text = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString();
+            txtToTime.Text = txtFromTime.Text;
+           // txtSubject.Text = "TIMESHEET | " + User.Identity.Name + " | " + String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text)) + " | " + txtBP.Text  ;
         }
 
         protected override void OnLoadComplete(EventArgs e)
@@ -117,8 +121,8 @@ namespace SAP
             {
                 if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
                 //Update table header
-                txtSubject.Text = "TIMESHEET | " + User.Identity.Name + " | " + String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text)) + " | " + txtBP.Text;
-
+               // txtSubject.Text = "TIMESHEET | " + User.Identity.Name + " | " + String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDate.Text)) + " | " + txtBP.Text;
+                txtToTime.Text = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString();
                 DataRow dr = dtHeader.Rows[0];
                 dr["Action"] = ddlActivity.SelectedValue.ToString();
                 dr["CntctType"] = ddlType.SelectedValue.ToString();
@@ -144,7 +148,15 @@ namespace SAP
 
         protected void imgAdd_Click(object sender, ImageClickEventArgs e)
         {
-            String simulate = System.Configuration.ConfigurationManager.AppSettings["Simulate"];
+            if (txtBP.Text == "")
+            {
+                Session["errorMessage"] = "Missing Business Partner";
+                Session["requestXML"] = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('Missing Business Partner','');", true);
+                //return;
+            }
+
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, "", false);
@@ -172,11 +184,15 @@ namespace SAP
             MasterData masterDataWS = new MasterData();
             ListItem item = new ListItem();
             DataSet dsMaster = masterDataWS.GetActivitySubject(User.Identity.Name, Int32.Parse(ddlType.SelectedValue.ToString()));
-            foreach (DataRow row in dsMaster.Tables[0].Rows)
-            {
-                item = new ListItem(row[1].ToString(), row[0].ToString());
-                ddlSubject.Items.Add(item);
-            }
+            ddlSubject.DataSource = dsMaster.Tables[0];
+            ddlSubject.DataTextField = "name";
+            ddlSubject.DataValueField = "code";
+            ddlSubject.DataBind();
+        }
+
+        protected void ddlSubject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSubject.Text = ddlSubject.SelectedItem.Text;
         }
 
     }

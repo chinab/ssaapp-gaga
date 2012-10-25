@@ -15,36 +15,7 @@ namespace SAP
         {
             DataTable ds = dtHeader;
             DataTable ds1 = dtLine;
-            //Xoa het cac column ko su dung trong XML (nhung column su dung tam de luu du lieu)
             Array arr=RemoveColums.Split(';');
-
-           // int i=0;
-            //for (int i = 0; i < arr.Length; i++)
-            //{
-            //    int j = 0;
-            //    foreach (DataColumn column in ds.Columns)
-            //    { 
-            //        if (column.ColumnName==arr.GetValue(i).ToString())
-            //        {
-            //            ds.Columns.RemoveAt(j);
-            //            break;
-            //        }
-            //        j = j + 1;
-            //    }
-
-            //    j = 0;
-            //    foreach (DataColumn column in ds1.Columns)
-            //    {
-            //        if (column.ColumnName == arr.GetValue(i).ToString())
-            //        {
-            //            ds1.Columns.RemoveAt(j);
-            //            break;
-            //        }
-            //        j = j + 1;
-            //    }
-            //}
-         
-
             GeneralFunctions gf = new GeneralFunctions();
             StringBuilder XmlString = new StringBuilder();
             XmlWriter writer = XmlWriter.Create(XmlString);

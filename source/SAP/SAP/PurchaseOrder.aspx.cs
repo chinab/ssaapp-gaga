@@ -138,6 +138,8 @@ namespace SAP
                             //dtContents.AcceptChanges();
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
+                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                                     "Dialog.hideLoader();", true);
                         }
                         break;
                     case "EditWareHouseCallBack":

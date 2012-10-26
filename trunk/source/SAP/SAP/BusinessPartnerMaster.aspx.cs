@@ -8,6 +8,7 @@ using System.Data;
 using SAP.WebServices;
 using System.Collections;
 using System.Globalization;
+using System.Net;
 
 namespace SAP
 {
@@ -27,6 +28,14 @@ namespace SAP
 
         protected void btnAdd_Click(object sender, ImageClickEventArgs e)
         {
+            if (txtCardCode.Text == "")
+            {
+                Session["errorMessage"] = "Missing Card Code";
+                Session["requestXML"] = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('Missing Card Code','');", true);
+            }
+
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, "", false);
@@ -35,7 +44,7 @@ namespace SAP
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + ds.Tables[0].Rows[0]["ErrMsg"].ToString() + "','');", true);
+                    "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
             }
             else
             {

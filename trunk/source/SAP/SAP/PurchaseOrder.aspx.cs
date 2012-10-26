@@ -8,6 +8,7 @@ using System.Data;
 using SAP.WebServices;
 using System.Collections;
 using System.Globalization;
+using System.Net;
 
 namespace SAP
 {
@@ -494,7 +495,7 @@ namespace SAP
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + ds.Tables[0].Rows[0]["ErrMsg"] + "','');", true);
+                    "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
             }
             else
             {

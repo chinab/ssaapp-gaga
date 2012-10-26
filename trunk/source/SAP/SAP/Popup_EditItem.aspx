@@ -79,10 +79,11 @@
 				</EmptyDataTemplate>
 			</asp:ListView>
             </div>
-            <div id="action-form">
-                <asp:Button ID="btnAdd" Text="OK" runat="server" onclick="btnAdd_Click" />
-                <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelDialogClick()" />
-            </div>
+            </br>
+    <div id="action-form">
+        <asp:ImageButton ID="btnAdd" runat="server" ImageUrl="~/skin/images/SAP_choose.png" OnClick="btnAdd_Click" />
+        <asp:ImageButton ID="btnCancel" runat="server" ImageUrl="~/skin/images/SAP_cancel.png" OnClientClick="return Main.cancelDialogClick()" />
+    </div>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger  ControlID="btnFilter" />

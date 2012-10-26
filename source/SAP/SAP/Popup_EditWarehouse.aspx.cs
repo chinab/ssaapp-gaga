@@ -28,21 +28,7 @@ namespace SAP
             }
         }
 
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            string selectedValue = Request.Form["MyRadioButton"];
-            if (!String.IsNullOrEmpty(selectedValue))
-            {
-                List<WareHouse> list = WareHouse.extractFromDataSet(warehousesItems.Tables[0]);
-                WareHouse chosenWareHouse = list[Int32.Parse(selectedValue)];
-                Session["chosenWareHouse"] = chosenWareHouse;
-                Session["chosenItemNo"] = Request.QueryString["id"];
-            }
-            //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
-            //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKWareHousePopup", "Main.okDialogClick('EditWareHouseCallBack');", true);
 
-        }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
         {
             string text = ((TextBox)sender).Text;
@@ -98,6 +84,22 @@ namespace SAP
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             BindCategories(this.txtFilter.Text);
+        }
+
+        protected void btnAdd_Click(object sender, ImageClickEventArgs e)
+        {
+            string selectedValue = Request.Form["MyRadioButton"];
+            if (!String.IsNullOrEmpty(selectedValue))
+            {
+                List<WareHouse> list = WareHouse.extractFromDataSet(warehousesItems.Tables[0]);
+                WareHouse chosenWareHouse = list[Int32.Parse(selectedValue)];
+                Session["chosenWareHouse"] = chosenWareHouse;
+                Session["chosenItemNo"] = Request.QueryString["id"];
+            }
+            //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
+            //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKWareHousePopup", "Main.okDialogClick('EditWareHouseCallBack');", true);
+
         }
     }
 }

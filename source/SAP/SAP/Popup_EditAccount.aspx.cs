@@ -23,18 +23,6 @@ namespace SAP
             }
         }
 
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            string selectedValue = Request.Form["MyRadioButton"];
-            if (!String.IsNullOrEmpty(selectedValue))
-            {
-                List<AccountMasterData> list = AccountMasterData.extractFromDataSet(warehousesItems.Tables[0]);
-                AccountMasterData chosenAccount = list[Int32.Parse(selectedValue)];
-                Session["chosenAccount"] = chosenAccount;
-                Session["chosenItemNo"] = Request.QueryString["id"];
-            }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKAccountPopup", "Main.okDialogClick('EditAccountCallBack');", true);
-        }
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
         {
             string text = ((TextBox)sender).Text;
@@ -91,6 +79,19 @@ namespace SAP
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             BindCategories(this.txtFilter.Text);
+        }
+
+        protected void btnAdd_Click(object sender, ImageClickEventArgs e)
+        {
+            string selectedValue = Request.Form["MyRadioButton"];
+            if (!String.IsNullOrEmpty(selectedValue))
+            {
+                List<AccountMasterData> list = AccountMasterData.extractFromDataSet(warehousesItems.Tables[0]);
+                AccountMasterData chosenAccount = list[Int32.Parse(selectedValue)];
+                Session["chosenAccount"] = chosenAccount;
+                Session["chosenItemNo"] = Request.QueryString["id"];
+            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKAccountPopup", "Main.okDialogClick('EditAccountCallBack');", true);
         }
     }
 }

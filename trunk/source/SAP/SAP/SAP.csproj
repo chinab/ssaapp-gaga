@@ -441,8 +441,6 @@
     <Compile Include="WebServices\Reports.cs" />
     <Compile Include="WebServices\Transaction.cs" />
     <Compile Include="WebServices\Entity\WareHouse.cs" />
-    <Compile Include="xml\Opportunity_StageXML.cs" />
-    <Compile Include="xml\OpportunityXML.cs" />
     <Compile Include="PurchaseOrder.aspx.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

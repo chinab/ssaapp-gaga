@@ -36,11 +36,11 @@
             showSpeed: 400,
             hideSpeed: 800
         });
-        $('#splitbarV').each(function () {
-            var $ids = $('[id=splitbarV]');
+        $('.splitbarV').each(function () {
+            var $ids = $('[class=splitbarV]');
             if ($ids.length > 1) {
                 $ids.not(':first').remove();
-            }
+            }            
         });
 
     });	

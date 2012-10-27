@@ -8,6 +8,39 @@
     <asp:UpdatePanel ID="SalesOpportunityUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
+             <div id="menu-action" style="margin-left: -15px;">
+                    <ul>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/preview.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/print.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/excel.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/pdf.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/word.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/addnew.png" /></a>
+                            <%--          <asp:ImageButton ID="btnAddNew" runat="server" AlternateText="button" 
+                            CommandName="Login" ImageUrl="~/skin/icon/addnew.png" 
+                    onclick="btnAddNew_Click" />--%>
+                        </li>
+                        <li><a href="#">
+                            <li><a href="#">
+                                <img alt="" src="/skin/icon/first.png" /></a></li>
+                            <li><a href="#">
+                                <img alt="" src="/skin/icon/previous.png" /></a></li>
+                            <li><a href="#">
+                                <img alt="" src="/skin/icon/next.png" /></a></li>
+                            <li><a href="#">
+                                <img alt="" src="/skin/icon/last.png" /></a></li>
+                    </ul>                    
+                </div>
+                <div class="clear">
+                </div>
                 <div id="title-form" style="border-bottom: 2px solid black;">
                     <h2>Sales Opportunity</h2>
                 </div>
@@ -445,10 +478,10 @@
                                              <asp:Label ID="lblNoEdit" runat="server" Text='<%# Bind("No") %>'/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtStartDateEdit" runat="server" Text='<%# Bind("OpenDate") %>'/>
+                                            <asp:TextBox ID="txtStartDateEdit" runat="server" Text='<%# Bind("OpenDate") %>' CssClass="txtDate"/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtClosingDateEdit" runat="server" Text='<%# Bind("ClosegDate") %>'/>
+                                            <asp:TextBox ID="txtClosingDateEdit" runat="server" Text='<%# Bind("CloseDate") %>' CssClass="txtDate"/>
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ddlSalesEmployeeEdit" runat="server" >
@@ -509,7 +542,7 @@
                                             <asp:TextBox ID="txtStartDateInsert" runat="server" Text='<%# Bind("OpenDate") %>'  CssClass="txtDate"/>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtClosingDateInsert" runat="server" Text='<%# Bind("CloseDate") %>'/>
+                                            <asp:TextBox ID="txtClosingDateInsert" runat="server" Text='<%# Bind("CloseDate") %>' CssClass="txtDate"/>
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ddlSalesEmployeeInsert" runat="server" >
@@ -609,7 +642,8 @@
                                     </table>
                                 </EmptyDataTemplate>
                             </asp:ListView>
-                            <asp:DataPager ID="lvDataPager1" runat="server" PagedControlID="lvStage" PageSize="5">
+                            <asp:DataPager ID="lvDataPager1" runat="server" PagedControlID="lvStage" 
+                                PageSize="5" onprerender="lvDataPager1_PreRender">
                                 <Fields>
                                     <asp:NumericPagerField ButtonType="Link" />
                                 </Fields>
@@ -843,6 +877,16 @@
                                     </table>
                                 </EmptyDataTemplate>
                             </asp:ListView>
+                            <asp:DataPager ID="ProductListPagerCombo" runat="server" PagedControlID="lvStage"
+                                PageSize="5" OnPreRender="ProductListPagerCombo_PreRender">
+                                <Fields>
+                                    <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" ShowNextPageButton="False"
+                                        ShowPreviousPageButton="False" />
+                                    <asp:NumericPagerField />
+                                    <asp:NextPreviousPagerField LastPageText="&gt;&gt;" ShowLastPageButton="True" ShowNextPageButton="False"
+                                        ShowPreviousPageButton="False" />
+                                </Fields>
+                            </asp:DataPager>
                         </div>
                         <div id="tabs-6">
                             <td class="detail_table_td_150">

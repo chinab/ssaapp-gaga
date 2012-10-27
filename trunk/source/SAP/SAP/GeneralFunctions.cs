@@ -204,28 +204,44 @@ namespace SAP
             DataTable dt1 = dt;
             Array arr = KeepColumns.Split(';');
             CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
+            string strcolumnremove = "";
             foreach (var column in dt1.Columns.Cast<DataColumn>().ToArray())
             {
-                if (Array.IndexOf(arr, column.ColumnName) < 0)
-                {//-------neu ko nam trong danh sach column giu lai, thi delete-----------------
-                    dt1.Columns.Remove(column);
+                if (KeepColumns!="")
+                {
+                    if (Array.IndexOf(arr, column.ColumnName) < 0)
+                    {//-------neu ko nam trong danh sach column giu lai, thi delete-----------------
+                        dt1.Columns.Remove(column);
+                    }
                 }
+                
                 else
                 {
                     if (column.DataType == typeof(DateTime))
                     {
+                        strcolumnremove = strcolumnremove + column.ColumnName + ";";
+                        dt1.Columns.Add(column.ColumnName + "_1xxx", typeof(string));
                         //--------------neu kieu du lieu la ngay, thi convert qua string------------
                         foreach (DataRow row in dt1.Rows)
                         {
                             DateTime d = Convert.ToDateTime(row[column].ToString(), ivC);
-                            dt1.Columns.Remove(column.ColumnName);
-                            dt1.Columns.Add(column.ColumnName, typeof(string));
-                            row[column.ColumnName] = String.Format("{0:yyyyMMdd}", d);
+                            row[column.ColumnName+"_1xxx"] = String.Format("{0:yyyyMMdd}", d);
                         }
                     }
                 }
             }
-
+            if (strcolumnremove != "")
+            {
+                Array arr1= strcolumnremove.Split(';');
+                for (int i = 0; i < arr1.Length; i++)
+                {
+                    if (arr1.GetValue(i).ToString() != "")
+                    {
+                        dt1.Columns.Remove(arr1.GetValue(i).ToString());
+                        dt1.Columns[arr1.GetValue(i).ToString() + "_1xxx"].ColumnName = arr1.GetValue(i).ToString();
+                    }
+                }
+            }
             return dt1;
         }
 

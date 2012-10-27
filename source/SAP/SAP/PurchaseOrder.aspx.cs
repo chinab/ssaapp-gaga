@@ -40,7 +40,7 @@ namespace SAP
                 dtContents.Columns.Add("Dscription");
                 dtContents.Columns.Add("Quantity");
                 dtContents.Columns.Add("PriceBefDi");
-                dtContents.Columns.Add("DiscPrcnt"); 
+                dtContents.Columns.Add("DiscPrcnt");
                 dtContents.Columns.Add("Price");
                 dtContents.Columns.Add("LineTotal");
                 dtContents.Columns.Add("TaxCode");
@@ -51,53 +51,101 @@ namespace SAP
                 dtContents.Columns.Add("OcrCode3");
                 dtContents.Columns.Add("OcrCode4");
                 dtContents.Columns.Add("OcrCode5");
-
+                
                 CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentCulture;
                 //ci.DateTimeFormat.ShortDatePattern = "yyyy/MM/dd";
                 txtPostingDate.Text.ToString(ci);
 
                 this.lvContents.DataSource = dtContents;
                 this.lvContents.DataBind();
-                
 
-                MasterData masterDataWS = new MasterData();
-                //-------------Load Sales/Buyer Employee----------------
-                GF = new GeneralFunctions(User.Identity.Name);
-                DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData(User.Identity.Name);
-                ListItem item = new ListItem();
-                foreach (DataRow row in salesBuyers.Tables[0].Rows)
+                String orderId = Request.QueryString["order_id"];
+                if (orderId != null)
                 {
-                    item = new ListItem(row[1].ToString(), row[0].ToString());
-                    ddlBuyer.Items.Add(item);
+                    loadOrderFromId(orderId);
+                    setLoadOrderButtonLink(0, 100);
                 }
-                //-------------Load Shipping Type---------------------
-                DataSet ShippingType = masterDataWS.GetShippingType(User.Identity.Name);
-                ListItem itemShipping = new ListItem();
-                foreach (DataRow row in ShippingType.Tables[0].Rows)
+                else
                 {
-                    itemShipping = new ListItem(row[1].ToString(), row[0].ToString());
-                    ddlShippingType.Items.Add(itemShipping);
-                }
-                //-------------Load Payment Tern----------------
-                DataSet PaymentTerm = masterDataWS.GetPaymentTerm(User.Identity.Name);
-                ListItem itemPaymenTerm = new ListItem();
-                foreach (DataRow row in PaymentTerm.Tables[0].Rows)
-                {
-                    itemPaymenTerm = new ListItem(row[1].ToString(), row[0].ToString());
-                    ddlPaymentTerm.Items.Add(itemPaymenTerm);
-                }
-                //-------------Load Indicator----------------
-                DataSet Indicator = masterDataWS.GetIndicator(User.Identity.Name);
-                ListItem itemIndicator = new ListItem();
-                foreach (DataRow row in Indicator.Tables[0].Rows)
-                {
-                    itemIndicator = new ListItem(row[1].ToString(), row[0].ToString());
-                    ddlIndicator.Items.Add(itemIndicator);
-                } 
+                    MasterData masterDataWS = new MasterData();
+                    //-------------Load Sales/Buyer Employee----------------
+                    GF = new GeneralFunctions(User.Identity.Name);
+                    DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData(User.Identity.Name);
+                    ListItem item = new ListItem();
+                    foreach (DataRow row in salesBuyers.Tables[0].Rows)
+                    {
+                        item = new ListItem(row[1].ToString(), row[0].ToString());
+                        ddlBuyer.Items.Add(item);
+                    }
+                    //-------------Load Shipping Type---------------------
+                    DataSet ShippingType = masterDataWS.GetShippingType(User.Identity.Name);
+                    ListItem itemShipping = new ListItem();
+                    foreach (DataRow row in ShippingType.Tables[0].Rows)
+                    {
+                        itemShipping = new ListItem(row[1].ToString(), row[0].ToString());
+                        ddlShippingType.Items.Add(itemShipping);
+                    }
+                    //-------------Load Payment Tern----------------
+                    DataSet PaymentTerm = masterDataWS.GetPaymentTerm(User.Identity.Name);
+                    ListItem itemPaymenTerm = new ListItem();
+                    foreach (DataRow row in PaymentTerm.Tables[0].Rows)
+                    {
+                        itemPaymenTerm = new ListItem(row[1].ToString(), row[0].ToString());
+                        ddlPaymentTerm.Items.Add(itemPaymenTerm);
+                    }
+                    //-------------Load Indicator----------------
+                    DataSet Indicator = masterDataWS.GetIndicator(User.Identity.Name);
+                    ListItem itemIndicator = new ListItem();
+                    foreach (DataRow row in Indicator.Tables[0].Rows)
+                    {
+                        itemIndicator = new ListItem(row[1].ToString(), row[0].ToString());
+                        ddlIndicator.Items.Add(itemIndicator);
+                    }
 
-                ClearScreen();
+                    ClearScreen();
+                }
             }
         }
+
+        protected void setLoadOrderButtonLink(int currentOrder, int maxOrder)
+        {
+            int next = 0;
+            int previous = 0;
+            if (currentOrder < maxOrder)
+                next = currentOrder + 1;
+            if (currentOrder > 0)
+                previous = currentOrder - 1;
+            
+            this.linkFirst.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + 0;
+            this.linkNext.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + previous;
+            this.linkPrevious.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + next;
+            this.linkLast.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + maxOrder;
+
+            if (next == maxOrder)
+                this.linkNext.Visible = false;
+            if (previous == 0)
+                this.linkPrevious.Visible = false;
+        }
+
+         protected void loadOrderFromId(String orderId)
+         {
+             Transaction ts = new Transaction();
+             DataSet returnDoc = ts.GetMarketingDocument_ReturnDS("22", Int32.Parse(orderId), User.Identity.Name);
+             DataTable OPOR = returnDoc.Tables[0];
+             if (OPOR.Rows.Count > 0)
+             {
+                 this.txtName.Text = OPOR.Rows[0]["CardName"].ToString();
+                 this.txtVendor.Text = OPOR.Rows[0]["CardCode"].ToString();
+                 this.txtNoFrom.Text = OPOR.Rows[0]["DocEntry"].ToString();
+                 this.txtNoFrom.Enabled = false;
+                 this.txtNoTo.Text = OPOR.Rows[0]["DocNum"].ToString();
+                 this.txtNoTo.Enabled = false;
+                 this.txtStatus.Text = OPOR.Rows[0]["DocStatus"].ToString();
+             }
+
+             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+            "Main.setMasterMessage('" + WebUtility.HtmlEncode(returnDoc.ToString()) + "','');", true);
+         }
 
         protected override void OnLoadComplete(EventArgs e)
         {

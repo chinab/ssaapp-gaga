@@ -463,6 +463,15 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.ListView lvCompetitor;
         
         /// <summary>
+        /// ProductListPagerCombo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataPager ProductListPagerCombo;
+        
+        /// <summary>
         /// TextBox2 control.
         /// </summary>
         /// <remarks>

@@ -50,11 +50,15 @@ namespace SAP
                                         {
                                             if (column.ColumnName != "No")//phan lon cac table deu co column No nay
                                             {
-                                                writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                if (row[column].ToString() != "")
                                                 {
-                                                    writer.WriteString(row[column].ToString());
+                                                    writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                    {
+                                                        writer.WriteString(row[column].ToString());
+                                                    }
+                                                    writer.WriteEndElement();
                                                 }
-                                                writer.WriteEndElement();
+                                                
                                             }
                                         }
                                         
@@ -81,11 +85,14 @@ namespace SAP
                                             {
                                                 if (column.ColumnName != "No")
                                                 {
-                                                    writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                    if (row[column].ToString() != "")
                                                     {
-                                                        writer.WriteString(row[column].ToString());
+                                                        writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                        {
+                                                            writer.WriteString(row[column].ToString());
+                                                        }
+                                                        writer.WriteEndElement();
                                                     }
-                                                    writer.WriteEndElement();
                                                 }
                                             }
                                         }

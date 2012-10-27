@@ -8,6 +8,7 @@ using System.Data;
 using SAP.WebServices;
 using System.Collections;
 using System.Net;
+using System.Globalization;
 
 namespace SAP
 {
@@ -17,7 +18,8 @@ namespace SAP
         public static DataTable dtStage;
         public static DataTable dtPartner;
         public static DataTable dtCompetitor;
-
+        private GeneralFunctions GF=new GeneralFunctions();
+        private string DocType = "97";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -37,11 +39,11 @@ namespace SAP
 
                 dtStage = new DataTable();
                 dtStage.Columns.Add("No");
-                dtStage.Columns.Add("OpenDate");
-                dtStage.Columns.Add("CloseDate");
-                dtStage.Columns.Add("ClosePrcnt");
-                dtStage.Columns.Add("MaxSumLoc");
-                dtStage.Columns.Add("WtSumLoc");
+                dtStage.Columns.Add("OpenDate",typeof(DateTime));
+                dtStage.Columns.Add("CloseDate", typeof(DateTime));
+                dtStage.Columns.Add("ClosePrcnt",typeof(double));
+                dtStage.Columns.Add("MaxSumLoc", typeof(double));
+                dtStage.Columns.Add("WtSumLoc", typeof(double));
                 dtStage.Columns.Add("DocChkbox");
                 dtStage.Columns.Add("SlpCode");
                 dtStage.Columns.Add("Step_Id");
@@ -188,12 +190,17 @@ namespace SAP
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                     "Main.setMasterMessage('" + "Missing Business Partner!" + "','');", true);
-                return;
             }
             
             String requestXML = _collectData();
+            if (requestXML == "")
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('XML String is empty','');", true);
+            }
+
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
-            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, "97", "", false);
+            DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, "", false);
             if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
@@ -211,6 +218,7 @@ namespace SAP
             
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                               "Dialog.hideLoader();", true);
+            SetControlsStatus("Save");
         }
         #region "List View Stage"
         
@@ -252,6 +260,7 @@ namespace SAP
                     this.lvStage.EditIndex = -1;
                     this.lvStage.DataSource = dtStage;
                     this.lvStage.DataBind();
+                    SetControlsStatus("Update");
                     break;
                 case "Delete":
                     // delete data and update dt
@@ -347,36 +356,21 @@ namespace SAP
 
         protected void _btnAddRecord_Click(object sender, EventArgs e)
         {
-            this.lvStage.InsertItemPosition = InsertItemPosition.FirstItem;
-            this.btnAddRecord.Enabled = false;
-            this.lvStage.EditIndex = -1;
+            int iNo = dtStage.Rows.Count + 1;
+            dtStage.Rows.Add(iNo, DateTime.Now.Date, DateTime.Now.Date, 0, 0, 0, "", "", "", "", "", "", "", "");
             this.lvStage.DataSource = dtStage;
+
+            //int lastpage = this.ProductListPagerCombo.TotalRowCount / this.ProductListPagerCombo.PageSize;
+            //this.ProductListPagerCombo.SetPageProperties(lastpage * this.ProductListPagerCombo.PageSize, this.ProductListPagerCombo.MaximumRows, false);
+            this.lvStage.EditIndex = iNo - 1;
             this.lvStage.DataBind();
+            SetControlsStatus("Add");
+
         }
       
         protected void lvStage_ItemCreated(object sender, ListViewItemEventArgs e)
         {
-            if (e.Item.ItemType == ListViewItemType.InsertItem)
-            {
-                DropDownList ddl = (DropDownList)e.Item.FindControl("ddlSalesEmployeeInsert"); if (ddl != null)
-                {
-                    MasterData masterDataWS = new MasterData();
-                    DataSet salesBuyers = masterDataWS.GetSalesBuyerMasterData(User.Identity.Name);
-                    ddl.DataSource = salesBuyers.Tables[0];
-                    ddl.DataTextField = "Name";
-                    ddl.DataValueField = "Code";
-                    ddl.DataBind();
-                }
-                ddl = (DropDownList)e.Item.FindControl("ddlStageInsert"); if (ddl != null)
-                {
-                    MasterData masterDataWS = new MasterData();
-                    DataSet salesBuyers = masterDataWS.GetStage(User.Identity.Name);
-                    ddl.DataSource = salesBuyers.Tables[0];
-                    ddl.DataTextField = "Descript";
-                    ddl.DataValueField = "Num";
-                    ddl.DataBind();
-                }
-            }
+           
         }
         
         protected void lvStage_ItemUpdating(object sender, ListViewUpdateEventArgs e)
@@ -422,6 +416,24 @@ namespace SAP
         }
         # endregion
         #region "Functions"
+        private void SetControlsStatus(string asStatus)
+        {
+            switch (asStatus)
+            {
+                case "Add":
+                    btnAdd.Enabled = btnAddRecord.Enabled = false;
+                    break;
+                case "Edit":
+                    btnAdd.Enabled = btnAddRecord.Enabled = false;
+                    break;
+                case "Update":
+                    btnAdd.Enabled = btnAddRecord.Enabled = true;
+                    break;
+                case "Save":
+                    btnAdd.Enabled = btnAddRecord.Enabled = true;
+                    break;
+            }
+        }
         void ClearScreen()
         {
             txtCustomerCode.Text = "";
@@ -440,35 +452,31 @@ namespace SAP
         {
             try
             {
-                //Update table header
+                CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
+                
                 DataRow dr = dtHeader.Rows[0];
                 dr["CardCode"] = txtCustomerCode.Text;
                 dr["SlpCode"] = ddlBuyer.Text;
-                dr["OpenDate"] = txtStartDate.Text;
+                dr["OpenDate"] = Convert.ToDateTime(txtStartDate.Text, ivC).ToString("yyyyMMdd"); 
                 dr["Source"] = "";
                 dr["Territory"] = "";
                 dr["CardName"] = "";
                 dr["CprCode"] = "";
-                dr["OpenDate"] = "";
                 dr["MaxSumLoc"] = txtPotentialAmt.Text;
-                dr["Name"] = "";
+                dr["Name"] = txtOpportunityName.Text;
 
-                //Remove row with empty itemcode
-                foreach (DataRow row in dtStage.Rows)
-                {
-                    if (row["ItemCode"].ToString() == "")
-                    {
-                        row.Delete();
-                    }
-                }
+               // dr["DocDate"] = Convert.ToDateTime(txtDueDate.Text, ivC).ToString("yyyyMMdd");//String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
+               
                 DocumentXML objInfo = new DocumentXML();
                 String RemoveColumn = "No;DocType;Stage;SalesEmployee";
-                return objInfo.ToXMLStringFromDS("97", dtHeader, dtStage, RemoveColumn);
+                return objInfo.ToXMLStringFromDS(DocType, dtHeader, GF.ConvertDate_RemoveCols(dtStage, ""), RemoveColumn);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                return "";
             }
 
         }
@@ -477,5 +485,15 @@ namespace SAP
             return dtStage.Rows.Count + 1;
         }
         # endregion 
+
+        protected void lvDataPager1_PreRender(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ProductListPagerCombo_PreRender(object sender, EventArgs e)
+        {
+
+        }
     }
 }

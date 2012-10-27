@@ -28,16 +28,28 @@
                             CommandName="Login" ImageUrl="~/skin/icon/addnew.png" 
                     onclick="btnAddNew_Click" />--%>
                         </li>
-                        <li><a href="#">
-                            <li><a href="#">
-                                <img alt="" src="/skin/icon/first.png" /></a></li>
-                            <li><a href="#">
-                                <img alt="" src="/skin/icon/previous.png" /></a></li>
-                            <li><a href="#">
-                                <img alt="" src="/skin/icon/next.png" /></a></li>
-                            <li><a href="#">
-                                <img alt="" src="/skin/icon/last.png" /></a></li>
-                    </ul>                    
+                         
+                        <li>
+                            <asp:HyperLink ID="linkFirst" runat="server">
+                                <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/first.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkPrevious" runat="server">
+                                <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/icon/previous.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkNext" runat="server">
+                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/next.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkLast" runat="server">
+                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/last.png" />
+                            </asp:HyperLink>
+                        </li>
+                 </ul>                    
                 </div>
                 <div class="clear">
                 </div>

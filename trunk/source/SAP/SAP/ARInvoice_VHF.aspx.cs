@@ -176,7 +176,7 @@ namespace SAP
                             this.lvContents.DataBind();
                         }
                         break;
-                    case "EditVendorCallBack":
+                    case "EditCustomerCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {

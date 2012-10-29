@@ -199,7 +199,17 @@ namespace SAP
             protected void lvStage_ItemUpdating(object sender, ListViewUpdateEventArgs e)
             {
                 //Click update link
-                this._StageCancelAddNew();
+                Label lblCode = (Label)lvStage.Items[e.ItemIndex].FindControl("lblItemCode");
+                if (lblCode == null || string.IsNullOrEmpty(lblCode.Text))
+                {
+                    e.Cancel = true;
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors", "Main.setMasterMessage('Missing Item','');", true);
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading", "Dialog.hideLoader();", true);
+                    return;
+                }
+                this.lvStage.EditIndex = -1;
+                this.lvStage.DataSource = dtItem;
+                this.lvStage.DataBind();
             }
             protected void lvStage_ItemCreated(object sender, ListViewItemEventArgs e)
             {

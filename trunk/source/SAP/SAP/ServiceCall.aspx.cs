@@ -67,7 +67,7 @@ namespace SAP
                         }
                         break;
                    
-                    case "EditVendorCallBack":
+                    case "EditCustomerCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using SAP.WebServices;
 using System.Collections;
+using System.Net;
 
 namespace SAP
 {
@@ -80,8 +81,8 @@ namespace SAP
                 if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
 
                 switch (this.Request["__EVENTARGUMENT"].ToString())
-                {                    
-                    case "EditVendorCallBack":
+                {
+                    case "EditCustomerCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {
@@ -165,7 +166,11 @@ namespace SAP
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + ds.Tables[0].Rows[0]["ErrMsg"] + "','');", true);
+                    "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString().Substring(0, 200)) + "','');", true);
+
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "alert('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "');", true);
+
             }
             else
             {

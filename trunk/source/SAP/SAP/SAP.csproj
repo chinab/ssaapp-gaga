@@ -65,12 +65,15 @@
     <Content Include="ARInvoice_VHF.aspx" />
     <Content Include="BusinessPartnerMaster.aspx" />
     <Content Include="Admin\Popup_Connection.aspx" />
+    <Content Include="Popup_EditBOM.aspx" />
+    <Content Include="Inventory\InventoryTransfer.aspx" />
     <Content Include="Inventory\GoodsIssue.aspx" />
     <Content Include="JournalEntry.aspx" />
     <Content Include="js\jquery.js" />
     <Content Include="Popup_EditAccount.aspx" />
     <Content Include="Inventory\GoodsReceipt.aspx" />
     <Content Include="Popup_OpenDocument.aspx" />
+    <Content Include="Production\ProductionOrder.aspx" />
     <Content Include="ServiceCall.aspx" />
     <Content Include="Popup_EditTerritory.aspx" />
     <Content Include="Popup_EditCostCenter.aspx" />
@@ -250,6 +253,20 @@
     <Compile Include="Admin\Popup_Connection.aspx.designer.cs">
       <DependentUpon>Popup_Connection.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Popup_EditBOM.aspx.cs">
+      <DependentUpon>Popup_EditBOM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditBOM.aspx.designer.cs">
+      <DependentUpon>Popup_EditBOM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\InventoryTransfer.aspx.cs">
+      <DependentUpon>InventoryTransfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventory\InventoryTransfer.aspx.designer.cs">
+      <DependentUpon>InventoryTransfer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\GoodsIssue.aspx.cs">
       <DependentUpon>GoodsIssue.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -291,6 +308,13 @@
     </Compile>
     <Compile Include="Popup_OpenDocument.aspx.designer.cs">
       <DependentUpon>Popup_OpenDocument.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Production\ProductionOrder.aspx.cs">
+      <DependentUpon>ProductionOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\ProductionOrder.aspx.designer.cs">
+      <DependentUpon>ProductionOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="ServiceCall.aspx.cs">
       <DependentUpon>ServiceCall.aspx</DependentUpon>
@@ -437,6 +461,8 @@
     <Compile Include="WebServices\Entity\AccountMasterData.cs" />
     <Compile Include="WebServices\Entity\BusinessPartner.cs" />
     <Compile Include="WebServices\Entity\ContactPerson.cs" />
+    <Compile Include="WebServices\Entity\BOM.cs" />
+    <Compile Include="WebServices\Entity\CostCenter.cs" />
     <Compile Include="WebServices\Entity\Territory.cs" />
     <Compile Include="WebServices\Entity\Promotion.cs" />
     <Compile Include="WebServices\GetDefault.cs" />

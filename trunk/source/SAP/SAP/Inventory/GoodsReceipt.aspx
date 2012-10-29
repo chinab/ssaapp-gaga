@@ -153,7 +153,7 @@
                                         </td>
                                         <td>
                                             <asp:Label ID="lblItemCode" runat="server" Text='<%# Bind("ItemCode") %>'/>
-                                            <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="linkItems" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"../Popup_EditItem.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
@@ -172,14 +172,14 @@
                                         </td>
                                         <td>
                                             <asp:Label ID="lblWarehouse" runat="server" Text='<%# Bind("WhsCode") %>'/>
-                                            <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"../Popup_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
                                         <td>
                                              <asp:Label ID="lblAccount" runat="server" Text='<%#Bind("AcctCode")%>' />
-                                             <asp:HyperLink ID="linkAccount" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"Popup_EditAccount.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                             <asp:HyperLink ID="linkAccount" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"../Popup_EditAccount.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>

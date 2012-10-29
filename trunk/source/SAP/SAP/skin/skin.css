@@ -537,7 +537,7 @@ table.detail_table .detail_table_td_200
 }
 
 #theMenu ul  li  ul  li  a{
-	color: #000;
+	/*color: #000;*/
 	/*background: #79c9ec url(images/ui-bg_glass_75_79c9ec_1x400.png) 50% 50% repeat-x;*/
 	background-position: 98% 50%;
 	display:block; 
@@ -579,7 +579,7 @@ border-bottom: 1px solid #90BADE;
 }
 /* Xtra Header links styling */
 #theMenu h4.head a { 
-	color: #333;
+	/*color: #333;*/
 	display:block; 
 	border-top: 1px solid #36a;
 	border-right: 1px solid #36a;
@@ -597,7 +597,7 @@ border-bottom: 1px solid #90BADE;
 	display:block; 
 	border-top: 1px solid #36a;
 	border-right: 1px solid #36a;
-	background: #eee url(down.gif) no-repeat; 
+	/*background: #eee url(down.gif) no-repeat; */
 	background-position: 98% 50%;
 	padding: 3px 6px;
 }
@@ -606,7 +606,7 @@ border-bottom: 1px solid #90BADE;
 	display:block; 
 	border-top: 1px solid #36a;
 	border-right: 1px solid #36a;
-	background: #eee url(down.gif) no-repeat; 
+	/*background: #eee url(down.gif) no-repeat; */
 	background-position: 98% 50%;
 	padding: 3px 6px;
 }

@@ -87,7 +87,13 @@
                 <%--<asp:LoginName ID="LoginName1" runat="server" />--%>
                 <a href="/Homepage.aspx">Home</a>
                 <%--<a href="/Admin/UserProfiles.aspx">User Management</a>--%>
+                
                 <asp:LoginStatus ID="LoginStatus1" runat="server" OnLoggedOut="LoginStatus1_LoggedOut"/>
+            </div>
+            <div style="font-family: Tahoma; font-size: x-small; color: #0000FF; font-weight: bold">
+            Welcome, <asp:LoginName ID="LoginName1" runat="server" />
+            </br>
+            You are in <asp:Label ID="lblCompany" runat="server" text=""/>
             </div>
         </div>
         <ul id="theMenu">
@@ -216,7 +222,7 @@
                         	<li>
                                 <h4 class="head"><a href="#">Inventory Transactions</a></h4>
                                 <ul>
-                                     <li><a class="subitem" href="#">Inventory Transfer</a></li>
+                                     <li><a class="subitem" href="/Inventory/InventoryTransfer.aspx">Inventory Transfer</a></li>
                                     <li><a class="subitem" href="/Inventory/GoodsReceipt.aspx">Goods Receipt</a></li>
                                     <li><a class="subitem" href="/Inventory/GoodsIssue.aspx">Goods Issue</a></li>
                                 </ul>
@@ -235,7 +241,7 @@
 				</h3>
 				<ul>
 					<li><a href="#">Bill of Materials</a></li>
-					<li><a href="#">Production Order</a></li>
+					<li><a href="/Production/ProductionOrder.aspx">Production Order</a></li>
 					<li><a href="#">Receipt From Production</a></li>
 					<li><a href="#">Issue For Production</a></li>
 				</ul>

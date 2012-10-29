@@ -88,6 +88,8 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     
     private System.Threading.SendOrPostCallback GetSAPUserOperationCompleted;
     
+    private System.Threading.SendOrPostCallback GetBOMOperationCompleted;
+    
     /// <remarks/>
     public MasterData()
     {
@@ -187,6 +189,9 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     public event GetSAPUserCompletedEventHandler GetSAPUserCompleted;
+    
+    /// <remarks/>
+    public event GetBOMCompletedEventHandler GetBOMCompleted;
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetBPGroup", RequestNamespace="http://electra-ai.com/", ResponseNamespace="http://electra-ai.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -1443,6 +1448,47 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
     
     /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetBOM", RequestNamespace="http://electra-ai.com/", ResponseNamespace="http://electra-ai.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetBOM(string UserID) {
+        object[] results = this.Invoke("GetBOM", new object[] {
+                    UserID});
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public System.IAsyncResult BeginGetBOM(string UserID, System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("GetBOM", new object[] {
+                    UserID}, callback, asyncState);
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet EndGetBOM(System.IAsyncResult asyncResult) {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public void GetBOMAsync(string UserID) {
+        this.GetBOMAsync(UserID, null);
+    }
+    
+    /// <remarks/>
+    public void GetBOMAsync(string UserID, object userState) {
+        if ((this.GetBOMOperationCompleted == null)) {
+            this.GetBOMOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBOMOperationCompleted);
+        }
+        this.InvokeAsync("GetBOM", new object[] {
+                    UserID}, this.GetBOMOperationCompleted, userState);
+    }
+    
+    private void OnGetBOMOperationCompleted(object arg) {
+        if ((this.GetBOMCompleted != null)) {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetBOMCompleted(this, new GetBOMCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+    
+    /// <remarks/>
     public new void CancelAsync(object userState) {
         base.CancelAsync(userState);
     }
@@ -2215,6 +2261,32 @@ public partial class GetSAPUserCompletedEventArgs : System.ComponentModel.AsyncC
     private object[] results;
     
     internal GetSAPUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState) {
+        this.results = results;
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet Result {
+        get {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetBOMCompletedEventHandler(object sender, GetBOMCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetBOMCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    
+    private object[] results;
+    
+    internal GetBOMCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
             base(exception, cancelled, userState) {
         this.results = results;
     }

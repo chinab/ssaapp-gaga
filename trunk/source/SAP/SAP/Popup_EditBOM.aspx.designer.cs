@@ -8,45 +8,37 @@
 //------------------------------------------------------------------------------
 
 namespace SAP {
-    
-    
-    public partial class Popup_EditCostCenter {
+
+
+    public partial class Popup_EditBOM
+    {
         
         /// <summary>
-        /// Head1 control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// form2 control.
+        /// ScriptManagerEditItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form2;
+        protected global::System.Web.UI.ScriptManager ScriptManagerEditItem;
         
         /// <summary>
-        /// ScriptManagerEditWareHouse control.
+        /// editItemUpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManagerEditWareHouse;
-        
-        /// <summary>
-        /// editWareHouseUpdatePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel editWareHouseUpdatePanel;
+        protected global::System.Web.UI.UpdatePanel editItemUpdatePanel;
         
         /// <summary>
         /// txtFilter control.
@@ -67,30 +59,30 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.Button btnFilter;
         
         /// <summary>
-        /// listWareHouses control.
+        /// listItems control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView listWareHouses;
+        protected global::System.Web.UI.WebControls.ListView listItems;
         
         /// <summary>
-        /// ImageButton1 control.
+        /// btnAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.ImageButton btnAdd;
         
         /// <summary>
-        /// ImageButton2 control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
+        protected global::System.Web.UI.WebControls.ImageButton btnCancel;
     }
 }

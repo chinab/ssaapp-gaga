@@ -114,6 +114,9 @@ namespace SAP
                 case "60": //Goods Issue
                     str = "OIGE";
                     break;
+                case "67": //Transfer
+                    str = "OWTR";
+                    break;
 
                 case "97": //sales opportunity
                     str = "OOPR";
@@ -170,6 +173,9 @@ namespace SAP
                     break;
                 case "60": //Goods Issue
                     str = "IGE1";
+                    break;
+                case "67": //Transfer
+                    str = "WTR1";
                     break;
 
                 case "97": //sales opportunity

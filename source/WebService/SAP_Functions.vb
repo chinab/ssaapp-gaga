@@ -333,19 +333,7 @@
 
         Return dtJE
     End Function
-    Public Function GetLoginInfo(UserID As String) As DataSet
-        Try
-            Dim str As String
-            str = "select CardCode,CardName,Phone1 from OCRD T0 where CardCode='" + UserID + "'"
-            Dim dt As DataSet
-            Dim connect As New Connection()
-            connect.setDB(UserID)
-            dt = connect.ObjectGetAll_Query_SAP(str)
-            Return dt
-        Catch ex As Exception
-            Return Nothing
-        End Try
-    End Function
+    
 
     Public Function CreateUDF(ByVal tableName As String, ByVal fieldName As String, _
                               ByVal desc As String, ByVal fieldType As SAPbobsCOM.BoFieldTypes, ByVal Size As Integer, ByVal LinkTab As String, UserID As String) As String

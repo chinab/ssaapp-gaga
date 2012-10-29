@@ -289,7 +289,11 @@ Public Class MasterData
                 dt = a.Simulate_OPLN
             Else
                 connect.setDB(UserID)
-                dt = connect.ObjectGetAll_Query_SAP("select ListNum,ListName from opln")
+                Dim str As String = ""
+                str = "select ListNum,ListName from opln "
+                str = str + " union all select -1,'Last Purchase Price' "
+                str = str + " union all select -2,'Last Evaluated Price' "
+                dt = connect.ObjectGetAll_Query_SAP(str)
             End If
             Return dt
         Catch ex As Exception
@@ -508,6 +512,21 @@ Public Class MasterData
             Else
                 connect.setDB(UserID)
                 dt = connect.ObjectGetAll_Query_SAP("select UserID,User_Code from OUSR")
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    <WebMethod()> _
+    Public Function GetBOM(UserID As String) As DataSet
+        Try
+            Dim dt As New DataSet("OITT")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB(UserID)
+                dt = connect.ObjectGetAll_Query_SAP("select T1.ItemCode,T1.ItemName from OITT T0 join OITM T1 on T0.code=T1.ItemCode")
             End If
             Return dt
         Catch ex As Exception

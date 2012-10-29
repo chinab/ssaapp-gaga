@@ -1,6 +1,7 @@
 ﻿Imports System.Web.Services
 Imports System.Web.Services.Protocols
 Imports System.ComponentModel
+Imports System.Data.SqlClient
 
 ' To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line.
 ' <System.Web.Script.Services.ScriptService()> _
@@ -9,6 +10,7 @@ Imports System.ComponentModel
 <ToolboxItem(False)> _
 Public Class GetDefault
     Inherits System.Web.Services.WebService
+    Dim connect As New Connection()
 #Region "Default Infor"
     '- Goi ws de lay default vendor/customer
     '- default date = today
@@ -26,7 +28,7 @@ Public Class GetDefault
             Return a.GetDefaultLineInfo(UserID, cardCode, itemCode, Quantity, refDate)
         End If
     End Function
-    
+
     <WebMethod()> _
     Public Function GetDefaultBP(UserID As String, CardType As String) As DataSet
         If PublicVariable.Simulate Then
@@ -66,7 +68,7 @@ Public Class GetDefault
         Else
             Dim a As New SAP_Functions
             Return a.GetPromotion(UserID, ItemCode, CardCode, Quantity, DocDate, Amount)
-        End If              
+        End If
     End Function
     <WebMethod()> _
     Public Function GetCopyFromTo(Type As Integer, ObjType As String) As DataSet
@@ -99,13 +101,8 @@ Public Class GetDefault
 
     <WebMethod()> _
     Public Function GetLoginInfo(UserID As String) As DataSet
-        If PublicVariable.Simulate Then
-            Dim a As New Simulation
-            Return a.Simulate_GetDeafaultBP(UserID, "")
-        Else
-            Dim a As New SAP_Functions
-            Return a.GetLoginInfo(UserID)
-        End If
+        connect.setDB(UserID)
+        Return connect.ObjectGetAll_Query_SAP("select compnyName from oadm")
     End Function
     <WebMethod()> _
     Public Function GetOpenDocument(UserID As String, CardCode As String, DocType As String) As DataSet
@@ -159,5 +156,64 @@ Public Class GetDefault
             Dim a As New SAP_Functions
             Return a.CreateUDF("ORDR", "UserID", "UserID", SAPbobsCOM.BoFieldTypes.db_Alpha, 30, "", UserID)
         End If
+    End Function
+
+    <WebMethod()> _
+    Public Function TestConnection(ConnectionString As String) As String
+        Dim MyArr As Array
+        Dim sErrMsg As String = ""
+        Dim connectOk As Integer = 0
+        MyArr = ConnectionString.Split(";")
+        Dim sCon As String = "server= " + MyArr(3).ToString() + ";database=" + MyArr(0).ToString() + " ;uid=" + MyArr(4).ToString() + "; pwd=" + MyArr(5).ToString() + ";"
+        Dim sConnSAP As SqlConnection = New SqlConnection(sCon)
+
+        Try
+            sConnSAP.Open()
+
+            Dim newcompayne As New SAPbobsCOM.Company
+            newcompayne.CompanyDB = MyArr(0).ToString()
+            newcompayne.UserName = MyArr(1).ToString()
+            newcompayne.Password = MyArr(2).ToString()
+            newcompayne.Server = MyArr(3).ToString()
+            newcompayne.DbUserName = MyArr(4).ToString()
+            newcompayne.DbPassword = MyArr(5).ToString()
+            newcompayne.LicenseServer = MyArr(6)
+            If MyArr(7) = 2008 Then
+                newcompayne.DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2008
+            Else
+                newcompayne.DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2005
+            End If
+
+            If newcompayne.Connect() <> 0 Then
+                newcompayne.GetLastError(connectOk, sErrMsg)
+                Return sErrMsg
+            Else
+                Return "OK"
+            End If
+
+        Catch ex As Exception
+            Return ex.ToString
+        End Try
+
+        
+    End Function
+
+    <WebMethod()> _
+    Public Function GetBOMChild(UserID As String, ItemCode As String) As DataSet
+        Try
+            Dim dt As New DataSet("ITT1")
+            If PublicVariable.Simulate Then
+
+            Else
+                connect.setDB(UserID)
+                Dim str As String = ""
+                str = "select ROW_NUMBER() Over(Order By ItemCode) No,T1.ItemCode,T1.ItemName Dscription,T0.Quantity PlannedQty,T0.IssueMthd IssueType,T0.Warehouse wareHouse "
+                str = str + " from ITT1 T0 join OITM T1 on T1.ItemCode=T0.Code where T0.Father='" + ItemCode + "'"
+                dt = connect.ObjectGetAll_Query_SAP(str)
+            End If
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 End Class

@@ -264,4 +264,50 @@ Public Class Transaction
             Return ""
         End Try
     End Function
+
+    <WebMethod()> _
+    Public Function DeleteActivity(UserID As String, Key As String) As DataSet
+        Dim b As New SAP_Functions
+        Try
+            Dim sStr As String = "Operation Completed Successfully!"
+            If PublicVariable.Simulate Then
+                Dim a As New Simulation
+                Return a.Simulate_CreateTransaction()
+            Else
+
+                Dim oActSrv As SAPbobsCOM.ActivitiesService
+                Dim oCompanyService As SAPbobsCOM.CompanyService
+                Dim oAct As SAPbobsCOM.Activity
+                Dim actpara As SAPbobsCOM.ActivitiesParams
+
+                If Connection.bConnect = False Then
+                    connect.setDB(UserID)
+                    If Not connect.connectDB() Then
+                        Return b.ReturnMessage(-1, "Connect SAP failed")
+                    End If
+                End If
+
+                oCompanyService = PublicVariable.oCompany.GetCompanyService
+                oActSrv = oCompanyService.GetBusinessService(SAPbobsCOM.ServiceTypes.ActivitiesService)
+                oAct = oActSrv.GetDataInterface(SAPbobsCOM.ActivitiesServiceDataInterfaces.asActivity)
+                actpara = oActSrv.GetDataInterface(SAPbobsCOM.ActivitiesServiceDataInterfaces.asActivitiesParams)
+
+                actpara.Add()
+                actpara.Item(0).ActivityCode = Key
+                oAct = oActSrv.GetActivity(actpara)
+                'oActSrv.DeleteActivity(actpara)
+
+                Return b.ReturnMessage(oAct.ActivityCode, "Operation Sucessful!")
+                'If lErrCode <> 0 Then
+                '    PublicVariable.oCompany.GetLastError(lErrCode, sErrMsg)
+                '    Return b.ReturnMessage(lErrCode, sErrMsg)
+                'Else
+                '    Return b.ReturnMessage(lErrCode, "Operation Sucessful!")
+                'End If
+            End If
+
+        Catch ex As Exception
+            Return b.ReturnMessage(-1, ex.ToString)
+        End Try
+    End Function
 End Class

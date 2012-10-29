@@ -217,8 +217,8 @@
                                 <h4 class="head"><a href="#">Inventory Transactions</a></h4>
                                 <ul>
                                      <li><a class="subitem" href="#">Inventory Transfer</a></li>
-                                    <li><a class="subitem" href="/GoodsReceipt.aspx">Goods Receipt</a></li>
-                                    <li><a class="subitem" href="/GoodsIssue.aspx">Goods Issue</a></li>
+                                    <li><a class="subitem" href="/Inventory/GoodsReceipt.aspx">Goods Receipt</a></li>
+                                    <li><a class="subitem" href="/Inventory/GoodsIssue.aspx">Goods Issue</a></li>
                                 </ul>
                             </li>
                         </ul>

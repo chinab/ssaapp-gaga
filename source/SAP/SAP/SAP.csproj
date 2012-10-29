@@ -64,11 +64,12 @@
     <Content Include="Admin\user_style.css" />
     <Content Include="ARInvoice_VHF.aspx" />
     <Content Include="BusinessPartnerMaster.aspx" />
-    <Content Include="GoodsIssue.aspx" />
+    <Content Include="Admin\Popup_Connection.aspx" />
+    <Content Include="Inventory\GoodsIssue.aspx" />
     <Content Include="JournalEntry.aspx" />
     <Content Include="js\jquery.js" />
     <Content Include="Popup_EditAccount.aspx" />
-    <Content Include="GoodsReceipt.aspx" />
+    <Content Include="Inventory\GoodsReceipt.aspx" />
     <Content Include="Popup_OpenDocument.aspx" />
     <Content Include="ServiceCall.aspx" />
     <Content Include="Popup_EditTerritory.aspx" />
@@ -242,11 +243,18 @@
     <Compile Include="BusinessPartnerMaster.aspx.designer.cs">
       <DependentUpon>BusinessPartnerMaster.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GoodsIssue.aspx.cs">
+    <Compile Include="Admin\Popup_Connection.aspx.cs">
+      <DependentUpon>Popup_Connection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Popup_Connection.aspx.designer.cs">
+      <DependentUpon>Popup_Connection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\GoodsIssue.aspx.cs">
       <DependentUpon>GoodsIssue.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GoodsIssue.aspx.designer.cs">
+    <Compile Include="Inventory\GoodsIssue.aspx.designer.cs">
       <DependentUpon>GoodsIssue.aspx</DependentUpon>
     </Compile>
     <Compile Include="JournalEntry.aspx.cs">
@@ -270,11 +278,11 @@
     <Compile Include="Popup_EditAccount.aspx.designer.cs">
       <DependentUpon>Popup_EditAccount.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GoodsReceipt.aspx.cs">
+    <Compile Include="Inventory\GoodsReceipt.aspx.cs">
       <DependentUpon>GoodsReceipt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GoodsReceipt.aspx.designer.cs">
+    <Compile Include="Inventory\GoodsReceipt.aspx.designer.cs">
       <DependentUpon>GoodsReceipt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup_OpenDocument.aspx.cs">

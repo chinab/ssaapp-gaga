@@ -202,7 +202,7 @@
                         <div id="tabs-1"">
                             <table class="detail_table">
                                 <tr>
-                                    <td class="detail_table_td_150">
+                                    <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                         <span>Predicted Closing In</span>
                                     </td>
                                     <td>
@@ -215,7 +215,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_150">
+                                    <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                         <span>Predicted Closing Date</span>
                                     </td>
                                     <td>
@@ -223,7 +223,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_150">
+                                    <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                         <span>Potential Amount</span>
                                     </td>
                                     <td>
@@ -231,7 +231,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_150">
+                                    <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                         <span>Weighted Amount</span>
                                     </td>
                                     <td>
@@ -239,7 +239,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_150">
+                                    <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                         <span>Gross Profit %</span>
                                     </td>
                                     <td>
@@ -247,7 +247,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_150">
+                                    <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                         <span>Gross Profit Total</span>
                                     </td>
                                     <td>
@@ -255,7 +255,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_150">
+                                    <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                         <span>Level of Interest</span>
                                     </td>
                                     <td>
@@ -274,7 +274,7 @@
                         <div id="tabs-2">
                             <table class="detail_table">
                                 <tr>
-                                    <td class="detail_table_td_100" style="width: 149px">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>BP Channel Code</span>
                                     </td>
                                     <td>
@@ -285,7 +285,7 @@
                                         
                                     </asp:HyperLink>
                                     </td>
-                                    <td class="detail_table_td_100" style="width: 131px">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>BP Project</span>
                                     </td>
                                     <td>
@@ -299,13 +299,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100" style="width: 149px">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>BP Channel Name</span>
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtJournalRemark1" runat="server"></asp:TextBox>
                                     </td>
-                                    <td class="detail_table_td_100" style="width: 131px">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Information Source</span>
                                     </td>
                                     <td>
@@ -314,7 +314,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100" style="width: 149px">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>BP Channel Contact</span>
                                     </td>
                                     <td>
@@ -329,7 +329,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100" style="width: 149px">
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                         <span>Remarks</span>
                                     </td>
                                     <td>

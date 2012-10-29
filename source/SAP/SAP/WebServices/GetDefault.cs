@@ -48,6 +48,8 @@ namespace SAP
 
         private System.Threading.SendOrPostCallback CreateUDFOperationCompleted;
 
+        private System.Threading.SendOrPostCallback TestConnectionOperationCompleted;
+
         /// <remarks/>
         public GetDefault()
         {
@@ -84,6 +86,9 @@ namespace SAP
 
         /// <remarks/>
         public event CreateUDFCompletedEventHandler CreateUDFCompleted;
+
+        /// <remarks/>
+        public event TestConnectionCompletedEventHandler TestConnectionCompleted;
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetDefaultLineInfo", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -566,6 +571,55 @@ namespace SAP
         }
 
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/TestConnection", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string TestConnection(string ConnectionString)
+        {
+            object[] results = this.Invoke("TestConnection", new object[] {
+                    ConnectionString});
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginTestConnection(string ConnectionString, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("TestConnection", new object[] {
+                    ConnectionString}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public string EndTestConnection(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public void TestConnectionAsync(string ConnectionString)
+        {
+            this.TestConnectionAsync(ConnectionString, null);
+        }
+
+        /// <remarks/>
+        public void TestConnectionAsync(string ConnectionString, object userState)
+        {
+            if ((this.TestConnectionOperationCompleted == null))
+            {
+                this.TestConnectionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTestConnectionOperationCompleted);
+            }
+            this.InvokeAsync("TestConnection", new object[] {
+                    ConnectionString}, this.TestConnectionOperationCompleted, userState);
+        }
+
+        private void OnTestConnectionOperationCompleted(object arg)
+        {
+            if ((this.TestConnectionCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.TestConnectionCompleted(this, new TestConnectionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
         public new void CancelAsync(object userState)
         {
             base.CancelAsync(userState);
@@ -826,6 +880,36 @@ namespace SAP
         private object[] results;
 
         internal CreateUDFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public string Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    public delegate void TestConnectionCompletedEventHandler(object sender, TestConnectionCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class TestConnectionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal TestConnectionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;

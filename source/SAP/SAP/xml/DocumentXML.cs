@@ -13,77 +13,44 @@ namespace SAP
     {
        public String ToXMLStringFromDS(String ObjType, DataTable dtHeader, DataTable dtLine, String RemoveColums)
         {
-            DataTable ds = dtHeader;
-            DataTable ds1 = dtLine;
-            Array arr=RemoveColums.Split(';');
-            GeneralFunctions gf = new GeneralFunctions();
-            StringBuilder XmlString = new StringBuilder();
-            XmlWriter writer = XmlWriter.Create(XmlString);
-            writer.WriteStartDocument();
+            try
             {
-                writer.WriteStartElement("BOM");
+                DataTable ds = dtHeader;
+                DataTable ds1 = dtLine;
+                Array arr = RemoveColums.Split(';');
+                GeneralFunctions gf = new GeneralFunctions();
+                StringBuilder XmlString = new StringBuilder();
+                XmlWriter writer = XmlWriter.Create(XmlString);
+                writer.WriteStartDocument();
                 {
-                    writer.WriteStartElement("BO");
+                    writer.WriteStartElement("BOM");
                     {
-                        #region write ADMINFO_ELEMENT
-                        writer.WriteStartElement("AdmInfo");
+                        writer.WriteStartElement("BO");
                         {
-                            writer.WriteStartElement("Object");
+                            #region write ADMINFO_ELEMENT
+                            writer.WriteStartElement("AdmInfo");
                             {
-                                writer.WriteString(ObjType);
-                            }
-                            writer.WriteEndElement();
-                        }
-                        writer.WriteEndElement();
-                        #endregion
-
-                        #region Header XML
-                        foreach (DataRow row in ds.Rows)
-                        {
-                            writer.WriteStartElement(gf.GetHeaderTableTag(ObjType));
-                            {
-                                writer.WriteStartElement("row");
+                                writer.WriteStartElement("Object");
                                 {
-                                    foreach (DataColumn column in ds.Columns)
-                                    {
-                                        if (Array.IndexOf(arr, column.ColumnName) < 0)
-                                        {
-                                            if (column.ColumnName != "No")//phan lon cac table deu co column No nay
-                                            {
-                                                if (row[column].ToString() != "")
-                                                {
-                                                    writer.WriteStartElement(column.ColumnName); //Write Tag
-                                                    {
-                                                        writer.WriteString(row[column].ToString());
-                                                    }
-                                                    writer.WriteEndElement();
-                                                }
-                                                
-                                            }
-                                        }
-                                        
-                                    }
+                                    writer.WriteString(ObjType);
                                 }
                                 writer.WriteEndElement();
                             }
                             writer.WriteEndElement();
-                        }
-                        #endregion
+                            #endregion
 
-                       #region LineXML 1
-                        if (ds1 != null)
-                        {
-                            writer.WriteStartElement(gf.GetLineTableTag(ObjType, 1));
+                            #region Header XML
+                            foreach (DataRow row in ds.Rows)
                             {
-                                foreach (DataRow row in ds1.Rows)
+                                writer.WriteStartElement(gf.GetHeaderTableTag(ObjType));
                                 {
                                     writer.WriteStartElement("row");
                                     {
-                                        foreach (DataColumn column in ds1.Columns)
+                                        foreach (DataColumn column in ds.Columns)
                                         {
                                             if (Array.IndexOf(arr, column.ColumnName) < 0)
                                             {
-                                                if (column.ColumnName != "No")
+                                                if (column.ColumnName != "No")//phan lon cac table deu co column No nay
                                                 {
                                                     if (row[column].ToString() != "")
                                                     {
@@ -93,26 +60,66 @@ namespace SAP
                                                         }
                                                         writer.WriteEndElement();
                                                     }
+
                                                 }
                                             }
+
                                         }
                                     }
                                     writer.WriteEndElement();
                                 }
+                                writer.WriteEndElement();
                             }
-                            writer.WriteEndElement();
+                            #endregion
+
+                            #region LineXML 1
+                            if (ds1 != null)
+                            {
+                                writer.WriteStartElement(gf.GetLineTableTag(ObjType, 1));
+                                {
+                                    foreach (DataRow row in ds1.Rows)
+                                    {
+                                        writer.WriteStartElement("row");
+                                        {
+                                            foreach (DataColumn column in ds1.Columns)
+                                            {
+                                                if (Array.IndexOf(arr, column.ColumnName) < 0)
+                                                {
+                                                    if (column.ColumnName != "No")
+                                                    {
+                                                        if (row[column].ToString() != "")
+                                                        {
+                                                            writer.WriteStartElement(column.ColumnName); //Write Tag
+                                                            {
+                                                                writer.WriteString(row[column].ToString());
+                                                            }
+                                                            writer.WriteEndElement();
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        writer.WriteEndElement();
+                                    }
+                                }
+                                writer.WriteEndElement();
+                            }
+                            #endregion
                         }
-                       #endregion
+                        writer.WriteEndElement();
                     }
                     writer.WriteEndElement();
                 }
-                writer.WriteEndElement();
+                writer.WriteEndDocument();
+
+                writer.Flush();
+
+                return XmlString.ToString();
             }
-            writer.WriteEndDocument();
-
-            writer.Flush();
-
-            return XmlString.ToString();
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
         }
        
     }

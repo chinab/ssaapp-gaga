@@ -1,5 +1,5 @@
-﻿<%@ Page Title="Goods Issue" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
-    CodeBehind="GoodsIssue.aspx.cs" Inherits="SAP.GoodsIssue" %>
+﻿<%@ Page Title="Inventory Transfer" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
+    CodeBehind="InventoryTransfer.aspx.cs" Inherits="SAP.InventoryTransfer" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type="text/javascript">
@@ -9,13 +9,57 @@
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
                 <div id="title-form" style="border-bottom: 2px solid black;">
-                    <h2>Goods Issue</h2>
+                    <h2>Inventory Transfer</h2>
                 </div>
                 <div id="header-form">
-                    <div style="width: 706px">
+                    <div class="left">
                         <table class="detail_table">
                             <tr>
-                                <td class="detail_table_td_100" style="width: 195px">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
+                                    <span>Business Partner</span>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtBP" runat="server" Enabled="False"></asp:TextBox>
+                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditCustomer.aspx','');"
+                                        runat="server">
+                                        <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                    </asp:HyperLink>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
+                                    <span>Name</span>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtBPName" runat="server" ></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
+                                    <span>Contact Person</span>
+                                </td>
+                                    <td>
+                                         <asp:DropDownList ID="ddlContactPerson" runat="server" Width="120px" 
+                                        Enabled="False">
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
+                                    <span>Ship To</span>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtAddress" runat="server" Width="204px" Height="65px" 
+                                        TextMode="MultiLine" ></asp:TextBox>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                    <div class="right">
+                        <table class="detail_table">
+                            <tr>
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Posting Date</span>
                                 </td>
                                 <td>
@@ -23,7 +67,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_100" style="width: 195px">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Document Date</span>
                                 </td>
                                 <td>
@@ -31,28 +75,55 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_100" style="width: 195px">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Remarks</span>
                                 </td>
                                     <td>
-                                         <asp:TextBox ID="txtRemarks" runat="server" Width="495px"></asp:TextBox>
+                                         <asp:TextBox ID="txtRemarks" runat="server" Width="250px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="detail_table_td_100" style="width: 195px">
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Journal Remark</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtJournalRemark" runat="server" Width="496px" ></asp:TextBox>
+                                    <asp:TextBox ID="txtJournalRemark" runat="server" Width="250px" ></asp:TextBox>
                                 </td>
                             </tr>
                             
                         </table>
                     </div>
-                    
+                    <div class="right">
+                        <table class="detail_table">
+                            <tr>
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
+                                    <span>From Warehouse</span>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtFromWarehouse" runat="server" class="txtDate" 
+                                        Enabled="False"></asp:TextBox>
+                                    <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('../Popup_EditWareHouse.aspx','');"
+                                        runat="server">
+                                        <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
+                                    </asp:HyperLink>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
+                                    <span>Price List</span>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlPriceList" runat="server" Width="120px">
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </div>
                 </div>
                 <div class="clear">
                 </div>
+                
                 <div id="content-form">
                     <div id="tabs">
                         <ul>
@@ -67,7 +138,8 @@
                                 OnItemInserted="lvStage_ItemInserted"
                                 OnItemInserting="lvStage_ItemInserting" OnItemCommand="lvStage_ItemCommand"
                                 OnItemEditing="lvStage_ItemEditing" onitemupdating="lvStage_ItemUpdating" 
-                                ViewStateMode="Enabled" onitemcreated="lvStage_ItemCreated" onitemdeleting="lvStage_ItemDeleting"
+                                ViewStateMode="Enabled" onitemcreated="lvStage_ItemCreated" 
+                                onitemdeleting="lvStage_ItemDeleting" onitemcanceling="lvStage_ItemCanceling"
                                  >
                                 <LayoutTemplate>
                                     <table class="data_table">
@@ -86,18 +158,11 @@
                                             <th >
                                                 <span>Quantity</span>
                                             </th>
-                                            <th >
-                                                <span>Unit Price</span>
-                                            </th>
-                                            <th >
-                                                <span>Total</span>
-                                            </th>
+                                           
                                             <th >
                                                 <span>Warehouse</span>
                                             </th>
-                                            <th>
-                                                <span>Account Code</span>
-                                            </th>
+                                            
                                             
                                         </tr>
                                         <tr ID="itemPlaceholder" runat="server">
@@ -125,18 +190,11 @@
                                         <td>
                                             <asp:Label ID="lblQuantity" runat="server"><%#Eval("Quantity")%></asp:Label>
                                         </td>
-                                        <td>
-                                            <asp:Label ID="lblPrice" runat="server"><%#Eval("Price")%></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lblTotal" runat="server"><%#Eval("LineTotal")%></asp:Label>
-                                        </td>
+                                       
                                         <td>
                                             <asp:Label ID="lblWarehouse" runat="server"><%#Eval("WhsCode")%></asp:Label>
                                         </td>
-                                        <td>
-                                            <asp:Label ID="lblAccount" runat="server"><%#Eval("AcctCode")%></asp:Label>
-                                        </td>
+                                       
                                                                             
                                     </tr>
                                 </ItemTemplate>
@@ -164,12 +222,7 @@
                                         <td>
                                             <asp:TextBox ID="txtQuantityEdit" runat="server" Text='<%# Bind("Quantity") %>'/>
                                         </td>
-                                        <td>
-                                            <asp:TextBox ID="txtPriceEdit" runat="server" Text='<%# Bind("Price") %>'/>     
-                                        </td>
-                                        <td>
-                                            <asp:TextBox ID="txtTotalEdit" runat="server" Text='<%# Bind("LineTotal") %>'/>
-                                        </td>
+                                       
                                         <td>
                                             <asp:Label ID="lblWarehouse" runat="server" Text='<%# Bind("WhsCode") %>'/>
                                             <asp:HyperLink ID="linkWarehouseLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"../Popup_EditWareHouse.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
@@ -177,13 +230,7 @@
                                                 <asp:Image ID="imgWarehouseLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
-                                        <td>
-                                             <asp:Label ID="lblAccount" runat="server" Text='<%#Bind("AcctCode")%>' />
-                                             <asp:HyperLink ID="linkAccount" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"../Popup_EditAccount.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
-                                                runat="server">
-                                                <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
-                                        </td>
+                                        
                                        
                                     </tr>
                                 </EditItemTemplate>
@@ -212,12 +259,7 @@
                                         <td>
                                             <asp:TextBox ID="txtQuantityInsert" runat="server" Text='<%# Bind("Quantity") %>'/>
                                         </td>
-                                        <td>
-                                            <asp:TextBox ID="txtPriceInsert" runat="server" Text='<%# Bind("Price") %>'/>     
-                                        </td>
-                                        <td>
-                                            <asp:TextBox ID="txtTotalInsert" runat="server" Text='<%# Bind("LineTotal") %>'/>
-                                        </td>
+                                        
                                         <td>
                                             <asp:Label runat="server" ID="lblWarehouse"></asp:Label>
                                              <asp:HyperLink ID="linkWarehouse" NavigateUrl='#'
@@ -225,13 +267,7 @@
                                                 <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
                                         </td>
-                                        <td>
-                                             <asp:Label runat="server" ID="lblAccount"></asp:Label>
-                                              <asp:HyperLink ID="linkAcount" NavigateUrl='#'
-                                                runat="server">
-                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
-                                        </td>
+                                       
                                     </tr>
                                 </InsertItemTemplate>
                                 <EmptyDataTemplate>
@@ -250,20 +286,11 @@
                                                 <span>Quantity</span>
                                             </th>
                                             <th >
-                                                <span>Unit Price</span>
-                                            </th>
-                                            <th >
-                                                <span>Total</span>
-                                            </th>
-                                            <th >
                                                 <span>Warehouse</span>
-                                            </th>
-                                            <th>
-                                                <span>Account Code</span>
                                             </th>
                                         </tr>
                                         <tr>
-                                            <td colspan="8">
+                                            <td colspan="5">
                                                 <span>No Data</span>
                                             </td>
                                         </tr>
@@ -287,12 +314,13 @@
                  
                 </div>
                 <div id="footer-form">
-                    <div class="left">
+                    <table>
+                        <td style="width: 100%;" align="left" valign="bottom">
                         <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button"  OnClientClick="Dialog.showLoader();"
                             CommandName="Login" Height="19px" Width="65px" 
                             ImageUrl="~/skin/images/SAP_Add.png" onclick="btnAdd_Click" />
-                    </div>
-                    
+                        </td>
+                    </table>
                     <div class="clear">
                     </div>
                 </div>

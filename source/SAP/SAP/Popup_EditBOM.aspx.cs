@@ -4,26 +4,27 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using SAP.WebServices;
+using System.Data;
 
 namespace SAP
 {
-    public partial class Popup_EditCostCenter : System.Web.UI.Page
+    public partial class Popup_EditBOM : System.Web.UI.Page
     {
-        protected static DataSet CostCenterItems;
+        protected static DataSet itemMasters;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                String Dimension = Request.QueryString["Dimension"];
+
                 MasterData masterDataWS = new MasterData();
-                CostCenterItems = masterDataWS.GetCostCenter(Int32.Parse(Dimension), User.Identity.Name);
+                itemMasters = masterDataWS.GetBOM(User.Identity.Name);
                 BindCategories("");
-                editWareHouseUpdatePanel.Update();
+                editItemUpdatePanel.Update();
 
             }
         }
+
 
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
         {
@@ -37,35 +38,31 @@ namespace SAP
             try
             {
                 // Simple created a table to bind with Grid view and populated it with data.
-                DataTable gridTable = new DataTable("WareHouses");
+                DataTable gridTable = new DataTable("Items");
                 gridTable.Columns.Add("Selected");
                 gridTable.Columns.Add("No");
                 gridTable.Columns.Add("Code");
                 gridTable.Columns.Add("Name");
-                DataTable warehouseTable = CostCenterItems.Tables[0];
+                DataTable itemsTable = itemMasters.Tables[0];
                 DataRow dr;
                 int i = 0;
-                foreach (DataRow row in warehouseTable.Rows)
+                foreach (DataRow row in itemsTable.Rows)
                 {
                     if (("" + row[0].ToString() + row[1].ToString()).Trim().IndexOf(CategoryFilter.Trim()) >= 0)
                     {
                         dr = gridTable.NewRow();
-                        if (i == 0)
-                            dr["Selected"] = "checked";
-                        else
-                            dr["Selected"] = "";
-                        dr["No"] = i.ToString(); warehouseTable.Rows.IndexOf(row);
+                        dr["No"] = i.ToString(); 
+                        itemsTable.Rows.IndexOf(row);
                         dr["Code"] = row[0].ToString();
-                        dr["Name"] = row[1].ToString();
-                        
+                        dr["Name"] = row[1].ToString();                        
                         gridTable.Rows.Add(dr);
                     }
                     i++;
                 }
-
-                listWareHouses.DataSource = gridTable;
-                listWareHouses.DataBind();
-                editWareHouseUpdatePanel.Update();
+                gridTable.Rows[gridTable.Rows.Count-1]["Selected"] = "checked";
+                listItems.DataSource = gridTable;
+                listItems.DataBind();
+                editItemUpdatePanel.Update();
             }
             catch (Exception)
             {
@@ -87,13 +84,14 @@ namespace SAP
             string selectedValue = Request.Form["MyRadioButton"];
             if (!String.IsNullOrEmpty(selectedValue))
             {
-                List<CostCenter> list = CostCenter.extractFromDataSet(CostCenterItems.Tables[0]);
-                CostCenter chosenWareHouse = list[Int32.Parse(selectedValue)];
-                Session["chosenCostCenter"] = chosenWareHouse;
+                List<BOM> list = BOM.extractFromDataSet(itemMasters.Tables[0]);
+                BOM chosenItem = list[Int32.Parse(selectedValue)];
+                Session["chosenItem"] = chosenItem;
                 Session["chosenItemNo"] = Request.QueryString["id"];
             }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKCostCenterPopup", "Main.okDialogClick('EditCostCenterCallBack');", true);
-
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopup", "Main.okDialogClick('EditBOMCallBack');", true);
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "ShowLoading", "Dialog.showLoader();", true);
+       
         }
     }
 }

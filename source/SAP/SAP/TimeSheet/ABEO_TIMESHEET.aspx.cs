@@ -211,7 +211,7 @@ namespace SAP
 
                         switch (this.Request["__EVENTARGUMENT"].ToString())
                         {                    
-                            case "EditVendorCallBack":
+                            case "EditCustomerCallBack":
                                 BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                                 if (chosenPartner != null)
                                 {

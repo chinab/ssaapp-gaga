@@ -8,6 +8,9 @@ using System.Data;
 using SAP.WebServices;
 using System.Collections;
 using System.Globalization;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace SAP
 {
@@ -220,8 +223,7 @@ namespace SAP
                         dt1.Columns.Remove(column);
                     }
                 }
-                
-                else
+                if (Array.IndexOf(arr, column.ColumnName) >= 0)
                 {
                     if (column.DataType == typeof(DateTime))
                     {
@@ -231,10 +233,11 @@ namespace SAP
                         foreach (DataRow row in dt1.Rows)
                         {
                             DateTime d = Convert.ToDateTime(row[column].ToString(), ivC);
-                            row[column.ColumnName+"_1xxx"] = String.Format("{0:yyyyMMdd}", d);
+                            row[column.ColumnName + "_1xxx"] = String.Format("{0:yyyyMMdd}", d);
                         }
                     }
                 }
+               
             }
             if (strcolumnremove != "")
             {
@@ -387,5 +390,19 @@ namespace SAP
             return dt;
         }
         #endregion
+
+
+        public DataTable RunQuery(String Query)
+        {
+            DataTable results = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ToString()))
+            {
+                SqlCommand command = new SqlCommand(Query, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                conn.Open();
+                adapter.Fill(results);
+            }
+            return results;
+        }
     }
 }

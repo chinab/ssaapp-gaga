@@ -13,9 +13,8 @@ namespace SAP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            GetDefault df = new GetDefault();
-            DataSet ds = df.GetLoginInfo(HttpContext.Current.User.Identity.Name);
-            lblCompany.Text=ds.Tables[0].Rows[0]["compnyName"].ToString();
+            MasterData masterDataWS = new MasterData();
+            lblCompany.Text = masterDataWS.GetCompanySetting(HttpContext.Current.User.Identity.Name).Tables[0].Rows[0]["CompanyName"].ToString();
         }
 
         protected void btnAddNew_Click(object sender, ImageClickEventArgs e)

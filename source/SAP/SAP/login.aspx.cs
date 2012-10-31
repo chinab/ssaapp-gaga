@@ -15,6 +15,10 @@ namespace SAP
             {
                 if (User.Identity.IsAuthenticated == true)
                 {
+                    GetDefault df = new GetDefault();
+                    df.GetConnection(User.Identity.Name);
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                                          "Dialog.hideLoader();", true);
                       Response.Redirect("Homepage.aspx");
                 }
             }

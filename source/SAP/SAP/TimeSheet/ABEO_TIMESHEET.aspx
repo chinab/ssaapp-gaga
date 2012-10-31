@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ABEO_TIMESHEET" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
+﻿<%@ Page Title="ABEO_TIMESHEET" Language="C#" MasterPageFile="~/Main.Master" validateRequest="false" AutoEventWireup="true"
     CodeBehind="ABEO_TIMESHEET.aspx.cs" Inherits="SAP.ABEO_TIMESHEET" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -11,61 +11,45 @@
             <div id="contentData" style="padding-left: 15px;">
              <div id="menu-action" style="margin-left: -15px;">
                     <ul>
-                        <li>
-                            <asp:ImageButton ID="ImageButton2" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/preview.png" 
-                                    onclick="btnAddNew_Click" Height="22px" Width="22px" />
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/preview.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/print.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/excel.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/pdf.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/word.png" /></a></li>
+                        
+                         <li>
+                            <asp:HyperLink ID="linkNew" runat="server">
+                                <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/icon/addnew.png" />
+                            </asp:HyperLink>
                         </li>
                         <li>
-                            <asp:ImageButton ID="ImageButton3" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/print.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                            <asp:HyperLink ID="linkFirst" runat="server">
+                                <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/first.png" />
+                            </asp:HyperLink>
                         </li>
                         <li>
-                            <asp:ImageButton ID="ImageButton4" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/email.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                            <asp:HyperLink ID="linkPrevious" runat="server">
+                                <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/icon/previous.png" />
+                            </asp:HyperLink>
                         </li>
                         <li>
-                            <asp:ImageButton ID="ImageButton5" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/excel.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                            <asp:HyperLink ID="linkNext" runat="server">
+                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/next.png" />
+                            </asp:HyperLink>
                         </li>
                         <li>
-                            <asp:ImageButton ID="ImageButton6" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/pdf.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                            <asp:HyperLink ID="linkLast" runat="server">
+                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/last.png" />
+                            </asp:HyperLink>
                         </li>
-                        <li>
-                             <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/word.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
-                        <li>
-                            <asp:ImageButton ID="btnAddNew" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/addnew.png" 
-                                    onclick="btnAddNew_Click" Height="22px"/>
-                        </li>
-                        <li>
-                            <asp:ImageButton ID="ImageButton7" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/first.png" 
-                                    onclick="btnAddNew_Click" Height="22px"/>
-                        </li>
-                        <li>
-                            <asp:ImageButton ID="ImageButton8" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/previous.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
-                        </li>
-                        <li>
-                            <asp:ImageButton ID="ImageButton9" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/next.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
-                        </li>
-                        <li>
-                            <asp:ImageButton ID="ImageButton10" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/last.png" 
-                                    onclick="btnAddNew_Click" Height="22px"/>
-                        </li>
-                    </ul>                    
+                 </ul>                    
                 </div>
                 <div id="title-form" style="border-bottom: 2px solid black;">
                     <h2>ABEO TIMESHEET</h2>
@@ -110,22 +94,6 @@
                                     </asp:DropDownList>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
-                                    <span>Assigned To</span></td>
-                                <td>
-                                    <asp:DropDownList ID="ddlAssignTo" runat="server" Width="70px" Enabled="False">
-                                        <asp:ListItem Text="User" Value="C"></asp:ListItem>
-                                        <asp:ListItem Text="Employee" Value="M"></asp:ListItem>
-                                    </asp:DropDownList>
-                                    <asp:TextBox ID="TextBox1" runat="server" Enabled="false" Text="" 
-                                        BackColor="#D5DCE0" Width="120px"></asp:TextBox>
-                                    <asp:HyperLink ID="HyperLink1" NavigateUrl="#"
-                                        runat="server">
-                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                    </asp:HyperLink>
-                                </td>
-                            </tr>
                         </table>
                     </div>
                     <div class="right">
@@ -157,17 +125,6 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtBPName" runat="server" Enabled="false" BackColor="#D5DCE0"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
-                                    <span>Contact Person</span>
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlContactPerson" runat="server" Width="120px" 
-                                        Enabled="False">
-                                    </asp:DropDownList>
-                                    
                                 </td>
                             </tr>
                         </table>
@@ -220,8 +177,17 @@
                                         <span>Details (*)</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtRemark" runat="server" Height="200px" 
-                                            TextMode="MultiLine" Width="652px"></asp:TextBox>
+                                        <SAP:FreeTextBox  ID="txtRemark" runat="server" Width="650px" Height="160px" ImageGalleryUrl="ftb.imagegallery.aspx?rif=/imagespath/&cif=~/images/" 
+                                             
+                                            ToolbarLayout=" ParagraphMenu,FontFacesMenu,FontSizesMenu,FontForeColorsMenu|
+                                            Bold,Italic,Underline,Strikethrough;Superscript,Subscript,RemoveFormat|
+                                            JustifyLeft,JustifyRight,JustifyCenter,JustifyFull;BulletedList,NumberedList,Indent,Outdent;
+                                            CreateLink,Unlink,InsertRule|Cut,Copy,Paste;Undo,Redo,Print, InsertImageFromGallery, InsertTable,Preview,SelectAll" 
+                                            SupportFolder="../aspnet_client/FreeTextBox/">
+                                        </SAP:FreeTextBox>
+
+                                        <%--<asp:TextBox ID="txtRemark" runat="server" Height="200px" 
+                                            TextMode="MultiLine" Width="652px"></asp:TextBox>--%>
                                     </td>
                                 </tr>
                                 <tr>
@@ -312,14 +278,14 @@
                     
                     <br />
                 </div>
-                <div class="clear">
-                </div>
                 <div id="footer-form">
                     <div class="left">
                         <asp:ImageButton ID="imgAdd" runat="server" AlternateText="button" 
                              Height="19px" Width="65px" 
                             ImageUrl="~/skin/images/SAP_Add.png" onclick="imgAdd_Click" OnClientClick="Dialog.showLoader();"/>
-                    
+                    <asp:ImageButton ID="imgUpdate" runat="server" AlternateText="button" 
+                             Height="19px" Width="65px" 
+                            ImageUrl="~/skin/images/SAP_update.png" onclick="imgAdd_Click" OnClientClick="Dialog.showLoader();"/>
                     </div>
                     <div class="clear">
                     </div>

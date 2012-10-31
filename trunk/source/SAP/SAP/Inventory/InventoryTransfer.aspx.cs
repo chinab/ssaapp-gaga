@@ -185,6 +185,7 @@ namespace SAP
             }
             catch (Exception ex)
             {
+                Session["errorMessage"] = ex.ToString();
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                                       "Main.setMasterMessage('" + ex.ToString() + "','');", true);
 

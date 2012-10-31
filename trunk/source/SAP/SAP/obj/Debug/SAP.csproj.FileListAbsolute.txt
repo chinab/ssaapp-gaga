@@ -1,0 +1,6 @@
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\bin\SAP.dll
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\bin\SAP.pdb
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\obj\Debug\ResolveAssemblyReference.cache
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\obj\Debug\SAP.dll
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\obj\Debug\SAP.pdb
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\obj\Debug\SAP.dll.licenses

@@ -22,13 +22,13 @@
                             <img alt="" src="/skin/icon/pdf.png" /></a></li>
                         <li><a href="#">
                             <img alt="" src="/skin/icon/word.png" /></a></li>
-                        <li><a href="#">
-                            <img alt="" src="/skin/icon/addnew.png" /></a>
-                            <%--          <asp:ImageButton ID="btnAddNew" runat="server" AlternateText="button" 
-                            CommandName="Login" ImageUrl="~/skin/icon/addnew.png" 
-                    onclick="btnAddNew_Click" />--%>
-                        </li>
                          
+                        <li>
+                            <asp:HyperLink ID="linkNew" runat="server">
+                                <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/icon/addnew.png" />
+                            </asp:HyperLink>
+                        </li>
+
                         <li>
                             <asp:HyperLink ID="linkFirst" runat="server">
                                 <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/first.png" />
@@ -116,33 +116,10 @@
                     <div class="right">
                         <table class="detail_table">
                             <tr>
-                                <td class="detail_table_td_150" style="padding: 0 0 0 0;">
-                                    <table style="padding: 0 0 0 0;">
-                                        <tr>
-                                            <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
-                                                <span>No</span>
-                                            </td>
-                                            <td class="detail_table_td_50">
-                                                <asp:DropDownList ID="ddlNo" runat="server">
-                                                    <asp:ListItem Text="Primary"></asp:ListItem>
-                                                    <asp:ListItem Text="Alternative"></asp:ListItem>
-                                                </asp:DropDownList>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
+                                    <span>No</span>&nbsp;</td>
                                 <td>
-                                    <table style="padding: 0 0 0 0;">
-                                        <tr>
-                                            <td style="width: 50%" align="left">
-                                                <asp:TextBox Width="50px" ID="txtNoFrom" Text="" runat="server"></asp:TextBox>
-                                                <span>-</span>
-                                            </td>
-                                            <td style="width: 50%">
-                                                <asp:TextBox Width="60px" ID="txtNoTo" Text="" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <asp:TextBox ID="txtNo" runat="server" Enabled="false" Text=""></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>

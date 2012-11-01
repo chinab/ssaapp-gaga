@@ -50,6 +50,8 @@ namespace SAP
 
                 ddlSubject.Text = dtHeader.Rows[0]["CntctSbjct"].ToString();
                 txtBP.Text = dtHeader.Rows[0]["CardCode"].ToString();
+                //Transaction trx = new Transaction();
+                //trx.GetMarketingDocument_ReturnDS("2",
                 txtBPName.Text = "";
                 txtRemark.Text= HttpUtility.HtmlDecode(dtHeader.Rows[0]["Notes"].ToString());
                 txtSubject.Text = dtHeader.Rows[0]["Details"].ToString();
@@ -143,7 +145,7 @@ namespace SAP
                     dr["CntctType"] = ddlType.SelectedValue.ToString();
                     dr["CntctSbjct"] = ddlSubject.SelectedValue.ToString();
                     dr["CardCode"] = txtBP.Text;
-                    dr["Notes"] = HttpUtility.HtmlAttributeEncode(txtRemark.Text);
+                    dr["Notes"] = HttpUtility.HtmlEncode(txtRemark.Text);
                     dr["Details"] = txtSubject.Text;
 
                     dr["Recontact"] = Convert.ToDateTime(txtDate.Text, ivC).ToString("yyyyMMdd");
@@ -232,8 +234,6 @@ namespace SAP
                             ddlType.DataValueField = "code";
                             ddlType.DataBind();
 
-                            
-
                             string clgCode = Request.QueryString["clgCode"];
                             if (!String.IsNullOrEmpty(clgCode))
                             {
@@ -301,7 +301,7 @@ namespace SAP
                 {
                     try
                     {
-                        if (HttpUtility.HtmlAttributeEncode(txtRemark.Text) == "") 
+                        if (HttpUtility.HtmlEncode(txtRemark.Text) == "") 
                         {
                             Session["errorMessage"] = "Detail information can't be blank";
                             Session["requestXML"] = "";

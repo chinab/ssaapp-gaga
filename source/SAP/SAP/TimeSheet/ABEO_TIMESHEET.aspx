@@ -1,6 +1,6 @@
-﻿<%@ Page Title="ABEO_TIMESHEET" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
+﻿<%@ Page Title="ABEO_TIMESHEET" Language="C#" MasterPageFile="~/Main.Master" validateRequest="false" AutoEventWireup="true"
     CodeBehind="ABEO_TIMESHEET.aspx.cs" Inherits="SAP.ABEO_TIMESHEET" %>
-
+ <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type="text/javascript">
         Main.myUpdatePanelId = '<%= purchaseOrderUpdatePanel.ClientID %>';
@@ -177,14 +177,7 @@
                                         <span>Details (*)</span>
                                     </td>
                                     <td>
-                                        <SAP:FreeTextBox  ID="txtRemark" runat="server" Width="650px" Height="160px" ImageGalleryUrl="ftb.imagegallery.aspx?rif=/imagespath/&cif=~/images/" 
-                                             
-                                            ToolbarLayout=" ParagraphMenu,FontFacesMenu,FontSizesMenu,FontForeColorsMenu|
-                                            Bold,Italic,Underline,Strikethrough;Superscript,Subscript,RemoveFormat|
-                                            JustifyLeft,JustifyRight,JustifyCenter,JustifyFull;BulletedList,NumberedList,Indent,Outdent;
-                                            CreateLink,Unlink,InsertRule|Cut,Copy,Paste;Undo,Redo,Print, InsertImageFromGallery, InsertTable,Preview,SelectAll" 
-                                            SupportFolder="../aspnet_client/FreeTextBox/" EnableHtmlMode="False">
-                                        </SAP:FreeTextBox>
+                                         <CKEditor:CKEditorControl ID="txtRemark" runat="server" Height="135px"></CKEditor:CKEditorControl>
 
                                         <%--<asp:TextBox ID="txtRemark" runat="server" Height="200px" 
                                             TextMode="MultiLine" Width="652px"></asp:TextBox>--%>
@@ -285,8 +278,7 @@
                             ImageUrl="~/skin/images/SAP_Add.png" onclick="imgAdd_Click" OnClientClick="Dialog.showLoader();"/>
                     <asp:ImageButton ID="imgUpdate" runat="server" AlternateText="button" 
                              Height="19px" Width="65px" 
-                            ImageUrl="~/skin/images/SAP_update.png" onclick="imgAdd_Click" 
-                            CausesValidation="False"/>
+                            ImageUrl="~/skin/images/SAP_update.png" onclick="imgAdd_Click" OnClientClick="Dialog.showLoader();"/>
                     </div>
                     <div class="clear">
                     </div>

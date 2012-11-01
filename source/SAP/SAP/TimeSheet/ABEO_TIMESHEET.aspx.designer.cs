@@ -235,7 +235,7 @@ namespace SAP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FreeTextBoxControls.FreeTextBox txtRemark;
+        protected global::CKEditor.NET.CKEditorControl txtRemark;
         
         /// <summary>
         /// cbClosed control.

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ABEO_TIMESHEET" Language="C#" MasterPageFile="~/Main.Master" validateRequest="false" AutoEventWireup="true"
+﻿<%@ Page Title="ABEO_TIMESHEET" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
     CodeBehind="ABEO_TIMESHEET.aspx.cs" Inherits="SAP.ABEO_TIMESHEET" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -183,7 +183,7 @@
                                             Bold,Italic,Underline,Strikethrough;Superscript,Subscript,RemoveFormat|
                                             JustifyLeft,JustifyRight,JustifyCenter,JustifyFull;BulletedList,NumberedList,Indent,Outdent;
                                             CreateLink,Unlink,InsertRule|Cut,Copy,Paste;Undo,Redo,Print, InsertImageFromGallery, InsertTable,Preview,SelectAll" 
-                                            SupportFolder="../aspnet_client/FreeTextBox/">
+                                            SupportFolder="../aspnet_client/FreeTextBox/" EnableHtmlMode="False">
                                         </SAP:FreeTextBox>
 
                                         <%--<asp:TextBox ID="txtRemark" runat="server" Height="200px" 
@@ -285,7 +285,8 @@
                             ImageUrl="~/skin/images/SAP_Add.png" onclick="imgAdd_Click" OnClientClick="Dialog.showLoader();"/>
                     <asp:ImageButton ID="imgUpdate" runat="server" AlternateText="button" 
                              Height="19px" Width="65px" 
-                            ImageUrl="~/skin/images/SAP_update.png" onclick="imgAdd_Click" OnClientClick="Dialog.showLoader();"/>
+                            ImageUrl="~/skin/images/SAP_update.png" onclick="imgAdd_Click" 
+                            CausesValidation="False"/>
                     </div>
                     <div class="clear">
                     </div>

@@ -404,5 +404,14 @@ namespace SAP
             }
             return results;
         }
+
+        public static string UrlFullEncode(string strUrl)
+        {
+            if (strUrl == null)
+                return "";
+            strUrl = System.Web.HttpUtility.UrlEncode(strUrl);
+            return strUrl.Replace("'", _strApostropheEncoding);
+        }
+        private const string _strApostropheEncoding = "%27";
     }
 }

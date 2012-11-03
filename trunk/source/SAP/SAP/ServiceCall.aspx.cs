@@ -18,6 +18,9 @@ namespace SAP
         private GeneralFunctions GF;
         private string DocType = "191";
 
+       
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -32,8 +35,6 @@ namespace SAP
                 dtHeader.Columns.Add("U_UserID");
 
                 dtHeader.Rows.Add("", "", "", "", "","", User.Identity.Name);
-
-                LoadDefault();
             }
             
         }
@@ -135,8 +136,9 @@ namespace SAP
             {
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
+                String errorMessage = GeneralFunctions.UrlFullEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString());
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
+                    "Main.setMasterMessage('" + errorMessage + "','');", true);
             }
             else
             {

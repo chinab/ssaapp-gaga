@@ -34,6 +34,13 @@ img
     height: 5%;
     
 }
+#footer-form
+{
+   height:10%;
+   position:absolute; 
+   bottom:10%;
+    
+}
 #splitterContainer
 {
     overflow: hidden;

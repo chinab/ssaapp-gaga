@@ -44,7 +44,7 @@ Main = {
         }
         ////
         if (window.parent != null || window.parent != undefined) {
-            if ($('body').height()>0) {
+            if ($('body').height() > 0) {
                 window.parent.Main.resizeIframe($('body').height());
             }
         }
@@ -115,7 +115,8 @@ Main = {
         setTimeout('Main.updateMasterMessage()', 10000);
     },
     setMasterMessage: function (msg) {
-        $('#customeMessage').text(msg);
+        var msgdecoded = decodeURIComponent((msg + '').replace(/\+/g, '%20'));
+        $('#customeMessage').text(msgdecoded);
         Main.clearMasterMessage();
     },
     integer_textbox_keypress: function (e) {
@@ -132,4 +133,6 @@ Main = {
             return false;
         }
     }
+
+
 }

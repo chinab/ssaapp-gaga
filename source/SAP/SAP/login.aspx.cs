@@ -19,7 +19,7 @@ namespace SAP
                     df.GetConnection(User.Identity.Name);
                     ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                           "Dialog.hideLoader();", true);
-                      Response.Redirect("Homepage.aspx");
+                    Response.Redirect("Homepage.aspx");
                 }
             }
             

@@ -28,8 +28,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <PackageAsSingleFile>false</PackageAsSingleFile>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <DeployIisAppPath>SBOWEB</DeployIisAppPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -67,7 +68,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Activity.aspx" />
+    <Content Include="BusinessPartner\Activity.aspx" />
     <Content Include="Admin\UserManagement.aspx" />
     <Content Include="Admin\UserProfiles.aspx" />
     <Content Include="Admin\user_style.css" />
@@ -413,7 +414,7 @@
     <Content Include="ckeditor\skins\v2\skin.js" />
     <Content Include="ckeditor\skins\v2\templates.css" />
     <Content Include="ckeditor\themes\default\theme.js" />
-    <Content Include="BusinessPartnerMaster.aspx" />
+    <Content Include="BusinessPartner\BusinessPartnerMaster.aspx" />
     <Content Include="Admin\Popup_Connection.aspx" />
     <Content Include="EmailTemplate.htm" />
     <Content Include="Popup_EditBOM.aspx" />
@@ -551,8 +552,6 @@
     <Content Include="skin\start\jquery-ui.css" />
     <Content Include="TimeSheet\ABEO_TIMESHEET.aspx" />
     <Content Include="TimeSheet\AllTimeSheet.aspx" />
-    <Content Include="TimeSheet\FTB-ImageGallery.js" />
-    <Content Include="TimeSheet\ftb.imagegallery.aspx" />
     <Content Include="TimeSheet\MyOpenTimeSheet.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -563,11 +562,11 @@
     <Content Include="WebServices\NoteGenerateCode.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity.aspx.cs">
+    <Compile Include="BusinessPartner\Activity.aspx.cs">
       <DependentUpon>Activity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Activity.aspx.designer.cs">
+    <Compile Include="BusinessPartner\Activity.aspx.designer.cs">
       <DependentUpon>Activity.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ProfileCommon.cs" />
@@ -592,11 +591,11 @@
     <Compile Include="ARInvoice_VHF.aspx.designer.cs">
       <DependentUpon>ARInvoice_VHF.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BusinessPartnerMaster.aspx.cs">
+    <Compile Include="BusinessPartner\BusinessPartnerMaster.aspx.cs">
       <DependentUpon>BusinessPartnerMaster.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BusinessPartnerMaster.aspx.designer.cs">
+    <Compile Include="BusinessPartner\BusinessPartnerMaster.aspx.designer.cs">
       <DependentUpon>BusinessPartnerMaster.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Popup_Connection.aspx.cs">

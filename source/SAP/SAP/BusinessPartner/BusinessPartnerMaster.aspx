@@ -10,61 +10,45 @@
             <div id="contentData" style="padding-left: 15px;">
             <div id="menu-action" style="margin-left: -15px;">
                     <ul>
-                        <li>
-                            <asp:ImageButton ID="ImageButton2" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/preview.png" 
-                                    onclick="btnAddNew_Click" Height="22px" Width="22px" />
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/preview.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/print.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/excel.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/pdf.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/word.png" /></a></li>
+                        
+                         <li>
+                            <asp:HyperLink ID="linkNew" runat="server">
+                                <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/addnew.png" />
+                            </asp:HyperLink>
                         </li>
                         <li>
-                            <asp:ImageButton ID="ImageButton3" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/print.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                            <asp:HyperLink ID="linkFirst" runat="server">
+                                <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/icon/first.png" />
+                            </asp:HyperLink>
                         </li>
                         <li>
-                            <asp:ImageButton ID="ImageButton4" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/email.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                            <asp:HyperLink ID="linkPrevious" runat="server">
+                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/previous.png" />
+                            </asp:HyperLink>
                         </li>
                         <li>
-                            <asp:ImageButton ID="ImageButton5" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/excel.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                            <asp:HyperLink ID="linkNext" runat="server">
+                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/next.png" />
+                            </asp:HyperLink>
                         </li>
                         <li>
-                            <asp:ImageButton ID="ImageButton6" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/pdf.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
+                            <asp:HyperLink ID="linkLast" runat="server">
+                                <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/icon/last.png" />
+                            </asp:HyperLink>
                         </li>
-                        <li>
-                             <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/word.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
-                        <li>
-                            <asp:ImageButton ID="btnAddNew" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/addnew.png" 
-                                    onclick="btnAddNew_Click" Height="22px"/>
-                        </li>
-                        <li>
-                            <asp:ImageButton ID="ImageButton7" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/first.png" 
-                                    onclick="btnAddNew_Click" Height="22px"/>
-                        </li>
-                        <li>
-                            <asp:ImageButton ID="ImageButton8" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/previous.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
-                        </li>
-                        <li>
-                            <asp:ImageButton ID="ImageButton9" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/next.png" 
-                                    onclick="btnAddNew_Click" Height="22px" />
-                        </li>
-                        <li>
-                            <asp:ImageButton ID="ImageButton10" runat="server" AlternateText="button" 
-                                    CommandName="Login" ImageUrl="~/skin/icon/last.png" 
-                                    onclick="btnAddNew_Click" Height="22px"/>
-                        </li>
-                    </ul>                    
+                 </ul>                    
                 </div>
                 <div id="title-form" style="border-bottom: 2px solid black;">
                     <h2>
@@ -151,7 +135,7 @@
                                     <span>Account Balance</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtStatus0" runat="server" Enabled="false" Text=""></asp:TextBox>
+                                    <asp:TextBox ID="txtAcctBalance" runat="server" Enabled="false" Text=""></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -159,7 +143,7 @@
                                     <span>Deliveries</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtStatus" runat="server" Enabled="false" Text=""></asp:TextBox>
+                                    <asp:TextBox ID="txtDelivery" runat="server" Enabled="false" Text=""></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -167,7 +151,7 @@
                                     <span>Orders</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtPostingDate" runat="server" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtOrder" runat="server" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -175,7 +159,7 @@
                                     <span>Opportunities</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDeliveryDate" runat="server" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtOpportunity" runat="server" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
@@ -207,7 +191,7 @@
                                         <span>Contact Person</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtContactPerson" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtContactPerson" runat="server" Enabled="False"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -528,6 +512,9 @@
                         <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button" OnClientClick="Dialog.showLoader();"
                             CommandName="Login" Height="19px" Width="65px" ImageUrl="~/skin/images/SAP_Add.png"
                             OnClick="btnAdd_Click" />
+                        <asp:ImageButton ID="btnUpdate" runat="server" AlternateText="button" 
+                             Height="19px" Width="65px" 
+                            ImageUrl="~/skin/images/SAP_update.png" onclick="btnAdd_Click" OnClientClick="Dialog.showLoader();"/>
                     </div>
                     <div class="right">
                     </div>

@@ -22,103 +22,94 @@ namespace SAP {
         protected global::System.Web.UI.UpdatePanel purchaseOrderUpdatePanel;
         
         /// <summary>
-        /// ImageButton2 control.
+        /// linkNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
+        protected global::System.Web.UI.WebControls.HyperLink linkNew;
         
         /// <summary>
-        /// ImageButton3 control.
+        /// Image4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton3;
+        protected global::System.Web.UI.WebControls.Image Image4;
         
         /// <summary>
-        /// ImageButton4 control.
+        /// linkFirst control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton4;
+        protected global::System.Web.UI.WebControls.HyperLink linkFirst;
         
         /// <summary>
-        /// ImageButton5 control.
+        /// Image5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton5;
+        protected global::System.Web.UI.WebControls.Image Image5;
         
         /// <summary>
-        /// ImageButton6 control.
+        /// linkPrevious control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton6;
+        protected global::System.Web.UI.WebControls.HyperLink linkPrevious;
         
         /// <summary>
-        /// ImageButton1 control.
+        /// Image6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.Image Image6;
         
         /// <summary>
-        /// btnAddNew control.
+        /// linkNext control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnAddNew;
+        protected global::System.Web.UI.WebControls.HyperLink linkNext;
         
         /// <summary>
-        /// ImageButton7 control.
+        /// Image7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton7;
+        protected global::System.Web.UI.WebControls.Image Image7;
         
         /// <summary>
-        /// ImageButton8 control.
+        /// linkLast control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton8;
+        protected global::System.Web.UI.WebControls.HyperLink linkLast;
         
         /// <summary>
-        /// ImageButton9 control.
+        /// Image8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton9;
-        
-        /// <summary>
-        /// ImageButton10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton10;
+        protected global::System.Web.UI.WebControls.Image Image8;
         
         /// <summary>
         /// lblResults control.
@@ -202,40 +193,40 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
         
         /// <summary>
-        /// txtStatus0 control.
+        /// txtAcctBalance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStatus0;
+        protected global::System.Web.UI.WebControls.TextBox txtAcctBalance;
         
         /// <summary>
-        /// txtStatus control.
+        /// txtDelivery control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStatus;
+        protected global::System.Web.UI.WebControls.TextBox txtDelivery;
         
         /// <summary>
-        /// txtPostingDate control.
+        /// txtOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPostingDate;
+        protected global::System.Web.UI.WebControls.TextBox txtOrder;
         
         /// <summary>
-        /// txtDeliveryDate control.
+        /// txtOpportunity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDeliveryDate;
+        protected global::System.Web.UI.WebControls.TextBox txtOpportunity;
         
         /// <summary>
         /// txtTel1 control.
@@ -479,5 +470,14 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnAdd;
+        
+        /// <summary>
+        /// btnUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnUpdate;
     }
 }

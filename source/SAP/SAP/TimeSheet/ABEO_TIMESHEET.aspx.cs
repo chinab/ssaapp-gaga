@@ -26,18 +26,18 @@ namespace SAP
 
         #region "Fuctions"
 
-        private void LoadData(int ClgCode)
+        private void LoadData(string ClgCode)
         {
             Transaction trx = new Transaction();
-            dtHeader = trx.GetMarketingDocument_ReturnDS("33", ClgCode, User.Identity.Name).Tables[0];
+            dtHeader = trx.GetMarketingDocument_ReturnDS(DocType, ClgCode, User.Identity.Name).Tables[0];
 
             if (dtHeader.Rows.Count == 0)
-                ClgCode = 1;
-            dtHeader = trx.GetMarketingDocument_ReturnDS("33", ClgCode, User.Identity.Name).Tables[0];
+                ClgCode = "1";
+            dtHeader = trx.GetMarketingDocument_ReturnDS(DocType, ClgCode, User.Identity.Name).Tables[0];
             dtHeader = GF.ConvertDate_RemoveCols(dtHeader, KeepColums);
 
             txtNo.Text = dtHeader.Rows[0]["ClgCode"].ToString();
-            SetNavigatorURL(Int32.Parse(txtNo.Text));
+            SetNavigatorURL(txtNo.Text);
 
             ddlActivity.SelectedValue = dtHeader.Rows[0]["Action"].ToString();
             ddlType.SelectedValue = dtHeader.Rows[0]["CntctType"].ToString();
@@ -137,7 +137,7 @@ namespace SAP
             dtAttachment.Columns.Add("FileName");
             dtAttachment.Columns.Add("FileExt");
             dtAttachment.Columns.Add("Date");
-            SetNavigatorURL(0);
+            SetNavigatorURL("");
         }
 
         public String _collectData()
@@ -209,23 +209,17 @@ namespace SAP
             return objInfo.ToXMLStringFromDS("221", dtHeader, dtAttachment, "No");
         }
 
-        protected void SetNavigatorURL(int currentOrder)
+        protected void SetNavigatorURL(string CurrentKey)
         {
-            int next = 0;
-            int previous = 0;
-
-            next = currentOrder + 1;
-
-            if (currentOrder > 0)
-                previous = currentOrder - 1;
-            else
-                previous = 1;
-
-            this.linkFirst.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode=1";
-            this.linkNext.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode=" + next;
-            this.linkPrevious.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode=" + previous;
-            this.linkLast.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode=-1";
-
+            GetDefault df = new GetDefault();
+            DataSet nav = df.GetNextPreviousID(DocType, User.Identity.Name, "OCLG", "clgcode", CurrentKey);
+            if (nav != null)
+            { 
+                this.linkFirst.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode="+nav.Tables[0].Rows[0]["Fir"].ToString();
+                this.linkNext.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode=" + nav.Tables[0].Rows[0]["Nex"].ToString();
+                this.linkPrevious.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode=" + nav.Tables[0].Rows[0]["Pre"].ToString();
+                this.linkLast.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode=" + nav.Tables[0].Rows[0]["Las"].ToString();
+            }
             this.linkNew.NavigateUrl = "/TIMESHEET/ABEO_TIMESHEET.aspx?clgCode=";
         }
 
@@ -256,7 +250,7 @@ namespace SAP
                     string clgCode = Request.QueryString["clgCode"];
                     if (!String.IsNullOrEmpty(clgCode))
                     {
-                        LoadData(int.Parse(clgCode));
+                        LoadData(clgCode);
                     }
                     else
                     {

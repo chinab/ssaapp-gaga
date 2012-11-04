@@ -18,51 +18,51 @@ namespace SAP
 {
     public class Emailling
     {
-        private string GetTemplateEmail(string arg_ParentName, string arg_UserName, string arg_PassWord)
+        private string GetTemplateEmail(string UserName, string CardName, string Information)
         {
             string l_PathTemplate = string.Empty;
             string l_Rs = string.Empty;
-
-            l_PathTemplate = "/EmailTemplate.htm";
+            l_PathTemplate =  "C:\\EmailTemplate.htm";
 
             if (l_PathTemplate.Trim().Equals(string.Empty))
             {
-                l_Rs = string.Format("Xin chào phụ huynh: {0} \\n Tên đăng nhập: {1} \\n Mật khẩu: {2}", arg_ParentName, arg_UserName, arg_PassWord);
+                l_Rs = string.Format("Dear: {0} \\n Business Parter Name: {1} \\n Information: {2}", UserName, CardName, Information);
             }
             else
             {
                 l_Rs = File.ReadAllText(l_PathTemplate);
-                l_Rs = l_Rs.Replace("<@ParentName>", arg_ParentName);
-                l_Rs = l_Rs.Replace("<@UserName>", arg_UserName);
-                l_Rs = l_Rs.Replace("<@Password>", arg_PassWord);
+                l_Rs = l_Rs.Replace("<@User>", UserName);
+                l_Rs = l_Rs.Replace("<@CardName>", CardName);
+                l_Rs = l_Rs.Replace("<@Information>", Information);
             }
             return l_Rs;
         }
 
-        public string SendMail(string arg_ParentName, string arg_ParentEmail, string arg_UserName, string arg_PassWord)
+        public string SendMail(string UserName, string CardName, string Information,string ToEmail)
         {
             string l_Rs = "";
-            string l_SenderEmail = "admin@condanglamgi.com";
-            if (arg_ParentEmail.Trim().Equals(string.Empty))
+            string l_SenderEmail = "truongthaithuy@gmail.com";
+            if (ToEmail.Trim().Equals(string.Empty))
             {
-                arg_ParentEmail = l_SenderEmail;
+                ToEmail = l_SenderEmail;
             }
             else
             {
-                arg_ParentEmail = arg_ParentEmail + "," + l_SenderEmail;
+                ToEmail = ToEmail + "," + l_SenderEmail;
             }
 
-            NetworkCredential loginInfo = new NetworkCredential(l_SenderEmail, "QZ2HrA<&");
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage(l_SenderEmail, arg_ParentEmail,
-                    "SAP WEB, inform to " + arg_ParentName, 
-                        GetTemplateEmail(arg_ParentName, arg_UserName, arg_PassWord));
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.From = new MailAddress(l_SenderEmail,"AUTO MAILER");
+            msg.To.Add(ToEmail);
+            msg.Subject = "SBO WEB Information";
+            msg.Body = GetTemplateEmail(UserName, CardName, Information);
             msg.IsBodyHtml = true;
             try
             {
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
-                client.Credentials = loginInfo;
+                client.Timeout = 0;
+                client.Credentials = new NetworkCredential(l_SenderEmail, "KHONGbiet");
                 client.Send(msg);
             }
             catch (SmtpException ex)

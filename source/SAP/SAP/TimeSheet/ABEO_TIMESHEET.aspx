@@ -138,22 +138,19 @@
                             <td>
                                 <asp:TextBox ID="txtDate" runat="server" Text="" CssClass="txtDate"></asp:TextBox>
                             </td>
-                        </tr>
-                        <tr>
                             <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                 <span>From Time</span></td>
                             <td>
-                                <asp:TextBox ID="txtFromTime" runat="server" Text=""></asp:TextBox>
+                                <asp:TextBox ID="txtFromTime" runat="server" Text="" Width="50px"></asp:TextBox>
                                
                             </td>
-                        </tr>
-                        <tr>
                             <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                 <span>To Time</span></td>
                             <td>
-                                <asp:TextBox ID="txtToTime" runat="server" Text=""></asp:TextBox>
+                                <asp:TextBox ID="txtToTime" runat="server" Text="" Width="50px"></asp:TextBox>
                             </td>
                         </tr>
+
                     </table>
                 </div>
                 <div id="content-form">
@@ -165,27 +162,23 @@
                         <div id="tabs-1">
                             <table class="detail_table">
                                 <tr>
-                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
-                                        <span>Summary</span>
-                                    </td>
+  
                                     <td>
                                         <asp:TextBox ID="txtSubject" runat="server" Width="650px" Enabled="False"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Details (*)</span>
-                                    </td>
+                                   
                                     <td>
-                                         <CKEditor:CKEditorControl ID="txtRemark" runat="server" Height="135px"></CKEditor:CKEditorControl>
+                                         <CKEditor:CKEditorControl ID="txtRemark" runat="server" Height="135px" 
+                                             Width=""></CKEditor:CKEditorControl>
 
                                         <%--<asp:TextBox ID="txtRemark" runat="server" Height="200px" 
                                             TextMode="MultiLine" Width="652px"></asp:TextBox>--%>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="detail_table_td_100">
-                                        &nbsp;</td>
+                
                                     <td>
                                         <asp:CheckBox ID="cbClosed" Text="Closed" runat="server" Font-Bold="True" /></td>
                                 </tr>

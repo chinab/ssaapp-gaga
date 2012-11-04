@@ -193,8 +193,8 @@
 					</a>
 				</h3>
 				<ul>
-					<li><a href="/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
-					<li><a href="/Activity.aspx">Activity</a></li>
+					<li><a href="/BusinessPartner/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
+					<li><a href="/BusinessPartner/Activity.aspx">Activity</a></li>
 				</ul>
 			</li>
 			<li>

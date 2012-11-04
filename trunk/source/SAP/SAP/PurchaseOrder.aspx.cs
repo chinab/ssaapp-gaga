@@ -42,12 +42,12 @@ namespace SAP
         protected void loadOrderFromId(String orderId)
         {
             Transaction ts = new Transaction();
-            DataSet returnDoc = ts.GetMarketingDocument_ReturnDS(DocType, Int32.Parse(orderId), User.Identity.Name);
+            DataSet returnDoc = ts.GetMarketingDocument_ReturnDS(DocType, orderId, User.Identity.Name);
             DataTable dtHeader = returnDoc.Tables[0];
             if (dtHeader.Rows.Count == 0)
                 orderId = "1";
 
-            returnDoc = ts.GetMarketingDocument_ReturnDS(DocType, Int32.Parse(orderId), User.Identity.Name);
+            returnDoc = ts.GetMarketingDocument_ReturnDS(DocType, orderId, User.Identity.Name);
             dtHeader = returnDoc.Tables[0];
             dtContents = returnDoc.Tables[1];
 
@@ -208,7 +208,7 @@ namespace SAP
             double orderTotalBeforeDiscount = 0.0;
             double orderTotal = 0.0;
             double taxTotal = 0.0;
-
+            if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
             foreach (DataRow row in dtContents.Rows)
             {
                 if (!"".Equals(row["ItemCode"]))
@@ -220,6 +220,7 @@ namespace SAP
 
                     orderTotalBeforeDiscount += total;
                     taxTotal += tax;
+                    updateRowTotalPrice(row);
                 }
             }
             this.txtTotalDiscount.Text = GF.FormatNumeric(orderTotalBeforeDiscount.ToString(), "SumDec");

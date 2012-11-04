@@ -13,14 +13,14 @@ namespace SAP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //MasterData masterDataWS = new MasterData();
-            //lblCompany.Text = masterDataWS.GetCompanySetting(HttpContext.Current.User.Identity.Name).Tables[0].Rows[0]["CompanyName"].ToString();
+            if (!IsPostBack)
+            {
+                MasterData masterDataWS = new MasterData();
+                lblCompany.Text = masterDataWS.GetCompanySetting(HttpContext.Current.User.Identity.Name).Tables[0].Rows[0]["CompanyName"].ToString();
+            }
         }
 
-        protected void btnAddNew_Click(object sender, ImageClickEventArgs e)
-        {
-            //this.ContentPlaceHolder1.FindControl(
-        }
+        
         
         protected void LoginStatus1_LoggedOut(object sender, EventArgs e)
         {

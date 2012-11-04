@@ -173,7 +173,7 @@ namespace SAP.WebServices
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMarketingDocument_ReturnDS", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetMarketingDocument_ReturnDS(string DocType, int DocEntry, string UserID)
+        public System.Data.DataSet GetMarketingDocument_ReturnDS(string DocType, string DocEntry, string UserID)
         {
             object[] results = this.Invoke("GetMarketingDocument_ReturnDS", new object[] {
                     DocType,

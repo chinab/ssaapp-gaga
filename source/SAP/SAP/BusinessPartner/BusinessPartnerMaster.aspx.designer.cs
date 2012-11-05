@@ -463,6 +463,60 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.TextBox txtBPProject8;
         
         /// <summary>
+        /// btnAddContact control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddContact;
+        
+        /// <summary>
+        /// lvContactPerson control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView lvContactPerson;
+        
+        /// <summary>
+        /// ContactPager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataPager ContactPager;
+        
+        /// <summary>
+        /// btnAddAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddAddress;
+        
+        /// <summary>
+        /// lvAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView lvAddress;
+        
+        /// <summary>
+        /// AddressPager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataPager AddressPager;
+        
+        /// <summary>
         /// btnAdd control.
         /// </summary>
         /// <remarks>

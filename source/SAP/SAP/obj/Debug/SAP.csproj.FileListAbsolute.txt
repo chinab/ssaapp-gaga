@@ -5,3 +5,9 @@ D:\Working\EBAOX\Update Code\source\SAP\SAP\obj\Debug\ResolveAssemblyReference.c
 D:\Working\EBAOX\Update Code\source\SAP\SAP\obj\Debug\SAP.dll.licenses
 D:\Working\EBAOX\Update Code\source\SAP\SAP\obj\Debug\SAP.dll
 D:\Working\EBAOX\Update Code\source\SAP\SAP\obj\Debug\SAP.pdb
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\bin\SAP.dll
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\bin\SAP.pdb
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\obj\Debug\ResolveAssemblyReference.cache
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\obj\Debug\SAP.dll.licenses
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\obj\Debug\SAP.dll
+C:\Working Folder\ABEO\SBOWEB\ssaapp-gaga\trunk\source\SAP\SAP\obj\Debug\SAP.pdb

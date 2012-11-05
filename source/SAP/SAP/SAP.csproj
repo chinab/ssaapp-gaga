@@ -417,6 +417,7 @@
     <Content Include="BusinessPartner\BusinessPartnerMaster.aspx" />
     <Content Include="Admin\Popup_Connection.aspx" />
     <Content Include="EmailTemplate.htm" />
+    <Content Include="EmailTemplate2.htm" />
     <Content Include="Popup_EditBOM.aspx" />
     <Content Include="Inventory\InventoryTransfer.aspx" />
     <Content Include="Inventory\GoodsIssue.aspx" />
@@ -445,39 +446,81 @@
     <Content Include="Popup_EditWarehouse.aspx" />
     <Content Include="SalesOpportunity.aspx" />
     <Content Include="skin\AdminLogin.css" />
+    <Content Include="skin\icon\addnew.png" />
+    <Content Include="skin\icon\add_icon_color.gif" />
+    <Content Include="skin\icon\add_icon_mono.gif" />
+    <Content Include="skin\icon\administrator.png" />
     <Content Include="skin\icon\banking.png" />
     <Content Include="skin\icon\Bin - Full.png" />
+    <Content Include="skin\icon\businesspartner.png" />
+    <Content Include="skin\icon\cancel.png" />
+    <Content Include="skin\icon\cancel_hover.png" />
     <Content Include="skin\icon\coins.png" />
     <Content Include="skin\icon\Date.png" />
+    <Content Include="skin\icon\delete.gif" />
+    <Content Include="skin\icon\delete_de.gif" />
+    <Content Include="skin\icon\delete_icon_color.gif" />
+    <Content Include="skin\icon\delete_icon_mono.gif" />
+    <Content Include="skin\icon\delete_on.gif" />
     <Content Include="skin\icon\document-preview.png" />
     <Content Include="skin\icon\document-print.png" />
     <Content Include="skin\icon\Drive - Windows.png" />
     <Content Include="skin\icon\E-mail 2.png" />
+    <Content Include="skin\icon\edit.gif" />
+    <Content Include="skin\icon\edit_hover.gif" />
+    <Content Include="skin\icon\edit_icon_color.gif" />
+    <Content Include="skin\icon\edit_icon_mono.gif" />
+    <Content Include="skin\icon\email.png" />
     <Content Include="skin\icon\Error.png" />
+    <Content Include="skin\icon\excel.png" />
     <Content Include="skin\icon\Favorites.png" />
+    <Content Include="skin\icon\financial.png" />
+    <Content Include="skin\icon\first.png" />
     <Content Include="skin\icon\Folder - Work.png" />
     <Content Include="skin\icon\IconX.png" />
     <Content Include="skin\icon\ICQ.png" />
     <Content Include="skin\icon\Info.png" />
     <Content Include="skin\icon\Internet.png" />
     <Content Include="skin\icon\inventory.png" />
+    <Content Include="skin\icon\last.png" />
+    <Content Include="skin\icon\link.png" />
     <Content Include="skin\icon\mrp.png" />
     <Content Include="skin\icon\My Computer 2.png" />
+    <Content Include="skin\icon\new.gif" />
+    <Content Include="skin\icon\new_de.gif" />
+    <Content Include="skin\icon\new_on.gif" />
+    <Content Include="skin\icon\next.png" />
+    <Content Include="skin\icon\opportunity.png" />
     <Content Include="skin\icon\Outlook Express.png" />
     <Content Include="skin\icon\partner.png" />
+    <Content Include="skin\icon\pdf.png" />
     <Content Include="skin\icon\Photocamera.png" />
+    <Content Include="skin\icon\preview.png" />
+    <Content Include="skin\icon\previous.png" />
+    <Content Include="skin\icon\print.png" />
     <Content Include="skin\icon\production.png" />
+    <Content Include="skin\icon\sales.png" />
+    <Content Include="skin\icon\save.png" />
+    <Content Include="skin\icon\save_hover.png" />
+    <Content Include="skin\icon\save_icon_color.gif" />
+    <Content Include="skin\icon\save_icon_mono.gif" />
     <Content Include="skin\icon\Search.png" />
+    <Content Include="skin\icon\select_row.png" />
+    <Content Include="skin\icon\select_row_hover.png" />
     <Content Include="skin\icon\service.png" />
     <Content Include="skin\icon\shopping.png" />
     <Content Include="skin\icon\Success.png" />
     <Content Include="skin\icon\system-search.png" />
     <Content Include="skin\icon\Time.ico" />
     <Content Include="skin\icon\Time.png" />
+    <Content Include="skin\icon\undo_icon_color.gif" />
+    <Content Include="skin\icon\undo_icon_mono.gif" />
     <Content Include="skin\icon\Warning.png" />
     <Content Include="skin\icon\Windows 2.png" />
     <Content Include="skin\icon\Windows Explorer.png" />
+    <Content Include="skin\icon\word.png" />
     <Content Include="skin\images\Abeo Logo.png" />
+    <Content Include="skin\images\activity.png" />
     <Content Include="skin\images\ajax-loader.gif" />
     <Content Include="skin\images\banking.png" />
     <Content Include="skin\images\Bin - Full.png" />
@@ -485,6 +528,8 @@
     <Content Include="skin\images\bk_tab.png" />
     <Content Include="skin\images\bk_tab_active.png" />
     <Content Include="skin\images\coins.png" />
+    <Content Include="skin\images\CopyFrom.png" />
+    <Content Include="skin\images\CopyTo.png" />
     <Content Include="skin\images\data_table_header.png" />
     <Content Include="skin\images\Date.png" />
     <Content Include="skin\images\document-preview.png" />
@@ -520,6 +565,16 @@
     <Content Include="skin\images\Photocamera.png" />
     <Content Include="skin\images\production.png" />
     <Content Include="skin\images\promocode.png" />
+    <Content Include="skin\images\relatedactivity.png" />
+    <Content Include="skin\images\relateddocument.png" />
+    <Content Include="skin\images\SAP_Add.png" />
+    <Content Include="skin\images\SAP_Button.png" />
+    <Content Include="skin\images\SAP_cancel.png" />
+    <Content Include="skin\images\SAP_ChangeCompany.png" />
+    <Content Include="skin\images\SAP_choose.png" />
+    <Content Include="skin\images\SAP_Login.png" />
+    <Content Include="skin\images\SAP_OK.png" />
+    <Content Include="skin\images\SAP_update.png" />
     <Content Include="skin\images\Search.png" />
     <Content Include="skin\images\service.png" />
     <Content Include="skin\images\shopping.png" />
@@ -557,7 +612,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="default.aspx" />
-    <Content Include="PurchaseOrder.aspx" />
+    <Content Include="Purchase\PurchaseOrder.aspx" />
     <Content Include="Homepage.aspx" />
     <Content Include="WebServices\NoteGenerateCode.txt" />
   </ItemGroup>
@@ -828,11 +883,11 @@
     <Compile Include="WebServices\Reports.cs" />
     <Compile Include="WebServices\Transaction.cs" />
     <Compile Include="WebServices\Entity\WareHouse.cs" />
-    <Compile Include="PurchaseOrder.aspx.cs">
+    <Compile Include="Purchase\PurchaseOrder.aspx.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PurchaseOrder.aspx.designer.cs">
+    <Compile Include="Purchase\PurchaseOrder.aspx.designer.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="xml\DocumentXML.cs" />

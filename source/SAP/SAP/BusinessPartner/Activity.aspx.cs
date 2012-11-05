@@ -50,6 +50,7 @@ namespace SAP
             txtBP.Text = dtHeader.Rows[0]["CardCode"].ToString();
                 
             txtBPName.Text = trx.GetMarketingDocument_ReturnDS("2",txtBP.Text,User.Identity.Name).Tables[0].Rows[0]["CardName"].ToString();;
+            lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtBP.Text;
 
             ddlContactPerson.DataSource = masterDataWS.GetContactPerson(txtBP.Text, User.Identity.Name).Tables[0];
             ddlContactPerson.DataValueField = "Code";
@@ -85,7 +86,13 @@ namespace SAP
             txtFromDate.Text = DateTime.Now.ToShortDateString();
             txtToDate.Text = DateTime.Now.ToShortDateString();
             txtFromTime.Text = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString();
-            txtToTime.Text = DateTime.Now.Hour.ToString() + (string)(DateTime.Now.Minute+15).ToString();
+            if (DateTime.Now.Minute + 15>60)
+                txtToTime.Text = (DateTime.Now.Hour+1).ToString() + (60-DateTime.Now.Minute - 15).ToString();
+            else
+                txtToTime.Text = DateTime.Now.Hour.ToString() + (DateTime.Now.Minute+15).ToString();
+            
+           // ddlType.Items.FindByText("CRM").Selected = true;
+            ddlType.Enabled = false;
         }
         void ClearScreen()
         {
@@ -250,12 +257,16 @@ namespace SAP
                         {
                             this.txtBPName.Text = chosenPartner.CardName;
                             this.txtBP.Text = chosenPartner.CardCode;
-
+                            lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtBP.Text;
                             MasterData masterDataWS = new MasterData();
                             ddlContactPerson.DataSource = masterDataWS.GetContactPerson(txtBP.Text, User.Identity.Name).Tables[0];
                             ddlContactPerson.DataValueField = "Code";
                             ddlContactPerson.DataTextField = "FirstName";
                             ddlContactPerson.DataBind();
+                        }
+                        else
+                        {
+                            lBP.NavigateUrl = "";
                         }
                         break;
 

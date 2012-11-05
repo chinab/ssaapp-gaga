@@ -20,38 +20,48 @@ namespace SAP
         private string DocType = "22";
 
         #region Functions
-        protected void SetNavigatorURL(int currentOrder)
+        protected void SetNavigatorURL(string CurrentKey)
         {
 
-            int next = 0;
-            int previous = 0;
+             GetDefault df = new GetDefault();
+            DataSet nav = df.GetNextPreviousID(DocType, User.Identity.Name, "OPOR", "DocEntry", CurrentKey);
+            if (nav != null)
+            {
 
-            next = currentOrder + 1;
-
-            if (currentOrder > 0)
-                previous = currentOrder - 1;
-            else
-                previous = 1;
-
-            this.linkFirst.NavigateUrl = "/PurchaseOrder.aspx?order_id=1";
-            this.linkNext.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + next;
-            this.linkPrevious.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + previous;
-            this.linkLast.NavigateUrl = "/PurchaseOrder.aspx?order_id=-1";
+                this.linkFirst.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + nav.Tables[0].Rows[0]["Fir"].ToString(); ;
+                this.linkNext.NavigateUrl = "/PurchaseOrder.aspx?order_id="  + nav.Tables[0].Rows[0]["Nex"].ToString(); ;
+                this.linkPrevious.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + nav.Tables[0].Rows[0]["Pre"].ToString(); ;
+                this.linkLast.NavigateUrl = "/PurchaseOrder.aspx?order_id=" + nav.Tables[0].Rows[0]["Las"].ToString(); ;
+            }
             this.linkNew.NavigateUrl = "/PurchaseOrder.aspx?order_id=";
         }
         protected void loadOrderFromId(String orderId)
         {
             Transaction ts = new Transaction();
             DataSet returnDoc = ts.GetMarketingDocument_ReturnDS(DocType, orderId, User.Identity.Name);
-            DataTable dtHeader = returnDoc.Tables[0];
-            if (dtHeader.Rows.Count == 0)
+            DataTable dtHeader;
+
+            if (returnDoc == null)
                 orderId = "1";
+            else
+                dtHeader = returnDoc.Tables[0];
 
             returnDoc = ts.GetMarketingDocument_ReturnDS(DocType, orderId, User.Identity.Name);
+
+            if (returnDoc == null || returnDoc.Tables.Count<2 )
+            {
+
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                                                    "Main.setMasterMessage('No record found!','');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                                                    "Dialog.hideLoader();", true);
+                return;
+            }
+
             dtHeader = returnDoc.Tables[0];
             dtContents = returnDoc.Tables[1];
 
-            SetNavigatorURL(Int32.Parse(dtHeader.Rows[0]["DocEntry"].ToString()));
+            SetNavigatorURL(dtHeader.Rows[0]["DocEntry"].ToString());
 
             this.txtName.Text = dtHeader.Rows[0]["CardName"].ToString();
             this.txtVendor.Text = dtHeader.Rows[0]["CardCode"].ToString();
@@ -142,7 +152,7 @@ namespace SAP
                 }
             }
             dtContents.Clear();
-            SetNavigatorURL(0);
+            SetNavigatorURL("0");
         }
         private void ResetLineNo()
         {
@@ -155,21 +165,16 @@ namespace SAP
             switch (asStatus)
             {
                 case "Add":
-                    btnAdd.Enabled = btnAddRecord.Enabled = false;
-                    btnCopyFrom.Enabled = false;
-                    btnCopyTo.Enabled = false;
+                    btnUpdate.Enabled = btnAdd.Enabled = btnAddRecord.Enabled = false;
                     break;
                 case "Edit":
-                    btnAdd.Enabled = btnAddRecord.Enabled = false;
-                    btnCopyFrom.Enabled = btnCopyTo.Enabled = false;
+                     btnUpdate.Enabled =btnAdd.Enabled = btnAddRecord.Enabled = false;
                     break;
                 case "Update":
-                    btnAdd.Enabled = btnAddRecord.Enabled = true;
-                    btnCopyFrom.Enabled = btnCopyTo.Enabled = true;
+                     btnUpdate.Enabled =btnAdd.Enabled = btnAddRecord.Enabled = true;
                     break;
                 case "Save":
-                    btnAdd.Enabled = btnAddRecord.Enabled = true;
-                    btnCopyFrom.Enabled = btnCopyTo.Enabled = true;
+                     btnUpdate.Enabled =btnAdd.Enabled = btnAddRecord.Enabled = true;
                     break;
             }
         }

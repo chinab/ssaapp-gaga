@@ -18,7 +18,7 @@ namespace SAP
 {
     public class Emailling
     {
-        private string GetTemplateEmail(string UserName, string CardName, string Information)
+        private string GetTemplateEmail(string UserName, string CardName, string Information, string url, string urlBP)
         {
             string l_PathTemplate = string.Empty;
             string l_Rs = string.Empty;
@@ -34,11 +34,13 @@ namespace SAP
                 l_Rs = l_Rs.Replace("<@User>", UserName);
                 l_Rs = l_Rs.Replace("<@CardName>", CardName);
                 l_Rs = l_Rs.Replace("<@Information>", Information);
+                l_Rs = l_Rs.Replace("<@url>", url);
+                l_Rs = l_Rs.Replace("<@url1>", urlBP);
             }
             return l_Rs;
         }
 
-        public string SendMail(string UserName, string CardName, string Information,string ToEmail)
+        public string SendMail(string UserName, string CardName, string Information, string ToEmail, string url, string urlBP)
         {
             string l_Rs = "";
             string l_SenderEmail = "truongthaithuy@gmail.com";
@@ -55,7 +57,7 @@ namespace SAP
             msg.From = new MailAddress(l_SenderEmail,"AUTO MAILER");
             msg.To.Add(ToEmail);
             msg.Subject = "SBO WEB Information";
-            msg.Body = GetTemplateEmail(UserName, CardName, Information);
+            msg.Body = GetTemplateEmail(UserName, CardName, Information, url, urlBP);
             msg.IsBodyHtml = true;
             try
             {

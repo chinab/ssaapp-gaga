@@ -108,7 +108,7 @@ namespace SAP
             dtHeader.Columns.Add("AtcEntry");
             dtHeader.Columns.Add("CntctCode");
             dtHeader.Columns.Add("AttendUser");
-
+            dtHeader.Columns.Add("U_UserID");
             KeepColums = GF.BuildKeepColumnStr(dtHeader);
 
             txtSubject.Text = "";
@@ -144,6 +144,7 @@ namespace SAP
                 //dr["AtcEntry"] = 2; // AttachmentString();
                 dr["cntctcode"] = ddlContactPerson.SelectedItem.Value.ToString();
                 dr["AttendUser"] = ddlUser.SelectedItem.Value.ToString();
+                dr["U_UserID"] = User.Identity.Name;
                 if (cbClosed.Checked == true)
                 {
                     dr["Closed"] = "Y";
@@ -202,6 +203,12 @@ namespace SAP
                     ddlUser.DataTextField = "User_Code";
                     ddlUser.DataValueField = "UserID";
                     ddlUser.DataBind();
+
+                    dsMaster = masterDataWS.GetActivitySubject(User.Identity.Name, Int32.Parse(ddlType.SelectedValue.ToString()));
+                    ddlSubject.DataSource = dsMaster.Tables[0];
+                    ddlSubject.DataTextField = "name";
+                    ddlSubject.DataValueField = "code";
+                    ddlSubject.DataBind();
 
                     string clgCode = Request.QueryString["clgCode"];
                     if (!String.IsNullOrEmpty(clgCode))
@@ -269,8 +276,6 @@ namespace SAP
                 //return;
             }
 
-            
-
             String requestXML = _collectData();
             SAP.WebServices.Transaction ts = new WebServices.Transaction();
             DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, "", false);
@@ -287,16 +292,29 @@ namespace SAP
             }
             else
             {
-                if (ddlType.SelectedItem.Value.ToString() == "14" || ddlType.SelectedItem.Value.ToString() == "18")
+                if (ddlSubject.SelectedItem.Value.ToString() == "14" || ddlSubject.SelectedItem.Value.ToString() == "18")
                 {
                     Emailling em = new Emailling();
-                    Transaction trx = new Transaction();
-                    string email = trx.GetMarketingDocument_ReturnDS("12", ddlUser.SelectedItem.Value.ToString(), User.Identity.Name).Tables[0].Rows[0]["E_Mail"].ToString();
-                    DataTable dtBP = trx.GetMarketingDocument_ReturnDS("2", txtBP.Text, User.Identity.Name).Tables[0];
+                    DataTable dtuser = ts.GetMarketingDocument_ReturnDS("12", ddlUser.SelectedItem.Value.ToString(), User.Identity.Name).Tables[0];
+                    string email = dtuser.Rows[0]["E_Mail"].ToString();
+                    DataTable dtBP = ts.GetMarketingDocument_ReturnDS("2", txtBP.Text, User.Identity.Name).Tables[0];
                     string BPInfo = "";
                     BPInfo = dtBP.Rows[0]["CardFName"].ToString();
 
-                    string str = em.SendMail(ddlUser.Text, txtBPName.Text, BPInfo, email);
+                    GetDefault df = new GetDefault();
+                    DataSet nav = df.GetNextPreviousID(DocType, User.Identity.Name, "OCLG", "clgcode", "");
+                    string urlActivity = "";
+                    Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
+                    string requested = uri.Scheme + Uri.SchemeDelimiter + uri.Host + ":" + uri.Port;
+
+                    string urlBP = requested+"/BusinessPartner/BusinessPartnerMaster.aspx?CardCode=" + txtBP.Text;
+
+                    if (nav != null)
+                    {
+                        urlActivity =requested+ "/BusinessPartner/Activity.aspx?clgCode=" + nav.Tables[0].Rows[0]["Las"].ToString();
+                    }
+
+                    string str = em.SendMail(dtuser.Rows[0]["U_Name"].ToString(), txtBPName.Text, BPInfo, email, urlActivity, urlBP);
                     if (str != "")
                     {
                         ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",

@@ -24,29 +24,19 @@
                             <img alt="" src="/skin/icon/word.png" /></a></li>
                         
                          <li>
-                            <asp:HyperLink ID="linkNew" runat="server">
-                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/icon/addnew.png" />
-                            </asp:HyperLink>
+                            <asp:HyperLink ID="linkNew" runat="server"> <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/icon/addnew.png" /></asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="linkFirst" runat="server">
-                                <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/first.png" />
-                            </asp:HyperLink>
+                            <asp:HyperLink ID="linkFirst" runat="server"> <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/first.png" /></asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="linkPrevious" runat="server">
-                                <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/icon/previous.png" />
-                            </asp:HyperLink>
+                            <asp:HyperLink ID="linkPrevious" runat="server"> <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/icon/previous.png" /></asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="linkNext" runat="server">
-                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/next.png" />
-                            </asp:HyperLink>
+                            <asp:HyperLink ID="linkNext" runat="server"> <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/next.png" /></asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="linkLast" runat="server">
-                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/last.png" />
-                            </asp:HyperLink>
+                            <asp:HyperLink ID="linkLast" runat="server"> <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/last.png" /></asp:HyperLink>
                         </li>
                  </ul>                    
                 </div>
@@ -127,9 +117,7 @@
                                     <asp:TextBox ID="txtBP" runat="server" Enabled="false" Text="" 
                                         BackColor="#D5DCE0"></asp:TextBox>
                                     <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditCustomer.aspx','');"
-                                        runat="server">
-                                        <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                    </asp:HyperLink>
+                                        runat="server"> <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" /></asp:HyperLink>
                                 </td>
                             </tr>
                             <tr>

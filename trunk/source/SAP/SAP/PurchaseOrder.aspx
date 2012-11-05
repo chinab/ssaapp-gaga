@@ -689,12 +689,11 @@
                         <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button" OnClientClick="Dialog.showLoader();"
                             CommandName="Login" Height="19px" Width="65px" ImageUrl="~/skin/images/SAP_Add.png"
                             OnClick="btnAdd_Click" />
+                        <asp:ImageButton ID="btnUpdate" runat="server" AlternateText="button" 
+                             Height="19px" Width="65px" 
+                            ImageUrl="~/skin/images/SAP_update.png" onclick="btnAdd_Click" OnClientClick="Dialog.showLoader();"/>
                     </div>
                     <div class="right">
-                        <asp:ImageButton ID="btnCopyFrom" runat="server" AlternateText="button" CommandName="Login"
-                            Height="19px" Width="109px" ImageUrl="~/skin/images/CopyFrom.png" />
-                        <asp:ImageButton ID="btnCopyTo" runat="server" AlternateText="button" CommandName="Login"
-                            Height="19px" Width="109px" ImageUrl="~/skin/images/CopyTo.png" />
                     </div>
                     <div class="clear">
                     </div>

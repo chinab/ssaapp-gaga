@@ -85,9 +85,7 @@ namespace SAP
             ddlType.Items.FindByText("TIMESHEET").Selected = true;
 
             MasterData masterDataWS = new MasterData();
-            ddlSubject.DataSource =
-                masterDataWS.GetActivitySubject(User.Identity.Name, Int32.Parse(ddlType.SelectedValue.ToString())).
-                    Tables[0];
+            ddlSubject.DataSource =masterDataWS.GetActivitySubject(User.Identity.Name, Int32.Parse(ddlType.SelectedValue.ToString())).Tables[0];
             ddlSubject.DataTextField = "name";
             ddlSubject.DataValueField = "code";
             ddlSubject.DataBind();
@@ -246,7 +244,6 @@ namespace SAP
                     ddlType.DataValueField = "code";
                     ddlType.DataBind();
 
-
                     string clgCode = Request.QueryString["clgCode"];
                     if (!String.IsNullOrEmpty(clgCode))
                     {
@@ -263,7 +260,6 @@ namespace SAP
                     Session["errorMessage"] = ex.ToString();
                     ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                                                         "Main.setMasterMessage('" + ex.ToString() + "','');", true);
-
                     ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                         "Dialog.hideLoader();", true);
                 }

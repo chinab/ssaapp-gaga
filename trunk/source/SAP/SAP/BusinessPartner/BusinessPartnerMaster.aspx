@@ -135,7 +135,7 @@
                                     <span>Account Balance</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtAcctBalance" runat="server" Enabled="false" Text=""></asp:TextBox>
+                                    <asp:TextBox ID="txtAcctBalance" runat="server" Enabled="false" Text="" Style="text-align: right"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -143,7 +143,7 @@
                                     <span>Deliveries</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDelivery" runat="server" Enabled="false" Text=""></asp:TextBox>
+                                    <asp:TextBox ID="txtDelivery" runat="server" Enabled="false" Text="" Style="text-align: right"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -151,7 +151,7 @@
                                     <span>Orders</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtOrder" runat="server" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtOrder" runat="server" Enabled="false" Style="text-align: right"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -159,7 +159,7 @@
                                     <span>Opportunities</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtOpportunity" runat="server" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtOpportunity" runat="server" Enabled="false" Style="text-align: right"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
@@ -171,9 +171,9 @@
                     <div id="tabs">
                         <ul>
                             <li><a href="#tabs-1">General</a></li>
-                           <%-- <li><a href="#tabs-2">Contact Person</a></li>
+                            <li><a href="#tabs-2">Contact Person</a></li>
                             <li><a href="#tabs-3">Address</a></li>
-                            <li><a href="#tabs-4">Payment Terms</a></li>
+                            <%--<li><a href="#tabs-4">Payment Terms</a></li>
                             <li><a href="#tabs-5">Accounting</a></li>
                             <li><a href="#tabs-6">Properties</a></li>
                             <li><a href="#tabs-7">Remark</a></li>--%>
@@ -318,191 +318,416 @@
                                 </tr>
                             </table>
                         </div>
-                       <%-- <div id="tabs-2">
-                            <table class="detail_table">
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Ship to</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtShipTo" runat="server" TextMode="MultiLine" Height="50px"></asp:TextBox>
-                                        <input type="button" name="btnBrowingShipTo" value="..." />
-                                    </td>
-                                    <td>
-                                        <asp:CheckBox ID="cbxSplitPurchaseOrder" Text="Split Purchase Order" runat="server" /><br />
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="clear">
-                            </div>
+                      <div id="tabs-2" style="overflow: auto; height: 300px; margin-top: 0px;">
+                            <asp:Button ID="btnAddContact" Text="Add" runat="server" 
+                                OnClick="btnAddContact_Click" />
+                            <br />
+                            <asp:ListView ID="lvContactPerson" runat="server" OnItemInserted="lvContactPerson_ItemInserted"
+                                OnItemCommand="lvContactPerson_ItemCommand" OnItemUpdating="lvContactPerson_ItemUpdating"
+                                ViewStateMode="Enabled" OnItemEditing="lvContactPerson_ItemEditing">
+                                <LayoutTemplate>
+                                    <table class="data_table">
+                                        <tr>
+                                            <th id="thButtons" runat="server" style="width: 70px">
+                                            </th>
+                                            <th style="width: 25px">
+                                                <span>#</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Contact ID</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>First Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Middle Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Last Name</span>
+                                            </th>
+                                            <th style="width: 70px">
+                                                <span>Title</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Position</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Address</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Telephone 1</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Telephone 2</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Mobile Phone</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>E-Mail</span>
+                                            </th>
+                                        </tr>
+                                        <tr id="itemPlaceholder" runat="server">
+                                        </tr>
+                                    </table>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <asp:LinkButton ID="imgbEdit" runat="server" CommandName="Edit" Text="Edit" ImageUrl="~/skin/icon/edit_icon_mono.gif" />
+                                            <asp:LinkButton ID="imgbDelete" runat="server" CommandName="DeleteItem" Text="Delete"
+                                                ImageUrl="~/skin/icon/delete_icon_mono.gif" OnClientClick="return confirm('Are you sure you want to delete this row?');"
+                                                ToolTip="Delete" />
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblNo" Text='<%#Eval("No")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblName"><%#Eval("Name") %></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblFirstName" Style="text-align: left"><%#Eval("FirstName")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblMiddleName" Text='<%# Eval("MiddleName") %>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblLastName" Text='<%# Eval("LastName") %>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTitle"><%#Eval("Title")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblPosition"><%#Eval("Position")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblAddress"><%#Eval("Address")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTel1"><%#Eval("Tel1")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTel2"><%#Eval("Tel2")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblCellolar"><%#Eval("Cellolar")%></asp:Label>
+                                        </td>
+                                        <td >
+                                            <asp:Label runat="server" ID="lblE_MailL"><%#Eval("E_MailL")%></asp:Label>
+                                        </td>
+                                       
+                                    </tr>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Update" Text="Update"
+                                                ImageUrl="~/skin/icon/save_icon_mono.gif" CausesValidation="true" ValidationGroup="vgrpSaveContact" />
+                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="CancelUpdate" Text="Cancel"
+                                                ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="lblNo" Text='<%#Eval("No")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblName"><%#Eval("Name") %></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblFirstName" Style="text-align: left"><%#Eval("FirstName")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblMiddleName" Text='<%# Eval("MiddleName") %>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblLastName" Text='<%# Eval("LastName") %>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTitle"><%#Eval("Title")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblPosition"><%#Eval("Position")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblAddress"><%#Eval("Address")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTel1"><%#Eval("Tel1")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTel2"><%#Eval("Tel2")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblCellolar"><%#Eval("Cellolar")%></asp:Label>
+                                        </td>
+                                        <td >
+                                            <asp:Label runat="server" ID="lblE_MailL"><%#Eval("E_MailL")%></asp:Label>
+                                        </td>
+                                    </tr>
+                                </EditItemTemplate>
+                                <EmptyDataTemplate>
+                                    <table class="data_table">
+                                        <tr>
+                                           <th style="width: 25px">
+                                                <span>#</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Contact ID</span>
+                                            </th>
+                                            <th style="width: 200px">
+                                                <span>First Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Middle Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Last Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Title</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Position</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Address</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Telephone 1</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Telephone 2</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Mobile Phone</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>E-Mail</span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="12">
+                                                <span>No Data</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </EmptyDataTemplate>
+                            </asp:ListView>
+                            <asp:DataPager ID="ContactPager" runat="server" PagedControlID="lvContactPerson"
+                                PageSize="5" OnPreRender="ContactPager_PreRender">
+                                <Fields>
+                                    <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" ShowNextPageButton="False"
+                                        ShowPreviousPageButton="False" />
+                                    <asp:NumericPagerField />
+                                    <asp:NextPreviousPagerField LastPageText="&gt;&gt;" ShowLastPageButton="True" ShowNextPageButton="False"
+                                        ShowPreviousPageButton="False" />
+                                </Fields>
+                            </asp:DataPager>
                         </div>
-                        <div id="tabs-3">
-                            <table class="detail_table">
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Journal Remark</span><span>BP Project</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtBPProject" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td class="detail_table_td_100">
-                                        &nbsp;</td>
-                                    <td>
-                                        <asp:TextBox ID="txtJournalRemark" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td class="detail_table_td_100">
-                                        <span>Cancellation Date</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtCancellationDate" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td class="detail_table_td_100">
-                                        <span>Required Date</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtRequiredDate" runat="server" CssClass="txtDate"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td class="detail_table_td_100">
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Payment Terms</span>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlPaymentTerm" runat="server">
-                                            <asp:ListItem Text="---"></asp:ListItem>
-                                            <asp:ListItem Text="Cash Basic"></asp:ListItem>
-                                            <asp:ListItem Text="2P10Net30"></asp:ListItem>
-                                            <asp:ListItem Text="Net30"></asp:ListItem>
-                                            <asp:ListItem Text="Defined View"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td class="detail_table_td_100">
-                                        <span>Indicator</span>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlIndicator" runat="server">
-                                            <asp:ListItem Text="---"></asp:ListItem>
-                                            <asp:ListItem Text="Define view"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Payment Method</span>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlPaymentMethod" runat="server">
-                                            <asp:ListItem Text="---"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td class="detail_table_td_100">
-                                        <span>Federal Tax ID</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="ddlFederalTaxID" runat="server" ReadOnly="true"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                        <span>Central Bank Incl.</span>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="txtCentralBankIncl" runat="server">
-                                            <asp:ListItem Text="---"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td class="detail_table_td_100">
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="detail_table_td_100">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td class="detail_table_td_100">
-                                        <span>Order Number</span>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtOrderNumber" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                            </table>
+                        <div id="tabs-3" style="overflow: auto; height: 300px; margin-top: 0px;">
+                            <asp:Button ID="btnAddAddress" Text="Add" runat="server" 
+                                OnClick="btnAddAddress_Click" />
                             <br />
-                            <br />
-                            <br />
+                            <asp:ListView ID="lvAddress" runat="server" OnItemInserted="lvAddress_ItemInserted"
+                                OnItemCommand="lvAddress_ItemCommand" OnItemUpdating="lvAddress_ItemUpdating"
+                                ViewStateMode="Enabled" OnItemEditing="lvAddress_ItemEditing">
+                                <LayoutTemplate>
+                                    <table class="data_table">
+                                        <tr>
+                                            <th id="thButtons" runat="server" style="width: 70px">
+                                            </th>
+                                            <th style="width: 25px">
+                                                <span>#</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Contact ID</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>First Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Middle Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Last Name</span>
+                                            </th>
+                                            <th style="width: 70px">
+                                                <span>Title</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Position</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Address</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Telephone 1</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Telephone 2</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Mobile Phone</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>E-Mail</span>
+                                            </th>
+                                        </tr>
+                                        <tr id="itemPlaceholder" runat="server">
+                                        </tr>
+                                    </table>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <asp:LinkButton ID="imgbEdit" runat="server" CommandName="Edit" Text="Edit" ImageUrl="~/skin/icon/edit_icon_mono.gif" />
+                                            <asp:LinkButton ID="imgbDelete" runat="server" CommandName="DeleteItem" Text="Delete"
+                                                ImageUrl="~/skin/icon/delete_icon_mono.gif" OnClientClick="return confirm('Are you sure you want to delete this row?');"
+                                                ToolTip="Delete" />
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblNo" Text='<%#Eval("No")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblName"><%#Eval("Name") %></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblFirstName" Style="text-align: left"><%#Eval("FirstName")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblMiddleName" Text='<%# Eval("MiddleName") %>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblLastName" Text='<%# Eval("LastName") %>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTitle"><%#Eval("Title")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblPosition"><%#Eval("Position")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblAddress"><%#Eval("Address")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTel1"><%#Eval("Tel1")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTel2"><%#Eval("Tel2")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblCellolar"><%#Eval("Cellolar")%></asp:Label>
+                                        </td>
+                                        <td >
+                                            <asp:Label runat="server" ID="lblE_MailL"><%#Eval("E_MailL")%></asp:Label>
+                                        </td>
+                                       
+                                    </tr>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Update" Text="Update"
+                                                ImageUrl="~/skin/icon/save_icon_mono.gif" CausesValidation="true" ValidationGroup="vgrpSaveContact" />
+                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="CancelUpdate" Text="Cancel"
+                                                ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />
+                                        </td>
+                                         <td>
+                                            <asp:Label runat="server" ID="lblNo" Text='<%#Eval("No")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblName"><%#Eval("Name") %></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblFirstName" Style="text-align: left"><%#Eval("FirstName")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblMiddleName" Text='<%# Eval("MiddleName") %>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblLastName" Text='<%# Eval("LastName") %>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTitle"><%#Eval("Title")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblPosition"><%#Eval("Position")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblAddress"><%#Eval("Address")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTel1"><%#Eval("Tel1")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTel2"><%#Eval("Tel2")%></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblCellolar"><%#Eval("Cellolar")%></asp:Label>
+                                        </td>
+                                        <td >
+                                            <asp:Label runat="server" ID="lblE_MailL"><%#Eval("E_MailL")%></asp:Label>
+                                        </td>
+                                    </tr>
+                                </EditItemTemplate>
+                                <EmptyDataTemplate>
+                                    <table class="data_table">
+                                        <tr>
+                                           <th style="width: 25px">
+                                                <span>#</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Contact ID</span>
+                                            </th>
+                                            <th style="width: 200px">
+                                                <span>First Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Middle Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Last Name</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Title</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Position</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Address</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Telephone 1</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Telephone 2</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>Mobile Phone</span>
+                                            </th>
+                                            <th style="width: 100px">
+                                                <span>E-Mail</span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="12">
+                                                <span>No Data</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </EmptyDataTemplate>
+                            </asp:ListView>
+                            <asp:DataPager ID="AddressPager" runat="server" PagedControlID="lvAddress"
+                                PageSize="5" OnPreRender="AddressPager_PreRender">
+                                <Fields>
+                                    <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" ShowNextPageButton="False"
+                                        ShowPreviousPageButton="False" />
+                                    <asp:NumericPagerField />
+                                    <asp:NextPreviousPagerField LastPageText="&gt;&gt;" ShowLastPageButton="True" ShowNextPageButton="False"
+                                        ShowPreviousPageButton="False" />
+                                </Fields>
+                            </asp:DataPager>
                         </div>
-                        <div ID="tabs-5">
-                        <table class="detail_table">
-                            <tr>
-                                <td class="detail_table_td_100">
-                                    <span>Consolidating BP</span></td>
-                                <td>
-                                    <asp:TextBox ID="txtJournalRemark13" runat="server"></asp:TextBox>
-                                    <br />
-                                    <asp:CheckBox ID="cbxSplitPurchaseOrder2" runat="server" 
-                                        Text="Split Purchase Order" />
-                                    &nbsp;<asp:CheckBox ID="cbxSplitPurchaseOrder3" runat="server" 
-                                        Text="Split Purchase Order" />
-                                </td>
-                                <td class="detail_table_td_100" style="width: 131px">
-                                    <span>Contact Person</span>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtBPProject13" runat="server"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="detail_table_td_100">
-                                    <span>Accounts Receivable</span>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtJournalRemark14" runat="server"></asp:TextBox>
-                                </td>
-                                <td class="detail_table_td_100" style="width: 131px">
-                                    <span>ID No. 2</span></td>
-                                <td>
-                                    <asp:TextBox ID="txtBPProject14" runat="server"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="detail_table_td_100">
-                                    <span>Mobile Phone</span>
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtJournalRemark15" runat="server"></asp:TextBox>
-                                </td>
-                                <td class="detail_table_td_100" style="width: 131px">
-                                    <span>Unified Federal Tax</span></td>
-                                <td>
-                                    <asp:TextBox ID="txtBPProject15" runat="server"></asp:TextBox>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>--%>
                     </div>
                     
                     <br />

@@ -121,6 +121,24 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.Label lblResults;
         
         /// <summary>
+        /// lBP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lBP;
+        
+        /// <summary>
+        /// Image2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image2;
+        
+        /// <summary>
         /// txtVendor control.
         /// </summary>
         /// <remarks>
@@ -173,24 +191,6 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtRefNo;
-        
-        /// <summary>
-        /// ddlCurency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCurency;
-        
-        /// <summary>
-        /// ddlCurrencyDetail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCurrencyDetail;
         
         /// <summary>
         /// txtNo control.
@@ -274,24 +274,6 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.TextBox txtShipTo;
         
         /// <summary>
-        /// cbxSplitPurchaseOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbxSplitPurchaseOrder;
-        
-        /// <summary>
-        /// cbxApproved control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbxApproved;
-        
-        /// <summary>
         /// txtPayTo control.
         /// </summary>
         /// <remarks>
@@ -326,6 +308,15 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBPProject;
+        
+        /// <summary>
+        /// txtProjectCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProjectCode;
         
         /// <summary>
         /// linkOwner0 control.
@@ -382,31 +373,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.DropDownList ddlIndicator;
         
         /// <summary>
-        /// ddlPaymentMethod control.
+        /// txtFederalTaxID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPaymentMethod;
-        
-        /// <summary>
-        /// ddlFederalTaxID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ddlFederalTaxID;
-        
-        /// <summary>
-        /// txtCentralBankIncl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList txtCentralBankIncl;
+        protected global::System.Web.UI.WebControls.TextBox txtFederalTaxID;
         
         /// <summary>
         /// txtOrderNumber control.
@@ -434,6 +407,15 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOwner;
+        
+        /// <summary>
+        /// txtOwnerCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOwnerCode;
         
         /// <summary>
         /// linkOwner control.

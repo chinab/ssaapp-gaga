@@ -178,7 +178,7 @@
 				</h3>
 				<ul>
 					<li><a href="#">Purchase Quotation</a></li>
-					<li><a href="/PurchaseOrder.aspx">Purchase Order</a></li>
+					<li><a href="/Purchase/PurchaseOrder.aspx">Purchase Order</a></li>
 					<li><a href="#">Goods Receipt PO</a></li>
 					<li><a href="#">Goods Return</a></li>
 					<li><a href="#">A/P invoice</a></li>

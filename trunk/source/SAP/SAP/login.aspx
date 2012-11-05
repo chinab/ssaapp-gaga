@@ -5,10 +5,16 @@
 <head runat="server">
     <title></title>
     <link href="skin/AdminLogin.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+
+* { margin: 0; padding: 0; }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <div id="login-form">
+    <asp:ScriptManager ID="ScriptManagerMain" runat="server">
+    </asp:ScriptManager>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Login ID="Login1" runat="server" Width="357px">
             <LayoutTemplate>

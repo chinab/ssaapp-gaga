@@ -50,6 +50,7 @@
                             <tr>
                                 <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Activity</span>
+                                    
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlActivity" runat="server" Width="200px">
@@ -112,6 +113,9 @@
                             <tr>
                                 <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
                                     <span>BP Code</span>
+                                    <asp:HyperLink ID="lBP" runat="server">
+                                        <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/icon/link.png"/>
+                                    </asp:HyperLink>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtBP" runat="server" Enabled="false" Text="" 
@@ -149,6 +153,7 @@
                         <ul>
                             <li><a href="#tabs-1">General</a></li>
                             <li><a href="#tabs-2">Content</a></li>
+                            <li><a href="#tabs-3">Linked Doc.</a></li>
                         </ul>
                         <div id="tabs-1">
                         <table >
@@ -212,11 +217,54 @@
                             <table class="detail_table">
                                 <tr>
                                     <td>
-                                        <CKEditor:CKEditorControl ID="txtRemark" runat="server" Height="135px" Width="">
-                                        </CKEditor:CKEditorControl>
+                                        <CKEditor:CKEditorControl ID="txtRemark" runat="server" Height="135px" Width=""></CKEditor:CKEditorControl>
                                         <%--<asp:TextBox ID="txtRemark" runat="server" Height="200px" 
                                             TextMode="MultiLine" Width="652px"></asp:TextBox>--%>
                                     </td>
+                            </table>
+                        </div>
+                        <div id="tabs-3">
+                            <table class="detail_table">
+                                <tr>
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
+                                        <span>Document Type</span>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="DropDownList2" runat="server">
+                                            <asp:ListItem Text="A/R Invoice" Value="13"></asp:ListItem>
+                                            <asp:ListItem Text="A/R Credit Memo" Value="14"></asp:ListItem>
+                                            <asp:ListItem Text="Delivery" Value="15"></asp:ListItem>
+                                            <asp:ListItem Text="Returns" Value="16"></asp:ListItem>
+                                            <asp:ListItem Text="Sales Order" Value="17"></asp:ListItem>
+                                            <asp:ListItem Text="A/P Invoice" Value="18"></asp:ListItem>
+                                            <asp:ListItem Text="A/P Credit Memo" Value="19"></asp:ListItem>
+                                            <asp:ListItem Text="Goods Receipt" Value="20"></asp:ListItem>
+                                            <asp:ListItem Text="Goods Return" Value="21"></asp:ListItem>
+                                            <asp:ListItem Text="Purchase Order" Value="22"></asp:ListItem>
+                                            <asp:ListItem Text="Purchase Quotation" Value="23"></asp:ListItem>
+                                            <asp:ListItem Text="Goods Receipt PO" Value="24"></asp:ListItem>
+                                            <asp:ListItem Text="Journal Entry" Value="30"></asp:ListItem>
+                                            <asp:ListItem Text="Outgoing Payment" Value="46"></asp:ListItem>
+                                            <asp:ListItem Text="Goods Receipt" Value="59"></asp:ListItem>
+                                            <asp:ListItem Text="Goods Issue" Value="60"></asp:ListItem>
+                                            <asp:ListItem Text="Inventory Transfer Request" Value="1250000001"></asp:ListItem>
+                                            <asp:ListItem Text="Inventory Transfer" Value="67"></asp:ListItem>
+                                            <asp:ListItem Text="Inventory Revaluation" Value="162"></asp:ListItem>
+                                            <asp:ListItem Text="Production Order" Value="202"></asp:ListItem>
+                                            <asp:ListItem Text="Items" Value="4"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
+                                        <span>Document No.</span>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="TextBox1" runat="server" Enabled="False"></asp:TextBox>
+                                        <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('../Popup_EditCustomer.aspx','');"
+                                        runat="server"> <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" /></asp:HyperLink>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>

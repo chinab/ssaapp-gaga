@@ -15,14 +15,20 @@ namespace SAP
     public partial class BusinessPartnerMaster : System.Web.UI.Page
     {
         public static DataTable dtHeader;
+        public static DataTable dtContactPerson;
+        public static DataTable dtAddress;
         private GeneralFunctions GF;
         private string DocType = "2";
 
+        #region "Event"
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 ClearScreen();
+                lvContactPerson.DataSource = dtContactPerson;
+                lvContactPerson.DataBind();
+
                 string cardcode = Request.QueryString["cardcode"];
                 if (!String.IsNullOrEmpty(cardcode))
                 {
@@ -35,7 +41,6 @@ namespace SAP
                 }
             }
         }
-
         protected void btnAdd_Click(object sender, ImageClickEventArgs e)
         {
             if (txtCardCode.Text == "")
@@ -77,9 +82,13 @@ namespace SAP
             ddlBPGroup.DataValueField = "GroupCode";
             ddlBPGroup.DataBind();
         }
+       
+        #endregion
+
         #region "Functions"
         private void LoadData(string Cardcode)
         {
+            if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
             Transaction trx = new Transaction();
             dtHeader = trx.GetMarketingDocument_ReturnDS(DocType, Cardcode, User.Identity.Name).Tables[0];
             if (dtHeader.Rows.Count == 0)
@@ -98,13 +107,18 @@ namespace SAP
             ddlCardType.SelectedValue = dr["CardType"].ToString();
             ddlCurrency.SelectedValue = dr["currency"].ToString();
             ddlBPGroup.SelectedValue = dr["GroupCode"].ToString();
-            txtAcctBalance.Text = dr["Balance"].ToString();
-            txtOrder.Text = dr["OrdersBal"].ToString();
-            txtDelivery.Text = dr["DNotesBal"].ToString();
+            txtAcctBalance.Text = GF.FormatNumeric(dr["Balance"].ToString(), "SumDec");
+            txtOrder.Text = GF.FormatNumeric(dr["OrdersBal"].ToString(), "SumDec");
+            txtDelivery.Text = GF.FormatNumeric(dr["DNotesBal"].ToString(), "SumDec"); 
             txtOpportunity.Text = dr["OprCount"].ToString();
 
             txtWebsite.Text = dr["IntrntSite"].ToString();
             txtEmail.Text = dr["E_mail"].ToString();
+            //----------load contact person---------------
+            dtContactPerson = trx.GetMarketingDocument_ReturnDS("11", Cardcode, User.Identity.Name).Tables[0];
+            lvContactPerson.DataSource = dtContactPerson;
+            lvContactPerson.DataBind();
+
             SetNavigatorURL(txtCardCode.Text);
             SetScreenStatus("Update");
         }
@@ -166,6 +180,21 @@ namespace SAP
             dtHeader.Columns.Add("U_UserID");
             dtHeader.Rows.Add("", "", "", "", "", "", "", "Generated from SBO WEB", User.Identity.Name);
 
+            dtContactPerson = new DataTable();
+            dtContactPerson.Columns.Add("No");
+            dtContactPerson.Columns.Add("Name");
+            dtContactPerson.Columns.Add("FirstName");
+            dtContactPerson.Columns.Add("MiddleName");
+            dtContactPerson.Columns.Add("LastName");
+            dtContactPerson.Columns.Add("Title");
+            dtContactPerson.Columns.Add("Position");
+            dtContactPerson.Columns.Add("Address");
+            dtContactPerson.Columns.Add("Tel1");
+            dtContactPerson.Columns.Add("Tel2");
+            dtContactPerson.Columns.Add("Cellolar");
+            dtContactPerson.Columns.Add("E_MailL");
+            dtContactPerson.Rows.Add(0,"", "", "", "", "", "", "", "", "", "", "");
+
             MasterData masterDataWS = new MasterData();
             DataSet dsMaster;
             dsMaster = masterDataWS.GetShippingType(User.Identity.Name);
@@ -188,6 +217,7 @@ namespace SAP
             dsMaster = masterDataWS.GetBPCurrency("", User.Identity.Name);
             if (dsMaster.Tables.Count > 0)
             {
+                dsMaster.Tables[0].Rows.Add("##", "All Currency");
                 ddlCurrency.DataSource = dsMaster.Tables[0];
                 ddlCurrency.DataTextField = "CurrName";
                 ddlCurrency.DataValueField = "CurrCode";
@@ -210,7 +240,73 @@ namespace SAP
             this.linkNew.NavigateUrl = "/BusinessPartner/BusinessPartnerMaster.aspx?cardcode=";
         }
         #endregion
-        
+
+        #region "Contact"
+        protected void lvContactPerson_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+
+        }
+
+        protected void lvContactPerson_ItemEditing(object sender, ListViewEditEventArgs e)
+        {
+
+        }
+
+        protected void lvContactPerson_ItemInserted(object sender, ListViewInsertedEventArgs e)
+        {
+
+        }
+
+        protected void lvContactPerson_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+        {
+
+        }
+
+        protected void btnAddContact_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ContactPager_PreRender(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region "Address"
+        protected void btnAddAddress_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lvAddress_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+
+        }
+
+        protected void lvAddress_ItemEditing(object sender, ListViewEditEventArgs e)
+        {
+
+        }
+
+        protected void lvAddress_ItemInserted(object sender, ListViewInsertedEventArgs e)
+        {
+
+        }
+
+        protected void lvAddress_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+        {
+
+        }
+
+        protected void AddressPager_PreRender(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+
 
     }
 }

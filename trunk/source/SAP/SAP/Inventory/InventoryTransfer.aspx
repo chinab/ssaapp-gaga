@@ -17,6 +17,9 @@
                             <tr>
                                 <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Business Partner</span>
+                                    <asp:HyperLink ID="lBP" runat="server">
+                                        <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/icon/link.png"/>
+                                    </asp:HyperLink>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtBP" runat="server" Enabled="False"></asp:TextBox>

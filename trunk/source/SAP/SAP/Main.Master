@@ -194,6 +194,7 @@
 				</h3>
 				<ul>
 					<li><a href="/BusinessPartner/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
+                    <li><a href="/BusinessPartner/BusinessPartnerMaster_ABEO.aspx">Bussiness Partner ABEO</a></li>
 					<li><a href="/BusinessPartner/Activity.aspx">Activity</a></li>
 				</ul>
 			</li>

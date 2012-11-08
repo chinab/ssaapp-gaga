@@ -70,7 +70,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtVendor" runat="server" Enabled="False"></asp:TextBox>
-                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditVendor.aspx','');"
+                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditBusinessPartner.aspx?CardType=S','');"
                                         runat="server">
                                         <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>
@@ -322,7 +322,7 @@
                                         </td>
                                         <td>
                                             <asp:Label runat="server" ID="lblTaxcode" Text='<%#Bind("Taxcode")%>' />
-                                            <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"../Popup_EditTaxCode_IN.aspx\",{0})", "\"id=" + Eval("No").ToString()+"\"")%>'
+                                            <asp:HyperLink ID="linkTaxCodeLoad" NavigateUrl='<%# String.Format("javascript:Main.openDialog(\"../Popup_EditTaxCode.aspx\",{0})", "\"id=" + Eval("No").ToString()+"&TaxType=I"+"\"")%>'
                                                 runat="server">
                                                 <asp:Image ID="imgTaxCodeLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                             </asp:HyperLink>
@@ -492,8 +492,7 @@
                                         <span>BP Project</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtBPProject" runat="server" Enabled="False"></asp:TextBox>
-                                        <asp:TextBox ID="txtProjectCode" runat="server" Enabled="False" Visible="False"></asp:TextBox>
+                                        <asp:TextBox ID="txtProjectCode" runat="server" Enabled="False"></asp:TextBox>
                                         <asp:HyperLink ID="linkOwner0" runat="server" NavigateUrl="javascript:Main.openDialog('../Popup_EditProject.aspx','');">
                                             <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                         </asp:HyperLink>
@@ -606,7 +605,7 @@
                                 <td class="detail_table_td_100">
                                     <asp:TextBox ID="txtOwner" runat="server" Enabled="False"></asp:TextBox>
                                     <asp:TextBox ID="txtOwnerCode" runat="server" Visible="False"></asp:TextBox>
-                                    <asp:HyperLink ID="linkOwner" NavigateUrl="javascript:Main.openDialog('Popup_EditEmployee.aspx','');"
+                                    <asp:HyperLink ID="linkOwner" NavigateUrl="javascript:Main.openDialog('../Popup_EditEmployee.aspx','');"
                                         runat="server">
                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>

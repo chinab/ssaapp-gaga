@@ -16,26 +16,34 @@ namespace SAP
     {
         public static DataTable dtContents;
         public static DataTable dtHeader;
-        private GeneralFunctions GF;
+        private GeneralFunctions GF= new GeneralFunctions(HttpContext.Current.User.Identity.Name);
         private string DocType = "22";
+        private string TblHeaderName = "OPOR";
+        private string TblLineName = "POR1";
+        private string CurrentPageUrl = "/Purchase/PurchaseOrder.aspx";
+        private string HeaderKeyName = "DocEntry";
+
+        private String TargetPageUrl = "/Purchase/GoodsReceiptPO.aspx";
+
+        public static string KeepColumsContent = "";
     #region Functions
         protected void SetNavigatorURL(string CurrentKey)
         {
-             GetDefault df = new GetDefault();
-            DataSet nav = df.GetNextPreviousID(DocType, User.Identity.Name, "OPOR", "DocEntry", CurrentKey);
+            GetDefault df = new GetDefault();
+            DataSet nav = df.GetNextPreviousID(DocType, User.Identity.Name, TblHeaderName, HeaderKeyName, CurrentKey);
             if (nav != null)
             {
-                this.linkFirst.NavigateUrl = "/Purchase/PurchaseOrder.aspx?order_id=" + nav.Tables[0].Rows[0]["Fir"].ToString(); ;
-                this.linkNext.NavigateUrl = "/Purchase/PurchaseOrder.aspx?order_id=" + nav.Tables[0].Rows[0]["Nex"].ToString(); ;
-                this.linkPrevious.NavigateUrl = "/Purchase/PurchaseOrder.aspx?order_id=" + nav.Tables[0].Rows[0]["Pre"].ToString(); ;
-                this.linkLast.NavigateUrl = "/Purchase/PurchaseOrder.aspx?order_id=" + nav.Tables[0].Rows[0]["Las"].ToString(); ;
+                this.linkFirst.NavigateUrl = CurrentPageUrl + "?order_id=" + nav.Tables[0].Rows[0]["Fir"].ToString(); ;
+                this.linkNext.NavigateUrl = CurrentPageUrl + "?order_id=" + nav.Tables[0].Rows[0]["Nex"].ToString(); ;
+                this.linkPrevious.NavigateUrl = CurrentPageUrl + "?order_id=" + nav.Tables[0].Rows[0]["Pre"].ToString(); ;
+                this.linkLast.NavigateUrl = CurrentPageUrl + "?order_id=" + nav.Tables[0].Rows[0]["Las"].ToString(); ;
             }
-            this.linkNew.NavigateUrl = "/Purchase/PurchaseOrder.aspx?order_id=";
+            this.linkNew.NavigateUrl = CurrentPageUrl + "?order_id=";
         }
-        protected void loadOrderFromId(String orderId)
+        protected void LoadData(String orderId, string NewDocType)
         {
             Transaction ts = new Transaction();
-            DataSet returnDoc = ts.GetMarketingDocument_ReturnDS(DocType, orderId, User.Identity.Name);
+            DataSet returnDoc = ts.GetMarketingDocument_ReturnDS(NewDocType, orderId, User.Identity.Name);
             DataTable dtHeader;
 
             if (returnDoc == null)
@@ -43,7 +51,7 @@ namespace SAP
             else
                 dtHeader = returnDoc.Tables[0];
 
-            returnDoc = ts.GetMarketingDocument_ReturnDS(DocType, orderId, User.Identity.Name);
+            returnDoc = ts.GetMarketingDocument_ReturnDS(NewDocType, orderId, User.Identity.Name);
 
             if (returnDoc == null || returnDoc.Tables.Count<2 )
             {
@@ -56,13 +64,20 @@ namespace SAP
             }
 
             dtHeader = returnDoc.Tables[0];
-            dtContents = returnDoc.Tables[1];
+            dtContents = GF.ConvertDataTable_RemoveCols(returnDoc.Tables[1], KeepColumsContent);
             DataRow dr = dtHeader.Rows[0];
             SetNavigatorURL(dr["DocEntry"].ToString());
 
             this.txtName.Text = dr["CardName"].ToString();
             this.txtVendor.Text = dr["CardCode"].ToString();
             lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtVendor.Text;
+
+            MasterData masterDataWS = new MasterData();
+            ddlContactPerson.DataSource = masterDataWS.GetContactPerson(txtVendor.Text, User.Identity.Name).Tables[0];
+            ddlContactPerson.DataValueField = "Code";
+            ddlContactPerson.DataTextField = "FirstName";
+            ddlContactPerson.DataBind();
+
             this.txtNo.Text = dr["DocEntry"].ToString();
             this.txtStatus.Text = dr["DocStatus"].ToString();
             CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
@@ -81,12 +96,17 @@ namespace SAP
 
             ddlBuyer.SelectedValue= dr["slpcode"].ToString();
             txtOwnerCode.Text = dr["OwnerCode"].ToString();
-            //txtOwner.Text = "";
+
+            DataTable dtEm= ts.GetMarketingDocument_ReturnDS("171", dr["OwnerCode"].ToString(), User.Identity.Name).Tables[0];
+            if (dtEm.Rows.Count>0)
+                txtOwner.Text = dtEm.Rows[0]["firstName"].ToString() + " " + dtEm.Rows[0]["middleName"].ToString() + " " + dtEm.Rows[0]["lastName"].ToString();
+            
+            ddlContactPerson.SelectedValue = dr["CntctCode"].ToString();
+
             ddlShippingType.SelectedValue= dr["TrnspCode"].ToString();
             txtPayTo.Text =dr["Address"].ToString();
             txtShipTo.Text =dr["Address2"].ToString()  ;
             txtProjectCode.Text =dr["Project"].ToString();
-            //txtBPProject.Text = "";
             txtFederalTaxID.Text =dr["LicTradNum"].ToString();
 
             ddlPaymentTerm.SelectedValue=  dr["GroupNum"].ToString();
@@ -100,19 +120,22 @@ namespace SAP
             txtJournalRemark.Text = dr["JrnlMemo"].ToString();
             txtRemarks.Text = dr["Comments"].ToString();
             txtRefNo.Text = dr["NumAtCard"].ToString();
-            lvContents.DataSource = dtContents;
-            lvContents.DataBind();
+
             foreach (DataRow row in dtContents.Rows)
             {
                 updateRowTotalPrice(row);
+                if (DocType != NewDocType) //truong hop copy to
+                {
+                    row["BaseEntry"] = orderId;
+                    row["BaseType"] = NewDocType;
+                    row["BaseLine"] = row["LineNum"];
+                }
             }
+            this.lvContents.DataSource = dtContents;
+            this.lvContents.DataBind();
             updateTableTotalPrice();
-            SetScreenStatus("Close");
-        }
-        private int GetNo()
-        {
-            return dtContents.Rows.Count + 1;
-        }
+            
+        }       
         protected void ClearScreen()
         {
             dtHeader = new DataTable("OPOR");
@@ -131,6 +154,7 @@ namespace SAP
             dtHeader.Columns.Add("Address2");
             dtHeader.Columns.Add("Project");
             dtHeader.Columns.Add("LicTradNum");
+            dtHeader.Columns.Add("NumAtCard");
             dtHeader.Columns.Add("GroupNum");
             dtHeader.Columns.Add("CancelDate");
             dtHeader.Columns.Add("ReqDate");
@@ -157,6 +181,11 @@ namespace SAP
             dtContents.Columns.Add("OcrCode3");
             dtContents.Columns.Add("OcrCode4");
             dtContents.Columns.Add("OcrCode5");
+            dtContents.Columns.Add("BaseEntry");
+            dtContents.Columns.Add("BaseLine");
+            dtContents.Columns.Add("BaseType");
+            dtContents.Columns.Add("LineNum");
+            KeepColumsContent = GF.BuildKeepColumnStr(dtContents);
 
             CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentCulture;
             txtPostingDate.Text.ToString(ci);
@@ -174,6 +203,8 @@ namespace SAP
             txtFederalTaxID.Text="";
             txtShipTo.Text = "";
             txtPayTo.Text = "";
+            txtVendor.Text = "";
+            txtName.Text = "";
 
             dtContents.Clear();
             SetNavigatorURL("0");
@@ -207,16 +238,14 @@ namespace SAP
         {
             try
             {
-                if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
                 //Update table header
                 DataRow dr = dtHeader.Rows[0];
 
                 CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
-                //string ls = Convert.ToDateTime(txtDueDate.Text,ivC).ToString("dd/MM/yyyy");
 
-                dr["DocDate"] = Convert.ToDateTime(txtDueDate.Text, ivC).ToString("yyyyMMdd");//String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
-                dr["DocDueDate"] = Convert.ToDateTime(txtDueDate.Text, ivC).ToString("yyyyMMdd");//String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDueDate.Text));
-                dr["TaxDate"] = Convert.ToDateTime(txtDocumentDate.Text, ivC).ToString("yyyyMMdd");//String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDocumentDate.Text));
+                dr["DocDate"] = Convert.ToDateTime(txtDueDate.Text, ivC).ToString("yyyyMMdd");
+                dr["DocDueDate"] = Convert.ToDateTime(txtDueDate.Text, ivC).ToString("yyyyMMdd");
+                dr["TaxDate"] = Convert.ToDateTime(txtDocumentDate.Text, ivC).ToString("yyyyMMdd");
 
                 dr["Comments"] = txtRemarks.Text;
                 dr["JrnlMemo"] = txtJournalRemark.Text;
@@ -230,6 +259,7 @@ namespace SAP
                 dr["Address2"]=txtShipTo.Text;
                 dr["Project"]=txtProjectCode.Text;
                 dr["LicTradNum"]=txtFederalTaxID.Text;
+                dr["NumAtCard"] = txtRefNo.Text;
                 dr["GroupNum"]=ddlPaymentTerm.SelectedItem.Value.ToString();
                 if(!string.IsNullOrEmpty(txtCancellationDate.Text))
                     dr["CancelDate"]=Convert.ToDateTime(txtCancellationDate.Text, ivC).ToString("yyyyMMdd");;
@@ -242,8 +272,10 @@ namespace SAP
 
                 DocumentXML objInfo = new DocumentXML();
                 DataSet ds = new DataSet("DS");
-                ds.Tables.Add(dtHeader);
-                ds.Tables.Add(GF.ResetFormatNumeric(dtContents, arrContentsCols));
+                dtHeader.TableName = TblHeaderName;
+                dtContents.TableName = TblLineName;
+                ds.Tables.Add(dtHeader.Copy());
+                ds.Tables.Add(GF.ResetFormatNumeric(dtContents, arrContentsCols).Copy());
 
                 return objInfo.ToXMLStringFromDS(DocType, ds);
             }
@@ -264,17 +296,19 @@ namespace SAP
                     btnAdd.Visible = true;
                     btnUpdate.Visible = false;
                     btnAddRecord.Visible = true;
+                    btnCopyTo.Visible = false;
                     break;
                 case "Update":
                     btnAdd.Visible = false;
-                    btnUpdate.Visible = true;
+                    btnUpdate.Visible = false;
                     btnAddRecord.Visible = false;
-                    
+                    btnCopyTo.Visible = true;
                     break;
                 case "Close":
                     btnAdd.Visible = false;
                     btnUpdate.Visible = false;
                     btnAddRecord.Visible = false;
+                    btnCopyTo.Visible = false;
                     break;
             }
         }
@@ -283,7 +317,6 @@ namespace SAP
             double orderTotalBeforeDiscount = 0.0;
             double orderTotal = 0.0;
             double taxTotal = 0.0;
-            if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
             foreach (DataRow row in dtContents.Rows)
             {
                 if (!"".Equals(row["ItemCode"]))
@@ -295,7 +328,6 @@ namespace SAP
 
                     orderTotalBeforeDiscount += total;
                     taxTotal += tax;
-                   // updateRowTotalPrice(row);
                 }
             }
             this.txtTotalDiscount.Text = GF.FormatNumeric(orderTotalBeforeDiscount.ToString(), "SumDec");
@@ -305,16 +337,16 @@ namespace SAP
         }
         public void updateRowTotalPrice(DataRow row)
         {
-            if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
-            double quantity = 0, unitPrice = 0.0, discountContract = 0, priceAfterDiscount = 0.0, total = 0;
+            double quantity = 0, unitPrice = 0.0, discount = 0, priceAfterDiscount = 0.0, total = 0;
             quantity = GF.Object2Double(row["Quantity"], "QtyDec");
             unitPrice = GF.Object2Double(row["PriceBefDi"], "PriceDec");
-            discountContract = GF.Object2Double(row["DiscPrcnt"], "PercentDec");
+            discount = GF.Object2Double(row["DiscPrcnt"], "PercentDec");
 
-            priceAfterDiscount = GF.Object2Double((Object)(unitPrice * (100 - discountContract) / 100), "PriceDec");
+            priceAfterDiscount = GF.Object2Double((Object)(unitPrice * (100 - discount) / 100), "PriceDec");
             total = GF.Object2Double((Object)(priceAfterDiscount * quantity), "SumDec");
+
             row["PriceBefDi"] = GF.FormatNumeric(unitPrice.ToString(), "PriceDec");
-            row["DiscPrcnt"] = GF.FormatNumeric(discountContract.ToString(), "PercentDec");
+            row["DiscPrcnt"] = GF.FormatNumeric(discount.ToString(), "PercentDec");
             row["Price"] = GF.FormatNumeric(priceAfterDiscount.ToString(), "PriceDec");
             row["LineTotal"] = GF.FormatNumeric(total.ToString(), "SumDec");
             row["Quantity"] = GF.FormatNumeric(quantity.ToString(), "QtyDec");
@@ -336,7 +368,7 @@ namespace SAP
             {
                 this.txtVendor.Text = defaultVendor.Tables[0].Rows[0]["CardCode"].ToString();
                 this.txtName.Text = defaultVendor.Tables[0].Rows[0]["CardName"].ToString();
-                
+
                 lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtVendor.Text;
                 MasterData masterDataWS = new MasterData();
                 ddlContactPerson.DataSource = masterDataWS.GetContactPerson(txtVendor.Text, User.Identity.Name).Tables[0];
@@ -360,9 +392,8 @@ namespace SAP
             {
                 if (!IsPostBack)
                 {
+                    
                     ClearScreen();
-                    //this.lvContents.DataSource = dtContents;
-                    //this.lvContents.DataBind();
 
                     MasterData masterDataWS = new MasterData();
                     DataSet ds;
@@ -391,19 +422,33 @@ namespace SAP
 
                     //-------------Load Indicator----------------
                     ds = masterDataWS.GetIndicator(User.Identity.Name);
+                    ds.Tables[0].Rows.Add("", "");
                     ddlIndicator.DataSource = ds.Tables[0];
                     ddlIndicator.DataTextField = "Name";
                     ddlIndicator.DataValueField = "Code";
                     ddlIndicator.DataBind();
+                    ddlIndicator.SelectedValue = "";
 
                     String orderId = Request.QueryString["order_id"];
                     if (!String.IsNullOrEmpty(orderId))
                     {
-                        loadOrderFromId(orderId);
+                        LoadData(orderId, DocType);
+                        if (txtStatus.Text == "C")
+                            SetScreenStatus("Close");
+                        else if (txtStatus.Text == "O")
+                            SetScreenStatus("Update");   
                     }
                     else
                     {
                         LoadDefault();
+                        SetScreenStatus("New");
+                    }
+
+                    String BaseEntry = Request.QueryString["base_entry"];
+                    if (!String.IsNullOrEmpty(BaseEntry))
+                    {
+                        String BaseType = Request.QueryString["base_type"];
+                        LoadData(BaseEntry, BaseType);
                     }
                 }
             }
@@ -424,7 +469,6 @@ namespace SAP
                 if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
                 {
                     Int32 itemNo = 0;
-                    if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
 
                     switch (this.Request["__EVENTARGUMENT"].ToString())
                     {
@@ -498,7 +542,6 @@ namespace SAP
                                 this.txtVendor.Text = chosenPartner.CardCode;
                                 lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtVendor.Text;
                                 this.txtStatus.Text = "Open";
-                                this.txtStatus.Enabled = false;
 
                                 this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
                                 this.txtDueDate.Text = DateTime.Now.ToShortDateString();
@@ -518,6 +561,7 @@ namespace SAP
                             if (employee != null)
                             {
                                 this.txtOwner.Text = employee.FirstName + " " + employee.MidName + " " + employee.LastName;
+                                this.txtOwnerCode.Text = employee.Code;
                             }
                             break;
                         case "EditProjectCallBack":
@@ -525,6 +569,38 @@ namespace SAP
                             if (prj != null)
                             {
                                 this.txtProjectCode.Text = prj.PrjCode;
+                            }
+                            break;
+                        case "EditCostCenterCallBack":
+                            CostCenter chosenCostCenter = Session["chosenCostCenter"] as CostCenter;
+                            itemNo = Int32.Parse(Session["chosenItemNo"] as String);
+                            if (chosenCostCenter != null)
+                            {
+                                // update grid
+                                switch (Session["chosenDimesion"].ToString())
+                                {
+                                    case "1":
+                                        dtContents.Rows[itemNo - 1]["OcrCode"] = chosenCostCenter.PrcCode;
+                                        break;
+                                    case "2":
+                                        dtContents.Rows[itemNo - 1]["OcrCode2"] = chosenCostCenter.PrcCode;
+                                        break;
+                                    case "3":
+                                        dtContents.Rows[itemNo - 1]["OcrCode3"] = chosenCostCenter.PrcCode;
+                                        break;
+                                    case "4":
+                                        dtContents.Rows[itemNo - 1]["OcrCode4"] = chosenCostCenter.PrcCode;
+                                        break;
+                                    case "5":
+                                        dtContents.Rows[itemNo - 1]["OcrCode5"] = chosenCostCenter.PrcCode;
+                                        break;
+                                    default:
+                                        break;
+                                       
+                                }
+                                
+                                this.lvContents.DataSource = dtContents;
+                                this.lvContents.DataBind();
                             }
                             break;
                         default:
@@ -545,8 +621,22 @@ namespace SAP
         {
             try
             {
-                int iNo = GetNo();
-                dtContents.Rows.Add(iNo, "", "", "1", "0", "0", "0", "0", "0", "", "", "", "", "", "", "");
+                if (txtVendor.Text == "")
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                                                        "Main.setMasterMessage('Missing Vendor','');", true);
+
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                                                        "Dialog.hideLoader();", true);
+                    return;
+                }
+                int iNo = dtContents.Rows.Count + 1;
+                dtContents.Rows.Add();
+                dtContents.Rows[iNo-1]["No"] = iNo;
+                //dtContents.Rows[iNo - 1]["BaseEntry"] = "2";
+                //dtContents.Rows[iNo - 1]["BaseType"] = "540000006";
+                //dtContents.Rows[iNo - 1]["BaseLine"] = "0";
+
                 this.lvContents.DataSource = dtContents;
 
                 int lastpage = this.ProductListPagerCombo.TotalRowCount / this.ProductListPagerCombo.PageSize;
@@ -648,7 +738,6 @@ namespace SAP
             {
                 this.lvContents.EditIndex = e.NewEditIndex;
 
-                if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
                 // Reset FormatNumeric 
                 string lsQty = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["Quantity"].ToString());       // Quantity
                 string lsUPrBeDi = GF.ResetFormatNumeric(dtContents.Rows[e.NewEditIndex]["PriceBefDi"].ToString()); // Unitprice
@@ -738,6 +827,12 @@ namespace SAP
                                                     "Dialog.hideLoader();", true);
             }
         }
+        protected void btnCopyTo_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect(TargetPageUrl + "?base_type=" + DocType + "&base_entry=" + txtNo.Text);
+        }
     #endregion
+
+        
     }
 }

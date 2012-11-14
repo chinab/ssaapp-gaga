@@ -360,22 +360,22 @@ namespace SAP
         protected void LoadDefault()
         {
             //-------------Load Default BP----------------
-            GetDefault getDefaultWS = new GetDefault();
-            DataSet defaultVendor = getDefaultWS.GetDefaultBP(User.Identity.Name, "S");
+            //GetDefault getDefaultWS = new GetDefault();
+            //DataSet defaultVendor = getDefaultWS.GetDefaultBP(User.Identity.Name, "S");
 
-            //extract to funtion later
-            if (defaultVendor != null)
-            {
-                this.txtVendor.Text = defaultVendor.Tables[0].Rows[0]["CardCode"].ToString();
-                this.txtName.Text = defaultVendor.Tables[0].Rows[0]["CardName"].ToString();
+            ////extract to funtion later
+            //if (defaultVendor != null)
+            //{
+            //    this.txtVendor.Text = defaultVendor.Tables[0].Rows[0]["CardCode"].ToString();
+            //    this.txtName.Text = defaultVendor.Tables[0].Rows[0]["CardName"].ToString();
 
-                lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtVendor.Text;
-                MasterData masterDataWS = new MasterData();
-                ddlContactPerson.DataSource = masterDataWS.GetContactPerson(txtVendor.Text, User.Identity.Name).Tables[0];
-                ddlContactPerson.DataValueField = "Code";
-                ddlContactPerson.DataTextField = "FirstName";
-                ddlContactPerson.DataBind();
-            }
+            //    lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtVendor.Text;
+            //    MasterData masterDataWS = new MasterData();
+            //    ddlContactPerson.DataSource = masterDataWS.GetContactPerson(txtVendor.Text, User.Identity.Name).Tables[0];
+            //    ddlContactPerson.DataValueField = "Code";
+            //    ddlContactPerson.DataTextField = "FirstName";
+            //    ddlContactPerson.DataBind();
+            //}
             this.txtStatus.Text = "Open";
             this.txtStatus.Enabled = false;
             this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
@@ -408,10 +408,12 @@ namespace SAP
 
                     //-------------Load Shipping Type---------------------
                     ds = masterDataWS.GetShippingType(User.Identity.Name);
+                    ds.Tables[0].Rows.Add("-1", "");
                     ddlShippingType.DataSource = ds.Tables[0];
                     ddlShippingType.DataTextField = "TrnspName";
                     ddlShippingType.DataValueField = "TrnspCode";
                     ddlShippingType.DataBind();
+                    ddlShippingType.SelectedValue = "-1";
 
                     //-------------Load Payment Tern----------------
                     ds = masterDataWS.GetPaymentTerm(User.Identity.Name);
@@ -633,9 +635,6 @@ namespace SAP
                 int iNo = dtContents.Rows.Count + 1;
                 dtContents.Rows.Add();
                 dtContents.Rows[iNo-1]["No"] = iNo;
-                //dtContents.Rows[iNo - 1]["BaseEntry"] = "2";
-                //dtContents.Rows[iNo - 1]["BaseType"] = "540000006";
-                //dtContents.Rows[iNo - 1]["BaseLine"] = "0";
 
                 this.lvContents.DataSource = dtContents;
 

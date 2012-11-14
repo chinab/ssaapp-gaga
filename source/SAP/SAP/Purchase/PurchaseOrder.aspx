@@ -5,7 +5,7 @@
     <script type="text/javascript">
         Main.myUpdatePanelId = '<%= purchaseOrderUpdatePanel.ClientID %>';
     </script>
-    <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
+    <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
                 <div id="menu-action" style="margin-left: -15px;">

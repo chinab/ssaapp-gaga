@@ -321,7 +321,7 @@ namespace SAP
         {
             int intNumDecimales = GetNumDecimals(asNumDecimales);
 
-            string NumberGroupSeparator = this.ThousSep, NegativeSign = "-";
+            string NumberGroupSeparator = this.ThousSep, NegativeSign = "-", NegativeSignOrg = "";
             string PercentDecimalSeparator = this.DecSep, NumberDecimalSeparator = this.DecSep;
 
             strValor = (Math.Round(Double.Parse(strValor), intNumDecimales)).ToString();
@@ -345,6 +345,7 @@ namespace SAP
             if (strAux.Substring(0, 1) == NegativeSign)
             {
                 strAux = strAux.Substring(1);
+                NegativeSignOrg = "-";
             }
 
             strPuntos = strAux;
@@ -366,7 +367,7 @@ namespace SAP
 
                 }
             }
-            strAux = strPuntos + strAux + strComas;
+            strAux = NegativeSignOrg + strPuntos + strAux + strComas;
 
             return strAux;
         }

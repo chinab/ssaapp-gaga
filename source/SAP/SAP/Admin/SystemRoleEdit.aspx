@@ -1,6 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="SystemRoleEdit.aspx.cs" Inherits="SAP.Admin.SystemRoleEdit" %>
 
 <asp:content id="pageContent" runat="Server" contentplaceholderid="ContentPlaceHolder1">
+    <div style="padding:15px;">
+        <div id="title-form" style="border-bottom: 2px solid black; padding-top: 10px;padding-left: 20px;">
+                <h1 class="Repeat" style="color: blue;">
+                        Administration                    
+                </h1>
+                <h2>
+                    SYSTEM ROLE EDIT
+                </h2>
+            <span id="ctl00_ContentPlaceHolder1_lblResults" style="background-color:Red;"></span>
+        </div>
     <fieldset id="systemRoleEdit">
     <div>
         <label>
@@ -44,6 +54,7 @@
             onclientclick="javascript:location.href='SystemRoles.aspx'; return false;" />
     </div>
 </fieldset>
+</div>
 <script  type="text/javascript" language="javascript">
 
     function ChangeCheckBoxState(id, checkState) {

@@ -50,22 +50,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\FreeTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Ionic.Zip.dll</HintPath>
-    </Reference>
-    <Reference Include="Pyco.Framework, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Pyco.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Pyco.Mail, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Pyco.Mail.dll</HintPath>
-    </Reference>
-    <Reference Include="Pyco.Web, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Pyco.Web.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -746,7 +730,7 @@
     <Compile Include="Admin\SystemUsers.aspx.designer.cs">
       <DependentUpon>SystemUsers.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\WebHelper.cs" />
+    <Compile Include="App_Data\WebHelper.cs" />
     <Compile Include="BusinessPartner\Activity.aspx.cs">
       <DependentUpon>Activity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -754,7 +738,7 @@
     <Compile Include="BusinessPartner\Activity.aspx.designer.cs">
       <DependentUpon>Activity.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ProfileCommon.cs" />
+    <Compile Include="App_Data\ProfileCommon.cs" />
     <Compile Include="Admin\UserManagement.aspx.cs">
       <DependentUpon>UserManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

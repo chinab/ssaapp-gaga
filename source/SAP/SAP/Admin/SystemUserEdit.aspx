@@ -2,6 +2,16 @@
     Codebehind="SystemUserEdit.aspx.cs" Inherits="SAP.Admin.SystemUserEdit" %>
 
 <asp:Content ID="pageContentContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div style="padding:15px;">
+        <div id="title-form" style="border-bottom: 2px solid black; padding-top: 10px;padding-left: 20px;">
+                <h1 class="Repeat" style="color: blue;">
+                        Administration                    
+                </h1>
+                <h2>
+                    SYSTEM USERS EDIT
+                </h2>
+            <span id="ctl00_ContentPlaceHolder1_lblResults" style="background-color:Red;"></span>
+        </div>
     <div class="EditRegion">       
         <div id="roleNameDiv" runat="server">
             <label>
@@ -84,5 +94,6 @@
             <asp:Button ID="cancelButton" runat="server" CssClass="Button" Text="Cancel"
                 OnClientClick="javascript:location.href='SystemUsers.aspx'; return false;" />
         </div>
+    </div>
     </div>
 </asp:Content>

@@ -38,15 +38,15 @@ namespace SAP.Admin
                     }
                 }
 
-                systemRoleGridView.DataSource = roleTable;
-                systemRoleGridView.DataBind();
+                systemRoleListView.DataSource = roleTable;
+                systemRoleListView.DataBind();
             }
             catch (Exception ex)
             {
 
             }
         }
-        protected void systemRoleGridView_Sorting(object sender, GridViewSortEventArgs e)
+        protected void systemRoleListView_Sorting(object sender, GridViewSortEventArgs e)
         {
             ShowRoleList();
         }

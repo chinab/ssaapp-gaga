@@ -1,16 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="SystemRoleEdit.aspx.cs" Inherits="SAP.Admin.SystemRoleEdit" %>
 
 <asp:content id="pageContent" runat="Server" contentplaceholderid="ContentPlaceHolder1">
-    <div style="padding:15px;">
-        <div id="title-form" style="border-bottom: 2px solid black; padding-top: 10px;padding-left: 20px;">
-                <h1 class="Repeat" style="color: blue;">
-                        Administration                    
-                </h1>
-                <h2>
-                    SYSTEM ROLE EDIT
-                </h2>
-            <span id="ctl00_ContentPlaceHolder1_lblResults" style="background-color:Red;"></span>
-        </div>
+    <link href="../Admin/user_style.css" rel="stylesheet" type="text/css" />
+    <link href="/skin/Admin/edit.css" rel="stylesheet" type="text/css" />
+    <div id="user-main">
+        <h1 class="user-header">Role Information</h1>
     <fieldset id="systemRoleEdit">
     <div>
         <label>

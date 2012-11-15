@@ -3,9 +3,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="../Admin/user_style.css" rel="stylesheet" type="text/css" />
-    <div id="user-profile">
-        <h1 class="user-profile-header">Management Your User Profile</h1>
-        <div id = "user-profile-left">     
+    <div id="user-main">
+        <h1 class="user-header">Management Your User Profile</h1>
+        <div id = "user-left">     
             <table>
                 <tbody>
                     <tr class="user-attribute">
@@ -51,7 +51,7 @@
                 </tbody>
             </table>
         </div>
-        <div id = "user-profile-right">     
+        <div id = "user-right">     
             <table>
                 <tbody>
                     <tr class="user-attribute">
@@ -97,7 +97,7 @@
                 </tbody>
             </table>
         </div>
-        <div id="user-profiles-roles">
+        <div id="user-roles">
             <asp:ListView ID="listUserRoles" runat="server">
                 <LayoutTemplate>
                     <table class="data_table">
@@ -131,7 +131,7 @@
                 </ItemTemplate>
             </asp:ListView>
         </div>
-         <div id="user-profile-default">
+         <div id="user-default">
             <asp:ListView ID="listUserDefault" runat="server">
                 <LayoutTemplate>
                     <table class="data_table">
@@ -166,7 +166,7 @@
             </asp:ListView>
         </div>
 
-        <div id="user-profiles-submit">
+        <div id="user-submit">
             <asp:Button ID="btnSaveProfiles" OnClick="btnSave_Click" runat="server" Text="Save" AlternateText="Save" CssClass="g-button g-button-submit"/>            
             <asp:Button ID="btnAddProfiles" OnClick="btnAdd_Click" runat="server" Text="Add" AlternateText="Add" CssClass="g-button g-button-submit"/>            
         </div>

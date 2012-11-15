@@ -775,6 +775,13 @@
       <DependentUpon>Popup_Connection.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emailling.cs" />
+    <Compile Include="Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
     <Compile Include="Popup_EditBOM.aspx.cs">
       <DependentUpon>Popup_EditBOM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -802,13 +809,6 @@
     </Compile>
     <Compile Include="JournalEntry.aspx.designer.cs">
       <DependentUpon>JournalEntry.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Main.Master.cs">
-      <DependentUpon>Main.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Main.Master.designer.cs">
-      <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Popup_EditAccount.aspx.cs">
       <DependentUpon>Popup_EditAccount.aspx</DependentUpon>
@@ -983,11 +983,9 @@
     <Content Include="skin\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Main.Master" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ckeditor\.htaccess" />
     <Content Include="skin\Admin\Default.skin" />
+    <Content Include="Main.Master" />
     <None Include="WebServices\GenerateCodeWSDLGetDefault.bat" />
     <None Include="WebServices\GenerateCodeWSDLMasterData.bat" />
     <None Include="WebServices\GenerateCodeWSDLReports.bat" />

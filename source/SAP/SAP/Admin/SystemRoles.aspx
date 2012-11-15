@@ -1,37 +1,39 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="SystemRoles.aspx.cs" Inherits="SAP.Admin.SystemRoles" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
+    CodeBehind="SystemRoles.aspx.cs" Inherits="SAP.Admin.SystemRoles" %>
 
-<asp:content id="pageContent" runat="Server" contentplaceholderid="ContentPlaceHolder1">
-    <div style="padding:15px;">
-        <div id="title-form" style="border-bottom: 2px solid black; padding-top: 10px;padding-left: 20px;">
-                <h1 class="Repeat" style="color: blue;">
-                        Administration                    
-                </h1>
-                <h2>
-                    SYSTEM ROLE LIST
-                </h2>
-            <span id="ctl00_ContentPlaceHolder1_lblResults" style="background-color:Red;"></span>
+<asp:Content ID="pageContent" runat="Server" ContentPlaceHolderID="ContentPlaceHolder1">
+    <link href="../Admin/user_style.css" rel="stylesheet" type="text/css" />
+    <div id="user-main">
+        <h1 class="user-header">
+            Management System Roles</h1>
+        <div id="user-section">
+            <h2>
+                System Role List</h2>
+            <asp:ListView ID="systemRoleListView" runat="server">
+                <LayoutTemplate>
+                    <table class="data_table" style="width: 50%; text-align: left;">
+                        <tr>
+                            <th style="width: 50%; text-align: left; padding: 4px 10px;">
+                                <span>User Name</span>
+                            </th>
+                        </tr>
+                        <tr id="itemPlaceholder" runat="server">
+                        </tr>
+                    </table>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">
+                            <a href="SystemRoleEdit.aspx?RoleName=<%# Eval("RoleName") %>">
+                                <%# Eval("RoleName") %></a>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:ListView>
+
         </div>
-    <fieldset id="roleListFieldset">
-    <legend>System Role List</legend>
-    <asp:gridview id="systemRoleGridView" runat="server" 
-        autogeneratecolumns="False"  onsorting="systemRoleGridView_Sorting">
-        <columns>
-            <asp:templatefield meta:resourcekey="RoleName" sortexpression="RoleName">
-                <itemtemplate>
-	                <a href="SystemRoleEdit.aspx?RoleName=<%# Eval("RoleName") %>" ><%# Eval("RoleName") %></a>
-	            </itemtemplate>
-                <itemstyle cssclass="AlignLeft" />
-            </asp:templatefield>
-        </columns>
-        <emptydatatemplate>
-            <strong>
-                <asp:localize id="noRolesFoundLocalize" runat="server" meta:resourcekey="NoRolesFound" />
-            </strong>
-        </emptydatatemplate>
-    </asp:gridview>
-    <asp:button id="addNewButton" runat="server" cssclass="Button" onclientclick="javascript:location.href='SystemRoleEdit.aspx'; return false;"
-        text="Add New" />
-</fieldset>
-</div>
-</asp:content>
-
+         <div id="user-submit">
+            <asp:Button ID="addNewButton" OnClientClick="javascript:location.href='SystemRoleEdit.aspx'; return false;" runat="server" Text="Add New" AlternateText="Add New" CssClass="g-button g-button-submit"/>            
+        </div>
+    </div>
+</asp:Content>

@@ -13,13 +13,13 @@ namespace SAP.Admin {
     public partial class SystemRoles {
         
         /// <summary>
-        /// systemRoleGridView control.
+        /// systemRoleListView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView systemRoleGridView;
+        protected global::System.Web.UI.WebControls.ListView systemRoleListView;
         
         /// <summary>
         /// addNewButton control.

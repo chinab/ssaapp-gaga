@@ -13,7 +13,6 @@ namespace SAP.Admin
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            systemUsersGridView.PageIndexChanged += new EventHandler(systemUsersGridView_PageIndexChanged);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,24 +25,22 @@ namespace SAP.Admin
 
         protected void FilterButton_Click(object sender, EventArgs e)
         {
-            systemUsersGridView.PageIndex = 0;
             ShowUserList();
         }
 
-        protected void systemUsersGridView_PageIndexChanged(object sender, EventArgs e)
+        protected void systemUsersListView_PageIndexChanged(object sender, EventArgs e)
         {
             ShowUserList();
         }
 
-        protected void SystemUsersGridView_Sorting(object sender, GridViewSortEventArgs e)
+        protected void systemUsersListView_Sorting(object sender, GridViewSortEventArgs e)
         {
             ShowUserList();
         }
 
-        protected void SystemUsersGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void systemUsersListView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            systemUsersGridView.PageIndex = e.NewPageIndex;
-            systemUsersGridView.DataBind();
+            systemUsersListView.DataBind();
 
             ShowUserList();
         }
@@ -97,8 +94,8 @@ namespace SAP.Admin
                 }
                 catch { }
 
-                systemUsersGridView.DataSource = list;
-                systemUsersGridView.DataBind();
+                systemUsersListView.DataSource = list;
+                systemUsersListView.DataBind();
                 //DataBindGridView(ConvertToDataTable(list));
             }
             catch (Exception ex)
@@ -111,14 +108,14 @@ namespace SAP.Admin
         {
             if (table == null || table.Rows.Count == 0)
             {
-                systemUsersGridView.DataSource = null;
+                systemUsersListView.DataSource = null;
             }
             else
             {
-                systemUsersGridView.DataSource = table;
+                systemUsersListView.DataSource = table;
             }
 
-            systemUsersGridView.DataBind();
+            systemUsersListView.DataBind();
         }
 
         private DataTable ConvertToDataTable(MembershipUserCollection userList)

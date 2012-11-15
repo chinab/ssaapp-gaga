@@ -2,16 +2,10 @@
     Codebehind="SystemUserEdit.aspx.cs" Inherits="SAP.Admin.SystemUserEdit" %>
 
 <asp:Content ID="pageContentContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div style="padding:15px;">
-        <div id="title-form" style="border-bottom: 2px solid black; padding-top: 10px;padding-left: 20px;">
-                <h1 class="Repeat" style="color: blue;">
-                        Administration                    
-                </h1>
-                <h2>
-                    SYSTEM USERS EDIT
-                </h2>
-            <span id="ctl00_ContentPlaceHolder1_lblResults" style="background-color:Red;"></span>
-        </div>
+    <link href="../Admin/user_style.css" rel="stylesheet" type="text/css" />
+    <link href="/skin/Admin/edit.css" rel="stylesheet" type="text/css" />
+    <div id="user-main">
+        <h1 class="user-header">User Information</h1>
     <div class="EditRegion">       
         <div id="roleNameDiv" runat="server">
             <label>
@@ -83,16 +77,10 @@
             </label>
             <asp:CheckBox ID='chkActive' runat="server" />
         </div>
-        <div>
-            <label>
-                &nbsp;</label>
-            <asp:Button ID="saveButton" runat="server" CssClass="Button" OnClick="SaveButton_Click"
-                Text="Save" />
-            <input id="resetButton" runat="server" class="Button" type="reset" value="Reset" />
-            <asp:Button ID="deleteButton" runat="server" CssClass="Button" OnClick="DeleteButton_Click"
-                Text="Delete" />
-            <asp:Button ID="cancelButton" runat="server" CssClass="Button" Text="Cancel"
-                OnClientClick="javascript:location.href='SystemUsers.aspx'; return false;" />
+        <div id="user-submit">
+            <asp:Button ID="saveButton" OnClick="SaveButton_Click" runat="server" Text="Save" AlternateText="Save" CssClass="g-button g-button-submit"/>            
+            <asp:Button ID="deleteButton" OnClick="DeleteButton_Click" runat="server" Text="Delete" AlternateText="Delete" CssClass="g-button g-button-submit"/>            
+            <asp:Button ID="cancelButton" OnClientClick="javascript:location.href='SystemUsers.aspx'; return false;" runat="server" Text="Cancel" AlternateText="Cancel" CssClass="g-button g-button-submit"/>            
         </div>
     </div>
     </div>

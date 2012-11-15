@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
 using System.Web.UI.WebControls;
-using Pyco.Framework;
 using System.Web.Security;
 using System.Data;
 using System.Collections;
@@ -69,7 +68,7 @@ namespace SAP.Admin
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+  
             }
         }
 
@@ -104,7 +103,7 @@ namespace SAP.Admin
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+
             }
         }
 

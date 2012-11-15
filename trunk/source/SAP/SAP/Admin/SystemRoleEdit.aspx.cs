@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.UI.WebControls;
 using System.Collections;
 using System.Web.Security;
-using Pyco.Framework;
 using System.Data;
 using System.IO;
 using SAP.Admin.DAO;
@@ -116,7 +115,7 @@ namespace SAP.Admin
             try
             {
                 saveButton.Focus();
-                ViewState["RoleName"] = Pyco.Web.QueryStringUtility.GetString("roleName", "");
+                ViewState["RoleName"] = Request.QueryString["roleName"].ToString();
 
                 deleteButton.OnClientClick = "return confirmAction('Do you want to delete this item')";
 

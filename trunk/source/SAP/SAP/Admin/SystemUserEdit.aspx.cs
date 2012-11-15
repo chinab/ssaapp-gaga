@@ -1,10 +1,7 @@
 using System;
-
 using System.Web;
 using System.Web.Security;
 using System.Web.UI.WebControls;
-using Pyco.Framework;
-using Pyco.Web;
 
 
 namespace SAP.Admin
@@ -43,7 +40,7 @@ namespace SAP.Admin
             {
                 if (!Page.IsValid) { return; }
 
-                string userName = QueryStringUtility.GetString("userName", string.Empty);
+                string userName = Request.QueryString["userName"]; 
                 string password = passwordTextbox.Text;
                 string roleName = rolesDropDownList.SelectedItem.Value.Trim();
                 string email = emailTextbox.Text.Trim();
@@ -131,7 +128,7 @@ namespace SAP.Admin
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+
             }
         }
 
@@ -151,7 +148,7 @@ namespace SAP.Admin
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+  
             }
         }
         #endregion
@@ -173,7 +170,7 @@ namespace SAP.Admin
                 string userName = string.Empty;
                 if (Context.User != null)
                 {
-                    string currentUser = QueryStringUtility.GetString("userName", string.Empty).ToLower().Trim();
+                    string currentUser = Request.QueryString["userName"].ToLower().Trim();
                     userName = Context.User.Identity.Name;
                     if (currentUser == userName.ToLower().Trim())
                     {
@@ -196,7 +193,7 @@ namespace SAP.Admin
             try
             {
                 deleteButton.Visible = true;
-                string userName = Pyco.Web.QueryStringUtility.GetString("UserName", "");
+                string userName = Request.QueryString["UserName"];
 
                 if (changePassword)
                 {
@@ -235,7 +232,7 @@ namespace SAP.Admin
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+    
             }
 
         }
@@ -269,7 +266,7 @@ namespace SAP.Admin
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+
             }
             return false;
         }

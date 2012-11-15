@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SAP.Admin{
+namespace SAP.Admin {
     
     
     public partial class SystemUsers {
@@ -49,12 +49,12 @@ namespace SAP.Admin{
         protected global::System.Web.UI.WebControls.GridView systemUsersGridView;
         
         /// <summary>
-        /// addNewButton control.
+        /// addNewButtonImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addNewButton;
+        protected global::System.Web.UI.WebControls.ImageButton addNewButtonImage;
     }
 }

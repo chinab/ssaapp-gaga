@@ -15,7 +15,7 @@
     <link href="skin/start/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="skin/skin.css" rel="stylesheet" type="text/css" />
     <link href="skin/menu.css" rel="stylesheet" type="text/css" />
-
+    <link href="skin/Admin/edit.css" media="screen" rel="stylesheet" />
     
 <script type="text/javascript">
     jQuery().ready(function () {

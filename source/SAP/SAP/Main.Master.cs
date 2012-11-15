@@ -15,8 +15,8 @@ namespace SAP
         {
             if (!IsPostBack)
             {
-                MasterData masterDataWS = new MasterData();
-                lblCompany.Text = masterDataWS.GetCompanySetting(HttpContext.Current.User.Identity.Name).Tables[0].Rows[0]["CompanyName"].ToString();
+                //MasterData masterDataWS = new MasterData();
+                //lblCompany.Text = masterDataWS.GetCompanySetting(HttpContext.Current.User.Identity.Name).Tables[0].Rows[0]["CompanyName"].ToString();
             }
         }
 

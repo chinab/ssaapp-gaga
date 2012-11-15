@@ -50,10 +50,27 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\FreeTextBox.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Pyco.Framework, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Pyco.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Pyco.Mail, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Pyco.Mail.dll</HintPath>
+    </Reference>
+    <Reference Include="Pyco.Web, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Pyco.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -68,6 +85,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\SystemRoleEdit.aspx" />
+    <Content Include="Admin\SystemRoles.aspx" />
+    <Content Include="Admin\SystemUserEdit.aspx" />
+    <Content Include="Admin\SystemUsers.aspx" />
     <Content Include="BusinessPartner\Activity.aspx" />
     <Content Include="Admin\UserManagement.aspx" />
     <Content Include="Admin\UserProfiles.aspx" />
@@ -418,6 +439,20 @@
     <Content Include="Admin\Popup_Connection.aspx" />
     <Content Include="EmailTemplate.htm" />
     <Content Include="EmailTemplate2.htm" />
+    <Content Include="js\AdapterUtils.js" />
+    <Content Include="js\ajaxtabs.js" />
+    <Content Include="js\ajaxtabsforlocal.js" />
+    <Content Include="js\calendar-en.js" />
+    <Content Include="js\calendar-setup.js" />
+    <Content Include="js\calendar.js" />
+    <Content Include="js\commons.js" />
+    <Content Include="js\jquery-1.4.1-vsdoc.js" />
+    <Content Include="js\jquery-1.4.1.js" />
+    <Content Include="js\jquery-1.4.1.min.js" />
+    <Content Include="js\MenuAdapter.js" />
+    <Content Include="js\TreeViewAdapter.js" />
+    <Content Include="js\Validation.js" />
+    <Content Include="js\xpmenuv21.js" />
     <Content Include="Popup_EditBOM.aspx" />
     <Content Include="Inventory\InventoryTransfer.aspx" />
     <Content Include="Inventory\GoodsIssue.aspx" />
@@ -431,14 +466,10 @@
     <Content Include="Popup_EditTerritory.aspx" />
     <Content Include="Popup_EditCostCenter.aspx" />
     <Content Include="Popup_EditProject.aspx" />
-    <Content Include="Popup_EditTaxCode_OUT.aspx" />
-    <Content Include="Popup_EditCustomer.aspx" />
     <Content Include="Popup_Promo.aspx" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="js\dialog.js" />
     <Content Include="Popup_EditEmployee.aspx" />
-    <Content Include="Popup_EditTaxCode_IN.aspx" />
-    <Content Include="Popup_EditVendor.aspx" />
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\main.js" />
     <Content Include="js\menu.js" />
@@ -446,6 +477,68 @@
     <Content Include="Popup_EditWarehouse.aspx" />
     <Content Include="SalesOpportunity.aspx" />
     <Content Include="skin\AdminLogin.css" />
+    <Content Include="skin\Admin\ajaxtabs.css" />
+    <Content Include="skin\Admin\Announcement.gif" />
+    <Content Include="skin\Admin\arrow-down-title-on.jpg" />
+    <Content Include="skin\Admin\arrow-down-title.jpg" />
+    <Content Include="skin\Admin\arrow-up-title-on.jpg" />
+    <Content Include="skin\Admin\arrow-up-title.jpg" />
+    <Content Include="skin\Admin\bg-fade-light.png" />
+    <Content Include="skin\Admin\bg_table.gif" />
+    <Content Include="skin\Admin\calendar-system.css" />
+    <Content Include="skin\Admin\calendar.gif" />
+    <Content Include="skin\Admin\carrier-icon.gif" />
+    <Content Include="skin\Admin\close-popup.jpg" />
+    <Content Include="skin\Admin\collapse.gif" />
+    <Content Include="skin\Admin\corner_bl.gif" />
+    <Content Include="skin\Admin\corner_br.gif" />
+    <Content Include="skin\Admin\corner_tl.gif" />
+    <Content Include="skin\Admin\corner_tr.gif" />
+    <Content Include="skin\Admin\critical24-bak.gif" />
+    <Content Include="skin\Admin\critical24.gif" />
+    <Content Include="skin\Admin\critical24.png" />
+    <Content Include="skin\Admin\Default.css" />
+    <Content Include="skin\Admin\down.gif" />
+    <Content Include="skin\Admin\edit.css" />
+    <Content Include="skin\Admin\editdoc.gif" />
+    <Content Include="skin\Admin\expand.gif" />
+    <Content Include="skin\Admin\go-back.gif" />
+    <Content Include="skin\Admin\go-first.gif" />
+    <Content Include="skin\Admin\go-last.gif" />
+    <Content Include="skin\Admin\go-next.gif" />
+    <Content Include="skin\Admin\headcornerp.gif" />
+    <Content Include="skin\Admin\headcornerx.jpg" />
+    <Content Include="skin\Admin\headcornerz.jpg" />
+    <Content Include="skin\Admin\icongo01.gif" />
+    <Content Include="skin\Admin\icon_alert.gif" />
+    <Content Include="skin\Admin\information-bak.gif" />
+    <Content Include="skin\Admin\information.png" />
+    <Content Include="skin\Admin\leftNavigation.css" />
+    <Content Include="skin\Admin\list.css" />
+    <Content Include="skin\Admin\loop_blue.gif" />
+    <Content Include="skin\Admin\loop_blue_top.gif" />
+    <Content Include="skin\Admin\nav-bg-repeat.jpg" />
+    <Content Include="skin\Admin\nav-bg.jpg" />
+    <Content Include="skin\Admin\nav-item-bg.jpg" />
+    <Content Include="skin\Admin\new.gif" />
+    <Content Include="skin\Admin\noPicture.gif" />
+    <Content Include="skin\Admin\partgradp.gif" />
+    <Content Include="skin\Admin\path-arrow.gif" />
+    <Content Include="skin\Admin\path-bullet.jpg" />
+    <Content Include="skin\Admin\report.css" />
+    <Content Include="skin\Admin\rtbullet.gif" />
+    <Content Include="skin\Admin\rule-node-add-child.gif" />
+    <Content Include="skin\Admin\rule-node-remove.gif" />
+    <Content Include="skin\Admin\SPSSearch2.gif" />
+    <Content Include="skin\Admin\spssites-bak.gif" />
+    <Content Include="skin\Admin\spssites.gif" />
+    <Content Include="skin\Admin\topgrad.gif" />
+    <Content Include="skin\Admin\treeview.css" />
+    <Content Include="skin\Admin\triangle.gif" />
+    <Content Include="skin\Admin\up.gif" />
+    <Content Include="skin\Admin\user.GIF" />
+    <Content Include="skin\Admin\warning24-bak.gif" />
+    <Content Include="skin\Admin\warning24.png" />
     <Content Include="skin\icon\addnew.png" />
     <Content Include="skin\icon\add_icon_color.gif" />
     <Content Include="skin\icon\add_icon_mono.gif" />
@@ -522,6 +615,10 @@
     <Content Include="skin\images\Abeo Logo.png" />
     <Content Include="skin\images\activity.png" />
     <Content Include="skin\images\ajax-loader.gif" />
+    <Content Include="skin\images\arrow-bottom.gif" />
+    <Content Include="skin\images\arrow-left.gif" />
+    <Content Include="skin\images\arrow-right.gif" />
+    <Content Include="skin\images\arrow-top.gif" />
     <Content Include="skin\images\banking.png" />
     <Content Include="skin\images\Bin - Full.png" />
     <Content Include="skin\images\bk_icontool.png" />
@@ -587,6 +684,7 @@
     <Content Include="skin\images\Windows 2.png" />
     <Content Include="skin\images\Windows Explorer.png" />
     <Content Include="skin\menu.css" />
+    <Content Include="skin\notifiers.css" />
     <Content Include="skin\skin.css" />
     <Content Include="skin\start\images\ui-bg_flat_55_999999_40x100.png" />
     <Content Include="skin\start\images\ui-bg_flat_75_aaaaaa_40x100.png" />
@@ -617,6 +715,38 @@
     <Content Include="WebServices\NoteGenerateCode.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\Data.cs" />
+    <Compile Include="App_Data\RolePermissions.cs" />
+    <Compile Include="App_Data\SqlHelper.cs" />
+    <Compile Include="Admin\SystemRoleEdit.aspx.cs">
+      <DependentUpon>SystemRoleEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SystemRoleEdit.aspx.designer.cs">
+      <DependentUpon>SystemRoleEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SystemRoles.aspx.cs">
+      <DependentUpon>SystemRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SystemRoles.aspx.designer.cs">
+      <DependentUpon>SystemRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SystemUserEdit.aspx.cs">
+      <DependentUpon>SystemUserEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SystemUserEdit.aspx.designer.cs">
+      <DependentUpon>SystemUserEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SystemUsers.aspx.cs">
+      <DependentUpon>SystemUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SystemUsers.aspx.designer.cs">
+      <DependentUpon>SystemUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\WebHelper.cs" />
     <Compile Include="BusinessPartner\Activity.aspx.cs">
       <DependentUpon>Activity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -753,20 +883,6 @@
       <DependentUpon>Popup_EditProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="GeneralFunctions.cs" />
-    <Compile Include="Popup_EditTaxCode_OUT.aspx.cs">
-      <DependentUpon>Popup_EditTaxCode_OUT.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Popup_EditTaxCode_OUT.aspx.designer.cs">
-      <DependentUpon>Popup_EditTaxCode_OUT.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Popup_EditCustomer.aspx.cs">
-      <DependentUpon>Popup_EditCustomer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Popup_EditCustomer.aspx.designer.cs">
-      <DependentUpon>Popup_EditCustomer.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Popup_Promo.aspx.cs">
       <DependentUpon>Popup_Promo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -787,20 +903,6 @@
     </Compile>
     <Compile Include="Popup_EditEmployee.aspx.designer.cs">
       <DependentUpon>Popup_EditEmployee.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Popup_EditTaxCode_IN.aspx.cs">
-      <DependentUpon>Popup_EditTaxCode_IN.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Popup_EditTaxCode_IN.aspx.designer.cs">
-      <DependentUpon>Popup_EditTaxCode_IN.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Popup_EditVendor.aspx.cs">
-      <DependentUpon>Popup_EditVendor.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Popup_EditVendor.aspx.designer.cs">
-      <DependentUpon>Popup_EditVendor.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -892,9 +994,7 @@
     </Compile>
     <Compile Include="xml\DocumentXML.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="skin\Web.config" />
   </ItemGroup>
@@ -903,12 +1003,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ckeditor\.htaccess" />
+    <Content Include="skin\Admin\Default.skin" />
     <None Include="WebServices\GenerateCodeWSDLGetDefault.bat" />
     <None Include="WebServices\GenerateCodeWSDLMasterData.bat" />
     <None Include="WebServices\GenerateCodeWSDLReports.bat" />
     <None Include="WebServices\GenerateCodeWSDLTransaction.bat" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\App_LocalResources\SystemRoleEdit.aspx.es.resx" />
+    <Content Include="Admin\App_LocalResources\SystemRoleEdit.aspx.resx" />
+    <Content Include="Admin\App_LocalResources\SystemRoles.aspx.es.resx" />
+    <Content Include="Admin\App_LocalResources\SystemRoles.aspx.resx" />
+    <Content Include="Admin\App_LocalResources\SystemUserEdit.aspx.es.resx" />
+    <Content Include="Admin\App_LocalResources\SystemUserEdit.aspx.resx" />
+    <Content Include="Admin\App_LocalResources\SystemUsers.aspx.es.resx" />
+    <Content Include="Admin\App_LocalResources\SystemUsers.aspx.resx" />
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -37,7 +37,7 @@ namespace SAP.Admin
             {
                 if (!Page.IsValid) return;
 
-                if (ViewState["RoleName"].ToString() == "")
+                if (ViewState["RoleName"] == null || ViewState["RoleName"].ToString() == "")
                 {
                     if (WebHelper.IsExistSpecialCharacter(roleNameTextBox.Text))
                     {
@@ -49,10 +49,6 @@ namespace SAP.Admin
                     }
 
                     Roles.CreateRole(roleNameTextBox.Text);
-                }
-                else
-                {
-
                 }
 
                 SavePermissions(roleNameTextBox.Text.Trim());
@@ -115,7 +111,7 @@ namespace SAP.Admin
             try
             {
                 saveButton.Focus();
-                ViewState["RoleName"] = Request.QueryString["roleName"].ToString();
+                ViewState["RoleName"] = Request.QueryString["RoleName"];
 
                 deleteButton.OnClientClick = "return confirmAction('Do you want to delete this item')";
 

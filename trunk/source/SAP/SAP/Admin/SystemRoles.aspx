@@ -5,13 +5,15 @@
     <link href="../Admin/user_style.css" rel="stylesheet" type="text/css" />
     <div id="user-main">
         <h1 class="user-header">
-            Management System Roles</h1>
+            Management System Roles
+        </h1>
         <div id="user-section">
             <h2>
-                System Role List</h2>
+                System Role List
+            </h2>
             <asp:ListView ID="systemRoleListView" runat="server">
                 <LayoutTemplate>
-                    <table class="data_table" style="width: 50%; text-align: left;">
+                    <table style="width: 50%; text-align: left;">
                         <tr>
                             <th style="width: 50%; text-align: left; padding: 4px 10px;">
                                 <span>User Name</span>

@@ -76,15 +76,6 @@ namespace SAP.Admin {
         protected global::System.Web.UI.WebControls.Button saveButton;
         
         /// <summary>
-        /// resetButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputReset resetButton;
-        
-        /// <summary>
         /// deleteButton control.
         /// </summary>
         /// <remarks>

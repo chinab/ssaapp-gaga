@@ -9,9 +9,9 @@ namespace SAP.Admin.DAO
         /// <summary>
         /// "System.Data.SqlClient"
         /// </summary>
-        public static string dataProvider = ConfigurationManager.ConnectionStrings["ConnectionString"].ProviderName;
+        public static string dataProvider = ConfigurationManager.ConnectionStrings["dbconnection"].ProviderName;
         private static readonly DbProviderFactory factory = DbProviderFactories.GetFactory(dataProvider);
-        public static string ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        public static string ConnectionString = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
 
         #region parameters
 

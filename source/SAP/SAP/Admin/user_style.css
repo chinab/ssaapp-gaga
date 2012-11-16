@@ -64,6 +64,12 @@
     width:100%;
     padding-top:10px;
 }  
+
+.FilterInput {
+    height: 22px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .user-attribute 
 {
     line-height: 40px;
@@ -100,8 +106,8 @@
     background-image: -ms-linear-gradient(top,#4D90FE,#4787ED);
     background-image: -o-linear-gradient(top,#4D90FE,#4787ED);
     background-image: linear-gradient(top,#4D90FE,#4787ED);
-    height: 29px;
-    line-height: 29px;
+    height: 25px;
+    line-height: 25px;
     vertical-align: bottom;
     margin: 0;
 }
@@ -126,29 +132,40 @@
     min-width: 75px;
 }
 
+
 /*=====================================================================*/
-/*USER PROFILE SECTION*/    
+/*ROLE PERMISSION SECTION*/    
 
-div.aspnet-gridview {
-margin-bottom: 1em;
-margin-right: 2px;
-padding-top: 0.7em;
-} 
-
-table.grid {
-width: 100%;
-border: white solid 0.1em;
-border-collapse: collapse;
-border-bottom: 1px solid #7EA0E6;
-font-family: Tahoma;
+#user-main table {
+  width: 45%;
+  border: #FFFFFF solid 0.1em;
+  border-collapse: collapse;
+  border-bottom: 1px solid #7ea0e6;
+  border-left: 1px solid #7ea0e6; 
+  padding-left: 5px; 
+  font-family: Tahoma;   
+  text-align: left;
+   margin-top: 10px;
 }
 
-table.grid .head td, table.grid .head th {
-border-width: 0;
-padding: 0.2em 0;
-border-bottom: #500002 solid 0.2em;
-border-right: #7EA0E6 solid 0.1em;
-text-align: center;
+#user-main .PermissionHeaderColumn {
+  background-color: #B6CBEF;
+  height: 2em;
+  font-weight: bold;
+  border-width: 0;
+  padding: 0.2em 0;
+  border-bottom: #500002 solid 0.2em;
+  border-right: #7ea0e6 solid 0.1em;
 }
 
 
+#user-main  td {
+  border-right: #7ea0e6 solid 0.1em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  height: 2em;
+}
+
+#user-main td {
+  background-color: #ffffff;
+}

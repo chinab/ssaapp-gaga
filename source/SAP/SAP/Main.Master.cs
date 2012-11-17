@@ -19,11 +19,10 @@ namespace SAP
             {
                 //MasterData masterDataWS = new MasterData();
                 //lblCompany.Text = masterDataWS.GetCompanySetting(HttpContext.Current.User.Identity.Name).Tables[0].Rows[0]["CompanyName"].ToString();
+                AuthorizeUser();
             }
         }
 
-        
-        
         protected void LoginStatus1_LoggedOut(object sender, EventArgs e)
         {
             GetDefault df = new GetDefault();
@@ -46,9 +45,9 @@ namespace SAP
                 userName = Context.User.Identity.Name.ToLower();
             }
 
-            if (AuthorizeUser(userName, pageName))
+            if (!AuthorizeUser(userName, pageName))
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/PermissionDenied.aspx");
             }
         }
 
@@ -56,10 +55,13 @@ namespace SAP
         {
             try
             {
-                if (userName.ToLower().Trim() == "admin")
+                /*if (userName.ToLower().Trim() == "admin")
                 {
                     return true;
-                }
+                }*/
+
+                if (pageName.Contains("login") || pageName.Contains("permissiondenied"))
+                    return true;
 
                 string[] roleName = Roles.GetRolesForUser(userName);
                 if (roleName == null || roleName.Length == 0) { return false; }
@@ -89,7 +91,7 @@ namespace SAP
                 {
                     foreach (RolePermissions allowedPage in allowedPages)
                     {
-                        if (allowedPage.PageName.ToLower().Trim() == pageName)
+                        if (allowedPage.PageName.ToLower().Trim().Contains(pageName))
                         {
                             return (bool)allowedPage.Accessable;
                         }

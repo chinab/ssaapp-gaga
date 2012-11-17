@@ -77,6 +77,44 @@
             </label>
             <asp:CheckBox ID='chkActive' runat="server" />
         </div>
+        <div>
+            <h4 class="user-default-header">User Default Value</h4>
+        </div>
+        <div id="user-default">
+            <asp:ListView ID="listUserDefault" runat="server">
+                <LayoutTemplate>
+                    <table style="width: 100%;">
+                        <tr>
+                            <th style="width: 100px">
+                                <span>&nbsp;Default Code</span>
+                            </th>
+                            <th style="width: 100px">
+                                <span>&nbsp;Default Value</span>
+                            </th>
+                            <th style="width: 200px">
+                                <span>&nbsp;Default By Query</span>
+                            </th>                            
+                        </tr>
+                        <tr id="itemPlaceholder" runat="server">
+                        </tr>
+                    </table>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <asp:Label runat="server" ID="lblNo" Text='<%#Eval("DefaultCode")%>'></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="LabelRoleName" Text='<%#Eval("DefaultValue")%>'></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="LabelRoleDescription" Text='<%#Eval("DefaultType")%>'></asp:Label>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:ListView>
+        </div>
+        
         <div id="user-submit">
             <asp:Button ID="saveButton" OnClick="SaveButton_Click" runat="server" Text="Save" AlternateText="Save" CssClass="g-button g-button-submit"/>            
             <asp:Button ID="deleteButton" OnClick="DeleteButton_Click" runat="server" Text="Delete" AlternateText="Delete" CssClass="g-button g-button-submit"/>            

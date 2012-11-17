@@ -2,6 +2,9 @@ using System;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 
 namespace SAP.Admin
@@ -229,6 +232,10 @@ namespace SAP.Admin
                 emailTextbox.Text = user.Email;
                 userNameTextbox.Text = user.UserName;
                 userNameTextbox.Enabled = false;
+                DataTable dtUserDefault = new DataTable();
+                dtUserDefault = getUserDefaultValue(userName);
+                listUserDefault.DataSource = dtUserDefault;
+                listUserDefault.DataBind();
             }
             catch (Exception ex)
             {
@@ -237,16 +244,20 @@ namespace SAP.Admin
 
         }
 
-        private void SetExtraUserFields(ref MembershipUser user)
+        protected DataTable getUserDefaultValue(String UserName)
         {
-
+            DataTable results = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ToString()))
+            {
+                SqlCommand command = new SqlCommand("select * from Users_Default where UserId= '" + UserName + "'", conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                conn.Open();
+                adapter.Fill(results);
+            }
+            return results;
         }
 
-        private void BindExtraUserFields(MembershipUser user)
-        {
-
-        }
-
+       
         private bool CheckPermitRoles(string[] roles)
         {
             try

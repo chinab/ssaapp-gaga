@@ -16,16 +16,7 @@ namespace SAP
 {
     public class GeneralFunctions
     {
-        //dr("CompnyName") = "DMS DEMO"
-        //dr("DecSep") = "."
-        //dr("ThousSep") = ","
-        //dr("SumDec") = 0
-        //dr("PriceDec") = 0
-        //dr("QtyDec") = 0
-        //dr("PercentDec") = 2
-        //dr("RateDec") = 2
-        //DateFormat
-        //DateSep
+
 
         private static MasterData MD;
         private static DataSet ds;

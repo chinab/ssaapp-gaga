@@ -129,12 +129,12 @@ namespace SAP.Admin
                 DataTable table = new DataTable();
                 table.Columns.Add("PageName");
 
-                string currentPath = Server.MapPath(".");
-                string[] fileNames = Directory.GetFiles(currentPath, "*.aspx", SearchOption.TopDirectoryOnly);
+                string currentPath = Server.MapPath("~");
+                string[] fileNames = Directory.GetFiles(currentPath, "*.aspx", SearchOption.AllDirectories);
                 string pageName = "";
                 for (int i = 0; i < fileNames.Length; i++)
                 {
-                    pageName = Path.GetFileName(fileNames[i]).Replace(".aspx", "");
+                    pageName = fileNames[i].Replace(currentPath, "");
                     DataRow row = table.NewRow();
                     row["PageName"] = pageName;
                     table.Rows.Add(row);

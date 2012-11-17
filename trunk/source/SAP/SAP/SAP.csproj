@@ -437,6 +437,7 @@
     <Content Include="js\TreeViewAdapter.js" />
     <Content Include="js\Validation.js" />
     <Content Include="js\xpmenuv21.js" />
+    <Content Include="PermissionDenied.aspx" />
     <Content Include="Popup_EditBOM.aspx" />
     <Content Include="Inventory\InventoryTransfer.aspx" />
     <Content Include="Inventory\GoodsIssue.aspx" />
@@ -597,6 +598,7 @@
     <Content Include="skin\icon\Windows Explorer.png" />
     <Content Include="skin\icon\word.png" />
     <Content Include="skin\images\Abeo Logo.png" />
+    <Content Include="skin\images\AccessDenied.png" />
     <Content Include="skin\images\activity.png" />
     <Content Include="skin\images\ajax-loader.gif" />
     <Content Include="skin\images\arrow-bottom.gif" />
@@ -781,6 +783,13 @@
     </Compile>
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="PermissionDenied.aspx.cs">
+      <DependentUpon>PermissionDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PermissionDenied.aspx.designer.cs">
+      <DependentUpon>PermissionDenied.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup_EditBOM.aspx.cs">
       <DependentUpon>Popup_EditBOM.aspx</DependentUpon>

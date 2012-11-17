@@ -617,3 +617,17 @@ border-bottom: 1px solid #90BADE;
 	background-position: 98% 50%;
 	padding: 3px 6px;
 }
+
+.xtraMenuClass ul {
+    border-bottom: 1px solid red;
+    background-color: #ACBCDF;
+}
+
+.xtraMenuClass a{
+    background-color: #ACBCDF !important;
+    color: black;
+}
+.xtraMenuClass a:hover{
+    background-color: #ACBCDF !important;
+    color: yellowgreen;
+}

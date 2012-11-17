@@ -108,7 +108,7 @@
                         	<li>
                                 <h4 class="head"><a href="#">User Management</a></h4>
                                 <ul>
-                                    <li><a class="subitem" href="/Admin/UserProfiles.aspx">User Profiles</a></li>
+                                    <li><a class="subitem" href="/Admin/SystemUserEdit.aspx?UserName=<% = Context.User.Identity.Name %>">User Profiles</a></li>
                                     <li><a class="subitem" href="/Admin/SystemUsers.aspx">System User</a></li>
                                     <li><a class="subitem" href="/Admin/SystemRoles.aspx">System Roles</a></li>
                                 </ul>

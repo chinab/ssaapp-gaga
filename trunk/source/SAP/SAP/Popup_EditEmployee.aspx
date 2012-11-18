@@ -27,7 +27,7 @@
 							<th style="display:none">
 								<span>Employee No.</span>
 							</th>
-							<th>
+							<th >
 								<span>Employee Code</span>
 							</th>
 							<th>
@@ -55,13 +55,13 @@
 						<td>
 							<asp:Label runat="server" ID="Label2"><%#Eval("Code")%></asp:Label>
 						</td>
-						<td>
+						<td  Style="text-align: left">
 							<asp:Label runat="server" ID="Label3"><%#Eval("First Name")%></asp:Label>
 						</td>	
-                        <td>
+                        <td  Style="text-align: left">
 							<asp:Label runat="server" ID="Label4"><%#Eval("Mid Name")%></asp:Label>
 						</td>	
-                        <td>
+                        <td  Style="text-align: left">
 							<asp:Label runat="server" ID="Label5"><%#Eval("Last Name")%></asp:Label>
 						</td>						
 					</tr>
@@ -97,9 +97,9 @@
 			</asp:ListView>
             </div>
             <div id="action-form">
-                <asp:Button ID="btnAdd" Text="OK" runat="server" onclick="btnAdd_Click" />
-                <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelDialogClick()" />
-            </div>
+        <asp:ImageButton ID="btnAdd" runat="server" ImageUrl="~/skin/images/SAP_choose.png" OnClick="btnAdd_Click" />
+        <asp:ImageButton ID="btnCancel" runat="server" ImageUrl="~/skin/images/SAP_cancel.png" OnClientClick="return Main.cancelDialogClick()" />
+    </div>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger  ControlID="btnFilter" />

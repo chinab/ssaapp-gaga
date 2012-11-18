@@ -779,7 +779,6 @@ namespace SAP
                 e.Cancel = true;
                 return;
             }
-            this.lvContents.EditIndex = -1;
             this.lvContents.DataSource = dtContents;
             this.lvContents.DataBind();
         }

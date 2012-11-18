@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="AR Invoice" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
-    CodeBehind="ARInvoice_VHF.aspx.cs" Inherits="SAP.ARInvoice" %>
+    CodeBehind="ARInvoice_VHF.aspx.cs" Inherits="SAP.ARInvoice_VHF" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type="text/javascript">
@@ -22,7 +22,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
-                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('Popup_EditCustomer.aspx','');"
+                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditBusinessParter.aspx?CardType=C','');"
                                         runat="server">
                                         <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>

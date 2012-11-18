@@ -48,10 +48,10 @@
 						<td style="display:none">
 							<asp:Label runat="server" ID="Label1"><%#Eval("No") %></asp:Label>
 						</td>
-						<td>
+						<td  Style="text-align: left">
 							<asp:Label runat="server" ID="Label2"><%#Eval("Code")%></asp:Label>
 						</td>
-						<td>
+						<td  Style="text-align: left">
 							<asp:Label runat="server" ID="Label3"><%#Eval("Name")%></asp:Label>
 						</td>						
 					</tr>
@@ -86,8 +86,8 @@
         </Triggers>
     </asp:UpdatePanel>
     <div id="action-form">
-        <asp:Button ID="btnAdd" Text="OK" runat="server" OnClick="btnAdd_Click" />
-        <asp:Button ID="btnCancel" Text="Cancel" runat="server" OnClientClick="return Main.cancelDialogClick()" />
+        <asp:ImageButton ID="btnAdd" runat="server" ImageUrl="~/skin/images/SAP_choose.png" OnClick="btnAdd_Click" />
+        <asp:ImageButton ID="btnCancel" runat="server" ImageUrl="~/skin/images/SAP_cancel.png" OnClientClick="return Main.cancelDialogClick()" />
     </div>
     </form>
 </body>

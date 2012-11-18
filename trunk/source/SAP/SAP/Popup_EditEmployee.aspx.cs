@@ -27,20 +27,7 @@ namespace SAP
             }
         }
 
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            string selectedValue = Request.Form["MyRadioButton"];
-            if (!String.IsNullOrEmpty(selectedValue))
-            {
-                List<EmployeeMasterData> list = EmployeeMasterData.extractFromDataSet(employeeSet.Tables[0]);
-                EmployeeMasterData chosenEmployee = list[Int32.Parse(selectedValue)];
-                Session["chosenEmployee"] = chosenEmployee;
-            }
-            //ScriptManager.RegisterStartupScript(this, typeof(Page), "12344", "alert('This pops up')", true); 
-            //ScriptManager.RegisterClientScriptBlock("", this.GetType(), "script", "alert('Hi');", true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopup", "Main.okDialogClick('EditEmployeeCallBack');", true);
-
-        }
+       
         protected void txtCategoryNameHeader_TextChanged(object sender, EventArgs e)
         {
             string text = ((TextBox)sender).Text;
@@ -95,6 +82,19 @@ namespace SAP
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             BindCategories(this.txtFilter.Text);
+        }
+
+        protected void btnAdd_Click(object sender, ImageClickEventArgs e)
+        {
+            string selectedValue = Request.Form["MyRadioButton"];
+            if (!String.IsNullOrEmpty(selectedValue))
+            {
+                List<EmployeeMasterData> list = EmployeeMasterData.extractFromDataSet(employeeSet.Tables[0]);
+                EmployeeMasterData chosenEmployee = list[Int32.Parse(selectedValue)];
+                Session["chosenEmployee"] = chosenEmployee;
+            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OKPopup", "Main.okDialogClick('EditEmployeeCallBack');", true);
+
         }
     }
 }

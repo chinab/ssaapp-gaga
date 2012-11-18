@@ -16,15 +16,10 @@ namespace SAP
         {
             if (!IsPostBack)
             {
-
                 MasterData masterDataWS = new MasterData();
                 itemMasters = masterDataWS.GetItemMasterData(User.Identity.Name);
-                //this.gridVendors.DataSource = warehousesItems.Tables[0];
-                //this.gridVendors.DataBind();
-                //this.lblTest.Text = "Load vendors" + warehousesItems.Tables[0].Rows.Count;
                 BindCategories("");
                 editItemUpdatePanel.Update();
-
             }
         }
 
@@ -40,7 +35,6 @@ namespace SAP
 
             try
             {
-                // Simple created a table to bind with Grid view and populated it with data.
                 DataTable gridTable = new DataTable("Items");
                 gridTable.Columns.Add("Selected");
                 gridTable.Columns.Add("No");
@@ -51,7 +45,7 @@ namespace SAP
                 int i = 0;
                 foreach (DataRow row in itemsTable.Rows)
                 {
-                    if (("" + row[0].ToString() + row[1].ToString()).Trim().IndexOf(CategoryFilter.Trim()) >= 0)
+                    if (("" + row[0].ToString() + row[1].ToString()).Trim().ToUpper().IndexOf(CategoryFilter.Trim().ToUpper()) >= 0)
                     {
                         dr = gridTable.NewRow();
                         dr["No"] = i.ToString(); 

@@ -45,9 +45,6 @@
                         &nbsp;</div>
                     <div style="height: 80px"></div>
                     <div dir="rtl" style="padding-right: 10px">
-                     <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="button" 
-                            CommandName="Login" Height="18px"  Width="89px"
-                            ImageUrl="~/skin/images/SAP_ChangeCompany.png" />
                         &nbsp;<asp:ImageButton ID="Button1" runat="server" AlternateText="button" 
                             CommandName="Login" Height="18px" Width="65px" ImageUrl="~/skin/images/SAP_OK.png" OnClientClick="Dialog.showLoader();"/>
                         &nbsp;

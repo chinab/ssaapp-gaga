@@ -8,6 +8,49 @@
     <asp:UpdatePanel ID="SalesOpportunityUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
+            <div id="menu-action" style="margin-left: -15px;">
+                    <ul>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/preview.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/print.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/excel.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/pdf.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/word.png" /></a></li>
+                         
+                        <li>
+                            <asp:HyperLink ID="linkNew" runat="server">
+                                <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/icon/addnew.png" />
+                            </asp:HyperLink>
+                        </li>
+
+                        <li>
+                            <asp:HyperLink ID="linkFirst" runat="server">
+                                <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/first.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkPrevious" runat="server">
+                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/icon/previous.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkNext" runat="server">
+                                <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/icon/next.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkLast" runat="server">
+                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/last.png" />
+                            </asp:HyperLink>
+                        </li>
+                 </ul>                    
+                </div>
                 <div id="title-form" style="border-bottom: 2px solid black;">
                     <h2>Production Order</h2>
                 </div>
@@ -20,11 +63,11 @@
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlType" runat="server" 
-                                        Width="120px">
-                                        <asp:ListItem Text="Planned" Value="P"></asp:ListItem>
-                                        <asp:ListItem Text="Canncelled" Value="R"></asp:ListItem>
-                                        <asp:ListItem Text="Released" Value="L"></asp:ListItem>
-                                        <asp:ListItem Text="Closed" Value="C"></asp:ListItem>
+                                        Width="120px" AutoPostBack=true 
+                                        onselectedindexchanged="ddlType_SelectedIndexChanged">
+                                         <asp:ListItem Text="Standard" Value="S"></asp:ListItem>
+                                        <asp:ListItem Text="Special" Value="P"></asp:ListItem>
+                                        <asp:ListItem Text="Disassembly" Value="D"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -35,9 +78,12 @@
                                 <td>
                                     <asp:DropDownList ID="ddlStatus" runat="server" 
                                         Width="120px">
-                                        <asp:ListItem Text="Standard" Value="S"></asp:ListItem>
-                                        <asp:ListItem Text="Special" Value="P"></asp:ListItem>
-                                        <asp:ListItem Text="Disassembly" Value="D"></asp:ListItem>
+                                        <asp:ListItem Text="Planned" Value="P"></asp:ListItem>
+                                        <asp:ListItem Text="Canncelled" Value="R"></asp:ListItem>
+                                        <asp:ListItem Text="Released" Value="L"></asp:ListItem>
+                                        <asp:ListItem Text="Closed" Value="C"></asp:ListItem>
+
+                                       
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -79,7 +125,7 @@
                                 <td>
                                     <asp:TextBox ID="txtWarehouse" runat="server" Enabled="False"></asp:TextBox>
                                     <asp:HyperLink ID="HyperLink6" runat="server" 
-                                        NavigateUrl="javascript:Main.openDialog('../Popup_EditWareHouse.aspx','');">
+                                        NavigateUrl="javascript:Main.openDialog('../Popup_EditWareHouse.aspx?id=-1','');">
                                         <asp:Image ID="Image9" runat="server" 
                                         ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>
@@ -125,7 +171,7 @@
                                 <td>
                                     <asp:TextBox ID="txtCardCode" runat="server" Enabled="False" ></asp:TextBox>
                                     <asp:HyperLink ID="HyperLink3" runat="server" 
-                                        NavigateUrl="javascript:Main.openDialog('../Popup_EditCustomer.aspx','');">
+                                        NavigateUrl="javascript:Main.openDialog('../Popup_EditBusinessPartner.aspx?CardType=C','');">
                                         <asp:Image ID="Image6" runat="server" 
                                         ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>
@@ -172,17 +218,14 @@
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" 
                                 OnClick="_btnAddRecord_Click" />
                             
-                            <asp:ListView ID="lvStage" runat="server"
-                                OnItemInserted="lvStage_ItemInserted"
-                                OnItemInserting="lvStage_ItemInserting" OnItemCommand="lvStage_ItemCommand"
-                                OnItemEditing="lvStage_ItemEditing" onitemupdating="lvStage_ItemUpdating" 
-                                ViewStateMode="Enabled" onitemcreated="lvStage_ItemCreated" 
-                                onitemdeleting="lvStage_ItemDeleting" onitemcanceling="lvStage_ItemCanceling"
+                            <asp:ListView ID="lvContents" runat="server" OnItemCommand="lvContents_ItemCommand"
+                                OnItemEditing="lvContents_ItemEditing" onitemupdating="lvContents_ItemUpdating" 
+                                ViewStateMode="Enabled"
                                  >
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
-                                            <th id="thButtons" runat="server" style="width: 70px">
+                                            <th id="thButtons" runat="server" style="width: 78px">
                                             </th>
                                             <th style="width: 25px">
                                                 <span>#</span>
@@ -220,18 +263,18 @@
                                         <td>
                                             <asp:Label ID="lblNo" runat="server"><%#Eval("No") %></asp:Label>
                                         </td>
-                                        <td>
+                                        <td Style="text-align: left">
                                             <asp:Label ID="lblItemCode" runat="server"><%#Eval("ItemCode") %></asp:Label>
                                             
                                         </td>
-                                        <td>
+                                        <td Style="text-align: left">
                                             <asp:Label ID="lblItemName" runat="server"><%#Eval("Dscription")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td Style="text-align: right">
                                             <asp:Label ID="lblQuantity" runat="server"><%#Eval("PlannedQty")%></asp:Label>
                                         </td>
                                        
-                                        <td>
+                                        <td Style="text-align: left">
                                             <asp:Label ID="lblWarehouse" runat="server"><%#Eval("wareHouse")%></asp:Label>
                                         </td>
                                        <td>
@@ -274,7 +317,7 @@
                                         </td>
 
                                         <td>
-                                            <asp:DropDownList ID="ddlIssueType" runat="server">
+                                            <asp:DropDownList ID="ddlIssueType" runat="server" SelectedValue=<%# Bind("IssueType") %>>
                                                 <asp:ListItem Text="Manual" Value="M"></asp:ListItem>
                                                 <asp:ListItem Text="Backflush" Value="B"></asp:ListItem>
                                             </asp:DropDownList> 
@@ -312,7 +355,7 @@
                                 </EmptyDataTemplate>
                             </asp:ListView>
                             <asp:DataPager ID="ProductListPagerCombo" runat="server" 
-                               PagedControlID="lvStage" PageSize="5" 
+                               PagedControlID="lvContents" PageSize="5" 
                                 onprerender="ProductListPagerCombo_PreRender">
                                <Fields>
                                   <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" 

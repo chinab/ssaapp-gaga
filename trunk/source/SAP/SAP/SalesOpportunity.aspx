@@ -22,22 +22,34 @@
                             <img alt="" src="/skin/icon/pdf.png" /></a></li>
                         <li><a href="#">
                             <img alt="" src="/skin/icon/word.png" /></a></li>
-                        <li><a href="#">
-                            <img alt="" src="/skin/icon/addnew.png" /></a>
-                            <%--          <asp:ImageButton ID="btnAddNew" runat="server" AlternateText="button" 
-                            CommandName="Login" ImageUrl="~/skin/icon/addnew.png" 
-                    onclick="btnAddNew_Click" />--%>
+                         
+                        <li>
+                            <asp:HyperLink ID="linkNew" runat="server">
+                                <asp:Image ID="Image18" runat="server" ImageUrl="~/skin/icon/addnew.png" />
+                            </asp:HyperLink>
                         </li>
-                        <li><a href="#">
-                            <li><a href="#">
-                                <img alt="" src="/skin/icon/first.png" /></a></li>
-                            <li><a href="#">
-                                <img alt="" src="/skin/icon/previous.png" /></a></li>
-                            <li><a href="#">
-                                <img alt="" src="/skin/icon/next.png" /></a></li>
-                            <li><a href="#">
-                                <img alt="" src="/skin/icon/last.png" /></a></li>
-                    </ul>                    
+
+                        <li>
+                            <asp:HyperLink ID="linkFirst" runat="server">
+                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/first.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkPrevious" runat="server">
+                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/previous.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkNext" runat="server">
+                                <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/icon/next.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkLast" runat="server">
+                                <asp:Image ID="Image9" runat="server" ImageUrl="~/skin/icon/last.png" />
+                            </asp:HyperLink>
+                        </li>
+                 </ul>                    
                 </div>
                 <div class="clear">
                 </div>
@@ -50,14 +62,14 @@
                             <tr>
                                 <td class="detail_table_td_100" style="width: 195px">
                                     <span>Business Partner Code (*)</span>
-                                    <asp:HyperLink ID="lBP" NavigateUrl="~/BusinesspartnerMaster.aspx" runat="server">
+                                    <asp:HyperLink ID="lBP" NavigateUrl="../BusinesspartnerMaster.aspx" runat="server">
                                         <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/link.png"/>
                                     
                                     </asp:HyperLink>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtCustomerCode" runat="server"></asp:TextBox>
-                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('Popup_EditCustomer.aspx','');"
+                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditBusinessPartner.aspx?CardType=CA','');"
                                         runat="server">
                                         <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     
@@ -279,7 +291,7 @@
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtJournalRemark0" runat="server"></asp:TextBox>
-                                        <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('Popup_EditVendor.aspx','');"
+                                        <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('../Popup_EditBusinessPartner.aspx?CardType=CA','');"
                                         runat="server">
                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                         

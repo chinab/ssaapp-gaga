@@ -8,9 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace SAP {
-    
-    
-    public partial class ARInvoice {
+
+
+    public partial class ARInvoice_VHF
+    {
         
         /// <summary>
         /// purchaseOrderUpdatePanel control.

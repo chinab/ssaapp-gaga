@@ -15,7 +15,6 @@ namespace SAP
 {
     public partial class ABEO_TIMESHEET : System.Web.UI.Page
     {
-        public static DataTable dtContents;
         public static DataTable dtHeader;
         public static DataTable dtAttachment;
 
@@ -34,7 +33,7 @@ namespace SAP
             if (dtHeader.Rows.Count == 0)
                 ClgCode = "1";
             dtHeader = trx.GetMarketingDocument_ReturnDS(DocType, ClgCode, User.Identity.Name).Tables[0];
-            dtHeader = GF.ConvertDate_RemoveCols(dtHeader, KeepColums);
+            dtHeader = GF.ConvertDataTable_RemoveCols(dtHeader, KeepColums);
 
             txtNo.Text = dtHeader.Rows[0]["ClgCode"].ToString();
             SetNavigatorURL(txtNo.Text);
@@ -102,7 +101,7 @@ namespace SAP
             //-------------create table------------------
             imgAdd.Visible = true;
             imgUpdate.Visible = false;
-            dtHeader = new DataTable();
+            dtHeader = new DataTable("OCLG");
             dtHeader.Columns.Add("ClgCode");
             dtHeader.Columns.Add("Action");
             dtHeader.Columns.Add("CntctType");
@@ -125,8 +124,7 @@ namespace SAP
             txtNo.Text = "";
             imgAdd.Visible = true;
 
-            dtHeader.Rows.Add("", "", "", "", "", "", "", "20121022", "830", "20121022", "930", "N", "",
-                              User.Identity.Name);
+            dtHeader.Rows.Add();
 
             dtAttachment = new DataTable();
             dtAttachment.Columns.Add("No");
@@ -161,16 +159,16 @@ namespace SAP
                 dr["endDate"] = Convert.ToDateTime(txtDate.Text, ivC).ToString("yyyyMMdd");
                 dr["ENDTime"] = txtToTime.Text;
                 dr["AtcEntry"] = 2; // AttachmentString();
+                dr["U_UserID"] = User.Identity.Name;
                 if (cbClosed.Checked == true)
                 {
                     dr["Closed"] = "Y";
                 }
                 DocumentXML objInfo = new DocumentXML();
-                String RemoveColumn = "";
+                DataSet ds = new DataSet("DS");
+                ds.Tables.Add(dtHeader.Copy());
 
-                RemoveColumn = "ClgCode";
-
-                return objInfo.ToXMLStringFromDS(DocType, dtHeader, dtContents, RemoveColumn);
+                return objInfo.ToXMLStringFromDS(DocType, ds);
             }
             catch (Exception)
             {
@@ -202,9 +200,10 @@ namespace SAP
 
             DataTable dtLines = dtAttachment;
             GeneralFunctions GF = new GeneralFunctions();
-            dtLines = GF.ConvertDate_RemoveCols(dtLines, "");
-            DocumentXML objInfo = new DocumentXML();
-            return objInfo.ToXMLStringFromDS("221", dtHeader, dtAttachment, "No");
+            dtLines = GF.ConvertDataTable_RemoveCols(dtLines, "");
+            //DocumentXML objInfo = new DocumentXML();
+            //return objInfo.ToXMLStringFromDS("221", dtHeader, dtAttachment, "No");
+            return "";
         }
 
         protected void SetNavigatorURL(string CurrentKey)
@@ -278,7 +277,7 @@ namespace SAP
 
                 switch (this.Request["__EVENTARGUMENT"].ToString())
                 {
-                    case "EditCustomerCallBack":
+                    case "EditBusinessPartnerCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {

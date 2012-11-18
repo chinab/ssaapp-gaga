@@ -46,15 +46,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\CKEditor.NET.dll</HintPath>
     </Reference>
-    <Reference Include="FreeTextBox, Version=3.3.0.22914, Culture=neutral, PublicKeyToken=5962a4e684a48b87, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\FreeTextBox.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -73,11 +68,14 @@
     <Content Include="Admin\SystemRoles.aspx" />
     <Content Include="Admin\SystemUserEdit.aspx" />
     <Content Include="Admin\SystemUsers.aspx" />
+    <Content Include="Banking\Outgoing.aspx" />
+    <Content Include="Banking\Incoming.aspx" />
     <Content Include="BusinessPartner\Activity.aspx" />
     <Content Include="Admin\UserManagement.aspx" />
     <Content Include="Admin\UserProfiles.aspx" />
     <Content Include="Admin\user_style.css" />
     <Content Include="ARInvoice_VHF.aspx" />
+    <Content Include="BusinessPartner\BusinessPartnerMaster_ABEO.aspx" />
     <Content Include="ckeditor\adapters\jquery.js" />
     <Content Include="ckeditor\CHANGES.html" />
     <Content Include="ckeditor\ckeditor.js" />
@@ -421,32 +419,30 @@
     <Content Include="ckeditor\themes\default\theme.js" />
     <Content Include="BusinessPartner\BusinessPartnerMaster.aspx" />
     <Content Include="Admin\Popup_Connection.aspx" />
+    <Content Include="Inventory\InventoryTransferRequest.aspx" />
+    <Content Include="Inventory\GoodsReceipt.aspx" />
+    <Content Include="Popup_EditTaxCode.aspx" />
+    <Content Include="Popup_EditBusinessPartner.aspx" />
     <Content Include="EmailTemplate.htm" />
     <Content Include="EmailTemplate2.htm" />
-    <Content Include="js\AdapterUtils.js" />
-    <Content Include="js\ajaxtabs.js" />
-    <Content Include="js\ajaxtabsforlocal.js" />
-    <Content Include="js\calendar-en.js" />
-    <Content Include="js\calendar-setup.js" />
-    <Content Include="js\calendar.js" />
-    <Content Include="js\commons.js" />
-    <Content Include="js\jquery-1.4.1-vsdoc.js" />
-    <Content Include="js\jquery-1.4.1.js" />
-    <Content Include="js\jquery-1.4.1.min.js" />
-    <Content Include="js\MenuAdapter.js" />
-    <Content Include="js\TreeViewAdapter.js" />
-    <Content Include="js\Validation.js" />
-    <Content Include="js\xpmenuv21.js" />
     <Content Include="PermissionDenied.aspx" />
     <Content Include="Popup_EditBOM.aspx" />
     <Content Include="Inventory\InventoryTransfer.aspx" />
     <Content Include="Inventory\GoodsIssue.aspx" />
-    <Content Include="JournalEntry.aspx" />
+    <Content Include="Financials\JournalEntry.aspx" />
     <Content Include="js\jquery.js" />
     <Content Include="Popup_EditAccount.aspx" />
-    <Content Include="Inventory\GoodsReceipt.aspx" />
     <Content Include="Popup_OpenDocument.aspx" />
     <Content Include="Production\ProductionOrder.aspx" />
+    <Content Include="Purchase\APInvoice.aspx" />
+    <Content Include="Purchase\APCredit.aspx" />
+    <Content Include="Purchase\GoodsReturn.aspx" />
+    <Content Include="Purchase\GoodsReceiptPO.aspx" />
+    <Content Include="Sales\ARInvoice.aspx" />
+    <Content Include="Sales\ARCredit.aspx" />
+    <Content Include="Sales\Return.aspx" />
+    <Content Include="Sales\Delivery.aspx" />
+    <Content Include="Sales\SalesOrder.aspx" />
     <Content Include="ServiceCall.aspx" />
     <Content Include="Popup_EditTerritory.aspx" />
     <Content Include="Popup_EditCostCenter.aspx" />
@@ -462,68 +458,6 @@
     <Content Include="Popup_EditWarehouse.aspx" />
     <Content Include="SalesOpportunity.aspx" />
     <Content Include="skin\AdminLogin.css" />
-    <Content Include="skin\Admin\ajaxtabs.css" />
-    <Content Include="skin\Admin\Announcement.gif" />
-    <Content Include="skin\Admin\arrow-down-title-on.jpg" />
-    <Content Include="skin\Admin\arrow-down-title.jpg" />
-    <Content Include="skin\Admin\arrow-up-title-on.jpg" />
-    <Content Include="skin\Admin\arrow-up-title.jpg" />
-    <Content Include="skin\Admin\bg-fade-light.png" />
-    <Content Include="skin\Admin\bg_table.gif" />
-    <Content Include="skin\Admin\calendar-system.css" />
-    <Content Include="skin\Admin\calendar.gif" />
-    <Content Include="skin\Admin\carrier-icon.gif" />
-    <Content Include="skin\Admin\close-popup.jpg" />
-    <Content Include="skin\Admin\collapse.gif" />
-    <Content Include="skin\Admin\corner_bl.gif" />
-    <Content Include="skin\Admin\corner_br.gif" />
-    <Content Include="skin\Admin\corner_tl.gif" />
-    <Content Include="skin\Admin\corner_tr.gif" />
-    <Content Include="skin\Admin\critical24-bak.gif" />
-    <Content Include="skin\Admin\critical24.gif" />
-    <Content Include="skin\Admin\critical24.png" />
-    <Content Include="skin\Admin\Default.css" />
-    <Content Include="skin\Admin\down.gif" />
-    <Content Include="skin\Admin\edit.css" />
-    <Content Include="skin\Admin\editdoc.gif" />
-    <Content Include="skin\Admin\expand.gif" />
-    <Content Include="skin\Admin\go-back.gif" />
-    <Content Include="skin\Admin\go-first.gif" />
-    <Content Include="skin\Admin\go-last.gif" />
-    <Content Include="skin\Admin\go-next.gif" />
-    <Content Include="skin\Admin\headcornerp.gif" />
-    <Content Include="skin\Admin\headcornerx.jpg" />
-    <Content Include="skin\Admin\headcornerz.jpg" />
-    <Content Include="skin\Admin\icongo01.gif" />
-    <Content Include="skin\Admin\icon_alert.gif" />
-    <Content Include="skin\Admin\information-bak.gif" />
-    <Content Include="skin\Admin\information.png" />
-    <Content Include="skin\Admin\leftNavigation.css" />
-    <Content Include="skin\Admin\list.css" />
-    <Content Include="skin\Admin\loop_blue.gif" />
-    <Content Include="skin\Admin\loop_blue_top.gif" />
-    <Content Include="skin\Admin\nav-bg-repeat.jpg" />
-    <Content Include="skin\Admin\nav-bg.jpg" />
-    <Content Include="skin\Admin\nav-item-bg.jpg" />
-    <Content Include="skin\Admin\new.gif" />
-    <Content Include="skin\Admin\noPicture.gif" />
-    <Content Include="skin\Admin\partgradp.gif" />
-    <Content Include="skin\Admin\path-arrow.gif" />
-    <Content Include="skin\Admin\path-bullet.jpg" />
-    <Content Include="skin\Admin\report.css" />
-    <Content Include="skin\Admin\rtbullet.gif" />
-    <Content Include="skin\Admin\rule-node-add-child.gif" />
-    <Content Include="skin\Admin\rule-node-remove.gif" />
-    <Content Include="skin\Admin\SPSSearch2.gif" />
-    <Content Include="skin\Admin\spssites-bak.gif" />
-    <Content Include="skin\Admin\spssites.gif" />
-    <Content Include="skin\Admin\topgrad.gif" />
-    <Content Include="skin\Admin\treeview.css" />
-    <Content Include="skin\Admin\triangle.gif" />
-    <Content Include="skin\Admin\up.gif" />
-    <Content Include="skin\Admin\user.GIF" />
-    <Content Include="skin\Admin\warning24-bak.gif" />
-    <Content Include="skin\Admin\warning24.png" />
     <Content Include="skin\icon\addnew.png" />
     <Content Include="skin\icon\add_icon_color.gif" />
     <Content Include="skin\icon\add_icon_mono.gif" />
@@ -601,10 +535,6 @@
     <Content Include="skin\images\AccessDenied.png" />
     <Content Include="skin\images\activity.png" />
     <Content Include="skin\images\ajax-loader.gif" />
-    <Content Include="skin\images\arrow-bottom.gif" />
-    <Content Include="skin\images\arrow-left.gif" />
-    <Content Include="skin\images\arrow-right.gif" />
-    <Content Include="skin\images\arrow-top.gif" />
     <Content Include="skin\images\banking.png" />
     <Content Include="skin\images\Bin - Full.png" />
     <Content Include="skin\images\bk_icontool.png" />
@@ -615,6 +545,7 @@
     <Content Include="skin\images\CopyTo.png" />
     <Content Include="skin\images\data_table_header.png" />
     <Content Include="skin\images\Date.png" />
+    <Content Include="skin\images\deselectall.png" />
     <Content Include="skin\images\document-preview.png" />
     <Content Include="skin\images\document-print.png" />
     <Content Include="skin\images\Drive - Windows.png" />
@@ -659,6 +590,7 @@
     <Content Include="skin\images\SAP_OK.png" />
     <Content Include="skin\images\SAP_update.png" />
     <Content Include="skin\images\Search.png" />
+    <Content Include="skin\images\selectall.png" />
     <Content Include="skin\images\service.png" />
     <Content Include="skin\images\shopping.png" />
     <Content Include="skin\images\Success.png" />
@@ -670,7 +602,6 @@
     <Content Include="skin\images\Windows 2.png" />
     <Content Include="skin\images\Windows Explorer.png" />
     <Content Include="skin\menu.css" />
-    <Content Include="skin\notifiers.css" />
     <Content Include="skin\skin.css" />
     <Content Include="skin\start\images\ui-bg_flat_55_999999_40x100.png" />
     <Content Include="skin\start\images\ui-bg_flat_75_aaaaaa_40x100.png" />
@@ -701,9 +632,6 @@
     <Content Include="WebServices\NoteGenerateCode.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Data\Data.cs" />
-    <Compile Include="App_Data\RolePermissions.cs" />
-    <Compile Include="App_Data\SqlHelper.cs" />
     <Compile Include="Admin\SystemRoleEdit.aspx.cs">
       <DependentUpon>SystemRoleEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -732,7 +660,27 @@
     <Compile Include="Admin\SystemUsers.aspx.designer.cs">
       <DependentUpon>SystemUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Data.cs" />
+    <Compile Include="App_Data\ProfileCommon.cs" />
+    <Compile Include="App_Data\RolePermissions.cs" />
+    <Compile Include="App_Data\SqlHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="App_Data\WebHelper.cs" />
+    <Compile Include="Banking\Outgoing.aspx.cs">
+      <DependentUpon>Outgoing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Banking\Outgoing.aspx.designer.cs">
+      <DependentUpon>Outgoing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Banking\Incoming.aspx.cs">
+      <DependentUpon>Incoming.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Banking\Incoming.aspx.designer.cs">
+      <DependentUpon>Incoming.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BusinessPartner\Activity.aspx.cs">
       <DependentUpon>Activity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -740,7 +688,6 @@
     <Compile Include="BusinessPartner\Activity.aspx.designer.cs">
       <DependentUpon>Activity.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\ProfileCommon.cs" />
     <Compile Include="Admin\UserManagement.aspx.cs">
       <DependentUpon>UserManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -775,6 +722,41 @@
     </Compile>
     <Compile Include="Admin\Popup_Connection.aspx.designer.cs">
       <DependentUpon>Popup_Connection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessPartner\BusinessPartnerMaster_ABEO.aspx.cs">
+      <DependentUpon>BusinessPartnerMaster_ABEO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessPartner\BusinessPartnerMaster_ABEO.aspx.designer.cs">
+      <DependentUpon>BusinessPartnerMaster_ABEO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\InventoryTransferRequest.aspx.cs">
+      <DependentUpon>InventoryTransferRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventory\InventoryTransferRequest.aspx.designer.cs">
+      <DependentUpon>InventoryTransferRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\GoodsReceipt.aspx.cs">
+      <DependentUpon>GoodsReceipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventory\GoodsReceipt.aspx.designer.cs">
+      <DependentUpon>GoodsReceipt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup_EditTaxCode.aspx.cs">
+      <DependentUpon>Popup_EditTaxCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditTaxCode.aspx.designer.cs">
+      <DependentUpon>Popup_EditTaxCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup_EditBusinessPartner.aspx.cs">
+      <DependentUpon>Popup_EditBusinessPartner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup_EditBusinessPartner.aspx.designer.cs">
+      <DependentUpon>Popup_EditBusinessPartner.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emailling.cs" />
     <Compile Include="Main.Master.cs">
@@ -812,11 +794,11 @@
     <Compile Include="Inventory\GoodsIssue.aspx.designer.cs">
       <DependentUpon>GoodsIssue.aspx</DependentUpon>
     </Compile>
-    <Compile Include="JournalEntry.aspx.cs">
+    <Compile Include="Financials\JournalEntry.aspx.cs">
       <DependentUpon>JournalEntry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="JournalEntry.aspx.designer.cs">
+    <Compile Include="Financials\JournalEntry.aspx.designer.cs">
       <DependentUpon>JournalEntry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup_EditAccount.aspx.cs">
@@ -825,13 +807,6 @@
     </Compile>
     <Compile Include="Popup_EditAccount.aspx.designer.cs">
       <DependentUpon>Popup_EditAccount.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Inventory\GoodsReceipt.aspx.cs">
-      <DependentUpon>GoodsReceipt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Inventory\GoodsReceipt.aspx.designer.cs">
-      <DependentUpon>GoodsReceipt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup_OpenDocument.aspx.cs">
       <DependentUpon>Popup_OpenDocument.aspx</DependentUpon>
@@ -846,6 +821,69 @@
     </Compile>
     <Compile Include="Production\ProductionOrder.aspx.designer.cs">
       <DependentUpon>ProductionOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\APInvoice.aspx.cs">
+      <DependentUpon>APInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchase\APInvoice.aspx.designer.cs">
+      <DependentUpon>APInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\APCredit.aspx.cs">
+      <DependentUpon>APCredit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchase\APCredit.aspx.designer.cs">
+      <DependentUpon>APCredit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\GoodsReturn.aspx.cs">
+      <DependentUpon>GoodsReturn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchase\GoodsReturn.aspx.designer.cs">
+      <DependentUpon>GoodsReturn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\GoodsReceiptPO.aspx.cs">
+      <DependentUpon>GoodsReceiptPO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchase\GoodsReceiptPO.aspx.designer.cs">
+      <DependentUpon>GoodsReceiptPO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ARInvoice.aspx.cs">
+      <DependentUpon>ARInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\ARInvoice.aspx.designer.cs">
+      <DependentUpon>ARInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ARCredit.aspx.cs">
+      <DependentUpon>ARCredit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\ARCredit.aspx.designer.cs">
+      <DependentUpon>ARCredit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\Return.aspx.cs">
+      <DependentUpon>Return.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\Return.aspx.designer.cs">
+      <DependentUpon>Return.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\Delivery.aspx.cs">
+      <DependentUpon>Delivery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\Delivery.aspx.designer.cs">
+      <DependentUpon>Delivery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SalesOrder.aspx.cs">
+      <DependentUpon>SalesOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sales\SalesOrder.aspx.designer.cs">
+      <DependentUpon>SalesOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="ServiceCall.aspx.cs">
       <DependentUpon>ServiceCall.aspx</DependentUpon>
@@ -993,7 +1031,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ckeditor\.htaccess" />
-    <Content Include="skin\Admin\Default.skin" />
     <Content Include="Main.Master" />
     <None Include="WebServices\GenerateCodeWSDLGetDefault.bat" />
     <None Include="WebServices\GenerateCodeWSDLMasterData.bat" />

@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace SAP
 {
-    public partial class ARInvoice : System.Web.UI.Page
+    public partial class ARInvoice_VHF : System.Web.UI.Page
     {
         public static DataTable dt;
         public static DataTable dtHeader;
@@ -176,7 +176,7 @@ namespace SAP
                             this.lvContents.DataBind();
                         }
                         break;
-                    case "EditCustomerCallBack":
+                    case "EditBusinessPartnerCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {
@@ -301,9 +301,16 @@ namespace SAP
                 dr["JrnlMemo"] = "";
                 dr["CardCode"] = txtVendor.Text;
                 dr["CardName"] = txtName.Text;
+                //DocumentXML objInfo = new DocumentXML();
+                //String RemoveColumn = "No;CardCode;PromoEnable;QuantityEnable;TotalDiscount";
+                //return objInfo.ToXMLStringFromDS("13", dtHeader, dt, RemoveColumn);
+
                 DocumentXML objInfo = new DocumentXML();
-                String RemoveColumn = "No;CardCode;PromoEnable;QuantityEnable;TotalDiscount";
-                return objInfo.ToXMLStringFromDS("13", dtHeader, dt, RemoveColumn);
+                DataSet ds = new DataSet("DS");
+                ds.Tables.Add(dtHeader);
+                ds.Tables.Add(dt);
+
+                return objInfo.ToXMLStringFromDS("13", ds);
             }
             catch (Exception)
             {

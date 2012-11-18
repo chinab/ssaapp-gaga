@@ -128,7 +128,7 @@ namespace SAP
             {
                 switch (this.Request["__EVENTARGUMENT"].ToString())
                 {
-                    case "EditCustomerCallBack":
+                    case "EditBusinessPartnerCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {
@@ -467,10 +467,16 @@ namespace SAP
 
                // dr["DocDate"] = Convert.ToDateTime(txtDueDate.Text, ivC).ToString("yyyyMMdd");//String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
                
-                DocumentXML objInfo = new DocumentXML();
-                String RemoveColumn = "No;DocType;Stage;SalesEmployee";
-                return objInfo.ToXMLStringFromDS(DocType, dtHeader, GF.ConvertDate_RemoveCols(dtStage, ""), RemoveColumn);
+                //DocumentXML objInfo = new DocumentXML();
+                //String RemoveColumn = "No;DocType;Stage;SalesEmployee";
+                //return objInfo.ToXMLStringFromDS(DocType, dtHeader, GF.ConvertDate_RemoveCols(dtStage, ""), RemoveColumn);
 
+                DocumentXML objInfo = new DocumentXML();
+                DataSet ds = new DataSet("DS");
+                ds.Tables.Add(dtHeader);
+                ds.Tables.Add(GF.ConvertDataTable_RemoveCols(dtStage, ""));
+
+                return objInfo.ToXMLStringFromDS(DocType, ds);
             }
             catch (Exception ex)
             {

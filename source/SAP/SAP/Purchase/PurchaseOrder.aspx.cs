@@ -64,7 +64,7 @@ namespace SAP
             }
 
             dtHeader = returnDoc.Tables[0];
-            dtContents = GF.ConvertDate_RemoveCols(returnDoc.Tables[1], KeepColumsContent);
+            dtContents = GF.ConvertDataTable_RemoveCols(returnDoc.Tables[1], KeepColumsContent);
             DataRow dr = dtHeader.Rows[0];
             SetNavigatorURL(dr["DocEntry"].ToString());
 
@@ -277,7 +277,7 @@ namespace SAP
                 ds.Tables.Add(dtHeader.Copy());
                 ds.Tables.Add(GF.ResetFormatNumeric(dtContents, arrContentsCols).Copy());
 
-                return objInfo.ToXMLStringFromDS(DocType, dtHeader, null, "");
+                return objInfo.ToXMLStringFromDS(DocType,ds);
             }
             catch (Exception ex)
             {

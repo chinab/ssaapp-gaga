@@ -67,8 +67,8 @@ namespace SAP
                             txtItemName.Text = chosenItem.ItemName;
                         }
                         break;
-                   
-                    case "EditCustomerCallBack":
+
+                    case "EditBusinessPartnerCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {
@@ -117,8 +117,11 @@ namespace SAP
                 dr["descrption"] = txtRemark.Text;
 
                 DocumentXML objInfo = new DocumentXML();
-                String RemoveColumn = "No";
-                return objInfo.ToXMLStringFromDS(DocType, dtHeader, dtContents, RemoveColumn);
+                DataSet ds = new DataSet("DS");
+                ds.Tables.Add(dtHeader);
+                ds.Tables.Add(dtContents);
+
+                return objInfo.ToXMLStringFromDS(DocType, ds);
             }
             catch (Exception)
             {

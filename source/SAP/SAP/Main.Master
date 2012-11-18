@@ -141,7 +141,7 @@
 				<ul>
 					<li><a href="#">Chart of Accounts</a></li>
 					<li><a href="#">Edit Chart of Accounts</a></li>
-					<li><a href="/JournalEntry.aspx">Journal Entry</a></li>
+					<li><a href="/Financials/JournalEntry.aspx">Journal Entry</a></li>
 					<li><a href="#">Journal Vouchers</a></li>
 				</ul>
 			</li>
@@ -163,11 +163,12 @@
 				</h3>
 				<ul>
 					<li><a href="#">Sales Quotation</a></li>
-					<li><a href="/PurchaseOrder.aspx">Sales Order</a></li>
-					<li><a href="#">Deliver</a></li>
-					<li><a href="#">Return</a></li>
-					<li><a href="/ARInvoice_VHF.aspx">A/R Invoice</a></li>
-					<li><a href="#">A/R Credit Memo</a></li>
+					<li><a href="/Sales/SalesOrder.aspx">Sales Order</a></li>
+					<li><a href="/Sales/Delivery.aspx">Delivery</a></li>
+					<li><a href="/Sales/Return.aspx">Return</a></li>
+					<li><a href="/Sales/ARInvoice.aspx">A/R Invoice</a></li>
+                    <%--<li><a href="/ARInvoice_VHF.aspx">A/R Invoice VHF</a></li>--%>
+					<li><a href="/Sales/ARCredit.aspx">A/R Credit Memo</a></li>
 				</ul>
 			</li>
 			<li>
@@ -179,10 +180,10 @@
 				<ul>
 					<li><a href="#">Purchase Quotation</a></li>
 					<li><a href="/Purchase/PurchaseOrder.aspx">Purchase Order</a></li>
-					<li><a href="#">Goods Receipt PO</a></li>
-					<li><a href="#">Goods Return</a></li>
-					<li><a href="#">A/P invoice</a></li>
-					<li><a href="#">A/P Credit Memo</a></li>
+					<li><a href="/Purchase/GoodsReceiptPO.aspx">Goods Receipt PO</a></li>
+					<li><a href="/Purchase/GoodsReturn.aspx">Goods Return</a></li>
+					<li><a href="/Purchase/APInvoice.aspx">A/P invoice</a></li>
+					<li><a href="/Purchase/APCredit.aspx">A/P Credit Memo</a></li>
 					<li><a href="#">Landed Costs</a></li>
 				</ul>
 			</li>
@@ -205,8 +206,8 @@
 					</a>
 				</h3>
 				<ul>
-					 <li><a href="#">Incomming Payments</a></li>
-					<li><a href="#">Outgoing Payments</a></li>
+					 <li><a href="/Banking/Incoming.aspx">Incomming Payments</a></li>
+					<li><a href="/Banking/Outgoing.aspx">Outgoing Payments</a></li>
 				</ul>
 			</li>
 			<li>
@@ -223,7 +224,8 @@
                         	<li>
                                 <h4 class="head"><a href="#">Inventory Transactions</a></h4>
                                 <ul>
-                                     <li><a class="subitem" href="/Inventory/InventoryTransfer.aspx">Inventory Transfer</a></li>
+                                    <li><a class="subitem" href="/Inventory/InventoryTransferRequest.aspx">Inventory Transfer Request</a></li>
+                                    <li><a class="subitem" href="/Inventory/InventoryTransfer.aspx">Inventory Transfer</a></li>
                                     <li><a class="subitem" href="/Inventory/GoodsReceipt.aspx">Goods Receipt</a></li>
                                     <li><a class="subitem" href="/Inventory/GoodsIssue.aspx">Goods Issue</a></li>
                                 </ul>

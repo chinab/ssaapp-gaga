@@ -14,10 +14,11 @@ namespace SAP
 {
     public partial class Activity : System.Web.UI.Page
     {
-        public static DataTable dtContents;
         public static DataTable dtHeader;
-        private GeneralFunctions GF = new GeneralFunctions();
+        private GeneralFunctions GF = new GeneralFunctions(HttpContext.Current.User.Identity.Name);
         private string DocType = "33";
+        private string TblHeaderName = "OCLG";
+        private string TblLineName = "RPC1";
         public static string KeepColums = "";
 
         #region "Functions"
@@ -29,7 +30,7 @@ namespace SAP
             if (dtHeader.Rows.Count == 0)
                 ClgCode = "1";
             dtHeader = trx.GetMarketingDocument_ReturnDS(DocType, ClgCode, User.Identity.Name).Tables[0];
-            dtHeader = GF.ConvertDate_RemoveCols(dtHeader, KeepColums);
+            dtHeader = GF.ConvertDataTable_RemoveCols(dtHeader, KeepColums);
 
             txtNo.Text = dtHeader.Rows[0]["ClgCode"].ToString();
             SetNavigatorURL(txtNo.Text);
@@ -91,15 +92,13 @@ namespace SAP
             else
                 txtToTime.Text = DateTime.Now.Hour.ToString() + (DateTime.Now.Minute+15).ToString();
             
-           // ddlType.Items.FindByText("CRM").Selected = true;
-            ddlType.Enabled = false;
         }
         void ClearScreen()
         {
             //-------------create table------------------
             imgAdd.Visible = true;
             imgUpdate.Visible = false;
-            dtHeader = new DataTable();
+            dtHeader = new DataTable("OCLG");
             dtHeader.Columns.Add("ClgCode");
             dtHeader.Columns.Add("Action");
             dtHeader.Columns.Add("CntctType");
@@ -123,8 +122,7 @@ namespace SAP
             txtNo.Text = "";
             imgAdd.Visible = true;
 
-            dtHeader.Rows.Add("", "", "", "", "", "", "", "20121022", "830", "20121022", "930", "N", "","",
-                              User.Identity.Name);
+            dtHeader.Rows.Add();
 
             
             SetNavigatorURL("");
@@ -134,7 +132,6 @@ namespace SAP
             try
             {
                 CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
-                if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
 
                 DataRow dr = dtHeader.Rows[0];
                 dr["Action"] = ddlActivity.SelectedValue.ToString();
@@ -148,8 +145,8 @@ namespace SAP
                 dr["BeginTime"] = txtFromTime.Text;
                 dr["endDate"] = Convert.ToDateTime(txtFromDate.Text, ivC).ToString("yyyyMMdd");
                 dr["ENDTime"] = txtToTime.Text;
-                //dr["AtcEntry"] = 2; // AttachmentString();
-                dr["cntctcode"] = ddlContactPerson.SelectedItem.Value.ToString();
+                if (ddlContactPerson.SelectedItem!=null)
+                    dr["cntctcode"] = ddlContactPerson.SelectedItem.Value.ToString();
                 dr["AttendUser"] = ddlUser.SelectedItem.Value.ToString();
                 dr["U_UserID"] = User.Identity.Name;
                 if (cbClosed.Checked == true)
@@ -157,11 +154,11 @@ namespace SAP
                     dr["Closed"] = "Y";
                 }
                 DocumentXML objInfo = new DocumentXML();
-                String RemoveColumn = "";
+                DataSet ds = new DataSet("DS");
+                dtHeader.TableName = TblHeaderName;
+                ds.Tables.Add(dtHeader.Copy());
 
-                RemoveColumn = "ClgCode";
-
-                return objInfo.ToXMLStringFromDS(DocType, dtHeader, dtContents, RemoveColumn);
+                return objInfo.ToXMLStringFromDS(DocType, ds);
             }
             catch (Exception ex)
             {
@@ -225,6 +222,19 @@ namespace SAP
                     else
                     {
                         LoadDefault();
+                        string cardcode = Request.QueryString["CardCode"];
+
+                        if (!String.IsNullOrEmpty(cardcode))
+                        {
+                            string cardname = Request.QueryString["CardName"];
+                            txtBP.Text = cardcode;
+                            txtBPName.Text = cardname;
+
+                            ddlContactPerson.DataSource = masterDataWS.GetContactPerson(txtBP.Text, User.Identity.Name).Tables[0];
+                            ddlContactPerson.DataValueField = "Code";
+                            ddlContactPerson.DataTextField = "FirstName";
+                            ddlContactPerson.DataBind();
+                        }
                         //dtHeader.Rows.Add("","", "", "", "", "", "", "20121022", "830", "20121022", "930", "N", User.Identity.Name);
                     }
                 }
@@ -247,11 +257,10 @@ namespace SAP
             if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
             {
                 //Int32 itemNo = 0;
-                if (GF == null) GF = new GeneralFunctions(User.Identity.Name);
 
                 switch (this.Request["__EVENTARGUMENT"].ToString())
                 {
-                    case "EditCustomerCallBack":
+                    case "EditBusinessPartnerCallBack":
                         BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
                         if (chosenPartner != null)
                         {
@@ -295,7 +304,7 @@ namespace SAP
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString().Substring(0, 200)) + "','');", true);
+                    "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString().Substring(0, 500)) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                     "alert('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "');", true);
@@ -303,36 +312,6 @@ namespace SAP
             }
             else
             {
-                if (ddlSubject.SelectedItem.Value.ToString() == "14" || ddlSubject.SelectedItem.Value.ToString() == "18")
-                {
-                    Emailling em = new Emailling();
-                    DataTable dtuser = ts.GetMarketingDocument_ReturnDS("12", ddlUser.SelectedItem.Value.ToString(), User.Identity.Name).Tables[0];
-                    string email = dtuser.Rows[0]["E_Mail"].ToString();
-                    DataTable dtBP = ts.GetMarketingDocument_ReturnDS("2", txtBP.Text, User.Identity.Name).Tables[0];
-                    string BPInfo = "";
-                    BPInfo = dtBP.Rows[0]["CardFName"].ToString();
-
-                    GetDefault df = new GetDefault();
-                    DataSet nav = df.GetNextPreviousID(DocType, User.Identity.Name, "OCLG", "clgcode", "");
-                    string urlActivity = "";
-                    Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
-                    string requested = uri.Scheme + Uri.SchemeDelimiter + uri.Host + ":" + uri.Port;
-
-                    string urlBP = requested+"/BusinessPartner/BusinessPartnerMaster.aspx?CardCode=" + txtBP.Text;
-
-                    if (nav != null)
-                    {
-                        urlActivity =requested+ "/BusinessPartner/Activity.aspx?clgCode=" + nav.Tables[0].Rows[0]["Las"].ToString();
-                    }
-
-                    string str = em.SendMail(dtuser.Rows[0]["U_Name"].ToString(), txtBPName.Text, BPInfo, email, urlActivity, urlBP);
-                    if (str != "")
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                 "Main.setMasterMessage('" + str + "','');", true);
-                    }
-                }
-
                 Session["successMessage"] = "Operation complete sucessful!";
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
                    "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);

@@ -11,13 +11,10 @@ namespace SAP
 {
     public class DocumentXML
     {
-       public String ToXMLStringFromDS(String ObjType, DataTable dtHeader, DataTable dtLine, String RemoveColums)
+       public String ToXMLStringFromDS(String ObjType,DataSet ds)
         {
             try
             {
-                DataTable ds = dtHeader;
-                DataTable ds1 = dtLine;
-                Array arr = RemoveColums.Split(';');
                 GeneralFunctions gf = new GeneralFunctions();
                 StringBuilder XmlString = new StringBuilder();
                 XmlWriter writer = XmlWriter.Create(XmlString);
@@ -39,53 +36,20 @@ namespace SAP
                             writer.WriteEndElement();
                             #endregion
 
-                            #region Header XML
-                            foreach (DataRow row in ds.Rows)
+                            #region Header&Line XML
+                            foreach (DataTable dt in ds.Tables)
                             {
-                                writer.WriteStartElement(gf.GetHeaderTableTag(ObjType));
+                                writer.WriteStartElement(dt.TableName.ToString());
                                 {
-                                    writer.WriteStartElement("row");
-                                    {
-                                        foreach (DataColumn column in ds.Columns)
-                                        {
-                                            if (Array.IndexOf(arr, column.ColumnName) < 0)
-                                            {
-                                                if (column.ColumnName != "No")//phan lon cac table deu co column No nay
-                                                {
-                                                    if (row[column].ToString() != "")
-                                                    {
-                                                        writer.WriteStartElement(column.ColumnName); //Write Tag
-                                                        {
-                                                            writer.WriteString(row[column].ToString());
-                                                        }
-                                                        writer.WriteEndElement();
-                                                    }
-
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                    writer.WriteEndElement();
-                                }
-                                writer.WriteEndElement();
-                            }
-                            #endregion
-
-                            #region LineXML 1
-                            if (ds1 != null)
-                            {
-                                writer.WriteStartElement(gf.GetLineTableTag(ObjType, 1));
-                                {
-                                    foreach (DataRow row in ds1.Rows)
+                                    foreach (DataRow row in dt.Rows)
                                     {
                                         writer.WriteStartElement("row");
                                         {
-                                            foreach (DataColumn column in ds1.Columns)
+                                            foreach (DataColumn column in dt.Columns)
                                             {
-                                                if (Array.IndexOf(arr, column.ColumnName) < 0)
+                                                if(column.DefaultValue.ToString()!="xx_remove_xx")
                                                 {
-                                                    if (column.ColumnName != "No")
+                                                    if (column.ColumnName != "No")//phan lon cac table deu co column No nay
                                                     {
                                                         if (row[column].ToString() != "")
                                                         {

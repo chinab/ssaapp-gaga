@@ -8,6 +8,49 @@
     <asp:UpdatePanel ID="purchaseOrderUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
+            <div id="menu-action" style="margin-left: -15px;">
+                    <ul>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/preview.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/print.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/excel.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/pdf.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/word.png" /></a></li>
+                         
+                        <li>
+                            <asp:HyperLink ID="linkNew" runat="server">
+                                <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/icon/addnew.png" />
+                            </asp:HyperLink>
+                        </li>
+
+                        <li>
+                            <asp:HyperLink ID="linkFirst" runat="server">
+                                <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/first.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkPrevious" runat="server">
+                                <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/icon/previous.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkNext" runat="server">
+                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/next.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkLast" runat="server">
+                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/last.png" />
+                            </asp:HyperLink>
+                        </li>
+                 </ul>                    
+                </div>
                 <div id="title-form" style="border-bottom: 2px solid black;">
                     <h2>Service Call</h2>
                     <asp:Label BackColor="Red" ID="lblResults" runat="server" />
@@ -22,7 +65,7 @@
                                 <td>
                                     <asp:TextBox ID="txtBP" runat="server" Width="186px" Enabled="false" 
                                         BackColor="#D5DCE0"></asp:TextBox>
-                                     <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('Popup_EditCustomer.aspx','');"
+                                     <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditBusinessPartner.aspx?CardType=C','');"
                                         runat="server">
                                         <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>

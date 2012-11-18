@@ -48,10 +48,10 @@
 						<td style="display:none">
 							<asp:Label runat="server" ID="Label1"><%#Eval("No") %></asp:Label>
 						</td>
-						<td>
+						<td Style="text-align: left">
 							<asp:Label runat="server" ID="Label2"><%#Eval("Code")%></asp:Label>
 						</td>
-						<td>
+						<td Style="text-align: left">
 							<asp:Label runat="server" ID="Label3"><%#Eval("Name")%></asp:Label>
 						</td>						
 					</tr>

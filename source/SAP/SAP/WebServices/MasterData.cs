@@ -90,6 +90,12 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     
     private System.Threading.SendOrPostCallback GetBOMOperationCompleted;
     
+    private System.Threading.SendOrPostCallback GetSeriesOperationCompleted;
+    
+    private System.Threading.SendOrPostCallback GetUDTValueOperationCompleted;
+    
+    private System.Threading.SendOrPostCallback GetCashFlowItemOperationCompleted;
+    
     /// <remarks/>
     public MasterData()
     {
@@ -192,6 +198,15 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     public event GetBOMCompletedEventHandler GetBOMCompleted;
+    
+    /// <remarks/>
+    public event GetSeriesCompletedEventHandler GetSeriesCompleted;
+    
+    /// <remarks/>
+    public event GetUDTValueCompletedEventHandler GetUDTValueCompleted;
+    
+    /// <remarks/>
+    public event GetCashFlowItemCompletedEventHandler GetCashFlowItemCompleted;
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetBPGroup", RequestNamespace="http://electra-ai.com/", ResponseNamespace="http://electra-ai.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -1489,6 +1504,138 @@ public partial class MasterData : System.Web.Services.Protocols.SoapHttpClientPr
     }
     
     /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetSeries", RequestNamespace="http://electra-ai.com/", ResponseNamespace="http://electra-ai.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetSeries(string UserID, string ObjType, string SubObjType) {
+        object[] results = this.Invoke("GetSeries", new object[] {
+                    UserID,
+                    ObjType,
+                    SubObjType});
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public System.IAsyncResult BeginGetSeries(string UserID, string ObjType, string SubObjType, System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("GetSeries", new object[] {
+                    UserID,
+                    ObjType,
+                    SubObjType}, callback, asyncState);
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet EndGetSeries(System.IAsyncResult asyncResult) {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public void GetSeriesAsync(string UserID, string ObjType, string SubObjType) {
+        this.GetSeriesAsync(UserID, ObjType, SubObjType, null);
+    }
+    
+    /// <remarks/>
+    public void GetSeriesAsync(string UserID, string ObjType, string SubObjType, object userState) {
+        if ((this.GetSeriesOperationCompleted == null)) {
+            this.GetSeriesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSeriesOperationCompleted);
+        }
+        this.InvokeAsync("GetSeries", new object[] {
+                    UserID,
+                    ObjType,
+                    SubObjType}, this.GetSeriesOperationCompleted, userState);
+    }
+    
+    private void OnGetSeriesOperationCompleted(object arg) {
+        if ((this.GetSeriesCompleted != null)) {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetSeriesCompleted(this, new GetSeriesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+    
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetUDTValue", RequestNamespace="http://electra-ai.com/", ResponseNamespace="http://electra-ai.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetUDTValue(string UserID, string UDT) {
+        object[] results = this.Invoke("GetUDTValue", new object[] {
+                    UserID,
+                    UDT});
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public System.IAsyncResult BeginGetUDTValue(string UserID, string UDT, System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("GetUDTValue", new object[] {
+                    UserID,
+                    UDT}, callback, asyncState);
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet EndGetUDTValue(System.IAsyncResult asyncResult) {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public void GetUDTValueAsync(string UserID, string UDT) {
+        this.GetUDTValueAsync(UserID, UDT, null);
+    }
+    
+    /// <remarks/>
+    public void GetUDTValueAsync(string UserID, string UDT, object userState) {
+        if ((this.GetUDTValueOperationCompleted == null)) {
+            this.GetUDTValueOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetUDTValueOperationCompleted);
+        }
+        this.InvokeAsync("GetUDTValue", new object[] {
+                    UserID,
+                    UDT}, this.GetUDTValueOperationCompleted, userState);
+    }
+    
+    private void OnGetUDTValueOperationCompleted(object arg) {
+        if ((this.GetUDTValueCompleted != null)) {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetUDTValueCompleted(this, new GetUDTValueCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+    
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://electra-ai.com/GetCashFlowItem", RequestNamespace="http://electra-ai.com/", ResponseNamespace="http://electra-ai.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetCashFlowItem(string UserID) {
+        object[] results = this.Invoke("GetCashFlowItem", new object[] {
+                    UserID});
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public System.IAsyncResult BeginGetCashFlowItem(string UserID, System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("GetCashFlowItem", new object[] {
+                    UserID}, callback, asyncState);
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet EndGetCashFlowItem(System.IAsyncResult asyncResult) {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+    
+    /// <remarks/>
+    public void GetCashFlowItemAsync(string UserID) {
+        this.GetCashFlowItemAsync(UserID, null);
+    }
+    
+    /// <remarks/>
+    public void GetCashFlowItemAsync(string UserID, object userState) {
+        if ((this.GetCashFlowItemOperationCompleted == null)) {
+            this.GetCashFlowItemOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCashFlowItemOperationCompleted);
+        }
+        this.InvokeAsync("GetCashFlowItem", new object[] {
+                    UserID}, this.GetCashFlowItemOperationCompleted, userState);
+    }
+    
+    private void OnGetCashFlowItemOperationCompleted(object arg) {
+        if ((this.GetCashFlowItemCompleted != null)) {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetCashFlowItemCompleted(this, new GetCashFlowItemCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+    
+    /// <remarks/>
     public new void CancelAsync(object userState) {
         base.CancelAsync(userState);
     }
@@ -2287,6 +2434,84 @@ public partial class GetBOMCompletedEventArgs : System.ComponentModel.AsyncCompl
     private object[] results;
     
     internal GetBOMCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState) {
+        this.results = results;
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet Result {
+        get {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetSeriesCompletedEventHandler(object sender, GetSeriesCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetSeriesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    
+    private object[] results;
+    
+    internal GetSeriesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState) {
+        this.results = results;
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet Result {
+        get {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetUDTValueCompletedEventHandler(object sender, GetUDTValueCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetUDTValueCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    
+    private object[] results;
+    
+    internal GetUDTValueCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState) {
+        this.results = results;
+    }
+    
+    /// <remarks/>
+    public System.Data.DataSet Result {
+        get {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetCashFlowItemCompletedEventHandler(object sender, GetCashFlowItemCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetCashFlowItemCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    
+    private object[] results;
+    
+    internal GetCashFlowItemCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
             base(exception, cancelled, userState) {
         this.results = results;
     }

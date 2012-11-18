@@ -22,304 +22,569 @@ using System.Xml.Serialization;
 namespace SAP.WebServices
 {
 
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Web.Services.WebServiceBindingAttribute(Name = "TransactionSoap", Namespace = "http://tempuri.org/")]
+public partial class Transaction : System.Web.Services.Protocols.SoapHttpClientProtocol
+{
+
+    private System.Threading.SendOrPostCallback CreateMarketingDocumentOperationCompleted;
+
+    private System.Threading.SendOrPostCallback GetMarketingDocumentOperationCompleted;
+
+    private System.Threading.SendOrPostCallback GetMarketingDocument_ReturnDSOperationCompleted;
+
+    private System.Threading.SendOrPostCallback GetLastKeyOperationCompleted;
+
+    private System.Threading.SendOrPostCallback DeleteActivityOperationCompleted;
+
+    private System.Threading.SendOrPostCallback GetDocumentForPaymentOperationCompleted;
+
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name = "TransactionSoap", Namespace = "http://tempuri.org/")]
-    public partial class Transaction : System.Web.Services.Protocols.SoapHttpClientProtocol
+    public Transaction()
     {
+        String urlSetting = System.Configuration.ConfigurationManager.AppSettings["TransactionWSURL"];
+        if (String.IsNullOrEmpty(urlSetting))
+            this.Url = "http://localhost:49881/Transaction.asmx";
+        else
+            this.Url = urlSetting;
+    }
 
-        private System.Threading.SendOrPostCallback CreateMarketingDocumentOperationCompleted;
+    /// <remarks/>
+    public event CreateMarketingDocumentCompletedEventHandler CreateMarketingDocumentCompleted;
 
-        private System.Threading.SendOrPostCallback GetMarketingDocumentOperationCompleted;
+    /// <remarks/>
+    public event GetMarketingDocumentCompletedEventHandler GetMarketingDocumentCompleted;
 
-        private System.Threading.SendOrPostCallback GetMarketingDocument_ReturnDSOperationCompleted;
+    /// <remarks/>
+    public event GetMarketingDocument_ReturnDSCompletedEventHandler GetMarketingDocument_ReturnDSCompleted;
 
-        /// <remarks/>
-        public Transaction()
-        {
-            String urlSetting = System.Configuration.ConfigurationManager.AppSettings["TransactionWSURL"];
-            if (String.IsNullOrEmpty(urlSetting))
-                this.Url = "http://localhost:49881/Transaction.asmx";
-            else
-                this.Url = urlSetting;
-        }
+    /// <remarks/>
+    public event GetLastKeyCompletedEventHandler GetLastKeyCompleted;
 
-        /// <remarks/>
-        public event CreateMarketingDocumentCompletedEventHandler CreateMarketingDocumentCompleted;
+    /// <remarks/>
+    public event DeleteActivityCompletedEventHandler DeleteActivityCompleted;
 
-        /// <remarks/>
-        public event GetMarketingDocumentCompletedEventHandler GetMarketingDocumentCompleted;
+    /// <remarks/>
+    public event GetDocumentForPaymentCompletedEventHandler GetDocumentForPaymentCompleted;
 
-        /// <remarks/>
-        public event GetMarketingDocument_ReturnDSCompletedEventHandler GetMarketingDocument_ReturnDSCompleted;
-
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateMarketingDocument", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet CreateMarketingDocument(string strXml, string UserID, string DocType, string Key, bool IsUpdate)
-        {
-            object[] results = this.Invoke("CreateMarketingDocument", new object[] {
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateMarketingDocument", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet CreateMarketingDocument(string strXml, string UserID, string DocType, string Key, bool IsUpdate)
+    {
+        object[] results = this.Invoke("CreateMarketingDocument", new object[] {
                     strXml,
                     UserID,
                     DocType,
                     Key,
                     IsUpdate});
-            return ((System.Data.DataSet)(results[0]));
-        }
+        return ((System.Data.DataSet)(results[0]));
+    }
 
-        /// <remarks/>
-        public System.IAsyncResult BeginCreateMarketingDocument(string strXml, string UserID, string DocType, string Key, bool IsUpdate, System.AsyncCallback callback, object asyncState)
-        {
-            return this.BeginInvoke("CreateMarketingDocument", new object[] {
+    /// <remarks/>
+    public System.IAsyncResult BeginCreateMarketingDocument(string strXml, string UserID, string DocType, string Key, bool IsUpdate, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginInvoke("CreateMarketingDocument", new object[] {
                     strXml,
                     UserID,
                     DocType,
                     Key,
                     IsUpdate}, callback, asyncState);
-        }
+    }
 
-        /// <remarks/>
-        public System.Data.DataSet EndCreateMarketingDocument(System.IAsyncResult asyncResult)
-        {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((System.Data.DataSet)(results[0]));
-        }
+    /// <remarks/>
+    public System.Data.DataSet EndCreateMarketingDocument(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
 
-        /// <remarks/>
-        public void CreateMarketingDocumentAsync(string strXml, string UserID, string DocType, string Key, bool IsUpdate)
-        {
-            this.CreateMarketingDocumentAsync(strXml, UserID, DocType, Key, IsUpdate, null);
-        }
+    /// <remarks/>
+    public void CreateMarketingDocumentAsync(string strXml, string UserID, string DocType, string Key, bool IsUpdate)
+    {
+        this.CreateMarketingDocumentAsync(strXml, UserID, DocType, Key, IsUpdate, null);
+    }
 
-        /// <remarks/>
-        public void CreateMarketingDocumentAsync(string strXml, string UserID, string DocType, string Key, bool IsUpdate, object userState)
+    /// <remarks/>
+    public void CreateMarketingDocumentAsync(string strXml, string UserID, string DocType, string Key, bool IsUpdate, object userState)
+    {
+        if ((this.CreateMarketingDocumentOperationCompleted == null))
         {
-            if ((this.CreateMarketingDocumentOperationCompleted == null))
-            {
-                this.CreateMarketingDocumentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateMarketingDocumentOperationCompleted);
-            }
-            this.InvokeAsync("CreateMarketingDocument", new object[] {
+            this.CreateMarketingDocumentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateMarketingDocumentOperationCompleted);
+        }
+        this.InvokeAsync("CreateMarketingDocument", new object[] {
                     strXml,
                     UserID,
                     DocType,
                     Key,
                     IsUpdate}, this.CreateMarketingDocumentOperationCompleted, userState);
-        }
+    }
 
-        private void OnCreateMarketingDocumentOperationCompleted(object arg)
+    private void OnCreateMarketingDocumentOperationCompleted(object arg)
+    {
+        if ((this.CreateMarketingDocumentCompleted != null))
         {
-            if ((this.CreateMarketingDocumentCompleted != null))
-            {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CreateMarketingDocumentCompleted(this, new CreateMarketingDocumentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.CreateMarketingDocumentCompleted(this, new CreateMarketingDocumentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
         }
+    }
 
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMarketingDocument", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetMarketingDocument(string DocType, int DocEntry, string UserID)
-        {
-            object[] results = this.Invoke("GetMarketingDocument", new object[] {
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMarketingDocument", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public string GetMarketingDocument(string DocType, string DocEntry, string UserID)
+    {
+        object[] results = this.Invoke("GetMarketingDocument", new object[] {
                     DocType,
                     DocEntry,
                     UserID});
-            return ((string)(results[0]));
-        }
+        return ((string)(results[0]));
+    }
 
-        /// <remarks/>
-        public System.IAsyncResult BeginGetMarketingDocument(string DocType, int DocEntry, string UserID, System.AsyncCallback callback, object asyncState)
-        {
-            return this.BeginInvoke("GetMarketingDocument", new object[] {
+    /// <remarks/>
+    public System.IAsyncResult BeginGetMarketingDocument(string DocType, string DocEntry, string UserID, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginInvoke("GetMarketingDocument", new object[] {
                     DocType,
                     DocEntry,
                     UserID}, callback, asyncState);
-        }
+    }
 
-        /// <remarks/>
-        public string EndGetMarketingDocument(System.IAsyncResult asyncResult)
-        {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((string)(results[0]));
-        }
+    /// <remarks/>
+    public string EndGetMarketingDocument(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((string)(results[0]));
+    }
 
-        /// <remarks/>
-        public void GetMarketingDocumentAsync(string DocType, int DocEntry, string UserID)
-        {
-            this.GetMarketingDocumentAsync(DocType, DocEntry, UserID, null);
-        }
+    /// <remarks/>
+    public void GetMarketingDocumentAsync(string DocType, string DocEntry, string UserID)
+    {
+        this.GetMarketingDocumentAsync(DocType, DocEntry, UserID, null);
+    }
 
-        /// <remarks/>
-        public void GetMarketingDocumentAsync(string DocType, int DocEntry, string UserID, object userState)
+    /// <remarks/>
+    public void GetMarketingDocumentAsync(string DocType, string DocEntry, string UserID, object userState)
+    {
+        if ((this.GetMarketingDocumentOperationCompleted == null))
         {
-            if ((this.GetMarketingDocumentOperationCompleted == null))
-            {
-                this.GetMarketingDocumentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMarketingDocumentOperationCompleted);
-            }
-            this.InvokeAsync("GetMarketingDocument", new object[] {
+            this.GetMarketingDocumentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMarketingDocumentOperationCompleted);
+        }
+        this.InvokeAsync("GetMarketingDocument", new object[] {
                     DocType,
                     DocEntry,
                     UserID}, this.GetMarketingDocumentOperationCompleted, userState);
-        }
+    }
 
-        private void OnGetMarketingDocumentOperationCompleted(object arg)
+    private void OnGetMarketingDocumentOperationCompleted(object arg)
+    {
+        if ((this.GetMarketingDocumentCompleted != null))
         {
-            if ((this.GetMarketingDocumentCompleted != null))
-            {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetMarketingDocumentCompleted(this, new GetMarketingDocumentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetMarketingDocumentCompleted(this, new GetMarketingDocumentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
         }
+    }
 
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMarketingDocument_ReturnDS", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetMarketingDocument_ReturnDS(string DocType, string DocEntry, string UserID)
-        {
-            object[] results = this.Invoke("GetMarketingDocument_ReturnDS", new object[] {
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMarketingDocument_ReturnDS", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetMarketingDocument_ReturnDS(string DocType, string DocEntry, string UserID)
+    {
+        object[] results = this.Invoke("GetMarketingDocument_ReturnDS", new object[] {
                     DocType,
                     DocEntry,
                     UserID});
-            return ((System.Data.DataSet)(results[0]));
-        }
+        return ((System.Data.DataSet)(results[0]));
+    }
 
-        /// <remarks/>
-        public System.IAsyncResult BeginGetMarketingDocument_ReturnDS(string DocType, int DocEntry, string UserID, System.AsyncCallback callback, object asyncState)
-        {
-            return this.BeginInvoke("GetMarketingDocument_ReturnDS", new object[] {
+    /// <remarks/>
+    public System.IAsyncResult BeginGetMarketingDocument_ReturnDS(string DocType, string DocEntry, string UserID, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginInvoke("GetMarketingDocument_ReturnDS", new object[] {
                     DocType,
                     DocEntry,
                     UserID}, callback, asyncState);
-        }
+    }
 
-        /// <remarks/>
-        public System.Data.DataSet EndGetMarketingDocument_ReturnDS(System.IAsyncResult asyncResult)
-        {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((System.Data.DataSet)(results[0]));
-        }
+    /// <remarks/>
+    public System.Data.DataSet EndGetMarketingDocument_ReturnDS(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
 
-        /// <remarks/>
-        public void GetMarketingDocument_ReturnDSAsync(string DocType, int DocEntry, string UserID)
-        {
-            this.GetMarketingDocument_ReturnDSAsync(DocType, DocEntry, UserID, null);
-        }
+    /// <remarks/>
+    public void GetMarketingDocument_ReturnDSAsync(string DocType, string DocEntry, string UserID)
+    {
+        this.GetMarketingDocument_ReturnDSAsync(DocType, DocEntry, UserID, null);
+    }
 
-        /// <remarks/>
-        public void GetMarketingDocument_ReturnDSAsync(string DocType, int DocEntry, string UserID, object userState)
+    /// <remarks/>
+    public void GetMarketingDocument_ReturnDSAsync(string DocType, string DocEntry, string UserID, object userState)
+    {
+        if ((this.GetMarketingDocument_ReturnDSOperationCompleted == null))
         {
-            if ((this.GetMarketingDocument_ReturnDSOperationCompleted == null))
-            {
-                this.GetMarketingDocument_ReturnDSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMarketingDocument_ReturnDSOperationCompleted);
-            }
-            this.InvokeAsync("GetMarketingDocument_ReturnDS", new object[] {
+            this.GetMarketingDocument_ReturnDSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMarketingDocument_ReturnDSOperationCompleted);
+        }
+        this.InvokeAsync("GetMarketingDocument_ReturnDS", new object[] {
                     DocType,
                     DocEntry,
                     UserID}, this.GetMarketingDocument_ReturnDSOperationCompleted, userState);
-        }
-
-        private void OnGetMarketingDocument_ReturnDSOperationCompleted(object arg)
-        {
-            if ((this.GetMarketingDocument_ReturnDSCompleted != null))
-            {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetMarketingDocument_ReturnDSCompleted(this, new GetMarketingDocument_ReturnDSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-
-        /// <remarks/>
-        public new void CancelAsync(object userState)
-        {
-            base.CancelAsync(userState);
-        }
     }
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    public delegate void CreateMarketingDocumentCompletedEventHandler(object sender, CreateMarketingDocumentCompletedEventArgs e);
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CreateMarketingDocumentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    private void OnGetMarketingDocument_ReturnDSOperationCompleted(object arg)
     {
-
-        private object[] results;
-
-        internal CreateMarketingDocumentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
-            base(exception, cancelled, userState)
+        if ((this.GetMarketingDocument_ReturnDSCompleted != null))
         {
-            this.results = results;
-        }
-
-        /// <remarks/>
-        public System.Data.DataSet Result
-        {
-            get
-            {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
-            }
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetMarketingDocument_ReturnDSCompleted(this, new GetMarketingDocument_ReturnDSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
         }
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    public delegate void GetMarketingDocumentCompletedEventHandler(object sender, GetMarketingDocumentCompletedEventArgs e);
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetMarketingDocumentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetLastKey", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public string GetLastKey(string DocType, string UserID)
     {
-
-        private object[] results;
-
-        internal GetMarketingDocumentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
-            base(exception, cancelled, userState)
-        {
-            this.results = results;
-        }
-
-        /// <remarks/>
-        public string Result
-        {
-            get
-            {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
+        object[] results = this.Invoke("GetLastKey", new object[] {
+                    DocType,
+                    UserID});
+        return ((string)(results[0]));
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    public delegate void GetMarketingDocument_ReturnDSCompletedEventHandler(object sender, GetMarketingDocument_ReturnDSCompletedEventArgs e);
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetMarketingDocument_ReturnDSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    public System.IAsyncResult BeginGetLastKey(string DocType, string UserID, System.AsyncCallback callback, object asyncState)
     {
+        return this.BeginInvoke("GetLastKey", new object[] {
+                    DocType,
+                    UserID}, callback, asyncState);
+    }
 
-        private object[] results;
+    /// <remarks/>
+    public string EndGetLastKey(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((string)(results[0]));
+    }
 
-        internal GetMarketingDocument_ReturnDSCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
-            base(exception, cancelled, userState)
+    /// <remarks/>
+    public void GetLastKeyAsync(string DocType, string UserID)
+    {
+        this.GetLastKeyAsync(DocType, UserID, null);
+    }
+
+    /// <remarks/>
+    public void GetLastKeyAsync(string DocType, string UserID, object userState)
+    {
+        if ((this.GetLastKeyOperationCompleted == null))
         {
-            this.results = results;
+            this.GetLastKeyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetLastKeyOperationCompleted);
         }
+        this.InvokeAsync("GetLastKey", new object[] {
+                    DocType,
+                    UserID}, this.GetLastKeyOperationCompleted, userState);
+    }
 
-        /// <remarks/>
-        public System.Data.DataSet Result
+    private void OnGetLastKeyOperationCompleted(object arg)
+    {
+        if ((this.GetLastKeyCompleted != null))
         {
-            get
-            {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
-            }
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetLastKeyCompleted(this, new GetLastKeyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
         }
     }
+
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DeleteActivity", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet DeleteActivity(string UserID, string Key)
+    {
+        object[] results = this.Invoke("DeleteActivity", new object[] {
+                    UserID,
+                    Key});
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public System.IAsyncResult BeginDeleteActivity(string UserID, string Key, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginInvoke("DeleteActivity", new object[] {
+                    UserID,
+                    Key}, callback, asyncState);
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet EndDeleteActivity(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public void DeleteActivityAsync(string UserID, string Key)
+    {
+        this.DeleteActivityAsync(UserID, Key, null);
+    }
+
+    /// <remarks/>
+    public void DeleteActivityAsync(string UserID, string Key, object userState)
+    {
+        if ((this.DeleteActivityOperationCompleted == null))
+        {
+            this.DeleteActivityOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteActivityOperationCompleted);
+        }
+        this.InvokeAsync("DeleteActivity", new object[] {
+                    UserID,
+                    Key}, this.DeleteActivityOperationCompleted, userState);
+    }
+
+    private void OnDeleteActivityOperationCompleted(object arg)
+    {
+        if ((this.DeleteActivityCompleted != null))
+        {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.DeleteActivityCompleted(this, new DeleteActivityCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+
+    /// <remarks/>
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetDocumentForPayment", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public System.Data.DataSet GetDocumentForPayment(string CardCode, System.DateTime DocDate, string UserID)
+    {
+        object[] results = this.Invoke("GetDocumentForPayment", new object[] {
+                    CardCode,
+                    DocDate,
+                    UserID});
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public System.IAsyncResult BeginGetDocumentForPayment(string CardCode, System.DateTime DocDate, string UserID, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginInvoke("GetDocumentForPayment", new object[] {
+                    CardCode,
+                    DocDate,
+                    UserID}, callback, asyncState);
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet EndGetDocumentForPayment(System.IAsyncResult asyncResult)
+    {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((System.Data.DataSet)(results[0]));
+    }
+
+    /// <remarks/>
+    public void GetDocumentForPaymentAsync(string CardCode, System.DateTime DocDate, string UserID)
+    {
+        this.GetDocumentForPaymentAsync(CardCode, DocDate, UserID, null);
+    }
+
+    /// <remarks/>
+    public void GetDocumentForPaymentAsync(string CardCode, System.DateTime DocDate, string UserID, object userState)
+    {
+        if ((this.GetDocumentForPaymentOperationCompleted == null))
+        {
+            this.GetDocumentForPaymentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDocumentForPaymentOperationCompleted);
+        }
+        this.InvokeAsync("GetDocumentForPayment", new object[] {
+                    CardCode,
+                    DocDate,
+                    UserID}, this.GetDocumentForPaymentOperationCompleted, userState);
+    }
+
+    private void OnGetDocumentForPaymentOperationCompleted(object arg)
+    {
+        if ((this.GetDocumentForPaymentCompleted != null))
+        {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.GetDocumentForPaymentCompleted(this, new GetDocumentForPaymentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+
+    /// <remarks/>
+    public new void CancelAsync(object userState)
+    {
+        base.CancelAsync(userState);
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void CreateMarketingDocumentCompletedEventHandler(object sender, CreateMarketingDocumentCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class CreateMarketingDocumentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal CreateMarketingDocumentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetMarketingDocumentCompletedEventHandler(object sender, GetMarketingDocumentCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetMarketingDocumentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal GetMarketingDocumentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public string Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((string)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetMarketingDocument_ReturnDSCompletedEventHandler(object sender, GetMarketingDocument_ReturnDSCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetMarketingDocument_ReturnDSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal GetMarketingDocument_ReturnDSCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetLastKeyCompletedEventHandler(object sender, GetLastKeyCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetLastKeyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal GetLastKeyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public string Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((string)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void DeleteActivityCompletedEventHandler(object sender, DeleteActivityCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class DeleteActivityCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal DeleteActivityCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+public delegate void GetDocumentForPaymentCompletedEventHandler(object sender, GetDocumentForPaymentCompletedEventArgs e);
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class GetDocumentForPaymentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+    private object[] results;
+
+    internal GetDocumentForPaymentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    /// <remarks/>
+    public System.Data.DataSet Result
+    {
+        get
+        {
+            this.RaiseExceptionIfNecessary();
+            return ((System.Data.DataSet)(this.results[0]));
+        }
+    }
+}
 }

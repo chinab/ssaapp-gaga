@@ -46,7 +46,7 @@ namespace SAP
                 int i = 0;
                 foreach (DataRow row in warehouseTable.Rows)
                 {
-                    if (("" + row[0].ToString() + row[1].ToString()).Trim().IndexOf(CategoryFilter.Trim()) >= 0)
+                    if (("" + row[0].ToString() + row[1].ToString()).Trim().ToUpper().IndexOf(CategoryFilter.Trim().ToUpper()) >= 0)
                     {
                         dr = gridTable.NewRow();
                         if (i == 0)

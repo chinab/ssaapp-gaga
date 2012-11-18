@@ -121,6 +121,15 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.Label lblResults;
         
         /// <summary>
+        /// ddlSeries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeries;
+        
+        /// <summary>
         /// txtCardCode control.
         /// </summary>
         /// <remarks>
@@ -184,15 +193,6 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.DropDownList ddlCurrency;
         
         /// <summary>
-        /// DropDownList1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        
-        /// <summary>
         /// txtAcctBalance control.
         /// </summary>
         /// <remarks>
@@ -200,6 +200,15 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAcctBalance;
+        
+        /// <summary>
+        /// trDelivery control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trDelivery;
         
         /// <summary>
         /// txtDelivery control.
@@ -211,6 +220,15 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.TextBox txtDelivery;
         
         /// <summary>
+        /// trOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trOrder;
+        
+        /// <summary>
         /// txtOrder control.
         /// </summary>
         /// <remarks>
@@ -218,6 +236,15 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOrder;
+        
+        /// <summary>
+        /// trOppor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trOppor;
         
         /// <summary>
         /// txtOpportunity control.
@@ -274,13 +301,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.TextBox txtMobile;
         
         /// <summary>
-        /// txtBPProject2 control.
+        /// txtFederalTax control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBPProject2;
+        protected global::System.Web.UI.WebControls.TextBox txtFederalTax;
         
         /// <summary>
         /// txtFax control.
@@ -418,13 +445,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
-        /// txtBPProject7 control.
+        /// txtAlias control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBPProject7;
+        protected global::System.Web.UI.WebControls.TextBox txtAlias;
         
         /// <summary>
         /// txtProject control.
@@ -454,13 +481,13 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.Image imgVendorsLoad;
         
         /// <summary>
-        /// txtBPProject8 control.
+        /// ddlIndustry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBPProject8;
+        protected global::System.Web.UI.WebControls.DropDownList ddlIndustry;
         
         /// <summary>
         /// btnAddContact control.
@@ -517,6 +544,15 @@ namespace SAP {
         protected global::System.Web.UI.WebControls.DataPager AddressPager;
         
         /// <summary>
+        /// txtRemark control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::CKEditor.NET.CKEditorControl txtRemark;
+        
+        /// <summary>
         /// btnAdd control.
         /// </summary>
         /// <remarks>
@@ -533,5 +569,14 @@ namespace SAP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnUpdate;
+        
+        /// <summary>
+        /// btnActivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnActivity;
     }
 }

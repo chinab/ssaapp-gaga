@@ -51,13 +51,13 @@
 						<t style="display:none"d>
 							<asp:Label runat="server" ID="Label1"><%#Eval("No") %></asp:Label>
 						</td>
-						<td>
+						<td  Style="text-align: left">
 							<asp:Label runat="server" ID="Label2"><%#Eval("AcctCode")%></asp:Label>
 						</td>
-						<td>
+						<td  Style="text-align: left">
 							<asp:Label runat="server" ID="Label3"><%#Eval("AcctName")%></asp:Label>
 						</td>	
-                        <td>
+                        <td  Style="text-align: left">
 							<asp:Label runat="server" ID="Label4"><%#Eval("FrgnName")%></asp:Label>
 						</td>						
 					</tr>

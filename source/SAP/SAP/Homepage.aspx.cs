@@ -11,8 +11,8 @@ namespace SAP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int a = 0;
-            a++;
+            //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+            //            "javascript:Main.openDialog(\"../Popup_EditItem.aspx\",id=\"" + "1" + "\")", true);
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using SAP.WebServices;
 using System.Collections;
 using System.Globalization;
@@ -74,122 +73,7 @@ namespace SAP
         }
         #endregion
 
-        public String GetHeaderTableTag(String ObjType)
-        {
-            String str = "";
-            switch (ObjType)
-            {
-                case "19": //AP Credit
-                    str = "ORPC";
-                    break;
-                case "20": //GRPO
-                    str = "OPDN";
-                    break;
-                case "21": //Goods Return
-                    str = "ORPD";
-                    break;
-                case "22": //Purchase Order
-                    str = "OPOR";
-                    break;
-
-                case "13": //AR Invoice
-                    str = "OINV";
-                    break;
-                case "14": //AR Credit
-                    str = "ORIN";
-                    break;
-                case "15": //Delivery
-                    str = "ODLN";
-                    break;
-
-                case "59": //Goods Receipt
-                    str = "OIGN";
-                    break;
-                case "60": //Goods Issue
-                    str = "OIGE";
-                    break;
-                case "67": //Transfer
-                    str = "OWTR";
-                    break;
-
-                case "97": //sales opportunity
-                    str = "OOPR";
-                    break;
-                case "30": //Journal Entry
-                    str = "OJDT";
-                    break;
-                case "191": //Service call
-                    str = "OSCL";
-                    break;
-                case "33": //Activity
-                    str = "OCLG";
-                    break;
-                case "221": //Activity
-                    str = "OATC";
-                    break;
-                case "2": //BP
-                    str = "OCRD";
-                    break;
-            }
-            return str;
-        }
-
-        public String GetLineTableTag(String ObjType, int num)
-        {
-            String str = "";
-            switch (ObjType)
-            {
-                case "19": //AP Credit
-                    str = "RPC1";
-                    break;
-                case "20": //GRPO
-                    str = "PDN1";
-                    break;
-                case "21": //Goods Return
-                    str = "RPD1";
-                    break;
-                case "22": //Purchase Order
-                    str = "POR1";
-                    break;
-
-                case "13": //AR Invoice
-                    str = "INV1";
-                    break;
-                case "14": //AR Credit
-                    str = "RIN1";
-                    break;
-                case "15": //Delivery
-                    str = "DLN1";
-                    break;
-
-                case "59": //Goods Receipt
-                    str = "IGN1";
-                    break;
-                case "60": //Goods Issue
-                    str = "IGE1";
-                    break;
-                case "67": //Transfer
-                    str = "WTR1";
-                    break;
-
-                case "97": //sales opportunity
-                    str = "OPR1";
-                    break;
-                case "30": //Journal Entry
-                    str = "JDT1";
-                    break;
-                case "191": //Service call
-                    str = "OSCL";
-                    break;
-                case "33": //Activity
-                    str = "OCLG";
-                    break;
-                case "221": //Activity
-                    str = "ATC1";
-                    break;
-            }
-            return str;
-        }
+        
         public string BuildKeepColumnStr(DataTable dt)
         {
             string str = "";
@@ -199,7 +83,7 @@ namespace SAP
             }
             return str;
         }
-        public DataTable ConvertDate_RemoveCols(DataTable dt, string KeepColumns)
+        public DataTable ConvertDataTable_RemoveCols(DataTable dt, string KeepColumns)
         {
             DataTable dt1 = dt;
             Array arr = KeepColumns.Split(';');
@@ -214,22 +98,27 @@ namespace SAP
                         dt1.Columns.Remove(column);
                     }
                 }
-                if (Array.IndexOf(arr, column.ColumnName) >= 0)
+                if (Array.IndexOf(arr, column.ColumnName) >= 0 || KeepColumns=="")
                 {
-                    if (column.DataType == typeof(DateTime))
+                    if (column.DataType != typeof(string)) //chuyen doi tat ca kieu du lieu, ngoai tru kieu string
                     {
                         strcolumnremove = strcolumnremove + column.ColumnName + ";";
-                        dt1.Columns.Add(column.ColumnName + "_1xxx", typeof(string));
-                        //--------------neu kieu du lieu la ngay, thi convert qua string------------
+                        dt1.Columns.Add(column.ColumnName + "_1xxx", typeof(string)); //them cot
+                        
                         foreach (DataRow row in dt1.Rows)
                         {
-                            DateTime d = Convert.ToDateTime(row[column].ToString(), ivC);
-                            row[column.ColumnName + "_1xxx"] = String.Format("{0:yyyyMMdd}", d);
+                            if (column.DataType == typeof(DateTime) & row[column].ToString()!="")
+                            {
+                                DateTime d = Convert.ToDateTime(row[column].ToString(), ivC);
+                                row[column.ColumnName + "_1xxx"] = String.Format("{0:yyyyMMdd}", d);
+                            }
+                            else
+                                row[column.ColumnName + "_1xxx"] = row[column].ToString();
                         }
                     }
                 }
-               
             }
+            //Xoa cac cot co kieu du lieu khac string, doi ten cac cot du lieu moi.
             if (strcolumnremove != "")
             {
                 Array arr1= strcolumnremove.Split(';');

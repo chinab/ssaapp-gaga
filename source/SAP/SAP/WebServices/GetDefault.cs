@@ -54,6 +54,10 @@ namespace SAP
 
         private System.Threading.SendOrPostCallback GetBOMChildOperationCompleted;
 
+        private System.Threading.SendOrPostCallback GetUDFOperationCompleted;
+
+        private System.Threading.SendOrPostCallback GetDefaultPaymentOperationCompleted;
+
         /// <remarks/>
         public GetDefault()
         {
@@ -63,6 +67,7 @@ namespace SAP
             else
                 this.Url = urlSetting;
         }
+
         /// <remarks/>
         public event GetDefaultLineInfoCompletedEventHandler GetDefaultLineInfoCompleted;
 
@@ -98,6 +103,12 @@ namespace SAP
 
         /// <remarks/>
         public event GetBOMChildCompletedEventHandler GetBOMChildCompleted;
+
+        /// <remarks/>
+        public event GetUDFCompletedEventHandler GetUDFCompleted;
+
+        /// <remarks/>
+        public event GetDefaultPaymentCompletedEventHandler GetDefaultPaymentCompleted;
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetDefaultLineInfo", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -742,6 +753,110 @@ namespace SAP
         }
 
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetUDF", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetUDF(string UserID, string TableID)
+        {
+            object[] results = this.Invoke("GetUDF", new object[] {
+                    UserID,
+                    TableID});
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetUDF(string UserID, string TableID, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetUDF", new object[] {
+                    UserID,
+                    TableID}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet EndGetUDF(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetUDFAsync(string UserID, string TableID)
+        {
+            this.GetUDFAsync(UserID, TableID, null);
+        }
+
+        /// <remarks/>
+        public void GetUDFAsync(string UserID, string TableID, object userState)
+        {
+            if ((this.GetUDFOperationCompleted == null))
+            {
+                this.GetUDFOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetUDFOperationCompleted);
+            }
+            this.InvokeAsync("GetUDF", new object[] {
+                    UserID,
+                    TableID}, this.GetUDFOperationCompleted, userState);
+        }
+
+        private void OnGetUDFOperationCompleted(object arg)
+        {
+            if ((this.GetUDFCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetUDFCompleted(this, new GetUDFCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetDefaultPayment", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetDefaultPayment(string UserID, int Year)
+        {
+            object[] results = this.Invoke("GetDefaultPayment", new object[] {
+                    UserID,
+                    Year});
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetDefaultPayment(string UserID, int Year, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetDefaultPayment", new object[] {
+                    UserID,
+                    Year}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet EndGetDefaultPayment(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((System.Data.DataSet)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetDefaultPaymentAsync(string UserID, int Year)
+        {
+            this.GetDefaultPaymentAsync(UserID, Year, null);
+        }
+
+        /// <remarks/>
+        public void GetDefaultPaymentAsync(string UserID, int Year, object userState)
+        {
+            if ((this.GetDefaultPaymentOperationCompleted == null))
+            {
+                this.GetDefaultPaymentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDefaultPaymentOperationCompleted);
+            }
+            this.InvokeAsync("GetDefaultPayment", new object[] {
+                    UserID,
+                    Year}, this.GetDefaultPaymentOperationCompleted, userState);
+        }
+
+        private void OnGetDefaultPaymentOperationCompleted(object arg)
+        {
+            if ((this.GetDefaultPaymentCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetDefaultPaymentCompleted(this, new GetDefaultPaymentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
         public new void CancelAsync(object userState)
         {
             base.CancelAsync(userState);
@@ -1092,6 +1207,66 @@ namespace SAP
         private object[] results;
 
         internal GetBOMChildCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    public delegate void GetUDFCompletedEventHandler(object sender, GetUDFCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetUDFCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetUDFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public System.Data.DataSet Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    public delegate void GetDefaultPaymentCompletedEventHandler(object sender, GetDefaultPaymentCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetDefaultPaymentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetDefaultPaymentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;

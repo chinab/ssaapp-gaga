@@ -8,8 +8,51 @@
     <asp:UpdatePanel ID="SalesOpportunityUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
+            <div id="menu-action" style="margin-left: -15px;">
+                    <ul>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/preview.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/print.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/excel.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/pdf.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/word.png" /></a></li>
+                         
+                        <li>
+                            <asp:HyperLink ID="linkNew" runat="server">
+                                <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/icon/addnew.png" />
+                            </asp:HyperLink>
+                        </li>
+
+                        <li>
+                            <asp:HyperLink ID="linkFirst" runat="server">
+                                <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/icon/first.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkPrevious" runat="server">
+                                <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/icon/previous.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkNext" runat="server">
+                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/next.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkLast" runat="server">
+                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/last.png" />
+                            </asp:HyperLink>
+                        </li>
+                 </ul>                    
+                </div>
                 <div id="title-form" style="border-bottom: 2px solid black;">
-                    <h2>Inventory Transfer</h2>
+                    <h2>INVENTORY TRANSFER</h2>
                 </div>
                 <div id="header-form">
                     <div class="left">
@@ -17,13 +60,13 @@
                             <tr>
                                 <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Business Partner</span>
-                                    <asp:HyperLink ID="lBP" runat="server">
+                                    <%--<asp:HyperLink ID="lBP" runat="server">
                                         <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/icon/link.png"/>
-                                    </asp:HyperLink>
+                                    </asp:HyperLink>--%>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtBP" runat="server" Enabled="False"></asp:TextBox>
-                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditCustomer.aspx','');"
+                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditBusinessPartner.aspx?CardType=C','');"
                                         runat="server">
                                         <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>
@@ -61,6 +104,21 @@
                     </div>
                     <div class="right">
                         <table class="detail_table">
+                             <tr>
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
+                                    <span>No</span>&nbsp;</td>
+                                <td>
+                                    <asp:TextBox ID="txtNo" runat="server" Enabled="false" Text=""></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detail_table_td_150" style="border-bottom: dotted 1px #808080;">
+                                    <span>Status</span>
+                                </td>
+                                <td>
+                                    <asp:TextBox Enabled="false" ID="txtStatus" Text="" runat="server"></asp:TextBox>
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Posting Date</span>
@@ -88,6 +146,10 @@
                             <tr>
                                 <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Journal Remark</span>
+                                    <asp:HyperLink ID="hlJE" runat="server">
+                                                <asp:Image ID="Image14" runat="server" 
+                                        ImageUrl="~/skin/icon/link.png"/>
+                                          </asp:HyperLink>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtJournalRemark" runat="server" Width="250px" ></asp:TextBox>
@@ -105,7 +167,7 @@
                                 <td>
                                     <asp:TextBox ID="txtFromWarehouse" runat="server" class="txtDate" 
                                         Enabled="False"></asp:TextBox>
-                                    <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('../Popup_EditWareHouse.aspx','');"
+                                    <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('../Popup_EditWareHouse.aspx?id=-1','');"
                                         runat="server">
                                         <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
                                     </asp:HyperLink>
@@ -137,17 +199,14 @@
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" 
                                 OnClick="_btnAddRecord_Click" />
                             
-                            <asp:ListView ID="lvStage" runat="server"
-                                OnItemInserted="lvStage_ItemInserted"
-                                OnItemInserting="lvStage_ItemInserting" OnItemCommand="lvStage_ItemCommand"
-                                OnItemEditing="lvStage_ItemEditing" onitemupdating="lvStage_ItemUpdating" 
-                                ViewStateMode="Enabled" onitemcreated="lvStage_ItemCreated" 
-                                onitemdeleting="lvStage_ItemDeleting" onitemcanceling="lvStage_ItemCanceling"
+                            <asp:ListView ID="lvContent" runat="server" OnItemCommand="lvContent_ItemCommand"
+                                OnItemEditing="lvContent_ItemEditing" onitemupdating="lvContent_ItemUpdating" 
+                                ViewStateMode="Enabled"
                                  >
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
-                                            <th id="thButtons" runat="server" style="width: 70px">
+                                            <th id="thButtons" runat="server" style="width: 78px">
                                             </th>
                                             <th style="width: 25px">
                                                 <span>#</span>
@@ -183,14 +242,14 @@
                                         <td>
                                             <asp:Label ID="lblNo" runat="server"><%#Eval("No") %></asp:Label>
                                         </td>
-                                        <td>
+                                        <td  Style="text-align: left">
                                             <asp:Label ID="lblItemCode" runat="server"><%#Eval("ItemCode") %></asp:Label>
                                             
                                         </td>
-                                        <td>
+                                        <td  Style="text-align: left">
                                             <asp:Label ID="lblItemName" runat="server"><%#Eval("Dscription")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td Style="text-align: right">
                                             <asp:Label ID="lblQuantity" runat="server"><%#Eval("Quantity")%></asp:Label>
                                         </td>
                                        
@@ -301,7 +360,7 @@
                                 </EmptyDataTemplate>
                             </asp:ListView>
                             <asp:DataPager ID="ProductListPagerCombo" runat="server" 
-                               PagedControlID="lvStage" PageSize="5" 
+                               PagedControlID="lvContent" PageSize="8" 
                                 onprerender="ProductListPagerCombo_PreRender">
                                <Fields>
                                   <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" 
@@ -318,11 +377,13 @@
                 </div>
                 <div id="footer-form">
                     <table>
-                        <td style="width: 100%;" align="left" valign="bottom">
-                        <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button"  OnClientClick="Dialog.showLoader();"
-                            CommandName="Login" Height="19px" Width="65px" 
-                            ImageUrl="~/skin/images/SAP_Add.png" onclick="btnAdd_Click" />
-                        </td>
+                        <tr>
+                            <td align="left" style="width: 100%;" valign="bottom">
+                                <asp:ImageButton ID="btnAdd" runat="server" AlternateText="button" 
+                                    CommandName="Login" Height="19px" ImageUrl="~/skin/images/SAP_Add.png" 
+                                    onclick="btnAdd_Click" OnClientClick="Dialog.showLoader();" Width="65px" />
+                            </td>
+                        </tr>
                     </table>
                     <div class="clear">
                     </div>

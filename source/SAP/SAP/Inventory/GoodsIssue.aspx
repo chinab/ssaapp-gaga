@@ -8,8 +8,51 @@
     <asp:UpdatePanel ID="SalesOpportunityUpdatePanel" runat="server">
         <ContentTemplate>
             <div id="contentData" style="padding-left: 15px;">
+            <div id="menu-action" style="margin-left: -15px;">
+                    <ul>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/preview.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/print.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/excel.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/pdf.png" /></a></li>
+                        <li><a href="#">
+                            <img alt="" src="/skin/icon/word.png" /></a></li>
+                         
+                        <li>
+                            <asp:HyperLink ID="linkNew" runat="server">
+                                <asp:Image ID="Image8" runat="server" ImageUrl="~/skin/icon/addnew.png" />
+                            </asp:HyperLink>
+                        </li>
+
+                        <li>
+                            <asp:HyperLink ID="linkFirst" runat="server">
+                                <asp:Image ID="Image4" runat="server" ImageUrl="~/skin/icon/first.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkPrevious" runat="server">
+                                <asp:Image ID="Image5" runat="server" ImageUrl="~/skin/icon/previous.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkNext" runat="server">
+                                <asp:Image ID="Image6" runat="server" ImageUrl="~/skin/icon/next.png" />
+                            </asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="linkLast" runat="server">
+                                <asp:Image ID="Image7" runat="server" ImageUrl="~/skin/icon/last.png" />
+                            </asp:HyperLink>
+                        </li>
+                 </ul>                    
+                </div>
                 <div id="title-form" style="border-bottom: 2px solid black;">
-                    <h2>Goods Issue</h2>
+                    <h2>GOODS ISSUE</h2>
                 </div>
                 <div id="header-form">
                     <div style="width: 706px">
@@ -41,6 +84,10 @@
                             <tr>
                                 <td class="detail_table_td_100" style="width: 195px">
                                     <span>Journal Remark</span>
+                                    <asp:HyperLink ID="hlJE" runat="server">
+                                                <asp:Image ID="Image14" runat="server" 
+                                        ImageUrl="~/skin/icon/link.png"/>
+                                          </asp:HyperLink>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtJournalRemark" runat="server" Width="496px" ></asp:TextBox>
@@ -63,16 +110,15 @@
                             <asp:Button ID="btnAddRecord" Text="Add" runat="server" 
                                 OnClick="_btnAddRecord_Click" />
                             
-                            <asp:ListView ID="lvStage" runat="server"
-                                OnItemInserted="lvStage_ItemInserted"
-                                OnItemInserting="lvStage_ItemInserting" OnItemCommand="lvStage_ItemCommand"
-                                OnItemEditing="lvStage_ItemEditing" onitemupdating="lvStage_ItemUpdating" 
-                                ViewStateMode="Enabled" onitemcreated="lvStage_ItemCreated" onitemdeleting="lvStage_ItemDeleting"
+                            <asp:ListView ID="lvContent" runat="server"
+                                OnItemInserted="lvContent_ItemInserted" OnItemCommand="lvContent_ItemCommand"
+                                OnItemEditing="lvContent_ItemEditing" onitemupdating="lvContent_ItemUpdating" 
+                                ViewStateMode="Enabled"
                                  >
                                 <LayoutTemplate>
                                     <table class="data_table">
                                         <tr>
-                                            <th id="thButtons" runat="server" style="width: 70px">
+                                            <th id="thButtons" runat="server" style="width: 78px">
                                             </th>
                                             <th style="width: 25px">
                                                 <span>#</span>
@@ -87,7 +133,7 @@
                                                 <span>Quantity</span>
                                             </th>
                                             <th >
-                                                <span>Unit Price</span>
+                                                <span>Price</span>
                                             </th>
                                             <th >
                                                 <span>Total</span>
@@ -115,20 +161,20 @@
                                         <td>
                                             <asp:Label ID="lblNo" runat="server"><%#Eval("No") %></asp:Label>
                                         </td>
-                                        <td>
+                                        <td  Style="text-align: left">
                                             <asp:Label ID="lblItemCode" runat="server"><%#Eval("ItemCode") %></asp:Label>
                                             
                                         </td>
-                                        <td>
+                                        <td  Style="text-align: left">
                                             <asp:Label ID="lblItemName" runat="server"><%#Eval("Dscription")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td  Style="text-align: right">
                                             <asp:Label ID="lblQuantity" runat="server"><%#Eval("Quantity")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td  Style="text-align: right">
                                             <asp:Label ID="lblPrice" runat="server"><%#Eval("Price")%></asp:Label>
                                         </td>
-                                        <td>
+                                        <td  Style="text-align: right">
                                             <asp:Label ID="lblTotal" runat="server"><%#Eval("LineTotal")%></asp:Label>
                                         </td>
                                         <td>
@@ -168,7 +214,7 @@
                                             <asp:TextBox ID="txtPriceEdit" runat="server" Text='<%# Bind("Price") %>'/>     
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtTotalEdit" runat="server" Text='<%# Bind("LineTotal") %>'/>
+                                            <asp:Label ID="txtTotalEdit" runat="server" Text='<%# Bind("LineTotal") %>'/>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblWarehouse" runat="server" Text='<%# Bind("WhsCode") %>'/>
@@ -187,53 +233,7 @@
                                        
                                     </tr>
                                 </EditItemTemplate>
-                                <InsertItemTemplate>
-                                    <tr>
-                                        <td>
-                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Insert" Text="Update"
-                                                ImageUrl="~/skin/icon/save_icon_mono.gif" CausesValidation="true" ValidationGroup="vgrpSaveContact" />
-                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="Cancel" Text="Cancel"
-                                                ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />
-                                        </td>
-                                        <td>
-                                             <asp:Label ID="lblNoInsert" runat="server" Text='<%# Bind("No") %>'/>
-                                        </td>
-                                        <td>
-                                           <asp:Label runat="server" ID="lblItemCode"></asp:Label>
-                                            <asp:HyperLink ID="linkItems" NavigateUrl='#'
-                                                runat="server">
-                                                <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
-                                             
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lblItemName" runat="server" Text='<%# Bind("Dscription") %>'/>
-                                        </td>
-                                        <td>
-                                            <asp:TextBox ID="txtQuantityInsert" runat="server" Text='<%# Bind("Quantity") %>'/>
-                                        </td>
-                                        <td>
-                                            <asp:TextBox ID="txtPriceInsert" runat="server" Text='<%# Bind("Price") %>'/>     
-                                        </td>
-                                        <td>
-                                            <asp:TextBox ID="txtTotalInsert" runat="server" Text='<%# Bind("LineTotal") %>'/>
-                                        </td>
-                                        <td>
-                                            <asp:Label runat="server" ID="lblWarehouse"></asp:Label>
-                                             <asp:HyperLink ID="linkWarehouse" NavigateUrl='#'
-                                                runat="server">
-                                                <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
-                                        </td>
-                                        <td>
-                                             <asp:Label runat="server" ID="lblAccount"></asp:Label>
-                                              <asp:HyperLink ID="linkAcount" NavigateUrl='#'
-                                                runat="server">
-                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
-                                        </td>
-                                    </tr>
-                                </InsertItemTemplate>
+                                
                                 <EmptyDataTemplate>
                                     <table class="data_table">
                                         <tr>
@@ -250,7 +250,7 @@
                                                 <span>Quantity</span>
                                             </th>
                                             <th >
-                                                <span>Unit Price</span>
+                                                <span>Item Cost</span>
                                             </th>
                                             <th >
                                                 <span>Total</span>
@@ -271,7 +271,7 @@
                                 </EmptyDataTemplate>
                             </asp:ListView>
                             <asp:DataPager ID="ProductListPagerCombo" runat="server" 
-                               PagedControlID="lvStage" PageSize="5" 
+                               PagedControlID="lvContent" PageSize="8" 
                                 onprerender="ProductListPagerCombo_PreRender">
                                <Fields>
                                   <asp:NextPreviousPagerField FirstPageText="&lt;&lt;" ShowFirstPageButton="True" 

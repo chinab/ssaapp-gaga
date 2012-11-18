@@ -91,6 +91,7 @@ namespace SAP
                 CostCenter chosenWareHouse = list[Int32.Parse(selectedValue)];
                 Session["chosenCostCenter"] = chosenWareHouse;
                 Session["chosenItemNo"] = Request.QueryString["id"];
+                Session["chosenDimesion"] = Request.QueryString["Dimension"];
             }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "OKCostCenterPopup", "Main.okDialogClick('EditCostCenterCallBack');", true);
 

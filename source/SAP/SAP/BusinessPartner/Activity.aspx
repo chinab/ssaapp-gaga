@@ -70,7 +70,7 @@
                                     <span>Type</span>
                                 </td>
                                 <td>
-                                     <asp:DropDownList ID="ddlType" runat="server" Width="200px" AutoPostBack="true"
+                                     <asp:DropDownList ID="ddlType" runat="server" Width="200px" AutoPostBack="True"
                                          onselectedindexchanged="ddlType_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
@@ -120,7 +120,7 @@
                                 <td>
                                     <asp:TextBox ID="txtBP" runat="server" Enabled="false" Text="" 
                                         BackColor="#D5DCE0"></asp:TextBox>
-                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditCustomer.aspx','');"
+                                    <asp:HyperLink ID="linkVendorsLoad" NavigateUrl="javascript:Main.openDialog('../Popup_EditBusinessPartner.aspx?CardType=A','');"
                                         runat="server"> <asp:Image ID="imgVendorsLoad" runat="server" ImageUrl="~/skin/images/item-pointer.gif" /></asp:HyperLink>
                                 </td>
                             </tr>
@@ -261,8 +261,7 @@
                                     </td>
                                     <td>
                                         <asp:TextBox ID="TextBox1" runat="server" Enabled="False"></asp:TextBox>
-                                        <asp:HyperLink ID="HyperLink1" NavigateUrl="javascript:Main.openDialog('../Popup_EditCustomer.aspx','');"
-                                        runat="server"> <asp:Image ID="Image1" runat="server" ImageUrl="~/skin/images/item-pointer.gif" /></asp:HyperLink>
+                                        
                                     </td>
                                 </tr>
                             </table>

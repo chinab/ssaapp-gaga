@@ -8,10 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace SAP {
-
-
-    public partial class Popup_EditProject
-    {
+    
+    
+    public partial class Popup_EditProject {
         
         /// <summary>
         /// Head1 control.
@@ -83,7 +82,7 @@ namespace SAP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.ImageButton btnAdd;
         
         /// <summary>
         /// btnCancel control.
@@ -92,6 +91,6 @@ namespace SAP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.ImageButton btnCancel;
     }
 }

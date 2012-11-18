@@ -50,6 +50,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -64,7 +65,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\SystemRoleEdit.aspx" />
     <Content Include="Admin\SystemRoles.aspx" />
     <Content Include="Admin\SystemUserEdit.aspx" />
     <Content Include="Admin\SystemUsers.aspx" />
@@ -632,13 +632,6 @@
     <Content Include="WebServices\NoteGenerateCode.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\SystemRoleEdit.aspx.cs">
-      <DependentUpon>SystemRoleEdit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\SystemRoleEdit.aspx.designer.cs">
-      <DependentUpon>SystemRoleEdit.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\SystemRoles.aspx.cs">
       <DependentUpon>SystemRoles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

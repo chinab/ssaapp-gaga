@@ -19,7 +19,7 @@ namespace SAP
             {
                 MasterData masterDataWS = new MasterData();
                 lblCompany.Text = masterDataWS.GetCompanySetting(HttpContext.Current.User.Identity.Name).Tables[0].Rows[0]["CompanyName"].ToString();
-                AuthorizeUser();
+               // AuthorizeUser();
             }
         }
 
@@ -33,7 +33,7 @@ namespace SAP
         private void AuthorizeUser()
         {
             string pageName = Request.Url.Segments[Request.Url.Segments.Length - 1].ToLower().Trim().Replace(".aspx", "");
-            if (pageName.StartsWith("login") || pageName.StartsWith("default") || pageName.StartsWith("exception"))
+            if (pageName.StartsWith("login") || pageName.StartsWith("default") || pageName.StartsWith("home") || pageName.StartsWith("exception") || pageName.StartsWith("Main"))
             {
                 return;
             }

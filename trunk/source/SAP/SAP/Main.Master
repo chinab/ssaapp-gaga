@@ -115,21 +115,7 @@
                             </li>
                         </ul>
                     </li>      
-                    <li><a href="#">Choose company</a></li>
-                    <li><a href="#">Exchange Rates and Indexes</a></li>                    
-                    <li>
-                          <ul id="xtraMenu" class="xtraMenuClass">
-                        	<li>
-                                <h4 class="head"><a href="#">System Initialization</a></h4>
-                                <ul>
-                                    <li><a class="subitem" href="#">General</a></li>
-                                    <li><a class="subitem" href="#">Financials</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>                         
-                    <li><a href="#">Data Import/Export</a></li>
-                    <li><a href="#">Utilities</a></li>
+                    
                 </ul>
 			</li>
 			<li>
@@ -139,10 +125,8 @@
 					</a>
 				</h3>
 				<ul>
-					<li><a href="#">Chart of Accounts</a></li>
-					<li><a href="#">Edit Chart of Accounts</a></li>
 					<li><a href="/Financials/JournalEntry.aspx">Journal Entry</a></li>
-					<li><a href="#">Journal Vouchers</a></li>
+					
 				</ul>
 			</li>
 			<li>
@@ -167,7 +151,7 @@
 					<li><a href="/Sales/Delivery.aspx">Delivery</a></li>
 					<li><a href="/Sales/Return.aspx">Return</a></li>
 					<li><a href="/Sales/ARInvoice.aspx">A/R Invoice</a></li>
-                    <%--<li><a href="/ARInvoice_VHF.aspx">A/R Invoice VHF</a></li>--%>
+                    <li><a href="/ARInvoice_VHF.aspx">A/R Invoice VHF</a></li>
 					<li><a href="/Sales/ARCredit.aspx">A/R Credit Memo</a></li>
 				</ul>
 			</li>
@@ -218,7 +202,6 @@
 				</h3>
 				<ul>
 					<li><a href="#">Item Master Data</a></li>
-					<li><a href="#">Item Management</a></li>
                     <li>
                           <ul id="xtraMenu2"  class="xtraMenuClass">
                         	<li>
@@ -246,7 +229,7 @@
 					<li><a href="#">Bill of Materials</a></li>
 					<li><a href="/Production/ProductionOrder.aspx">Production Order</a></li>
 					<li><a href="#">Receipt From Production</a></li>
-					<li><a href="#">Issue For Production</a></li>
+					<li><a href="/Production/IssueForProduction.aspx">Issue For Production</a></li>
 				</ul>
 			</li>
             <li>

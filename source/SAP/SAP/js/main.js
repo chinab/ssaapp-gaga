@@ -105,6 +105,10 @@ Main = {
     cancelDialogClick: function () {
         window.parent.$('#dialogFrame').dialog('close');
     },
+    cancelNewDialogClick: function (newurl) {
+        window.parent.$('#dialogFrame').dialog('close');
+        redirectPage(newurl);
+    },
     redirectWithTimeout: function (url, timeout) {
         setTimeout('Main.redirectPage("' + url + '")', timeout);
     },

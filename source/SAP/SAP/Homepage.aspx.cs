@@ -13,6 +13,28 @@ namespace SAP
         {
             //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
             //            "javascript:Main.openDialog(\"../Popup_EditItem.aspx\",id=\"" + "1" + "\")", true);
+
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "ShowLoader", "Dialog.showLoader();", true);
+
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('Connecting to SAP.....','');", true);
+
+            GetDefault df = new GetDefault();
+            if (df.GetConnection(HttpContext.Current.User.Identity.Name) == -1)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                    "Main.setMasterMessage('Connect to SAP Failed!','');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                        "Main.setMasterMessage('Creating UDFs.....','');", true);
+
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                        "Main.setMasterMessage('Getting Information.....','');", true);
+            }
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                                                "Dialog.hideLoader();", true);
         }
     }
 }

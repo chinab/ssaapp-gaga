@@ -65,6 +65,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\SystemRoleEdit.aspx" />
     <Content Include="Admin\SystemRoles.aspx" />
     <Content Include="Admin\SystemUserEdit.aspx" />
     <Content Include="Admin\SystemUsers.aspx" />
@@ -433,6 +434,11 @@
     <Content Include="js\jquery.js" />
     <Content Include="Popup_EditAccount.aspx" />
     <Content Include="Popup_OpenDocument.aspx" />
+    <Content Include="Production\BillOfMaterial.aspx" />
+    <Content Include="Production\Popup_ReceiptFromProduction.aspx" />
+    <Content Include="Production\ReceiptFromProduction.aspx" />
+    <Content Include="Production\IssueForProduction.aspx" />
+    <Content Include="Production\Popup_IssueForProduction.aspx" />
     <Content Include="Production\ProductionOrder.aspx" />
     <Content Include="Purchase\APInvoice.aspx" />
     <Content Include="Purchase\APCredit.aspx" />
@@ -458,6 +464,68 @@
     <Content Include="Popup_EditWarehouse.aspx" />
     <Content Include="SalesOpportunity.aspx" />
     <Content Include="skin\AdminLogin.css" />
+    <Content Include="skin\Admin\ajaxtabs.css" />
+    <Content Include="skin\Admin\Announcement.gif" />
+    <Content Include="skin\Admin\arrow-down-title-on.jpg" />
+    <Content Include="skin\Admin\arrow-down-title.jpg" />
+    <Content Include="skin\Admin\arrow-up-title-on.jpg" />
+    <Content Include="skin\Admin\arrow-up-title.jpg" />
+    <Content Include="skin\Admin\bg-fade-light.png" />
+    <Content Include="skin\Admin\bg_table.gif" />
+    <Content Include="skin\Admin\calendar-system.css" />
+    <Content Include="skin\Admin\calendar.gif" />
+    <Content Include="skin\Admin\carrier-icon.gif" />
+    <Content Include="skin\Admin\close-popup.jpg" />
+    <Content Include="skin\Admin\collapse.gif" />
+    <Content Include="skin\Admin\corner_bl.gif" />
+    <Content Include="skin\Admin\corner_br.gif" />
+    <Content Include="skin\Admin\corner_tl.gif" />
+    <Content Include="skin\Admin\corner_tr.gif" />
+    <Content Include="skin\Admin\critical24-bak.gif" />
+    <Content Include="skin\Admin\critical24.gif" />
+    <Content Include="skin\Admin\critical24.png" />
+    <Content Include="skin\Admin\Default.css" />
+    <Content Include="skin\Admin\down.gif" />
+    <Content Include="skin\Admin\edit.css" />
+    <Content Include="skin\Admin\editdoc.gif" />
+    <Content Include="skin\Admin\expand.gif" />
+    <Content Include="skin\Admin\go-back.gif" />
+    <Content Include="skin\Admin\go-first.gif" />
+    <Content Include="skin\Admin\go-last.gif" />
+    <Content Include="skin\Admin\go-next.gif" />
+    <Content Include="skin\Admin\headcornerp.gif" />
+    <Content Include="skin\Admin\headcornerx.jpg" />
+    <Content Include="skin\Admin\headcornerz.jpg" />
+    <Content Include="skin\Admin\icongo01.gif" />
+    <Content Include="skin\Admin\icon_alert.gif" />
+    <Content Include="skin\Admin\information-bak.gif" />
+    <Content Include="skin\Admin\information.png" />
+    <Content Include="skin\Admin\leftNavigation.css" />
+    <Content Include="skin\Admin\list.css" />
+    <Content Include="skin\Admin\loop_blue.gif" />
+    <Content Include="skin\Admin\loop_blue_top.gif" />
+    <Content Include="skin\Admin\nav-bg-repeat.jpg" />
+    <Content Include="skin\Admin\nav-bg.jpg" />
+    <Content Include="skin\Admin\nav-item-bg.jpg" />
+    <Content Include="skin\Admin\new.gif" />
+    <Content Include="skin\Admin\noPicture.gif" />
+    <Content Include="skin\Admin\partgradp.gif" />
+    <Content Include="skin\Admin\path-arrow.gif" />
+    <Content Include="skin\Admin\path-bullet.jpg" />
+    <Content Include="skin\Admin\report.css" />
+    <Content Include="skin\Admin\rtbullet.gif" />
+    <Content Include="skin\Admin\rule-node-add-child.gif" />
+    <Content Include="skin\Admin\rule-node-remove.gif" />
+    <Content Include="skin\Admin\SPSSearch2.gif" />
+    <Content Include="skin\Admin\spssites-bak.gif" />
+    <Content Include="skin\Admin\spssites.gif" />
+    <Content Include="skin\Admin\topgrad.gif" />
+    <Content Include="skin\Admin\treeview.css" />
+    <Content Include="skin\Admin\triangle.gif" />
+    <Content Include="skin\Admin\up.gif" />
+    <Content Include="skin\Admin\user.GIF" />
+    <Content Include="skin\Admin\warning24-bak.gif" />
+    <Content Include="skin\Admin\warning24.png" />
     <Content Include="skin\icon\addnew.png" />
     <Content Include="skin\icon\add_icon_color.gif" />
     <Content Include="skin\icon\add_icon_mono.gif" />
@@ -550,6 +618,7 @@
     <Content Include="skin\images\document-print.png" />
     <Content Include="skin\images\Drive - Windows.png" />
     <Content Include="skin\images\E-mail 2.png" />
+    <Content Include="skin\images\error.gif" />
     <Content Include="skin\images\Error.png" />
     <Content Include="skin\images\Favorites.png" />
     <Content Include="skin\images\Folder - Work.png" />
@@ -587,7 +656,9 @@
     <Content Include="skin\images\SAP_ChangeCompany.png" />
     <Content Include="skin\images\SAP_choose.png" />
     <Content Include="skin\images\SAP_Login.png" />
+    <Content Include="skin\images\SAP_New.png" />
     <Content Include="skin\images\SAP_OK.png" />
+    <Content Include="skin\images\SAP_ProOrder.png" />
     <Content Include="skin\images\SAP_update.png" />
     <Content Include="skin\images\Search.png" />
     <Content Include="skin\images\selectall.png" />
@@ -598,6 +669,7 @@
     <Content Include="skin\images\Time.ico" />
     <Content Include="skin\images\Time.png" />
     <Content Include="skin\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="skin\images\warning.gif" />
     <Content Include="skin\images\Warning.png" />
     <Content Include="skin\images\Windows 2.png" />
     <Content Include="skin\images\Windows Explorer.png" />
@@ -632,6 +704,13 @@
     <Content Include="WebServices\NoteGenerateCode.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\SystemRoleEdit.aspx.cs">
+      <DependentUpon>SystemRoleEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SystemRoleEdit.aspx.designer.cs">
+      <DependentUpon>SystemRoleEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\SystemRoles.aspx.cs">
       <DependentUpon>SystemRoles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -807,6 +886,41 @@
     </Compile>
     <Compile Include="Popup_OpenDocument.aspx.designer.cs">
       <DependentUpon>Popup_OpenDocument.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Production\BillOfMaterial.aspx.cs">
+      <DependentUpon>BillOfMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\BillOfMaterial.aspx.designer.cs">
+      <DependentUpon>BillOfMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Production\Popup_ReceiptFromProduction.aspx.cs">
+      <DependentUpon>Popup_ReceiptFromProduction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\Popup_ReceiptFromProduction.aspx.designer.cs">
+      <DependentUpon>Popup_ReceiptFromProduction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Production\ReceiptFromProduction.aspx.cs">
+      <DependentUpon>ReceiptFromProduction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\ReceiptFromProduction.aspx.designer.cs">
+      <DependentUpon>ReceiptFromProduction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Production\IssueForProduction.aspx.cs">
+      <DependentUpon>IssueForProduction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\IssueForProduction.aspx.designer.cs">
+      <DependentUpon>IssueForProduction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Production\Popup_IssueForProduction.aspx.cs">
+      <DependentUpon>Popup_IssueForProduction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\Popup_IssueForProduction.aspx.designer.cs">
+      <DependentUpon>Popup_IssueForProduction.aspx</DependentUpon>
     </Compile>
     <Compile Include="Production\ProductionOrder.aspx.cs">
       <DependentUpon>ProductionOrder.aspx</DependentUpon>
@@ -1025,6 +1139,7 @@
   <ItemGroup>
     <None Include="ckeditor\.htaccess" />
     <Content Include="Main.Master" />
+    <Content Include="skin\Admin\Default.skin" />
     <None Include="WebServices\GenerateCodeWSDLGetDefault.bat" />
     <None Include="WebServices\GenerateCodeWSDLMasterData.bat" />
     <None Include="WebServices\GenerateCodeWSDLReports.bat" />

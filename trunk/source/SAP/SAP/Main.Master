@@ -226,9 +226,9 @@
 					</a>
 				</h3>
 				<ul>
-					<li><a href="#">Bill of Materials</a></li>
+					<li><a href="/Production/BillOfMaterial.aspx">Bill of Materials</a></li>
 					<li><a href="/Production/ProductionOrder.aspx">Production Order</a></li>
-					<li><a href="#">Receipt From Production</a></li>
+					<li><a href="/Production/ReceiptFromProduction.aspx">Receipt From Production</a></li>
 					<li><a href="/Production/IssueForProduction.aspx">Issue For Production</a></li>
 				</ul>
 			</li>

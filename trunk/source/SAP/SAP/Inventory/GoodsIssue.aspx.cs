@@ -337,12 +337,13 @@ namespace SAP
                     dr["Comments"] = txtRemarks.Text;
                     dr["JrnlMemo"] = txtJournalRemark.Text;
                     dr["U_UserID"] = User.Identity.Name;
+                    Array arrContentsCols = new string[] { "Quantity" }; // Columns need to reset format numeric
                     DocumentXML objInfo = new DocumentXML();
                     DataSet ds = new DataSet("DS");
                     dtHeader.TableName = TblHeaderName;
                     dtContents.TableName = TblLineName;
                     ds.Tables.Add(dtHeader.Copy());
-                    ds.Tables.Add(dtContents.Copy());
+                    ds.Tables.Add(GF.ResetFormatNumeric(dtContents, arrContentsCols).Copy());
                    
                     return objInfo.ToXMLStringFromDS(DocType, ds);
                 }

@@ -16,13 +16,13 @@ namespace SAP
     {
         public static DataTable dtContents;
         public static DataTable dtHeader;
-        private string DocType = "22";
+        private string DocType = "202";
         private GeneralFunctions GF = new GeneralFunctions(HttpContext.Current.User.Identity.Name);
         private string TblHeaderName = "OWOR";
         private string TblLineName = "WOR1";
         private string CurrentPageUrl = "/Production/ProductionOrder.aspx";
         private string HeaderKeyName = "DocEntry";
-        public static string KeepColumsContent = "";
+            public static string KeepColumsContent = "";
         #region "Event"
             protected void Page_Load(object sender, EventArgs e)
             {
@@ -33,174 +33,167 @@ namespace SAP
                     if (!String.IsNullOrEmpty(orderId))
                     {
                         LoadData(orderId, DocType);
-                        //if (txtStatus.Text == "C")
-                        //    SetScreenStatus("Close");
-                        //else if (txtStatus.Text == "O")
-                        //    SetScreenStatus("Update");
                     }
                     else
                     {
-                       // LoadDefault();
+                        LoadDefault();
                         SetScreenStatus("New");
                     }
 
-                    this.txtDueDate.Text = DateTime.Now.ToShortDateString();
-                    this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
-                    txtQuantity.Text = "1";
+                    
                 }
             }
             protected override void OnLoadComplete(EventArgs e)
-        {
-            try
             {
-            
-                base.OnLoadComplete(e);
-                // get callback from popup
-                if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
+                try
                 {
-                    Int32 itemNo = 0;
-                    switch (this.Request["__EVENTARGUMENT"].ToString())
+                    base.OnLoadComplete(e);
+                    // get callback from popup
+                    if (this.Request["__EVENTARGUMENT"] != null && this.Request["__EVENTARGUMENT"].ToString() != "")
                     {
-                        case "EditBusinessPartnerCallBack":
-                            BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
-                            if (chosenPartner != null)
-                            {
-                                //this.txtBPName.Text = chosenPartner.CardName;
-                                this.txtCardCode.Text = chosenPartner.CardCode;
-                            }
-                            break;
-                        case "EditItemCallBack":
-                            ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
-                            if (chosenItem != null)
-                            {
-                                itemNo = Int32.Parse(Session["chosenItemNo"] as String);
-                                if (itemNo == -1)
+                        Int32 itemNo = 0;
+                        switch (this.Request["__EVENTARGUMENT"].ToString())
+                        {
+                            
+                            case "EditBusinessPartnerCallBack":
+                                BusinessPartner chosenPartner = Session["chosenPartner"] as BusinessPartner;
+                                if (chosenPartner != null)
                                 {
-                                    txtItemCode.Text = chosenItem.ItemCode;
-                                    txtItemName.Text = chosenItem.ItemName;
+                                    //this.txtBPName.Text = chosenPartner.CardName;
+                                    this.txtCardCode.Text = chosenPartner.CardCode;
                                 }
-                                else
+                                break;
+                            case "EditItemCallBack":
+                                ItemMaster chosenItem = Session["chosenItem"] as ItemMaster;
+                                if (chosenItem != null)
                                 {
                                     itemNo = Int32.Parse(Session["chosenItemNo"] as String);
-                                    DataRow dr = dtContents.Rows[itemNo - 1];
-                                    dr["No"] = itemNo;
-                                    dr["ItemCode"] = chosenItem.ItemCode;
-                                    dr["Dscription"] = chosenItem.ItemName;
-                                    dr["Quantity"] = 1;
-                                    this.lvContents.DataSource = dtContents;
-                                    this.lvContents.DataBind();
+                                    if (itemNo == -1)
+                                    {
+                                        txtItemCode.Text = chosenItem.ItemCode;
+                                        txtItemName.Text = chosenItem.ItemName;
+                                    }
+                                    else
+                                    {
+                                        itemNo = Int32.Parse(Session["chosenItemNo"] as String);
+                                        DataRow dr = dtContents.Rows[itemNo - 1];
+                                        dr["No"] = itemNo;
+                                        dr["ItemCode"] = chosenItem.ItemCode;
+                                        dr["Dscription"] = chosenItem.ItemName;
+                                        dr["Quantity"] = 1;
+                                        this.lvContents.DataSource = dtContents;
+                                        this.lvContents.DataBind();
+                                    }
                                 }
-                            }
-                            break;
-                        case "EditBOMCallBack":
-                            BOM chosenBOM = Session["chosenItem"] as BOM;
-                            if (chosenBOM != null)
-                            {
-                                txtItemCode.Text = chosenBOM.ItemCode;
-                                txtItemName.Text = chosenBOM.ItemName;
+                                break;
+                            case "EditBOMCallBack":
+                                BOM chosenBOM = Session["chosenItem"] as BOM;
+                                if (chosenBOM != null)
+                                {
+                                    txtItemCode.Text = chosenBOM.ItemCode;
+                                    txtItemName.Text = chosenBOM.ItemName;
 
-                                GetDefault gf = new GetDefault();
-                                dtContents= gf.GetBOMChild(User.Identity.Name, txtItemCode.Text).Tables[0];
-                                this.lvContents.DataSource = dtContents;
-                                this.lvContents.DataBind();
-                                updateTableTotalPrice();
-                            }
-                            break;
-                        case "EditWareHouseCallBack":
-                            WareHouse chosenWarehouse = Session["chosenWarehouse"] as WareHouse;
+                                    GetDefault gf = new GetDefault();
+                                    dtContents= gf.GetBOMChild(User.Identity.Name, txtItemCode.Text).Tables[0];
+                                    dtContents = GF.ConvertDataTable_RemoveCols(dtContents, "");
+                                    updateTableTotalPrice();
+                                }
+                                break;
+                            case "EditWareHouseCallBack":
+                                WareHouse chosenWarehouse = Session["chosenWarehouse"] as WareHouse;
                         
-                            if (chosenWarehouse != null)
-                            {
-                                itemNo = Int32.Parse(Session["chosenItemNo"] as String);
-                                if (itemNo == -1)
+                                if (chosenWarehouse != null)
                                 {
-                                    txtWarehouse.Text = chosenWarehouse.WhsCode;
+                                    itemNo = Int32.Parse(Session["chosenItemNo"] as String);
+                                    if (itemNo == -1)
+                                    {
+                                        txtWarehouse.Text = chosenWarehouse.WhsCode;
+                                    }
+                                    else
+                                    {
+                                        DataRow dr = dtContents.Rows[itemNo-1];
+                                        dr["wareHouse"] = chosenWarehouse.WhsCode;
+                                        this.lvContents.DataSource = dtContents;
+                                        this.lvContents.DataBind();
+                                    }
                                 }
-                                else
+                                break;
+                            case "EditProjectCallBack":
+                                Project chosenProject = Session["chosenProject"] as Project;
+                                if (chosenProject != null)
                                 {
-                                    DataRow dr = dtContents.Rows[itemNo-1];
-                                    dr["wareHouse"] = chosenWarehouse.WhsCode;
-                                    this.lvContents.DataSource = dtContents;
-                                    this.lvContents.DataBind();
+                                    txtProject.Text = chosenProject.PrjCode;
                                 }
-                            }
-                            break;
-                        case "EditProjectCallBack":
-                            Project chosenProject = Session["chosenProject"] as Project;
-                            if (chosenProject != null)
-                            {
-                                txtProject.Text = chosenProject.PrjCode;
-                            }
-                            break;
-                        case "EditCostCenterCallBack":
-                            CostCenter chosenCostCenter = Session["chosenCostCenter"] as CostCenter;
-                            if (chosenCostCenter != null)
-                            {
-                                txtCostCenter.Text = chosenCostCenter.PrcCode;
-                            }
-                            break;
-                        default:
-                            break;
+                                break;
+                            case "EditCostCenterCallBack":
+                                CostCenter chosenCostCenter = Session["chosenCostCenter"] as CostCenter;
+                                if (chosenCostCenter != null)
+                                {
+                                    //txtCostCenter.Text = chosenCostCenter.PrcCode;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                      "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                                          "Main.setMasterMessage('" + ex.ToString() + "','');", true);
 
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
-                     "Dialog.hideLoader();", true);
-            }
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                         "Dialog.hideLoader();", true);
+                }
 
-        }
+            }
             protected void btnAdd_Click(object sender, ImageClickEventArgs e)
-        {
-            try
             {
-                if (txtWarehouse.Text == "")
+                try
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors", "Main.setMasterMessage('Missing From Warehouse','');", true);
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading","Dialog.hideLoader();", true);
-                    return;
-                }
-                if (dtContents.Rows.Count == 0)
-                {
+                    if (txtWarehouse.Text == "")
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors", "Main.setMasterMessage('Missing From Warehouse','');", true);
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading","Dialog.hideLoader();", true);
+                        return;
+                    }
+                    if (dtContents.Rows.Count == 0)
+                    {
 
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors", "Main.setMasterMessage('Missing Item','');", true);
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading", "Dialog.hideLoader();", true);
-                    return;
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors", "Main.setMasterMessage('Missing Item','');", true);
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading", "Dialog.hideLoader();", true);
+                        return;
+                    }
+                    String requestXML = _collectData();
+                    SAP.WebServices.Transaction ts = new WebServices.Transaction();
+                    DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, "", false);
+                    if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
+                    {
+                        Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
+                        Session["requestXML"] = requestXML;
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                            "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
+                    }
+                    else
+                    {
+                        Session["successMessage"] = "Operation complete sucessful!";
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                           "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
+                        ClearScreen();
+                    }
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                         "Dialog.hideLoader();", true);
                 }
-                String requestXML = _collectData();
-                SAP.WebServices.Transaction ts = new WebServices.Transaction();
-                DataSet ds = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, "", false);
-                if ((int)ds.Tables[0].Rows[0]["ErrCode"] != 0)
+                catch (Exception ex)
                 {
-                    Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
-                    Session["requestXML"] = requestXML;
                     ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                        "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
-                }
-                else
-                {
-                    Session["successMessage"] = "Operation complete sucessful!";
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                       "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
-                    ClearScreen();
-                }
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
-                     "Dialog.hideLoader();", true);
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                      "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                          "Main.setMasterMessage('" + ex.ToString() + "','');", true);
 
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
-                     "Dialog.hideLoader();", true);
-            }
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                         "Dialog.hideLoader();", true);
+                }
 
-        }
+            }
             protected void lvContents_ItemCommand(object sender, ListViewCommandEventArgs e)
             {
                 try
@@ -241,7 +234,7 @@ namespace SAP
                                     row["ItemCode"] = ((Label)lvi.FindControl("lblItemCode")).Text;
                                     row["Dscription"] = ((Label)lvi.FindControl("lblItemName")).Text;
                                     row["PlannedQty"] = ((TextBox)lvi.FindControl("txtQuantityEdit")).Text;
-                                    row["WhsCode"] = ((Label)lvi.FindControl("lblWarehouse")).Text;
+                                    row["wareHouse"] = ((Label)lvi.FindControl("lblWarehouse")).Text;
                                     row["IssueType"] = ((DropDownList)lvi.FindControl("ddlIssueType")).SelectedValue.ToString();
                                     break;
                                 }
@@ -249,6 +242,7 @@ namespace SAP
                             this.lvContents.EditIndex = -1;
                             this.lvContents.DataSource = dtContents;
                             this.lvContents.DataBind();
+                            SetControlsStatus("Update");    
                             break;
                    
                         default:
@@ -271,6 +265,7 @@ namespace SAP
                 this.lvContents.EditIndex = e.NewEditIndex;
                 this.lvContents.DataSource = dtContents;
                 this.lvContents.DataBind();
+                SetControlsStatus("Edit");
             }
             protected void lvContents_ItemInserted(object sender, ListViewInsertedEventArgs e)
             {
@@ -302,8 +297,6 @@ namespace SAP
                 if (lblCode == null || string.IsNullOrEmpty(lblCode.Text))
                 {
                     e.Cancel = true;
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors", "Main.setMasterMessage('Missing Item','');", true);
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading", "Dialog.hideLoader();", true);
                     return;
                 }
                 this.lvContents.EditIndex = -1;
@@ -326,6 +319,42 @@ namespace SAP
                     linkItems.NavigateUrl = "javascript:Main.openDialog('../Popup_EditBOM.aspx','');";
                 }
             }
+            protected void btnUpdate_Click(object sender, ImageClickEventArgs e)
+            {
+                DataRow dr = dtHeader.Rows[0];
+                dr["Status"] = ddlStatus.SelectedItem.Value;
+                DocumentXML objInfo = new DocumentXML();
+                DataSet ds = new DataSet("DS");
+                dtHeader.TableName = TblHeaderName;
+                ds.Tables.Add(GF.ConvertDataTable_RemoveCols(dtHeader, "DocEntry;Status").Copy());
+                String requestXML = objInfo.ToXMLStringFromDS(DocType, ds);
+                SAP.WebServices.Transaction ts = new WebServices.Transaction();
+
+                DataSet ds1 = ts.CreateMarketingDocument(requestXML, User.Identity.Name, DocType, txtNo.Text, true);
+                if ((int)ds1.Tables[0].Rows[0]["ErrCode"] != 0)
+                {
+                    Session["errorMessage"] = ds1.Tables[0].Rows[0]["ErrMsg"];
+                    Session["requestXML"] = requestXML;
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                        "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds1.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
+                }
+                else
+                {
+                    Session["successMessage"] = "Operation complete sucessful!";
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                       "Main.setMasterMessage('" + "Operation complete sucessful!" + "','');", true);
+                }
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                     "Dialog.hideLoader();", true);
+            }
+            protected void txtQuantity_TextChanged(object sender, EventArgs e)
+            {
+                foreach (DataRow row in dtContents.Rows)
+                {
+                    row["PlannedQty"] = double.Parse(GF.ResetFormatNumeric(row["BaseQty"].ToString())) * double.Parse(txtQuantity.Text);
+                }
+                updateTableTotalPrice();
+            }
         #endregion
             #region "Functions"
             protected void LoadData(String orderId, string NewDocType)
@@ -335,11 +364,10 @@ namespace SAP
                 DataTable dtHeader;
 
                 if (returnDoc == null)
+                {
                     orderId = "1";
-                else
-                    dtHeader = returnDoc.Tables[0];
-
-                returnDoc = ts.GetMarketingDocument_ReturnDS(NewDocType, orderId, User.Identity.Name);
+                    returnDoc = ts.GetMarketingDocument_ReturnDS(NewDocType, orderId, User.Identity.Name);
+                }
 
                 if (returnDoc == null || returnDoc.Tables.Count < 2)
                 {
@@ -352,32 +380,57 @@ namespace SAP
                 }
 
                 dtHeader = returnDoc.Tables[0];
-               // dtContents = GF.ConvertDataTable_RemoveCols(returnDoc.Tables[1], KeepColumsContent);
+                dtContents = GF.ConvertDataTable_RemoveCols(returnDoc.Tables[1], "");
+                
+
                 DataRow dr = dtHeader.Rows[0];
                 SetNavigatorURL(dr["DocEntry"].ToString());
-                //hlJE.NavigateUrl = "../Financials/JournalEntry.aspx?order_id=" + dr["TransID"].ToString();
-                //this.txtName.Text = dr["CardName"].ToString();
-                //this.txtVendor.Text = dr["CardCode"].ToString();
-                //lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtVendor.Text;
 
-                //this.txtNo.Text = dr["DocEntry"].ToString();
-                //this.txtStatus.Text = dr["DocStatus"].ToString();
+                updateTableTotalPrice();
+                this.txtNo.Text = dr["DocEntry"].ToString();
+                ddlStatus.SelectedValue = dr["Status"].ToString();
+                txtItemCode.Text = dr["ItemCode"].ToString();
+                txtQuantity.Text = GF.FormatNumeric(dr["PlannedQty"].ToString(), "QtyDec"); //dr["PlannedQty"].ToString();
+                txtWarehouse.Text = dr["Warehouse"].ToString();
+                txtCardCode.Text = dr["CardCode"].ToString();
+                txtProject.Text = dr["Project"].ToString();
+
+                if (txtCardCode.Text != "")
+                {
+                    lBP.Visible = true;
+                    lBP.NavigateUrl = "../BusinessPartner/BusinessPartnerMaster.aspx?cardcode=" + txtCardCode.Text;
+                }
+                else
+                    lBP.Visible = false;
+
+                if (dr["TransID"].ToString()!= "")
+                {
+                    hlJE.Visible = true;
+                    hlJE.NavigateUrl = "../Financials/JournalEntry.aspx?order_id=" + dr["TransID"].ToString();
+                }
+                else
+                    hlJE.Visible = false;
+                
                 CultureInfo ivC = new System.Globalization.CultureInfo("es-US");
 
-                DateTime d = Convert.ToDateTime(dr["DocDate"], ivC);
+                DateTime d = Convert.ToDateTime(dr["PostDate"], ivC);
                 txtPostingDate.Text = String.Format("{0:MM/dd/yyyy}", d);
 
-                d = Convert.ToDateTime(dtHeader.Rows[0]["DocDueDate"], ivC);
+                d = Convert.ToDateTime(dtHeader.Rows[0]["DueDate"], ivC);
                 txtDueDate.Text = String.Format("{0:MM/dd/yyyy}", d);
 
-                //txtJournalRemark.Text = dr["JrnlMemo"].ToString();
-                //txtRemarks.Text = dr["Comments"].ToString();
+                txtJournalRemark.Text = dr["JrnlMemo"].ToString();
+                txtRemarks.Text = dr["Comments"].ToString();
 
-                updateTableTotalPrice();
-                this.lvContents.DataSource = dtContents;
-                this.lvContents.DataBind();
-                updateTableTotalPrice();
-
+                txtPlQty.Text = GF.FormatNumeric(dr["PlannedQty"].ToString(), "QtyDec");// dr["PlannedQty"].ToString();
+                txtCplQty.Text = GF.FormatNumeric(dr["CmpltQty"].ToString(), "QtyDec");// dr["CmpltQty"].ToString();
+                txtRjtQty.Text = GF.FormatNumeric(dr["RjctQty"].ToString(), "QtyDec");// dr["RjctQty"].ToString();
+                
+                if (dr["Status"].ToString() == "C" || dr["Status"].ToString() == "L")
+                    SetScreenStatus("Close");
+                else
+                    SetScreenStatus("Update");
+                
             }       
             protected void SetNavigatorURL(string CurrentKey)
             {
@@ -402,18 +455,27 @@ namespace SAP
             }         
             void ClearScreen()
             {
+                DataColumn col;
                 dtContents = new DataTable("WOR1");
-                dtContents.Columns.Add("No");//need to remove
+                col = new DataColumn("No");
+                col.DefaultValue = "xx_remove_xx";
+                dtContents.Columns.Add(col);
                 dtContents.Columns.Add("ItemCode");
-                dtContents.Columns.Add("Dscription");//need to remove
+
+                col = new DataColumn("Dscription");
+                col.DefaultValue = "xx_remove_xx";
+                dtContents.Columns.Add(col);
+
                 dtContents.Columns.Add("PlannedQty");
                 dtContents.Columns.Add("wareHouse");
                 dtContents.Columns.Add("IssueType");
+                KeepColumsContent = "ItemCode;PlannedQty;wareHouse;IssueType";
 
                 dtHeader = new DataTable("OWOR");
                 dtHeader.Columns.Add("Type");
                 dtHeader.Columns.Add("Status");
                 dtHeader.Columns.Add("PlannedQty");
+                dtHeader.Columns.Add("ItemCode");
                 dtHeader.Columns.Add("CardCode");
                 dtHeader.Columns.Add("warehouse");
                 dtHeader.Columns.Add("PostDate");
@@ -429,12 +491,18 @@ namespace SAP
                 txtItemCode.Text = "";
                 txtItemName.Text = "";
                 txtCardCode.Text = "";
-                txtCostCenter.Text = "";
+                //txtCostCenter.Text = "";
                 txtWarehouse.Text = "";
+                txtPlQty.Text = "";
+                txtCplQty.Text = "";
+                txtRjtQty.Text = "";
+                txtRemarks.Text = "";
+                txtJournalRemark.Text = "";
+                txtQuantity.Text = "1";
 
                 SetNavigatorURL("0");
                 SetScreenStatus("New");
-
+                lBP.Visible = false;
             }
             protected void SetScreenStatus(string Status)
             {
@@ -442,14 +510,22 @@ namespace SAP
                 {
                     case "New":
                         btnAdd.Visible = true;
+                        btnUpdate.Visible = false;
                         btnAddRecord.Visible = true;
+                        ddlStatus.SelectedValue = "P";
+                        ddlStatus.Enabled = false;
+                        txtPostingDate.Enabled = true;
                         break;
                     case "Update":
                         btnAdd.Visible = false;
+                        btnUpdate.Visible = true;
                         btnAddRecord.Visible = false;
+                        ddlStatus.Enabled = true;
+                        txtPostingDate.Enabled = false;
                         break;
                     case "Close":
                         btnAdd.Visible = false;
+                        btnUpdate.Visible = false;
                         btnAddRecord.Visible = false;
                         break;
                 }
@@ -463,22 +539,22 @@ namespace SAP
                     dr["Type"] = ddlType.SelectedItem.Value;
                     dr["Status"] = ddlStatus.SelectedItem.Value;
                     dr["PlannedQty"] = txtQuantity.Text;
-
+                    dr["ItemCode"] = txtItemCode.Text;
                     dr["CardCode"] = txtCardCode.Text;
                     dr["warehouse"] = txtWarehouse.Text;
                     dr["PostDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtPostingDate.Text));
-                    dr["DueDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDueDate.Text)); 
-                    dr["Comments"] = "";
-                    dr["JrnlMemo"] = "";
+                    dr["DueDate"] = String.Format("{0:yyyyMMdd}", DateTime.Parse(txtDueDate.Text));
+                    dr["Comments"] = txtRemarks.Text;
+                    dr["JrnlMemo"] = txtJournalRemark.Text;
                     dr["U_UserID"] = User.Identity.Name;
-                    Array arrContentsCols = new string[] { "Quantity" }; // Columns need to reset format numeric
+                    Array arrContentsCols = new string[] { "PlannedQty" }; // Columns need to reset format numeric
                     DocumentXML objInfo = new DocumentXML();
                     DataSet ds = new DataSet("DS");
                     dtHeader.TableName = TblHeaderName;
                     dtContents.TableName = TblLineName;
-                    ds.Tables.Add(dtHeader.Copy());
-                    ds.Tables.Add(GF.ResetFormatNumeric(dtContents, arrContentsCols).Copy());
-
+                    ds.Tables.Add(GF.ResetFormatNumeric(dtHeader, arrContentsCols).Copy());
+                    ds.Tables.Add( GF.ConvertDataTable_RemoveCols(GF.ResetFormatNumeric(dtContents, arrContentsCols).Copy(), KeepColumsContent));
+                   
                     return objInfo.ToXMLStringFromDS(DocType, ds);
                 }
                 catch (Exception)
@@ -488,40 +564,45 @@ namespace SAP
             }
             protected void updateTableTotalPrice()
             {
-                foreach (DataRow row in dtContents.Rows)
+                try
                 {
-                    row["PlannedQty"] = GF.FormatNumeric(row["PlannedQty"].ToString(), "QtyDec");
+                    foreach (DataRow row in dtContents.Rows)
+                    {
+                        row["PlannedQty"] = GF.FormatNumeric(row["PlannedQty"].ToString(), "QtyDec");
+                        row["BaseQty"] = GF.FormatNumeric(row["BaseQty"].ToString(), "QtyDec");
+                        row["IssuedQty"] = GF.FormatNumeric(row["IssuedQty"].ToString(), "QtyDec");
+                    }
+                    this.lvContents.DataSource = dtContents;
+                    this.lvContents.DataBind();
                 }
-                dtHeader.Rows[0]["PlannedQty"] = GF.FormatNumeric(dtHeader.Rows[0]["PlannedQty"].ToString(), "QtyDec");
+                catch (Exception)
+                {
+                }
             }
             private void SetControlsStatus(string asStatus)
             {
                 switch (asStatus)
                 {
                     case "Add":
-                        btnAdd.Enabled = btnAddRecord.Enabled = false;
+                        btnUpdate.Enabled= btnAdd.Enabled = btnAddRecord.Enabled = false;
                         break;
                     case "Edit":
-                        btnAdd.Enabled = btnAddRecord.Enabled = false;
+                        btnUpdate.Enabled = btnAdd.Enabled = btnAddRecord.Enabled = false;
                         break;
                     case "Update":
-                        btnAdd.Enabled = btnAddRecord.Enabled = true;
+                        btnUpdate.Enabled = btnAdd.Enabled = btnAddRecord.Enabled = true;
                         break;
                     case "Save":
-                        btnAdd.Enabled = btnAddRecord.Enabled = true;
+                        btnUpdate.Enabled = btnAdd.Enabled = btnAddRecord.Enabled = true;
                         break;
                 }
             }
             private void LoadDefault()
-            { }
+            {
+                this.txtDueDate.Text = DateTime.Now.ToShortDateString();
+                this.txtPostingDate.Text = DateTime.Now.ToShortDateString();
+                txtQuantity.Text = "1";
+            }
         # endregion 
-
-            
-
-   
-
-            
-
-            
     }
 }

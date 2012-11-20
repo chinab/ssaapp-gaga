@@ -86,7 +86,7 @@
                 <asp:ImageButton ID="btnCancel" runat="server" 
                     ImageUrl="~/skin/images/SAP_cancel.png" 
                     OnClientClick="return Main.cancelDialogClick()" />
-                <asp:ImageButton ID="ImageButton1" runat="server" 
+                <asp:ImageButton ID="ImageButton1" runat="server" OnClientClick="return Main.cancelNewDialogClick('http://google.com')"
                     ImageUrl="~/skin/images/SAP_New.png" onclick="ImageButton1_Click" />
             </div>
             </br>

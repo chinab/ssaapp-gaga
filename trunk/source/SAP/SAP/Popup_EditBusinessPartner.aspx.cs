@@ -92,7 +92,9 @@ namespace SAP
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Write("<script>window.open('http://localhost/BusinessPartner/BusinessPartnerMaster.aspx','_blank');</script>");
+            Response.Redirect("Homepage.aspx");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "alert('hello');",true);
+            //Response.Write("<script>window.open('http://localhost/BusinessPartner/BusinessPartnerMaster.aspx','_blank');</script>");
         }
         
     }

@@ -15,7 +15,9 @@
                         <li><a href="#">
                             <img alt="" src="/skin/icon/print.png" /></a></li>
                         <li><a href="#">
-                            <img alt="" src="/skin/icon/email.png" /></a></li>
+                        <asp:ImageButton ImageUrl="/skin/icon/email.png" runat="server" ID="btnEmail"  CssClass="imagebutton"
+                                Height="22px" onclick="Unnamed1_Click"  />
+                            <%--<img alt="" src="/skin/icon/email.png" /></a></li>--%>
                         <li><a href="#">
                             <img alt="" src="/skin/icon/excel.png" /></a></li>
                         <li><a href="#">

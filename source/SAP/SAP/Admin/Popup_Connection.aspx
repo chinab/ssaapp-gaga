@@ -6,9 +6,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
-    <script type="text/javascript" src="/js/jquery-1.4.3.min.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
-    <link href="skin/skin.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+    <link href="../skin/skin.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .left
         {

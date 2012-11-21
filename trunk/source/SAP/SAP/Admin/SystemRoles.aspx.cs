@@ -14,10 +14,10 @@ namespace SAP.Admin
                 return;
             }
 
-            if (WebHelper.GetCurrentUserName().ToLower() != "admin")
-            {
-                addNewButton.Visible = false;
-            }
+            //if (WebHelper.GetCurrentUserName().ToLower() != "admin")
+            //{
+            //    addNewButton.Visible = false;
+            //}
             ShowRoleList();
         }
 

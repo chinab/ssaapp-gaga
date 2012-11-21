@@ -135,10 +135,10 @@ namespace SAP.Admin
             while (iList.MoveNext())
             {
                 string userName = ((MembershipUser)(iList.Current)).UserName;
-                if ((currentUserName != "admin") && (userName.Trim().Equals("admin", StringComparison.OrdinalIgnoreCase) || currentUserName.Equals(userName.Trim(), StringComparison.OrdinalIgnoreCase)))
-                {
-                    continue; // remove currentUser to the list 
-                }
+                //if ((currentUserName != "admin") && (userName.Trim().Equals("admin", StringComparison.OrdinalIgnoreCase) || currentUserName.Equals(userName.Trim(), StringComparison.OrdinalIgnoreCase)))
+                //{
+                //    continue; // remove currentUser to the list 
+                //}
                 string email = ((MembershipUser)(iList.Current)).Email;
 
                 DataRow row = table.NewRow();

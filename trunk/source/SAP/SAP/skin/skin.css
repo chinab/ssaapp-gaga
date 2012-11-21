@@ -13,6 +13,12 @@ img
 {
     border: none;
 }
+.imagebutton
+{
+    border: none;
+    height:22px;
+    padding-left:22px;
+}
 .clear
 {
     clear: both;

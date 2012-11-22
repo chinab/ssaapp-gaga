@@ -17,6 +17,7 @@ namespace SAP
         {
             if (!IsPostBack)
             {
+                //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "ShowLoader", "Dialog.showLoader();", true);
                 MasterData masterDataWS = new MasterData();
                 lblCompany.Text = masterDataWS.GetCompanySetting(HttpContext.Current.User.Identity.Name).Tables[0].Rows[0]["CompanyName"].ToString();
                // AuthorizeUser();

@@ -514,7 +514,7 @@ table.detail_table .detail_table_td_200
 
 /* Header links styling */
 #theMenu  h3.head a { 
-	background: url("images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50% #0078AE;
+	background: url("images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50% #2C46AC;
 	background-position:98% 50%;
 	padding: 6px 6px;
 	display:block; 
@@ -533,7 +533,7 @@ table.detail_table .detail_table_td_200
 	padding: 6px 6px;
 }
 #theMenu h3.selected a { 
-	background: url("images/ui-bg_gloss-wave_50_6eac2c_500x100.png") repeat-x scroll 50% 50% #6EAC2C;
+	background: url("images/ui-bg_gloss-wave_50_6eac2c_500x100.png") repeat-x scroll 50% 50% #7F74FC;
 	background-position:98% 50%;
 	color: #fff;
 	padding: 6px 6px;
@@ -630,10 +630,10 @@ border-bottom: 1px solid #90BADE;
 }
 
 .xtraMenuClass a{
-    background-color: #ACBCDF !important;
+    background-color: #7F74FC !important;
     color: black;
 }
 .xtraMenuClass a:hover{
-    background-color: #ACBCDF !important;
+    background-color: #7F74FC !important;
     color: yellowgreen;
 }

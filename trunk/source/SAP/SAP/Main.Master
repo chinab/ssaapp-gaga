@@ -181,6 +181,7 @@
 					<li><a href="/BusinessPartner/BusinessPartnerMaster.aspx">Bussiness Partner Master Data</a></li>
                     <li><a href="/BusinessPartner/BusinessPartnerMaster_ABEO.aspx">Bussiness Partner ABEO</a></li>
 					<li><a href="/BusinessPartner/Activity.aspx">Activity</a></li>
+                    <li><a href="/TimeSheet/ABEO_TIMESHEET.aspx">TimeSheet</a></li>
 				</ul>
 			</li>
 			<li>
@@ -201,7 +202,7 @@
 					</a>
 				</h3>
 				<ul>
-					<li><a href="#">Item Master Data</a></li>
+					<li><a href="/Inventory/ItemMasterData.aspx">Item Master Data</a></li>
                     <li>
                           <ul id="xtraMenu2"  class="xtraMenuClass">
                         	<li>
@@ -235,7 +236,7 @@
             <li>
 				<h3 class="head">
                     <a href="#">
-						<img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;MRP
+						<img alt="" width="15px" src="/skin/icon/MRP.png" />&nbsp;MRP
 					</a>
 				</h3>
 				<ul>
@@ -260,13 +261,13 @@
             <li>
 				<h3 class="head">
                     <a href="#">
-						<img alt="" width="15px" src="/skin/icon/service.png" />&nbsp;TimeSheet
+						<img alt="" width="15px" src="/skin/icon/report.png" />&nbsp;Reports
 					</a>
 				</h3>
 				<ul>
-					<li><a href="/TimeSheet/ABEO_TIMESHEET.aspx">TimeSheet</a></li>
-					<li><a href="/TimeSheet/MyOpenTimeSheet.aspx">My Open TimeSheet</a></li>
-					<li><a href="/TimeSheet/AllTimeSheet.aspx">TimeSheet Reports</a></li>					
+                    <li><a href="/TimeSheet/MyOpenTimeSheet.aspx">My Open TimeSheet</a></li>
+					<li><a href="/TimeSheet/AllTimeSheet.aspx">TimeSheet Reports</a></li>	
+					<li><a href="/Reports/GeneralJournal.aspx">General Journal</a></li>
 				</ul>
 			</li>
 		</ul>

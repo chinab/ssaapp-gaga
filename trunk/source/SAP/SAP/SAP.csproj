@@ -46,6 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\CKEditor.NET.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -420,6 +423,7 @@
     <Content Include="ckeditor\themes\default\theme.js" />
     <Content Include="BusinessPartner\BusinessPartnerMaster.aspx" />
     <Content Include="Admin\Popup_Connection.aspx" />
+    <Content Include="Inventory\ItemMasterData.aspx" />
     <Content Include="Inventory\InventoryTransferRequest.aspx" />
     <Content Include="Inventory\GoodsReceipt.aspx" />
     <Content Include="Popup_EditTaxCode.aspx" />
@@ -444,6 +448,7 @@
     <Content Include="Purchase\APCredit.aspx" />
     <Content Include="Purchase\GoodsReturn.aspx" />
     <Content Include="Purchase\GoodsReceiptPO.aspx" />
+    <Content Include="Reports\GeneralJournal.aspx" />
     <Content Include="Sales\ARInvoice.aspx" />
     <Content Include="Sales\ARCredit.aspx" />
     <Content Include="Sales\Return.aspx" />
@@ -802,6 +807,18 @@
     <Compile Include="BusinessPartner\BusinessPartnerMaster_ABEO.aspx.designer.cs">
       <DependentUpon>BusinessPartnerMaster_ABEO.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DEMOSBODataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DEMOSBODataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ItemMasterData.aspx.cs">
+      <DependentUpon>ItemMasterData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventory\ItemMasterData.aspx.designer.cs">
+      <DependentUpon>ItemMasterData.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\InventoryTransferRequest.aspx.cs">
       <DependentUpon>InventoryTransferRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -956,6 +973,13 @@
     </Compile>
     <Compile Include="Purchase\GoodsReceiptPO.aspx.designer.cs">
       <DependentUpon>GoodsReceiptPO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\GeneralJournal.aspx.cs">
+      <DependentUpon>GeneralJournal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\GeneralJournal.aspx.designer.cs">
+      <DependentUpon>GeneralJournal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sales\ARInvoice.aspx.cs">
       <DependentUpon>ARInvoice.aspx</DependentUpon>
@@ -1137,9 +1161,21 @@
     <Content Include="skin\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Report1.rdlc" />
     <None Include="ckeditor\.htaccess" />
     <Content Include="Main.Master" />
     <Content Include="skin\Admin\Default.skin" />
+    <None Include="DEMOSBODataSet.xsc">
+      <DependentUpon>DEMOSBODataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DEMOSBODataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DEMOSBODataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DEMOSBODataSet.xss">
+      <DependentUpon>DEMOSBODataSet.xsd</DependentUpon>
+    </None>
     <None Include="WebServices\GenerateCodeWSDLGetDefault.bat" />
     <None Include="WebServices\GenerateCodeWSDLMasterData.bat" />
     <None Include="WebServices\GenerateCodeWSDLReports.bat" />

@@ -14,11 +14,11 @@ namespace SAP
             
             if (!IsPostBack)
             {
-                if (Request.Browser.Browser=="IE")
-                {
-                    this.Login1.Enabled = false;
-                    return;
-                }
+                //if (Request.Browser.Browser == "IE")
+                //{
+                //    this.Login1.Enabled = false;
+                //    return;
+                //}
                 if (User.Identity.IsAuthenticated == true)
                 {
                     Response.Redirect("Homepage.aspx");

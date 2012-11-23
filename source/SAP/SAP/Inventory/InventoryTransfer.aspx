@@ -243,6 +243,9 @@
                                             <asp:Label ID="lblNo" runat="server"><%#Eval("No") %></asp:Label>
                                         </td>
                                         <td  Style="text-align: left">
+                                            <asp:HyperLink ID="litem" runat="server" NavigateUrl='<%# "../Inventory/ItemMasterData.aspx?itemcode=" + Eval("ItemCode").ToString() %>' >
+                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/icon/link.png"/>
+                                            </asp:HyperLink>
                                             <asp:Label ID="lblItemCode" runat="server"><%#Eval("ItemCode") %></asp:Label>
                                             
                                         </td>
@@ -296,42 +299,7 @@
                                        
                                     </tr>
                                 </EditItemTemplate>
-                                <InsertItemTemplate>
-                                    <tr>
-                                        <td>
-                                            <asp:LinkButton ID="imgbUpdate" runat="server" CommandName="Insert" Text="Update"
-                                                ImageUrl="~/skin/icon/save_icon_mono.gif" CausesValidation="true" ValidationGroup="vgrpSaveContact" />
-                                            <asp:LinkButton ID="imgbCancel" runat="server" CommandName="Cancel" Text="Cancel"
-                                                ImageUrl="~/skin/icon/undo_icon_mono.gif" CausesValidation="false" />
-                                        </td>
-                                        <td>
-                                             <asp:Label ID="lblNoInsert" runat="server" Text='<%# Bind("No") %>'/>
-                                        </td>
-                                        <td>
-                                           <asp:Label runat="server" ID="lblItemCode"></asp:Label>
-                                            <asp:HyperLink ID="linkItems" NavigateUrl='#'
-                                                runat="server">
-                                                <asp:Image ID="imgItems" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
-                                             
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lblItemName" runat="server" Text='<%# Bind("Dscription") %>'/>
-                                        </td>
-                                        <td>
-                                            <asp:TextBox ID="txtQuantityInsert" runat="server" Text='<%# Bind("Quantity") %>'/>
-                                        </td>
-                                        
-                                        <td>
-                                            <asp:Label runat="server" ID="lblWarehouse"></asp:Label>
-                                             <asp:HyperLink ID="linkWarehouse" NavigateUrl='#'
-                                                runat="server">
-                                                <asp:Image ID="Image3" runat="server" ImageUrl="~/skin/images/item-pointer.gif" />
-                                            </asp:HyperLink>
-                                        </td>
-                                       
-                                    </tr>
-                                </InsertItemTemplate>
+                                
                                 <EmptyDataTemplate>
                                     <table class="data_table">
                                         <tr>

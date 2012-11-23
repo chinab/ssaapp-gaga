@@ -52,7 +52,7 @@ namespace SAP
                     Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                     Session["requestXML"] = requestXML;
                     ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                        "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
+                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
                 }
                 else
                 {

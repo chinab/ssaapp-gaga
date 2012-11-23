@@ -15,9 +15,8 @@
                         <li><a href="#">
                             <img alt="" src="/skin/icon/print.png" /></a></li>
                         <li><a href="#">
-                        <asp:ImageButton ImageUrl="/skin/icon/email.png" runat="server" ID="btnEmail"  CssClass="imagebutton"
-                                Height="22px" onclick="Unnamed1_Click"  />
-                            <%--<img alt="" src="/skin/icon/email.png" /></a></li>--%>
+                            <asp:ImageButton ImageUrl="/skin/icon/email.png" runat="server" ID="btnEmail"  CssClass="imagebutton"
+                                Height="22px" onclick="btnEmail_Click"  OnClientClick="Dialog.showLoader();" /> </a></li>
                         <li><a href="#">
                             <img alt="" src="/skin/icon/excel.png" /></a></li>
                         <li><a href="#">
@@ -235,6 +234,9 @@
                                             <asp:Label runat="server" ID="lblNo" Text='<%#Eval("No")%>'></asp:Label>
                                         </td>
                                         <td Style="text-align: left">
+                                            <asp:HyperLink ID="litem" runat="server" NavigateUrl='<%# "../Inventory/ItemMasterData.aspx?itemcode=" + Eval("ItemCode").ToString() %>' >
+                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/icon/link.png"/>
+                                            </asp:HyperLink>
                                             <asp:Label runat="server" ID="lblCode"><%#Eval("ItemCode") %></asp:Label>
                                         </td>
                                         <td Style="text-align: left">

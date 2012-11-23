@@ -162,6 +162,9 @@
                                             <asp:Label ID="lblNo" runat="server"><%#Eval("No") %></asp:Label>
                                         </td>
                                         <td  Style="text-align: left">
+                                            <asp:HyperLink ID="litem" runat="server" NavigateUrl='<%# "../Inventory/ItemMasterData.aspx?itemcode=" + Eval("ItemCode").ToString() %>' >
+                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/icon/link.png"/>
+                                            </asp:HyperLink>
                                             <asp:Label ID="lblItemCode" runat="server"><%#Eval("ItemCode") %></asp:Label>
                                             
                                         </td>

@@ -79,6 +79,8 @@
                             <tr>
                                 <td class="detail_table_td_100" style="border-bottom: dotted 1px #808080;">
                                     <span>Product No.</span>
+                                    <asp:HyperLink ID="lItem" runat="server"> <asp:Image 
+                                        ID="Image16" runat="server" ImageUrl="~/skin/icon/link.png"/></asp:HyperLink>
                                 </td>
                                     <td>
                                          <asp:TextBox ID="txtItemCode" runat="server" Enabled="False"></asp:TextBox>
@@ -237,6 +239,9 @@
                                         </td>
                                         
                                         <td style="text-align: left">
+                                            <asp:HyperLink ID="litem" runat="server" NavigateUrl='<%# "../Inventory/ItemMasterData.aspx?itemcode=" + Eval("ItemCode").ToString() %>' >
+                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/skin/icon/link.png"/>
+                                            </asp:HyperLink>
                                             <asp:Label ID="lblItemCode" runat="server"><%#Eval("ItemCode") %></asp:Label>
                                         </td>
                                         

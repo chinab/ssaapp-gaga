@@ -72,6 +72,8 @@ namespace SAP
                                     {
                                         txtItemCode.Text = chosenItem.ItemCode;
                                         txtItemName.Text = chosenItem.ItemName;
+                                        lItem.Visible = true;
+                                        lItem.NavigateUrl = "../Inventory/ItemMasterData.aspx?itemcode=" + txtItemCode.Text;
                                     }
                                     else
                                     {
@@ -92,6 +94,8 @@ namespace SAP
                                 {
                                     txtItemCode.Text = chosenBOM.ItemCode;
                                     txtItemName.Text = chosenBOM.ItemName;
+                                    lItem.Visible = true;
+                                    lItem.NavigateUrl = "../Inventory/ItemMasterData.aspx?itemcode=" + txtItemCode.Text;
 
                                     GetDefault gf = new GetDefault();
                                     dtContents= gf.GetBOMChild(User.Identity.Name, txtItemCode.Text).Tables[0];
@@ -172,7 +176,7 @@ namespace SAP
                         Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                         Session["requestXML"] = requestXML;
                         ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                            "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
+                            "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
                     }
                     else
                     {
@@ -336,7 +340,7 @@ namespace SAP
                     Session["errorMessage"] = ds1.Tables[0].Rows[0]["ErrMsg"];
                     Session["requestXML"] = requestXML;
                     ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                        "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds1.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
+                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ds1.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
                 }
                 else
                 {
@@ -390,6 +394,9 @@ namespace SAP
                 this.txtNo.Text = dr["DocEntry"].ToString();
                 ddlStatus.SelectedValue = dr["Status"].ToString();
                 txtItemCode.Text = dr["ItemCode"].ToString();
+                lItem.Visible = true;
+                lItem.NavigateUrl = "../Inventory/ItemMasterData.aspx?itemcode=" + txtItemCode.Text;
+
                 txtQuantity.Text = GF.FormatNumeric(dr["PlannedQty"].ToString(), "QtyDec"); //dr["PlannedQty"].ToString();
                 txtWarehouse.Text = dr["Warehouse"].ToString();
                 txtCardCode.Text = dr["CardCode"].ToString();
@@ -503,6 +510,7 @@ namespace SAP
                 SetNavigatorURL("0");
                 SetScreenStatus("New");
                 lBP.Visible = false;
+                lItem.Visible = false;
             }
             protected void SetScreenStatus(string Status)
             {

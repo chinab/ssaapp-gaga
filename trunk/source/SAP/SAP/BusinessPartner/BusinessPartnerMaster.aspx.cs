@@ -117,7 +117,7 @@ namespace SAP
                 Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                 Session["requestXML"] = requestXML;
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
+                    "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
             }
             else
             {
@@ -180,7 +180,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -264,7 +264,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                    "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                    "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
             }
@@ -315,7 +315,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -579,7 +579,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -740,7 +740,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);

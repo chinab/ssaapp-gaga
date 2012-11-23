@@ -44,7 +44,6 @@ namespace SAP
         {
             Transaction ts = new Transaction();
             DataSet returnDoc = ts.GetMarketingDocument_ReturnDS(NewDocType, orderId, User.Identity.Name);
-            DataTable dtHeader;
 
             if (returnDoc == null)
                 orderId = "1";
@@ -282,7 +281,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                    "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                    "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                               "Dialog.hideLoader();", true);
                 return "";
@@ -383,6 +382,21 @@ namespace SAP
             this.txtDocumentDate.Text = DateTime.Now.ToShortDateString();
             this.txtNo.Text = "";
         }
+        private string GetEmailList()
+        {
+            Transaction trx = new Transaction();
+            DataSet ds = trx.GetMarketingDocument_ReturnDS("2", txtVendor.Text, User.Identity.Name);
+            string emaillist = "";
+            if (!string.IsNullOrEmpty(ds.Tables[0].Rows[0]["E_mail"].ToString()))
+                emaillist = ds.Tables[0].Rows[0]["E_mail"].ToString();
+            foreach (DataRow dr in ds.Tables[2].Rows)
+            {
+                if (dr["E_mailL"].ToString() != "")
+                    emaillist = emaillist + "," + dr["E_mailL"].ToString();
+            }
+
+            return emaillist;
+        }
     #endregion
 
     #region Event
@@ -457,7 +471,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -613,7 +627,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -647,7 +661,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -725,7 +739,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -756,7 +770,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -802,7 +816,7 @@ namespace SAP
                     Session["errorMessage"] = ds.Tables[0].Rows[0]["ErrMsg"];
                     Session["requestXML"] = requestXML;
                     ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                        "Main.setMasterMessage('" + WebUtility.HtmlEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
+                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ds.Tables[0].Rows[0]["ErrMsg"].ToString()) + "','');", true);
                 }
                 else
                 {
@@ -819,7 +833,7 @@ namespace SAP
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
-                                                        "Main.setMasterMessage('" + ex.ToString() + "','');", true);
+                                                        "Main.setMasterMessage('" + GeneralFunctions.UrlFullEncode(ex.ToString()) + "','');", true);
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
                                                     "Dialog.hideLoader();", true);
@@ -829,13 +843,27 @@ namespace SAP
         {
             Response.Redirect(TargetPageUrl + "?base_type=" + DocType + "&base_entry=" + txtNo.Text);
         }
-    #endregion
-
-        protected void Unnamed1_Click(object sender, ImageClickEventArgs e)
+        protected void btnEmail_Click(object sender, ImageClickEventArgs e)
         {
+            if (txtNo.Text == "")
+                return;
 
+            Emailling em = new Emailling();
+            DataSet ds = new DataSet("DS");
+            ds.Tables.Add(dtHeader.Copy());
+            ds.Tables.Add(dtContents.Copy());
+            string emailto = GetEmailList();
+            if (emailto != "")
+            {
+                string str = em.SendMailByDS(ds, emailto, "SALES ORDER", Server.MapPath("../EmailTemplate3.htm"));
+
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "OKErrors",
+                                                           "Main.setMasterMessage('" + str + "','');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "CloseLoading",
+                                     "Dialog.hideLoader();", true);
+            }
         }
-
+    #endregion      
         
     }
 }
